@@ -8,36 +8,45 @@
 </head>
 <body>
 
-<!-- 0. Auth Screen (Đăng nhập / Đăng ký) -->
-<div id="auth-screen" class="screen active">
-    <div class="cute-box">
-        <h1>🌸 挑戰中文大師 🌸</h1>
-        <p>Tu tiên tích lũy Linh lực - Học tiếng Trung TOCFL</p>
-        
-        <div class="auth-tabs">
-            <button id="tab-login" class="tab-btn active" onclick="switchAuthTab('login')">Đăng nhập</button>
-            <button id="tab-signup" class="tab-btn" onclick="switchAuthTab('signup')">Đăng ký</button>
+<!-- MÀN HÌNH CHƠI GAME (GAME SCREEN) -->
+<div id="game-screen" class="screen">
+    <div class="game-header">
+        <!-- Khối hiển thị thông số Nhân vật -->
+        <div class="character-status-card">
+            <div class="stat-row">
+                <span class="stat-label">❤️ Sinh Mệnh (HP):</span>
+                <div class="hp-bar-container">
+                    <div id="hpFill" class="hp-fill" style="width: 100%;"></div>
+                    <span id="hpText" class="bar-text">100/100</span>
+                </div>
+            </div>
+            
+            <div class="stat-row attributes-row">
+                <span>⚔️ Sức Mạnh (STR): <b id="statStr">10</b></span>
+                <span>⚡ Nhanh Nhẹn (AGI): <b id="statAgi">10</b></span>
+            </div>
         </div>
 
-        <div class="input-group" id="displayNameGroup" style="display: none;">
-            <input type="text" id="authDisplayName" placeholder="Đạo hiệu (Ví dụ: Tiêu Viêm)" maxlength="15" />
+        <div class="stats-bar">
+            <span>Tầng Tu Luyện: <b id="level">1</b></span>
+            <span>Linh Lực Ván Này: <b id="totalScore">0</b></span>
+            <span>⏱️ <span id="timerDisplay">00:00</span></span>
         </div>
         
-        <div class="input-group">
-            <input type="email" id="authEmail" placeholder="Email khoản..." />
-        </div>
-
-        <div class="input-group">
-            <input type="password" id="authPassword" placeholder="Mật khẩu (tối thiểu 6 ký tự)..." />
-        </div>
-        
-        <div class="btn-group">
-            <button id="authSubmitBtn" class="primary-btn" onclick="handleLogin()">Bắt đầu Tu Luyện 🚀</button>
-            <button class="google-btn" onclick="handleGoogleLogin()">🌐 Đăng nhập bằng Google</button>
+        <div class="progress-bar">
+            <div id="expFill" class="exp-fill"></div>
+            <span class="exp-text"><span id="exp">0</span> / <span id="maxExp">80</span> Linh Lực Yêu Cầu</span>
         </div>
     </div>
-</div>
 
+    <div class="quiz-container">
+        <div id="counter" class="counter"></div>
+        <div id="question" class="question"></div>
+        <div id="options" class="options"></div>
+        <div id="message" class="message"></div>
+        <button id="nextBtn" class="primary-btn" style="display: none;" onclick="nextQuestion()">Tiếp Theo ➡️</button>
+    </div>
+</div>
 <!-- 1. Start Screen (Động phủ - Màn hình chính) -->
 <div id="start-screen" class="screen">
     <div class="cute-box">
