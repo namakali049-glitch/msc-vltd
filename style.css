@@ -224,26 +224,94 @@ body {
 .mana-text { color: #4a69bd; }
 .tocfl-text { color: #f6b93b; }
 
-/* --- Leaderboard Screen --- */
+/* --- Leaderboard Screen (Tiên Đạo Bảng) --- */
 .leaderboard-list {
     list-style: none;
     padding: 0;
     margin: 0 0 20px 0;
     width: 100%;
-    max-height: 350px;
+    max-height: 360px;
     overflow-y: auto;
 }
+
 .leaderboard-list li {
-    background: #f1f2f6;
-    margin-bottom: 10px;
-    padding: 15px;
-    border-radius: 10px;
+    background: #ffffff;
+    margin-bottom: 12px;
+    padding: 12px 16px;
+    border-radius: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.1rem;
-    font-weight: bold;
+    border: 2px solid #f1f2f6;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s;
+}
+
+.leaderboard-list li:hover {
+    transform: scale(1.01);
+}
+
+.leaderboard-list li:nth-child(1) { border-color: #ffd32a; background: #fffdf2; }
+.leaderboard-list li:nth-child(2) { border-color: #d2dae2; background: #fbfbfc; }
+.leaderboard-list li:nth-child(3) { border-color: #ffb8b8; background: #fff7f7; }
+
+.lb-user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+}
+
+.lb-rank {
+    font-size: 1.2rem;
+    min-width: 25px;
+}
+
+.lb-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.lb-name {
+    font-size: 1.05rem;
+    font-weight: 700;
     color: #2f3542;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.lb-realm-badge {
+    font-size: 0.78rem;
+    font-weight: 700;
+    background: #ffeaa7;
+    color: #d63031;
+    padding: 2px 8px;
+    border-radius: 8px;
+    border: 1px solid #fdcb6e;
+    letter-spacing: 0.5px;
+}
+
+.lb-stats {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.lb-mana {
+    font-weight: 900;
+    color: #ff6b81;
+    font-size: 1rem;
+}
+
+.lb-time {
+    font-size: 0.82rem;
+    color: #747d8c;
+    margin-top: 2px;
 }
 .leaderboard-list li:nth-child(1) { background: #ffd32a; color: #fff; }
 .leaderboard-list li:nth-child(2) { background: #d2dae2; }
