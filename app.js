@@ -73,7 +73,6 @@ window.switchAuthTab = function(type) {
     }
 };
 
-// Hàm tải Đan Điền từ Firebase khi người chơi đăng nhập
 async function loadUserLifetimeMana(uid) {
     try {
         const userRef = ref(database, 'users/' + uid);
@@ -89,14 +88,12 @@ async function loadUserLifetimeMana(uid) {
     }
 }
 
-// Theo dõi trạng thái đăng nhập
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         currentUser = user;
         const name = user.displayName || user.email.split('@')[0];
         document.getElementById('userDisplayName').innerText = name;
         
-        // Nạp tu vi (Linh lực) cũ từ Database
         await loadUserLifetimeMana(user.uid);
         
         switchScreen('start-screen');
@@ -107,7 +104,6 @@ onAuthStateChanged(auth, async (user) => {
     }
 });
 
-// Đăng ký
 window.handleSignup = async function() {
     const email = document.getElementById('authEmail').value.trim();
     const password = document.getElementById('authPassword').value.trim();
@@ -120,7 +116,6 @@ window.handleSignup = async function() {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(userCredential.user, { displayName: displayName });
         
-        // Khởi tạo Đan Điền cho tân thủ
         await set(ref(database, 'users/' + userCredential.user.uid), {
             name: displayName,
             mana: 0,
@@ -131,7 +126,6 @@ window.handleSignup = async function() {
     } catch (error) { alert("Đăng ký thất bại: " + error.message); }
 };
 
-// Đăng nhập
 window.handleLogin = async function() {
     const email = document.getElementById('authEmail').value.trim();
     const password = document.getElementById('authPassword').value.trim();
@@ -141,11 +135,9 @@ window.handleLogin = async function() {
     catch (error) { alert("Đăng nhập thất bại: Tài khoản hoặc mật khẩu không chính xác!"); }
 };
 
-// Đăng nhập Google
 window.handleGoogleLogin = async function() {
     try { 
         const result = await signInWithPopup(auth, googleProvider);
-        // Tự động kiểm tra và tạo Đan Điền nếu là người mới
         const userRef = ref(database, 'users/' + result.user.uid);
         const snapshot = await get(userRef);
         if (!snapshot.exists()) {
@@ -158,14 +150,12 @@ window.handleGoogleLogin = async function() {
     } catch (error) { alert("Đăng nhập Google thất bại: " + error.message); }
 };
 
-// Đăng xuất
 window.handleLogout = function() { signOut(auth); };
 
 // ==========================================
-// HỆ THỐNG CẢNH GIỚI & LƯU TRỮ
+// HỆ THỐNG CẢNH GIỚI & LƯU TRỮ TỨC THỜI
 // ==========================================
 
-// Quy đổi tổng Linh Lực sang Cảnh Giới
 function calculateRealm(mana) {
     if (mana < 50) return "Phàm Nhân";
     if (mana < 150) return "Luyện Khí Sơ Kỳ";
@@ -175,23 +165,17 @@ function calculateRealm(mana) {
     return "Trúc Cơ Sơ Kỳ";
 }
 
-// Lưu Linh lực cộng dồn vĩnh viễn sau mỗi ván bế quan
-async function saveScore() {
+async function syncManaToDatabase() {
     if (!currentUser) return;
     const name = currentUser.displayName || currentUser.email.split('@')[0];
     
-    // 1. Cộng dồn linh lực ván này vào tổng
-    lifetimeMana += sessionMana;
-
     try {
-        // 2. Cập nhật Đan Điền cá nhân (users/uid)
         await set(ref(database, 'users/' + currentUser.uid), {
             name: name,
             mana: lifetimeMana,
             lastUpdated: Date.now()
         });
 
-        // 3. Cập nhật Tiên Đạo Bảng (Dùng set để mỗi user chỉ có 1 record)
         await set(ref(database, 'leaderboard/' + currentUser.uid), {
             uid: currentUser.uid,
             name: name,
@@ -199,11 +183,10 @@ async function saveScore() {
             timestamp: Date.now()
         });
     } catch (error) {
-        console.error("Lỗi khi cập nhật Đan Điền:", error);
+        console.error("Lỗi cập nhật Đan Điền:", error);
     }
 }
 
-// Màn hình hồ sơ nhân vật (Hiện thị tổng tu vi)
 window.showProfile = function() {
     if (!currentUser) { alert("Đạo hữu vui lòng đăng nhập để xem thông tin!"); return; }
     
@@ -211,12 +194,10 @@ window.showProfile = function() {
     const name = currentUser.displayName || currentUser.email.split('@')[0];
     document.getElementById('profileName').innerText = name;
     
-    // Trực tiếp lấy từ biến lifetimeMana cực kỳ nhanh chóng
     document.getElementById('profileMana').innerText = lifetimeMana;
     document.getElementById('profileRealm').innerText = calculateRealm(lifetimeMana);
 };
 
-// Tiên Đạo Bảng (Xếp hạng theo tổng Linh lực vĩnh viễn)
 window.showLeaderboard = async function() {
     switchScreen('leaderboard-screen');
     let lbList = document.getElementById('lb-list');
@@ -230,7 +211,6 @@ window.showLeaderboard = async function() {
             const data = snapshot.val();
             let records = Object.values(data);
             
-            // Sắp xếp: Ai có nhiều tổng Linh lực nhất đứng đầu
             records.sort((a, b) => b.score - a.score);
             let top10 = records.slice(0, 10);
             
@@ -315,9 +295,8 @@ function generateQuizSession(pool, numQuestions = 10) {
     return quizQuestions;
 }
 
-// Bắt đầu game (Fix lỗi UI Loading & Catch file CSV)
 window.startGame = async function() {
-    switchScreen('game-screen'); // Chuyển màn hình trước để hiển thị chữ Loading
+    switchScreen('game-screen'); 
     
     if (vocabPool.length === 0) {
         document.getElementById('question').innerText = "⏳ Đang mở Tàng Kinh Các, nạp từ vựng...";
@@ -343,7 +322,7 @@ window.startGame = async function() {
     }
 
     currentLevel = 1; 
-    sessionMana = 0; // Đặt lại linh lực của riêng ván này
+    sessionMana = 0; 
     totalSeconds = 0;
     
     document.getElementById('timerDisplay').innerText = "00:00";
@@ -369,9 +348,6 @@ function initLevel() {
 
 async function endGame(win) {
     clearInterval(timerInterval);
-    
-    // Lưu và cộng dồn điểm ván này vào Đan Điền vĩnh viễn
-    await saveScore(); 
     
     let finalTime = formatTime(totalSeconds);
     if (win) {
@@ -424,8 +400,13 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
         btnElement.classList.add('correct');
         document.getElementById('message').innerText = "✅ Đáp đúng! +" + expPerQuestion + " Linh Lực";
         document.getElementById('message').style.color = "#ffa502";
+        
         currentLevelExp += expPerQuestion;
         sessionMana += expPerQuestion;
+        lifetimeMana += expPerQuestion; 
+        
+        // 🌟 Đồng bộ ngay lập tức lên Đan Điền Firebase
+        syncManaToDatabase();
     } else {
         btnElement.classList.add('wrong');
         buttons[correctIndex].classList.add('correct');
