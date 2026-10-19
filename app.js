@@ -1,96 +1,280 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>挑戰中文大師 (TOCFL)</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+// ==========================================
+// FIREBASE MODULE CONFIGURATION
+// ==========================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { 
+    getAuth, 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword, 
+    signOut, 
+    onAuthStateChanged,
+    GoogleAuthProvider,
+    signInWithPopup,
+    updateProfile
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { 
+    getDatabase, 
+    ref, 
+    push, 
+    get 
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-<!-- 0. Auth Screen -->
-<div id="auth-screen" class="screen active">
-    <div class="cute-box">
-        <h1>🌸 挑戰中文大師 🌸</h1>
-        <p>請先登入或註冊以儲存個人戰績</p>
-        
-        <div class="auth-tabs">
-            <button id="tab-login" class="tab-btn active" onclick="switchAuthTab('login')">登入</button>
-            <button id="tab-signup" class="tab-btn" onclick="switchAuthTab('signup')">註冊</button>
-        </div>
+const firebaseConfig = {
+    apiKey: "AiZaSyBBn3CGkftYVV1wr9fY80hBAd8LKzUSyE",
+    authDomain: "msc-vltd.firebaseapp.com",
+    projectId: "msc-vltd",
+    storageBucket: "msc-vltd.firebasestorage.app",
+    messagingSenderId: "684705162429",
+    appId: "1:684705162429:web:2ed8e08891060f61f103d4",
+    measurementId: "G-53PPGGS0ZN"
+};
 
-        <div class="input-group" id="displayNameGroup" style="display: none;">
-            <input type="text" id="authDisplayName" placeholder="暱稱 (例如: 小明)" maxlength="15" />
-        </div>
-        
-        <div class="input-group">
-            <input type="email" id="authEmail" placeholder="Email 帳號..." />
-        </div>
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const database = getDatabase(app);
+const googleProvider = new GoogleAuthProvider();
 
-        <div class="input-group">
-            <input type="password" id="authPassword" placeholder="密碼..." />
-        </div>
-        
-        <div class="btn-group">
-            <button id="authSubmitBtn" class="primary-btn" onclick="handleLogin()">登入 🚀</button>
-            <button class="google-btn" onclick="handleGoogleLogin()">🌐 使用 Google 帳號登入</button>
-        </div>
-    </div>
-</div>
+let currentUser = null;
+let currentLevel = 1;
+let totalScore = 0;      
+let currentLevelExp = 0; 
+let currentQuestionIndex = 0;
+let expToLevelUp = 0; 
+const expPerQuestion = 10;
 
-<!-- 1. Start Screen -->
-<div id="start-screen" class="screen">
-    <div class="cute-box">
-        <div class="user-bar">
-            <span>👤 歡迎, <span id="userDisplayName">玩家</span></span>
-            <button class="logout-btn" onclick="handleLogout()">登出</button>
-        </div>
-        <h1>🌸 挑戰中文大師 🌸</h1>
-        <p>測試你的中文能力 (含計時系統)</p>
-        
-        <div class="btn-group">
-            <button class="primary-btn" onclick="startGame()">開始挑戰 🚀</button>
-            <button class="secondary-btn" onclick="showLeaderboard()">🏆 排行榜</button>
-        </div>
-    </div>
-</div>
+let timerInterval = null;
+let totalSeconds = 0;
+let activeQuestions = []; 
 
-<!-- 2. Game Screen -->
-<div id="game-screen" class="screen">
-    <div class="game-container">
-        <div class="stats-top">
-            <div class="level">等級: <span id="level">1</span></div>
-            <div class="timer">⏱️ <span id="timerDisplay">00:00</span></div>
-        </div>
-        <div class="stats-bottom">
-            <div class="exp">總分: <span id="totalScore">0</span></div>
-            <div class="exp">進度: <span id="exp">0</span> / <span id="maxExp">0</span></div>
-        </div>
-        <div class="question-counter" id="counter">題目: 1 / X</div>
-        <div class="question" id="question">載入中...</div>
-        <div class="options" id="options"></div>
-        <div class="message" id="message"></div>
-        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">繼續 ➔</button>
-    </div>
-</div>
+window.switchAuthTab = function(type) {
+    document.getElementById('tab-login').classList.remove('active');
+    document.getElementById('tab-signup').classList.remove('active');
+    document.getElementById('displayNameGroup').style.display = 'none';
 
-<!-- 3. Leaderboard Screen -->
-<div id="leaderboard-screen" class="screen">
-    <div class="cute-box">
-        <h1>🏆 英雄榜 🏆</h1>
-        <p>最高分與最快通關排名 (Firebase Live)</p>
-        
-        <ul class="leaderboard-list" id="lb-list">
-            <!-- Data will be injected here -->
-        </ul>
-        
-        <button class="primary-btn" onclick="goHome()">返回首頁 🏠</button>
-    </div>
-</div>
+    if (type === 'login') {
+        document.getElementById('tab-login').classList.add('active');
+        document.getElementById('authSubmitBtn').innerText = "登入 🚀";
+        document.getElementById('authSubmitBtn').onclick = handleLogin;
+    } else {
+        document.getElementById('tab-signup').classList.add('active');
+        document.getElementById('displayNameGroup').style.display = 'block';
+        document.getElementById('authSubmitBtn').innerText = "註冊帳號 📝";
+        document.getElementById('authSubmitBtn').onclick = handleSignup;
+    }
+}
 
-<!-- Nhúng file JavaScript -->
-<script src="data.js"></script>
-<script type="module" src="app.js"></script>
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        currentUser = user;
+        const name = user.displayName || user.email.split('@')[0];
+        document.getElementById('userDisplayName').innerText = name;
+        switchScreen('start-screen');
+    } else {
+        currentUser = null;
+        switchScreen('auth-screen');
+    }
+});
 
-</body>
-</html>
+window.handleSignup = async function() {
+    const email = document.getElementById('authEmail').value.trim();
+    const password = document.getElementById('authPassword').value.trim();
+    const displayName = document.getElementById('authDisplayName').value.trim();
+
+    if (!email || !password || !displayName) { alert("請填寫所有欄位！"); return; }
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(userCredential.user, { displayName: displayName });
+        alert("註冊成功！");
+    } catch (error) { alert("註冊失敗: " + error.message); }
+}
+
+window.handleLogin = async function() {
+    const email = document.getElementById('authEmail').value.trim();
+    const password = document.getElementById('authPassword').value.trim();
+
+    if (!email || !password) { alert("請輸入 Email 與密碼！"); return; }
+    try { await signInWithEmailAndPassword(auth, email, password); } 
+    catch (error) { alert("登入失敗: 帳號或密碼錯誤！"); }
+}
+
+window.handleGoogleLogin = async function() {
+    try { await signInWithPopup(auth, googleProvider); } 
+    catch (error) { alert("Google 登入失敗: " + error.message); }
+}
+
+window.handleLogout = function() { signOut(auth); }
+
+function formatTime(seconds) {
+    let m = String(Math.floor(seconds / 60)).padStart(2, '0');
+    let s = String(seconds % 60).padStart(2, '0');
+    return `${m}:${s}`;
+}
+
+function shuffleArray(array) {
+    let curId = array.length;
+    while (0 !== curId) {
+        let randId = Math.floor(Math.random() * curId);
+        curId -= 1;
+        let tmp = array[curId];
+        array[curId] = array[randId];
+        array[randId] = tmp;
+    }
+    return array;
+}
+
+window.switchScreen = function(screenId) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(screenId).classList.add('active');
+}
+
+window.goHome = function() { switchScreen('start-screen'); }
+
+function saveScore() {
+    if (!currentUser) return;
+    const name = currentUser.displayName || currentUser.email.split('@')[0];
+    const scoresRef = ref(database, 'leaderboard');
+    push(scoresRef, { uid: currentUser.uid, name: name, score: totalScore, time: totalSeconds, timestamp: Date.now() });
+}
+
+window.showLeaderboard = async function() {
+    switchScreen('leaderboard-screen');
+    let lbList = document.getElementById('lb-list');
+    lbList.innerHTML = '<li>⏳ 正在載入全球排行榜...</li>';
+
+    try {
+        const scoresRef = ref(database, 'leaderboard');
+        const snapshot = await get(scoresRef);
+
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            let records = Object.values(data);
+            records.sort((a, b) => {
+                if (b.score !== a.score) return b.score - a.score;
+                return a.time - b.time;
+            });
+
+            let uniqueRecords = [];
+            let seenUsers = new Set();
+            for (let r of records) {
+                if (!seenUsers.has(r.uid || r.name)) {
+                    seenUsers.add(r.uid || r.name);
+                    uniqueRecords.push(r);
+                }
+            }
+
+            let top10 = uniqueRecords.slice(0, 10);
+            lbList.innerHTML = '';
+            top10.forEach((player, index) => {
+                let medal = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `<b>${index+1}.</b>`;
+                let timeStr = formatTime(player.time || 0);
+                lbList.innerHTML += `
+                    <li>
+                        <span>${medal}</span><span class="lb-name">${player.name}</span> 
+                        <div class="lb-stats"><span style="color:#ff6b81;">${player.score} 分</span><span class="lb-time">⏱️ ${timeStr}</span></div>
+                    </li>`;
+            });
+        } else { lbList.innerHTML = '<li>目前還沒有紀錄喔！</li>'; }
+    } catch (error) {
+        lbList.innerHTML = '<li>❌ 排行榜載入失敗。</li>';
+    }
+}
+
+window.startGame = function() {
+    currentLevel = 1; totalScore = 0; totalSeconds = 0;
+    document.getElementById('timerDisplay').innerText = "00:00";
+    if(timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        totalSeconds++;
+        document.getElementById('timerDisplay').innerText = formatTime(totalSeconds);
+    }, 1000);
+    initLevel();
+    switchScreen('game-screen');
+}
+
+function initLevel() {
+    currentLevelExp = 0; currentQuestionIndex = 0;
+    activeQuestions = shuffleArray(JSON.parse(JSON.stringify(db[currentLevel])));
+    expToLevelUp = Math.floor(activeQuestions.length * 0.8) * expPerQuestion;
+    document.getElementById('level').innerText = currentLevel;
+    document.getElementById('maxExp').innerText = expToLevelUp;
+    document.getElementById('totalScore').innerText = totalScore;
+    loadQuestion();
+}
+
+function endGame(win) {
+    clearInterval(timerInterval);
+    saveScore();
+    let finalTime = formatTime(totalSeconds);
+    if (win) {
+        document.getElementById('question').innerHTML = `🏆 <b>恭喜大師！</b><br><br>🎯 總分：<span style="color:#eccc68;">${totalScore}</span><br>⏱️ 時間：<span style="color:#7bed9f;">${finalTime}</span>`;
+    } else {
+        document.getElementById('question').innerHTML = `😢 <b>挑戰失敗！</b><br><br>🎯 總分：<span style="color:#ff6b81;">${totalScore}</span><br>⏱️ 時間：<span style="color:#747d8c;">${finalTime}</span>`;
+    }
+    document.getElementById('options').innerHTML = "";
+    document.getElementById('counter').innerText = "";
+    let returnBtn = document.createElement('button');
+    returnBtn.className = "primary-btn";
+    returnBtn.innerText = "查看排行榜 🏆";
+    returnBtn.style.marginTop = "20px";
+    returnBtn.onclick = showLeaderboard;
+    document.getElementById('options').appendChild(returnBtn);
+    document.getElementById('nextBtn').style.display = 'none';
+    document.getElementById('message').innerText = "";
+}
+
+function loadQuestion() {
+    if(currentLevel > 4) { endGame(true); return; }
+    const qData = activeQuestions[currentQuestionIndex];
+    document.getElementById('counter').innerText = `題目: ${currentQuestionIndex + 1} / ${activeQuestions.length}`;
+    document.getElementById('question').innerText = qData.q;
+    const optionsDiv = document.getElementById('options');
+    optionsDiv.innerHTML = '';
+    document.getElementById('message').innerText = '';
+    document.getElementById('nextBtn').style.display = 'none';
+
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, qData.ans, btn);
+        optionsDiv.appendChild(btn);
+    });
+    
+    document.getElementById('exp').innerText = currentLevelExp;
+    document.getElementById('totalScore').innerText = totalScore;
+}
+
+function checkAnswer(selectedIndex, correctIndex, btnElement) {
+    const buttons = document.querySelectorAll('.options .option-btn');
+    buttons.forEach(b => b.onclick = null); 
+    if (selectedIndex === correctIndex) {
+        btnElement.classList.add('correct');
+        document.getElementById('message').innerText = "✅ 答對了！ +" + expPerQuestion + " 分";
+        document.getElementById('message').style.color = "#ffa502";
+        currentLevelExp += expPerQuestion;
+        totalScore += expPerQuestion;
+    } else {
+        btnElement.classList.add('wrong');
+        buttons[correctIndex].classList.add('correct');
+        document.getElementById('message').innerText = "❌ 答錯了！黃色才是正確答案。";
+        document.getElementById('message').style.color = "#ff4757";
+    }
+    document.getElementById('exp').innerText = currentLevelExp;
+    document.getElementById('totalScore').innerText = totalScore;
+    document.getElementById('nextBtn').style.display = 'block';
+}
+
+window.nextQuestion = function() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex >= activeQuestions.length) {
+        if (currentLevelExp >= expToLevelUp) {
+            currentLevel++;
+            if (currentLevel <= 4) { alert(`🎉 晉級 等級 ${currentLevel}！`); initLevel(); return; }
+        } else {
+            alert(`😢 分數不足 (需要 ${expToLevelUp} 分)。`);
+            endGame(false); return;
+        }
+    }
+    loadQuestion();
+}
