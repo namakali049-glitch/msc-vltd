@@ -8,7 +8,53 @@
 </head>
 <body>
 
-<!-- MÀN HÌNH CHƠI GAME (GAME SCREEN) -->
+<!-- 0. Auth Screen (Màn hình Đăng nhập / Đăng ký) -->
+<div id="auth-screen" class="screen active">
+    <div class="cute-box auth-box">
+        <h1>☯️ TIÊN ĐẠO TRẤN ☯️</h1>
+        <p>Đăng nhập hoặc Đăng ký để bước vào con đường Tu Tiên</p>
+        
+        <div class="auth-tabs" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 15px;">
+            <button id="tab-login" class="tab-btn active" onclick="switchAuthTab('login')">Đăng Nhập</button>
+            <button id="tab-signup" class="tab-btn" onclick="switchAuthTab('signup')">Đăng Ký</button>
+        </div>
+
+        <div class="auth-form">
+            <div id="displayNameGroup" style="display: none; margin-bottom: 12px;">
+                <input type="text" id="authDisplayName" placeholder="Nhập Đạo hiệu (Tên nhân vật)" class="auth-input" style="width: 100%; padding: 8px; box-sizing: border-box;">
+            </div>
+            <div style="margin-bottom: 12px;">
+                <input type="email" id="authEmail" placeholder="Nhập Email" class="auth-input" style="width: 100%; padding: 8px; box-sizing: border-box;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <input type="password" id="authPassword" placeholder="Nhập Mật khẩu (từ 6 ký tự)" class="auth-input" style="width: 100%; padding: 8px; box-sizing: border-box;">
+            </div>
+
+            <button id="authSubmitBtn" class="primary-btn" onclick="handleLogin()" style="width: 100%;">Bắt đầu Tu Luyện 🚀</button>
+            <button class="google-btn" onclick="handleGoogleLogin()" style="width: 100%; margin-top: 10px; background: #fff; color: #333;">Đăng nhập bằng Google 🌐</button>
+        </div>
+    </div>
+</div>
+
+<!-- 1. Start Screen (Động phủ - Màn hình chính) -->
+<div id="start-screen" class="screen">
+    <div class="cute-box">
+        <div class="user-bar">
+            <span>👤 Đạo hữu: <span id="userDisplayName">Đang tải...</span></span>
+            <button class="logout-btn" onclick="handleLogout()">Đăng xuất</button>
+        </div>
+        <h1>☯️ ĐỘNG PHỦ TU TIÊN ☯️</h1>
+        <p>Luyện tập Tiếng Trung - Tích lũy Linh lực thăng cảnh giới</p>
+        
+        <div class="btn-group">
+            <button class="primary-btn" onclick="startGame()">Bế Quan Khai Phá 🚀</button>
+            <button class="secondary-btn" onclick="showProfile()">📜 Thông Tin Nhân Vật</button>
+            <button class="secondary-btn" onclick="showLeaderboard()">🏆 Tiên Đạo Bảng</button>
+        </div>
+    </div>
+</div>
+
+<!-- 2. Game Screen (Thử thách Tu luyện & Thanh máu RPG) -->
 <div id="game-screen" class="screen">
     <div class="game-header">
         <!-- Khối hiển thị thông số Nhân vật -->
@@ -47,45 +93,8 @@
         <button id="nextBtn" class="primary-btn" style="display: none;" onclick="nextQuestion()">Tiếp Theo ➡️</button>
     </div>
 </div>
-<!-- 1. Start Screen (Động phủ - Màn hình chính) -->
-<div id="start-screen" class="screen">
-    <div class="cute-box">
-        <div class="user-bar">
-            <span>👤 Đạo hữu: <span id="userDisplayName">Đang tải...</span></span>
-            <button class="logout-btn" onclick="handleLogout()">Đăng xuất</button>
-        </div>
-        <h1>☯️ ĐỘNG PHỦ TU TIÊN ☯️</h1>
-        <p>Luyện tập Tiếng Trung - Tích lũy Linh lực thăng cảnh giới</p>
-        
-        <div class="btn-group">
-            <button class="primary-btn" onclick="startGame()">Bế Quan Khai Phá 🚀</button>
-            <button class="secondary-btn" onclick="showProfile()">📜 Thông Tin Nhân Vật</button>
-            <button class="secondary-btn" onclick="showLeaderboard()">🏆 Tiên Đạo Bảng</button>
-        </div>
-    </div>
-</div>
-
-<!-- 2. Game Screen (Thử thách Tu luyện) -->
-<div id="game-screen" class="screen">
-    <div class="game-container">
-        <div class="stats-top">
-            <div class="level">Cấp độ: <span id="level">1</span></div>
-            <div class="timer">⏱️ <span id="timerDisplay">00:00</span></div>
-        </div>
-        <div class="stats-bottom">
-            <div class="exp">Tổng Linh Lực: <span id="totalScore">0</span></div>
-            <div class="exp">Tiến độ: <span id="exp">0</span> / <span id="maxExp">0</span></div>
-        </div>
-        <div class="question-counter" id="counter">Câu hỏi: 1 / X</div>
-        <div class="question" id="question">Đang tải câu hỏi...</div>
-        <div class="options" id="options"></div>
-        <div class="message" id="message"></div>
-        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Tiếp tục ➔</button>
-    </div>
-</div>
 
 <!-- 3. Profile Screen (Hồ sơ Nhân vật Tu Tiên) -->
-<!-- MÀN HÌNH HỒ SƠ NHÂN VẬT (PROFILE SCREEN) -->
 <div id="profile-screen" class="screen">
     <h2>📜 Hồ Sơ Tu Tiên Giả</h2>
     <div class="profile-card">
@@ -95,7 +104,6 @@
         
         <hr style="border: 0.5px solid #444; margin: 15px 0;">
         
-        <!-- THÊM CÁC CHỈ SỐ NHÂN VẬT VÀO ĐÂY -->
         <h3>⚔️ Thuộc Tính Nhân Vật</h3>
         <p><b>❤️ Sinh Mệnh (HP):</b> <span id="profileHp" style="color: #ff4757; font-weight: bold;">100/100</span></p>
         <p><b>⚔️ Sức Mạnh (STR):</b> <span id="profileStr" style="color: #ffa502; font-weight: bold;">10</span> <small style="color: #aaa;">(Tăng thưởng Linh lực)</small></p>
@@ -118,7 +126,7 @@
     </div>
 </div>
 
-<!-- Thêm thư viện PapaParse để đọc file CSV tự động -->
+<!-- Thư viện PapaParse đọc file CSV tự động và mã điều khiển -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script type="module" src="./app.js"></script>
 </body>
