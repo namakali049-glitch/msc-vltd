@@ -313,3 +313,63 @@ body {
     color: #747d8c;
     margin-top: 2px;
 }
+
+/* Khối chỉ số Nhân vật */
+.character-status-card {
+    background: rgba(15, 15, 25, 0.7);
+    border: 1px solid #eccc68;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.stat-row {
+    margin-bottom: 8px;
+}
+
+.attributes-row {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.9em;
+    color: #ffa502;
+    margin-bottom: 0;
+}
+
+/* Thanh Máu (HP Bar) */
+.hp-bar-container {
+    background: #2f3542;
+    border-radius: 12px;
+    height: 20px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 4px;
+    border: 1px solid #ff4757;
+}
+
+.hp-fill {
+    background: linear-gradient(90deg, #ff4757, #ff6b81);
+    height: 100%;
+    transition: width 0.3s ease-in-out;
+}
+
+.bar-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 11px;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* Hiệu ứng Tâm Ma Phản Phệ (Nhấp nháy đỏ khi chọn sai) */
+@keyframes damageFlash {
+    0% { background-color: rgba(255, 0, 0, 0.4); }
+    100% { background-color: transparent; }
+}
+
+.damage-flash {
+    animation: damageFlash 0.4s ease-in-out;
+}
