@@ -3,94 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>挑戰中文大師 (TOCFL)</title>
+    <title>挑戰中文大師 - Tu Tiên Truyện (TOCFL A1)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- 0. Auth Screen -->
+<!-- 0. Auth Screen (Đăng nhập / Đăng ký) -->
 <div id="auth-screen" class="screen active">
     <div class="cute-box">
         <h1>🌸 挑戰中文大師 🌸</h1>
-        <p>請先登入或註冊以儲存個人戰績</p>
+        <p>Tu tiên tích lũy Linh lực - Học tiếng Trung TOCFL</p>
         
         <div class="auth-tabs">
-            <button id="tab-login" class="tab-btn active" onclick="switchAuthTab('login')">登入</button>
-            <button id="tab-signup" class="tab-btn" onclick="switchAuthTab('signup')">註冊</button>
+            <button id="tab-login" class="tab-btn active" onclick="switchAuthTab('login')">Đăng nhập</button>
+            <button id="tab-signup" class="tab-btn" onclick="switchAuthTab('signup')">Đăng ký</button>
         </div>
 
         <div class="input-group" id="displayNameGroup" style="display: none;">
-            <input type="text" id="authDisplayName" placeholder="暱稱 (例如: 小明)" maxlength="15" />
+            <input type="text" id="authDisplayName" placeholder="Đạo hiệu (Ví dụ: Tiêu Viêm)" maxlength="15" />
         </div>
         
         <div class="input-group">
-            <input type="email" id="authEmail" placeholder="Email 帳號..." />
+            <input type="email" id="authEmail" placeholder="Email khoản..." />
         </div>
 
         <div class="input-group">
-            <input type="password" id="authPassword" placeholder="密碼..." />
+            <input type="password" id="authPassword" placeholder="Mật khẩu (tối thiểu 6 ký tự)..." />
         </div>
         
         <div class="btn-group">
-            <button id="authSubmitBtn" class="primary-btn" onclick="handleLogin()">登入 🚀</button>
-            <button class="google-btn" onclick="handleGoogleLogin()">🌐 使用 Google 帳號登入</button>
+            <button id="authSubmitBtn" class="primary-btn" onclick="handleLogin()">Bắt đầu Tu Luyện 🚀</button>
+            <button class="google-btn" onclick="handleGoogleLogin()">🌐 Đăng nhập bằng Google</button>
         </div>
     </div>
 </div>
 
-<!-- 1. Start Screen -->
+<!-- 1. Start Screen (Động phủ - Màn hình chính) -->
 <div id="start-screen" class="screen">
     <div class="cute-box">
         <div class="user-bar">
-            <span>👤 歡迎, <span id="userDisplayName">玩家</span></span>
-            <button class="logout-btn" onclick="handleLogout()">登出</button>
+            <span>👤 Đạo hữu: <span id="userDisplayName">Đang tải...</span></span>
+            <button class="logout-btn" onclick="handleLogout()">Đăng xuất</button>
         </div>
-        <h1>🌸 挑戰中文大師 🌸</h1>
-        <p>測試你的中文能力 (含計時系統)</p>
+        <h1>☯️ ĐỘNG PHỦ TU TIÊN ☯️</h1>
+        <p>Luyện tập Tiếng Trung - Tích lũy Linh lực thăng cảnh giới</p>
         
         <div class="btn-group">
-            <button class="primary-btn" onclick="startGame()">開始挑戰 🚀</button>
-            <button class="secondary-btn" onclick="showLeaderboard()">🏆 排行榜</button>
+            <button class="primary-btn" onclick="startGame()">Bế Quan Khai Phá 🚀</button>
+            <button class="secondary-btn" onclick="showProfile()">📜 Thông Tin Nhân Vật</button>
+            <button class="secondary-btn" onclick="showLeaderboard()">🏆 Tiên Đạo Bảng</button>
         </div>
     </div>
 </div>
 
-<!-- 2. Game Screen -->
+<!-- 2. Game Screen (Thử thách Tu luyện) -->
 <div id="game-screen" class="screen">
     <div class="game-container">
         <div class="stats-top">
-            <div class="level">等級: <span id="level">1</span></div>
+            <div class="level">Cấp độ: <span id="level">1</span></div>
             <div class="timer">⏱️ <span id="timerDisplay">00:00</span></div>
         </div>
         <div class="stats-bottom">
-            <div class="exp">總分: <span id="totalScore">0</span></div>
-            <div class="exp">進度: <span id="exp">0</span> / <span id="maxExp">0</span></div>
+            <div class="exp">Tổng Linh Lực: <span id="totalScore">0</span></div>
+            <div class="exp">Tiến độ: <span id="exp">0</span> / <span id="maxExp">0</span></div>
         </div>
-        <div class="question-counter" id="counter">題目: 1 / X</div>
-        <div class="question" id="question">載入中...</div>
+        <div class="question-counter" id="counter">Câu hỏi: 1 / X</div>
+        <div class="question" id="question">Đang tải câu hỏi...</div>
         <div class="options" id="options"></div>
         <div class="message" id="message"></div>
-        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">繼續 ➔</button>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Tiếp tục ➔</button>
     </div>
 </div>
 
-<!-- 3. Leaderboard Screen -->
+<!-- 3. Profile Screen (Hồ sơ Nhân vật Tu Tiên) -->
+<div id="profile-screen" class="screen">
+    <div class="cute-box profile-box">
+        <h1>☯️ THÔNG TIN TÀI KHOẢN ☯️</h1>
+        
+        <div class="profile-stats">
+            <div class="stat-item">
+                <span class="stat-label">Đạo hiệu:</span>
+                <span class="stat-value" id="profileName">Đang tải...</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Cảnh giới hiện tại:</span>
+                <span class="stat-value realm-text" id="profileRealm">Phàm Nhân</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Tổng Linh lực tích lũy:</span>
+                <span class="stat-value mana-text"><span id="profileMana">0</span> điểm</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Tâm pháp tu luyện:</span>
+                <span class="stat-value tocfl-text">TOCFL A1 Sơ Cấp</span>
+            </div>
+        </div>
+        
+        <button class="primary-btn" onclick="goHome()">Trở về Động phủ 🏠</button>
+    </div>
+</div>
+
+<!-- 4. Leaderboard Screen (Tiên Đạo Bảng) -->
 <div id="leaderboard-screen" class="screen">
     <div class="cute-box">
-        <h1>🏆 英雄榜 🏆</h1>
-        <p>最高分與最快通關排名 (Firebase Live)</p>
+        <h1>🏆 TIÊN ĐẠO BẢNG 🏆</h1>
+        <p>Bảng xếp hạng Linh lực & Thời gian tu luyện</p>
         
         <ul class="leaderboard-list" id="lb-list">
-            <!-- Data will be injected here -->
+            <!-- Dữ liệu bảng xếp hạng từ Firebase sẽ đổ vào đây -->
         </ul>
         
-        <button class="primary-btn" onclick="goHome()">返回首頁 🏠</button>
+        <button class="primary-btn" onclick="goHome()">Trở về Động phủ 🏠</button>
     </div>
 </div>
 
-<!-- Nhúng file JavaScript -->
+<!-- Nhúng script chuẩn Module -->
 <script src="data.js"></script>
-<script type="module" src="app.js"></script>
+<script type="module" src="./app.js"></script>
 
 </body>
 </html>
