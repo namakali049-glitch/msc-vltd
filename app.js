@@ -1,22 +1,13 @@
 // ==========================================
-// FIREBASE MODULE CONFIGURATION
+// 1. CẤU HÌNH FIREBASE
 // ==========================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { 
-    getAuth, 
-    createUserWithEmailAndPassword, 
-    signInWithEmailAndPassword, 
-    signOut, 
-    onAuthStateChanged,
-    GoogleAuthProvider,
-    signInWithPopup,
-    updateProfile
+    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
+    signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, updateProfile
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { 
-    getDatabase, 
-    ref, 
-    set, 
-    get 
+    getDatabase, ref, set, get 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -35,17 +26,17 @@ const database = getDatabase(app);
 const googleProvider = new GoogleAuthProvider();
 
 // ==========================================
-// BIẾN TOÀN CỤC & CHỈ SỐ NHÂN VẬT (STATS)
+// 2. BIẾN TOÀN CỤC & CHỈ SỐ RPG
 // ==========================================
 let currentUser = null;
-let lifetimeMana = 0; // Đan Điền: Tổng Linh lực vĩnh viễn
-let sessionMana = 0;  // Linh lực thu thập trong ván hiện tại
+let lifetimeMana = 0; 
+let sessionMana = 0;  
 
 // Chỉ số nhân vật
 let maxHp = 100;
 let currentHp = 100;
-let str = 10; // Sức Mạnh (Tăng thưởng Linh lực)
-let agi = 10; // Nhanh Nhẹn (Tăng cơ hội Né tránh tổn thương)
+let str = 10; 
+let agi = 10; 
 
 let currentLevel = 1;
 let currentLevelExp = 0; 
@@ -59,10 +50,26 @@ let activeQuestions = [];
 let vocabPool = [];
 
 // ==========================================
-// TÍNH TOÁN CHỈ SỐ & GIAO DIỆN
+// 3. TÍNH TOÁN CẢNH GIỚI & AVATAR
 // ==========================================
+function calculateRealm(mana) {
+    if (mana < 150) return "Phàm Nhân";
+    if (mana < 300) return "Luyện Khí Sơ Kỳ";
+    if (mana < 600) return "Luyện Khí Trung Kỳ";
+    if (mana < 1500) return "Luyện Khí Hậu Kỳ";
+    return "Trúc Cơ Sơ Kỳ";
+}
 
-// Tính toán lại chỉ số dựa trên Cảnh Giới / Tổng Linh Lực
+function getAvatarByMana(mana) {
+    if (mana < 150) {
+        return "./assets/pham-nhan.jpg";
+    } else if (mana < 1500) {
+        return "./assets/luyen-khi.png";
+    } else {
+        return "./assets/truc-co.png";
+    }
+}
+
 function recalcStats() {
     let bonusTier = Math.floor(lifetimeMana / 100);
     maxHp = 100 + (bonusTier * 15);
@@ -70,32 +77,25 @@ function recalcStats() {
     agi = 10 + (bonusTier * 2);
 }
 
-// Cập nhật giao diện thanh máu và thuộc tính
 function updateCharacterUI() {
     let hpPercent = Math.max(0, (currentHp / maxHp) * 100);
-    const hpFill = document.getElementById('hpFill');
-    const hpText = document.getElementById('hpText');
-    const statStr = document.getElementById('statStr');
-    const statAgi = document.getElementById('statAgi');
-
-    if (hpFill) hpFill.style.width = hpPercent + "%";
-    if (hpText) hpText.innerText = `${currentHp}/${maxHp}`;
-    if (statStr) statStr.innerText = str;
-    if (statAgi) statAgi.innerText = agi;
-}
-
-function calculateRealm(mana) {
-    if (mana < 50) return "Phàm Nhân";
-    if (mana < 150) return "Luyện Khí Sơ Kỳ";
-    if (mana < 300) return "Luyện Khí Trung Kỳ";
-    if (mana < 600) return "Luyện Khí Hậu Kỳ";
-    if (mana < 1500) return "Luyện Khí Đại Viên Mãn";
-    return "Trúc Cơ Sơ Kỳ";
+    if (document.getElementById('hpFill')) document.getElementById('hpFill').style.width = hpPercent + "%";
+    if (document.getElementById('hpText')) document.getElementById('hpText').innerText = `${currentHp}/${maxHp}`;
+    if (document.getElementById('statStr')) document.getElementById('statStr').innerText = str;
+    if (document.getElementById('statAgi')) document.getElementById('statAgi').innerText = agi;
+    
+    const gameAvatar = document.getElementById('gameAvatar');
+    if (gameAvatar) gameAvatar.src = getAvatarByMana(lifetimeMana);
 }
 
 // ==========================================
-// XÁC THỰC & ĐỒNG BỘ ĐAN ĐIỀN
+// 4. XÁC THỰC & FIREBASE SYNC
 // ==========================================
+window.switchScreen = function(screenId) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const targetScreen = document.getElementById(screenId);
+    if(targetScreen) targetScreen.classList.add('active');
+};
 
 window.switchAuthTab = function(type) {
     document.getElementById('tab-login').classList.remove('active');
@@ -118,23 +118,15 @@ async function loadUserLifetimeMana(uid) {
     try {
         const userRef = ref(database, 'users/' + uid);
         const snapshot = await get(userRef);
-        if (snapshot.exists() && snapshot.val().mana) {
-            lifetimeMana = snapshot.val().mana;
-        } else {
-            lifetimeMana = 0;
-        }
-    } catch (error) {
-        console.error("Lỗi nạp Đan Điền:", error);
-        lifetimeMana = 0;
-    }
+        lifetimeMana = (snapshot.exists() && snapshot.val().mana) ? snapshot.val().mana : 0;
+    } catch (error) { lifetimeMana = 0; }
     recalcStats();
 }
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         currentUser = user;
-        const name = user.displayName || user.email.split('@')[0];
-        document.getElementById('userDisplayName').innerText = name;
+        document.getElementById('userDisplayName').innerText = user.displayName || user.email.split('@')[0];
         await loadUserLifetimeMana(user.uid);
         switchScreen('start-screen');
     } else {
@@ -148,29 +140,21 @@ window.handleSignup = async function() {
     const email = document.getElementById('authEmail').value.trim();
     const password = document.getElementById('authPassword').value.trim();
     const displayName = document.getElementById('authDisplayName').value.trim();
-
-    if (!email || !password || !displayName) { alert("Vui lòng điền đầy đủ thông tin!"); return; }
-    if (password.length < 6) { alert("Mật khẩu phải từ 6 ký tự trở lên!"); return; }
-    
+    if (!email || !password || !displayName) { alert("Vui lòng điền đủ!"); return; }
     try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        await updateProfile(userCredential.user, { displayName: displayName });
-        await set(ref(database, 'users/' + userCredential.user.uid), {
-            name: displayName,
-            mana: 0,
-            joinedAt: Date.now()
-        });
-        alert("Đăng ký tài khoản tu tiên thành công!");
-    } catch (error) { alert("Đăng ký thất bại: " + error.message); }
+        const userCred = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(userCred.user, { displayName: displayName });
+        await set(ref(database, 'users/' + userCred.user.uid), { name: displayName, mana: 0 });
+        alert("Đăng ký thành công!");
+    } catch (e) { alert("Lỗi: " + e.message); }
 };
 
 window.handleLogin = async function() {
     const email = document.getElementById('authEmail').value.trim();
     const password = document.getElementById('authPassword').value.trim();
-
-    if (!email || !password) { alert("Vui lòng nhập Email và Mật khẩu!"); return; }
+    if (!email || !password) { alert("Nhập Email và Mật khẩu!"); return; }
     try { await signInWithEmailAndPassword(auth, email, password); } 
-    catch (error) { alert("Đăng nhập thất bại: Tài khoản hoặc mật khẩu không chính xác!"); }
+    catch (e) { alert("Đăng nhập thất bại!"); }
 };
 
 window.handleGoogleLogin = async function() {
@@ -179,46 +163,38 @@ window.handleGoogleLogin = async function() {
         const userRef = ref(database, 'users/' + result.user.uid);
         const snapshot = await get(userRef);
         if (!snapshot.exists()) {
-            await set(userRef, {
-                name: result.user.displayName || "Đạo Hữu Vô Danh",
-                mana: 0,
-                joinedAt: Date.now()
-            });
+            await set(userRef, { name: result.user.displayName || "Đạo Hữu", mana: 0 });
         }
-    } catch (error) { alert("Đăng nhập Google thất bại: " + error.message); }
+    } catch (e) { alert("Lỗi Google: " + e.message); }
 };
 
 window.handleLogout = function() { signOut(auth); };
 
 async function syncManaToDatabase() {
     if (!currentUser) return;
-    const name = currentUser.displayName || currentUser.email.split('@')[0];
     try {
         await set(ref(database, 'users/' + currentUser.uid), {
-            name: name,
+            name: currentUser.displayName || currentUser.email.split('@')[0],
             mana: lifetimeMana,
             lastUpdated: Date.now()
         });
-    } catch (error) {
-        console.error("Lỗi cập nhật Đan Điền:", error);
-    }
+    } catch (e) { console.error("Lỗi đồng bộ:", e); }
 }
 
+// ==========================================
+// 5. HỒ SƠ & BẢNG XẾP HẠNG
+// ==========================================
 window.showProfile = function() {
-    if (!currentUser) { alert("Đạo hữu vui lòng đăng nhập để xem thông tin!"); return; }
-    
-    // Tính toán lại chỉ số nhân vật dựa trên Tổng Linh Lực (Tu vi)
+    if (!currentUser) return;
     recalcStats();
-    
     switchScreen('profile-screen');
-    const name = currentUser.displayName || currentUser.email.split('@')[0];
-    
-    // Đổ dữ liệu thông tin cá nhân
-    document.getElementById('profileName').innerText = name;
+    document.getElementById('profileName').innerText = currentUser.displayName || currentUser.email.split('@')[0];
     document.getElementById('profileMana').innerText = lifetimeMana;
     document.getElementById('profileRealm').innerText = calculateRealm(lifetimeMana);
     
-    // Đổ dữ liệu chỉ số nhân vật
+    const profileAvatar = document.getElementById('profileAvatar');
+    if (profileAvatar) profileAvatar.src = getAvatarByMana(lifetimeMana);
+    
     document.getElementById('profileHp').innerText = `${maxHp}/${maxHp}`;
     document.getElementById('profileStr').innerText = str;
     document.getElementById('profileAgi').innerText = agi;
@@ -228,134 +204,78 @@ window.showLeaderboard = async function() {
     switchScreen('leaderboard-screen');
     let lbList = document.getElementById('lb-list');
     lbList.innerHTML = '<li>⏳ Đang tải Tiên Đạo Bảng...</li>';
-
     try {
-        const usersRef = ref(database, 'users');
-        const snapshot = await get(usersRef);
-
+        const snapshot = await get(ref(database, 'users'));
         if (snapshot.exists()) {
-            let records = Object.values(snapshot.val());
-            records.sort((a, b) => (b.mana || 0) - (a.mana || 0));
-            let top10 = records.slice(0, 10);
-            
+            let records = Object.values(snapshot.val()).sort((a, b) => (b.mana || 0) - (a.mana || 0)).slice(0, 10);
             lbList.innerHTML = '';
-            top10.forEach((player, index) => {
+            records.forEach((player, index) => {
                 let medal = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `<b>${index + 1}.</b>`;
-                let realm = calculateRealm(player.mana || 0);
-
                 lbList.innerHTML += `
                     <li>
                         <div class="lb-user-info">
                             <span class="lb-rank">${medal}</span>
                             <div class="lb-details">
                                 <span class="lb-name">${player.name}</span>
-                                <span class="lb-realm-badge">${realm}</span>
+                                <span class="realm-badge">${calculateRealm(player.mana || 0)}</span>
                             </div>
                         </div>
-                        <div class="lb-stats">
-                            <span class="lb-mana">⚡ ${player.mana || 0} Tổng Linh Lực</span>
-                        </div>
+                        <div class="lb-mana">⚡ ${player.mana || 0} Linh Lực</div>
                     </li>`;
             });
-        } else { 
-            lbList.innerHTML = '<li>Chưa có danh sách tu tiên giả!</li>'; 
-        }
-    } catch (error) {
-        lbList.innerHTML = '<li>❌ Tải Tiên Đạo Bảng thất bại.</li>';
-    }
-};
-
-// ==========================================
-// CƠ CHẾ BẾ QUAN TU LUYỆN & TRẬN CHIẾN
-// ==========================================
-
-function formatTime(seconds) {
-    let m = String(Math.floor(seconds / 60)).padStart(2, '0');
-    let s = String(seconds % 60).padStart(2, '0');
-    return `${m}:${s}`;
-}
-
-function shuffleArray(array) {
-    let curId = array.length;
-    while (0 !== curId) {
-        let randId = Math.floor(Math.random() * curId);
-        curId -= 1;
-        let tmp = array[curId];
-        array[curId] = array[randId];
-        array[randId] = tmp;
-    }
-    return array;
-}
-
-window.switchScreen = function(screenId) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    const targetScreen = document.getElementById(screenId);
-    if (targetScreen) {
-        targetScreen.classList.add('active');
-    } else {
-        console.error(`❌ Không tìm thấy màn hình nào có id="${screenId}" trong index.html!`);
-    }
+        } else { lbList.innerHTML = '<li>Chưa có cao thủ nào!</li>'; }
+    } catch (e) { lbList.innerHTML = '<li>❌ Lỗi tải bảng xếp hạng.</li>'; }
 };
 
 window.goHome = function() { switchScreen('start-screen'); };
 
-function generateQuizSession(pool, numQuestions = 10) {
-    let shuffledPool = shuffleArray([...pool]);
-    let selectedVocabs = shuffledPool.slice(0, numQuestions);
-    let quizQuestions = [];
+// ==========================================
+// 6. GAMEPLAY & COMBAT
+// ==========================================
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 
-    selectedVocabs.forEach(vocab => {
+function generateQuizSession(pool, numQuestions = 10) {
+    let selected = shuffleArray([...pool]).slice(0, numQuestions);
+    return selected.map(vocab => {
         let options = [vocab.meaning]; 
         while (options.length < 4) {
-            let randomWrongVocab = pool[Math.floor(Math.random() * pool.length)];
-            if (randomWrongVocab && randomWrongVocab.meaning && !options.includes(randomWrongVocab.meaning)) {
-                options.push(randomWrongVocab.meaning);
-            }
+            let rand = pool[Math.floor(Math.random() * pool.length)];
+            if (rand && rand.meaning && !options.includes(rand.meaning)) options.push(rand.meaning);
         }
         options = shuffleArray(options);
-        let correctIndex = options.indexOf(vocab.meaning);
-
-        quizQuestions.push({
+        return {
             q: `Đạo hữu hãy cho biết ý nghĩa của từ này:\n\n✨ ${vocab.hanzi} ✨\n(Phiên âm: ${vocab.pinyin} | Loại: ${vocab.type})`,
-            options: options,
-            ans: correctIndex
-        });
+            options: options, ans: options.indexOf(vocab.meaning)
+        };
     });
-    return quizQuestions;
+}
+
+function formatTime(sec) {
+    return `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`;
 }
 
 window.startGame = async function() {
     switchScreen('game-screen'); 
-    
     if (vocabPool.length === 0) {
-        document.getElementById('question').innerText = "⏳ Đang mở Tàng Kinh Các, nạp từ vựng...";
-        document.getElementById('options').innerHTML = ""; 
-        document.getElementById('nextBtn').style.display = 'none';
-        
-        await new Promise((resolve) => {
+        document.getElementById('question').innerText = "⏳ Đang mở Tàng Kinh Các...";
+        await new Promise(resolve => {
             Papa.parse("./a1_vocab.csv", {
-                download: true,
-                header: true,
-                skipEmptyLines: true,
-                complete: function(results) {
-                    vocabPool = results.data;
-                    resolve();
-                },
-                error: function() {
-                    alert("❌ Lỗi tải Kinh Thư (Không tìm thấy file CSV).");
-                    resolve();
-                }
+                download: true, header: true, skipEmptyLines: true,
+                complete: res => { vocabPool = res.data; resolve(); },
+                error: () => { alert("❌ Lỗi tải CSV!"); resolve(); }
             });
         });
     }
 
-    currentLevel = 1; 
-    sessionMana = 0; 
-    totalSeconds = 0;
-    
-    // Hồi đầy Máu khi bắt đầu bế quan mới
+    currentLevel = 1; sessionMana = 0; totalSeconds = 0;
     recalcStats();
-    currentHp = maxHp;
+    currentHp = maxHp; // Bơm đầy máu
     updateCharacterUI();
 
     document.getElementById('timerDisplay').innerText = "00:00";
@@ -371,36 +291,12 @@ window.startGame = async function() {
 function initLevel() {
     currentLevelExp = 0; currentQuestionIndex = 0;
     activeQuestions = generateQuizSession(vocabPool, 10);
-    
     expToLevelUp = Math.floor(activeQuestions.length * 0.8) * expPerQuestion; 
+    
     document.getElementById('level').innerText = currentLevel;
     document.getElementById('maxExp').innerText = expToLevelUp;
     document.getElementById('totalScore').innerText = sessionMana;
     loadQuestion();
-}
-
-async function endGame(win) {
-    clearInterval(timerInterval);
-    let finalTime = formatTime(totalSeconds);
-    
-    if (win) {
-        document.getElementById('question').innerHTML = `🏆 <b>Chúc mừng Đạo Hữu Đột Phá Màn Bế Quan!</b><br><br>🎯 Thu nhập: <span style="color:#eccc68;">+${sessionMana} Linh Lực</span><br>💎 Tổng Tu Vi: <span style="color:#00d2d3;">${lifetimeMana} Linh Lực</span><br>⏱️ Thời gian: <span style="color:#7bed9f;">${finalTime}</span>`;
-    } else {
-        document.getElementById('question').innerHTML = `💥 <b>Tẩu Hỏa Nhập Ma! Bế quan thất bại.</b><br><br>🎯 Thu nhập: <span style="color:#eccc68;">+${sessionMana} Linh Lực</span><br>💎 Tổng Tu Vi: <span style="color:#00d2d3;">${lifetimeMana} Linh Lực</span><br>⏱️ Thời gian: <span style="color:#747d8c;">${finalTime}</span>`;
-    }
-    
-    document.getElementById('options').innerHTML = "";
-    document.getElementById('counter').innerText = "";
-    
-    let returnBtn = document.createElement('button');
-    returnBtn.className = "primary-btn";
-    returnBtn.innerText = "Xem Tiên Đạo Bảng 🏆";
-    returnBtn.style.marginTop = "20px";
-    returnBtn.onclick = showLeaderboard;
-    
-    document.getElementById('options').appendChild(returnBtn);
-    document.getElementById('nextBtn').style.display = 'none';
-    document.getElementById('message').innerText = "";
 }
 
 function loadQuestion() {
@@ -408,6 +304,7 @@ function loadQuestion() {
     const qData = activeQuestions[currentQuestionIndex];
     document.getElementById('counter').innerText = `Câu hỏi: ${currentQuestionIndex + 1} / ${activeQuestions.length}`;
     document.getElementById('question').innerText = qData.q;
+    
     const optionsDiv = document.getElementById('options');
     optionsDiv.innerHTML = '';
     document.getElementById('message').innerText = '';
@@ -415,12 +312,13 @@ function loadQuestion() {
 
     qData.options.forEach((opt, index) => {
         const btn = document.createElement('button');
-        btn.className = 'option-btn';
-        btn.innerText = opt;
+        btn.className = 'option-btn'; btn.innerText = opt;
         btn.onclick = () => checkAnswer(index, qData.ans, btn);
         optionsDiv.appendChild(btn);
     });
     
+    let expPercent = Math.min(100, (currentLevelExp / expToLevelUp) * 100);
+    document.getElementById('expFill').style.width = expPercent + "%";
     document.getElementById('exp').innerText = currentLevelExp;
     document.getElementById('totalScore').innerText = sessionMana;
     updateCharacterUI();
@@ -432,15 +330,11 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
     
     if (selectedIndex === correctIndex) {
         btnElement.classList.add('correct');
-        
-        // Thưởng thêm điểm nhờ Sức Mạnh (STR)
         let bonusMana = Math.floor(expPerQuestion + (str * 0.2));
+        currentHp = Math.min(maxHp, currentHp + 2); // Hồi 2 máu
         
-        // Hồi 2 HP khi trả lời đúng
-        currentHp = Math.min(maxHp, currentHp + 2);
-        
-        document.getElementById('message').innerText = `✅ Đáp đúng! +${bonusMana} Linh Lực (STR +${Math.floor(str * 0.2)})`;
-        document.getElementById('message').style.color = "#ffa502";
+        document.getElementById('message').innerText = `✅ Đáp đúng! +${bonusMana} Linh Lực (Sức mạnh +${Math.floor(str * 0.2)})`;
+        document.getElementById('message').style.color = "#2ed573";
         
         currentLevelExp += bonusMana;
         sessionMana += bonusMana;
@@ -453,39 +347,29 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
         btnElement.classList.add('wrong');
         buttons[correctIndex].classList.add('correct');
         
-        // Nhanh Nhẹn (AGI) giúp có cơ hội Né Tránh Tâm Ma
-        let dodgeRate = Math.min(30, agi * 0.5); // Tối đa 30% né
-        let isDodged = Math.random() * 100 < dodgeRate;
-
-        if (isDodged) {
-            document.getElementById('message').innerText = "⚡ Thân pháp linh hoạt! Né tránh thành công Tâm Ma Phản Phệ!";
+        let dodgeRate = Math.min(30, agi * 0.5); 
+        if (Math.random() * 100 < dodgeRate) {
+            document.getElementById('message').innerText = "⚡ Thân pháp siêu phàm! Né thành công Tâm Ma!";
             document.getElementById('message').style.color = "#70a1ff";
         } else {
-            // Trừ 20 Máu khi chọn sai
-            let damage = 20;
-            currentHp -= damage;
-            
-            // Chớp đỏ màn hình
+            currentHp -= 20;
             const gameScreen = document.getElementById('game-screen');
             gameScreen.classList.add('damage-flash');
             setTimeout(() => gameScreen.classList.remove('damage-flash'), 400);
 
-            document.getElementById('message').innerText = `❌ Tâm Ma Phản Phệ! Tổn hại ${damage} Sinh Mệnh!`;
+            document.getElementById('message').innerText = `❌ Tâm Ma Phản Phệ! Mất 20 Sinh Mệnh!`;
             document.getElementById('message').style.color = "#ff4757";
         }
-
         updateCharacterUI();
 
-        // Kiểm tra hết máu -> Tẩu hỏa nhập ma
         if (currentHp <= 0) {
-            setTimeout(() => {
-                alert("💥 Sinh Mệnh cạn kiệt! Đạo hữu đã Tẩu Hỏa Nhập Ma.");
-                endGame(false);
-            }, 500);
+            setTimeout(() => { alert("💥 Sinh Mệnh cạn kiệt! Đạo hữu đã Tẩu Hỏa Nhập Ma."); endGame(false); }, 500);
             return;
         }
     }
     
+    let expPercent = Math.min(100, (currentLevelExp / expToLevelUp) * 100);
+    document.getElementById('expFill').style.width = expPercent + "%";
     document.getElementById('exp').innerText = currentLevelExp;
     document.getElementById('totalScore').innerText = sessionMana;
     document.getElementById('nextBtn').style.display = 'block';
@@ -498,9 +382,26 @@ window.nextQuestion = function() {
             currentLevel++;
             if (currentLevel <= 4) { alert(`🎉 Đột phá thành công sang Tầng ${currentLevel}!`); initLevel(); return; }
         } else {
-            alert(`😢 Linh lực không đủ (Cần tối thiểu ${expToLevelUp} để vượt ải). Mời Đạo Hữu làm lại.`);
+            alert(`😢 Linh lực không đủ (Cần tối thiểu ${expToLevelUp}). Mời Đạo Hữu làm lại.`);
             endGame(false); return;
         }
     }
     loadQuestion();
 };
+
+function endGame(win) {
+    clearInterval(timerInterval);
+    document.getElementById('question').innerHTML = win ? 
+        `🏆 <b>Đột Phá Thành Công!</b><br><br>🎯 Nhận: <span style="color:#eccc68;">+${sessionMana} Linh Lực</span><br>💎 Tổng Tu Vi: <span style="color:#00d2d3;">${lifetimeMana}</span>` : 
+        `💥 <b>Tẩu Hỏa Nhập Ma!</b><br><br>🎯 Nhận: <span style="color:#eccc68;">+${sessionMana} Linh Lực</span><br>💎 Tổng Tu Vi: <span style="color:#00d2d3;">${lifetimeMana}</span>`;
+    
+    document.getElementById('options').innerHTML = "";
+    document.getElementById('counter').innerText = "";
+    document.getElementById('nextBtn').style.display = 'none';
+    document.getElementById('message').innerText = "";
+    
+    let btn = document.createElement('button');
+    btn.className = "primary-btn"; btn.innerText = "Xem Tiên Đạo Bảng 🏆";
+    btn.onclick = showLeaderboard;
+    document.getElementById('options').appendChild(btn);
+}
