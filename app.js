@@ -165,59 +165,52 @@ function calculateRealm(mana) {
     return "Trúc Cơ Sơ Kỳ";
 }
 
+// ==========================================
+// 🌟 1. TỐI ƯU HÀM LƯU TỨC THỜI (Chỉ lưu vào Đan Điền)
+// ==========================================
 async function syncManaToDatabase() {
     if (!currentUser) return;
     const name = currentUser.displayName || currentUser.email.split('@')[0];
     
     try {
+        // Chỉ cần lưu duy nhất vào nhánh 'users' (Đan Điền) là đủ
         await set(ref(database, 'users/' + currentUser.uid), {
             name: name,
             mana: lifetimeMana,
             lastUpdated: Date.now()
-        });
-
-        await set(ref(database, 'leaderboard/' + currentUser.uid), {
-            uid: currentUser.uid,
-            name: name,
-            score: lifetimeMana,
-            timestamp: Date.now()
         });
     } catch (error) {
         console.error("Lỗi cập nhật Đan Điền:", error);
     }
 }
 
-window.showProfile = function() {
-    if (!currentUser) { alert("Đạo hữu vui lòng đăng nhập để xem thông tin!"); return; }
-    
-    switchScreen('profile-screen');
-    const name = currentUser.displayName || currentUser.email.split('@')[0];
-    document.getElementById('profileName').innerText = name;
-    
-    document.getElementById('profileMana').innerText = lifetimeMana;
-    document.getElementById('profileRealm').innerText = calculateRealm(lifetimeMana);
-};
-
+// ==========================================
+// 🌟 2. BẢNG XẾP HẠNG (Đọc trực tiếp từ Đan Điền để lấy Tổng tu vi)
+// ==========================================
 window.showLeaderboard = async function() {
     switchScreen('leaderboard-screen');
     let lbList = document.getElementById('lb-list');
     lbList.innerHTML = '<li>⏳ Đang tải Tiên Đạo Bảng...</li>';
 
     try {
-        const scoresRef = ref(database, 'leaderboard');
-        const snapshot = await get(scoresRef);
+        // Thay vì lấy từ leaderboard cũ, ta lấy thẳng từ nhánh 'users'
+        const usersRef = ref(database, 'users');
+        const snapshot = await get(usersRef);
 
         if (snapshot.exists()) {
             const data = snapshot.val();
             let records = Object.values(data);
             
-            records.sort((a, b) => b.score - a.score);
+            // Sắp xếp: Ai có TỔNG LINH LỰC (mana) cao nhất sẽ đứng đầu
+            records.sort((a, b) => (b.mana || 0) - (a.mana || 0));
             let top10 = records.slice(0, 10);
             
             lbList.innerHTML = '';
             top10.forEach((player, index) => {
                 let medal = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `<b>${index + 1}.</b>`;
-                let realm = calculateRealm(player.score || 0);
+                
+                // Tính cảnh giới dựa trên tổng linh lực (mana)
+                let realm = calculateRealm(player.mana || 0);
 
                 lbList.innerHTML += `
                     <li>
@@ -229,7 +222,7 @@ window.showLeaderboard = async function() {
                             </div>
                         </div>
                         <div class="lb-stats">
-                            <span class="lb-mana">⚡ ${player.score} Tổng Linh Lực</span>
+                            <span class="lb-mana">⚡ ${player.mana || 0} Tổng Linh Lực</span>
                         </div>
                     </li>`;
             });
@@ -240,7 +233,6 @@ window.showLeaderboard = async function() {
         lbList.innerHTML = '<li>❌ Tải Tiên Đạo Bảng thất bại.</li>';
     }
 };
-
 // ==========================================
 // CƠ CHẾ RÚT THẺ VÀ TẠO CÂU HỎI TỰ ĐỘNG
 // ==========================================
