@@ -64,9 +64,9 @@ function getAvatarByMana(mana) {
     if (mana < 150) {
         return "./assets/pham-nhan.jpg";
     } else if (mana < 1500) {
-        return "./assets/luyen-khi.png";
+        return "./assets/luyen-khi.jpg";
     } else {
-        return "./assets/truc-co.png";
+        return "./assets/truc-co.jpg";
     }
 }
 
