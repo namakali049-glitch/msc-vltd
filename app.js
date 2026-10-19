@@ -44,7 +44,9 @@ const expPerQuestion = 10;
 
 let timerInterval = null;
 let totalSeconds = 0;
+let activeQuestions = [];
 let activeQuestions = []; 
+let vocabPool = []; // Chứa toàn bộ từ vựng nạp từ CSV
 
 // Chuyển tab Đăng nhập / Đăng ký
 window.switchAuthTab = function(type) {
@@ -248,7 +250,59 @@ window.showLeaderboard = async function() {
     }
 };
 
-window.startGame = function() {
+// ==========================================
+// CƠ CHẾ RÚT THẺ VÀ TẠO CÂU HỎI TỰ ĐỘNG
+// ==========================================
+
+// Hàm tạo một ván tu luyện (bốc ngẫu nhiên 10 từ)
+function generateQuizSession(pool, numQuestions = 10) {
+    let shuffledPool = shuffleArray([...pool]);
+    let selectedVocabs = shuffledPool.slice(0, numQuestions);
+    let quizQuestions = [];
+
+    selectedVocabs.forEach(vocab => {
+        let options = [vocab.meaning]; // Đáp án đúng
+        
+        // Bốc 3 nghĩa sai ngẫu nhiên từ kho
+        while (options.length < 4) {
+            let randomWrongVocab = pool[Math.floor(Math.random() * pool.length)];
+            // Tránh bốc trùng nghĩa hoặc ô bị rỗng
+            if (randomWrongVocab && randomWrongVocab.meaning && !options.includes(randomWrongVocab.meaning)) {
+                options.push(randomWrongVocab.meaning);
+            }
+        }
+
+        options = shuffleArray(options); // Xáo trộn 4 đáp án
+        let correctIndex = options.indexOf(vocab.meaning);
+
+        quizQuestions.push({
+            q: `Đạo hữu hãy cho biết ý nghĩa của từ này:\n\n✨ ${vocab.hanzi} ✨\n(Phiên âm: ${vocab.pinyin} | Loại: ${vocab.type})`,
+            options: options,
+            ans: correctIndex
+        });
+    });
+
+    return quizQuestions;
+}
+
+window.startGame = async function() {
+    // Nếu chưa tải Kinh Thư, tiến hành tải từ file CSV
+    if (vocabPool.length === 0) {
+        document.getElementById('question').innerText = "Đang mở Tàng Kinh Các, nạp từ vựng...";
+        await new Promise((resolve) => {
+            Papa.parse("./a1_vocab.csv", {
+                download: true,
+                header: true,
+                skipEmptyLines: true,
+                complete: function(results) {
+                    vocabPool = results.data;
+                    console.log("Đã tải kho từ vựng:", vocabPool.length, "từ");
+                    resolve();
+                }
+            });
+        });
+    }
+
     currentLevel = 1; totalScore = 0; totalSeconds = 0;
     document.getElementById('timerDisplay').innerText = "00:00";
     if(timerInterval) clearInterval(timerInterval);
@@ -256,14 +310,18 @@ window.startGame = function() {
         totalSeconds++;
         document.getElementById('timerDisplay').innerText = formatTime(totalSeconds);
     }, 1000);
+    
     initLevel();
     switchScreen('game-screen');
 };
 
 function initLevel() {
     currentLevelExp = 0; currentQuestionIndex = 0;
-    activeQuestions = shuffleArray(JSON.parse(JSON.stringify(db[currentLevel])));
-    expToLevelUp = Math.floor(activeQuestions.length * 0.8) * expPerQuestion;
+    
+    // Mỗi ải bốc 10 câu hỏi ngẫu nhiên từ Tàng Kinh Các
+    activeQuestions = generateQuizSession(vocabPool, 10);
+    
+    expToLevelUp = Math.floor(activeQuestions.length * 0.8) * expPerQuestion; // Đúng 80% là qua ải
     document.getElementById('level').innerText = currentLevel;
     document.getElementById('maxExp').innerText = expToLevelUp;
     document.getElementById('totalScore').innerText = totalScore;
