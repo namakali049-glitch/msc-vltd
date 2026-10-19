@@ -19,7 +19,6 @@ import {
     get 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-// Khởi tạo Firebase với API Key chuẩn của dự án msc-vltd
 const firebaseConfig = {
     apiKey: "AIzaSyBBn3CGkftYVVl1wr9fY8OhBAd8LKzUSyE",
     authDomain: "msc-vltd.firebaseapp.com",
@@ -63,9 +62,9 @@ window.switchAuthTab = function(type) {
         document.getElementById('authSubmitBtn').innerText = "Đăng Ký Tài Khoản 📝";
         document.getElementById('authSubmitBtn').onclick = handleSignup;
     }
-}
+};
 
-// Theo dõi trạng thái xác thực người dùng
+// Theo dõi trạng thái đăng nhập
 onAuthStateChanged(auth, (user) => {
     if (user) {
         currentUser = user;
@@ -78,7 +77,7 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-// Xử lý Đăng ký
+// Đăng ký
 window.handleSignup = async function() {
     const email = document.getElementById('authEmail').value.trim();
     const password = document.getElementById('authPassword').value.trim();
@@ -92,9 +91,9 @@ window.handleSignup = async function() {
         await updateProfile(userCredential.user, { displayName: displayName });
         alert("Đăng ký tài khoản tu tiên thành công!");
     } catch (error) { alert("Đăng ký thất bại: " + error.message); }
-}
+};
 
-// Xử lý Đăng nhập
+// Đăng nhập
 window.handleLogin = async function() {
     const email = document.getElementById('authEmail').value.trim();
     const password = document.getElementById('authPassword').value.trim();
@@ -102,18 +101,18 @@ window.handleLogin = async function() {
     if (!email || !password) { alert("Vui lòng nhập Email và Mật khẩu!"); return; }
     try { await signInWithEmailAndPassword(auth, email, password); } 
     catch (error) { alert("Đăng nhập thất bại: Tài khoản hoặc mật khẩu không chính xác!"); }
-}
+};
 
 // Đăng nhập Google
 window.handleGoogleLogin = async function() {
     try { await signInWithPopup(auth, googleProvider); } 
     catch (error) { alert("Đăng nhập Google thất bại: " + error.message); }
-}
+};
 
 // Đăng xuất
-window.handleLogout = function() { signOut(auth); }
+window.handleLogout = function() { signOut(auth); };
 
-// Hàm quy đổi Cảnh Giới Tu Tiên dựa trên Linh Lực
+// Quy đổi điểm Linh Lực sang Cảnh Giới
 function calculateRealm(mana) {
     if (mana < 50) return "Phàm Nhân";
     if (mana < 150) return "Luyện Khí Sơ Kỳ";
@@ -123,7 +122,7 @@ function calculateRealm(mana) {
     return "Trúc Cơ Sơ Kỳ";
 }
 
-// Hiển thị Hồ sơ Nhân vật
+// Màn hình hồ sơ nhân vật
 window.showProfile = async function() {
     if (!currentUser) {
         alert("Đạo hữu vui lòng đăng nhập để xem thông tin!");
@@ -155,7 +154,7 @@ window.showProfile = async function() {
         document.getElementById('profileMana').innerText = totalScore; 
         document.getElementById('profileRealm').innerText = calculateRealm(totalScore);
     }
-}
+};
 
 function formatTime(seconds) {
     let m = String(Math.floor(seconds / 60)).padStart(2, '0');
@@ -178,9 +177,9 @@ function shuffleArray(array) {
 window.switchScreen = function(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(screenId).classList.add('active');
-}
+};
 
-window.goHome = function() { switchScreen('start-screen'); }
+window.goHome = function() { switchScreen('start-screen'); };
 
 function saveScore() {
     if (!currentUser) return;
@@ -189,6 +188,7 @@ function saveScore() {
     push(scoresRef, { uid: currentUser.uid, name: name, score: totalScore, time: totalSeconds, timestamp: Date.now() });
 }
 
+// Tiên Đạo Bảng (Đã sửa sạch sẽ, chuẩn xác)
 window.showLeaderboard = async function() {
     switchScreen('leaderboard-screen');
     let lbList = document.getElementById('lb-list');
@@ -202,13 +202,12 @@ window.showLeaderboard = async function() {
             const data = snapshot.val();
             let records = Object.values(data);
             
-            // Sắp xếp: Ưu tiên điểm Linh Lực cao nhất, nếu bằng nhau thì so thời gian ngắn hơn
+            // Sắp xếp: Điểm cao xếp trước, thời gian ít xếp trước
             records.sort((a, b) => {
                 if (b.score !== a.score) return b.score - a.score;
                 return a.time - b.time;
             });
 
-            // Lọc giữ lại kỷ lục cao nhất của mỗi người chơi
             let uniqueRecords = [];
             let seenUsers = new Set();
             for (let r of records) {
@@ -224,7 +223,6 @@ window.showLeaderboard = async function() {
             top10.forEach((player, index) => {
                 let medal = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `<b>${index + 1}.</b>`;
                 let timeStr = formatTime(player.time || 0);
-                // Quy đổi điểm Linh Lực ra Cảnh Giới
                 let realm = calculateRealm(player.score || 0);
 
                 lbList.innerHTML += `
@@ -248,24 +246,7 @@ window.showLeaderboard = async function() {
     } catch (error) {
         lbList.innerHTML = '<li>❌ Tải Tiên Đạo Bảng thất bại.</li>';
     }
-}
-
-            let top10 = uniqueRecords.slice(0, 10);
-            lbList.innerHTML = '';
-            top10.forEach((player, index) => {
-                let medal = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `<b>${index+1}.</b>`;
-                let timeStr = formatTime(player.time || 0);
-                lbList.innerHTML += `
-                    <li>
-                        <span>${medal}</span><span class="lb-name">${player.name}</span> 
-                        <div class="lb-stats"><span style="color:#ff6b81;">${player.score} Linh Lực</span><span class="lb-time">⏱️ ${timeStr}</span></div>
-                    </li>`;
-            });
-        } else { lbList.innerHTML = '<li>Chưa có danh sách tu tiên giả!</li>'; }
-    } catch (error) {
-        lbList.innerHTML = '<li>❌ Tải Tiên Đạo Bảng thất bại.</li>';
-    }
-}
+};
 
 window.startGame = function() {
     currentLevel = 1; totalScore = 0; totalSeconds = 0;
@@ -277,7 +258,7 @@ window.startGame = function() {
     }, 1000);
     initLevel();
     switchScreen('game-screen');
-}
+};
 
 function initLevel() {
     currentLevelExp = 0; currentQuestionIndex = 0;
@@ -364,4 +345,4 @@ window.nextQuestion = function() {
         }
     }
     loadQuestion();
-}
+};
