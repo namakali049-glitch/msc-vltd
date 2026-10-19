@@ -15,7 +15,7 @@ import {
 import { 
     getDatabase, 
     ref, 
-    push, 
+    set, 
     get 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
@@ -34,9 +34,14 @@ const auth = getAuth(app);
 const database = getDatabase(app);
 const googleProvider = new GoogleAuthProvider();
 
+// ==========================================
+// BIẾN TOÀN CỤC (STATE MANAGEMENT)
+// ==========================================
 let currentUser = null;
+let lifetimeMana = 0; // Đan Điền: Tổng Linh lực vĩnh viễn trọn đời
+let sessionMana = 0;  // Linh lực kiếm được trong ván bế quan hiện tại
+
 let currentLevel = 1;
-let totalScore = 0; // Linh lực tích lũy
 let currentLevelExp = 0; 
 let currentQuestionIndex = 0;
 let expToLevelUp = 0; 
@@ -47,7 +52,10 @@ let totalSeconds = 0;
 let activeQuestions = []; 
 let vocabPool = []; // Chứa toàn bộ từ vựng nạp từ CSV
 
-// Chuyển tab Đăng nhập / Đăng ký
+// ==========================================
+// XÁC THỰC & HỒ SƠ NGƯỜI CHƠI
+// ==========================================
+
 window.switchAuthTab = function(type) {
     document.getElementById('tab-login').classList.remove('active');
     document.getElementById('tab-signup').classList.remove('active');
@@ -65,15 +73,36 @@ window.switchAuthTab = function(type) {
     }
 };
 
+// Hàm tải Đan Điền từ Firebase khi người chơi đăng nhập
+async function loadUserLifetimeMana(uid) {
+    try {
+        const userRef = ref(database, 'users/' + uid);
+        const snapshot = await get(userRef);
+        if (snapshot.exists() && snapshot.val().mana) {
+            lifetimeMana = snapshot.val().mana;
+        } else {
+            lifetimeMana = 0;
+        }
+    } catch (error) {
+        console.error("Lỗi khi tải Đan Điền:", error);
+        lifetimeMana = 0;
+    }
+}
+
 // Theo dõi trạng thái đăng nhập
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
     if (user) {
         currentUser = user;
         const name = user.displayName || user.email.split('@')[0];
         document.getElementById('userDisplayName').innerText = name;
+        
+        // Nạp tu vi (Linh lực) cũ từ Database
+        await loadUserLifetimeMana(user.uid);
+        
         switchScreen('start-screen');
     } else {
         currentUser = null;
+        lifetimeMana = 0;
         switchScreen('auth-screen');
     }
 });
@@ -90,6 +119,14 @@ window.handleSignup = async function() {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(userCredential.user, { displayName: displayName });
+        
+        // Khởi tạo Đan Điền cho tân thủ
+        await set(ref(database, 'users/' + userCredential.user.uid), {
+            name: displayName,
+            mana: 0,
+            joinedAt: Date.now()
+        });
+        
         alert("Đăng ký tài khoản tu tiên thành công!");
     } catch (error) { alert("Đăng ký thất bại: " + error.message); }
 };
@@ -106,56 +143,127 @@ window.handleLogin = async function() {
 
 // Đăng nhập Google
 window.handleGoogleLogin = async function() {
-    try { await signInWithPopup(auth, googleProvider); } 
-    catch (error) { alert("Đăng nhập Google thất bại: " + error.message); }
+    try { 
+        const result = await signInWithPopup(auth, googleProvider);
+        // Tự động kiểm tra và tạo Đan Điền nếu là người mới
+        const userRef = ref(database, 'users/' + result.user.uid);
+        const snapshot = await get(userRef);
+        if (!snapshot.exists()) {
+            await set(userRef, {
+                name: result.user.displayName || "Đạo Hữu Vô Danh",
+                mana: 0,
+                joinedAt: Date.now()
+            });
+        }
+    } catch (error) { alert("Đăng nhập Google thất bại: " + error.message); }
 };
 
 // Đăng xuất
 window.handleLogout = function() { signOut(auth); };
 
-// Quy đổi điểm Linh Lực sang Cảnh Giới
+// ==========================================
+// HỆ THỐNG CẢNH GIỚI & LƯU TRỮ
+// ==========================================
+
+// Quy đổi tổng Linh Lực sang Cảnh Giới
 function calculateRealm(mana) {
     if (mana < 50) return "Phàm Nhân";
     if (mana < 150) return "Luyện Khí Sơ Kỳ";
     if (mana < 300) return "Luyện Khí Trung Kỳ";
     if (mana < 600) return "Luyện Khí Hậu Kỳ";
-    if (mana < 1000) return "Luyện Khí Đại Viên Mãn";
+    if (mana < 1500) return "Luyện Khí Đại Viên Mãn";
     return "Trúc Cơ Sơ Kỳ";
 }
 
-// Màn hình hồ sơ nhân vật
-window.showProfile = async function() {
-    if (!currentUser) {
-        alert("Đạo hữu vui lòng đăng nhập để xem thông tin!");
-        return;
+// Lưu Linh lực cộng dồn vĩnh viễn sau mỗi ván bế quan
+async function saveScore() {
+    if (!currentUser) return;
+    const name = currentUser.displayName || currentUser.email.split('@')[0];
+    
+    // 1. Cộng dồn linh lực ván này vào tổng
+    lifetimeMana += sessionMana;
+
+    try {
+        // 2. Cập nhật Đan Điền cá nhân (users/uid)
+        await set(ref(database, 'users/' + currentUser.uid), {
+            name: name,
+            mana: lifetimeMana,
+            lastUpdated: Date.now()
+        });
+
+        // 3. Cập nhật Tiên Đạo Bảng (Dùng set để mỗi user chỉ có 1 record)
+        await set(ref(database, 'leaderboard/' + currentUser.uid), {
+            uid: currentUser.uid,
+            name: name,
+            score: lifetimeMana,
+            timestamp: Date.now()
+        });
+    } catch (error) {
+        console.error("Lỗi khi cập nhật Đan Điền:", error);
     }
+}
+
+// Màn hình hồ sơ nhân vật (Hiện thị tổng tu vi)
+window.showProfile = function() {
+    if (!currentUser) { alert("Đạo hữu vui lòng đăng nhập để xem thông tin!"); return; }
     
     switchScreen('profile-screen');
     const name = currentUser.displayName || currentUser.email.split('@')[0];
     document.getElementById('profileName').innerText = name;
     
-    const scoresRef = ref(database, 'leaderboard');
+    // Trực tiếp lấy từ biến lifetimeMana cực kỳ nhanh chóng
+    document.getElementById('profileMana').innerText = lifetimeMana;
+    document.getElementById('profileRealm').innerText = calculateRealm(lifetimeMana);
+};
+
+// Tiên Đạo Bảng (Xếp hạng theo tổng Linh lực vĩnh viễn)
+window.showLeaderboard = async function() {
+    switchScreen('leaderboard-screen');
+    let lbList = document.getElementById('lb-list');
+    lbList.innerHTML = '<li>⏳ Đang tải Tiên Đạo Bảng...</li>';
+
     try {
+        const scoresRef = ref(database, 'leaderboard');
         const snapshot = await get(scoresRef);
-        let myMaxScore = 0;
-        
+
         if (snapshot.exists()) {
             const data = snapshot.val();
-            Object.values(data).forEach(record => {
-                if (record.uid === currentUser.uid && record.score > myMaxScore) {
-                    myMaxScore = record.score;
-                }
+            let records = Object.values(data);
+            
+            // Sắp xếp: Ai có nhiều tổng Linh lực nhất đứng đầu
+            records.sort((a, b) => b.score - a.score);
+            let top10 = records.slice(0, 10);
+            
+            lbList.innerHTML = '';
+            top10.forEach((player, index) => {
+                let medal = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `<b>${index + 1}.</b>`;
+                let realm = calculateRealm(player.score || 0);
+
+                lbList.innerHTML += `
+                    <li>
+                        <div class="lb-user-info">
+                            <span class="lb-rank">${medal}</span>
+                            <div class="lb-details">
+                                <span class="lb-name">${player.name}</span>
+                                <span class="lb-realm-badge">${realm}</span>
+                            </div>
+                        </div>
+                        <div class="lb-stats">
+                            <span class="lb-mana">⚡ ${player.score} Tổng Linh Lực</span>
+                        </div>
+                    </li>`;
             });
+        } else { 
+            lbList.innerHTML = '<li>Chưa có danh sách tu tiên giả!</li>'; 
         }
-        
-        document.getElementById('profileMana').innerText = myMaxScore;
-        document.getElementById('profileRealm').innerText = calculateRealm(myMaxScore);
-        
     } catch (error) {
-        document.getElementById('profileMana').innerText = totalScore; 
-        document.getElementById('profileRealm').innerText = calculateRealm(totalScore);
+        lbList.innerHTML = '<li>❌ Tải Tiên Đạo Bảng thất bại.</li>';
     }
 };
+
+// ==========================================
+// CƠ CHẾ RÚT THẺ VÀ TẠO CÂU HỎI TỰ ĐỘNG
+// ==========================================
 
 function formatTime(seconds) {
     let m = String(Math.floor(seconds / 60)).padStart(2, '0');
@@ -182,96 +290,20 @@ window.switchScreen = function(screenId) {
 
 window.goHome = function() { switchScreen('start-screen'); };
 
-function saveScore() {
-    if (!currentUser) return;
-    const name = currentUser.displayName || currentUser.email.split('@')[0];
-    const scoresRef = ref(database, 'leaderboard');
-    push(scoresRef, { uid: currentUser.uid, name: name, score: totalScore, time: totalSeconds, timestamp: Date.now() });
-}
-
-// Tiên Đạo Bảng (Đã sửa sạch sẽ, chuẩn xác)
-window.showLeaderboard = async function() {
-    switchScreen('leaderboard-screen');
-    let lbList = document.getElementById('lb-list');
-    lbList.innerHTML = '<li>⏳ Đang tải Tiên Đạo Bảng...</li>';
-
-    try {
-        const scoresRef = ref(database, 'leaderboard');
-        const snapshot = await get(scoresRef);
-
-        if (snapshot.exists()) {
-            const data = snapshot.val();
-            let records = Object.values(data);
-            
-            // Sắp xếp: Điểm cao xếp trước, thời gian ít xếp trước
-            records.sort((a, b) => {
-                if (b.score !== a.score) return b.score - a.score;
-                return a.time - b.time;
-            });
-
-            let uniqueRecords = [];
-            let seenUsers = new Set();
-            for (let r of records) {
-                if (!seenUsers.has(r.uid || r.name)) {
-                    seenUsers.add(r.uid || r.name);
-                    uniqueRecords.push(r);
-                }
-            }
-
-            let top10 = uniqueRecords.slice(0, 10);
-            lbList.innerHTML = '';
-            
-            top10.forEach((player, index) => {
-                let medal = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `<b>${index + 1}.</b>`;
-                let timeStr = formatTime(player.time || 0);
-                let realm = calculateRealm(player.score || 0);
-
-                lbList.innerHTML += `
-                    <li>
-                        <div class="lb-user-info">
-                            <span class="lb-rank">${medal}</span>
-                            <div class="lb-details">
-                                <span class="lb-name">${player.name}</span>
-                                <span class="lb-realm-badge">${realm}</span>
-                            </div>
-                        </div>
-                        <div class="lb-stats">
-                            <span class="lb-mana">${player.score} Linh Lực</span>
-                            <span class="lb-time">⏱️ ${timeStr}</span>
-                        </div>
-                    </li>`;
-            });
-        } else { 
-            lbList.innerHTML = '<li>Chưa có danh sách tu tiên giả!</li>'; 
-        }
-    } catch (error) {
-        lbList.innerHTML = '<li>❌ Tải Tiên Đạo Bảng thất bại.</li>';
-    }
-};
-
-// ==========================================
-// CƠ CHẾ RÚT THẺ VÀ TẠO CÂU HỎI TỰ ĐỘNG
-// ==========================================
-
-// Hàm tạo một ván tu luyện (bốc ngẫu nhiên 10 từ)
 function generateQuizSession(pool, numQuestions = 10) {
     let shuffledPool = shuffleArray([...pool]);
     let selectedVocabs = shuffledPool.slice(0, numQuestions);
     let quizQuestions = [];
 
     selectedVocabs.forEach(vocab => {
-        let options = [vocab.meaning]; // Đáp án đúng
-        
-        // Bốc 3 nghĩa sai ngẫu nhiên từ kho
+        let options = [vocab.meaning]; 
         while (options.length < 4) {
             let randomWrongVocab = pool[Math.floor(Math.random() * pool.length)];
-            // Tránh bốc trùng nghĩa hoặc ô bị rỗng
             if (randomWrongVocab && randomWrongVocab.meaning && !options.includes(randomWrongVocab.meaning)) {
                 options.push(randomWrongVocab.meaning);
             }
         }
-
-        options = shuffleArray(options); // Xáo trộn 4 đáp án
+        options = shuffleArray(options);
         let correctIndex = options.indexOf(vocab.meaning);
 
         quizQuestions.push({
@@ -280,14 +312,18 @@ function generateQuizSession(pool, numQuestions = 10) {
             ans: correctIndex
         });
     });
-
     return quizQuestions;
 }
 
+// Bắt đầu game (Fix lỗi UI Loading & Catch file CSV)
 window.startGame = async function() {
-    // Nếu chưa tải Kinh Thư, tiến hành tải từ file CSV
+    switchScreen('game-screen'); // Chuyển màn hình trước để hiển thị chữ Loading
+    
     if (vocabPool.length === 0) {
-        document.getElementById('question').innerText = "Đang mở Tàng Kinh Các, nạp từ vựng...";
+        document.getElementById('question').innerText = "⏳ Đang mở Tàng Kinh Các, nạp từ vựng...";
+        document.getElementById('options').innerHTML = ""; 
+        document.getElementById('nextBtn').style.display = 'none';
+        
         await new Promise((resolve) => {
             Papa.parse("./a1_vocab.csv", {
                 download: true,
@@ -297,12 +333,19 @@ window.startGame = async function() {
                     vocabPool = results.data;
                     console.log("Đã tải kho từ vựng:", vocabPool.length, "từ");
                     resolve();
+                },
+                error: function(err) {
+                    alert("❌ Lỗi tải Kinh Thư (Không tìm thấy file CSV).");
+                    resolve();
                 }
             });
         });
     }
 
-    currentLevel = 1; totalScore = 0; totalSeconds = 0;
+    currentLevel = 1; 
+    sessionMana = 0; // Đặt lại linh lực của riêng ván này
+    totalSeconds = 0;
+    
     document.getElementById('timerDisplay').innerText = "00:00";
     if(timerInterval) clearInterval(timerInterval);
     timerInterval = setInterval(() => {
@@ -311,95 +354,8 @@ window.startGame = async function() {
     }, 1000);
     
     initLevel();
-    switchScreen('game-screen');
 };
 
 function initLevel() {
     currentLevelExp = 0; currentQuestionIndex = 0;
-    
-    // Mỗi ải bốc 10 câu hỏi ngẫu nhiên từ Tàng Kinh Các
-    activeQuestions = generateQuizSession(vocabPool, 10);
-    
-    expToLevelUp = Math.floor(activeQuestions.length * 0.8) * expPerQuestion; // Đúng 80% là qua ải
-    document.getElementById('level').innerText = currentLevel;
-    document.getElementById('maxExp').innerText = expToLevelUp;
-    document.getElementById('totalScore').innerText = totalScore;
-    loadQuestion();
-}
-
-function endGame(win) {
-    clearInterval(timerInterval);
-    saveScore();
-    let finalTime = formatTime(totalSeconds);
-    if (win) {
-        document.getElementById('question').innerHTML = `🏆 <b>Chúc mừng Đạo Hữu Đột Phá Màn Tu Luyện!</b><br><br>🎯 Tổng Linh Lực: <span style="color:#eccc68;">${totalScore}</span><br>⏱️ Thời gian: <span style="color:#7bed9f;">${finalTime}</span>`;
-    } else {
-        document.getElementById('question').innerHTML = `😢 <b>Tu luyện thất bại! Tăng cường tích lũy linh lực.</b><br><br>🎯 Tổng Linh Lực: <span style="color:#ff6b81;">${totalScore}</span><br>⏱️ Thời gian: <span style="color:#747d8c;">${finalTime}</span>`;
-    }
-    document.getElementById('options').innerHTML = "";
-    document.getElementById('counter').innerText = "";
-    let returnBtn = document.createElement('button');
-    returnBtn.className = "primary-btn";
-    returnBtn.innerText = "Xem Tiên Đạo Bảng 🏆";
-    returnBtn.style.marginTop = "20px";
-    returnBtn.onclick = showLeaderboard;
-    document.getElementById('options').appendChild(returnBtn);
-    document.getElementById('nextBtn').style.display = 'none';
-    document.getElementById('message').innerText = "";
-}
-
-function loadQuestion() {
-    if(currentLevel > 4) { endGame(true); return; }
-    const qData = activeQuestions[currentQuestionIndex];
-    document.getElementById('counter').innerText = `Câu hỏi: ${currentQuestionIndex + 1} / ${activeQuestions.length}`;
-    document.getElementById('question').innerText = qData.q;
-    const optionsDiv = document.getElementById('options');
-    optionsDiv.innerHTML = '';
-    document.getElementById('message').innerText = '';
-    document.getElementById('nextBtn').style.display = 'none';
-
-    qData.options.forEach((opt, index) => {
-        const btn = document.createElement('button');
-        btn.className = 'option-btn';
-        btn.innerText = opt;
-        btn.onclick = () => checkAnswer(index, qData.ans, btn);
-        optionsDiv.appendChild(btn);
-    });
-    
-    document.getElementById('exp').innerText = currentLevelExp;
-    document.getElementById('totalScore').innerText = totalScore;
-}
-
-function checkAnswer(selectedIndex, correctIndex, btnElement) {
-    const buttons = document.querySelectorAll('.options .option-btn');
-    buttons.forEach(b => b.onclick = null); 
-    if (selectedIndex === correctIndex) {
-        btnElement.classList.add('correct');
-        document.getElementById('message').innerText = "✅ Đáp đúng! +" + expPerQuestion + " Linh Lực";
-        document.getElementById('message').style.color = "#ffa502";
-        currentLevelExp += expPerQuestion;
-        totalScore += expPerQuestion;
-    } else {
-        btnElement.classList.add('wrong');
-        buttons[correctIndex].classList.add('correct');
-        document.getElementById('message').innerText = "❌ Chưa chính xác! Linh lực không tăng.";
-        document.getElementById('message').style.color = "#ff4757";
-    }
-    document.getElementById('exp').innerText = currentLevelExp;
-    document.getElementById('totalScore').innerText = totalScore;
-    document.getElementById('nextBtn').style.display = 'block';
-}
-
-window.nextQuestion = function() {
-    currentQuestionIndex++;
-    if (currentQuestionIndex >= activeQuestions.length) {
-        if (currentLevelExp >= expToLevelUp) {
-            currentLevel++;
-            if (currentLevel <= 4) { alert(`🎉 Đột phá thành công sang Cấp Tu Luyện ${currentLevel}!`); initLevel(); return; }
-        } else {
-            alert(`😢 Linh lực không đủ (Cần ${expToLevelUp} Linh Lực để vượt cấp).`);
-            endGame(false); return;
-        }
-    }
-    loadQuestion();
-};
+    activeQuestions = generate
