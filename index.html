@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>挑戰中文大師 - Tu Tiên Truyện (TOCFL A1)</title>
+    <title>Thách Thức Tu Tiên (TOCFL A1)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- 0. Auth Screen (Màn hình Đăng nhập / Đăng ký) -->
+<!-- 0. MÀN HÌNH ĐĂNG NHẬP / ĐĂNG KÝ -->
 <div id="auth-screen" class="screen active">
     <div class="cute-box auth-box">
         <h1>☯️ TIÊN ĐẠO TRẤN ☯️</h1>
@@ -36,7 +36,7 @@
     </div>
 </div>
 
-<!-- 1. Start Screen (Động phủ - Màn hình chính) -->
+<!-- 1. MÀN HÌNH CHÍNH (ĐỘNG PHỦ) -->
 <div id="start-screen" class="screen">
     <div class="cute-box">
         <div class="user-bar">
@@ -54,22 +54,27 @@
     </div>
 </div>
 
-<!-- 2. Game Screen (Thử thách Tu luyện & Thanh máu RPG) -->
+<!-- 2. MÀN HÌNH CHƠI GAME (BẾ QUAN) -->
 <div id="game-screen" class="screen">
     <div class="game-header">
-        <!-- Khối hiển thị thông số Nhân vật -->
-        <div class="character-status-card">
-            <div class="stat-row">
-                <span class="stat-label">❤️ Sinh Mệnh (HP):</span>
-                <div class="hp-bar-container">
-                    <div id="hpFill" class="hp-fill" style="width: 100%;"></div>
-                    <span id="hpText" class="bar-text">100/100</span>
-                </div>
+        <div class="character-status-card" style="display: flex; gap: 15px; align-items: center;">
+            <div class="avatar-box">
+                <img id="gameAvatar" src="./assets/pham-nhan.jpg" alt="Avatar">
             </div>
             
-            <div class="stat-row attributes-row">
-                <span>⚔️ Sức Mạnh (STR): <b id="statStr">10</b></span>
-                <span>⚡ Nhanh Nhẹn (AGI): <b id="statAgi">10</b></span>
+            <div class="status-details" style="flex: 1;">
+                <div class="stat-row">
+                    <span class="stat-label">❤️ Sinh Mệnh (HP):</span>
+                    <div class="hp-bar-container">
+                        <div id="hpFill" class="hp-fill" style="width: 100%;"></div>
+                        <span id="hpText" class="bar-text">100/100</span>
+                    </div>
+                </div>
+                
+                <div class="stat-row attributes-row">
+                    <span>⚔️ Sức Mạnh: <b id="statStr">10</b></span>
+                    <span>⚡ Nhanh Nhẹn: <b id="statAgi">10</b></span>
+                </div>
             </div>
         </div>
 
@@ -94,16 +99,21 @@
     </div>
 </div>
 
-<!-- 3. Profile Screen (Hồ sơ Nhân vật Tu Tiên) -->
+<!-- 3. MÀN HÌNH HỒ SƠ NHÂN VẬT -->
 <div id="profile-screen" class="screen">
     <h2>📜 Hồ Sơ Tu Tiên Giả</h2>
+    
+    <div style="text-align: center; margin-bottom: 20px;">
+        <div class="avatar-box profile-avatar">
+            <img id="profileAvatar" src="./assets/pham-nhan.jpg" alt="Avatar">
+        </div>
+    </div>
+    
     <div class="profile-card">
         <p><b>Đạo Hiệu:</b> <span id="profileName">--</span></p>
         <p><b>Cảnh Giới:</b> <span id="profileRealm" class="realm-badge">Phàm Nhân</span></p>
         <p><b>Tổng Tu Vi (Linh Lực):</b> <span id="profileMana">0</span></p>
-        
         <hr style="border: 0.5px solid #444; margin: 15px 0;">
-        
         <h3>⚔️ Thuộc Tính Nhân Vật</h3>
         <p><b>❤️ Sinh Mệnh (HP):</b> <span id="profileHp" style="color: #ff4757; font-weight: bold;">100/100</span></p>
         <p><b>⚔️ Sức Mạnh (STR):</b> <span id="profileStr" style="color: #ffa502; font-weight: bold;">10</span> <small style="color: #aaa;">(Tăng thưởng Linh lực)</small></p>
@@ -112,21 +122,16 @@
     <button class="secondary-btn" onclick="goHome()" style="margin-top: 15px;">Về động phủ 🏠</button>
 </div>
 
-<!-- 4. Leaderboard Screen (Tiên Đạo Bảng) -->
+<!-- 4. MÀN HÌNH TIÊN ĐẠO BẢNG -->
 <div id="leaderboard-screen" class="screen">
     <div class="cute-box">
         <h1>🏆 TIÊN ĐẠO BẢNG 🏆</h1>
-        <p>Bảng xếp hạng Linh lực & Thời gian tu luyện</p>
-        
-        <ul class="leaderboard-list" id="lb-list">
-            <!-- Dữ liệu bảng xếp hạng từ Firebase sẽ đổ vào đây -->
-        </ul>
-        
+        <p>Bảng xếp hạng Linh lực trọn đời</p>
+        <ul class="leaderboard-list" id="lb-list"></ul>
         <button class="primary-btn" onclick="goHome()">Trở về Động phủ 🏠</button>
     </div>
 </div>
 
-<!-- Thư viện PapaParse đọc file CSV tự động và mã điều khiển -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script type="module" src="./app.js"></script>
 </body>
