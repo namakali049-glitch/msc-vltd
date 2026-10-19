@@ -44,7 +44,6 @@ const expPerQuestion = 10;
 
 let timerInterval = null;
 let totalSeconds = 0;
-let activeQuestions = [];
 let activeQuestions = []; 
 let vocabPool = []; // Chứa toàn bộ từ vựng nạp từ CSV
 
