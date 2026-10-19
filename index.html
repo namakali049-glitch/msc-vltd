@@ -85,31 +85,23 @@
 </div>
 
 <!-- 3. Profile Screen (Hồ sơ Nhân vật Tu Tiên) -->
+<!-- MÀN HÌNH HỒ SƠ NHÂN VẬT (PROFILE SCREEN) -->
 <div id="profile-screen" class="screen">
-    <div class="cute-box profile-box">
-        <h1>☯️ THÔNG TIN TÀI KHOẢN ☯️</h1>
+    <h2>📜 Hồ Sơ Tu Tiên Giả</h2>
+    <div class="profile-card">
+        <p><b>Đạo Hiệu:</b> <span id="profileName">--</span></p>
+        <p><b>Cảnh Giới:</b> <span id="profileRealm" class="realm-badge">Phàm Nhân</span></p>
+        <p><b>Tổng Tu Vi (Linh Lực):</b> <span id="profileMana">0</span></p>
         
-        <div class="profile-stats">
-            <div class="stat-item">
-                <span class="stat-label">Đạo hiệu:</span>
-                <span class="stat-value" id="profileName">Đang tải...</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Cảnh giới hiện tại:</span>
-                <span class="stat-value realm-text" id="profileRealm">Phàm Nhân</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Tổng Linh lực tích lũy:</span>
-                <span class="stat-value mana-text"><span id="profileMana">0</span> điểm</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Tâm pháp tu luyện:</span>
-                <span class="stat-value tocfl-text">TOCFL A1 Sơ Cấp</span>
-            </div>
-        </div>
+        <hr style="border: 0.5px solid #444; margin: 15px 0;">
         
-        <button class="primary-btn" onclick="goHome()">Trở về Động phủ 🏠</button>
+        <!-- THÊM CÁC CHỈ SỐ NHÂN VẬT VÀO ĐÂY -->
+        <h3>⚔️ Thuộc Tính Nhân Vật</h3>
+        <p><b>❤️ Sinh Mệnh (HP):</b> <span id="profileHp" style="color: #ff4757; font-weight: bold;">100/100</span></p>
+        <p><b>⚔️ Sức Mạnh (STR):</b> <span id="profileStr" style="color: #ffa502; font-weight: bold;">10</span> <small style="color: #aaa;">(Tăng thưởng Linh lực)</small></p>
+        <p><b>⚡ Nhanh Nhẹn (AGI):</b> <span id="profileAgi" style="color: #70a1ff; font-weight: bold;">10</span> <small style="color: #aaa;">(Tăng tỷ lệ né Tâm Ma)</small></p>
     </div>
+    <button class="secondary-btn" onclick="goHome()" style="margin-top: 15px;">Về động phủ 🏠</button>
 </div>
 
 <!-- 4. Leaderboard Screen (Tiên Đạo Bảng) -->
