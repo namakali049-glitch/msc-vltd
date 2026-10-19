@@ -358,4 +358,96 @@ window.startGame = async function() {
 
 function initLevel() {
     currentLevelExp = 0; currentQuestionIndex = 0;
-    activeQuestions = generate
+    activeQuestions = generateQuizSession(vocabPool, 10);
+    
+    expToLevelUp = Math.floor(activeQuestions.length * 0.8) * expPerQuestion; 
+    document.getElementById('level').innerText = currentLevel;
+    document.getElementById('maxExp').innerText = expToLevelUp;
+    document.getElementById('totalScore').innerText = sessionMana;
+    loadQuestion();
+}
+
+async function endGame(win) {
+    clearInterval(timerInterval);
+    
+    // Lưu và cộng dồn điểm ván này vào Đan Điền vĩnh viễn
+    await saveScore(); 
+    
+    let finalTime = formatTime(totalSeconds);
+    if (win) {
+        document.getElementById('question').innerHTML = `🏆 <b>Chúc mừng Đạo Hữu Đột Phá!</b><br><br>🎯 Thu thập: <span style="color:#eccc68;">+${sessionMana} Linh Lực</span><br>💎 Tổng Tu Vi: <span style="color:#00d2d3;">${lifetimeMana} Linh Lực</span><br>⏱️ Thời gian: <span style="color:#7bed9f;">${finalTime}</span>`;
+    } else {
+        document.getElementById('question').innerHTML = `😢 <b>Tu luyện thất bại!</b><br><br>🎯 Thu thập: <span style="color:#eccc68;">+${sessionMana} Linh Lực</span><br>💎 Tổng Tu Vi: <span style="color:#00d2d3;">${lifetimeMana} Linh Lực</span><br>⏱️ Thời gian: <span style="color:#747d8c;">${finalTime}</span>`;
+    }
+    
+    document.getElementById('options').innerHTML = "";
+    document.getElementById('counter').innerText = "";
+    
+    let returnBtn = document.createElement('button');
+    returnBtn.className = "primary-btn";
+    returnBtn.innerText = "Xem Tiên Đạo Bảng 🏆";
+    returnBtn.style.marginTop = "20px";
+    returnBtn.onclick = showLeaderboard;
+    
+    document.getElementById('options').appendChild(returnBtn);
+    document.getElementById('nextBtn').style.display = 'none';
+    document.getElementById('message').innerText = "";
+}
+
+function loadQuestion() {
+    if(currentLevel > 4) { endGame(true); return; }
+    const qData = activeQuestions[currentQuestionIndex];
+    document.getElementById('counter').innerText = `Câu hỏi: ${currentQuestionIndex + 1} / ${activeQuestions.length}`;
+    document.getElementById('question').innerText = qData.q;
+    const optionsDiv = document.getElementById('options');
+    optionsDiv.innerHTML = '';
+    document.getElementById('message').innerText = '';
+    document.getElementById('nextBtn').style.display = 'none';
+
+    qData.options.forEach((opt, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(index, qData.ans, btn);
+        optionsDiv.appendChild(btn);
+    });
+    
+    document.getElementById('exp').innerText = currentLevelExp;
+    document.getElementById('totalScore').innerText = sessionMana;
+}
+
+function checkAnswer(selectedIndex, correctIndex, btnElement) {
+    const buttons = document.querySelectorAll('.options .option-btn');
+    buttons.forEach(b => b.onclick = null); 
+    
+    if (selectedIndex === correctIndex) {
+        btnElement.classList.add('correct');
+        document.getElementById('message').innerText = "✅ Đáp đúng! +" + expPerQuestion + " Linh Lực";
+        document.getElementById('message').style.color = "#ffa502";
+        currentLevelExp += expPerQuestion;
+        sessionMana += expPerQuestion;
+    } else {
+        btnElement.classList.add('wrong');
+        buttons[correctIndex].classList.add('correct');
+        document.getElementById('message').innerText = "❌ Chưa chính xác! Linh khí tiêu tán.";
+        document.getElementById('message').style.color = "#ff4757";
+    }
+    
+    document.getElementById('exp').innerText = currentLevelExp;
+    document.getElementById('totalScore').innerText = sessionMana;
+    document.getElementById('nextBtn').style.display = 'block';
+}
+
+window.nextQuestion = function() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex >= activeQuestions.length) {
+        if (currentLevelExp >= expToLevelUp) {
+            currentLevel++;
+            if (currentLevel <= 4) { alert(`🎉 Đột phá thành công sang Tầng ${currentLevel}!`); initLevel(); return; }
+        } else {
+            alert(`😢 Linh lực không đủ (Cần tối thiểu ${expToLevelUp} để vượt ải). Mời Đạo Hữu làm lại.`);
+            endGame(false); return;
+        }
+    }
+    loadQuestion();
+};
