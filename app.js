@@ -201,11 +201,14 @@ window.showLeaderboard = async function() {
         if (snapshot.exists()) {
             const data = snapshot.val();
             let records = Object.values(data);
+            
+            // Sắp xếp: Ưu tiên điểm Linh Lực cao nhất, nếu bằng nhau thì so thời gian ngắn hơn
             records.sort((a, b) => {
                 if (b.score !== a.score) return b.score - a.score;
                 return a.time - b.time;
             });
 
+            // Lọc giữ lại kỷ lục cao nhất của mỗi người chơi
             let uniqueRecords = [];
             let seenUsers = new Set();
             for (let r of records) {
@@ -214,6 +217,38 @@ window.showLeaderboard = async function() {
                     uniqueRecords.push(r);
                 }
             }
+
+            let top10 = uniqueRecords.slice(0, 10);
+            lbList.innerHTML = '';
+            
+            top10.forEach((player, index) => {
+                let medal = index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `<b>${index + 1}.</b>`;
+                let timeStr = formatTime(player.time || 0);
+                // Quy đổi điểm Linh Lực ra Cảnh Giới
+                let realm = calculateRealm(player.score || 0);
+
+                lbList.innerHTML += `
+                    <li>
+                        <div class="lb-user-info">
+                            <span class="lb-rank">${medal}</span>
+                            <div class="lb-details">
+                                <span class="lb-name">${player.name}</span>
+                                <span class="lb-realm-badge">${realm}</span>
+                            </div>
+                        </div>
+                        <div class="lb-stats">
+                            <span class="lb-mana">${player.score} Linh Lực</span>
+                            <span class="lb-time">⏱️ ${timeStr}</span>
+                        </div>
+                    </li>`;
+            });
+        } else { 
+            lbList.innerHTML = '<li>Chưa có danh sách tu tiên giả!</li>'; 
+        }
+    } catch (error) {
+        lbList.innerHTML = '<li>❌ Tải Tiên Đạo Bảng thất bại.</li>';
+    }
+}
 
             let top10 = uniqueRecords.slice(0, 10);
             lbList.innerHTML = '';
