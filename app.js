@@ -20,7 +20,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 const firebaseConfig = {
-    apiKey: "AiZaSyBBn3CGkftYVV1wr9fY80hBAd8LKzUSyE",
+    apiKey: "AIzaSyBBn3CGkftYVVl1wr9fY8OhBAd8LKzUSyE",
     authDomain: "msc-vltd.firebaseapp.com",
     projectId: "msc-vltd",
     storageBucket: "msc-vltd.firebasestorage.app",
