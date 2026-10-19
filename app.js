@@ -206,11 +206,22 @@ async function syncManaToDatabase() {
 
 window.showProfile = function() {
     if (!currentUser) { alert("Đạo hữu vui lòng đăng nhập để xem thông tin!"); return; }
+    
+    // Tính toán lại chỉ số nhân vật dựa trên Tổng Linh Lực (Tu vi)
+    recalcStats();
+    
     switchScreen('profile-screen');
     const name = currentUser.displayName || currentUser.email.split('@')[0];
+    
+    // Đổ dữ liệu thông tin cá nhân
     document.getElementById('profileName').innerText = name;
     document.getElementById('profileMana').innerText = lifetimeMana;
     document.getElementById('profileRealm').innerText = calculateRealm(lifetimeMana);
+    
+    // Đổ dữ liệu chỉ số nhân vật
+    document.getElementById('profileHp').innerText = `${maxHp}/${maxHp}`;
+    document.getElementById('profileStr').innerText = str;
+    document.getElementById('profileAgi').innerText = agi;
 };
 
 window.showLeaderboard = async function() {
