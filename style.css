@@ -313,10 +313,3 @@ body {
     color: #747d8c;
     margin-top: 2px;
 }
-.leaderboard-list li:nth-child(1) { background: #ffd32a; color: #fff; }
-.leaderboard-list li:nth-child(2) { background: #d2dae2; }
-.leaderboard-list li:nth-child(3) { background: #ffb8b8; color: #fff; }
-
-.lb-name { flex: 1; text-align: left; margin-left: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.lb-stats { text-align: right; font-size: 1rem; }
-.lb-time { font-size: 0.85rem; opacity: 0.9; display: block; margin-top: 3px; }
