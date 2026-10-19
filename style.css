@@ -31,8 +31,8 @@ body {
     width: 90%;
     max-width: 480px;
 }
-.cute-box h1 { font-size: 2.2rem; color: #ff6b81; margin-bottom: 8px; font-weight: 900; }
-.cute-box p { font-size: 1.1rem; color: #747d8c; margin-bottom: 25px; }
+.cute-box h1 { font-size: 2rem; color: #ff6b81; margin-bottom: 8px; font-weight: 900; }
+.cute-box p { font-size: 1rem; color: #747d8c; margin-bottom: 25px; }
 
 .auth-tabs {
     display: flex;
@@ -188,6 +188,41 @@ body {
     transition: 0.3s;
 }
 .next-btn:hover { background: #2ed573; transform: scale(1.05); }
+
+/* --- Hồ sơ Nhân vật Tu Tiên --- */
+.profile-box {
+    border: 4px solid #78e08f;
+    box-shadow: 0 15px 35px rgba(120, 224, 143, 0.4);
+}
+.profile-stats {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    text-align: left;
+    border: 2px dashed #b8e994;
+}
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e1e8ed;
+    font-size: 1.1rem;
+}
+.stat-item:last-child {
+    border-bottom: none;
+}
+.stat-label {
+    font-weight: bold;
+    color: #4a4a4a;
+}
+.stat-value {
+    font-weight: 900;
+}
+.realm-text { color: #e55039; font-size: 1.2rem; }
+.mana-text { color: #4a69bd; }
+.tocfl-text { color: #f6b93b; }
 
 /* --- Leaderboard Screen --- */
 .leaderboard-list {
