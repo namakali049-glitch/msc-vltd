@@ -289,7 +289,12 @@ function shuffleArray(array) {
 
 window.switchScreen = function(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(screenId).classList.add('active');
+    const targetScreen = document.getElementById(screenId);
+    if (targetScreen) {
+        targetScreen.classList.add('active');
+    } else {
+        console.error(`❌ Không tìm thấy màn hình nào có id="${screenId}" trong index.html!`);
+    }
 };
 
 window.goHome = function() { switchScreen('start-screen'); };
