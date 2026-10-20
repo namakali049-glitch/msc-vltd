@@ -574,17 +574,38 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
         
         let dodgeRate = Math.min(30, agi * 0.5); 
         if (Math.random() * 100 < dodgeRate) {
-            document.getElementById('message').innerText = "⚡ Thân pháp siêu phàm! Né thành công Tâm Ma!";
+            document.getElementById('message').innerText = "⚡ Thân pháp siêu phàm! Né thành công chướng ngại!";
             document.getElementById('message').style.color = "#70a1ff";
         } else {
-            currentHp -= 20;
-            document.getElementById('message').innerText = `❌ Tâm Ma Phản Phệ! Mất 20 Sinh Mệnh!`;
-            document.getElementById('message').style.color = "#ff4757";
-        }
-
-        if (currentHp <= 0) {
-            setTimeout(() => { alert("💥 Sinh Mệnh cạn kiệt! Đạo hữu đã Tẩu Hỏa Nhập Ma."); endGame(false); }, 500);
-            return;
+            // CƠ CHẾ TRỪ 1/3 (Thần Thức hoặc Sinh Mệnh)
+            if (thanThuc > 0) {
+                // Tu sĩ: Trừ 1/3 Thần Thức hiện có
+                let damage = Math.ceil(window.sessionThanThuc / 3);
+                if (damage < 1) damage = 1;
+                window.sessionThanThuc -= damage;
+                
+                document.getElementById('quizStatValue').innerText = window.sessionThanThuc;
+                document.getElementById('message').innerText = `❌ Sai lầm! Hư tổn ${damage} Thần Thức!`;
+                document.getElementById('message').style.color = "#ff4757";
+                
+                if (window.sessionThanThuc <= 0) {
+                    setTimeout(() => { alert("💥 Thần Thức cạn kiệt! Đạo hữu đã Tẩu Hỏa Nhập Ma, buộc phải xuất quan."); endGame(false); }, 500);
+                    return;
+                }
+            } else {
+                // Phàm Nhân: Trừ 1/3 Sinh Mệnh hiện có
+                let damage = Math.ceil(currentHp / 3);
+                currentHp -= damage;
+                
+                document.getElementById('quizStatValue').innerText = currentHp;
+                document.getElementById('message').innerText = `❌ Khí huyết đảo nghịch! Mất ${damage} Sinh Mệnh!`;
+                document.getElementById('message').style.color = "#ff4757";
+                
+                if (currentHp <= 0) {
+                    setTimeout(() => { alert("💥 Sinh Mệnh cạn kiệt! Ngất xỉu và bị đẩy khỏi Tàng Kinh Các."); endGame(false); }, 500);
+                    return;
+                }
+            }
         }
     }
     
