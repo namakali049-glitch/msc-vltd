@@ -131,7 +131,20 @@
         <button class="primary-btn" onclick="goHome()">Trở về Động phủ 🏠</button>
     </div>
 </div>
+<!-- NÚT MỞ TÚI TRỮ VẬT NỔI Ở GÓC MÀN HÌNH -->
+<button onclick="openInventory()" class="inventory-btn">🎒 Túi Trữ Vật</button>
 
+<!-- GIAO DIỆN TÚI TRỮ VẬT (ẨN/HIỆN MỘT CÁCH POPUP) -->
+<div id="inventoryModal" class="modal-overlay">
+    <div class="modal-content">
+        <h2>🎒 TÚI TRỮ VẬT</h2>
+        <div id="inventoryList" class="inventory-grid">
+            <!-- Các vật phẩm sẽ tự động hiện ở đây -->
+        </div>
+        <button class="secondary-btn" onclick="closeInventory()">Đóng Túi</button>
+    </div>
+</div>
+    
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script type="module" src="./app.js"></script>
 </body>
