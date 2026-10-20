@@ -167,6 +167,16 @@ window.toggleBGM = async function() {
     }
 };
 
+// Kích hoạt Web Audio API ngay lần click đầu tiên
+function unlockAudioOnInteraction() {
+    const ctx = getAudioContext();
+    if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {});
+    document.removeEventListener('click', unlockAudioOnInteraction);
+    document.removeEventListener('keydown', unlockAudioOnInteraction);
+}
+document.addEventListener('click', unlockAudioOnInteraction);
+document.addEventListener('keydown', unlockAudioOnInteraction);
+
 // ==========================================
 // 4. TIẾN TRÌNH NHÂN VẬT & AVATAR
 // ==========================================
@@ -191,6 +201,10 @@ function getBattleCharacterSkin() {
     if (lifetimeMana >= 3000) return battleAssets.playerTrucCoVienMan;
     if (lifetimeMana >= 1500) return battleAssets.playerTrucCoTrungKy;
     return battleAssets.playerLuyenKhi;
+}
+
+function getBattleSwordSkin() {
+    return lifetimeMana >= 1500 ? battleAssets.swordCyan : battleAssets.swordWood;
 }
 
 function setAvatarWithFallback(imgElement, mana) {
@@ -752,18 +766,6 @@ function resizeBattleCanvas() {
     }
 }
 
-// 3. NGOẠI HÌNH THEO CẢNH GIỚI
-function getBattleCharacterSkin() {
-    if (lifetimeMana >= 6000) return battleAssets.playerTrucCoVienMan;
-    if (lifetimeMana >= 3000) return battleAssets.playerTrucCoTrungKy;
-    if (lifetimeMana >= 1500) return battleAssets.playerTrucCo;
-    return battleAssets.playerLuyenKhi;
-}
-
-function getBattleSwordSkin() {
-    return lifetimeMana >= 1500 ? battleAssets.swordCyan : battleAssets.swordWood;
-}
-
 // 4. BẮT ĐẦU VÀ THOÁT KHỎI BÍ CẢNH
 window.startBattle = function() {
     window.playClickSound();
@@ -899,7 +901,7 @@ function battleLoop() {
     battleCtx.translate(battleData.player.x, battleData.player.y + bobbingY);
 
     if (pImg.complete && pImg.naturalWidth > 0) {
-        battleCtx.drawImage(pImg, -28, -42, 56, 72);
+        battleCtx.drawImage(pImg, -35, -45, 70, 70); // 70x70 chuẩn tỷ lệ áo trắng
     } else {
         battleCtx.beginPath();
         battleCtx.arc(0, 0, 22, 0, Math.PI * 2);
@@ -1056,13 +1058,3 @@ window.addEventListener('resize', () => {
         resizeBattleCanvas();
     }
 });
-
-// Kích hoạt Web Audio API ngay lần click đầu tiên
-function unlockAudioOnInteraction() {
-    const ctx = getAudioContext();
-    if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {});
-    document.removeEventListener('click', unlockAudioOnInteraction);
-    document.removeEventListener('keydown', unlockAudioOnInteraction);
-}
-document.addEventListener('click', unlockAudioOnInteraction);
-document.addEventListener('keydown', unlockAudioOnInteraction);
