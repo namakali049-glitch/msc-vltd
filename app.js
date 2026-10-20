@@ -670,6 +670,38 @@ window.useItem = function(item) {
     }
 };
 
+// HÀM KHÓA XOAY NGANG MÀN HÌNH TRÊN THIẾT BỊ DI ĐỘNG
+async function requestLandscapeMode() {
+    try {
+        // 1. Chuyển sang chế độ toàn màn hình (Fullscreen)
+        const docEl = document.documentElement;
+        if (docEl.requestFullscreen) {
+            await docEl.requestFullscreen().catch(() => {});
+        } else if (docEl.webkitRequestFullscreen) {
+            await docEl.webkitRequestFullscreen().catch(() => {});
+        }
+
+        // 2. Tự động ép khóa sang hướng màn hình ngang (Landscape)
+        if (screen.orientation && screen.orientation.lock) {
+            await screen.orientation.lock('landscape').catch(() => {});
+        }
+    } catch (e) {
+        console.log("Trình duyệt không hỗ trợ API tự khóa xoay:", e);
+    }
+}
+
+// HÀM MỞ KHÓA KHI THOÁT RA ĐỘNG PHỦ
+async function exitLandscapeMode() {
+    try {
+        if (screen.orientation && screen.orientation.unlock) {
+            screen.orientation.unlock();
+        }
+        if (document.fullscreenElement && document.exitFullscreen) {
+            await document.exitFullscreen().catch(() => {});
+        }
+    } catch (e) {}
+}
+
 // ==========================================
 // 9. ĐỘNG CƠ BÍ CẢNH TRẢM YÊU (ĐIỀU KHIỂN NÚT BẤM)
 // ==========================================
