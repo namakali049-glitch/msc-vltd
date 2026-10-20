@@ -198,3 +198,46 @@ h1, h2, h3 { color: #eccc68; }
 .lb-rank { font-size: 20px; width: 30px; text-align: center; }
 .lb-name { font-weight: bold; font-size: 16px; color: #fff; display: block; }
 .lb-mana { color: #eccc68; font-weight: bold; }
+/* =========================================
+   HỆ THỐNG TÚI TRỮ VẬT & VẬT PHẨM
+   ========================================= */
+.inventory-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #eccc68;
+    color: #2f3542;
+    border: 2px solid #fff;
+    padding: 12px 18px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    cursor: pointer;
+    z-index: 100;
+    transition: 0.3s;
+}
+.inventory-btn:hover { background: #ffa502; transform: scale(1.1); }
+
+.modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; 
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); z-index: 1000;
+}
+
+.modal-content {
+    background: #2f3542; width: 85%; max-width: 400px;
+    margin: 30% auto 0 auto; padding: 20px; border-radius: 12px;
+    border: 2px solid #eccc68; text-align: center;
+}
+
+.inventory-grid { display: grid; gap: 10px; margin-bottom: 15px; max-height: 300px; overflow-y: auto;}
+
+.item-card {
+    background: rgba(0,0,0,0.4); padding: 10px; border-radius: 8px;
+    border: 1px solid #747d8c; text-align: left; display: flex;
+    justify-content: space-between; align-items: center;
+}
+.item-card-info h4 { color: #2ed573; margin: 0 0 5px 0; font-size: 15px;}
+.item-card-info p { font-size: 12px; margin: 0; color: #ccc; }
+.item-card button { width: auto; margin: 0; padding: 8px 15px; font-size: 14px;}
