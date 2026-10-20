@@ -661,3 +661,254 @@ function unlockAudioOnInteraction() {
 }
 document.addEventListener('click', unlockAudioOnInteraction);
 document.addEventListener('keydown', unlockAudioOnInteraction);
+// ==========================================
+// 9. ĐỘNG CƠ BÍ CẢNH TRẢM YÊU (2D BATTLE ENGINE)
+// ==========================================
+let battleAnimationFrame = null;
+let battleData = {
+    player: { x: 400, y: 300, radius: 22 },
+    orbitAngle: 0,
+    swords: [],
+    enemies: [],
+    kills: 0,
+    frameCount: 0
+};
+
+// 1. NẠP HÌNH ẢNH TỪ THƯ MỤC ASSETS
+const battleAssets = {
+    bg: new Image(),
+    playerLuyenKhi: new Image(),
+    playerTrucCo: new Image(),
+    playerTrucCoTrungKy: new Image(),
+    playerTrucCoVienMan: new Image(),
+    swordWood: new Image(),
+    swordCyan: new Image(),
+    enemyGhost: new Image()
+};
+
+battleAssets.bg.src = "assets/hac-am-son-dong.png";
+battleAssets.playerLuyenKhi.src = "assets/luyen-khi.png";
+battleAssets.playerTrucCo.src = "assets/truc-co.png";
+battleAssets.playerTrucCoTrungKy.src = "assets/truc-co-trung-ky.png";
+battleAssets.playerTrucCoVienMan.src = "assets/truc-co-vien-man.png";
+battleAssets.swordWood.src = "assets/kiem-khi-luyen-khi.png";
+battleAssets.swordCyan.src = "assets/kiem-khi-truc-co.png";
+// Nếu file quái của bạn là quy-hon.jpg thì sửa thành assets/quy-hon.jpg
+battleAssets.enemyGhost.src = "assets/quy-hon.png"; 
+battleAssets.enemyGhost.onerror = () => {
+    battleAssets.enemyGhost.src = "assets/quy-hon.png";
+};
+
+// 2. TỌA ĐỘ THEO CHUỘT / CẢM ỨNG
+const battleCanvas = document.getElementById('gameCanvas');
+const battleCtx = battleCanvas ? battleCanvas.getContext('2d') : null;
+
+if (battleCanvas) {
+    battleCanvas.addEventListener('mousemove', (e) => {
+        const rect = battleCanvas.getBoundingClientRect();
+        const scaleX = battleCanvas.width / rect.width;
+        const scaleY = battleCanvas.height / rect.height;
+        battleData.player.x = (e.clientX - rect.left) * scaleX;
+        battleData.player.y = (e.clientY - rect.top) * scaleY;
+    });
+}
+
+// 3. XÁC ĐỊNH NGOẠI HÌNH THEO CẢNH GIỚI
+function getBattleCharacterSkin() {
+    if (lifetimeMana >= 6000) return battleAssets.playerTrucCoVienMan;
+    if (lifetimeMana >= 3000) return battleAssets.playerTrucCoTrungKy;
+    if (lifetimeMana >= 1500) return battleAssets.playerTrucCo;
+    return battleAssets.playerLuyenKhi;
+}
+
+function getBattleSwordSkin() {
+    return lifetimeMana >= 1500 ? battleAssets.swordCyan : battleAssets.swordWood;
+}
+
+// 4. BẮT ĐẦU VÀ THOÁT BÍ CẢNH
+window.startBattle = function() {
+    window.playClickSound();
+    switchScreen('battle-screen');
+    recalcStats();
+    
+    // Số kiếm theo cảnh giới tu vi
+    let count = 2;
+    if (lifetimeMana >= 3000) count = 5;
+    else if (lifetimeMana >= 1500) count = 4;
+    else if (lifetimeMana >= 300) count = 3;
+
+    battleData.swords = Array.from({ length: count }, () => ({ active: true }));
+    battleData.enemies = [];
+    battleData.kills = 0;
+    battleData.orbitAngle = 0;
+    battleData.frameCount = 0;
+    currentHp = maxHp;
+
+    if (battleAnimationFrame) cancelAnimationFrame(battleAnimationFrame);
+    battleLoop();
+};
+
+window.exitBattle = function() {
+    window.playClickSound();
+    if (battleAnimationFrame) cancelAnimationFrame(battleAnimationFrame);
+    syncManaToDatabase();
+    goHome();
+};
+
+// 5. SINH MA VẬT TỰ ĐỘNG
+function spawnBattleEnemy() {
+    if (!battleCanvas) return;
+    let x, y;
+    if (Math.random() < 0.5) {
+        x = Math.random() < 0.5 ? -30 : battleCanvas.width + 30;
+        y = Math.random() * battleCanvas.height;
+    } else {
+        x = Math.random() * battleCanvas.width;
+        y = Math.random() < 0.5 ? -30 : battleCanvas.height + 30;
+    }
+    battleData.enemies.push({
+        x: x, y: y, radius: 18,
+        speed: 1.1 + Math.random() * 0.7,
+        hp: 20 + Math.floor(lifetimeMana / 250)
+    });
+}
+
+// 6. VÒNG LẶP RENDER CHÍNH (60 FPS)
+function battleLoop() {
+    if (!battleCtx) return;
+    battleCtx.clearRect(0, 0, battleCanvas.width, battleCanvas.height);
+    battleData.frameCount++;
+
+    // 1. Vẽ Bản Đồ Hang Động
+    if (battleAssets.bg.complete && battleAssets.bg.naturalWidth > 0) {
+        battleCtx.drawImage(battleAssets.bg, 0, 0, battleCanvas.width, battleCanvas.height);
+    } else {
+        battleCtx.fillStyle = "#0c1017";
+        battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
+    }
+
+    // 2. Vẽ Nhân Vật Chibi
+    const pImg = getBattleCharacterSkin();
+    battleCtx.save();
+    const bobbingY = Math.sin(battleData.frameCount * 0.12) * 4;
+    battleCtx.translate(battleData.player.x, battleData.player.y + bobbingY);
+
+    if (pImg.complete && pImg.naturalWidth > 0) {
+        battleCtx.drawImage(pImg, -28, -42, 56, 72);
+    } else {
+        battleCtx.beginPath();
+        battleCtx.arc(0, 0, 22, 0, Math.PI * 2);
+        battleCtx.fillStyle = "#ffa502";
+        battleCtx.fill();
+    }
+    battleCtx.restore();
+
+    // 3. Vẽ Kiếm Trận Xoay Quanh
+    let activeSwordCount = 0;
+    const orbitRadius = 75;
+    const rotSpeed = 0.04 + (agi * 0.0008);
+    battleData.orbitAngle += rotSpeed;
+    const swordImg = getBattleSwordSkin();
+
+    battleData.swords.forEach((sword, index) => {
+        const angle = battleData.orbitAngle + (index * (Math.PI * 2 / battleData.swords.length));
+        const sx = battleData.player.x + Math.cos(angle) * orbitRadius;
+        const sy = battleData.player.y + Math.sin(angle) * orbitRadius;
+
+        if (sword.active) {
+            activeSwordCount++;
+            battleCtx.save();
+            battleCtx.translate(sx, sy);
+            battleCtx.rotate(angle + Math.PI / 2); // Mũi kiếm hướng ra ngoài đón quái
+
+            if (swordImg.complete && swordImg.naturalWidth > 0) {
+                battleCtx.drawImage(swordImg, -9, -24, 18, 48);
+            } else {
+                battleCtx.fillStyle = "#00d2d3";
+                battleCtx.fillRect(-3, -15, 6, 30);
+            }
+            battleCtx.restore();
+
+            // Va chạm giữa Kiếm Khí và Ma Vật
+            for (let i = battleData.enemies.length - 1; i >= 0; i--) {
+                const en = battleData.enemies[i];
+                if (Math.hypot(sx - en.x, sy - en.y) < en.radius + 15) {
+                    en.hp -= (str * 2 + 10);
+                    sword.active = false; // Kiếm vỡ sau va chạm
+
+                    if (en.hp <= 0) {
+                        battleData.enemies.splice(i, 1);
+                        battleData.kills++;
+
+                        // Tuyệt đối không cộng Linh Lực, chỉ rớt Đan Dược
+                        const roll = Math.random();
+                        if (roll < 0.15) {
+                            inventory["Hồi Xuân Đan"] = (inventory["Hồi Xuân Đan"] || 0) + 1;
+                            playLootSound();
+                        } else if (roll < 0.20) {
+                            inventory["Tụ Linh Đan"] = (inventory["Tụ Linh Đan"] || 0) + 1;
+                            playLootSound();
+                        }
+                    }
+
+                    // Hồi kiếm theo chỉ số Thân Pháp AGI
+                    const cd = Math.max(1000, 3200 - agi * 25);
+                    setTimeout(() => { sword.active = true; }, cd);
+                    break;
+                }
+            }
+        }
+    });
+
+    // 4. Quái vật đuổi theo nhân vật
+    if (battleData.frameCount % 50 === 0) spawnBattleEnemy();
+
+    for (let i = battleData.enemies.length - 1; i >= 0; i--) {
+        const en = battleData.enemies[i];
+        const dx = battleData.player.x - en.x;
+        const dy = battleData.player.y - en.y;
+        const dist = Math.hypot(dx, dy);
+
+        en.x += (dx / dist) * en.speed;
+        en.y += (dy / dist) * en.speed;
+
+        // Vẽ Ma Vật Quỷ Hồn
+        battleCtx.save();
+        battleCtx.translate(en.x, en.y);
+        if (battleAssets.enemyGhost.complete && battleAssets.enemyGhost.naturalWidth > 0) {
+            battleCtx.drawImage(battleAssets.enemyGhost, -20, -20, 40, 40);
+        } else {
+            battleCtx.beginPath();
+            battleCtx.arc(0, 0, en.radius, 0, Math.PI * 2);
+            battleCtx.fillStyle = "#70a1ff";
+            battleCtx.fill();
+        }
+        battleCtx.restore();
+
+        // Ma vật cắn trúng thân thể
+        if (dist < battleData.player.radius + en.radius) {
+            let dodge = Math.min(30, agi * 0.5);
+            if (Math.random() * 100 >= dodge) {
+                currentHp -= 15;
+                playWrongSound();
+            }
+            battleData.enemies.splice(i, 1);
+
+            if (currentHp <= 0) {
+                alert(`💥 Đạo thể tổn hao nặng nề! Buộc phải rút lui. Đã trảm sát ${battleData.kills} Quái vật.`);
+                exitBattle();
+                return;
+            }
+        }
+    }
+
+    // 5. Cập nhật HUD trong trận
+    const hpEl = document.getElementById('battleHpText');
+    const swordEl = document.getElementById('battleSwordText');
+    const killsEl = document.getElementById('battleKillsText');
+    if (hpEl) hpEl.innerText = `❤️ Sinh Mệnh: ${Math.max(0, currentHp)}/${maxHp}`;
+    if (swordEl) swordEl.innerText = `⚔️ Kiếm Khí: ${activeSwordCount}/${battleData.swords.length}`;
+    if (killsEl) killsEl.innerText = `👾 Ma Vật Trảm: ${battleData.kills}`;
+
+    battleAnimationFrame = requestAnimationFrame(battleLoop);
+}
