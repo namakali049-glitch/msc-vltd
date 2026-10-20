@@ -1,4 +1,151 @@
 // ==========================================
+// HỆ THỐNG ÂM THANH TIÊN GIỚI (WEB AUDIO API)
+// ==========================================
+let audioCtx = null;
+let isAudioMuted = false;
+
+// Khởi tạo AudioContext khi người dùng chạm vào màn hình lần đầu
+function getAudioContext() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+    return audioCtx;
+}
+
+// 1. Âm thanh bấm nút (Thanh thúy nhẹ nhàng)
+window.playClickSound = function() {
+    if (isAudioMuted) return;
+    try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(600, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.06);
+        
+        gain.gain.setValueAtTime(0.15, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
+        
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.06);
+    } catch(e) {}
+};
+
+// 2. Âm thanh Trả Lời Đúng (Chuông tiên ngân vang - Đạo Tâm Thông Minh)
+function playCorrectSound() {
+    if (isAudioMuted) return;
+    try {
+        const ctx = getAudioContext();
+        // Hợp âm tiên khí: Đô - Mi - Son - Đô cao
+        const notes = [523.25, 659.25, 783.99, 1046.50]; 
+        notes.forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            
+            osc.type = "triangle";
+            osc.frequency.value = freq;
+            
+            const startTime = ctx.currentTime + (idx * 0.07);
+            const duration = 0.35;
+            
+            gain.gain.setValueAtTime(0.18, startTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+            
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            
+            osc.start(startTime);
+            osc.stop(startTime + duration);
+        });
+    } catch(e) {}
+}
+
+// 3. Âm thanh Trả Lời Sai (Sét đánh trầm đục - Tâm Ma Phản Phệ)
+function playWrongSound() {
+    if (isAudioMuted) return;
+    try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(160, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.3);
+        
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+        
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        
+        osc.start();
+        osc.stop(ctx.currentTime + 0.3);
+    } catch(e) {}
+}
+
+// 4. Âm thanh Rớt Đồ / Nhặt Đan Dược (Kỳ Ngộ Kim Quang)
+function playLootSound() {
+    if (isAudioMuted) return;
+    try {
+        const ctx = getAudioContext();
+        [880, 1174, 1760].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            osc.frequency.value = freq;
+            
+            const start = ctx.currentTime + (idx * 0.08);
+            gain.gain.setValueAtTime(0.2, start);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.25);
+            
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.25);
+        });
+    } catch(e) {}
+}
+
+// 5. Điều khiển Nhạc Nền (BGM)
+window.toggleBGM = function() {
+    const bgm = document.getElementById('bgmAudio');
+    const btn = document.getElementById('audioToggleBtn');
+    if (!bgm) return;
+    
+    getAudioContext(); // Kích hoạt AudioContext
+    
+    if (bgm.paused) {
+        bgm.volume = 0.4;
+        bgm.play().then(() => {
+            isAudioMuted = false;
+            btn.innerText = "🎵 Nhạc: Bật";
+            btn.classList.remove('muted');
+        }).catch(e => console.log("Trình duyệt chặn autoplay:", e));
+    } else {
+        bgm.pause();
+        isAudioMuted = true;
+        btn.innerText = "🔇 Nhạc: Tắt";
+        btn.classList.add('muted');
+    }
+};
+
+// Tự động bật nhạc ở lần thao tác đầu tiên
+function tryStartBGMOnce() {
+    const bgm = document.getElementById('bgmAudio');
+    if (bgm && bgm.paused && !isAudioMuted) {
+        bgm.volume = 0.4;
+        bgm.play().catch(() => {});
+    }
+    document.removeEventListener('click', tryStartBGMOnce);
+}
+document.addEventListener('click', tryStartBGMOnce);
+// ==========================================
 // 1. CẤU HÌNH FIREBASE
 // ==========================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
