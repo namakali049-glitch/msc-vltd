@@ -753,6 +753,14 @@ function resizeBattleCanvas() {
 
 window.startBattle = function() {
     window.playClickSound();
+    recalcStats();
+
+    // 1. Chặn Phàm Nhân không được bước vào Bí Cảnh
+    if (thanThuc < 100 || calculateRealm(lifetimeMana) === "Phàm Nhân") {
+        alert("⚠️ Đạo hữu hiện tại là Phàm Nhân, chưa ngưng tụ Thần Thức nên không thể ngự kiếm!\n\nHãy vào 'Bế Quan Khai Phá' để tích lũy Linh Lực đạt mốc 150 (Luyện Khí Sơ Kỳ).");
+        return;
+    }
+
     switchScreen('battle-screen');
     
     const invBtn = document.querySelector('.fixed-inventory-btn');
@@ -761,13 +769,9 @@ window.startBattle = function() {
     if (audioBtn) audioBtn.style.display = 'none';
 
     resizeBattleCanvas();
-    recalcStats();
     
-    let count = 2;
-    if (lifetimeMana >= 3000) count = 5;
-    else if (lifetimeMana >= 1500) count = 4;
-    else if (lifetimeMana >= 300) count = 3;
-
+    // 2. Cấp chính xác số lượng phi kiếm xoay quanh thân dựa trên Thần Thức
+    const count = getSwordCount(thanThuc);
     battleData.swords = Array.from({ length: count }, () => ({ active: true }));
     battleData.enemies = [];
     battleData.particles = [];
