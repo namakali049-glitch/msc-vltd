@@ -475,6 +475,20 @@ window.startGame = async function() {
     currentLevel = 1; sessionMana = 0; totalSeconds = 0;
     recalcStats();
     currentHp = maxHp; 
+    
+    // Nạp Avatar, Tên và Chỉ số cho màn hình Bế Quan
+    document.getElementById('quizAvatar').src = getAvatarByMana(lifetimeMana);
+    document.getElementById('quizName').innerText = currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : "Đạo Hữu";
+    
+    window.sessionThanThuc = thanThuc; // Lưu thần thức hiện tại
+    if (thanThuc > 0) {
+        document.getElementById('quizStatLabel').innerText = "Thần Thức";
+        document.getElementById('quizStatValue').innerText = window.sessionThanThuc;
+    } else {
+        // Nếu là Phàm Nhân (0 Thần thức), hệ thống tự đổi sang hiển thị Sinh Mệnh
+        document.getElementById('quizStatLabel').innerText = "Sinh Mệnh";
+        document.getElementById('quizStatValue').innerText = currentHp;
+    }
 
     document.getElementById('timerDisplay').innerText = "00:00";
     if (timerInterval) clearInterval(timerInterval);
