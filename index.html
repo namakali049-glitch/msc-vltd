@@ -2,61 +2,32 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Mộng Tu Tiên: Vạn Linh Tiên Đạo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mộng Tu Tiên</title>
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Cảnh báo khóa màn hình dọc -->
+  <!-- Lớp phủ yêu cầu xoay ngang màn hình -->
   <div id="rotate-screen-warning">
-    <div class="warning-box">
-      <div class="phone-rotate-icon">📱 ➔ 📲</div>
-      <p>Vui lòng xoay ngang thiết bị để bước vào Tiên Đồ!</p>
-    </div>
+    <p>Vui lòng xoay ngang điện thoại để trải nghiệm tốt nhất!</p>
   </div>
 
-  <!-- Nút bật/tắt nhạc nền -->
-  <button id="audio-toggle-btn" class="audio-btn" onclick="toggleBGM()" title="Âm nhạc">🎵</button>
-  <audio id="bgm-player" src="assets/bgm.mp3" loop preload="auto"></audio>
-
-  <!-- Màn hình 1: Sảnh Chính -->
+  <!-- Sảnh Chính -->
   <div id="main-lobby" class="screen">
-    <div class="lobby-container">
-      <h1 class="game-title">VÔ LƯỢNG TIÊN ĐỒ</h1>
-      <p class="game-subtitle">Mộng Tu Tiên · Khẩu Quyết Vấn Đạo</p>
-
-      <div class="player-panel">
-        <div class="avatar-frame">
-          <img id="player-avatar" src="assets/pham-nhan.jpg" alt="Chân dung Đạo hữu">
-        </div>
-        <div class="stats-info">
-          <div class="stat-row">
-            <span class="stat-label">Cảnh Giới:</span>
-            <span id="player-rank" class="highlight-text">Phàm Nhân</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label">Tu Vi:</span>
-            <div class="exp-bar-container">
-              <div id="player-exp-bar" class="exp-bar-fill" style="width: 0%;"></div>
-              <span class="exp-bar-text"><span id="player-exp">0</span> / <span id="player-max-exp">100</span></span>
-            </div>
-          </div>
-          <div class="stat-row stats-sub">
-            <span>❤️ Khí Huyết: <b id="player-hp">100</b></span>
-            <span>⚔️ Công Kích: <b id="player-atk">10</b></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="lobby-actions">
-        <button class="btn-main" onclick="openCultivation()">🧘 Bế Quan Tu Luyện</button>
-      </div>
+    <h1>Mộng Tu Tiên</h1>
+    <div class="player-stats">
+      <p>Cảnh giới: <span id="player-rank">Luyện Khí Kỳ</span></p>
+      <p>Tu vi: <span id="player-exp">0</span> / <span id="player-max-exp">1000</span></p>
+    </div>
+    <div class="menu-buttons">
+      <button onclick="openCultivation()">Bế Quan Tu Luyện</button>
     </div>
   </div>
 
-  <!-- Màn hình 2: Bế Quan Tu Luyện -->
+  <!-- Khu vực Bế Quan Tu Luyện -->
   <div id="cultivation-screen" class="screen hidden">
+    <!-- Thanh trạng thái phía trên -->
     <div class="cultivation-header">
       <div class="timer-badge">⏳ <span id="cultivation-timer">02:00</span></div>
       <div class="lives-container" id="cultivation-lives">
@@ -67,42 +38,25 @@
       <button id="btn-stop-cultivation" class="btn-stop" onclick="stopCultivation('manual')">🚪 Xuất Quan</button>
     </div>
 
+    <!-- Khu vực hiển thị câu hỏi -->
     <div class="quiz-body">
-      <div class="cultivation-character-preview">
-        <img id="cultivation-sprite" src="assets/truc-co.png" alt="Đả tọa">
-      </div>
-      <div class="question-container">
-        <div class="question-hanzi" id="quiz-hanzi">修仙</div>
-        <div class="question-pinyin" id="quiz-pinyin">Xiūxiān</div>
-        <div class="question-prompt">Chọn ý nghĩa đúng của khẩu quyết trên:</div>
-      </div>
+      <h2 class="question-title" id="quiz-question">Đang tải khẩu quyết...</h2>
       <div class="options-grid" id="quiz-options">
-        <!-- Nút đáp án render từ app.js -->
+        <!-- Nút đáp án sẽ được JS sinh ra ở đây -->
       </div>
     </div>
   </div>
 
-  <!-- Modal Tổng Kết Sau Khi Xuất Quan -->
+  <!-- Modal Tổng kết xuất quan -->
   <div id="cultivation-summary-modal" class="modal-overlay hidden">
     <div class="modal-card">
       <h3 id="summary-title">Kết Thúc Bế Quan</h3>
       <p id="summary-reason" class="summary-reason"></p>
-      
       <div class="summary-stats">
-        <div class="summary-row">
-          <span>Khẩu quyết lãnh ngộ:</span>
-          <b id="summary-correct">0</b>
-        </div>
-        <div class="summary-row">
-          <span>Tu vi thu được:</span>
-          <b id="summary-exp" class="exp-text">+0</b>
-        </div>
-        <div id="breakthrough-notice" class="breakthrough-notice hidden">
-          ✨ Chúc mừng Đạo hữu đột phá cảnh giới mới! ✨
-        </div>
+        <p>Số câu đúng: <b id="summary-correct">0</b></p>
+        <p>Tu vi lĩnh ngộ: <b id="summary-exp" class="exp-text">+0</b></p>
       </div>
-
-      <button class="btn-confirm" onclick="closeCultivationModal()">Thu Công Quy Vị</button>
+      <button class="btn-confirm" onclick="closeCultivationModal()">Xác Nhận</button>
     </div>
   </div>
 
