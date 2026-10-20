@@ -1059,3 +1059,29 @@ function unlockAudioOnInteraction() {
 }
 document.addEventListener('click', unlockAudioOnInteraction);
 document.addEventListener('keydown', unlockAudioOnInteraction);
+// ==========================================
+// ĐIỀU KHIỂN TÀNG KINH CÁC
+// ==========================================
+window.openLibraryModal = function() {
+    window.playClickSound();
+    const modal = document.getElementById('libraryModal');
+    if (modal) modal.style.display = 'flex';
+};
+
+window.closeLibraryModal = function() {
+    window.playClickSound();
+    const modal = document.getElementById('libraryModal');
+    if (modal) modal.style.display = 'none';
+};
+
+window.chooseLibraryOption = function(type) {
+    window.playClickSound();
+    if (type === 'han_ngu') {
+        // Đóng modal Tàng Kinh Các và bắt đầu tu luyện Hán Ngữ Chân Giải như cũ
+        window.closeLibraryModal();
+        window.startGame();
+    } else if (type === 'anh_ngu') {
+        // Thông báo khi bấm vào Anh Ngữ Công
+        alert("🔒 Cấm chế phong ấn!\n\nĐiển tịch 'Anh Ngữ Công' hiện chưa khai mở. Đạo hữu hãy chuyên tâm lĩnh ngộ 'Hán Ngữ Chân Giải' để nâng cao tu vi!");
+    }
+};
