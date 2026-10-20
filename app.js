@@ -37,6 +37,7 @@ let maxHp = 100;
 let currentHp = 100;
 let str = 10; 
 let agi = 10; 
+let thanThuc = 0; // Thần thức điều khiển phi kiếm 
 
 let currentLevel = 1;
 let currentLevelExp = 0; 
