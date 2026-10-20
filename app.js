@@ -32,6 +32,7 @@ let currentUser = null;
 let lifetimeMana = 0; 
 let sessionMana = 0;  
 let inventory = { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
+
 // Chỉ số nhân vật
 let maxHp = 100;
 let currentHp = 100;
@@ -62,12 +63,26 @@ function calculateRealm(mana) {
 
 function getAvatarByMana(mana) {
     if (mana < 150) {
-        return "./assets/pham-nhan.jpg";
+        return "assets/pham-nhan.jpg";
     } else if (mana < 1500) {
-        return "./assets/luyen-khi.jpg";
+        return "assets/luyen-khi.png";
     } else {
-        return "./assets/truc-co.jpg";
+        return "assets/truc-co.png";
     }
+}
+
+// Tự động thử đuôi còn lại (.png <-> .jpg) nếu ảnh bị lỗi 404
+function setAvatarWithFallback(imgElement, mana) {
+    if (!imgElement) return;
+    const initialPath = getAvatarByMana(mana);
+    imgElement.src = initialPath;
+    imgElement.onerror = () => {
+        if (imgElement.src.endsWith(".jpg")) {
+            imgElement.src = imgElement.src.replace(".jpg", ".png");
+        } else if (imgElement.src.endsWith(".png")) {
+            imgElement.src = imgElement.src.replace(".png", ".jpg");
+        }
+    };
 }
 
 function recalcStats() {
@@ -85,7 +100,7 @@ function updateCharacterUI() {
     if (document.getElementById('statAgi')) document.getElementById('statAgi').innerText = agi;
     
     const gameAvatar = document.getElementById('gameAvatar');
-    if (gameAvatar) gameAvatar.src = getAvatarByMana(lifetimeMana);
+    if (gameAvatar) setAvatarWithFallback(gameAvatar, lifetimeMana);
 }
 
 // ==========================================
@@ -94,7 +109,7 @@ function updateCharacterUI() {
 window.switchScreen = function(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     const targetScreen = document.getElementById(screenId);
-    if(targetScreen) targetScreen.classList.add('active');
+    if (targetScreen) targetScreen.classList.add('active');
 };
 
 window.switchAuthTab = function(type) {
@@ -120,12 +135,14 @@ async function loadUserLifetimeMana(uid) {
         const snapshot = await get(userRef);
         if (snapshot.exists()) {
             lifetimeMana = snapshot.val().mana || 0;
-            // Tải túi đồ từ Firebase, nếu chưa có thì tạo túi mới
             inventory = snapshot.val().inventory || { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
         }
-    } catch (error) { lifetimeMana = 0; }
+    } catch (error) { 
+        lifetimeMana = 0; 
+    }
     recalcStats();
 }
+
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         currentUser = user;
@@ -147,7 +164,11 @@ window.handleSignup = async function() {
     try {
         const userCred = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(userCred.user, { displayName: displayName });
-        await set(ref(database, 'users/' + userCred.user.uid), { name: displayName, mana: 0 });
+        await set(ref(database, 'users/' + userCred.user.uid), { 
+            name: displayName, 
+            mana: 0,
+            inventory: inventory 
+        });
         alert("Đăng ký thành công!");
     } catch (e) { alert("Lỗi: " + e.message); }
 };
@@ -166,7 +187,11 @@ window.handleGoogleLogin = async function() {
         const userRef = ref(database, 'users/' + result.user.uid);
         const snapshot = await get(userRef);
         if (!snapshot.exists()) {
-            await set(userRef, { name: result.user.displayName || "Đạo Hữu", mana: 0 });
+            await set(userRef, { 
+                name: result.user.displayName || "Đạo Hữu", 
+                mana: 0,
+                inventory: inventory 
+            });
         }
     } catch (e) { alert("Lỗi Google: " + e.message); }
 };
@@ -179,11 +204,12 @@ async function syncManaToDatabase() {
         await set(ref(database, 'users/' + currentUser.uid), {
             name: currentUser.displayName || currentUser.email.split('@')[0],
             mana: lifetimeMana,
-            inventory: inventory, // <--- LƯU THÊM DÒNG NÀY
+            inventory: inventory,
             lastUpdated: Date.now()
         });
     } catch (e) { console.error("Lỗi đồng bộ:", e); }
 }
+
 // ==========================================
 // 5. HỒ SƠ & BẢNG XẾP HẠNG
 // ==========================================
@@ -196,7 +222,7 @@ window.showProfile = function() {
     document.getElementById('profileRealm').innerText = calculateRealm(lifetimeMana);
     
     const profileAvatar = document.getElementById('profileAvatar');
-    if (profileAvatar) profileAvatar.src = getAvatarByMana(lifetimeMana);
+    if (profileAvatar) setAvatarWithFallback(profileAvatar, lifetimeMana);
     
     document.getElementById('profileHp').innerText = `${maxHp}/${maxHp}`;
     document.getElementById('profileStr').innerText = str;
@@ -278,11 +304,11 @@ window.startGame = async function() {
 
     currentLevel = 1; sessionMana = 0; totalSeconds = 0;
     recalcStats();
-    currentHp = maxHp; // Bơm đầy máu
+    currentHp = maxHp; 
     updateCharacterUI();
 
     document.getElementById('timerDisplay').innerText = "00:00";
-    if(timerInterval) clearInterval(timerInterval);
+    if (timerInterval) clearInterval(timerInterval);
     timerInterval = setInterval(() => {
         totalSeconds++;
         document.getElementById('timerDisplay').innerText = formatTime(totalSeconds);
@@ -303,7 +329,7 @@ function initLevel() {
 }
 
 function loadQuestion() {
-    if(currentLevel > 4) { endGame(true); return; }
+    if (currentLevel > 4) { endGame(true); return; }
     const qData = activeQuestions[currentQuestionIndex];
     document.getElementById('counter').innerText = `Câu hỏi: ${currentQuestionIndex + 1} / ${activeQuestions.length}`;
     document.getElementById('question').innerText = qData.q;
@@ -336,7 +362,16 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
         let bonusMana = Math.floor(expPerQuestion + (str * 0.2));
         currentHp = Math.min(maxHp, currentHp + 2); // Hồi 2 máu
         
-        document.getElementById('message').innerText = `✅ Đáp đúng! +${bonusMana} Linh Lực (Sức mạnh +${Math.floor(str * 0.2)})`;
+        // TỶ LỆ RỚT VẬT PHẨM (15%)
+        let lootMessage = "";
+        if (Math.random() < 0.15) {
+            const items = ["Hồi Xuân Đan", "Tụ Linh Đan", "Tẩy Tủy Đan"];
+            const droppedItem = items[Math.floor(Math.random() * items.length)];
+            inventory[droppedItem] = (inventory[droppedItem] || 0) + 1;
+            lootMessage = `<br>🎁 <b style="color:#ffa502">Kỳ Ngộ!</b> Nhặt được [<b>${droppedItem}</b>]!`;
+        }
+
+        document.getElementById('message').innerHTML = `✅ Đáp đúng! +${bonusMana} Linh Lực (STR +${Math.floor(str * 0.2)})${lootMessage}`;
         document.getElementById('message').style.color = "#2ed573";
         
         currentLevelExp += bonusMana;
@@ -357,8 +392,10 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
         } else {
             currentHp -= 20;
             const gameScreen = document.getElementById('game-screen');
-            gameScreen.classList.add('damage-flash');
-            setTimeout(() => gameScreen.classList.remove('damage-flash'), 400);
+            if (gameScreen) {
+                gameScreen.classList.add('damage-flash');
+                setTimeout(() => gameScreen.classList.remove('damage-flash'), 400);
+            }
 
             document.getElementById('message').innerText = `❌ Tâm Ma Phản Phệ! Mất 20 Sinh Mệnh!`;
             document.getElementById('message').style.color = "#ff4757";
@@ -408,3 +445,70 @@ function endGame(win) {
     btn.onclick = showLeaderboard;
     document.getElementById('options').appendChild(btn);
 }
+
+// ==========================================
+// 7. HỆ THỐNG TÚI TRỮ VẬT (ITEM BAG)
+// ==========================================
+window.openInventory = function() {
+    const modal = document.getElementById('inventoryModal');
+    if (modal) modal.style.display = 'block';
+    updateInventoryUI();
+};
+
+window.closeInventory = function() {
+    const modal = document.getElementById('inventoryModal');
+    if (modal) modal.style.display = 'none';
+};
+
+function updateInventoryUI() {
+    const invList = document.getElementById('inventoryList');
+    if (!invList) return;
+    invList.innerHTML = '';
+    
+    const itemEffects = {
+        "Hồi Xuân Đan": "Hồi phục ngay 30 Sinh Mệnh.",
+        "Tụ Linh Đan": "Sử dụng nhận ngay +50 Linh Lực.",
+        "Tẩy Tủy Đan": "Sinh Mệnh phục hồi hoàn toàn."
+    };
+
+    let hasItems = false;
+    for (let item in inventory) {
+        if (inventory[item] > 0) {
+            hasItems = true;
+            invList.innerHTML += `
+            <div class="item-card">
+                <div class="item-card-info">
+                    <h4>${item} (x${inventory[item]})</h4>
+                    <p>${itemEffects[item]}</p>
+                </div>
+                <button class="primary-btn" style="background:#3742fa; width:auto; margin:0; padding:8px 15px;" onclick="useItem('${item}')">Dùng</button>
+            </div>`;
+        }
+    }
+    if (!hasItems) {
+        invList.innerHTML = '<p style="color:#aaa; font-size:14px;">Túi đồ trống không! Hãy trả lời câu hỏi để rớt đan dược.</p>';
+    }
+}
+
+window.useItem = function(item) {
+    if (inventory[item] > 0) {
+        inventory[item]--;
+        
+        if (item === "Hồi Xuân Đan") {
+            currentHp = Math.min(maxHp, currentHp + 30);
+            alert("💊 Đã dùng Hồi Xuân Đan! Phục hồi 30 Sinh Mệnh.");
+        } else if (item === "Tụ Linh Đan") {
+            lifetimeMana += 50;
+            sessionMana += 50;
+            recalcStats();
+            alert("✨ Đã dùng Tụ Linh Đan! Tu vi tăng vọt +50 Linh Lực.");
+        } else if (item === "Tẩy Tủy Đan") {
+            currentHp = maxHp;
+            alert("💎 Đã dùng Tẩy Tủy Đan! Đạo thể khôi phục 100% Sinh Mệnh.");
+        }
+        
+        updateInventoryUI();
+        updateCharacterUI();
+        syncManaToDatabase();
+    }
+};
