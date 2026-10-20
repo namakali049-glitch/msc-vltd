@@ -8,15 +8,13 @@
 </head>
 <body>
 
-<!-- NÚT BẬT / TẮT NHẠC (GÓC TRÊN BÊN PHẢI) -->
+<!-- NÚT BẬT / TẮT NHẠC NỀN -->
 <button id="audioToggleBtn" class="audio-toggle-btn" onclick="toggleBGM()">🎵 Nhạc: Bật</button>
 
 <!-- THẺ PHÁT NHẠC NỀN AN TOÀN -->
 <audio id="bgmAudio" loop preload="auto">
-    <!-- Ưu tiên 1: File nhạc nằm trực tiếp trong thư mục assets của bạn -->
     <source src="assets/bgm.mp3" type="audio/mpeg">
-    <!-- Dự phòng 2: Link nhạc cổ phong CDN mở không chặn hotlink -->
-    <source src="https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3" type="audio/mpeg">
+    <source src="https://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/music/start.ogg" type="audio/ogg">
 </audio>
 
 <!-- 0. MÀN HÌNH ĐĂNG NHẬP / ĐĂNG KÝ -->
