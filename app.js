@@ -577,15 +577,15 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
             document.getElementById('message').innerText = "⚡ Thân pháp siêu phàm! Né thành công chướng ngại!";
             document.getElementById('message').style.color = "#70a1ff";
         } else {
-            // CƠ CHẾ TRỪ 1/3 (Thần Thức hoặc Sinh Mệnh)
+            // CƠ CHẾ TRỪ ĐÚNG 1/3 MỨC CAO NHẤT (SAI 3 CÂU LÀ VỀ 0)
             if (thanThuc > 0) {
-                // Tu sĩ: Trừ 1/3 Thần Thức hiện có
-                let damage = Math.ceil(window.sessionThanThuc / 3);
-                if (damage < 1) damage = 1;
+                // Tu sĩ: Trừ 1/3 Thần Thức tối đa (thanThuc)
+                let damage = Math.ceil(thanThuc / 3);
                 window.sessionThanThuc -= damage;
+                if (window.sessionThanThuc < 0) window.sessionThanThuc = 0;
                 
-                document.getElementById('quizStatValue').innerText = window.sessionThanThuc;
-                document.getElementById('message').innerText = `❌ Sai lầm! Hư tổn ${damage} Thần Thức!`;
+                document.getElementById('quizStatValue').innerText = `${window.sessionThanThuc}/${thanThuc}`;
+                document.getElementById('message').innerText = `❌ Sai lầm! Hư tổn ${damage} Thần Thức (1/3 mức tối đa)!`;
                 document.getElementById('message').style.color = "#ff4757";
                 
                 if (window.sessionThanThuc <= 0) {
@@ -593,12 +593,13 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
                     return;
                 }
             } else {
-                // Phàm Nhân: Trừ 1/3 Sinh Mệnh hiện có
-                let damage = Math.ceil(currentHp / 3);
+                // Phàm Nhân: Trừ 1/3 Sinh Mệnh tối đa (maxHp)
+                let damage = Math.ceil(maxHp / 3);
                 currentHp -= damage;
+                if (currentHp < 0) currentHp = 0;
                 
-                document.getElementById('quizStatValue').innerText = currentHp;
-                document.getElementById('message').innerText = `❌ Khí huyết đảo nghịch! Mất ${damage} Sinh Mệnh!`;
+                document.getElementById('quizStatValue').innerText = `${currentHp}/${maxHp}`;
+                document.getElementById('message').innerText = `❌ Khí huyết đảo nghịch! Mất ${damage} Sinh Mệnh (1/3 mức tối đa)!`;
                 document.getElementById('message').style.color = "#ff4757";
                 
                 if (currentHp <= 0) {
