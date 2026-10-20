@@ -489,9 +489,10 @@ function loadQuestion() {
     qData.options.forEach((opt, index) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn'; btn.innerText = opt;
-        btn.onclick = () => checkAnswer(index, qData.ans, btn);
-        optionsDiv.appendChild(btn);
-    });
+        btn.onclick = () => {
+    playClickSound(); // <-- Âm thanh click
+    checkAnswer(index, qData.ans, btn);
+};
     
     let expPercent = Math.min(100, (currentLevelExp / expToLevelUp) * 100);
     document.getElementById('expFill').style.width = expPercent + "%";
@@ -500,37 +501,28 @@ function loadQuestion() {
     updateCharacterUI();
 }
 
-function checkAnswer(selectedIndex, correctIndex, btnElement) {
-    const buttons = document.querySelectorAll('.options .option-btn');
-    buttons.forEach(b => b.onclick = null); 
-    
-    if (selectedIndex === correctIndex) {
-        btnElement.classList.add('correct');
-        let bonusMana = Math.floor(expPerQuestion + (str * 0.2));
-        currentHp = Math.min(maxHp, currentHp + 2); // Hồi 2 máu
-        
-        // TỶ LỆ RỚT VẬT PHẨM (15%)
-        let lootMessage = "";
-        if (Math.random() < 0.15) {
-            const items = ["Hồi Xuân Đan", "Tụ Linh Đan", "Tẩy Tủy Đan"];
-            const droppedItem = items[Math.floor(Math.random() * items.length)];
-            inventory[droppedItem] = (inventory[droppedItem] || 0) + 1;
-            lootMessage = `<br>🎁 <b style="color:#ffa502">Kỳ Ngộ!</b> Nhặt được [<b>${droppedItem}</b>]!`;
-        }
+if (selectedIndex === correctIndex) {
+    btnElement.classList.add('correct');
+    playCorrectSound(); // <-- PHÁT ÂM THANH TRẢ LỜI ĐÚNG
 
-        document.getElementById('message').innerHTML = `✅ Đáp đúng! +${bonusMana} Linh Lực (STR +${Math.floor(str * 0.2)})${lootMessage}`;
-        document.getElementById('message').style.color = "#2ed573";
-        
-        currentLevelExp += bonusMana;
-        sessionMana += bonusMana;
-        lifetimeMana += bonusMana; 
-        
-        recalcStats();
-        updateCharacterUI();
-        syncManaToDatabase();
-    } else {
-        btnElement.classList.add('wrong');
-        buttons[correctIndex].classList.add('correct');
+    let bonusMana = Math.floor(expPerQuestion + (str * 0.2));
+    currentHp = Math.min(maxHp, currentHp + 2);
+
+    let lootMessage = "";
+    if (Math.random() < 0.15) {
+        const items = ["Hồi Xuân Đan", "Tụ Linh Đan", "Tẩy Tủy Đan"];
+        const droppedItem = items[Math.floor(Math.random() * items.length)];
+        inventory[droppedItem] = (inventory[droppedItem] || 0) + 1;
+        lootMessage = `<br>🎁 <b style="color:#ffa502">Kỳ Ngộ!</b> Nhặt được [<b>${droppedItem}</b>]!`;
+        playLootSound(); // <-- PHÁT ÂM THANH NHẶT ĐỒ HIẾM
+    }
+    // ... code phía sau giữ nguyên
+} else {
+    btnElement.classList.add('wrong');
+    buttons[correctIndex].classList.add('correct');
+    playWrongSound(); // <-- PHÁT ÂM THANH TÂM MA PHẢN PHỆ
+    // ... code phía sau giữ nguyên
+}
         
         let dodgeRate = Math.min(30, agi * 0.5); 
         if (Math.random() * 100 < dodgeRate) {
