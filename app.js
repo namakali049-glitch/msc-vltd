@@ -526,7 +526,8 @@ window.startGame = async function() {
 function initLevel() {
     currentLevelExp = 0; currentQuestionIndex = 0;
     activeQuestions = generateQuizSession(vocabPool, 10);
-    expToLevelUp = Math.floor(activeQuestions.length * 0.8) * expPerQuestion; 
+    // Độ khó cao sẽ x5 lượng Linh lực cần thiết để đột phá tầng
+    expToLevelUp = Math.floor(activeQuestions.length * 0.8) * expPerQuestion * window.difficultyMultiplier * 2; 
     
     document.getElementById('level').innerText = currentLevel;
     document.getElementById('maxExp').innerText = expToLevelUp;
