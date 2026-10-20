@@ -383,8 +383,10 @@ window.showProfile = function() {
     if (profileAvatar) profileAvatar.src = getAvatarByMana(lifetimeMana);
     
     document.getElementById('profileHp').innerText = `${maxHp}/${maxHp}`;
-    document.getElementById('profileStr').innerText = str;
-    document.getElementById('profileAgi').innerText = agi;
+    const senseEl = document.getElementById('profileSense');
+    if (senseEl) senseEl.innerText = thanThuc;
+    const swordEl = document.getElementById('profileSwords');
+    if (swordEl) swordEl.innerText = `${getSwordCount(thanThuc)} Thanh`;
 };
 
 window.showLeaderboard = async function() {
