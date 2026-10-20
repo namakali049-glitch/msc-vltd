@@ -169,26 +169,62 @@ window.toggleBGM = async function() {
 };
 
 // ==========================================
-// 4. TIẾN TRÌNH & HÌNH ẢNH CẢNH GIỚI
+// 4. TIẾN TRÌNH & HÌNH ẢNH CẢNH GIỚI (CẬP NHẬT MỚI)
 // ==========================================
+function getRealmData(mana) {
+    if (mana < 150) {
+        return { rank: "Phàm Nhân", hp: 100, thanThuc: 0 };
+    }
+    if (mana < 400) {
+        return { rank: "Luyện Khí Sơ Kỳ", hp: 250, thanThuc: 100 };
+    }
+    if (mana < 800) {
+        return { rank: "Luyện Khí Trung Kỳ", hp: 400, thanThuc: 200 };
+    }
+    if (mana < 1500) {
+        return { rank: "Luyện Khí Hậu Kỳ", hp: 550, thanThuc: 300 };
+    }
+    if (mana < 2500) {
+        return { rank: "Trúc Cơ Sơ Kỳ", hp: 700, thanThuc: 400 };
+    }
+    if (mana < 4000) {
+        return { rank: "Trúc Cơ Trung Kỳ", hp: 850, thanThuc: 500 };
+    }
+    return { rank: "Trúc Cơ Hậu Kỳ", hp: 1000, thanThuc: 600 };
+}
+
 function calculateRealm(mana) {
-    if (mana < 150) return "Phàm Nhân";
-    if (mana < 300) return "Luyện Khí Sơ Kỳ";
-    if (mana < 600) return "Luyện Khí Trung Kỳ";
-    if (mana < 1500) return "Luyện Khí Hậu Kỳ";
-    return "Trúc Cơ Sơ Kỳ";
+    return getRealmData(mana).rank;
+}
+
+// Điều kiện điều khiển số lượng phi kiếm theo Thần Thức
+function getSwordCount(sense) {
+    if (sense >= 600) return 4;
+    if (sense >= 400) return 3;
+    if (sense >= 300) return 2;
+    if (sense >= 100) return 1;
+    return 0;
+}
+
+function recalcStats() {
+    const data = getRealmData(lifetimeMana);
+    maxHp = data.hp;
+    thanThuc = data.thanThuc;
+    if (currentHp > maxHp) currentHp = maxHp;
 }
 
 function getAvatarByMana(mana) {
     if (mana < 150) return "assets/pham-nhan.jpg";
-    if (mana < 1500) return "assets/luyen-khi.png";
-    if (mana < 3000) return "assets/truc-co-trung-ky.png";
+    if (mana < 1500) return "assets/luyen-khi.jpg";
+    if (mana < 2500) return "assets/truc-co.jpg";
+    if (mana < 4000) return "assets/truc-co-trung-ky.png";
     return "assets/truc-co-vien-man.png";
 }
 
 function getBattleCharacterSkin() {
-    if (lifetimeMana >= 3000) return battleAssets.playerTrucCoVienMan;
-    if (lifetimeMana >= 1500) return battleAssets.playerTrucCoTrungKy;
+    if (lifetimeMana >= 4000) return battleAssets.playerTrucCoVienMan;
+    if (lifetimeMana >= 2500) return battleAssets.playerTrucCoTrungKy;
+    if (lifetimeMana >= 1500) return battleAssets.playerTrucCo;
     return battleAssets.playerLuyenKhi;
 }
 
@@ -196,21 +232,14 @@ function getBattleSwordSkin() {
     return lifetimeMana >= 1500 ? battleAssets.swordCyan : battleAssets.swordWood;
 }
 
-function recalcStats() {
-    let bonusTier = Math.floor(lifetimeMana / 100);
-    maxHp = 100 + (bonusTier * 15);
-    str = 10 + (bonusTier * 2);
-    agi = 10 + (bonusTier * 2);
-}
-
 function updateCharacterUI() {
     recalcStats();
     const hpTxt = document.getElementById('profileHp');
-    const strTxt = document.getElementById('profileStr');
-    const agiTxt = document.getElementById('profileAgi');
+    const senseTxt = document.getElementById('profileSense');
+    const swordsTxt = document.getElementById('profileSwords');
     if (hpTxt) hpTxt.innerText = `${currentHp}/${maxHp}`;
-    if (strTxt) strTxt.innerText = str;
-    if (agiTxt) agiTxt.innerText = agi;
+    if (senseTxt) senseTxt.innerText = thanThuc;
+    if (swordsTxt) swordsTxt.innerText = `${getSwordCount(thanThuc)} Thanh`;
 }
 // ==========================================
 // 5. CHUYỂN MÀN HÌNH & XÁC THỰC
