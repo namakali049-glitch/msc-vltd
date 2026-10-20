@@ -212,7 +212,6 @@ function updateCharacterUI() {
     if (strTxt) strTxt.innerText = str;
     if (agiTxt) agiTxt.innerText = agi;
 }
-
 // ==========================================
 // 5. CHUYỂN MÀN HÌNH & XÁC THỰC
 // ==========================================
