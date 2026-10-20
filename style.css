@@ -334,3 +334,109 @@ body {
 }
 .mt-10 { margin-top: 10px; }
 .mt-15 { margin-top: 15px; }
+/* ========================================== */
+/* GIAO DIỆN MODAL TÀNG KINH CÁC             */
+/* ========================================== */
+.library-card {
+  background: #0f172a;
+  border: 2px solid #ffd700;
+  border-radius: 14px;
+  padding: 20px;
+  width: 90%;
+  max-width: 440px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+}
+
+.library-header {
+  color: #ffd700;
+  font-size: 1.35rem;
+  margin-bottom: 6px;
+}
+
+.library-desc {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  margin-bottom: 16px;
+}
+
+.library-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.library-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.library-item:hover {
+  background: rgba(30, 41, 59, 1);
+  border-color: #ffd700;
+  transform: translateY(-2px);
+}
+
+.library-item.locked {
+  opacity: 0.65;
+  cursor: not-allowed;
+  border-color: #475569;
+}
+
+.library-item.locked:hover {
+  transform: none;
+  border-color: #ef4444;
+}
+
+.lib-icon {
+  font-size: 1.8rem;
+}
+
+.lib-info {
+  flex: 1;
+}
+
+.lib-info h4 {
+  font-size: 0.95rem;
+  color: #e2e8f0;
+  margin-bottom: 3px;
+}
+
+.lib-info p {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.lock-tag {
+  font-size: 0.7rem;
+  background: #ef4444;
+  color: #fff;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+}
+
+.btn-lib-action {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(180deg, #f59e0b, #d97706);
+  color: #000;
+}
+
+.btn-lib-action.disabled {
+  background: #334155;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
