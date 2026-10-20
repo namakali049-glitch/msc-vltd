@@ -1,6 +1,12 @@
+/* =========================================
+   HÌNH NỀN VÀ KHUNG GIAO DIỆN CHÍNH
+   ========================================= */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1e272e, #2f3542);
+    /* Lớp phủ tối (overlay) kết hợp ảnh nền để chữ luôn sắc nét, không bị chói */
+    background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)), 
+                url('./assets/background.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: #fff;
     margin: 0;
     padding: 20px;
@@ -10,44 +16,29 @@ body {
     min-height: 100vh;
 }
 
-.screen {
-    display: none;
-    width: 100%;
-    max-width: 500px;
-}
-
-.screen.active {
-    display: block;
-}
-
-.cute-box {
-    background: rgba(47, 53, 66, 0.9);
-    border-radius: 15px;
+/* Hiệu ứng Kính Mờ (Glassmorphism) cho các hộp giao diện */
+.cute-box, .profile-card, .quiz-container, .character-status-card {
+    background: rgba(30, 39, 46, 0.75) !important; /* Độ trong suốt nhẹ */
+    backdrop-filter: blur(12px);                  /* Làm mờ hình nền phía sau */
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
     padding: 25px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(236, 204, 104, 0.35); /* Viền vàng kim mỏng sang trọng */
     text-align: center;
-    border: 2px solid #57606f;
 }
 
-h1, h2, h3 { color: #eccc68; }
-
-.primary-btn, .secondary-btn, .tab-btn {
-    background: #ff4757;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    width: 100%;
-    margin-bottom: 10px;
+/* Chỉnh riêng cho khối câu hỏi trong màn chơi */
+.quiz-container {
+    margin-top: 15px;
+    padding: 20px;
 }
 
-.secondary-btn { background: #3742fa; }
-.primary-btn:hover { background: #ff6b81; }
-.secondary-btn:hover { background: #5352ed; }
+/* Chỉnh riêng cho khung chỉ số đầu màn chơi */
+.character-status-card {
+    padding: 15px;
+    margin-bottom: 15px;
+}
 
 /* Hệ thống UI Chơi Game */
 .game-header { margin-bottom: 20px; }
