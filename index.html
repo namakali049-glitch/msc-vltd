@@ -7,13 +7,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <!-- NÚT BẬT / TẮT NHẠC NỀN & ÂM THANH (GÓC TRÊN BÊN PHẢI) -->
 <button id="audioToggleBtn" class="audio-toggle-btn" onclick="toggleBGM()">🎵 Nhạc: Bật</button>
 
-<!-- THẺ PHÁT NHẠC NỀN TIÊN HIỆP (Guzheng Không Bản Quyền) -->
+<!-- THẺ PHÁT NHẠC NỀN TIÊN HIỆP -->
 <audio id="bgmAudio" loop preload="auto">
     <source src="https://cdn.pixabay.com/download/audio/2022/05/16/audio_c89146522a.mp3?filename=chinese-traditional-folk-110825.mp3" type="audio/mpeg">
 </audio>
+
 <!-- 0. MÀN HÌNH ĐĂNG NHẬP / ĐĂNG KÝ -->
 <div id="auth-screen" class="screen active">
     <div class="cute-box auth-box">
@@ -137,11 +139,12 @@
         <button class="primary-btn" onclick="goHome()">Trở về Động phủ 🏠</button>
     </div>
 </div>
+
 <!-- NÚT MỞ TÚI TRỮ VẬT NỔI Ở GÓC MÀN HÌNH -->
 <button onclick="openInventory()" class="inventory-btn">🎒 Túi Trữ Vật</button>
 
-<!-- GIAO DIỆN TÚI TRỮ VẬT (ẨN/HIỆN MỘT CÁCH POPUP) -->
-<div id="inventoryModal" class="modal-overlay">
+<!-- GIAO DIỆN TÚI TRỮ VẬT (BẮT BUỘC style="display: none;" ĐỂ KHÔNG CHẶN CLICK) -->
+<div id="inventoryModal" class="modal-overlay" style="display: none;">
     <div class="modal-content">
         <h2>🎒 TÚI TRỮ VẬT</h2>
         <div id="inventoryList" class="inventory-grid">
@@ -150,7 +153,7 @@
         <button class="secondary-btn" onclick="closeInventory()">Đóng Túi</button>
     </div>
 </div>
-    
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script type="module" src="./app.js"></script>
 </body>
