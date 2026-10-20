@@ -179,11 +179,11 @@ async function syncManaToDatabase() {
         await set(ref(database, 'users/' + currentUser.uid), {
             name: currentUser.displayName || currentUser.email.split('@')[0],
             mana: lifetimeMana,
+            inventory: inventory, // <--- LƯU THÊM DÒNG NÀY
             lastUpdated: Date.now()
         });
     } catch (e) { console.error("Lỗi đồng bộ:", e); }
 }
-
 // ==========================================
 // 5. HỒ SƠ & BẢNG XẾP HẠNG
 // ==========================================
