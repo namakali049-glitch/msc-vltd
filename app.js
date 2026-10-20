@@ -458,19 +458,42 @@ function formatTime(sec) {
     return `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`;
 }
 
+// Khai báo biến lưu file CSV và độ khó
+window.currentCsvFile = "./a1_vocab.csv";
+window.difficultyMultiplier = 1;
+
+// Hàm kiểm tra Cảnh Giới trước khi vào Quyển
+window.checkAndStartVolume = function(vol) {
+    if (vol === 'trung_quyen') {
+        if (lifetimeMana < 8000) { // 8000 là mốc lên Kim Đan
+            alert("⚠️ Cảnh giới chưa đủ!\nĐạo hữu cần đạt ít nhất [Kim Đan Kỳ] (8000 Linh Lực) mới có thể chịu đựng áp lực của Trung Quyển.");
+            return;
+        }
+        window.currentCsvFile = "./b1_vocab.csv";
+        window.difficultyMultiplier = 5; // Yêu cầu EXP cực cao để qua ải
+    } else {
+        window.currentCsvFile = "./a1_vocab.csv";
+        window.difficultyMultiplier = 1;
+    }
+    
+    document.getElementById('hanNguModal').style.display = 'none';
+    window.startGame();
+};
+
 window.startGame = async function() {
     window.playClickSound();
     switchScreen('game-screen'); 
-    if (vocabPool.length === 0) {
-        document.getElementById('question').innerText = "⏳ Đang mở Tàng Kinh Các...";
-        await new Promise(resolve => {
-            Papa.parse("./a1_vocab.csv", {
-                download: true, header: true, skipEmptyLines: true,
-                complete: res => { vocabPool = res.data; resolve(); },
-                error: () => { alert("❌ Lỗi nạp dữ liệu từ vựng CSV!"); resolve(); }
-            });
+    
+    document.getElementById('question').innerText = "⏳ Đang trích xuất Khẩu Quyết...";
+    
+    // Luôn tải lại file CSV theo sự lựa chọn (A1 hay B1)
+    await new Promise(resolve => {
+        Papa.parse(window.currentCsvFile, {
+            download: true, header: true, skipEmptyLines: true,
+            complete: res => { vocabPool = res.data; resolve(); },
+            error: () => { alert("❌ Lỗi nạp dữ liệu từ vựng! Đảm bảo đã có file " + window.currentCsvFile); resolve(); }
         });
-    }
+    });
 
     currentLevel = 1; sessionMana = 0; totalSeconds = 0;
     recalcStats();
