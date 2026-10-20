@@ -50,7 +50,7 @@ let activeQuestions = [];
 let vocabPool = [];
 
 // ==========================================
-// 3. HỆ THỐNG ÂM THANH TIÊN GIỚI (CÁCH LY AN TOÀN TUYỆT ĐỐI)
+// 3. HỆ THỐNG ÂM THANH TIÊN GIỚI (CÁCH LY AN TOÀN)
 // ==========================================
 let audioCtx = null;
 let isBgmPlaying = false;
@@ -689,7 +689,7 @@ window.useItem = function(item) {
     }
 };
 
-// Đánh thức hệ thống âm thanh ở tương tác chạm đầu tiên
+// 點擊觸發音訊解鎖監聽器
 function unlockAudioOnInteraction() {
     const ctx = getAudioContext();
     if (ctx && ctx.state === 'suspended') {
