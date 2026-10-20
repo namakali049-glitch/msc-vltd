@@ -8,12 +8,15 @@
 </head>
 <body>
 
-<!-- NÚT BẬT / TẮT NHẠC NỀN & ÂM THANH (GÓC TRÊN BÊN PHẢI) -->
+<!-- NÚT BẬT / TẮT NHẠC (GÓC TRÊN BÊN PHẢI) -->
 <button id="audioToggleBtn" class="audio-toggle-btn" onclick="toggleBGM()">🎵 Nhạc: Bật</button>
 
-<!-- THẺ PHÁT NHẠC NỀN TIÊN HIỆP -->
+<!-- THẺ PHÁT NHẠC NỀN AN TOÀN -->
 <audio id="bgmAudio" loop preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/05/16/audio_c89146522a.mp3?filename=chinese-traditional-folk-110825.mp3" type="audio/mpeg">
+    <!-- Ưu tiên 1: File nhạc nằm trực tiếp trong thư mục assets của bạn -->
+    <source src="assets/bgm.mp3" type="audio/mpeg">
+    <!-- Dự phòng 2: Link nhạc cổ phong CDN mở không chặn hotlink -->
+    <source src="https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3" type="audio/mpeg">
 </audio>
 
 <!-- 0. MÀN HÌNH ĐĂNG NHẬP / ĐĂNG KÝ -->
