@@ -190,6 +190,40 @@
     </div>
   </div>
 
+  <!-- ========================================== -->
+  <!-- MODAL: TÀNG KINH CÁC                       -->
+  <!-- ========================================== -->
+  <div id="libraryModal" class="modal-overlay" style="display: none;">
+    <div class="library-card">
+      <h3 class="library-header">📖 TÀNG KINH CÁC 📖</h3>
+      <p class="library-desc">Chọn công pháp điển tịch để nhập định tu luyện:</p>
+      
+      <div class="library-options">
+        <!-- Lựa chọn 1: Hán Ngữ Chân Giải -->
+        <div class="library-item" onclick="chooseLibraryOption('han_ngu')">
+          <div class="lib-icon">📜</div>
+          <div class="lib-info">
+            <h4>Hán Ngữ Chân Giải</h4>
+            <p>Khẩu quyết Hán tự, ngưng tụ Linh lực thăng cấp cảnh giới</p>
+          </div>
+          <button class="btn-lib-action">Lĩnh Ngộ</button>
+        </div>
+
+        <!-- Lựa chọn 2: Anh Ngữ Công (Chưa mở khóa) -->
+        <div class="library-item locked" onclick="chooseLibraryOption('anh_ngu')">
+          <div class="lib-icon">🔒</div>
+          <div class="lib-info">
+            <h4>Anh Ngữ Công <span class="lock-tag">Chưa Mở Khóa</span></h4>
+            <p>Bí điển dị giới, tạm thời bị phong ấn bởi cấm chế cổ xưa</p>
+          </div>
+          <button class="btn-lib-action disabled">Phong Ấn</button>
+        </div>
+      </div>
+
+      <button class="btn-close-inv mt-15" onclick="closeLibraryModal()">Rời Khỏi Tàng Kinh Các</button>
+    </div>
+  </div>
+
   <script type="module" src="app.js"></script>
 </body>
 </html>
