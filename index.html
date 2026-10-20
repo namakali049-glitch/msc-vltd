@@ -81,6 +81,16 @@
   <!-- 3. MÀN HÌNH BẾ QUAN KHAI PHÁ (CÂU HỎI CSV) -->
   <!-- ========================================== -->
   <div id="game-screen" class="screen">
+    <!-- INFO NGƯỜI CHƠI & NÚT XUẤT QUAN -->
+    <div style="display: flex; align-items: center; width: 100%; max-width: 460px; padding: 10px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; margin-bottom: 10px; border: 1px solid rgba(255, 215, 0, 0.3);">
+      <img id="quizAvatar" src="assets/pham-nhan.jpg" style="width: 42px; height: 42px; border-radius: 50%; border: 2px solid #00ffcc; margin-right: 12px; object-fit: cover;">
+      <div style="text-align: left;">
+        <div id="quizName" style="font-weight: bold; color: #ffd700; font-size: 0.95rem;">Đạo Hữu</div>
+        <div style="font-size: 0.82rem; color: #38bdf8;"><span id="quizStatLabel">Thần Thức</span>: <b id="quizStatValue">0</b></div>
+      </div>
+      <button onclick="stopCultivationEarly()" style="margin-left: auto; padding: 7px 14px; background: #991b1b; color: #fff; border: 1px solid #ef4444; border-radius: 6px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.5);">🚪 Xuất Quan</button>
+    </div>
+
     <div class="cultivation-hud">
       <span>Tầng: <b id="level">1</b></span>
       <span>Linh Lực: <b id="totalScore">0</b></span>
