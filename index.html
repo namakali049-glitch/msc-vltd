@@ -3,214 +3,193 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Vô Lượng Tiên Đồ</title>
+  <title>Mộng Tu Tiên: Vạn Linh Tiên Đạo</title>
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
-  <!-- Thư viện đọc file CSV a1_vocab.csv -->
+  <!-- Thư viện nạp tệp CSV từ vựng -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 </head>
 <body>
 
-  <!-- Lớp phủ cảnh báo xoay ngang điện thoại -->
-  <div id="rotate-warning">
-    <div class="rotate-icon">📱 ➔ 📲</div>
-    <p>Đạo hữu vui lòng xoay ngang điện thoại để nhập định tu luyện!</p>
-  </div>
-
-  <!-- Âm thanh nền BGM -->
+  <!-- Âm thanh nền -->
   <audio id="bgmAudio" loop src="assets/bgm.mp3"></audio>
 
-  <!-- Nút tiện ích góc phải trên cùng -->
-  <div class="fixed-top-actions">
-    <button class="icon-btn inventory-btn" onclick="openInventory()">🎒 Túi Đồ</button>
-    <button id="audioToggleBtn" class="icon-btn" onclick="toggleBGM()">🎵 Nhạc: Tắt</button>
-  </div>
+  <!-- Nút Bật/Tắt nhạc cố định góc trên bên phải -->
+  <button id="audioToggleBtn" class="fixed-music-btn" onclick="toggleBGM()">🎵 Nhạc: Bật</button>
 
-  <!-- ======================================================== -->
-  <!-- MÀN HÌNH 1: XÁC THỰC TÀI KHOẢN (AUTH SCREEN) -->
-  <!-- ======================================================== -->
+  <!-- Nút Túi Trữ Vật cố định góc dưới bên phải -->
+  <button class="fixed-inventory-btn" onclick="openInventory()">🎒 Túi Trữ Vật</button>
+
+  <!-- ========================================== -->
+  <!-- 1. MÀN HÌNH ĐĂNG NHẬP / ĐĂNG KÝ            -->
+  <!-- ========================================== -->
   <div id="auth-screen" class="screen active">
-    <div class="auth-card">
-      <h1 class="game-title">Vô Lượng Tiên Đồ</h1>
+    <div class="auth-box">
+      <h1 class="auth-title">Vô Lượng Tiên Đồ</h1>
       <div class="auth-tabs">
         <button id="tab-login" class="tab-btn active" onclick="switchAuthTab('login')">Đăng Nhập</button>
         <button id="tab-signup" class="tab-btn" onclick="switchAuthTab('signup')">Đăng Ký</button>
       </div>
-      <div class="auth-form">
-        <div id="displayNameGroup" class="form-group" style="display: none;">
+      <div class="auth-inputs">
+        <div id="displayNameGroup" style="display: none;">
           <input type="text" id="authDisplayName" placeholder="Đạo hiệu (Tên hiển thị)">
         </div>
-        <div class="form-group">
-          <input type="email" id="authEmail" placeholder="Tiên thư (Email)">
-        </div>
-        <div class="form-group">
-          <input type="password" id="authPassword" placeholder="Mật khẩu">
-        </div>
-        <button id="authSubmitBtn" class="primary-btn" onclick="handleLogin()">Bắt đầu Tu Luyện 🚀</button>
-        <button class="google-btn" onclick="handleGoogleLogin()">Đăng nhập bằng Google 🌐</button>
+        <input type="email" id="authEmail" placeholder="Tiên thư (Email)">
+        <input type="password" id="authPassword" placeholder="Mật khẩu">
+        <button id="authSubmitBtn" class="btn-main" onclick="handleLogin()">Bắt đầu Tu Luyện 🚀</button>
+        <button class="btn-google" onclick="handleGoogleLogin()">Đăng nhập bằng Google 🌐</button>
       </div>
     </div>
   </div>
 
-  <!-- ======================================================== -->
-  <!-- MÀN HÌNH 2: SẢNH CHÍNH (START SCREEN) -->
-  <!-- ======================================================== -->
+  <!-- ========================================== -->
+  <!-- 2. SẢNH CHÍNH: ĐỘNG PHỦ TU TIÊN           -->
+  <!-- ========================================== -->
   <div id="start-screen" class="screen">
-    <!-- Khung thông tin nhân vật chính -->
-    <div class="character-hud">
-      <img id="gameAvatar" class="avatar-circle" src="assets/pham-nhan.jpg" alt="Avatar">
-      <div class="hud-details">
-        <div class="hud-name" id="userDisplayName">Đạo Hữu</div>
-        <div class="hud-hp-row">
-          <span>❤️ HP:</span>
-          <div class="hp-bar-bg"><div id="hpFill" class="hp-bar-fill"></div></div>
-          <span id="hpText">100/100</span>
-        </div>
-        <div class="hud-stats">
-          <span>⚔️ Sức Mạnh: <b id="statStr">10</b></span>
-          <span>⚡ Nhanh Nhẹn: <b id="statAgi">10</b></span>
-        </div>
+    <!-- Thanh trạng thái người dùng góc trên -->
+    <div class="top-user-bar">
+      <div class="user-pill">
+        <span class="user-icon">👤</span>
+        <span>Đạo Hữu: <b id="userDisplayName">Nam</b></span>
       </div>
+      <button class="btn-logout" onclick="handleLogout()">Đăng xuất</button>
     </div>
 
-    <!-- Menu chức năng sảnh chính -->
-    <div class="menu-actions">
-      <button class="menu-btn gold" onclick="startGame()">🧘 Bế Quan Tu Luyện</button>
-      <button class="menu-btn red" onclick="startBattle()">⚔️ Bí Cảnh Trảm Yêu</button>
-      <div class="sub-actions">
-        <button class="sub-btn" onclick="showProfile()">📜 Hồ Sơ</button>
-        <button class="sub-btn" onclick="showLeaderboard()">🏆 Tiên Đạo Bảng</button>
-        <button class="sub-btn danger" onclick="handleLogout()">🚪 Đăng Xuất</button>
+    <!-- Khung chức năng chính -->
+    <div class="lobby-center-card">
+      <h2 class="lobby-title">☯️ ĐỘNG PHỦ TU TIÊN ☯️</h2>
+      <p class="lobby-desc">Luyện tập Tiếng Trung - Tích lũy Linh lực thăng cảnh giới</p>
+
+      <div class="lobby-button-group">
+        <button class="lobby-btn btn-cultivate" onclick="startGame()">
+          Bế Quan Khai Phá 🚀
+        </button>
+        <button class="lobby-btn btn-battle" onclick="startBattle()">
+          Bí Cảnh Trảm Yêu ⚔️
+        </button>
+        <button class="lobby-btn btn-profile" onclick="showProfile()">
+          📜 Thông Tin Nhân Vật
+        </button>
+        <button class="lobby-btn btn-leaderboard" onclick="showLeaderboard()">
+          🏆 Tiên Đạo Bảng
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- ======================================================== -->
-  <!-- MÀN HÌNH 3: BẾ QUAN TU LUYỆN (GAME SCREEN) -->
-  <!-- ======================================================== -->
+  <!-- ========================================== -->
+  <!-- 3. MÀN HÌNH BẾ QUAN KHAI PHÁ (CÂU HỎI CSV) -->
+  <!-- ========================================== -->
   <div id="game-screen" class="screen">
-    <div class="watermark-bg">不周山</div>
-
-    <!-- Thanh trạng thái tu luyện trên đỉnh -->
-    <div class="quiz-top-bar">
-      <div>Tầng: <b id="level">1</b></div>
-      <div>Linh Lực: <b id="totalScore" class="cyan-text">0</b></div>
-      <div>⏱️ <b id="timerDisplay">02:00</b></div>
-      <div class="lives-box">
-        Tâm Ma: 
-        <span id="hearts-container">
-          <span class="heart">❤️</span>
-          <span class="heart">❤️</span>
-          <span class="heart">❤️</span>
-        </span>
-      </div>
-      <button class="btn-stop-run" onclick="stopCultivation('manual')">🚪 Xuất Quan</button>
+    <div class="cultivation-hud">
+      <span>Tầng: <b id="level">1</b></span>
+      <span>Linh Lực: <b id="totalScore">0</b></span>
+      <span>⏱️ <b id="timerDisplay">00:00</b></span>
     </div>
 
-    <!-- Thanh tiến độ kinh nghiệm tầng -->
-    <div class="exp-bar-container">
-      <div id="expFill" class="exp-fill"></div>
-      <div class="exp-label"><span id="exp">0</span> / <span id="maxExp">80</span> Linh Lực</div>
+    <div class="mana-bar-wrap">
+      <div id="expFill" class="mana-bar-fill"></div>
+      <div class="mana-bar-text"><span id="exp">0</span> / <span id="maxExp">80</span> Linh Lực</div>
     </div>
 
-    <!-- Thẻ câu hỏi Hán Tự -->
-    <div class="quiz-card">
+    <div class="quiz-box">
       <div id="counter" class="quiz-counter">Câu hỏi: 1 / 10</div>
       <div id="question" class="quiz-question">Đang mở Tàng Kinh Các...</div>
-      <div id="options" class="options-grid"></div>
-      <div id="message" class="quiz-message"></div>
-      <button id="nextBtn" class="primary-btn next-btn" style="display:none;" onclick="nextQuestion()">Tiếp Tục ➔</button>
+      <div id="options" class="options-container"></div>
+      <div id="message" class="quiz-msg"></div>
+      <button id="nextBtn" class="btn-main mt-10" style="display:none;" onclick="nextQuestion()">Tiếp Tục ➔</button>
     </div>
   </div>
 
-  <!-- ======================================================== -->
-  <!-- MÀN HÌNH 4: HỒ SƠ NHÂN VẬT (PROFILE SCREEN) -->
-  <!-- ======================================================== -->
+  <!-- ========================================== -->
+  <!-- 4. MÀN HÌNH HỒ SƠ TU TIÊN GIẢ              -->
+  <!-- ========================================== -->
   <div id="profile-screen" class="screen">
-    <div class="modal-card">
-      <h2>Hồ Sơ Đạo Hữu</h2>
-      <img id="profileAvatar" class="avatar-large" src="assets/pham-nhan.jpg" alt="Avatar">
-      <h3 id="profileName">Đạo Hữu</h3>
-      <p>Cảnh giới: <b id="profileRealm" class="gold-text">Phàm Nhân</b></p>
-      <p>Tổng Linh Lực: <b id="profileMana" class="cyan-text">0</b></p>
-      <hr>
-      <p>Sinh Mệnh: <span id="profileHp">100/100</span></p>
-      <p>Sức Mạnh: <span id="profileStr">10</span> | Nhanh Nhẹn: <span id="profileAgi">10</span></p>
-      <button class="primary-btn mt-10" onclick="goHome()">Trở Về Sảnh</button>
+    <div class="profile-card">
+      <h2 class="profile-header">📜 Hồ Sơ Tu Tiên Giả</h2>
+
+      <div class="avatar-container">
+        <img id="profileAvatar" class="avatar-circle" src="assets/pham-nhan.jpg" alt="Avatar">
+        <div id="profileRealmBadge" class="avatar-badge">Phàm Nhân</div>
+      </div>
+
+      <div class="profile-meta-list">
+        <p>Đạo Hiệu: <b id="profileName">Nam</b></p>
+        <p>Cảnh Giới: <span id="profileRealm" class="realm-pill">Phàm Nhân</span></p>
+        <p>Tổng Tu Vi (Linh Lực): <b id="profileMana" class="gold-txt">24</b></p>
+      </div>
+
+      <div class="profile-attributes-box">
+        <h3 class="attr-title">⚔️ Thuộc Tính Nhân Vật</h3>
+        <p class="attr-row">❤️ Sinh Mệnh (HP): <span id="profileHp" class="hp-red">100/100</span></p>
+        <p class="attr-row">⚔️ Sức Mạnh (STR): <span id="profileStr">10</span> <small>(Tăng thưởng Linh lực)</small></p>
+        <p class="attr-row">⚡ Nhanh Nhẹn (AGI): <span id="profileAgi">10</span> <small>(Tăng tỷ lệ né Tâm Ma)</small></p>
+      </div>
+
+      <button class="btn-back-lobby btn-blue" onclick="goHome()">Về động phủ 🏯</button>
     </div>
   </div>
 
-  <!-- ======================================================== -->
-  <!-- MÀN HÌNH 5: TIÊN ĐẠO BẢNG (LEADERBOARD) -->
-  <!-- ======================================================== -->
+  <!-- ========================================== -->
+  <!-- 5. MÀN HÌNH TIÊN ĐẠO BẢNG                  -->
+  <!-- ========================================== -->
   <div id="leaderboard-screen" class="screen">
     <div class="leaderboard-card">
-      <h2>🏆 Tiên Đạo Bảng 🏆</h2>
-      <ul id="lb-list" class="lb-list"></ul>
-      <button class="primary-btn mt-10" onclick="goHome()">Trở Về Sảnh</button>
+      <h2 class="lb-header">🏆 TIÊN ĐẠO BẢNG 🏆</h2>
+      <p class="lb-desc">Bảng xếp hạng Linh lực trọn đời</p>
+
+      <ul id="lb-list" class="lb-container"></ul>
+
+      <button class="btn-back-lobby btn-red mt-15" onclick="goHome()">Trở về Động phủ 🏯</button>
     </div>
   </div>
 
-  <!-- ======================================================== -->
-  <!-- MÀN HÌNH 6: BÍ CẢNH TRẢM YÊU (BATTLE CANVAS 2D) -->
-  <!-- ======================================================== -->
+  <!-- ========================================== -->
+  <!-- 6. MÀN HÌNH BÍ CẢNH TRẢM YÊU (CANVAS 2D)   -->
+  <!-- ========================================== -->
   <div id="battle-screen" class="screen">
     <canvas id="gameCanvas"></canvas>
 
-    <!-- HUD trong trận chiến -->
-    <div class="battle-hud">
-      <span id="battleHpText">❤️ Sinh Mệnh: 100/100</span>
-      <span id="battleSwordText">⚔️ Kiếm Khí: 2/2</span>
-      <span id="battleKillsText">👾 Ma Vật Trảm: 0</span>
-      <button class="btn-battle-exit" onclick="exitBattle()">Đào Tẩu 🚪</button>
+    <!-- HUD chỉ số chiến đấu góc trên bên trái -->
+    <div class="battle-hud-box">
+      <div id="battleHpText">❤️ Sinh Mệnh: 100/100</div>
+      <div id="battleSwordText">⚔️ Kiếm Khí: 2/2</div>
+      <div id="battleKillsText">👾 Ma Vật Trảm: 0</div>
     </div>
 
-    <!-- Bàn phím điều hướng ảo (D-Pad cảm ứng) -->
-    <div class="dpad-container">
-      <button class="dpad-btn dpad-up" 
+    <!-- Nút rút lui góc trên bên phải -->
+    <button class="btn-battle-escape" onclick="exitBattle()">🚪 Rút lui</button>
+
+    <!-- Cụm phím di chuyển D-Pad góc dưới bên trái -->
+    <div class="dpad-wrapper">
+      <button class="dpad-key dpad-up" 
               ontouchstart="setMoveDir('up', true)" ontouchend="setMoveDir('up', false)"
               onmousedown="setMoveDir('up', true)" onmouseup="setMoveDir('up', false)">▲</button>
-      <div class="dpad-row">
-        <button class="dpad-btn dpad-left" 
+      <div class="dpad-horizontal">
+        <button class="dpad-key dpad-left" 
                 ontouchstart="setMoveDir('left', true)" ontouchend="setMoveDir('left', false)"
                 onmousedown="setMoveDir('left', true)" onmouseup="setMoveDir('left', false)">◀</button>
-        <button class="dpad-btn dpad-right" 
+        <button class="dpad-key dpad-right" 
                 ontouchstart="setMoveDir('right', true)" ontouchend="setMoveDir('right', false)"
                 onmousedown="setMoveDir('right', true)" onmouseup="setMoveDir('right', false)">▶</button>
       </div>
-      <button class="dpad-btn dpad-down" 
+      <button class="dpad-key dpad-down" 
               ontouchstart="setMoveDir('down', true)" ontouchend="setMoveDir('down', false)"
               onmousedown="setMoveDir('down', true)" onmouseup="setMoveDir('down', false)">▼</button>
     </div>
   </div>
 
-  <!-- ======================================================== -->
-  <!-- CÁC CỬA SỔ PHỤ (MODALS) -->
-  <!-- ======================================================== -->
-  <!-- Modal Túi Trữ Vật -->
-  <div id="inventoryModal" class="modal-overlay" style="display:none;">
-    <div class="modal-card">
-      <h3>🎒 Túi Trữ Vật</h3>
-      <div id="inventoryList" class="inventory-list"></div>
-      <button class="primary-btn mt-10" onclick="closeInventory()">Đóng Túi</button>
+  <!-- ========================================== -->
+  <!-- MODAL: TÚI TRỮ VẬT                         -->
+  <!-- ========================================== -->
+  <div id="inventoryModal" class="modal-overlay" style="display: none;">
+    <div class="inventory-card">
+      <h3 class="inv-header">🎒 TÚI TRỮ VẬT</h3>
+      <div id="inventoryList" class="inv-items-box"></div>
+      <button class="btn-close-inv" onclick="closeInventory()">Đóng Túi</button>
     </div>
   </div>
 
-  <!-- Modal Tổng Kết Xuất Quan -->
-  <div id="summary-modal" class="modal-overlay hidden">
-    <div class="modal-card">
-      <h2 id="modal-title">Xuất Quan</h2>
-      <p id="modal-desc" class="modal-desc"></p>
-      <div class="summary-details">
-        <p>Khẩu quyết đúng: <b id="summary-correct">0/10</b></p>
-        <p>Linh lực thu được: <b id="summary-gained" class="cyan-text">+0</b></p>
-        <p>Tiến độ tầng: <b id="summary-total">0 / 80</b></p>
-      </div>
-      <button class="primary-btn mt-10" onclick="closeSummaryModal()">Xác Nhận Quy Phẩm</button>
-    </div>
-  </div>
-
-  <!-- File logic chính phải để type="module" do dùng Firebase v10 import -->
   <script type="module" src="app.js"></script>
 </body>
 </html>
