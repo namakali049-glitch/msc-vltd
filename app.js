@@ -886,14 +886,26 @@ function battleLoop() {
     battleCtx.save();
     battleCtx.translate(shakeX, shakeY);
     battleCtx.clearRect(0, 0, battleCanvas.width, battleCanvas.height);
-// Xử lý di chuyển từ Cụm phím ảo D-pad hoặc Bàn phím
-    const pSpeed = 4.2 + (agi * 0.05);
-    if (moveDir.up) battleData.player.y -= pSpeed;
-    if (moveDir.down) battleData.player.y += pSpeed;
-    if (moveDir.left) battleData.player.x -= pSpeed;
-    if (moveDir.right) battleData.player.x += pSpeed;
+// Xử lý di chuyển thuần túy bằng nút bấm
+    let moveX = 0;
+    let moveY = 0;
+    if (moveDir.up) moveY -= 1;
+    if (moveDir.down) moveY += 1;
+    if (moveDir.left) moveX -= 1;
+    if (moveDir.right) moveX += 1;
 
-    // Giữ nhân vật không bị trôi ra ngoài mép màn hình
+    // Chuẩn hóa vector khi đi chéo (tránh đi chéo nhanh hơn đi thẳng)
+    if (moveX !== 0 && moveY !== 0) {
+        moveX *= 0.7071;
+        moveY *= 0.7071;
+    }
+
+    // Tốc độ di chuyển tăng theo chỉ số Nhanh Nhẹn (AGI)
+    const pSpeed = 4.5 + (agi * 0.05);
+    battleData.player.x += moveX * pSpeed;
+    battleData.player.y += moveY * pSpeed;
+
+    // Giới hạn nhân vật không vượt khỏi rìa màn hình
     battleData.player.x = Math.max(35, Math.min(battleCanvas.width - 35, battleData.player.x));
     battleData.player.y = Math.max(45, Math.min(battleCanvas.height - 45, battleData.player.y));
     // 1. Vẽ bản đồ sơn động
