@@ -1,222 +1,65 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Thách Thức Tu Tiên (TOCFL A1)</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- CẤU HÌNH APP DI ĐỘNG TOÀN MÀN HÌNH NGANG -->
-    <link rel="manifest" href="./manifest.json">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Mộng Tu Tiên">
-    <link rel="apple-touch-icon" href="assets/pham-nhan.jpg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mộng Tu Tiên</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
 </head>
-
-<!-- MÀN HÌNH NHẮC XOAY NGANG ĐIỆN THOẠI TRÊN MOBILE -->
-<div id="rotate-warning">
-    <div class="rotate-content">
-        <div class="rotate-icon">📲 ➔ 🔄</div>
-        <h2>VUI LÒNG XOAY NGANG ĐIỆN THOẠI</h2>
-        <p>Bí Cảnh yêu cầu màn hình ngang để quan sát Kiếm Khí và ma vật xung quanh!</p>
-    </div>
-</div>    
-
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js')
-                .then(() => console.log('PWA Service Worker đã sẵn sàng!'))
-                .catch((err) => console.log('Lỗi SW:', err));
-        });
-    }
-</script>
-    
 <body>
+  <!-- Lớp phủ yêu cầu xoay ngang màn hình -->
+  <div id="rotate-screen-warning">
+    <p>Vui lòng xoay ngang điện thoại để trải nghiệm tốt nhất!</p>
+  </div>
 
-<!-- NÚT BẬT / TẮT NHẠC NỀN -->
-<button id="audioToggleBtn" class="audio-toggle-btn" onclick="toggleBGM()">🎵 Nhạc: Bật</button>
-
-<audio id="bgmAudio" loop preload="auto">
-    <source src="assets/bgm.mp3" type="audio/mpeg">
-    <source src="https://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/music/start.ogg" type="audio/ogg">
-</audio>
-
-<!-- 0. MÀN HÌNH ĐĂNG NHẬP / ĐĂNG KÝ -->
-<div id="auth-screen" class="screen active">
-    <div class="cute-box auth-box">
-        <h1>☯️ TIÊN ĐẠO TRẤN ☯️</h1>
-        <p>Đăng nhập hoặc Đăng ký để bước vào con đường Tu Tiên</p>
-        
-        <div class="auth-tabs" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 15px;">
-            <button id="tab-login" class="tab-btn active" onclick="switchAuthTab('login')">Đăng Nhập</button>
-            <button id="tab-signup" class="tab-btn" onclick="switchAuthTab('signup')">Đăng Ký</button>
-        </div>
-
-        <div class="auth-form">
-            <div id="displayNameGroup" style="display: none; margin-bottom: 12px;">
-                <input type="text" id="authDisplayName" placeholder="Nhập Đạo hiệu (Tên nhân vật)" class="auth-input" style="width: 100%; padding: 8px; box-sizing: border-box;">
-            </div>
-            <div style="margin-bottom: 12px;">
-                <input type="email" id="authEmail" placeholder="Nhập Email" class="auth-input" style="width: 100%; padding: 8px; box-sizing: border-box;">
-            </div>
-            <div style="margin-bottom: 15px;">
-                <input type="password" id="authPassword" placeholder="Nhập Mật khẩu (từ 6 ký tự)" class="auth-input" style="width: 100%; padding: 8px; box-sizing: border-box;">
-            </div>
-
-            <button id="authSubmitBtn" class="primary-btn" onclick="handleLogin()" style="width: 100%;">Bắt đầu Tu Luyện 🚀</button>
-            <button class="google-btn" onclick="handleGoogleLogin()" style="width: 100%; margin-top: 10px; background: #fff; color: #333;">Đăng nhập bằng Google 🌐</button>
-        </div>
+  <!-- Sảnh Chính -->
+  <div id="main-lobby" class="screen">
+    <h1>Mộng Tu Tiên</h1>
+    <div class="player-stats">
+      <p>Cảnh giới: <span id="player-rank">Luyện Khí Kỳ</span></p>
+      <p>Tu vi: <span id="player-exp">0</span> / <span id="player-max-exp">1000</span></p>
     </div>
-</div>
+    <div class="menu-buttons">
+      <button onclick="openCultivation()">Bế Quan Tu Luyện</button>
+    </div>
+  </div>
 
-<!-- 1. MÀN HÌNH CHÍNH (ĐỘNG PHỦ) -->
-<div id="start-screen" class="screen">
-    <div class="cute-box">
-        <div class="user-bar">
-            <span>👤 Đạo hữu: <span id="userDisplayName">Đang tải...</span></span>
-            <button class="logout-btn" onclick="handleLogout()">Đăng xuất</button>
-        </div>
-        <h1>☯️ ĐỘNG PHỦ TU TIÊN ☯️</h1>
-        <p>Luyện tập Tiếng Trung - Tích lũy Linh lực thăng cảnh giới</p>
-        
-        <div class="btn-group">
-            <button class="primary-btn" onclick="startGame()">Bế Quan Khai Phá 🚀</button>
-            <button class="primary-btn" style="background:#e84118; box-shadow: 0 4px #c23616;" onclick="startBattle()">Bí Cảnh Trảm Yêu ⚔️</button>
-            <button class="secondary-btn" onclick="showProfile()">📜 Thông Tin Nhân Vật</button>
-            <button class="secondary-btn" onclick="showLeaderboard()">🏆 Tiên Đạo Bảng</button>
-        </div>
-    </div> <!-- Đã bổ sung đóng cute-box -->
-</div> <!-- Đã bổ sung đóng start-screen -->
-
-<!-- 2. MÀN HÌNH BẾ QUAN (LUYỆN TỪ VỰNG) -->
-<div id="game-screen" class="screen">
-    <div class="game-header">
-        <div class="character-status-card" style="display: flex; gap: 15px; align-items: center;">
-            <div class="avatar-box">
-                <img id="gameAvatar" src="./assets/pham-nhan.jpg" alt="Avatar">
-            </div>
-            
-            <div class="status-details" style="flex: 1;">
-                <div class="stat-row">
-                    <span class="stat-label">❤️ Sinh Mệnh (HP):</span>
-                    <div class="hp-bar-container">
-                        <div id="hpFill" class="hp-fill" style="width: 100%;"></div>
-                        <span id="hpText" class="bar-text">100/100</span>
-                    </div>
-                </div>
-                
-                <div class="stat-row attributes-row">
-                    <span>⚔️ Sức Mạnh: <b id="statStr">10</b></span>
-                    <span>⚡ Nhanh Nhẹn: <b id="statAgi">10</b></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="stats-bar">
-            <span>Tầng Tu Luyện: <b id="level">1</b></span>
-            <span>Linh Lực Ván Này: <b id="totalScore">0</b></span>
-            <span>⏱️ <span id="timerDisplay">00:00</span></span>
-        </div>
-        
-        <div class="progress-bar">
-            <div id="expFill" class="exp-fill"></div>
-            <span class="exp-text"><span id="exp">0</span> / <span id="maxExp">80</span> Linh Lực Yêu Cầu</span>
-        </div>
+  <!-- Khu vực Bế Quan Tu Luyện -->
+  <div id="cultivation-screen" class="screen hidden">
+    <!-- Thanh trạng thái phía trên -->
+    <div class="cultivation-header">
+      <div class="timer-badge">⏳ <span id="cultivation-timer">02:00</span></div>
+      <div class="lives-container" id="cultivation-lives">
+        <span class="life-icon">❤️</span>
+        <span class="life-icon">❤️</span>
+        <span class="life-icon">❤️</span>
+      </div>
+      <button id="btn-stop-cultivation" class="btn-stop" onclick="stopCultivation('manual')">🚪 Xuất Quan</button>
     </div>
 
-    <div class="quiz-container">
-        <div id="counter" class="counter"></div>
-        <div id="question" class="question"></div>
-        <div id="options" class="options"></div>
-        <div id="message" class="message"></div>
-        <button id="nextBtn" class="primary-btn" style="display: none;" onclick="nextQuestion()">Tiếp Theo ➡️</button>
+    <!-- Khu vực hiển thị câu hỏi -->
+    <div class="quiz-body">
+      <h2 class="question-title" id="quiz-question">Đang tải khẩu quyết...</h2>
+      <div class="options-grid" id="quiz-options">
+        <!-- Nút đáp án sẽ được JS sinh ra ở đây -->
+      </div>
     </div>
-</div>
+  </div>
 
-<!-- 3. MÀN HÌNH HỒ SƠ NHÂN VẬT -->
-<div id="profile-screen" class="screen">
-    <h2>📜 Hồ Sơ Tu Tiên Giả</h2>
-    
-    <div style="text-align: center; margin-bottom: 20px;">
-        <div class="avatar-box profile-avatar">
-            <img id="profileAvatar" src="./assets/pham-nhan.jpg" alt="Avatar">
-        </div>
+  <!-- Modal Tổng kết xuất quan -->
+  <div id="cultivation-summary-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h3 id="summary-title">Kết Thúc Bế Quan</h3>
+      <p id="summary-reason" class="summary-reason"></p>
+      <div class="summary-stats">
+        <p>Số câu đúng: <b id="summary-correct">0</b></p>
+        <p>Tu vi lĩnh ngộ: <b id="summary-exp" class="exp-text">+0</b></p>
+      </div>
+      <button class="btn-confirm" onclick="closeCultivationModal()">Xác Nhận</button>
     </div>
-    
-    <div class="profile-card">
-        <p><b>Đạo Hiệu:</b> <span id="profileName">--</span></p>
-        <p><b>Cảnh Giới:</b> <span id="profileRealm" class="realm-badge">Phàm Nhân</span></p>
-        <p><b>Tổng Tu Vi (Linh Lực):</b> <span id="profileMana">0</span></p>
-        <hr style="border: 0.5px solid #444; margin: 15px 0;">
-        <h3>⚔️ Thuộc Tính Nhân Vật</h3>
-        <p><b>❤️ Sinh Mệnh (HP):</b> <span id="profileHp" style="color: #ff4757; font-weight: bold;">100/100</span></p>
-        <p><b>⚔️ Sức Mạnh (STR):</b> <span id="profileStr" style="color: #ffa502; font-weight: bold;">10</span> <small style="color: #aaa;">(Tăng thưởng Linh lực)</small></p>
-        <p><b>⚡ Nhanh Nhẹn (AGI):</b> <span id="profileAgi" style="color: #70a1ff; font-weight: bold;">10</span> <small style="color: #aaa;">(Tăng tỷ lệ né Tâm Ma)</small></p>
-    </div>
-    <button class="secondary-btn" onclick="goHome()" style="margin-top: 15px;">Về động phủ 🏠</button>
-</div>
+  </div>
 
-<!-- 4. MÀN HÌNH TIÊN ĐẠO BẢNG -->
-<div id="leaderboard-screen" class="screen">
-    <div class="cute-box">
-        <h1>🏆 TIÊN ĐẠO BẢNG 🏆</h1>
-        <p>Bảng xếp hạng Linh lực trọn đời</p>
-        <ul class="leaderboard-list" id="lb-list"></ul>
-        <button class="primary-btn" onclick="goHome()">Trở về Động phủ 🏠</button>
-    </div>
-</div>
-
-<!-- 5. MÀN HÌNH BÍ CẢNH TRẢM YÊU 2D (TRÀN TOÀN MÀN HÌNH CHUẨN XÁC) -->
-<div id="battle-screen" class="screen" style="display: none; padding: 0 !important; margin: 0 !important; width: 100vw !important; height: 100vh !important; max-width: none !important; position: fixed !important; top: 0 !important; left: 0 !important; z-index: 9999 !important; background: #000 !important;">
-    <!-- BẢNG HUD CHỈ SỐ -->
-    <div style="position: absolute; top: 15px; left: 15px; z-index: 10001; background: rgba(15, 23, 42, 0.85); padding: 12px 18px; border-radius: 10px; border: 1px solid #eccc68; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-        <div id="battleHpText" style="color: #ff4757; margin-bottom: 4px;">❤️ Sinh Mệnh: 100/100</div>
-        <div id="battleSwordText" style="color: #00d2d3; margin-bottom: 4px;">⚔️ Kiếm Khí: 0/0</div>
-        <div id="battleKillsText" style="color: #ffa502;">👾 Ma Vật Trảm: 0</div>
-    </div>
-<!-- CỤM NÚT DI CHUYỂN ẢO D-PAD -->
-    <div id="virtualDpad" style="position: absolute; bottom: 25px; left: 25px; z-index: 10002; width: 144px; height: 144px; user-select: none; -webkit-user-select: none; touch-action: none;">
-        <!-- Nút Lên -->
-        <button class="dpad-btn" style="top: 0; left: 48px;"
-                onmousedown="setMoveDir('up', true)" onmouseup="setMoveDir('up', false)" onmouseleave="setMoveDir('up', false)"
-                ontouchstart="setMoveDir('up', true); event.preventDefault();" ontouchend="setMoveDir('up', false)" ontouchcancel="setMoveDir('up', false)">▲</button>
-        <!-- Nút Trái -->
-        <button class="dpad-btn" style="top: 48px; left: 0;"
-                onmousedown="setMoveDir('left', true)" onmouseup="setMoveDir('left', false)" onmouseleave="setMoveDir('left', false)"
-                ontouchstart="setMoveDir('left', true); event.preventDefault();" ontouchend="setMoveDir('left', false)" ontouchcancel="setMoveDir('left', false)">◀</button>
-        <!-- Nút Phải -->
-        <button class="dpad-btn" style="top: 48px; left: 96px;"
-                onmousedown="setMoveDir('right', true)" onmouseup="setMoveDir('right', false)" onmouseleave="setMoveDir('right', false)"
-                ontouchstart="setMoveDir('right', true); event.preventDefault();" ontouchend="setMoveDir('right', false)" ontouchcancel="setMoveDir('right', false)">▶</button>
-        <!-- Nút Xuống -->
-        <button class="dpad-btn" style="top: 96px; left: 48px;"
-                onmousedown="setMoveDir('down', true)" onmouseup="setMoveDir('down', false)" onmouseleave="setMoveDir('down', false)"
-                ontouchstart="setMoveDir('down', true); event.preventDefault();" ontouchend="setMoveDir('down', false)" ontouchcancel="setMoveDir('down', false)">▼</button>
-    </div>    
-    <!-- NÚT RÚT LUI -->
-    <button onclick="exitBattle()" class="secondary-btn" style="position: absolute; top: 15px; right: 20px; z-index: 10001; margin: 0; padding: 8px 18px; width: auto; background: rgba(30,39,46,0.9); border: 1px solid #ff4757;">
-        🚪 Rút lui
-    </button>
-    
-    <!-- KHUNG VẼ CANVAS -->
-    <canvas id="gameCanvas" style="display: block; width: 100vw !important; height: 100vh !important; cursor: crosshair;"></canvas>
-</div>
-
-<!-- NÚT MỞ TÚI TRỮ VẬT -->
-<button onclick="openInventory()" class="inventory-btn">🎒 Túi Trữ Vật</button>
-
-<!-- POPUP TÚI TRỮ VẬT -->
-<div id="inventoryModal" class="modal-overlay" style="display: none;">
-    <div class="modal-content">
-        <h2>🎒 TÚI TRỮ VẬT</h2>
-        <div id="inventoryList" class="inventory-grid"></div>
-        <button class="secondary-btn" onclick="closeInventory()">Đóng Túi</button>
-    </div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-<script type="module" src="./app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
