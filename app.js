@@ -167,16 +167,6 @@ window.toggleBGM = async function() {
     }
 };
 
-// Kích hoạt Web Audio API ngay lần click đầu tiên
-function unlockAudioOnInteraction() {
-    const ctx = getAudioContext();
-    if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {});
-    document.removeEventListener('click', unlockAudioOnInteraction);
-    document.removeEventListener('keydown', unlockAudioOnInteraction);
-}
-document.addEventListener('click', unlockAudioOnInteraction);
-document.addEventListener('keydown', unlockAudioOnInteraction);
-
 // ==========================================
 // 4. TIẾN TRÌNH NHÂN VẬT & AVATAR
 // ==========================================
@@ -188,15 +178,13 @@ function calculateRealm(mana) {
     return "Trúc Cơ Sơ Kỳ";
 }
 
-// Phân cấp Avatar hiển thị ngoài web (Khảo thí & Hồ sơ)
 function getAvatarByMana(mana) {
     if (mana < 150) return "assets/pham-nhan.jpg";
     if (mana < 1500) return "assets/luyen-khi.png";
-    if (mana < 3000) return "assets/truc-co-trung-ky.png"; // Trúc Cơ Sơ/Trung kỳ: Áo trắng ngự kiếm
-    return "assets/truc-co-vien-man.png";                 // Trúc Cơ Viên Mãn: Áo trắng tỏa hào quang
+    if (mana < 3000) return "assets/truc-co-trung-ky.png";
+    return "assets/truc-co-vien-man.png";
 }
 
-// Phân cấp Skin chiến đấu trong Bí Cảnh 2D
 function getBattleCharacterSkin() {
     if (lifetimeMana >= 3000) return battleAssets.playerTrucCoVienMan;
     if (lifetimeMana >= 1500) return battleAssets.playerTrucCoTrungKy;
@@ -240,17 +228,14 @@ function updateCharacterUI() {
 window.switchScreen = function(screenId) {
     window.playClickSound();
     
-    // Ẩn toàn bộ các màn hình và xóa style inline can thiệp
     document.querySelectorAll('.screen').forEach(s => {
         s.classList.remove('active');
         s.style.display = 'none';
     });
     
-    // Bật màn hình được chọn và giữ nguyên thứ tự dọc tự nhiên
     const targetScreen = document.getElementById(screenId);
     if (targetScreen) {
         targetScreen.classList.add('active');
-        // Bí cảnh dùng block, các màn hình khác dùng flex nhưng theo chiều dọc (column)
         if (screenId === 'battle-screen') {
             targetScreen.style.display = 'block';
         } else {
@@ -686,7 +671,7 @@ window.useItem = function(item) {
 };
 
 // ==========================================
-// 9. ĐỘNG CƠ BÍ CẢNH TRẢM YÊU (TỐI ƯU 60 FPS)
+// 9. ĐỘNG CƠ BÍ CẢNH TRẢM YÊU (ĐIỀU KHIỂN NÚT BẤM)
 // ==========================================
 let battleAnimationFrame = null;
 let battleData = {
@@ -701,7 +686,7 @@ let battleData = {
     frameCount: 0
 };
 
-// Trạng thái giữ nút di chuyển
+// Trạng thái nút bấm di chuyển
 const moveDir = { up: false, down: false, left: false, right: false };
 
 window.setMoveDir = function(dir, active) {
@@ -710,7 +695,7 @@ window.setMoveDir = function(dir, active) {
     }
 };
 
-// Hỗ trợ thêm cả bàn phím máy tính (WASD và Phím Mũi Tên)
+// Hỗ trợ phím cứng trên máy tính
 window.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') moveDir.up = true;
     if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') moveDir.down = true;
@@ -725,7 +710,7 @@ window.addEventListener('keyup', (e) => {
     if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveDir.right = false;
 });
 
-// 1. NẠP TÀI NGUYÊN HÌNH ẢNH ĐỒNG BỘ .PNG
+// Nạp tài nguyên hình ảnh
 const battleAssets = {
     bg: new Image(),
     playerLuyenKhi: new Image(),
@@ -746,34 +731,8 @@ battleAssets.swordWood.src = "assets/kiem-khi-luyen-khi.png";
 battleAssets.swordCyan.src = "assets/kiem-khi-truc-co.png";
 battleAssets.enemyGhost.src = "assets/quy-hon.png";
 
-// 2. KHỞI TẠO CANVAS & HỆ THỐNG ĐIỀU KHIỂN NÚT BẤM
 const battleCanvas = document.getElementById('gameCanvas');
 const battleCtx = battleCanvas ? battleCanvas.getContext('2d') : null;
-
-// Biến lưu trạng thái các nút di chuyển
-const moveDir = { up: false, down: false, left: false, right: false };
-
-// Hàm kích hoạt di chuyển từ nút bấm (UI D-pad hoặc Touch)
-window.setMoveDir = function(dir, active) {
-    if (moveDir.hasOwnProperty(dir)) {
-        moveDir[dir] = active;
-    }
-};
-
-// Hỗ trợ nút bấm vật lý trên bàn phím (WASD và Phím Mũi Tên)
-window.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') { moveDir.up = true; e.preventDefault(); }
-    if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') { moveDir.down = true; e.preventDefault(); }
-    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') { moveDir.left = true; e.preventDefault(); }
-    if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') { moveDir.right = true; e.preventDefault(); }
-});
-
-window.addEventListener('keyup', (e) => {
-    if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') moveDir.up = false;
-    if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') moveDir.down = false;
-    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveDir.left = false;
-    if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveDir.right = false;
-});
 
 function resizeBattleCanvas() {
     if (!battleCanvas) return;
@@ -783,13 +742,12 @@ function resizeBattleCanvas() {
         battleCtx.imageSmoothingEnabled = false;
     }
 }
-// 4. BẮT ĐẦU VÀ THOÁT KHỎI BÍ CẢNH
+
+// Bắt đầu và thoát Bí Cảnh
 window.startBattle = function() {
-    moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
     window.playClickSound();
     switchScreen('battle-screen');
     
-    // Ẩn nút Túi Trữ Vật và Nút Nhạc để không che màn hình
     const invBtn = document.querySelector('.inventory-btn');
     const audioBtn = document.getElementById('audioToggleBtn');
     if (invBtn) invBtn.style.display = 'none';
@@ -798,7 +756,6 @@ window.startBattle = function() {
     resizeBattleCanvas();
     recalcStats();
     
-    // Căn số kiếm theo tu vi
     let count = 2;
     if (lifetimeMana >= 3000) count = 5;
     else if (lifetimeMana >= 1500) count = 4;
@@ -812,8 +769,8 @@ window.startBattle = function() {
     battleData.frameCount = 0;
     battleData.screenShake = 0;
     battleData.damageFlash = 0;
+    moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
     
-    // Đặt nhân vật ở giữa màn hình khi bắt đầu
     battleData.player.x = battleCanvas.width / 2;
     battleData.player.y = battleCanvas.height / 2;
     currentHp = maxHp;
@@ -823,21 +780,19 @@ window.startBattle = function() {
 };
 
 window.exitBattle = function() {
-    moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
     window.playClickSound();
     if (battleAnimationFrame) cancelAnimationFrame(battleAnimationFrame);
     
-    // Hiện lại nút Túi Trữ Vật và Nút Nhạc khi về Động Phủ
     const invBtn = document.querySelector('.inventory-btn');
     const audioBtn = document.getElementById('audioToggleBtn');
     if (invBtn) invBtn.style.display = 'block';
     if (audioBtn) audioBtn.style.display = 'block';
 
+    moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
     syncManaToDatabase();
     goHome();
 };
 
-// 5. SINH QUÁI VẬT TỰ ĐỘNG
 function spawnBattleEnemy() {
     if (!battleCanvas) return;
     let x, y;
@@ -869,12 +824,11 @@ function spawnDeathParticles(x, y, color = "#00d2d3") {
     }
 }
 
-// 6. VÒNG LẶP RENDER CHIẾN ĐẤU
+// Vòng lặp render chính
 function battleLoop() {
     if (!battleCtx) return;
     battleData.frameCount++;
 
-    // Xử lý rung màn hình
     let shakeX = 0, shakeY = 0;
     if (battleData.screenShake > 0) {
         shakeX = (Math.random() - 0.5) * battleData.screenShake;
@@ -886,7 +840,8 @@ function battleLoop() {
     battleCtx.save();
     battleCtx.translate(shakeX, shakeY);
     battleCtx.clearRect(0, 0, battleCanvas.width, battleCanvas.height);
-// Xử lý di chuyển thuần túy bằng nút bấm
+
+    // Di chuyển nhân vật thuần túy bằng nút bấm
     let moveX = 0;
     let moveY = 0;
     if (moveDir.up) moveY -= 1;
@@ -894,20 +849,18 @@ function battleLoop() {
     if (moveDir.left) moveX -= 1;
     if (moveDir.right) moveX += 1;
 
-    // Chuẩn hóa vector khi đi chéo (tránh đi chéo nhanh hơn đi thẳng)
     if (moveX !== 0 && moveY !== 0) {
         moveX *= 0.7071;
         moveY *= 0.7071;
     }
 
-    // Tốc độ di chuyển tăng theo chỉ số Nhanh Nhẹn (AGI)
     const pSpeed = 4.5 + (agi * 0.05);
     battleData.player.x += moveX * pSpeed;
     battleData.player.y += moveY * pSpeed;
 
-    // Giới hạn nhân vật không vượt khỏi rìa màn hình
     battleData.player.x = Math.max(35, Math.min(battleCanvas.width - 35, battleData.player.x));
     battleData.player.y = Math.max(45, Math.min(battleCanvas.height - 45, battleData.player.y));
+
     // 1. Vẽ bản đồ sơn động
     if (battleAssets.bg.complete && battleAssets.bg.naturalWidth > 0) {
         battleCtx.drawImage(battleAssets.bg, 0, 0, battleCanvas.width, battleCanvas.height);
@@ -916,7 +869,7 @@ function battleLoop() {
         battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
     }
 
-    // 2. Cập nhật và vẽ hạt nổ linh lực
+    // 2. Vẽ hạt nổ linh lực
     for (let i = battleData.particles.length - 1; i >= 0; i--) {
         const p = battleData.particles[i];
         p.x += p.vx;
@@ -941,7 +894,7 @@ function battleLoop() {
     battleCtx.translate(battleData.player.x, battleData.player.y + bobbingY);
 
     if (pImg.complete && pImg.naturalWidth > 0) {
-        battleCtx.drawImage(pImg, -35, -45, 70, 70); // 70x70 chuẩn tỷ lệ áo trắng
+        battleCtx.drawImage(pImg, -35, -45, 70, 70);
     } else {
         battleCtx.beginPath();
         battleCtx.arc(0, 0, 22, 0, Math.PI * 2);
@@ -976,14 +929,12 @@ function battleLoop() {
             }
             battleCtx.restore();
 
-            // Va chạm giữa Kiếm Khí và Ma Vật
             for (let i = battleData.enemies.length - 1; i >= 0; i--) {
                 const en = battleData.enemies[i];
                 if (Math.hypot(sx - en.x, sy - en.y) < en.radius + 15) {
                     en.hp -= (str * 2 + 10);
                     sword.active = false; 
 
-                    // Lực giật lùi (Knockback)
                     const kdx = en.x - battleData.player.x;
                     const kdy = en.y - battleData.player.y;
                     const kdist = Math.hypot(kdx, kdy);
@@ -997,7 +948,6 @@ function battleLoop() {
                         battleData.enemies.splice(i, 1);
                         battleData.kills++;
 
-                        // Thuần túy rớt đan dược, 0 EXP
                         const roll = Math.random();
                         if (roll < 0.15) {
                             inventory["Hồi Xuân Đan"] = (inventory["Hồi Xuân Đan"] || 0) + 1;
@@ -1008,7 +958,6 @@ function battleLoop() {
                         }
                     }
 
-                    // Hồi chiêu kiếm khí theo Thân Pháp
                     const cd = Math.max(1000, 3200 - agi * 25);
                     setTimeout(() => { sword.active = true; }, cd);
                     break;
@@ -1026,18 +975,15 @@ function battleLoop() {
         const dy = battleData.player.y - en.y;
         const dist = Math.hypot(dx, dy);
 
-        // Chống lỗi chia cho 0
         if (dist > 0.001) {
             en.x += (dx / dist) * en.speed;
             en.y += (dy / dist) * en.speed;
         }
 
-        // Vẽ Ma Vật Quỷ Hồn nhấp nhô
         battleCtx.save();
         const ghostWobble = Math.sin(battleData.frameCount * 0.15 + i) * 3;
         battleCtx.translate(en.x, en.y + ghostWobble);
         
-        // Tự động quay mặt theo người chơi
         if (battleData.player.x < en.x) battleCtx.scale(-1, 1);
 
         if (battleAssets.enemyGhost.complete && battleAssets.enemyGhost.naturalWidth > 0) {
@@ -1050,13 +996,12 @@ function battleLoop() {
         }
         battleCtx.restore();
 
-        // Quái vật cắn trúng người chơi
         if (dist < battleData.player.radius + en.radius) {
             let dodge = Math.min(30, agi * 0.5);
             if (Math.random() * 100 >= dodge) {
                 currentHp -= 15;
-                battleData.screenShake = 12; // Rung màn hình
-                battleData.damageFlash = 6;  // Chớp đỏ
+                battleData.screenShake = 12;
+                battleData.damageFlash = 6;
                 playWrongSound();
             }
             spawnDeathParticles(en.x, en.y, "#ff4757");
@@ -1071,7 +1016,6 @@ function battleLoop() {
         }
     }
 
-    // Hiệu ứng chớp đỏ khi bị cắn mất máu
     if (battleData.damageFlash > 0) {
         battleCtx.fillStyle = `rgba(255, 0, 0, ${battleData.damageFlash * 0.06})`;
         battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
@@ -1091,10 +1035,18 @@ function battleLoop() {
     battleAnimationFrame = requestAnimationFrame(battleLoop);
 }
 
-// Lắng nghe kích thước màn hình thay đổi
 window.addEventListener('resize', () => {
     const battleScreen = document.getElementById('battle-screen');
     if (battleScreen && battleScreen.classList.contains('active')) {
         resizeBattleCanvas();
     }
 });
+
+function unlockAudioOnInteraction() {
+    const ctx = getAudioContext();
+    if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {});
+    document.removeEventListener('click', unlockAudioOnInteraction);
+    document.removeEventListener('keydown', unlockAudioOnInteraction);
+}
+document.addEventListener('click', unlockAudioOnInteraction);
+document.addEventListener('keydown', unlockAudioOnInteraction);
