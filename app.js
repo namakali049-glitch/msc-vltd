@@ -31,7 +31,7 @@ const googleProvider = new GoogleAuthProvider();
 let currentUser = null;
 let lifetimeMana = 0; 
 let sessionMana = 0;  
-
+let inventory = { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
 // Chỉ số nhân vật
 let maxHp = 100;
 let currentHp = 100;
