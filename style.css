@@ -15,21 +15,21 @@ body {
   overflow: hidden;
 }
 
-/* NỀN CẢNH TIÊN HIỆP BẤT CHU SƠN */
+/* NỀN CẢNH BẤT CHU SƠN CHUẨN GỐC TỪ ASSETS/BACKGROUND.JPG */
 .screen {
   display: none;
   width: 100vw;
   height: 100vh;
   position: relative;
-  background: radial-gradient(circle at center, rgba(16, 26, 43, 0.75) 0%, rgba(5, 8, 17, 0.95) 100%),
-              url('https://images.unsplash.com/photo-1508739773434-c26b3d09e071?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+  background: radial-gradient(circle at center, rgba(16, 26, 43, 0.45) 0%, rgba(5, 8, 17, 0.8) 100%),
+              url('assets/background.jpg') center/cover no-repeat;
 }
 .screen.active {
   display: flex;
 }
 #battle-screen.active {
   display: block;
-  background: #000;
+  background: #0c1017;
 }
 
 /* NÚT TIỆN ÍCH CỐ ĐỊNH */
@@ -46,6 +46,7 @@ body {
   font-weight: bold;
   cursor: pointer;
   z-index: 1000;
+  backdrop-filter: blur(4px);
 }
 .fixed-music-btn.muted {
   color: #94a3b8;
@@ -74,7 +75,7 @@ body {
   align-items: center;
 }
 .auth-box {
-  background: rgba(18, 24, 38, 0.95);
+  background: rgba(18, 24, 38, 0.92);
   border: 2px solid #ffd700;
   border-radius: 14px;
   padding: 24px;
@@ -82,6 +83,7 @@ body {
   max-width: 360px;
   text-align: center;
   box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
+  backdrop-filter: blur(6px);
 }
 .auth-title { color: #ffd700; font-size: 1.8rem; margin-bottom: 14px; }
 .auth-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
@@ -124,6 +126,7 @@ body {
   border-radius: 20px;
   font-size: 0.85rem;
   color: #e2e8f0;
+  backdrop-filter: blur(4px);
 }
 .btn-logout {
   background: linear-gradient(180deg, #ef4444, #991b1b);
@@ -137,7 +140,7 @@ body {
 }
 
 .lobby-center-card {
-  background: rgba(18, 22, 36, 0.92);
+  background: rgba(18, 22, 36, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 16px;
   padding: 24px 20px;
@@ -145,6 +148,7 @@ body {
   max-width: 420px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
 }
 .lobby-title {
   font-size: 1.55rem;
@@ -186,13 +190,14 @@ body {
   align-items: center;
 }
 .profile-card {
-  background: rgba(18, 24, 38, 0.95);
+  background: rgba(18, 24, 38, 0.92);
   border: 2px solid rgba(255, 215, 0, 0.4);
   border-radius: 16px;
   padding: 22px 20px;
   width: 90%;
   max-width: 380px;
   text-align: center;
+  backdrop-filter: blur(8px);
 }
 .profile-header { color: #facc15; font-size: 1.35rem; margin-bottom: 12px; }
 .avatar-container { position: relative; width: 85px; height: 85px; margin: 0 auto 12px; }
@@ -231,8 +236,9 @@ body {
 /* TIÊN ĐẠO BẢNG */
 #leaderboard-screen { justify-content: center; align-items: center; }
 .leaderboard-card {
-  background: rgba(18, 24, 38, 0.95); border: 2px solid #ffd700;
+  background: rgba(18, 24, 38, 0.92); border: 2px solid #ffd700;
   border-radius: 16px; padding: 20px; width: 90%; max-width: 440px; text-align: center;
+  backdrop-filter: blur(8px);
 }
 .lb-header { color: #ffd700; font-size: 1.35rem; }
 .lb-desc { font-size: 0.78rem; color: #cbd5e1; margin-bottom: 12px; }
@@ -278,6 +284,7 @@ body {
 .cultivation-hud {
   display: flex; justify-content: space-between; width: 100%; max-width: 460px;
   background: rgba(15, 23, 42, 0.85); padding: 6px 14px; border-radius: 6px; font-size: 0.82rem;
+  backdrop-filter: blur(4px);
 }
 .mana-bar-wrap {
   position: relative; width: 100%; max-width: 460px; height: 16px;
@@ -289,8 +296,9 @@ body {
   justify-content: center; font-size: 0.7rem; font-weight: bold;
 }
 .quiz-box {
-  width: 100%; max-width: 460px; background: rgba(18, 24, 38, 0.95);
+  width: 100%; max-width: 460px; background: rgba(18, 24, 38, 0.92);
   border-radius: 12px; padding: 16px; text-align: center;
+  backdrop-filter: blur(8px);
 }
 .quiz-counter { font-size: 0.75rem; color: #94a3b8; }
 .quiz-question { font-size: 1.05rem; font-weight: bold; margin: 8px 0 12px; white-space: pre-line; }
