@@ -2,7 +2,7 @@
   "id": "/",
   "name": "Mộng Tu Tiên: Vạn Linh Tiên Đạo",
   "short_name": "Mộng Tu Tiên",
-  "description": "Trò chơi nhập vai tu tiên kết hợp học từ vựng và trảm yêu Bí Cảnh.",
+  "description": "Trò chơi nhập vai tu tiên kết hợp học từ vựng tiếng Trung và trảm yêu Bí Cảnh.",
   "start_url": "./index.html",
   "display": "fullscreen",
   "orientation": "landscape",
