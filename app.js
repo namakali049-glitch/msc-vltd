@@ -701,6 +701,30 @@ let battleData = {
     frameCount: 0
 };
 
+// Trạng thái giữ nút di chuyển
+const moveDir = { up: false, down: false, left: false, right: false };
+
+window.setMoveDir = function(dir, active) {
+    if (moveDir.hasOwnProperty(dir)) {
+        moveDir[dir] = active;
+    }
+};
+
+// Hỗ trợ thêm cả bàn phím máy tính (WASD và Phím Mũi Tên)
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') moveDir.up = true;
+    if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') moveDir.down = true;
+    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveDir.left = true;
+    if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveDir.right = true;
+});
+
+window.addEventListener('keyup', (e) => {
+    if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') moveDir.up = false;
+    if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') moveDir.down = false;
+    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveDir.left = false;
+    if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveDir.right = false;
+});
+
 // 1. NẠP TÀI NGUYÊN HÌNH ẢNH ĐỒNG BỘ .PNG
 const battleAssets = {
     bg: new Image(),
