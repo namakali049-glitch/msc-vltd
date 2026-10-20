@@ -631,11 +631,25 @@ window.nextQuestion = function() {
     loadQuestion();
 };
 
-function endGame(win) {
+// Hàm xuất quan sớm (Tạm dừng)
+window.stopCultivationEarly = function() {
+    window.playClickSound();
+    if(confirm("Đạo hữu muốn xuất quan sớm?\nLinh Lực đã lĩnh ngộ trong lần này vẫn sẽ được giữ lại!")) {
+        endGame(true, true); // Gọi endGame với trạng thái thắng (true) và xuất quan sớm (true)
+    }
+};
+
+function endGame(win, earlyExit = false) {
     clearInterval(timerInterval);
-    document.getElementById('question').innerHTML = win ? 
-        `🏆 <b>Đột Phá Thành Công!</b><br><br>🎯 Nhận: <span style="color:#eccc68;">+${sessionMana} Linh Lực</span><br>💎 Tổng Tu Vi: <span style="color:#00d2d3;">${lifetimeMana}</span>` : 
-        `💥 <b>Tẩu Hỏa Nhập Ma!</b><br><br>🎯 Nhận: <span style="color:#eccc68;">+${sessionMana} Linh Lực</span><br>💎 Tổng Tu Vi: <span style="color:#00d2d3;">${lifetimeMana}</span>`;
+    
+    // Đổi tiêu đề và màu sắc tùy trạng thái
+    let title = win ? (earlyExit ? "🚪 Đã Xuất Quan Sớm" : "🏆 Bế Quan Viên Mãn!") : "💥 Tẩu Hỏa Nhập Ma!";
+    let titleColor = win ? (earlyExit ? "#38bdf8" : "#2ed573") : "#ff4757";
+    
+    document.getElementById('question').innerHTML = 
+        `<span style="color:${titleColor}; font-size:1.3rem;"><b>${title}</b></span><br><br>
+        🎯 Nhận: <span style="color:#eccc68;">+${sessionMana} Linh Lực</span><br>
+        💎 Tổng Tu Vi: <span style="color:#00d2d3;">${lifetimeMana}</span>`;
     
     document.getElementById('options').innerHTML = "";
     document.getElementById('counter').innerText = "";
@@ -643,8 +657,8 @@ function endGame(win) {
     document.getElementById('message').innerText = "";
     
     let btn = document.createElement('button');
-    btn.className = "btn-main mt-10"; btn.innerText = "Xem Tiên Đạo Bảng 🏆";
-    btn.onclick = showLeaderboard;
+    btn.className = "btn-main mt-10"; btn.innerText = "Trở Về Động Phủ 🏯";
+    btn.onclick = goHome;
     document.getElementById('options').appendChild(btn);
 }
 
