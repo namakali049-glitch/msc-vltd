@@ -891,7 +891,16 @@ function battleLoop() {
     battleCtx.save();
     battleCtx.translate(shakeX, shakeY);
     battleCtx.clearRect(0, 0, battleCanvas.width, battleCanvas.height);
+// Xử lý di chuyển từ Cụm phím ảo D-pad hoặc Bàn phím
+    const pSpeed = 4.2 + (agi * 0.05);
+    if (moveDir.up) battleData.player.y -= pSpeed;
+    if (moveDir.down) battleData.player.y += pSpeed;
+    if (moveDir.left) battleData.player.x -= pSpeed;
+    if (moveDir.right) battleData.player.x += pSpeed;
 
+    // Giữ nhân vật không bị trôi ra ngoài mép màn hình
+    battleData.player.x = Math.max(35, Math.min(battleCanvas.width - 35, battleData.player.x));
+    battleData.player.y = Math.max(45, Math.min(battleCanvas.height - 45, battleData.player.y));
     // 1. Vẽ bản đồ sơn động
     if (battleAssets.bg.complete && battleAssets.bg.naturalWidth > 0) {
         battleCtx.drawImage(battleAssets.bg, 0, 0, battleCanvas.width, battleCanvas.height);
