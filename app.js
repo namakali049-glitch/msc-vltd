@@ -184,13 +184,13 @@ function getRealmData(mana) {
     if (mana < 1500) {
         return { rank: "Luyện Khí Hậu Kỳ", hp: 550, thanThuc: 300 };
     }
-    if (mana < 2500) {
-        return { rank: "Trúc Cơ Sơ Kỳ", hp: 700, thanThuc: 400 };
-    }
-    if (mana < 4000) {
-        return { rank: "Trúc Cơ Trung Kỳ", hp: 850, thanThuc: 500 };
-    }
-    return { rank: "Trúc Cơ Hậu Kỳ", hp: 1000, thanThuc: 600 };
+    if (mana < 2500) return { rank: "Trúc Cơ Sơ Kỳ", hp: 700, thanThuc: 400 };
+    if (mana < 4000) return { rank: "Trúc Cơ Trung Kỳ", hp: 850, thanThuc: 500 };
+    if (mana < 8000) return { rank: "Trúc Cơ Hậu Kỳ", hp: 1000, thanThuc: 600 };
+    
+    // Bổ sung giới hạn Kim Đan / Nguyên Anh cho Trung Quyển
+    if (mana < 25000) return { rank: "Kim Đan Kỳ", hp: 3000, thanThuc: 1200 };
+    return { rank: "Nguyên Anh Kỳ", hp: 8000, thanThuc: 3000 };
 }
 
 function calculateRealm(mana) {
