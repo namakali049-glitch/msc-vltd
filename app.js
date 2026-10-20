@@ -792,6 +792,7 @@ function resizeBattleCanvas() {
 
 // 4. BẮT ĐẦU VÀ THOÁT KHỎI BÍ CẢNH
 window.startBattle = function() {
+    moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
     window.playClickSound();
     switchScreen('battle-screen');
     
@@ -829,6 +830,7 @@ window.startBattle = function() {
 };
 
 window.exitBattle = function() {
+    moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
     window.playClickSound();
     if (battleAnimationFrame) cancelAnimationFrame(battleAnimationFrame);
     
