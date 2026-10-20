@@ -483,11 +483,11 @@ window.startGame = async function() {
     window.sessionThanThuc = thanThuc; // Lưu thần thức hiện tại
     if (thanThuc > 0) {
         document.getElementById('quizStatLabel').innerText = "Thần Thức";
-        document.getElementById('quizStatValue').innerText = window.sessionThanThuc;
+        document.getElementById('quizStatValue').innerText = `${window.sessionThanThuc}/${thanThuc}`;
     } else {
-        // Nếu là Phàm Nhân (0 Thần thức), hệ thống tự đổi sang hiển thị Sinh Mệnh
+        // Phàm Nhân: Hiển thị Sinh Mệnh theo dạng hiện tại/tối đa
         document.getElementById('quizStatLabel').innerText = "Sinh Mệnh";
-        document.getElementById('quizStatValue').innerText = currentHp;
+        document.getElementById('quizStatValue').innerText = `${currentHp}/${maxHp}`;
     }
 
     document.getElementById('timerDisplay').innerText = "00:00";
