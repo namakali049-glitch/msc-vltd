@@ -746,50 +746,43 @@ battleAssets.swordWood.src = "assets/kiem-khi-luyen-khi.png";
 battleAssets.swordCyan.src = "assets/kiem-khi-truc-co.png";
 battleAssets.enemyGhost.src = "assets/quy-hon.png";
 
-// 2. KHỞI TẠO CANVAS & BẮT CẢ CHUỘT LẪN CẢM ỨNG
+// 2. KHỞI TẠO CANVAS & HỆ THỐNG ĐIỀU KHIỂN NÚT BẤM
 const battleCanvas = document.getElementById('gameCanvas');
 const battleCtx = battleCanvas ? battleCanvas.getContext('2d') : null;
 
-function updatePlayerPos(clientX, clientY) {
-    if (!battleCanvas) return;
-    const rect = battleCanvas.getBoundingClientRect();
-    const scaleX = battleCanvas.width / rect.width;
-    const scaleY = battleCanvas.height / rect.height;
-    battleData.player.x = (clientX - rect.left) * scaleX;
-    battleData.player.y = (clientY - rect.top) * scaleY;
-}
+// Biến lưu trạng thái các nút di chuyển
+const moveDir = { up: false, down: false, left: false, right: false };
 
-if (battleCanvas) {
-    // Di chuyển bằng chuột
-    battleCanvas.addEventListener('mousemove', (e) => {
-        updatePlayerPos(e.clientX, e.clientY);
-    });
+// Hàm kích hoạt di chuyển từ nút bấm (UI D-pad hoặc Touch)
+window.setMoveDir = function(dir, active) {
+    if (moveDir.hasOwnProperty(dir)) {
+        moveDir[dir] = active;
+    }
+};
 
-    // Di chuyển bằng chạm / vuốt trên điện thoại
-    battleCanvas.addEventListener('touchmove', (e) => {
-        if (e.touches.length > 0) {
-            updatePlayerPos(e.touches[0].clientX, e.touches[0].clientY);
-            e.preventDefault();
-        }
-    }, { passive: false });
+// Hỗ trợ nút bấm vật lý trên bàn phím (WASD và Phím Mũi Tên)
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') { moveDir.up = true; e.preventDefault(); }
+    if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') { moveDir.down = true; e.preventDefault(); }
+    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') { moveDir.left = true; e.preventDefault(); }
+    if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') { moveDir.right = true; e.preventDefault(); }
+});
 
-    battleCanvas.addEventListener('touchstart', (e) => {
-        if (e.touches.length > 0) {
-            updatePlayerPos(e.touches[0].clientX, e.touches[0].clientY);
-        }
-    });
-}
+window.addEventListener('keyup', (e) => {
+    if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') moveDir.up = false;
+    if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') moveDir.down = false;
+    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveDir.left = false;
+    if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveDir.right = false;
+});
 
 function resizeBattleCanvas() {
     if (!battleCanvas) return;
     battleCanvas.width = window.innerWidth;
     battleCanvas.height = window.innerHeight;
     if (battleCtx) {
-        // Giữ nét nguyên bản cho Pixel Art
         battleCtx.imageSmoothingEnabled = false;
     }
 }
-
 // 4. BẮT ĐẦU VÀ THOÁT KHỎI BÍ CẢNH
 window.startBattle = function() {
     moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
