@@ -1,211 +1,111 @@
-/* RESET & CƠ BẢN */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  user-select: none; /* Ngăn bôi đen văn bản trên mobile */
-}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Mộng Tu Tiên: Vạn Linh Tiên Đạo</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Cảnh báo khóa màn hình dọc -->
+  <div id="rotate-screen-warning">
+    <div class="warning-box">
+      <div class="phone-rotate-icon">📱 ➔ 📲</div>
+      <p>Vui lòng xoay ngang thiết bị để bước vào Tiên Đồ!</p>
+    </div>
+  </div>
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #0a0f1d;
-  color: #fff;
-  overflow: hidden; /* Ngăn cuộn trang */
-  touch-action: manipulation; /* Tối ưu chạm trên di động */
-}
+  <!-- Nút bật/tắt nhạc nền -->
+  <button id="audio-toggle-btn" class="audio-btn" onclick="toggleBGM()" title="Âm nhạc">🎵</button>
+  <audio id="bgm-player" src="assets/bgm.mp3" loop preload="auto"></audio>
 
-/* KHÓA MÀN HÌNH DỌC BẰNG CSS */
-#rotate-screen-warning {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: #000;
-  color: #ffd700;
-  z-index: 9999;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-  padding: 20px;
-}
+  <!-- Màn hình 1: Sảnh Chính -->
+  <div id="main-lobby" class="screen">
+    <div class="lobby-container">
+      <h1 class="game-title">VÔ LƯỢNG TIÊN ĐỒ</h1>
+      <p class="game-subtitle">Mộng Tu Tiên · Khẩu Quyết Vấn Đạo</p>
 
-@media screen and (orientation: portrait) {
-  #rotate-screen-warning {
-    display: flex;
-  }
-}
+      <div class="player-panel">
+        <div class="avatar-frame">
+          <img id="player-avatar" src="assets/pham-nhan.jpg" alt="Chân dung Đạo hữu">
+        </div>
+        <div class="stats-info">
+          <div class="stat-row">
+            <span class="stat-label">Cảnh Giới:</span>
+            <span id="player-rank" class="highlight-text">Phàm Nhân</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Tu Vi:</span>
+            <div class="exp-bar-container">
+              <div id="player-exp-bar" class="exp-bar-fill" style="width: 0%;"></div>
+              <span class="exp-bar-text"><span id="player-exp">0</span> / <span id="player-max-exp">100</span></span>
+            </div>
+          </div>
+          <div class="stat-row stats-sub">
+            <span>❤️ Khí Huyết: <b id="player-hp">100</b></span>
+            <span>⚔️ Công Kích: <b id="player-atk">10</b></span>
+          </div>
+        </div>
+      </div>
 
-/* QUẢN LÝ MÀN HÌNH CHUNG */
-.screen {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-.hidden {
-  display: none !important;
-}
+      <div class="lobby-actions">
+        <button class="btn-main" onclick="openCultivation()">🧘 Bế Quan Tu Luyện</button>
+      </div>
+    </div>
+  </div>
 
-/* SẢNH CHÍNH */
-#main-lobby {
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #111728, #1a233a);
-}
-#main-lobby h1 {
-  font-size: 2.5rem;
-  color: #ffd700;
-  text-shadow: 0 0 10px #ff0;
-  margin-bottom: 20px;
-}
-.player-stats {
-  background: rgba(0,0,0,0.6);
-  padding: 15px 30px;
-  border-radius: 10px;
-  border: 1px solid #ffd700;
-  margin-bottom: 20px;
-  font-size: 1.2rem;
-  line-height: 1.5;
-}
-.player-stats span {
-  color: #00ffcc;
-  font-weight: bold;
-}
-.menu-buttons button {
-  padding: 12px 24px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  background: linear-gradient(180deg, #444, #111);
-  color: #ffd700;
-  border: 2px solid #ffd700;
-  border-radius: 8px;
-  cursor: pointer;
-}
+  <!-- Màn hình 2: Bế Quan Tu Luyện -->
+  <div id="cultivation-screen" class="screen hidden">
+    <div class="cultivation-header">
+      <div class="timer-badge">⏳ <span id="cultivation-timer">02:00</span></div>
+      <div class="lives-container" id="cultivation-lives">
+        <span class="life-icon">❤️</span>
+        <span class="life-icon">❤️</span>
+        <span class="life-icon">❤️</span>
+      </div>
+      <button id="btn-stop-cultivation" class="btn-stop" onclick="stopCultivation('manual')">🚪 Xuất Quan</button>
+    </div>
 
-/* MÀN HÌNH BẾ QUAN */
-#cultivation-screen {
-  background: #0b0f19;
-}
+    <div class="quiz-body">
+      <div class="cultivation-character-preview">
+        <img id="cultivation-sprite" src="assets/truc-co.png" alt="Đả tọa">
+      </div>
+      <div class="question-container">
+        <div class="question-hanzi" id="quiz-hanzi">修仙</div>
+        <div class="question-pinyin" id="quiz-pinyin">Xiūxiān</div>
+        <div class="question-prompt">Chọn ý nghĩa đúng của khẩu quyết trên:</div>
+      </div>
+      <div class="options-grid" id="quiz-options">
+        <!-- Nút đáp án render từ app.js -->
+      </div>
+    </div>
+  </div>
 
-.cultivation-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
-  background: rgba(0, 0, 0, 0.8);
-  border-bottom: 2px solid rgba(255, 215, 0, 0.5);
-}
+  <!-- Modal Tổng Kết Sau Khi Xuất Quan -->
+  <div id="cultivation-summary-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h3 id="summary-title">Kết Thúc Bế Quan</h3>
+      <p id="summary-reason" class="summary-reason"></p>
+      
+      <div class="summary-stats">
+        <div class="summary-row">
+          <span>Khẩu quyết lãnh ngộ:</span>
+          <b id="summary-correct">0</b>
+        </div>
+        <div class="summary-row">
+          <span>Tu vi thu được:</span>
+          <b id="summary-exp" class="exp-text">+0</b>
+        </div>
+        <div id="breakthrough-notice" class="breakthrough-notice hidden">
+          ✨ Chúc mừng Đạo hữu đột phá cảnh giới mới! ✨
+        </div>
+      </div>
 
-.timer-badge {
-  font-size: 1.2rem;
-  color: #ffd700;
-  font-weight: bold;
-}
+      <button class="btn-confirm" onclick="closeCultivationModal()">Thu Công Quy Vị</button>
+    </div>
+  </div>
 
-.lives-container {
-  display: flex;
-  gap: 8px;
-  font-size: 1.2rem;
-}
-.life-icon.lost {
-  filter: grayscale(100%);
-  opacity: 0.2;
-}
-
-.btn-stop {
-  background: #8b0000;
-  color: #fff;
-  border: 1px solid #ff4d4d;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* Câu hỏi & Đáp án */
-.quiz-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-.question-title {
-  font-size: 1.8rem;
-  margin-bottom: 30px;
-  text-align: center;
-  color: #e0f7fa;
-}
-.options-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  width: 100%;
-  max-width: 650px;
-}
-.option-btn {
-  padding: 15px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  background: #1a233a;
-  color: #fff;
-  border: 2px solid #4a90e2;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.option-btn:active {
-  background: #4a90e2;
-}
-
-/* MODAL TỔNG KẾT */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-.modal-card {
-  background: #111728;
-  border: 2px solid #ffd700;
-  border-radius: 12px;
-  padding: 24px;
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-}
-.modal-card h3 {
-  color: #ff4d4d;
-  font-size: 1.6rem;
-  margin-bottom: 10px;
-}
-.summary-reason {
-  color: #ccc;
-  margin-bottom: 20px;
-  font-style: italic;
-  font-size: 0.95rem;
-}
-.summary-stats p {
-  font-size: 1.1rem;
-  margin-bottom: 10px;
-}
-.exp-text {
-  color: #00ffcc;
-  font-size: 1.4rem;
-}
-.btn-confirm {
-  margin-top: 20px;
-  padding: 10px 25px;
-  background: #ffd700;
-  color: #000;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 1.1rem;
-  cursor: pointer;
-}
+  <script src="app.js"></script>
+</body>
+</html>
