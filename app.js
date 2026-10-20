@@ -50,7 +50,7 @@ let activeQuestions = [];
 let vocabPool = [];
 
 // ==========================================
-// 3. HỆ THỐNG ÂM THANH TIÊN GIỚI (CÁCH LY AN TOÀN)
+// 3. HỆ THỐNG ÂM THANH TIÊN GIỚI
 // ==========================================
 let audioCtx = null;
 let isBgmPlaying = false;
@@ -77,10 +77,8 @@ window.playClickSound = function() {
         osc.frequency.setValueAtTime(350, now + 0.05);
         gain.gain.setValueAtTime(0.15, now);
         gain.gain.linearRampToValueAtTime(0.001, now + 0.06);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(now);
-        osc.stop(now + 0.06);
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.start(now); osc.stop(now + 0.06);
     } catch(e) {}
 };
 
@@ -97,10 +95,8 @@ function playCorrectSound() {
             osc.frequency.setValueAtTime(freq, start);
             gain.gain.setValueAtTime(0.2, start);
             gain.gain.linearRampToValueAtTime(0.001, start + 0.25);
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start(start);
-            osc.stop(start + 0.28);
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.start(start); osc.stop(start + 0.28);
         });
     } catch(e) {}
 }
@@ -117,10 +113,8 @@ function playWrongSound() {
         osc.frequency.setValueAtTime(45, now + 0.28);
         gain.gain.setValueAtTime(0.25, now);
         gain.gain.linearRampToValueAtTime(0.001, now + 0.28);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(now);
-        osc.stop(now + 0.28);
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.start(now); osc.stop(now + 0.28);
     } catch(e) {}
 }
 
@@ -137,10 +131,8 @@ function playLootSound() {
             osc.frequency.setValueAtTime(freq, start);
             gain.gain.setValueAtTime(0.18, start);
             gain.gain.linearRampToValueAtTime(0.001, start + 0.2);
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start(start);
-            osc.stop(start + 0.22);
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.start(start); osc.stop(start + 0.22);
         });
     } catch(e) {}
 }
@@ -220,13 +212,19 @@ function updateCharacterUI() {
 }
 
 // ==========================================
-// 5. MÀN HÌNH & TÀI KHOẢN FIREBASE
+// 5. CHUYỂN MÀN HÌNH & XÁC THỰC FIREBASE
 // ==========================================
 window.switchScreen = function(screenId) {
     window.playClickSound();
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.screen').forEach(s => {
+        s.classList.remove('active');
+        s.style.display = 'none';
+    });
     const targetScreen = document.getElementById(screenId);
-    if (targetScreen) targetScreen.classList.add('active');
+    if (targetScreen) {
+        targetScreen.classList.add('active');
+        targetScreen.style.display = (screenId === 'battle-screen') ? 'block' : 'flex';
+    }
 };
 
 window.switchAuthTab = function(type) {
@@ -385,7 +383,7 @@ window.goHome = function() {
 };
 
 // ==========================================
-// 7. LỐI CHƠI VÀ CÂU HỎI
+// 7. LỐI CHƠI BẾ QUAN (HỌC TỪ VỰNG)
 // ==========================================
 function shuffleArray(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -652,29 +650,23 @@ window.useItem = function(item) {
     }
 };
 
-// 第一次點擊時啟動音訊環境
-function unlockAudioOnInteraction() {
-    const ctx = getAudioContext();
-    if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {});
-    document.removeEventListener('click', unlockAudioOnInteraction);
-    document.removeEventListener('keydown', unlockAudioOnInteraction);
-}
-document.addEventListener('click', unlockAudioOnInteraction);
-document.addEventListener('keydown', unlockAudioOnInteraction);
 // ==========================================
-// 9. ĐỘNG CƠ BÍ CẢNH TRẢM YÊU (2D BATTLE ENGINE)
+// 9. ĐỘNG CƠ BÍ CẢNH TRẢM YÊU (TỐI ƯU 60 FPS)
 // ==========================================
 let battleAnimationFrame = null;
 let battleData = {
-    player: { x: 400, y: 300, radius: 22 },
+    player: { x: 400, y: 300, radius: 24 },
     orbitAngle: 0,
     swords: [],
     enemies: [],
+    particles: [],
+    screenShake: 0,
+    damageFlash: 0,
     kills: 0,
     frameCount: 0
 };
 
-// 1. NẠP HÌNH ẢNH TỪ THƯ MỤC ASSETS
+// 1. NẠP TÀI NGUYÊN HÌNH ẢNH ĐỒNG BỘ .PNG
 const battleAssets = {
     bg: new Image(),
     playerLuyenKhi: new Image(),
@@ -691,27 +683,55 @@ battleAssets.playerLuyenKhi.src = "assets/luyen-khi.png";
 battleAssets.playerTrucCo.src = "assets/truc-co.png";
 battleAssets.playerTrucCoTrungKy.src = "assets/truc-co-trung-ky.png";
 battleAssets.playerTrucCoVienMan.src = "assets/truc-co-vien-man.png";
-
 battleAssets.swordWood.src = "assets/kiem-khi-luyen-khi.png";
 battleAssets.swordCyan.src = "assets/kiem-khi-truc-co.png";
-
 battleAssets.enemyGhost.src = "assets/quy-hon.png";
 
-// 2. TỌA ĐỘ THEO CHUỘT / CẢM ỨNG
+// 2. KHỞI TẠO CANVAS & BẮT CẢ CHUỘT LẪN CẢM ỨNG
 const battleCanvas = document.getElementById('gameCanvas');
 const battleCtx = battleCanvas ? battleCanvas.getContext('2d') : null;
 
+function updatePlayerPos(clientX, clientY) {
+    if (!battleCanvas) return;
+    const rect = battleCanvas.getBoundingClientRect();
+    const scaleX = battleCanvas.width / rect.width;
+    const scaleY = battleCanvas.height / rect.height;
+    battleData.player.x = (clientX - rect.left) * scaleX;
+    battleData.player.y = (clientY - rect.top) * scaleY;
+}
+
 if (battleCanvas) {
+    // Di chuyển bằng chuột
     battleCanvas.addEventListener('mousemove', (e) => {
-        const rect = battleCanvas.getBoundingClientRect();
-        const scaleX = battleCanvas.width / rect.width;
-        const scaleY = battleCanvas.height / rect.height;
-        battleData.player.x = (e.clientX - rect.left) * scaleX;
-        battleData.player.y = (e.clientY - rect.top) * scaleY;
+        updatePlayerPos(e.clientX, e.clientY);
+    });
+
+    // Di chuyển bằng chạm / vuốt trên điện thoại
+    battleCanvas.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+            updatePlayerPos(e.touches[0].clientX, e.touches[0].clientY);
+            e.preventDefault();
+        }
+    }, { passive: false });
+
+    battleCanvas.addEventListener('touchstart', (e) => {
+        if (e.touches.length > 0) {
+            updatePlayerPos(e.touches[0].clientX, e.touches[0].clientY);
+        }
     });
 }
 
-// 3. XÁC ĐỊNH NGOẠI HÌNH THEO CẢNH GIỚI
+function resizeBattleCanvas() {
+    if (!battleCanvas) return;
+    battleCanvas.width = window.innerWidth;
+    battleCanvas.height = window.innerHeight;
+    if (battleCtx) {
+        // Giữ nét nguyên bản cho Pixel Art
+        battleCtx.imageSmoothingEnabled = false;
+    }
+}
+
+// 3. NGOẠI HÌNH THEO CẢNH GIỚI
 function getBattleCharacterSkin() {
     if (lifetimeMana >= 6000) return battleAssets.playerTrucCoVienMan;
     if (lifetimeMana >= 3000) return battleAssets.playerTrucCoTrungKy;
@@ -723,13 +743,14 @@ function getBattleSwordSkin() {
     return lifetimeMana >= 1500 ? battleAssets.swordCyan : battleAssets.swordWood;
 }
 
-// 4. BẮT ĐẦU VÀ THOÁT BÍ CẢNH
+// 4. BẮT ĐẦU VÀ THOÁT KHỎI BÍ CẢNH
 window.startBattle = function() {
     window.playClickSound();
     switchScreen('battle-screen');
+    resizeBattleCanvas();
     recalcStats();
     
-    // Số kiếm theo cảnh giới tu vi
+    // Căn số kiếm theo tu vi
     let count = 2;
     if (lifetimeMana >= 3000) count = 5;
     else if (lifetimeMana >= 1500) count = 4;
@@ -737,9 +758,16 @@ window.startBattle = function() {
 
     battleData.swords = Array.from({ length: count }, () => ({ active: true }));
     battleData.enemies = [];
+    battleData.particles = [];
     battleData.kills = 0;
     battleData.orbitAngle = 0;
     battleData.frameCount = 0;
+    battleData.screenShake = 0;
+    battleData.damageFlash = 0;
+    
+    // Đặt nhân vật ở giữa màn hình khi bắt đầu
+    battleData.player.x = battleCanvas.width / 2;
+    battleData.player.y = battleCanvas.height / 2;
     currentHp = maxHp;
 
     if (battleAnimationFrame) cancelAnimationFrame(battleAnimationFrame);
@@ -753,7 +781,7 @@ window.exitBattle = function() {
     goHome();
 };
 
-// 5. SINH MA VẬT TỰ ĐỘNG
+// 5. SINH QUÁI VẬT TỰ ĐỘNG
 function spawnBattleEnemy() {
     if (!battleCanvas) return;
     let x, y;
@@ -771,13 +799,39 @@ function spawnBattleEnemy() {
     });
 }
 
-// 6. VÒNG LẶP RENDER CHÍNH (60 FPS)
+function spawnDeathParticles(x, y, color = "#00d2d3") {
+    for (let i = 0; i < 8; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 1.5 + Math.random() * 3;
+        battleData.particles.push({
+            x: x, y: y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            life: 1.0,
+            color: color
+        });
+    }
+}
+
+// 6. VÒNG LẶP RENDER CHIẾN ĐẤU
 function battleLoop() {
     if (!battleCtx) return;
-    battleCtx.clearRect(0, 0, battleCanvas.width, battleCanvas.height);
     battleData.frameCount++;
 
-    // 1. Vẽ Bản Đồ Hang Động
+    // Xử lý rung màn hình
+    let shakeX = 0, shakeY = 0;
+    if (battleData.screenShake > 0) {
+        shakeX = (Math.random() - 0.5) * battleData.screenShake;
+        shakeY = (Math.random() - 0.5) * battleData.screenShake;
+        battleData.screenShake *= 0.85;
+        if (battleData.screenShake < 0.5) battleData.screenShake = 0;
+    }
+
+    battleCtx.save();
+    battleCtx.translate(shakeX, shakeY);
+    battleCtx.clearRect(0, 0, battleCanvas.width, battleCanvas.height);
+
+    // 1. Vẽ bản đồ sơn động
     if (battleAssets.bg.complete && battleAssets.bg.naturalWidth > 0) {
         battleCtx.drawImage(battleAssets.bg, 0, 0, battleCanvas.width, battleCanvas.height);
     } else {
@@ -785,7 +839,25 @@ function battleLoop() {
         battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
     }
 
-    // 2. Vẽ Nhân Vật Chibi
+    // 2. Cập nhật và vẽ hạt nổ linh lực
+    for (let i = battleData.particles.length - 1; i >= 0; i--) {
+        const p = battleData.particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= 0.04;
+        if (p.life <= 0) {
+            battleData.particles.splice(i, 1);
+            continue;
+        }
+        battleCtx.beginPath();
+        battleCtx.arc(p.x, p.y, 3 * p.life, 0, Math.PI * 2);
+        battleCtx.fillStyle = p.color;
+        battleCtx.globalAlpha = p.life;
+        battleCtx.fill();
+        battleCtx.globalAlpha = 1.0;
+    }
+
+    // 3. Vẽ Nhân Vật Chibi
     const pImg = getBattleCharacterSkin();
     battleCtx.save();
     const bobbingY = Math.sin(battleData.frameCount * 0.12) * 4;
@@ -801,7 +873,7 @@ function battleLoop() {
     }
     battleCtx.restore();
 
-    // 3. Vẽ Kiếm Trận Xoay Quanh
+    // 4. Vẽ Kiếm Trận Xoay Quanh
     let activeSwordCount = 0;
     const orbitRadius = 75;
     const rotSpeed = 0.04 + (agi * 0.0008);
@@ -817,7 +889,7 @@ function battleLoop() {
             activeSwordCount++;
             battleCtx.save();
             battleCtx.translate(sx, sy);
-            battleCtx.rotate(angle + Math.PI / 2); // Mũi kiếm hướng ra ngoài đón quái
+            battleCtx.rotate(angle + Math.PI / 2);
 
             if (swordImg.complete && swordImg.naturalWidth > 0) {
                 battleCtx.drawImage(swordImg, -9, -24, 18, 48);
@@ -832,13 +904,23 @@ function battleLoop() {
                 const en = battleData.enemies[i];
                 if (Math.hypot(sx - en.x, sy - en.y) < en.radius + 15) {
                     en.hp -= (str * 2 + 10);
-                    sword.active = false; // Kiếm vỡ sau va chạm
+                    sword.active = false; 
+
+                    // Lực giật lùi (Knockback)
+                    const kdx = en.x - battleData.player.x;
+                    const kdy = en.y - battleData.player.y;
+                    const kdist = Math.hypot(kdx, kdy);
+                    if (kdist > 0.001) {
+                        en.x += (kdx / kdist) * 20;
+                        en.y += (kdy / kdist) * 20;
+                    }
 
                     if (en.hp <= 0) {
+                        spawnDeathParticles(en.x, en.y, "#00d2d3");
                         battleData.enemies.splice(i, 1);
                         battleData.kills++;
 
-                        // Tuyệt đối không cộng Linh Lực, chỉ rớt Đan Dược
+                        // Thuần túy rớt đan dược, 0 EXP
                         const roll = Math.random();
                         if (roll < 0.15) {
                             inventory["Hồi Xuân Đan"] = (inventory["Hồi Xuân Đan"] || 0) + 1;
@@ -849,7 +931,7 @@ function battleLoop() {
                         }
                     }
 
-                    // Hồi kiếm theo chỉ số Thân Pháp AGI
+                    // Hồi chiêu kiếm khí theo Thân Pháp
                     const cd = Math.max(1000, 3200 - agi * 25);
                     setTimeout(() => { sword.active = true; }, cd);
                     break;
@@ -858,7 +940,7 @@ function battleLoop() {
         }
     });
 
-    // 4. Quái vật đuổi theo nhân vật
+    // 5. Quái vật bám đuổi
     if (battleData.frameCount % 50 === 0) spawnBattleEnemy();
 
     for (let i = battleData.enemies.length - 1; i >= 0; i--) {
@@ -867,12 +949,20 @@ function battleLoop() {
         const dy = battleData.player.y - en.y;
         const dist = Math.hypot(dx, dy);
 
-        en.x += (dx / dist) * en.speed;
-        en.y += (dy / dist) * en.speed;
+        // Chống lỗi chia cho 0
+        if (dist > 0.001) {
+            en.x += (dx / dist) * en.speed;
+            en.y += (dy / dist) * en.speed;
+        }
 
-        // Vẽ Ma Vật Quỷ Hồn
+        // Vẽ Ma Vật Quỷ Hồn nhấp nhô
         battleCtx.save();
-        battleCtx.translate(en.x, en.y);
+        const ghostWobble = Math.sin(battleData.frameCount * 0.15 + i) * 3;
+        battleCtx.translate(en.x, en.y + ghostWobble);
+        
+        // Tự động quay mặt theo người chơi
+        if (battleData.player.x < en.x) battleCtx.scale(-1, 1);
+
         if (battleAssets.enemyGhost.complete && battleAssets.enemyGhost.naturalWidth > 0) {
             battleCtx.drawImage(battleAssets.enemyGhost, -20, -20, 40, 40);
         } else {
@@ -883,16 +973,20 @@ function battleLoop() {
         }
         battleCtx.restore();
 
-        // Ma vật cắn trúng thân thể
+        // Quái vật cắn trúng người chơi
         if (dist < battleData.player.radius + en.radius) {
             let dodge = Math.min(30, agi * 0.5);
             if (Math.random() * 100 >= dodge) {
                 currentHp -= 15;
+                battleData.screenShake = 12; // Rung màn hình
+                battleData.damageFlash = 6;  // Chớp đỏ
                 playWrongSound();
             }
+            spawnDeathParticles(en.x, en.y, "#ff4757");
             battleData.enemies.splice(i, 1);
 
             if (currentHp <= 0) {
+                battleCtx.restore();
                 alert(`💥 Đạo thể tổn hao nặng nề! Buộc phải rút lui. Đã trảm sát ${battleData.kills} Quái vật.`);
                 exitBattle();
                 return;
@@ -900,7 +994,16 @@ function battleLoop() {
         }
     }
 
-    // 5. Cập nhật HUD trong trận
+    // Hiệu ứng chớp đỏ khi bị cắn mất máu
+    if (battleData.damageFlash > 0) {
+        battleCtx.fillStyle = `rgba(255, 0, 0, ${battleData.damageFlash * 0.06})`;
+        battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
+        battleData.damageFlash--;
+    }
+
+    battleCtx.restore();
+
+    // 6. Cập nhật HUD trong trận
     const hpEl = document.getElementById('battleHpText');
     const swordEl = document.getElementById('battleSwordText');
     const killsEl = document.getElementById('battleKillsText');
@@ -910,3 +1013,21 @@ function battleLoop() {
 
     battleAnimationFrame = requestAnimationFrame(battleLoop);
 }
+
+// Lắng nghe kích thước màn hình thay đổi
+window.addEventListener('resize', () => {
+    const battleScreen = document.getElementById('battle-screen');
+    if (battleScreen && battleScreen.classList.contains('active')) {
+        resizeBattleCanvas();
+    }
+});
+
+// Kích hoạt Web Audio API ngay lần click đầu tiên
+function unlockAudioOnInteraction() {
+    const ctx = getAudioContext();
+    if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {});
+    document.removeEventListener('click', unlockAudioOnInteraction);
+    document.removeEventListener('keydown', unlockAudioOnInteraction);
+}
+document.addEventListener('click', unlockAudioOnInteraction);
+document.addEventListener('keydown', unlockAudioOnInteraction);
