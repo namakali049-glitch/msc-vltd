@@ -407,5 +407,29 @@ h1, h2, h3 {
     color: #a4b0be;
     background: rgba(47, 53, 66, 0.8);
 }
+/* NÚT DI CHUYỂN ẢO TRONG BÍ CẢNH */
+.dpad-btn {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    background: rgba(15, 23, 42, 0.65);
+    border: 1.5px solid rgba(236, 204, 104, 0.5);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background 0.1s, transform 0.1s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+}
 
+.dpad-btn:active {
+    background: rgba(236, 204, 104, 0.5);
+    transform: scale(0.92);
+}
 /* =================================
