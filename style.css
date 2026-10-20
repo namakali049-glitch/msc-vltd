@@ -1,111 +1,459 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Mộng Tu Tiên: Vạn Linh Tiên Đạo</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <!-- Cảnh báo khóa màn hình dọc -->
-  <div id="rotate-screen-warning">
-    <div class="warning-box">
-      <div class="phone-rotate-icon">📱 ➔ 📲</div>
-      <p>Vui lòng xoay ngang thiết bị để bước vào Tiên Đồ!</p>
-    </div>
-  </div>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
 
-  <!-- Nút bật/tắt nhạc nền -->
-  <button id="audio-toggle-btn" class="audio-btn" onclick="toggleBGM()" title="Âm nhạc">🎵</button>
-  <audio id="bgm-player" src="assets/bgm.mp3" loop preload="auto"></audio>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #060a14;
+  color: #f1f5f9;
+  overflow: hidden;
+  touch-action: manipulation;
+  width: 100vw;
+  height: 100vh;
+}
 
-  <!-- Màn hình 1: Sảnh Chính -->
-  <div id="main-lobby" class="screen">
-    <div class="lobby-container">
-      <h1 class="game-title">VÔ LƯỢNG TIÊN ĐỒ</h1>
-      <p class="game-subtitle">Mộng Tu Tiên · Khẩu Quyết Vấn Đạo</p>
+/* KHÓA MÀN HÌNH DỌC */
+#rotate-screen-warning {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #1a233a 0%, #000000 100%);
+  color: #ffd700;
+  z-index: 99999;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+}
 
-      <div class="player-panel">
-        <div class="avatar-frame">
-          <img id="player-avatar" src="assets/pham-nhan.jpg" alt="Chân dung Đạo hữu">
-        </div>
-        <div class="stats-info">
-          <div class="stat-row">
-            <span class="stat-label">Cảnh Giới:</span>
-            <span id="player-rank" class="highlight-text">Phàm Nhân</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label">Tu Vi:</span>
-            <div class="exp-bar-container">
-              <div id="player-exp-bar" class="exp-bar-fill" style="width: 0%;"></div>
-              <span class="exp-bar-text"><span id="player-exp">0</span> / <span id="player-max-exp">100</span></span>
-            </div>
-          </div>
-          <div class="stat-row stats-sub">
-            <span>❤️ Khí Huyết: <b id="player-hp">100</b></span>
-            <span>⚔️ Công Kích: <b id="player-atk">10</b></span>
-          </div>
-        </div>
-      </div>
+.warning-box {
+  animation: pulse 2s infinite ease-in-out;
+}
 
-      <div class="lobby-actions">
-        <button class="btn-main" onclick="openCultivation()">🧘 Bế Quan Tu Luyện</button>
-      </div>
-    </div>
-  </div>
+.phone-rotate-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
 
-  <!-- Màn hình 2: Bế Quan Tu Luyện -->
-  <div id="cultivation-screen" class="screen hidden">
-    <div class="cultivation-header">
-      <div class="timer-badge">⏳ <span id="cultivation-timer">02:00</span></div>
-      <div class="lives-container" id="cultivation-lives">
-        <span class="life-icon">❤️</span>
-        <span class="life-icon">❤️</span>
-        <span class="life-icon">❤️</span>
-      </div>
-      <button id="btn-stop-cultivation" class="btn-stop" onclick="stopCultivation('manual')">🚪 Xuất Quan</button>
-    </div>
+@media screen and (orientation: portrait) {
+  #rotate-screen-warning {
+    display: flex;
+  }
+}
 
-    <div class="quiz-body">
-      <div class="cultivation-character-preview">
-        <img id="cultivation-sprite" src="assets/truc-co.png" alt="Đả tọa">
-      </div>
-      <div class="question-container">
-        <div class="question-hanzi" id="quiz-hanzi">修仙</div>
-        <div class="question-pinyin" id="quiz-pinyin">Xiūxiān</div>
-        <div class="question-prompt">Chọn ý nghĩa đúng của khẩu quyết trên:</div>
-      </div>
-      <div class="options-grid" id="quiz-options">
-        <!-- Nút đáp án render từ app.js -->
-      </div>
-    </div>
-  </div>
+/* QUẢN LÝ MÀN HÌNH */
+.screen {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
 
-  <!-- Modal Tổng Kết Sau Khi Xuất Quan -->
-  <div id="cultivation-summary-modal" class="modal-overlay hidden">
-    <div class="modal-card">
-      <h3 id="summary-title">Kết Thúc Bế Quan</h3>
-      <p id="summary-reason" class="summary-reason"></p>
-      
-      <div class="summary-stats">
-        <div class="summary-row">
-          <span>Khẩu quyết lãnh ngộ:</span>
-          <b id="summary-correct">0</b>
-        </div>
-        <div class="summary-row">
-          <span>Tu vi thu được:</span>
-          <b id="summary-exp" class="exp-text">+0</b>
-        </div>
-        <div id="breakthrough-notice" class="breakthrough-notice hidden">
-          ✨ Chúc mừng Đạo hữu đột phá cảnh giới mới! ✨
-        </div>
-      </div>
+.hidden {
+  display: none !important;
+}
 
-      <button class="btn-confirm" onclick="closeCultivationModal()">Thu Công Quy Vị</button>
-    </div>
-  </div>
+/* NÚT ÂM THANH NỔI */
+.audio-btn {
+  position: fixed;
+  top: 12px;
+  right: 14px;
+  z-index: 1000;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid #ffd700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
+  transition: transform 0.15s, opacity 0.2s;
+}
 
-  <script src="app.js"></script>
-</body>
-</html>
+.audio-btn:active {
+  transform: scale(0.92);
+}
+
+.audio-btn.muted {
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+/* SẢNH CHÍNH */
+#main-lobby {
+  background: radial-gradient(circle at center, #162036 0%, #080c16 100%);
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.lobby-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 700px;
+  width: 100%;
+}
+
+.game-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #ffd700;
+  text-shadow: 0 0 16px rgba(255, 215, 0, 0.6);
+  margin-bottom: 2px;
+}
+
+.game-subtitle {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin-bottom: 18px;
+  letter-spacing: 2px;
+}
+
+.player-panel {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(15, 23, 42, 0.9);
+  padding: 14px 24px;
+  border-radius: 14px;
+  border: 1.5px solid #ffd700;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(255, 215, 0, 0.08);
+  width: 100%;
+  max-width: 580px;
+  margin-bottom: 20px;
+}
+
+.avatar-frame {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  border: 2px solid #00ffcc;
+  box-shadow: 0 0 12px #00ffcc;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #000;
+}
+
+.avatar-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.stats-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: #cbd5e1;
+}
+
+.highlight-text {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 1.15rem;
+}
+
+.exp-bar-container {
+  flex: 1;
+  height: 18px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 9px;
+  margin-left: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.exp-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0284c7, #00ffcc);
+  border-radius: 9px;
+  transition: width 0.3s ease;
+}
+
+.exp-bar-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.stats-sub {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 6px;
+}
+
+.stats-sub b {
+  color: #38bdf8;
+}
+
+.lobby-actions .btn-main {
+  padding: 12px 36px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #ffd700;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border: 2px solid #ffd700;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  transition: transform 0.1s, box-shadow 0.2s;
+}
+
+.lobby-actions .btn-main:active {
+  transform: scale(0.96);
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+/* BẾ QUAN TU LUYỆN */
+#cultivation-screen {
+  background: radial-gradient(circle at center, #0f172a 0%, #050811 100%);
+}
+
+.cultivation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 18px;
+  background: rgba(10, 15, 29, 0.9);
+  border-bottom: 1.5px solid rgba(255, 215, 0, 0.3);
+}
+
+.timer-badge {
+  font-size: 1.2rem;
+  color: #ffd700;
+  font-weight: bold;
+}
+
+.lives-container {
+  display: flex;
+  gap: 6px;
+  font-size: 1.3rem;
+}
+
+.life-icon.lost {
+  filter: grayscale(100%);
+  opacity: 0.18;
+}
+
+.btn-stop {
+  background: #7f1d1d;
+  color: #fee2e2;
+  border: 1px solid #ef4444;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-stop:active {
+  background: #991b1b;
+}
+
+.quiz-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.cultivation-character-preview {
+  margin-bottom: 8px;
+}
+
+.cultivation-character-preview img {
+  height: 64px;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 204, 0.4));
+}
+
+.question-container {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.question-hanzi {
+  font-size: 2.6rem;
+  font-weight: bold;
+  color: #38bdf8;
+  text-shadow: 0 0 14px rgba(56, 189, 248, 0.7);
+  letter-spacing: 3px;
+  line-height: 1.1;
+}
+
+.question-pinyin {
+  font-size: 1.15rem;
+  color: #ffd700;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+.question-prompt {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 580px;
+}
+
+.option-btn {
+  padding: 12px 14px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  background: #1e293b;
+  color: #f8fafc;
+  border: 1.5px solid #475569;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.option-btn:active {
+  transform: scale(0.98);
+}
+
+.option-btn.btn-correct {
+  background-color: #166534 !important;
+  border-color: #22c55e !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 10px #22c55e;
+}
+
+.option-btn.btn-wrong {
+  background-color: #991b1b !important;
+  border-color: #ef4444 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 10px #ef4444;
+}
+
+/* MODAL TỔNG KẾT */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 15px;
+}
+
+.modal-card {
+  background: #0f172a;
+  border: 2px solid #ffd700;
+  border-radius: 12px;
+  padding: 20px 24px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.35);
+  animation: modalIn 0.25s ease-out;
+}
+
+@keyframes modalIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.summary-reason {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.summary-stats {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 18px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.exp-text {
+  color: #00ffcc;
+  font-size: 1.25rem;
+}
+
+.breakthrough-notice {
+  margin-top: 10px;
+  padding: 8px;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px dashed #ffd700;
+  border-radius: 6px;
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 0.95rem;
+  animation: pulse 1.5s infinite;
+}
+
+.btn-confirm {
+  padding: 10px 28px;
+  background: #ffd700;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.btn-confirm:active {
+  background: #eab308;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.75; transform: scale(0.98); }
+}
