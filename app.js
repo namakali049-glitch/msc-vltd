@@ -50,11 +50,12 @@ let activeQuestions = [];
 let vocabPool = [];
 
 // ==========================================
-// 3. HỆ THỐNG ÂM THANH TIÊN GIỚI (WEB AUDIO API AN TOÀN)
+// 3. HỆ THỐNG ÂM THANH TIÊN GIỚI (TÁCH BIỆT BGM & SFX)
 // ==========================================
 let audioCtx = null;
-let isAudioMuted = false;
+let isBgmPlaying = false; 
 
+// Khởi tạo AudioContext an toàn và đánh thức ngay khi có thao tác
 function getAudioContext() {
     try {
         if (!audioCtx) {
@@ -64,92 +65,112 @@ function getAudioContext() {
             audioCtx.resume();
         }
         return audioCtx;
-    } catch(e) {
+    } catch (e) {
         return null;
     }
 }
 
+// 1. Âm thanh bấm nút (Tiếng gõ thanh mộc sắc nét, nghe rõ ràng)
 window.playClickSound = function() {
-    if (isAudioMuted) return;
     try {
         const ctx = getAudioContext();
         if (!ctx) return;
+        
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
+        
         osc.type = "sine";
-        osc.frequency.setValueAtTime(600, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.05);
-        gain.gain.setValueAtTime(0.1, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+        osc.frequency.setValueAtTime(800, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.08);
+        
+        gain.gain.setValueAtTime(0.25, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+        
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start();
-        osc.stop(ctx.currentTime + 0.05);
+        osc.stop(ctx.currentTime + 0.08);
     } catch(e) {}
 };
 
+// 2. Âm thanh Chọn Đúng (Hợp âm Ngũ Cung Tiên Giới ngân vang)
 function playCorrectSound() {
-    if (isAudioMuted) return;
     try {
         const ctx = getAudioContext();
         if (!ctx) return;
+        
+        // Cung - Thương - Giốc - Vũ (Đô - Rê - Mi - Sol - Đô cao)
         const notes = [523.25, 659.25, 783.99, 1046.50];
         notes.forEach((freq, idx) => {
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
+            
             osc.type = "triangle";
             osc.frequency.value = freq;
-            const startTime = ctx.currentTime + (idx * 0.06);
-            gain.gain.setValueAtTime(0.15, startTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.3);
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start(startTime);
-            osc.stop(startTime + 0.3);
-        });
-    } catch(e) {}
-}
-
-function playWrongSound() {
-    if (isAudioMuted) return;
-    try {
-        const ctx = getAudioContext();
-        if (!ctx) return;
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = "sawtooth";
-        osc.frequency.setValueAtTime(150, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.25);
-        gain.gain.setValueAtTime(0.25, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.25);
-    } catch(e) {}
-}
-
-function playLootSound() {
-    if (isAudioMuted) return;
-    try {
-        const ctx = getAudioContext();
-        if (!ctx) return;
-        [880, 1174, 1760].forEach((freq, idx) => {
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.type = "sine";
-            osc.frequency.value = freq;
+            
             const start = ctx.currentTime + (idx * 0.07);
-            gain.gain.setValueAtTime(0.18, start);
-            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.2);
+            const duration = 0.35;
+            
+            gain.gain.setValueAtTime(0.3, start);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + duration);
+            
             osc.connect(gain);
             gain.connect(ctx.destination);
             osc.start(start);
-            osc.stop(start + 0.2);
+            osc.stop(start + duration);
         });
     } catch(e) {}
 }
 
+// 3. Âm thanh Chọn Sai (Sấm sét gầm & thổ huyết)
+function playWrongSound() {
+    try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(200, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.35);
+        
+        gain.gain.setValueAtTime(0.4, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+        
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.35);
+    } catch(e) {}
+}
+
+// 4. Âm thanh Nhặt Đan Dược (Kỳ Ngộ Linh Khí)
+function playLootSound() {
+    try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        
+        [1046.50, 1318.51, 1567.98, 2093.00].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            
+            osc.type = "sine";
+            osc.frequency.value = freq;
+            
+            const start = ctx.currentTime + (idx * 0.06);
+            gain.gain.setValueAtTime(0.25, start);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.25);
+            
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.25);
+        });
+    } catch(e) {}
+}
+
+// 5. Điều khiển Nhạc Nền (Không bao giờ bị đơ nút)
 window.toggleBGM = function() {
     playClickSound();
     const bgm = document.getElementById('bgmAudio');
@@ -157,19 +178,53 @@ window.toggleBGM = function() {
     if (!bgm) return;
     
     getAudioContext();
+    
     if (bgm.paused) {
         bgm.volume = 0.35;
-        bgm.play().then(() => {
-            isAudioMuted = false;
-            if (btn) { btn.innerText = "🎵 Nhạc: Bật"; btn.classList.remove('muted'); }
-        }).catch(e => console.log("Trình duyệt chặn autoplay:", e));
+        const playPromise = bgm.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                isBgmPlaying = true;
+                if (btn) {
+                    btn.innerText = "🎵 Nhạc: Bật";
+                    btn.classList.remove('muted');
+                }
+            }).catch(err => {
+                console.warn("Không thể phát nhạc nền:", err);
+                // Vẫn cập nhật trạng thái để người dùng bấm lại được
+                if (btn) btn.innerText = "🔇 Lỗi File Nhạc";
+            });
+        }
     } else {
         bgm.pause();
-        isAudioMuted = true;
-        if (btn) { btn.innerText = "🔇 Nhạc: Tắt"; btn.classList.add('muted'); }
+        isBgmPlaying = false;
+        if (btn) {
+            btn.innerText = "🔇 Nhạc: Tắt";
+            btn.classList.add('muted');
+        }
     }
 };
 
+// Kích hoạt âm thanh ở lần chạm đầu tiên của người chơi
+function initAudioOnFirstUserGesture() {
+    getAudioContext();
+    const bgm = document.getElementById('bgmAudio');
+    if (bgm && bgm.paused) {
+        bgm.volume = 0.35;
+        bgm.play().then(() => {
+            isBgmPlaying = true;
+            const btn = document.getElementById('audioToggleBtn');
+            if (btn) {
+                btn.innerText = "🎵 Nhạc: Bật";
+                btn.classList.remove('muted');
+            }
+        }).catch(() => {});
+    }
+    document.removeEventListener('click', initAudioOnFirstUserGesture);
+    document.removeEventListener('keydown', initAudioOnFirstUserGesture);
+}
+document.addEventListener('click', initAudioOnFirstUserGesture);
+document.addEventListener('keydown', initAudioOnFirstUserGesture);
 // ==========================================
 // 4. TÍNH TOÁN CẢNH GIỚI & AVATAR
 // ==========================================
