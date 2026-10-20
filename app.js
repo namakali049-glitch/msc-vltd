@@ -1,151 +1,4 @@
 // ==========================================
-// HỆ THỐNG ÂM THANH TIÊN GIỚI (WEB AUDIO API)
-// ==========================================
-let audioCtx = null;
-let isAudioMuted = false;
-
-// Khởi tạo AudioContext khi người dùng chạm vào màn hình lần đầu
-function getAudioContext() {
-    if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-    }
-    return audioCtx;
-}
-
-// 1. Âm thanh bấm nút (Thanh thúy nhẹ nhàng)
-window.playClickSound = function() {
-    if (isAudioMuted) return;
-    try {
-        const ctx = getAudioContext();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(600, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.06);
-        
-        gain.gain.setValueAtTime(0.15, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
-        
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.06);
-    } catch(e) {}
-};
-
-// 2. Âm thanh Trả Lời Đúng (Chuông tiên ngân vang - Đạo Tâm Thông Minh)
-function playCorrectSound() {
-    if (isAudioMuted) return;
-    try {
-        const ctx = getAudioContext();
-        // Hợp âm tiên khí: Đô - Mi - Son - Đô cao
-        const notes = [523.25, 659.25, 783.99, 1046.50]; 
-        notes.forEach((freq, idx) => {
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            
-            osc.type = "triangle";
-            osc.frequency.value = freq;
-            
-            const startTime = ctx.currentTime + (idx * 0.07);
-            const duration = 0.35;
-            
-            gain.gain.setValueAtTime(0.18, startTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
-            
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            
-            osc.start(startTime);
-            osc.stop(startTime + duration);
-        });
-    } catch(e) {}
-}
-
-// 3. Âm thanh Trả Lời Sai (Sét đánh trầm đục - Tâm Ma Phản Phệ)
-function playWrongSound() {
-    if (isAudioMuted) return;
-    try {
-        const ctx = getAudioContext();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        
-        osc.type = "sawtooth";
-        osc.frequency.setValueAtTime(160, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.3);
-        
-        gain.gain.setValueAtTime(0.3, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-        
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        
-        osc.start();
-        osc.stop(ctx.currentTime + 0.3);
-    } catch(e) {}
-}
-
-// 4. Âm thanh Rớt Đồ / Nhặt Đan Dược (Kỳ Ngộ Kim Quang)
-function playLootSound() {
-    if (isAudioMuted) return;
-    try {
-        const ctx = getAudioContext();
-        [880, 1174, 1760].forEach((freq, idx) => {
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.type = "sine";
-            osc.frequency.value = freq;
-            
-            const start = ctx.currentTime + (idx * 0.08);
-            gain.gain.setValueAtTime(0.2, start);
-            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.25);
-            
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start(start);
-            osc.stop(start + 0.25);
-        });
-    } catch(e) {}
-}
-
-// 5. Điều khiển Nhạc Nền (BGM)
-window.toggleBGM = function() {
-    const bgm = document.getElementById('bgmAudio');
-    const btn = document.getElementById('audioToggleBtn');
-    if (!bgm) return;
-    
-    getAudioContext(); // Kích hoạt AudioContext
-    
-    if (bgm.paused) {
-        bgm.volume = 0.4;
-        bgm.play().then(() => {
-            isAudioMuted = false;
-            btn.innerText = "🎵 Nhạc: Bật";
-            btn.classList.remove('muted');
-        }).catch(e => console.log("Trình duyệt chặn autoplay:", e));
-    } else {
-        bgm.pause();
-        isAudioMuted = true;
-        btn.innerText = "🔇 Nhạc: Tắt";
-        btn.classList.add('muted');
-    }
-};
-
-// Tự động bật nhạc ở lần thao tác đầu tiên
-function tryStartBGMOnce() {
-    const bgm = document.getElementById('bgmAudio');
-    if (bgm && bgm.paused && !isAudioMuted) {
-        bgm.volume = 0.4;
-        bgm.play().catch(() => {});
-    }
-    document.removeEventListener('click', tryStartBGMOnce);
-}
-document.addEventListener('click', tryStartBGMOnce);
-// ==========================================
 // 1. CẤU HÌNH FIREBASE
 // ==========================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -180,7 +33,6 @@ let lifetimeMana = 0;
 let sessionMana = 0;  
 let inventory = { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
 
-// Chỉ số nhân vật
 let maxHp = 100;
 let currentHp = 100;
 let str = 10; 
@@ -198,7 +50,128 @@ let activeQuestions = [];
 let vocabPool = [];
 
 // ==========================================
-// 3. TÍNH TOÁN CẢNH GIỚI & AVATAR
+// 3. HỆ THỐNG ÂM THANH TIÊN GIỚI (WEB AUDIO API AN TOÀN)
+// ==========================================
+let audioCtx = null;
+let isAudioMuted = false;
+
+function getAudioContext() {
+    try {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+        return audioCtx;
+    } catch(e) {
+        return null;
+    }
+}
+
+window.playClickSound = function() {
+    if (isAudioMuted) return;
+    try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(600, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.05);
+        gain.gain.setValueAtTime(0.1, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.05);
+    } catch(e) {}
+};
+
+function playCorrectSound() {
+    if (isAudioMuted) return;
+    try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "triangle";
+            osc.frequency.value = freq;
+            const startTime = ctx.currentTime + (idx * 0.06);
+            gain.gain.setValueAtTime(0.15, startTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.3);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + 0.3);
+        });
+    } catch(e) {}
+}
+
+function playWrongSound() {
+    if (isAudioMuted) return;
+    try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(150, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.25);
+        gain.gain.setValueAtTime(0.25, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.25);
+    } catch(e) {}
+}
+
+function playLootSound() {
+    if (isAudioMuted) return;
+    try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        [880, 1174, 1760].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            osc.frequency.value = freq;
+            const start = ctx.currentTime + (idx * 0.07);
+            gain.gain.setValueAtTime(0.18, start);
+            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.2);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.2);
+        });
+    } catch(e) {}
+}
+
+window.toggleBGM = function() {
+    playClickSound();
+    const bgm = document.getElementById('bgmAudio');
+    const btn = document.getElementById('audioToggleBtn');
+    if (!bgm) return;
+    
+    getAudioContext();
+    if (bgm.paused) {
+        bgm.volume = 0.35;
+        bgm.play().then(() => {
+            isAudioMuted = false;
+            if (btn) { btn.innerText = "🎵 Nhạc: Bật"; btn.classList.remove('muted'); }
+        }).catch(e => console.log("Trình duyệt chặn autoplay:", e));
+    } else {
+        bgm.pause();
+        isAudioMuted = true;
+        if (btn) { btn.innerText = "🔇 Nhạc: Tắt"; btn.classList.add('muted'); }
+    }
+};
+
+// ==========================================
+// 4. TÍNH TOÁN CẢNH GIỚI & AVATAR
 // ==========================================
 function calculateRealm(mana) {
     if (mana < 150) return "Phàm Nhân";
@@ -209,16 +182,11 @@ function calculateRealm(mana) {
 }
 
 function getAvatarByMana(mana) {
-    if (mana < 150) {
-        return "assets/pham-nhan.jpg";
-    } else if (mana < 1500) {
-        return "assets/luyen-khi.png";
-    } else {
-        return "assets/truc-co.png";
-    }
+    if (mana < 150) return "assets/pham-nhan.jpg";
+    if (mana < 1500) return "assets/luyen-khi.png";
+    return "assets/truc-co.png";
 }
 
-// Tự động thử đuôi còn lại (.png <-> .jpg) nếu ảnh bị lỗi 404
 function setAvatarWithFallback(imgElement, mana) {
     if (!imgElement) return;
     const initialPath = getAvatarByMana(mana);
@@ -251,15 +219,17 @@ function updateCharacterUI() {
 }
 
 // ==========================================
-// 4. XÁC THỰC & FIREBASE SYNC
+// 5. XÁC THỰC & FIREBASE SYNC
 // ==========================================
 window.switchScreen = function(screenId) {
+    playClickSound();
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     const targetScreen = document.getElementById(screenId);
     if (targetScreen) targetScreen.classList.add('active');
 };
 
 window.switchAuthTab = function(type) {
+    playClickSound();
     document.getElementById('tab-login').classList.remove('active');
     document.getElementById('tab-signup').classList.remove('active');
     document.getElementById('displayNameGroup').style.display = 'none';
@@ -293,7 +263,8 @@ async function loadUserLifetimeMana(uid) {
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         currentUser = user;
-        document.getElementById('userDisplayName').innerText = user.displayName || user.email.split('@')[0];
+        const nameEl = document.getElementById('userDisplayName');
+        if (nameEl) nameEl.innerText = user.displayName || user.email.split('@')[0];
         await loadUserLifetimeMana(user.uid);
         switchScreen('start-screen');
     } else {
@@ -304,6 +275,7 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 window.handleSignup = async function() {
+    playClickSound();
     const email = document.getElementById('authEmail').value.trim();
     const password = document.getElementById('authPassword').value.trim();
     const displayName = document.getElementById('authDisplayName').value.trim();
@@ -321,14 +293,19 @@ window.handleSignup = async function() {
 };
 
 window.handleLogin = async function() {
+    playClickSound();
     const email = document.getElementById('authEmail').value.trim();
     const password = document.getElementById('authPassword').value.trim();
     if (!email || !password) { alert("Nhập Email và Mật khẩu!"); return; }
-    try { await signInWithEmailAndPassword(auth, email, password); } 
-    catch (e) { alert("Đăng nhập thất bại!"); }
+    try { 
+        await signInWithEmailAndPassword(auth, email, password); 
+    } catch (e) { 
+        alert("Đăng nhập thất bại: " + e.message); 
+    }
 };
 
 window.handleGoogleLogin = async function() {
+    playClickSound();
     try { 
         const result = await signInWithPopup(auth, googleProvider);
         const userRef = ref(database, 'users/' + result.user.uid);
@@ -343,7 +320,10 @@ window.handleGoogleLogin = async function() {
     } catch (e) { alert("Lỗi Google: " + e.message); }
 };
 
-window.handleLogout = function() { signOut(auth); };
+window.handleLogout = function() { 
+    playClickSound();
+    signOut(auth); 
+};
 
 async function syncManaToDatabase() {
     if (!currentUser) return;
@@ -358,9 +338,10 @@ async function syncManaToDatabase() {
 }
 
 // ==========================================
-// 5. HỒ SƠ & BẢNG XẾP HẠNG
+// 6. HỒ SƠ & BẢNG XẾP HẠNG
 // ==========================================
 window.showProfile = function() {
+    playClickSound();
     if (!currentUser) return;
     recalcStats();
     switchScreen('profile-screen');
@@ -377,6 +358,7 @@ window.showProfile = function() {
 };
 
 window.showLeaderboard = async function() {
+    playClickSound();
     switchScreen('leaderboard-screen');
     let lbList = document.getElementById('lb-list');
     lbList.innerHTML = '<li>⏳ Đang tải Tiên Đạo Bảng...</li>';
@@ -403,10 +385,13 @@ window.showLeaderboard = async function() {
     } catch (e) { lbList.innerHTML = '<li>❌ Lỗi tải bảng xếp hạng.</li>'; }
 };
 
-window.goHome = function() { switchScreen('start-screen'); };
+window.goHome = function() { 
+    playClickSound();
+    switchScreen('start-screen'); 
+};
 
 // ==========================================
-// 6. GAMEPLAY & COMBAT
+// 7. GAMEPLAY & COMBAT
 // ==========================================
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -420,14 +405,20 @@ function generateQuizSession(pool, numQuestions = 10) {
     let selected = shuffleArray([...pool]).slice(0, numQuestions);
     return selected.map(vocab => {
         let options = [vocab.meaning]; 
-        while (options.length < 4) {
+        let attempts = 0;
+        // Chốt an toàn chống treo vòng lặp (attempts < 50)
+        while (options.length < 4 && attempts < 50 && pool.length > 1) {
+            attempts++;
             let rand = pool[Math.floor(Math.random() * pool.length)];
-            if (rand && rand.meaning && !options.includes(rand.meaning)) options.push(rand.meaning);
+            if (rand && rand.meaning && !options.includes(rand.meaning)) {
+                options.push(rand.meaning);
+            }
         }
         options = shuffleArray(options);
         return {
             q: `Đạo hữu hãy cho biết ý nghĩa của từ này:\n\n✨ ${vocab.hanzi} ✨\n(Phiên âm: ${vocab.pinyin} | Loại: ${vocab.type})`,
-            options: options, ans: options.indexOf(vocab.meaning)
+            options: options, 
+            ans: options.indexOf(vocab.meaning)
         };
     });
 }
@@ -437,6 +428,7 @@ function formatTime(sec) {
 }
 
 window.startGame = async function() {
+    playClickSound();
     switchScreen('game-screen'); 
     if (vocabPool.length === 0) {
         document.getElementById('question').innerText = "⏳ Đang mở Tàng Kinh Các...";
@@ -444,7 +436,7 @@ window.startGame = async function() {
             Papa.parse("./a1_vocab.csv", {
                 download: true, header: true, skipEmptyLines: true,
                 complete: res => { vocabPool = res.data; resolve(); },
-                error: () => { alert("❌ Lỗi tải CSV!"); resolve(); }
+                error: () => { alert("❌ Lỗi tải CSV từ vựng!"); resolve(); }
             });
         });
     }
@@ -490,9 +482,11 @@ function loadQuestion() {
         const btn = document.createElement('button');
         btn.className = 'option-btn'; btn.innerText = opt;
         btn.onclick = () => {
-    playClickSound(); // <-- Âm thanh click
-    checkAnswer(index, qData.ans, btn);
-};
+            playClickSound();
+            checkAnswer(index, qData.ans, btn);
+        };
+        optionsDiv.appendChild(btn);
+    });
     
     let expPercent = Math.min(100, (currentLevelExp / expToLevelUp) * 100);
     document.getElementById('expFill').style.width = expPercent + "%";
@@ -501,28 +495,40 @@ function loadQuestion() {
     updateCharacterUI();
 }
 
-if (selectedIndex === correctIndex) {
-    btnElement.classList.add('correct');
-    playCorrectSound(); // <-- PHÁT ÂM THANH TRẢ LỜI ĐÚNG
+function checkAnswer(selectedIndex, correctIndex, btnElement) {
+    const buttons = document.querySelectorAll('.options .option-btn');
+    buttons.forEach(b => b.onclick = null); 
+    
+    if (selectedIndex === correctIndex) {
+        btnElement.classList.add('correct');
+        playCorrectSound();
+        
+        let bonusMana = Math.floor(expPerQuestion + (str * 0.2));
+        currentHp = Math.min(maxHp, currentHp + 2);
+        
+        let lootMessage = "";
+        if (Math.random() < 0.15) {
+            const items = ["Hồi Xuân Đan", "Tụ Linh Đan", "Tẩy Tủy Đan"];
+            const droppedItem = items[Math.floor(Math.random() * items.length)];
+            inventory[droppedItem] = (inventory[droppedItem] || 0) + 1;
+            lootMessage = `<br>🎁 <b style="color:#ffa502">Kỳ Ngộ!</b> Nhặt được [<b>${droppedItem}</b>]!`;
+            playLootSound();
+        }
 
-    let bonusMana = Math.floor(expPerQuestion + (str * 0.2));
-    currentHp = Math.min(maxHp, currentHp + 2);
-
-    let lootMessage = "";
-    if (Math.random() < 0.15) {
-        const items = ["Hồi Xuân Đan", "Tụ Linh Đan", "Tẩy Tủy Đan"];
-        const droppedItem = items[Math.floor(Math.random() * items.length)];
-        inventory[droppedItem] = (inventory[droppedItem] || 0) + 1;
-        lootMessage = `<br>🎁 <b style="color:#ffa502">Kỳ Ngộ!</b> Nhặt được [<b>${droppedItem}</b>]!`;
-        playLootSound(); // <-- PHÁT ÂM THANH NHẶT ĐỒ HIẾM
-    }
-    // ... code phía sau giữ nguyên
-} else {
-    btnElement.classList.add('wrong');
-    buttons[correctIndex].classList.add('correct');
-    playWrongSound(); // <-- PHÁT ÂM THANH TÂM MA PHẢN PHỆ
-    // ... code phía sau giữ nguyên
-}
+        document.getElementById('message').innerHTML = `✅ Đáp đúng! +${bonusMana} Linh Lực (STR +${Math.floor(str * 0.2)})${lootMessage}`;
+        document.getElementById('message').style.color = "#2ed573";
+        
+        currentLevelExp += bonusMana;
+        sessionMana += bonusMana;
+        lifetimeMana += bonusMana; 
+        
+        recalcStats();
+        updateCharacterUI();
+        syncManaToDatabase();
+    } else {
+        btnElement.classList.add('wrong');
+        buttons[correctIndex].classList.add('correct');
+        playWrongSound();
         
         let dodgeRate = Math.min(30, agi * 0.5); 
         if (Math.random() * 100 < dodgeRate) {
@@ -555,6 +561,7 @@ if (selectedIndex === correctIndex) {
 }
 
 window.nextQuestion = function() {
+    playClickSound();
     currentQuestionIndex++;
     if (currentQuestionIndex >= activeQuestions.length) {
         if (currentLevelExp >= expToLevelUp) {
@@ -586,15 +593,17 @@ function endGame(win) {
 }
 
 // ==========================================
-// 7. HỆ THỐNG TÚI TRỮ VẬT (ITEM BAG)
+// 8. HỆ THỐNG TÚI TRỮ VẬT (ITEM BAG)
 // ==========================================
 window.openInventory = function() {
+    playClickSound();
     const modal = document.getElementById('inventoryModal');
     if (modal) modal.style.display = 'block';
     updateInventoryUI();
 };
 
 window.closeInventory = function() {
+    playClickSound();
     const modal = document.getElementById('inventoryModal');
     if (modal) modal.style.display = 'none';
 };
@@ -630,6 +639,7 @@ function updateInventoryUI() {
 }
 
 window.useItem = function(item) {
+    playClickSound();
     if (inventory[item] > 0) {
         inventory[item]--;
         
@@ -651,3 +661,15 @@ window.useItem = function(item) {
         syncManaToDatabase();
     }
 };
+
+// Kích hoạt phát nhạc ở cú click đầu tiên
+function initAudioOnFirstUserGesture() {
+    getAudioContext();
+    const bgm = document.getElementById('bgmAudio');
+    if (bgm && bgm.paused && !isAudioMuted) {
+        bgm.volume = 0.35;
+        bgm.play().catch(() => {});
+    }
+    document.removeEventListener('click', initAudioOnFirstUserGesture);
+}
+document.addEventListener('click', initAudioOnFirstUserGesture);
