@@ -375,5 +375,37 @@ h1, h2, h3 {
     margin: 0;
     color: #a4b0be;
 }
+/* =========================================
+   NÚT ĐIỀU KHIỂN ÂM THANH (BGM TOGGLE)
+   ========================================= */
+.audio-toggle-btn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: rgba(30, 39, 46, 0.85);
+    color: #eccc68;
+    border: 1px solid #eccc68;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+    transition: 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.audio-toggle-btn:hover {
+    background: #ffa502;
+    color: #1e272e;
+    transform: scale(1.05);
+}
+
+.audio-toggle-btn.muted {
+    border-color: #747d8c;
+    color: #a4b0be;
+    background: rgba(47, 53, 66, 0.8);
+}
 
 /* =================================
