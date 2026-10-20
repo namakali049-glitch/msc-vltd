@@ -118,11 +118,14 @@ async function loadUserLifetimeMana(uid) {
     try {
         const userRef = ref(database, 'users/' + uid);
         const snapshot = await get(userRef);
-        lifetimeMana = (snapshot.exists() && snapshot.val().mana) ? snapshot.val().mana : 0;
+        if (snapshot.exists()) {
+            lifetimeMana = snapshot.val().mana || 0;
+            // Tải túi đồ từ Firebase, nếu chưa có thì tạo túi mới
+            inventory = snapshot.val().inventory || { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
+        }
     } catch (error) { lifetimeMana = 0; }
     recalcStats();
 }
-
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         currentUser = user;
