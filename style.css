@@ -434,4 +434,78 @@ h1, h2, h3 {
     border-color: #ffa502;
     transform: scale(0.9);
 }
+
+/* TỐI ƯU GIAO DIỆN DI ĐỘNG & TAI THỎ */
+body {
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* CĂN CHỈNH CỤM PHÍM D-PAD THEO VÙNG AN TOÀN TRÊN ĐIỆN THOẠI */
+#virtualDpad {
+    bottom: max(20px, env(safe-area-inset-bottom) + 10px) !important;
+    left: max(20px, env(safe-area-inset-left) + 10px) !important;
+}
+
+/* MÀN HÌNH CẢNH BÁO KHI DỰNG DỌC ĐIỆN THOẠI */
+#rotate-warning {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 15, 29, 0.96);
+    z-index: 99999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.rotate-content {
+    color: #eccc68;
+    animation: pulseWarn 1.5s infinite;
+}
+
+.rotate-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+    animation: spinPhone 2s ease-in-out infinite;
+}
+
+.rotate-content h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #ffa502;
+}
+
+.rotate-content p {
+    font-size: 14px;
+    color: #ced6e0;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+@keyframes spinPhone {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-90deg); }
+}
+
+@keyframes pulseWarn {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+/* CHỈ HIỆN CẢNH BÁO KHI ĐANG VÀO BÍ CẢNH MÀ ĐIỆN THOẠI BỊ DỰNG DỌC */
+body:has(#battle-screen.active) #rotate-warning {
+    display: none;
+}
+
+@media screen and (orientation: portrait) {
+    body:has(#battle-screen.active) #rotate-warning {
+        display: flex !important;
+    }
+}
 /* =================================
