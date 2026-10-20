@@ -149,7 +149,29 @@
         <div id="battleSwordText" style="color: #00d2d3; margin-bottom: 4px;">⚔️ Kiếm Khí: 0/0</div>
         <div id="battleKillsText" style="color: #ffa502;">👾 Ma Vật Trảm: 0</div>
     </div>
-    
+<!-- CỤM NÚT DI CHUYỂN 4 HƯỚNG ẢO TRÊN ĐIỆN THOẠI (D-PAD) -->
+    <div id="virtualDpad" style="position: absolute; bottom: 25px; left: 25px; z-index: 10002; width: 140px; height: 140px; user-select: none; -webkit-user-select: none; touch-action: none;">
+        <!-- Nút Lên -->
+        <button class="dpad-btn" 
+                style="top: 0; left: 47px;"
+                onmousedown="setMoveDir('up', true)" onmouseup="setMoveDir('up', false)"
+                ontouchstart="setMoveDir('up', true); event.preventDefault();" ontouchend="setMoveDir('up', false)">⬆️</button>
+        <!-- Nút Trái -->
+        <button class="dpad-btn" 
+                style="top: 47px; left: 0;"
+                onmousedown="setMoveDir('left', true)" onmouseup="setMoveDir('left', false)"
+                ontouchstart="setMoveDir('left', true); event.preventDefault();" ontouchend="setMoveDir('left', false)">⬅️</button>
+        <!-- Nút Phải -->
+        <button class="dpad-btn" 
+                style="top: 47px; left: 94px;"
+                onmousedown="setMoveDir('right', true)" onmouseup="setMoveDir('right', false)"
+                ontouchstart="setMoveDir('right', true); event.preventDefault();" ontouchend="setMoveDir('right', false)">➡️</button>
+        <!-- Nút Xuống -->
+        <button class="dpad-btn" 
+                style="top: 94px; left: 47px;"
+                onmousedown="setMoveDir('down', true)" onmouseup="setMoveDir('down', false)"
+                ontouchstart="setMoveDir('down', true); event.preventDefault();" ontouchend="setMoveDir('down', false)">⬇️</button>
+    </div>    
     <!-- NÚT RÚT LUI -->
     <button onclick="exitBattle()" class="secondary-btn" style="position: absolute; top: 15px; right: 20px; z-index: 10001; margin: 0; padding: 8px 18px; width: auto; background: rgba(30,39,46,0.9); border: 1px solid #ff4757;">
         🚪 Rút lui
