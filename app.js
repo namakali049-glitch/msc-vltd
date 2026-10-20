@@ -691,13 +691,11 @@ battleAssets.playerLuyenKhi.src = "assets/luyen-khi.png";
 battleAssets.playerTrucCo.src = "assets/truc-co.png";
 battleAssets.playerTrucCoTrungKy.src = "assets/truc-co-trung-ky.png";
 battleAssets.playerTrucCoVienMan.src = "assets/truc-co-vien-man.png";
+
 battleAssets.swordWood.src = "assets/kiem-khi-luyen-khi.png";
 battleAssets.swordCyan.src = "assets/kiem-khi-truc-co.png";
-// Nếu file quái của bạn là quy-hon.jpg thì sửa thành assets/quy-hon.jpg
-battleAssets.enemyGhost.src = "assets/quy-hon.png"; 
-battleAssets.enemyGhost.onerror = () => {
-    battleAssets.enemyGhost.src = "assets/quy-hon.png";
-};
+
+battleAssets.enemyGhost.src = "assets/quy-hon.png";
 
 // 2. TỌA ĐỘ THEO CHUỘT / CẢM ỨNG
 const battleCanvas = document.getElementById('gameCanvas');
