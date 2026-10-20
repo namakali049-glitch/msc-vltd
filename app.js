@@ -41,18 +41,11 @@ let agi = 10;
 let currentLevel = 1;
 let currentLevelExp = 0; 
 let currentQuestionIndex = 0;
-let expToLevelUp = 80; 
+let expToLevelUp = 0; 
 const expPerQuestion = 10;
 
-// CẤU HÌNH MỚI CHO BẾ QUAN TU LUYỆN
-const CULTIVATION_TIME_LIMIT = 120; // 2 phút (120 giây)
-const MAX_WRONG_TRIES = 3;          // 3 lần sai = Tẩu hỏa nhập ma
-let cultivationTimeLeft = CULTIVATION_TIME_LIMIT;
-let wrongTries = 0;
-let correctCountInRun = 0;
-let isCultivationActive = false;
-
 let timerInterval = null;
+let totalSeconds = 0;
 let activeQuestions = []; 
 let vocabPool = [];
 
@@ -147,7 +140,7 @@ function playLootSound() {
 window.toggleBGM = async function() {
     window.playClickSound();
     const bgm = document.getElementById('bgmAudio');
-    const btn = document.getElementById('audioToggleBtn') || document.getElementById('btn-music');
+    const btn = document.getElementById('audioToggleBtn');
     if (!bgm) return;
     const ctx = getAudioContext();
     if (ctx && ctx.state === 'suspended') await ctx.resume().catch(() => {});
@@ -158,7 +151,7 @@ window.toggleBGM = async function() {
             await bgm.play();
             isBgmPlaying = true;
             if (btn) {
-                btn.innerHTML = "🎵 Nhạc: Bật";
+                btn.innerText = "🎵 Nhạc: Bật";
                 btn.classList.remove('muted');
             }
         } catch(err) {
@@ -168,7 +161,7 @@ window.toggleBGM = async function() {
         bgm.pause();
         isBgmPlaying = false;
         if (btn) {
-            btn.innerHTML = "🔇 Nhạc: Tắt";
+            btn.innerText = "🔇 Nhạc: Tắt";
             btn.classList.add('muted');
         }
     }
@@ -220,15 +213,19 @@ function recalcStats() {
 
 function updateCharacterUI() {
     let hpPercent = Math.max(0, (currentHp / maxHp) * 100);
-    const hpFill = document.getElementById('hpFill') || document.getElementById('hp-bar');
-    const hpText = document.getElementById('hpText') || document.getElementById('hp-text');
-    const statStr = document.getElementById('statStr') || document.getElementById('stat-str');
-    const statAgi = document.getElementById('statAgi') || document.getElementById('stat-agi');
+    
+    // Đồng bộ cả màn hình Sảnh chính lẫn màn hình Bế Quan
+    const hpFills = [document.getElementById('hpFill'), document.getElementById('cultHpFill')];
+    hpFills.forEach(f => { if (f) f.style.width = hpPercent + "%"; });
 
-    if (hpFill) hpFill.style.width = hpPercent + "%";
-    if (hpText) hpText.innerText = `${currentHp}/${maxHp}`;
-    if (statStr) statStr.innerText = str;
-    if (statAgi) statAgi.innerText = agi;
+    const hpTexts = [document.getElementById('hpText'), document.getElementById('cultHpText')];
+    hpTexts.forEach(t => { if (t) t.innerText = `${currentHp}/${maxHp}`; });
+
+    const strTexts = [document.getElementById('statStr'), document.getElementById('cultStatStr')];
+    strTexts.forEach(s => { if (s) s.innerText = str; });
+
+    const agiTexts = [document.getElementById('statAgi'), document.getElementById('cultStatAgi')];
+    agiTexts.forEach(a => { if (a) a.innerText = agi; });
     
     const gameAvatar = document.getElementById('gameAvatar');
     if (gameAvatar) setAvatarWithFallback(gameAvatar, lifetimeMana);
@@ -261,28 +258,19 @@ window.switchScreen = function(screenId) {
 
 window.switchAuthTab = function(type) {
     window.playClickSound();
-    const tabLogin = document.getElementById('tab-login');
-    const tabSignup = document.getElementById('tab-signup');
-    const displayNameGroup = document.getElementById('displayNameGroup');
-    const authSubmitBtn = document.getElementById('authSubmitBtn');
-
-    if (tabLogin) tabLogin.classList.remove('active');
-    if (tabSignup) tabSignup.classList.remove('active');
-    if (displayNameGroup) displayNameGroup.style.display = 'none';
+    document.getElementById('tab-login').classList.remove('active');
+    document.getElementById('tab-signup').classList.remove('active');
+    document.getElementById('displayNameGroup').style.display = 'none';
 
     if (type === 'login') {
-        if (tabLogin) tabLogin.classList.add('active');
-        if (authSubmitBtn) {
-            authSubmitBtn.innerText = "Bắt đầu Tu Luyện 🚀";
-            authSubmitBtn.onclick = handleLogin;
-        }
+        document.getElementById('tab-login').classList.add('active');
+        document.getElementById('authSubmitBtn').innerText = "Bắt đầu Tu Luyện 🚀";
+        document.getElementById('authSubmitBtn').onclick = handleLogin;
     } else {
-        if (tabSignup) tabSignup.classList.add('active');
-        if (displayNameGroup) displayNameGroup.style.display = 'block';
-        if (authSubmitBtn) {
-            authSubmitBtn.innerText = "Đăng Ký Tài Khoản 📝";
-            authSubmitBtn.onclick = handleSignup;
-        }
+        document.getElementById('tab-signup').classList.add('active');
+        document.getElementById('displayNameGroup').style.display = 'block';
+        document.getElementById('authSubmitBtn').innerText = "Đăng Ký Tài Khoản 📝";
+        document.getElementById('authSubmitBtn').onclick = handleSignup;
     }
 };
 
@@ -424,7 +412,7 @@ window.goHome = function() {
 };
 
 // ==========================================
-// 7. LỐI CHƠI BẾ QUAN (HỌC TỪ VỰNG - ĐẦY ĐỦ 4 TÍNH NĂNG MỚI)
+// 7. LỐI CHƠI BẾ QUAN (HỌC TỪ VỰNG GỐC)
 // ==========================================
 function shuffleArray(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -459,41 +447,11 @@ function formatTime(sec) {
     return `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`;
 }
 
-// CẬP NHẬT GIAO DIỆN TRÁI TIM TÂM MA
-function updateHeartsUI() {
-    const heartsContainer = document.getElementById('hearts-container') || document.getElementById('cultivation-lives');
-    if (!heartsContainer) return;
-    const hearts = heartsContainer.querySelectorAll('.heart, .life-icon');
-    hearts.forEach((h, idx) => {
-        if (idx < MAX_WRONG_TRIES - wrongTries) {
-            h.classList.remove('lost');
-            h.style.opacity = "1";
-            h.style.filter = "none";
-        } else {
-            h.classList.add('lost');
-            h.style.opacity = "0.2";
-            h.style.filter = "grayscale(100%)";
-        }
-    });
-}
-
-// CẬP NHẬT ĐỒNG HỒ ĐẾM NGƯỢC
-function updateTimerDisplay() {
-    const timerElem = document.getElementById('timerDisplay') || document.getElementById('countdown-timer');
-    if (timerElem) {
-        timerElem.innerText = formatTime(cultivationTimeLeft);
-    }
-}
-
-// BẮT ĐẦU BẾ QUAN
 window.startGame = async function() {
     window.playClickSound();
     switchScreen('game-screen'); 
-    
-    // Tự động nạp file từ vựng CSV gốc
     if (vocabPool.length === 0) {
-        const qElem = document.getElementById('question');
-        if (qElem) qElem.innerText = "⏳ Đang mở Tàng Kinh Các...";
+        document.getElementById('question').innerText = "⏳ Đang mở Tàng Kinh Các...";
         await new Promise(resolve => {
             Papa.parse("./a1_vocab.csv", {
                 download: true, header: true, skipEmptyLines: true,
@@ -503,110 +461,67 @@ window.startGame = async function() {
         });
     }
 
-    currentLevel = 1; 
-    sessionMana = 0; 
-    wrongTries = 0;
-    correctCountInRun = 0;
-    cultivationTimeLeft = CULTIVATION_TIME_LIMIT;
-    isCultivationActive = true;
-
+    currentLevel = 1; sessionMana = 0; totalSeconds = 0;
     recalcStats();
     currentHp = maxHp; 
     updateCharacterUI();
-    updateHeartsUI();
-    updateTimerDisplay();
 
-    // Khởi động đồng hồ đếm ngược từ 02:00 về 00:00
+    document.getElementById('timerDisplay').innerText = "00:00";
     if (timerInterval) clearInterval(timerInterval);
     timerInterval = setInterval(() => {
-        if (!isCultivationActive) return;
-        cultivationTimeLeft--;
-        updateTimerDisplay();
-
-        if (cultivationTimeLeft <= 0) {
-            stopCultivation('timeout');
-        }
+        totalSeconds++;
+        document.getElementById('timerDisplay').innerText = formatTime(totalSeconds);
     }, 1000);
     
     initLevel();
 };
 
 function initLevel() {
-    currentLevelExp = 0; 
-    currentQuestionIndex = 0;
+    currentLevelExp = 0; currentQuestionIndex = 0;
     activeQuestions = generateQuizSession(vocabPool, 10);
     expToLevelUp = Math.floor(activeQuestions.length * 0.8) * expPerQuestion; 
     
-    const lvlEl = document.getElementById('level') || document.getElementById('current-floor');
-    const maxExpEl = document.getElementById('maxExp');
-    const totalScoreEl = document.getElementById('totalScore') || document.getElementById('run-exp');
-
-    if (lvlEl) lvlEl.innerText = currentLevel;
-    if (maxExpEl) maxExpEl.innerText = expToLevelUp;
-    if (totalScoreEl) totalScoreEl.innerText = sessionMana;
-    
+    document.getElementById('level').innerText = currentLevel;
+    document.getElementById('maxExp').innerText = expToLevelUp;
+    document.getElementById('totalScore').innerText = sessionMana;
     loadQuestion();
 }
 
 function loadQuestion() {
-    if (currentLevel > 4) { stopCultivation('completed'); return; }
-    if (currentQuestionIndex >= activeQuestions.length) {
-        stopCultivation('completed');
-        return;
-    }
-
+    if (currentLevel > 4) { endGame(true); return; }
     const qData = activeQuestions[currentQuestionIndex];
-    const counterEl = document.getElementById('counter') || document.getElementById('quiz-counter');
-    const questionEl = document.getElementById('question');
-    const optionsDiv = document.getElementById('options') || document.getElementById('options-container');
-
-    if (counterEl) counterEl.innerText = `Câu hỏi: ${currentQuestionIndex + 1} / ${activeQuestions.length}`;
-    if (questionEl) questionEl.innerText = qData.q;
+    document.getElementById('counter').innerText = `Câu hỏi: ${currentQuestionIndex + 1} / ${activeQuestions.length}`;
+    document.getElementById('question').innerText = qData.q;
     
-    if (optionsDiv) optionsDiv.innerHTML = '';
-    const msgEl = document.getElementById('message');
-    if (msgEl) msgEl.innerText = '';
-    const nextBtn = document.getElementById('nextBtn');
-    if (nextBtn) nextBtn.style.display = 'none';
+    const optionsDiv = document.getElementById('options');
+    optionsDiv.innerHTML = '';
+    document.getElementById('message').innerText = '';
+    document.getElementById('nextBtn').style.display = 'none';
 
     qData.options.forEach((opt, index) => {
         const btn = document.createElement('button');
-        btn.className = 'option-btn'; 
-        btn.innerText = opt;
+        btn.className = 'option-btn'; btn.innerText = opt;
         btn.onclick = () => {
             window.playClickSound();
             checkAnswer(index, qData.ans, btn);
         };
-        if (optionsDiv) optionsDiv.appendChild(btn);
+        optionsDiv.appendChild(btn);
     });
     
-    updateExpUI();
+    let expPercent = Math.min(100, (currentLevelExp / expToLevelUp) * 100);
+    document.getElementById('expFill').style.width = expPercent + "%";
+    document.getElementById('exp').innerText = currentLevelExp;
+    document.getElementById('totalScore').innerText = sessionMana;
     updateCharacterUI();
 }
 
-function updateExpUI() {
-    let expPercent = Math.min(100, (currentLevelExp / expToLevelUp) * 100);
-    const expFill = document.getElementById('expFill') || document.getElementById('exp-bar');
-    const expText = document.getElementById('exp');
-    const expTextFull = document.getElementById('exp-text');
-    const totalScore = document.getElementById('totalScore') || document.getElementById('run-exp');
-
-    if (expFill) expFill.style.width = expPercent + "%";
-    if (expText) expText.innerText = currentLevelExp;
-    if (expTextFull) expTextFull.innerText = `${currentLevelExp} / ${expToLevelUp} Linh Lực Yêu Cầu`;
-    if (totalScore) totalScore.innerText = sessionMana;
-}
-
 function checkAnswer(selectedIndex, correctIndex, btnElement) {
-    if (!isCultivationActive) return;
-    const buttons = document.querySelectorAll('.options .option-btn, .options-container .option-btn');
+    const buttons = document.querySelectorAll('.quiz-options-list .option-btn');
     buttons.forEach(b => b.onclick = null); 
     
     if (selectedIndex === correctIndex) {
-        // TRẢ LỜI ĐÚNG
         btnElement.classList.add('correct');
         playCorrectSound();
-        correctCountInRun++;
         
         let bonusMana = Math.floor(expPerQuestion + (str * 0.2));
         currentHp = Math.min(maxHp, currentHp + 2);
@@ -620,11 +535,8 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
             playLootSound();
         }
 
-        const msg = document.getElementById('message');
-        if (msg) {
-            msg.innerHTML = `✅ Đáp đúng! +${bonusMana} Linh Lực (STR +${Math.floor(str * 0.2)})${lootMessage}`;
-            msg.style.color = "#2ed573";
-        }
+        document.getElementById('message').innerHTML = `✅ Đáp đúng! +${bonusMana} Linh Lực (STR +${Math.floor(str * 0.2)})${lootMessage}`;
+        document.getElementById('message').style.color = "#2ed573";
         
         currentLevelExp += bonusMana;
         sessionMana += bonusMana;
@@ -632,38 +544,16 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
         
         recalcStats();
         updateCharacterUI();
-        updateExpUI();
         syncManaToDatabase();
-
-        // Tự động chuyển câu sau 0.6s nếu không có nút Next
-        const nextBtn = document.getElementById('nextBtn');
-        if (nextBtn) {
-            nextBtn.style.display = 'block';
-        } else {
-            setTimeout(() => { window.nextQuestion(); }, 600);
-        }
     } else {
-        // TRẢ LỜI SAI (TÍNH TÂM MA - TRỪ MẠNG)
         btnElement.classList.add('wrong');
-        if (buttons[correctIndex]) buttons[correctIndex].classList.add('correct');
+        buttons[correctIndex].classList.add('correct');
         playWrongSound();
         
-        wrongTries++;
-        updateHeartsUI();
-
-        // Kiểm tra điều kiện 3 lần sai
-        if (wrongTries >= MAX_WRONG_TRIES) {
-            setTimeout(() => { stopCultivation('demon'); }, 600);
-            return;
-        }
-
         let dodgeRate = Math.min(30, agi * 0.5); 
         if (Math.random() * 100 < dodgeRate) {
-            const msg = document.getElementById('message');
-            if (msg) {
-                msg.innerText = "⚡ Thân pháp siêu phàm! Né thành công Tâm Ma!";
-                msg.style.color = "#70a1ff";
-            }
+            document.getElementById('message').innerText = "⚡ Thân pháp siêu phàm! Né thành công Tâm Ma!";
+            document.getElementById('message').style.color = "#70a1ff";
         } else {
             currentHp -= 20;
             const gameScreen = document.getElementById('game-screen');
@@ -671,26 +561,22 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
                 gameScreen.classList.add('damage-flash');
                 setTimeout(() => gameScreen.classList.remove('damage-flash'), 400);
             }
-            const msg = document.getElementById('message');
-            if (msg) {
-                msg.innerText = `❌ Tâm Ma Phản Phệ! Mất 20 Sinh Mệnh!`;
-                msg.style.color = "#ff4757";
-            }
+            document.getElementById('message').innerText = `❌ Tâm Ma Phản Phệ! Mất 20 Sinh Mệnh!`;
+            document.getElementById('message').style.color = "#ff4757";
         }
         updateCharacterUI();
 
         if (currentHp <= 0) {
-            setTimeout(() => { stopCultivation('demon'); }, 500);
+            setTimeout(() => { alert("💥 Sinh Mệnh cạn kiệt! Đạo hữu đã Tẩu Hỏa Nhập Ma."); endGame(false); }, 500);
             return;
         }
-
-        const nextBtn = document.getElementById('nextBtn');
-        if (nextBtn) {
-            nextBtn.style.display = 'block';
-        } else {
-            setTimeout(() => { window.nextQuestion(); }, 700);
-        }
     }
+    
+    let expPercent = Math.min(100, (currentLevelExp / expToLevelUp) * 100);
+    document.getElementById('expFill').style.width = expPercent + "%";
+    document.getElementById('exp').innerText = currentLevelExp;
+    document.getElementById('totalScore').innerText = sessionMana;
+    document.getElementById('nextBtn').style.display = 'block';
 }
 
 window.nextQuestion = function() {
@@ -699,98 +585,30 @@ window.nextQuestion = function() {
     if (currentQuestionIndex >= activeQuestions.length) {
         if (currentLevelExp >= expToLevelUp) {
             currentLevel++;
-            if (currentLevel <= 4) { 
-                alert(`🎉 Đột phá thành công sang Tầng ${currentLevel}!`); 
-                initLevel(); 
-                return; 
-            } else {
-                stopCultivation('completed');
-                return;
-            }
+            if (currentLevel <= 4) { alert(`🎉 Đột phá thành công sang Tầng ${currentLevel}!`); initLevel(); return; }
         } else {
-            stopCultivation('failed');
-            return;
+            alert(`😢 Linh lực không đủ (Cần tối thiểu ${expToLevelUp}). Mời Đạo Hữu làm lại.`);
+            endGame(false); return;
         }
     }
     loadQuestion();
 };
 
-// DỪNG TU LUYỆN (XUẤT QUAN CHỦ ĐỘNG HOẶC HẾT MẠNG / HẾT GIỜ)
-window.stopCultivation = function(reason = 'manual') {
-    if (!isCultivationActive) return;
-    isCultivationActive = false;
-    clearInterval(timerInterval);
-    syncManaToDatabase();
-
-    const summaryModal = document.getElementById('summary-modal') || document.getElementById('cultivation-summary-modal');
-    
-    // Nếu có Modal Tổng Kết, nạp thông tin chi tiết vào Modal
-    if (summaryModal) {
-        const titleEl = document.getElementById('modal-title') || document.getElementById('summary-title');
-        const descEl = document.getElementById('modal-desc') || document.getElementById('summary-reason');
-        const correctEl = document.getElementById('summary-correct');
-        const gainedEl = document.getElementById('summary-gained') || document.getElementById('summary-exp');
-        const totalEl = document.getElementById('summary-total');
-
-        if (reason === 'demon') {
-            if (titleEl) { titleEl.innerText = "💥 Tẩu Hỏa Nhập Ma!"; titleEl.style.color = "#ef4444"; }
-            if (descEl) descEl.innerText = "Đạo hữu tâm trí bất định, chọn sai quá 3 lần, buộc phải ngưng tụ chân khí xuất quan!";
-        } else if (reason === 'timeout') {
-            if (titleEl) { titleEl.innerText = "⌛ Mãn Hạn Bế Quan!"; titleEl.style.color = "#facc15"; }
-            if (descEl) descEl.innerText = "Thời hạn bế quan 2 phút đã kết thúc, chân khí tự động quy về đan điền.";
-        } else if (reason === 'completed') {
-            if (titleEl) { titleEl.innerText = "🎉 Viên Mãn Xuất Quan!"; titleEl.style.color = "#4ade80"; }
-            if (descEl) descEl.innerText = "Chúc mừng đạo hữu đã thông triệt toàn bộ khẩu quyết của đợt tịnh tu này!";
-        } else {
-            if (titleEl) { titleEl.innerText = "🚪 Chủ Động Xuất Quan"; titleEl.style.color = "#38bdf8"; }
-            if (descEl) descEl.innerText = "Đạo hữu chủ động thu công, bảo toàn toàn vẹn số linh lực đã lĩnh ngộ.";
-        }
-
-        if (correctEl) correctEl.innerText = `${correctCountInRun} / ${activeQuestions.length}`;
-        if (gainedEl) gainedEl.innerText = `+${sessionMana} Linh Lực`;
-        if (totalEl) totalEl.innerText = `${currentLevelExp} / ${expToLevelUp}`;
-
-        summaryModal.classList.remove('hidden');
-        summaryModal.style.display = 'flex';
-    } else {
-        // Fallback giao diện cũ nếu chưa nhúng Modal
-        endGame(reason !== 'demon');
-    }
-};
-
-window.closeSummaryModal = function() {
-    window.playClickSound();
-    const summaryModal = document.getElementById('summary-modal') || document.getElementById('cultivation-summary-modal');
-    if (summaryModal) {
-        summaryModal.classList.add('hidden');
-        summaryModal.style.display = 'none';
-    }
-    goHome();
-};
-
 function endGame(win) {
     clearInterval(timerInterval);
-    const qElem = document.getElementById('question');
-    if (qElem) {
-        qElem.innerHTML = win ? 
-            `🏆 <b>Đột Phá Thành Công!</b><br><br>🎯 Nhận: <span style="color:#eccc68;">+${sessionMana} Linh Lực</span><br>💎 Tổng Tu Vi: <span style="color:#00d2d3;">${lifetimeMana}</span>` : 
-            `💥 <b>Tẩu Hỏa Nhập Ma!</b><br><br>🎯 Nhận: <span style="color:#eccc68;">+${sessionMana} Linh Lực</span><br>💎 Tổng Tu Vi: <span style="color:#00d2d3;">${lifetimeMana}</span>`;
-    }
+    document.getElementById('question').innerHTML = win ? 
+        `🏆 <b>Đột Phá Thành Công!</b><br><br>🎯 Nhận: <span style="color:#eccc68;">+${sessionMana} Linh Lực</span><br>💎 Tổng Tu Vi: <span style="color:#00d2d3;">${lifetimeMana}</span>` : 
+        `💥 <b>Tẩu Hỏa Nhập Ma!</b><br><br>🎯 Nhận: <span style="color:#eccc68;">+${sessionMana} Linh Lực</span><br>💎 Tổng Tu Vi: <span style="color:#00d2d3;">${lifetimeMana}</span>`;
     
-    const options = document.getElementById('options');
-    if (options) {
-        options.innerHTML = "";
-        let btn = document.createElement('button');
-        btn.className = "primary-btn"; btn.innerText = "Xem Tiên Đạo Bảng 🏆";
-        btn.onclick = showLeaderboard;
-        options.appendChild(btn);
-    }
-    const counter = document.getElementById('counter');
-    if (counter) counter.innerText = "";
-    const nextBtn = document.getElementById('nextBtn');
-    if (nextBtn) nextBtn.style.display = 'none';
-    const message = document.getElementById('message');
-    if (message) message.innerText = "";
+    document.getElementById('options').innerHTML = "";
+    document.getElementById('counter').innerText = "";
+    document.getElementById('nextBtn').style.display = 'none';
+    document.getElementById('message').innerText = "";
+    
+    let btn = document.createElement('button');
+    btn.className = "primary-btn"; btn.innerText = "Xem Tiên Đạo Bảng 🏆";
+    btn.onclick = showLeaderboard;
+    document.getElementById('options').appendChild(btn);
 }
 
 // ==========================================
@@ -799,7 +617,7 @@ function endGame(win) {
 window.openInventory = function() {
     window.playClickSound();
     const modal = document.getElementById('inventoryModal');
-    if (modal) modal.style.display = 'block';
+    if (modal) modal.style.display = 'flex';
     updateInventoryUI();
 };
 
@@ -830,12 +648,12 @@ function updateInventoryUI() {
                     <h4>${item} (x${inventory[item]})</h4>
                     <p>${itemEffects[item]}</p>
                 </div>
-                <button class="primary-btn" style="background:#3742fa; width:auto; margin:0; padding:8px 15px;" onclick="useItem('${item}')">Dùng</button>
+                <button class="primary-btn" style="background:#3742fa; width:auto; margin:0; padding:6px 14px;" onclick="useItem('${item}')">Dùng</button>
             </div>`;
         }
     }
     if (!hasItems) {
-        invList.innerHTML = '<p style="color:#aaa; font-size:14px;">Túi đồ trống không! Hãy trả lời câu hỏi để rớt đan dược.</p>';
+        invList.innerHTML = '<p style="color:#aaa; font-size:14px; padding:10px 0;">Túi đồ trống không! Hãy trả lời câu hỏi để rớt đan dược.</p>';
     }
 }
 
@@ -1054,7 +872,7 @@ function battleLoop() {
         battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
     }
 
-    // 2. Vẽ hạt nổ linh lực
+    // 2. Vẽ hiệu ứng hạt linh lực
     for (let i = battleData.particles.length - 1; i >= 0; i--) {
         const p = battleData.particles[i];
         p.x += p.vx;
@@ -1072,7 +890,7 @@ function battleLoop() {
         battleCtx.globalAlpha = 1.0;
     }
 
-    // 3. Vẽ Nhân Vật Chibi
+    // 3. Vẽ nhân vật Chibi
     const pImg = getBattleCharacterSkin();
     battleCtx.save();
     const bobbingY = Math.sin(battleData.frameCount * 0.12) * 4;
@@ -1088,7 +906,7 @@ function battleLoop() {
     }
     battleCtx.restore();
 
-    // 4. Vẽ Kiếm Trận Xoay Quanh
+    // 4. Vẽ Kiếm Trận xoay tròn
     let activeSwordCount = 0;
     const orbitRadius = 75;
     const rotSpeed = 0.04 + (agi * 0.0008);
