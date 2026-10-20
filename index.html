@@ -201,7 +201,7 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- MODAL: TÀNG KINH CÁC                       -->
+  <!-- MODAL: TÀNG KINH CÁC (CŨ)                  -->
   <!-- ========================================== -->
   <div id="libraryModal" class="modal-overlay" style="display: none;">
     <div class="library-card">
@@ -209,7 +209,7 @@
       <p class="library-desc">Chọn công pháp điển tịch để nhập định tu luyện:</p>
       
       <div class="library-options">
-        <!-- Lựa chọn 1: Hán Ngữ Chân Giải -->
+        <!-- Lựa chọn 1: Hán Ngữ Chân Giải -> Chuyển hướng mở Modal mới -->
         <div class="library-item" onclick="openHanNguModal()">
           <div class="lib-icon">📜</div>
           <div class="lib-info">
@@ -220,7 +220,7 @@
         </div>
 
         <!-- Lựa chọn 2: Anh Ngữ Công (Chưa mở khóa) -->
-        <div class="library-item locked" onclick="chooseLibraryOption('anh_ngu')">
+        <div class="library-item locked" onclick="alert('🔒 Cấm chế phong ấn!\n\nĐiển tịch Anh Ngữ Công hiện chưa khai mở.')">
           <div class="lib-icon">🔒</div>
           <div class="lib-info">
             <h4>Anh Ngữ Công <span class="lock-tag">Chưa Mở Khóa</span></h4>
@@ -233,6 +233,88 @@
       <button class="btn-close-inv mt-15" onclick="closeLibraryModal()">Rời Khỏi Tàng Kinh Các</button>
     </div>
   </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: HÁN NGỮ CHÂN GIẢI (HẠ - TRUNG - THƯỢNG) -->
+  <!-- ========================================== -->
+  <div id="hanNguModal" class="modal-overlay" style="display: none;">
+    <div class="library-card">
+      <h3 class="library-header">📜 HÁN NGỮ CHÂN GIẢI (v0.4)</h3>
+      <p class="library-desc">Cảnh giới càng cao, thiên đạo càng vô tình. Hãy chọn quyển tịch phù hợp:</p>
+      
+      <div class="library-options">
+        <!-- Hạ Quyển -->
+        <div class="library-item" onclick="startVolume('ha_quyen')">
+          <div class="lib-icon">📗</div>
+          <div class="lib-info">
+            <h4>Hạ Quyển (A1-A2)</h4>
+            <p>Dành cho: Phàm Nhân ➔ Trúc Cơ</p>
+          </div>
+          <button class="btn-lib-action">Tu Luyện</button>
+        </div>
+
+        <!-- Trung Quyển -->
+        <div class="library-item" onclick="startVolume('trung_quyen')">
+          <div class="lib-icon">📘</div>
+          <div class="lib-info">
+            <h4>Trung Quyển (B1-B2)</h4>
+            <p>Yêu cầu: Kim Đan ➔ Nguyên Anh<br><small style="color:#f59e0b; font-weight:bold;">(Độ khó Siêu Cấp)</small></p>
+          </div>
+          <button class="btn-lib-action">Tu Luyện</button>
+        </div>
+
+        <!-- Thượng Quyển -->
+        <div class="library-item locked" onclick="alert('Thượng Quyển (C1-C2) chứa đựng thiên cơ của Hóa Thần trở lên. Tạm thời chưa xuất thế!')">
+          <div class="lib-icon">📕</div>
+          <div class="lib-info">
+            <h4>Thượng Quyển (C1-C2) <span class="lock-tag">Bản sau</span></h4>
+            <p>Yêu cầu: Hóa Thần ➔ Độ Kiếp</p>
+          </div>
+          <button class="btn-lib-action disabled">Phong Ấn</button>
+        </div>
+      </div>
+
+      <button class="btn-close-inv mt-15" onclick="closeHanNguModal()">Trở Lại</button>
+    </div>
+  </div>
+
+  <!-- Gắn trực tiếp các Script xử lý Modal vào HTML để tránh lỗi Uncaught ReferenceError -->
+  <script>
+    function openLibraryModal() {
+      if (window.playClickSound) window.playClickSound();
+      const modal = document.getElementById('libraryModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeLibraryModal() {
+      if (window.playClickSound) window.playClickSound();
+      const modal = document.getElementById('libraryModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function openHanNguModal() {
+      if (window.playClickSound) window.playClickSound();
+      document.getElementById('libraryModal').style.display = 'none';
+      const modal = document.getElementById('hanNguModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeHanNguModal() {
+      if (window.playClickSound) window.playClickSound();
+      document.getElementById('hanNguModal').style.display = 'none';
+      document.getElementById('libraryModal').style.display = 'flex';
+    }
+
+    function startVolume(vol) {
+      if (window.playClickSound) window.playClickSound();
+      // Chuyển lệnh xử lý vào file app.js
+      if (typeof window.checkAndStartVolume === 'function') {
+        window.checkAndStartVolume(vol);
+      } else {
+        alert("Đang tải dữ liệu Tàng Kinh Các, vui lòng thử lại sau vài giây...");
+      }
+    }
+  </script>
 
   <script type="module" src="app.js"></script>
 </body>
