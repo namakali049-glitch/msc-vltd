@@ -1,10 +1,9 @@
 /* =========================================
-   HÌNH NỀN VÀ KHUNG GIAO DIỆN CHÍNH
+   1. HÌNH NỀN & KHUNG GIAO DIỆN CHÍNH
    ========================================= */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Lớp phủ tối (overlay) kết hợp ảnh nền để chữ luôn sắc nét, không bị chói */
-    background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)), 
+    background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.88)), 
                 url('./assets/background.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #fff;
@@ -14,55 +13,134 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    box-sizing: border-box;
 }
 
-/* Hiệu ứng Kính Mờ (Glassmorphism) cho các hộp giao diện */
+/* QUY TẮC BẮT BUỘC: Ẩn tất cả màn hình, chỉ mở màn hình có class active */
+.screen {
+    display: none;
+    width: 100%;
+    max-width: 480px;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* Hiệu ứng Kính Mờ (Glassmorphism) */
 .cute-box, .profile-card, .quiz-container, .character-status-card {
-    background: rgba(30, 39, 46, 0.75) !important; /* Độ trong suốt nhẹ */
-    backdrop-filter: blur(12px);                  /* Làm mờ hình nền phía sau */
+    background: rgba(30, 39, 46, 0.8) !important;
+    backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: 16px;
     padding: 25px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(236, 204, 104, 0.35); /* Viền vàng kim mỏng sang trọng */
+    border: 1px solid rgba(236, 204, 104, 0.35);
     text-align: center;
 }
 
-/* Chỉnh riêng cho khối câu hỏi trong màn chơi */
-.quiz-container {
-    margin-top: 15px;
-    padding: 20px;
+h1, h2, h3 { 
+    color: #eccc68; 
+    margin-top: 0;
 }
 
-/* Chỉnh riêng cho khung chỉ số đầu màn chơi */
-.character-status-card {
-    padding: 15px;
+/* =========================================
+   2. HỆ THỐNG NÚT BẤM & NHẬP LIỆU
+   ========================================= */
+.primary-btn, .secondary-btn, .tab-btn, .logout-btn, .google-btn {
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s ease;
+    box-sizing: border-box;
+}
+
+.primary-btn {
+    background: #ff4757;
+    color: white;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.primary-btn:hover { background: #ff6b81; }
+
+.secondary-btn {
+    background: #3742fa;
+    color: white;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.secondary-btn:hover { background: #5352ed; }
+
+.tab-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ccc;
+    flex: 1;
+}
+.tab-btn.active {
+    background: #ffa502;
+    color: #1e272e;
+}
+
+.logout-btn {
+    background: #ff4757;
+    color: white;
+    padding: 6px 12px;
+    font-size: 12px;
+    float: right;
+}
+
+.auth-input {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid #57606f;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 15px;
+}
+.auth-input:focus {
+    outline: none;
+    border-color: #ffa502;
+}
+
+.user-bar {
+    text-align: left;
     margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Hệ thống UI Chơi Game */
-.game-header { margin-bottom: 20px; }
+/* =========================================
+   3. GIAO DIỆN CHƠI GAME & CHỈ SỐ RPG
+   ========================================= */
 .character-status-card {
-    background: rgba(15, 15, 25, 0.8);
-    border: 1px solid #eccc68;
-    border-radius: 10px;
-    padding: 12px;
+    padding: 12px 15px;
     margin-bottom: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.stat-row {
+    margin-bottom: 8px;
+    text-align: left;
+}
+.stat-label {
+    font-size: 13px;
+    font-weight: bold;
 }
 
 .attributes-row {
     display: flex;
     justify-content: space-around;
-    font-size: 14px;
+    font-size: 13px;
     color: #ffa502;
-    margin-top: 8px;
+    margin-top: 6px;
+    margin-bottom: 0;
 }
 
 .hp-bar-container {
     background: #2f3542;
     border-radius: 12px;
-    height: 20px;
+    height: 18px;
     position: relative;
     overflow: hidden;
     margin-top: 4px;
@@ -79,22 +157,32 @@ body {
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: bold;
     text-shadow: 1px 1px 2px #000;
 }
 
+.stats-bar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
 .progress-bar {
-    background: #57606f;
+    background: #2f3542;
     border-radius: 10px;
-    height: 20px;
+    height: 18px;
     position: relative;
     overflow: hidden;
-    margin-top: 10px;
+    border: 1px solid #2ed573;
 }
 
 .exp-fill {
-    background: #2ed573;
+    background: linear-gradient(90deg, #2ed573, #7bed9f);
     height: 100%;
     width: 0%;
     transition: width 0.3s;
@@ -104,55 +192,85 @@ body {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     text-align: center;
-    font-size: 12px;
-    line-height: 20px;
+    font-size: 11px;
+    line-height: 18px;
     font-weight: bold;
+    text-shadow: 1px 1px 2px #000;
 }
 
-.stats-bar {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    background: rgba(0,0,0,0.3);
-    padding: 8px;
-    border-radius: 8px;
+.quiz-container {
+    margin-top: 15px;
+    padding: 20px;
 }
 
-.question { font-size: 20px; margin: 20px 0; font-weight: bold; white-space: pre-line; }
+.counter {
+    font-size: 13px;
+    color: #a4b0be;
+    margin-bottom: 10px;
+}
+
+.question { 
+    font-size: 19px; 
+    margin: 15px 0 20px 0; 
+    font-weight: bold; 
+    white-space: pre-line;
+    line-height: 1.5;
+}
 
 .option-btn {
-    background: #ffffff; color: #2f3542;
-    border: 2px solid #dfe4ea; border-radius: 8px;
-    padding: 12px; margin: 8px 0;
-    width: 100%; font-size: 16px; font-weight: bold;
-    cursor: pointer; transition: 0.2s;
+    background: rgba(255, 255, 255, 0.95);
+    color: #2f3542;
+    border: 2px solid #dfe4ea;
+    border-radius: 10px;
+    padding: 12px;
+    margin: 8px 0;
+    width: 100%;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
 }
-.option-btn:hover { background: #f1f2f6; border-color: #3742fa; }
-.option-btn.correct { background: #2ed573; color: white; border-color: #2ed573; }
-.option-btn.wrong { background: #ff4757; color: white; border-color: #ff4757; }
+.option-btn:hover { 
+    background: #fff; 
+    border-color: #3742fa; 
+    transform: translateY(-2px);
+}
+.option-btn.correct { background: #2ed573 !important; color: white !important; border-color: #2ed573 !important; }
+.option-btn.wrong { background: #ff4757 !important; color: white !important; border-color: #ff4757 !important; }
 
-.message { font-size: 18px; font-weight: bold; margin: 15px 0; min-height: 25px; }
+.message { 
+    font-size: 16px; 
+    font-weight: bold; 
+    margin: 15px 0; 
+    min-height: 24px; 
+}
 
-/* Hiệu Ứng Avatar Tu Tiên */
+/* =========================================
+   4. AVATAR NHÂN VẬT & HUY HIỆU
+   ========================================= */
 .avatar-box {
-    width: 75px; height: 75px;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
     border: 3px solid #eccc68;
     overflow: hidden;
     background-color: #2f3542;
-    box-shadow: 0 0 10px rgba(236, 204, 104, 0.5);
+    box-shadow: 0 0 12px rgba(236, 204, 104, 0.6);
     flex-shrink: 0;
     animation: breathing 3s infinite ease-in-out;
 }
 
 .avatar-box img {
-    width: 100%; height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: top center;
 }
 
 .profile-avatar {
-    width: 130px; height: 130px;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
     border-width: 4px;
 }
 
@@ -162,48 +280,33 @@ body {
     100% { transform: scale(1); box-shadow: 0 0 10px rgba(236, 204, 104, 0.5); border-color: #eccc68; }
 }
 
-/* Hiệu ứng Tâm ma (Mất máu) */
 @keyframes damageFlash {
-    0% { background-color: rgba(255, 0, 0, 0.5); }
+    0% { background-color: rgba(255, 0, 0, 0.6); }
     100% { background-color: transparent; }
 }
 .damage-flash { animation: damageFlash 0.4s ease-in-out; }
 
-/* Bảng xếp hạng & Hồ sơ */
-.profile-card {
-    background: rgba(0,0,0,0.3); padding: 15px;
-    border-radius: 10px; text-align: left;
-}
+/* Huy hiệu Cảnh Giới: Nền vàng cam, chữ đen đậm tương phản cao */
 .realm-badge {
     background: #ffa502 !important;
     color: #1e272e !important;
     font-weight: 800;
-    padding: 4px 10px;
+    padding: 3px 10px;
     border-radius: 12px;
     display: inline-block;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
-.leaderboard-list {
-    list-style: none; padding: 0; text-align: left;
-}
-.leaderboard-list li {
-    background: rgba(0,0,0,0.3); margin-bottom: 10px;
-    padding: 10px; border-radius: 8px;
-}
-.lb-user-info { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
-.lb-rank { font-size: 20px; width: 30px; text-align: center; }
-.lb-name { font-weight: bold; font-size: 16px; color: #fff; display: block; }
-.lb-mana { color: #eccc68; font-weight: bold; }
+
 /* =========================================
-   HỆ THỐNG TÚI TRỮ VẬT & VẬT PHẨM
+   5. TÚI TRỮ VẬT & CỬA SỔ VẬT PHẨM
    ========================================= */
 .inventory-btn {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: linear-gradient(135deg, #6c5ce7, #8e44ad); /* Tím hoàng gia tu tiên */
-    color: #ffffff !important;                              /* Chữ trắng rõ nét */
-    border: 2px solid #eccc68;                             /* Viền chỉ vàng nổi bật */
+    background: linear-gradient(135deg, #6c5ce7, #8e44ad);
+    color: #ffffff !important;
+    border: 2px solid #eccc68;
     padding: 12px 20px;
     border-radius: 50px;
     font-size: 15px;
@@ -219,25 +322,58 @@ body {
     transform: scale(1.08);
     box-shadow: 0 6px 20px rgba(236, 204, 104, 0.6);
 }
+
 .modal-overlay {
-    display: none; position: fixed; top: 0; left: 0; 
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8); z-index: 1000;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
 }
 
 .modal-content {
-    background: #2f3542; width: 85%; max-width: 400px;
-    margin: 30% auto 0 auto; padding: 20px; border-radius: 12px;
-    border: 2px solid #eccc68; text-align: center;
+    background: #1e272e;
+    width: 88%;
+    max-width: 400px;
+    margin: 15vh auto 0 auto;
+    padding: 22px;
+    border-radius: 14px;
+    border: 2px solid #eccc68;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
 
-.inventory-grid { display: grid; gap: 10px; margin-bottom: 15px; max-height: 300px; overflow-y: auto;}
+.inventory-grid {
+    display: grid;
+    gap: 10px;
+    margin: 15px 0;
+    max-height: 280px;
+    overflow-y: auto;
+}
 
 .item-card {
-    background: rgba(0,0,0,0.4); padding: 10px; border-radius: 8px;
-    border: 1px solid #747d8c; text-align: left; display: flex;
-    justify-content: space-between; align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.item-card-info h4 { color: #2ed573; margin: 0 0 5px 0; font-size: 15px;}
-.item-card-info p { font-size: 12px; margin: 0; color: #ccc; }
-.item-card button { width: auto; margin: 0; padding: 8px 15px; font-size: 14px;}
+
+.item-card-info h4 {
+    color: #2ed573;
+    margin: 0 0 4px 0;
+    font-size: 14px;
+}
+
+.item-card-info p {
+    font-size: 12px;
+    margin: 0;
+    color: #a4b0be;
+}
+
+/* =================================
