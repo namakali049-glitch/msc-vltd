@@ -141,19 +141,22 @@
     </div>
 </div>
 
-<!-- 5. MÀN HÌNH BÍ CẢNH TRẢM YÊU 2D (ĐÃ BỔ SUNG ĐẦY ĐỦ) -->
-<div id="battle-screen" class="screen" style="padding: 0; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 50; background: #000;">
-    <div style="position: absolute; top: 15px; left: 15px; z-index: 60; background: rgba(15, 23, 42, 0.85); padding: 12px 18px; border-radius: 10px; border: 1px solid #eccc68; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+<!-- 5. MÀN HÌNH BÍ CẢNH TRẢM YÊU 2D (TRÀN TOÀN MÀN HÌNH CHUẨN XÁC) -->
+<div id="battle-screen" class="screen" style="display: none; padding: 0 !important; margin: 0 !important; width: 100vw !important; height: 100vh !important; max-width: none !important; position: fixed !important; top: 0 !important; left: 0 !important; z-index: 9999 !important; background: #000 !important;">
+    <!-- BẢNG HUD CHỈ SỐ -->
+    <div style="position: absolute; top: 15px; left: 15px; z-index: 10001; background: rgba(15, 23, 42, 0.85); padding: 12px 18px; border-radius: 10px; border: 1px solid #eccc68; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
         <div id="battleHpText" style="color: #ff4757; margin-bottom: 4px;">❤️ Sinh Mệnh: 100/100</div>
         <div id="battleSwordText" style="color: #00d2d3; margin-bottom: 4px;">⚔️ Kiếm Khí: 0/0</div>
         <div id="battleKillsText" style="color: #ffa502;">👾 Ma Vật Trảm: 0</div>
     </div>
     
-    <button onclick="exitBattle()" class="secondary-btn" style="position: absolute; top: 15px; right: 140px; z-index: 60; margin: 0; padding: 8px 16px; width: auto; background: rgba(30,39,46,0.9);">
+    <!-- NÚT RÚT LUI -->
+    <button onclick="exitBattle()" class="secondary-btn" style="position: absolute; top: 15px; right: 20px; z-index: 10001; margin: 0; padding: 8px 18px; width: auto; background: rgba(30,39,46,0.9); border: 1px solid #ff4757;">
         🚪 Rút lui
     </button>
     
-    <canvas id="gameCanvas" width="800" height="600" style="display: block; width: 100%; height: 100%; cursor: crosshair;"></canvas>
+    <!-- KHUNG VẼ CANVAS -->
+    <canvas id="gameCanvas" style="display: block; width: 100vw !important; height: 100vh !important; cursor: crosshair;"></canvas>
 </div>
 
 <!-- NÚT MỞ TÚI TRỮ VẬT -->

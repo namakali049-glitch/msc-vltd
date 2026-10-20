@@ -178,10 +178,19 @@ function calculateRealm(mana) {
     return "Trúc Cơ Sơ Kỳ";
 }
 
+// Phân cấp Avatar hiển thị ngoài web (Khảo thí & Hồ sơ)
 function getAvatarByMana(mana) {
     if (mana < 150) return "assets/pham-nhan.jpg";
     if (mana < 1500) return "assets/luyen-khi.png";
-    return "assets/truc-co.png";
+    if (mana < 3000) return "assets/truc-co-trung-ky.png"; // Trúc Cơ Sơ/Trung kỳ: Áo trắng ngự kiếm
+    return "assets/truc-co-vien-man.png";                 // Trúc Cơ Viên Mãn: Áo trắng tỏa hào quang
+}
+
+// Phân cấp Skin chiến đấu trong Bí Cảnh 2D
+function getBattleCharacterSkin() {
+    if (lifetimeMana >= 3000) return battleAssets.playerTrucCoVienMan;
+    if (lifetimeMana >= 1500) return battleAssets.playerTrucCoTrungKy;
+    return battleAssets.playerLuyenKhi;
 }
 
 function setAvatarWithFallback(imgElement, mana) {
@@ -216,14 +225,26 @@ function updateCharacterUI() {
 // ==========================================
 window.switchScreen = function(screenId) {
     window.playClickSound();
+    
+    // Ẩn toàn bộ các màn hình và xóa style inline can thiệp
     document.querySelectorAll('.screen').forEach(s => {
         s.classList.remove('active');
         s.style.display = 'none';
     });
+    
+    // Bật màn hình được chọn và giữ nguyên thứ tự dọc tự nhiên
     const targetScreen = document.getElementById(screenId);
     if (targetScreen) {
         targetScreen.classList.add('active');
-        targetScreen.style.display = (screenId === 'battle-screen') ? 'block' : 'flex';
+        // Bí cảnh dùng block, các màn hình khác dùng flex nhưng theo chiều dọc (column)
+        if (screenId === 'battle-screen') {
+            targetScreen.style.display = 'block';
+        } else {
+            targetScreen.style.display = 'flex';
+            targetScreen.style.flexDirection = 'column';
+            targetScreen.style.alignItems = 'center';
+            targetScreen.style.justifyContent = 'center';
+        }
     }
 };
 
@@ -747,6 +768,13 @@ function getBattleSwordSkin() {
 window.startBattle = function() {
     window.playClickSound();
     switchScreen('battle-screen');
+    
+    // Ẩn nút Túi Trữ Vật và Nút Nhạc để không che màn hình
+    const invBtn = document.querySelector('.inventory-btn');
+    const audioBtn = document.getElementById('audioToggleBtn');
+    if (invBtn) invBtn.style.display = 'none';
+    if (audioBtn) audioBtn.style.display = 'none';
+
     resizeBattleCanvas();
     recalcStats();
     
@@ -777,6 +805,13 @@ window.startBattle = function() {
 window.exitBattle = function() {
     window.playClickSound();
     if (battleAnimationFrame) cancelAnimationFrame(battleAnimationFrame);
+    
+    // Hiện lại nút Túi Trữ Vật và Nút Nhạc khi về Động Phủ
+    const invBtn = document.querySelector('.inventory-btn');
+    const audioBtn = document.getElementById('audioToggleBtn');
+    if (invBtn) invBtn.style.display = 'block';
+    if (audioBtn) audioBtn.style.display = 'block';
+
     syncManaToDatabase();
     goHome();
 };
