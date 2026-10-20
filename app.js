@@ -26,7 +26,7 @@ const database = getDatabase(app);
 const googleProvider = new GoogleAuthProvider();
 
 // ==========================================
-// 2. BIẾN TOÀN CỤC & CHỈ SỐ RPG
+// 2. BIẾN TOÀN CỤC & CHỈ SỐ NHÂN VẬT
 // ==========================================
 let currentUser = null;
 let lifetimeMana = 0; 
@@ -50,7 +50,7 @@ let activeQuestions = [];
 let vocabPool = [];
 
 // ==========================================
-// 3. HỆ THỐNG ÂM THANH TIÊN GIỚI
+// 3. HỆ THỐNG ÂM THANH
 // ==========================================
 let audioCtx = null;
 let isBgmPlaying = false;
@@ -168,7 +168,7 @@ window.toggleBGM = async function() {
 };
 
 // ==========================================
-// 4. TIẾN TRÌNH NHÂN VẬT & AVATAR
+// 4. TIẾN TRÌNH & HÌNH ẢNH CẢNH GIỚI
 // ==========================================
 function calculateRealm(mana) {
     if (mana < 150) return "Phàm Nhân";
@@ -195,15 +195,6 @@ function getBattleSwordSkin() {
     return lifetimeMana >= 1500 ? battleAssets.swordCyan : battleAssets.swordWood;
 }
 
-function setAvatarWithFallback(imgElement, mana) {
-    if (!imgElement) return;
-    imgElement.src = getAvatarByMana(mana);
-    imgElement.onerror = () => {
-        if (imgElement.src.endsWith(".jpg")) imgElement.src = imgElement.src.replace(".jpg", ".png");
-        else if (imgElement.src.endsWith(".png")) imgElement.src = imgElement.src.replace(".png", ".jpg");
-    };
-}
-
 function recalcStats() {
     let bonusTier = Math.floor(lifetimeMana / 100);
     maxHp = 100 + (bonusTier * 15);
@@ -212,31 +203,20 @@ function recalcStats() {
 }
 
 function updateCharacterUI() {
-    let hpPercent = Math.max(0, (currentHp / maxHp) * 100);
-    
-    // Đồng bộ cả màn hình Sảnh chính lẫn màn hình Bế Quan
-    const hpFills = [document.getElementById('hpFill'), document.getElementById('cultHpFill')];
-    hpFills.forEach(f => { if (f) f.style.width = hpPercent + "%"; });
-
-    const hpTexts = [document.getElementById('hpText'), document.getElementById('cultHpText')];
-    hpTexts.forEach(t => { if (t) t.innerText = `${currentHp}/${maxHp}`; });
-
-    const strTexts = [document.getElementById('statStr'), document.getElementById('cultStatStr')];
-    strTexts.forEach(s => { if (s) s.innerText = str; });
-
-    const agiTexts = [document.getElementById('statAgi'), document.getElementById('cultStatAgi')];
-    agiTexts.forEach(a => { if (a) a.innerText = agi; });
-    
-    const gameAvatar = document.getElementById('gameAvatar');
-    if (gameAvatar) setAvatarWithFallback(gameAvatar, lifetimeMana);
+    recalcStats();
+    const hpTxt = document.getElementById('profileHp');
+    const strTxt = document.getElementById('profileStr');
+    const agiTxt = document.getElementById('profileAgi');
+    if (hpTxt) hpTxt.innerText = `${currentHp}/${maxHp}`;
+    if (strTxt) strTxt.innerText = str;
+    if (agiTxt) agiTxt.innerText = agi;
 }
 
 // ==========================================
-// 5. CHUYỂN MÀN HÌNH & XÁC THỰC FIREBASE
+// 5. CHUYỂN MÀN HÌNH & XÁC THỰC
 // ==========================================
 window.switchScreen = function(screenId) {
     window.playClickSound();
-    
     document.querySelectorAll('.screen').forEach(s => {
         s.classList.remove('active');
         s.style.display = 'none';
@@ -249,9 +229,6 @@ window.switchScreen = function(screenId) {
             targetScreen.style.display = 'block';
         } else {
             targetScreen.style.display = 'flex';
-            targetScreen.style.flexDirection = 'column';
-            targetScreen.style.alignItems = 'center';
-            targetScreen.style.justifyContent = 'center';
         }
     }
 };
@@ -359,7 +336,7 @@ async function syncManaToDatabase() {
 }
 
 // ==========================================
-// 6. HỒ SƠ & TIÊN ĐẠO BẢNG
+// 6. HỒ SƠ & BẢNG XẾP HẠNG
 // ==========================================
 window.showProfile = function() {
     window.playClickSound();
@@ -368,10 +345,13 @@ window.showProfile = function() {
     switchScreen('profile-screen');
     document.getElementById('profileName').innerText = currentUser.displayName || currentUser.email.split('@')[0];
     document.getElementById('profileMana').innerText = lifetimeMana;
-    document.getElementById('profileRealm').innerText = calculateRealm(lifetimeMana);
+    const realm = calculateRealm(lifetimeMana);
+    document.getElementById('profileRealm').innerText = realm;
+    const badge = document.getElementById('profileRealmBadge');
+    if (badge) badge.innerText = realm;
     
     const profileAvatar = document.getElementById('profileAvatar');
-    if (profileAvatar) setAvatarWithFallback(profileAvatar, lifetimeMana);
+    if (profileAvatar) profileAvatar.src = getAvatarByMana(lifetimeMana);
     
     document.getElementById('profileHp').innerText = `${maxHp}/${maxHp}`;
     document.getElementById('profileStr').innerText = str;
@@ -464,7 +444,6 @@ window.startGame = async function() {
     currentLevel = 1; sessionMana = 0; totalSeconds = 0;
     recalcStats();
     currentHp = maxHp; 
-    updateCharacterUI();
 
     document.getElementById('timerDisplay').innerText = "00:00";
     if (timerInterval) clearInterval(timerInterval);
@@ -512,11 +491,10 @@ function loadQuestion() {
     document.getElementById('expFill').style.width = expPercent + "%";
     document.getElementById('exp').innerText = currentLevelExp;
     document.getElementById('totalScore').innerText = sessionMana;
-    updateCharacterUI();
 }
 
 function checkAnswer(selectedIndex, correctIndex, btnElement) {
-    const buttons = document.querySelectorAll('.quiz-options-list .option-btn');
+    const buttons = document.querySelectorAll('.options-container .option-btn');
     buttons.forEach(b => b.onclick = null); 
     
     if (selectedIndex === correctIndex) {
@@ -543,7 +521,6 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
         lifetimeMana += bonusMana; 
         
         recalcStats();
-        updateCharacterUI();
         syncManaToDatabase();
     } else {
         btnElement.classList.add('wrong');
@@ -556,15 +533,9 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
             document.getElementById('message').style.color = "#70a1ff";
         } else {
             currentHp -= 20;
-            const gameScreen = document.getElementById('game-screen');
-            if (gameScreen) {
-                gameScreen.classList.add('damage-flash');
-                setTimeout(() => gameScreen.classList.remove('damage-flash'), 400);
-            }
             document.getElementById('message').innerText = `❌ Tâm Ma Phản Phệ! Mất 20 Sinh Mệnh!`;
             document.getElementById('message').style.color = "#ff4757";
         }
-        updateCharacterUI();
 
         if (currentHp <= 0) {
             setTimeout(() => { alert("💥 Sinh Mệnh cạn kiệt! Đạo hữu đã Tẩu Hỏa Nhập Ma."); endGame(false); }, 500);
@@ -606,7 +577,7 @@ function endGame(win) {
     document.getElementById('message').innerText = "";
     
     let btn = document.createElement('button');
-    btn.className = "primary-btn"; btn.innerText = "Xem Tiên Đạo Bảng 🏆";
+    btn.className = "btn-main mt-10"; btn.innerText = "Xem Tiên Đạo Bảng 🏆";
     btn.onclick = showLeaderboard;
     document.getElementById('options').appendChild(btn);
 }
@@ -648,7 +619,7 @@ function updateInventoryUI() {
                     <h4>${item} (x${inventory[item]})</h4>
                     <p>${itemEffects[item]}</p>
                 </div>
-                <button class="primary-btn" style="background:#3742fa; width:auto; margin:0; padding:6px 14px;" onclick="useItem('${item}')">Dùng</button>
+                <button class="btn-main" style="width:auto; padding:6px 14px;" onclick="useItem('${item}')">Dùng</button>
             </div>`;
         }
     }
@@ -753,7 +724,7 @@ window.startBattle = function() {
     window.playClickSound();
     switchScreen('battle-screen');
     
-    const invBtn = document.querySelector('.inventory-btn');
+    const invBtn = document.querySelector('.fixed-inventory-btn');
     const audioBtn = document.getElementById('audioToggleBtn');
     if (invBtn) invBtn.style.display = 'none';
     if (audioBtn) audioBtn.style.display = 'none';
@@ -788,7 +759,7 @@ window.exitBattle = function() {
     window.playClickSound();
     if (battleAnimationFrame) cancelAnimationFrame(battleAnimationFrame);
     
-    const invBtn = document.querySelector('.inventory-btn');
+    const invBtn = document.querySelector('.fixed-inventory-btn');
     const audioBtn = document.getElementById('audioToggleBtn');
     if (invBtn) invBtn.style.display = 'block';
     if (audioBtn) audioBtn.style.display = 'block';
@@ -864,7 +835,7 @@ function battleLoop() {
     battleData.player.x = Math.max(35, Math.min(battleCanvas.width - 35, battleData.player.x));
     battleData.player.y = Math.max(45, Math.min(battleCanvas.height - 45, battleData.player.y));
 
-    // 1. Vẽ bản đồ sơn động
+    // Vẽ nền hắc ám sơn động
     if (battleAssets.bg.complete && battleAssets.bg.naturalWidth > 0) {
         battleCtx.drawImage(battleAssets.bg, 0, 0, battleCanvas.width, battleCanvas.height);
     } else {
@@ -872,7 +843,7 @@ function battleLoop() {
         battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
     }
 
-    // 2. Vẽ hiệu ứng hạt linh lực
+    // Hiệu ứng nổ hạt linh lực
     for (let i = battleData.particles.length - 1; i >= 0; i--) {
         const p = battleData.particles[i];
         p.x += p.vx;
@@ -890,7 +861,7 @@ function battleLoop() {
         battleCtx.globalAlpha = 1.0;
     }
 
-    // 3. Vẽ nhân vật Chibi
+    // Nhân vật chibi
     const pImg = getBattleCharacterSkin();
     battleCtx.save();
     const bobbingY = Math.sin(battleData.frameCount * 0.12) * 4;
@@ -906,7 +877,7 @@ function battleLoop() {
     }
     battleCtx.restore();
 
-    // 4. Vẽ Kiếm Trận xoay tròn
+    // Kiếm khí xoay tròn
     let activeSwordCount = 0;
     const orbitRadius = 75;
     const rotSpeed = 0.04 + (agi * 0.0008);
@@ -969,7 +940,7 @@ function battleLoop() {
         }
     });
 
-    // 5. Quái vật bám đuổi
+    // Quỷ hồn bám đuổi
     if (battleData.frameCount % 50 === 0) spawnBattleEnemy();
 
     for (let i = battleData.enemies.length - 1; i >= 0; i--) {
@@ -1027,7 +998,7 @@ function battleLoop() {
 
     battleCtx.restore();
 
-    // 6. Cập nhật HUD trong trận
+    // Cập nhật số liệu HUD
     const hpEl = document.getElementById('battleHpText');
     const swordEl = document.getElementById('battleSwordText');
     const killsEl = document.getElementById('battleKillsText');
