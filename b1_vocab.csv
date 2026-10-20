@@ -1,0 +1,4006 @@
+id,hanzi,pinyin,meaning,type,LEVEL
+1,阿姨,āyí,"Dì, cô",N,B1
+2,哎,āi,"Chao ôi, ơ kìa",Ptc,B1
+3,唉,āi,"Hừ (thán từ, tỏ ý ái ngại/thở dài)",Ptc,B1
+4,愛,ài,Yêu,N,B1
+5,愛情,àiqíng,Tình yêu,N,B1
+6,愛惜,àixí,"Yêu quý, quý trọng",Vst,B1
+7,愛心,àixīn,Tình yêu/ biểu tượng trái tim,N,B1
+8,安定,āndìng,"ổn định, yên ổn",Vs,B1
+9,安排,ānpái,Sự sắp xếp,N,B1
+10,安排,ānpái,"Sắp đặt, sắp xếp",V,B1
+11,安心,ānxīn,"Rắp tâm, mưu tính",Vs,B1
+12,按,àn,"Theo, dựa vào…",Prep,B1
+13,按照,ànzhào,"Dựa theo, căn cứ theo…",Prep,B1
+14,B,,,,
+15,巴士,bāshì,Xe buýt,N,B1
+16,把,bǎ,"Cán, quai, tay cầm, cuống",M,B1
+17,把握,băwò,"Cầm, nắm, nắm bắt",V,B1
+18,白,bái,Trắng,Vs,B1
+19,白(白),bái(bái),Vô ích,Adv,B1
+20,白菜,báicài,Cải trắng,N,B1
+21,白天,báitian,Ban ngày,N,B1
+22,擺,băi,"Xếp đặt, bày biện",V,B1
+23,百貨公司,băihuògōngsī,Công ty bách hóa,N,B1
+24,班機,bānjī,Chuyến bay,N,B1
+25,搬家,bānjiā,"Dọn nhà, chuyển nhà",V-sep,B1
+26,辦,bàn,"Xử lý, lo liệu",V,B1
+27,辦理,bànlĭ,"Giải quyết, thực hiện",V,B1
+28,半天,bàntiān,Nửa ngày,N,B1
+29,半夜,bànyè,Nửa đêm,N,B1
+30,幫助,bāngzhù,Giúp đỡ,V,B1
+31,榜樣,băngyàng,Tấm gương,N,B1
+32,棒,bàng,"Tốt, giỏi",Vs,B1
+33,包,bāo,"Bao lại, gói lại",V,B1
+34,包含,bāohán,"Bao hàm, hàm chứa",Vst,B1
+35,寶貝,băobèi,"Bảo bối, cục cưng",N,B1
+36,寶貴,băoguì,"Quý giá, quý báu",Vs,B1
+37,保護,băohù,"Bảo vệ, giữ gìn",V,B1
+38,保守,băoshǒu,"Tuân theo, tuân thủ",Vs,B1
+39,保養,băoyăng,"Bảo dưỡng, chăm sóc",V,B1
+40,保證/証,băozhèng,"Vật chứng, vật đảm bảo",N,B1
+41,保證/証,băozhèng,"Cam đoan, bảo đảm",V,B1
+42,抱,bào,"Bế, bồng, ôm",V,B1
+43,抱怨,bàoyuàn,"Oán hận, oán trách",V,B1
+44,報名,bàomíng,"Đăng ký, ghi danh",V-sep,B1
+45,背包,bēibāo,"Ba lô, túi đeo vai",N,B1
+46,北方,běifāng,Phương Bắc,N,B1
+47,被動,bèidòng,Bị động,Vs,B1
+48,背後,bèihòu,Phía sau,N,B1
+49,背景,bèijĭng,"Phông nền, cảnh",N,B1
+50,輩子,bèizi,Cuộc đời,N,B1
+51,本,běn,"Gốc, thân",Det,B1
+52,本人,běnrén,"Bản thân, tự mình",N,B1
+53,本子,běnzi,Cuốn vở,N,B1
+54,笨,bèn,Ngốc nghếch,Vs,B1
+55,逼,bī,Dồn ép,V,B1
+56,筆,bĭ,Bút,M,B1
+57,比,bǐ,"So sánh, so với",V,B1
+58,比如(說),bǐrú(shuō),Ví dụ như,Prep,B1
+59,畢竟,bìjìng,"Rốt cuộc, suy cho cùng",Adv,B1
+60,避免,bìmiăn,"Tránh, phòng ngừa",V,B1
+61,必要,bìyào,Cần thiết,Vs,B1
+62,鞭炮,biānpào,"Pháo, bánh pháo",N,B1
+63,變,biàn,Thay đổi,Vp,B1
+64,變成,biànchéng,"Biến thành, trở thành",Vpt,B1
+65,變更,biàngēng,"Thay đổi, biến đổi",V,B1
+66,變化,biànhuà,Sự thay đổi,N,B1
+67,變化,biànhuà,Biến hóa,Vs,B1
+68,便條,biàntiáo,Giấy ghi chú,N,B1
+69,標準,biāozhŭn,Chuẩn mực,N,B1
+70,標準,biāozhŭn,Tiêu chuẩn,Vs,B1
+71,表,biǎo,"Bề ngoài, mặt ngoài",N,B1
+72,表達,biăodá,Bày tỏ,V,B1
+73,表面,biăomiàn,"Mặt ngoài, phía ngoài",N,B1
+74,表示,biăoshì,"Biểu thị, tỏ ý",V,B1
+75,表現,biǎoxiàn,Biểu hiện,N,B1
+76,表現,biǎoxiàn,"Thể hiện, tỏ ra",V,B1
+77,表演,biǎoyǎn,Biểu diễn,V,B1
+78,別的,biéde,Cái khác,Det,B1
+79,冰,bīng,"Đá, băng",N,B1
+80,冰塊/冰塊兒,bīngkuài/bīngkuàir,"Viên đá, khối đá",N,B1
+81,餅,bǐng,Bánh,N,B1
+82,病,bìng,"Bệnh, ốm đau",Vp,B1
+83,伯伯,bóbo,Bác trai,N,B1
+84,博士,bóshì,Tiến sĩ,N,B1
+85,播,bò,Truyền bá,V,B1
+86,不必,bùbì,"Không cần, khỏi phải",Vaux,B1
+87,不斷,bùduàn,Không ngừng,Adv,B1
+88,不斷,bùduàn,"Liên tục, liên tiếp",Vs,B1
+89,不過,bùguò,Vừa mới,Adv,B1
+90,不過,bùguò,Nhưng,Conj,B1
+91,不見(了),bùjiàn(le),"Không gặp, không thấy nữa",Vp,B1
+92,不論,bùlùn,"Cho dù, bất luận",Conj,B1
+93,不幸,bùxìng,Bất hạnh,Vs,B1
+94,不用說,bùyòngshuō,Không cần nói,Conj,B1
+95,不得不,bùdébù,Không thể không,Adv,B1
+96,不得了,bùdéliăo,Cực kỳ,Vs,B1
+97,不管,bùguǎn,"Cho dù, bất kể",Conj,B1
+98,不滿,bùmăn,Không vừa lòng,Vs,B1
+99,不如,bùrú,Không bằng,conj,B1
+100,不少,bùshǎo,Không ít,Det,B1
+101,不少,bùshǎo,Nhiều,Vs,B1
+102,不足,bùzú,Không đủ,Vs,B1
+103,部,bù,"Bộ phận, phòng ban",M,B1
+104,部分/份,bùfen,Một phần,Det,B1
+105,部分/份,bùfen,Bộ phận,N,B1
+106,部門,bùmén,"Ngành, bộ môn",N,B1
+107,布,bù,Vài bố,N,B1
+108,布/佈置,bùzhì,"Sắp xếp, xếp đặt",V,B1
+109,C,,,,
+110,擦,cā,"Chà, cọ xát",V,B1
+111,猜,cāi,"Đoán, phỏng đoán",V,B1
+112,材料,cáiliào,"Vật liệu, tư liệu",N,B1
+113,採用,căiyòng,Áp dụng,V,B1
+114,餐,cān,Bữa ăn,M,B1
+115,餐桌,cānzhuō,Bàn ăn,N,B1
+116,參考,cānkăo,Tham khảo,V,B1
+117,草地,cǎodì,"Bãi cỏ, đồng cỏ",N,B1
+118,草原,cǎoyuán,Thảo nguyên,N,B1
+119,層,céng,Tầng lớp,M,B1
+120,曾,céng,Từng,Adv,B1
+121,曾經,céngjīng,Đã từng,Adv,B1
+122,差別,chābié,"Khác biệt, chênh lệch",N,B1
+123,差異,chāyì,Khác nhau,N,B1
+124,查,chá,,V,B1
+125,"""差(一)點/ 差(一)點兒""",chà(yī)diăn/ chà(yī)diăn,Kém 1 chút,Adv,B1
+126,產品,chănpǐn,Sản phẩm,N,B1
+127,產生,chănshēng,"Sản sinh, xuất hiện",Vpt,B1
+128,常,cháng,"Thường, thông thường",Adv,B1
+129,嘗/嚐試,chángshì,"Nếm, thử",V,B1
+130,場,chǎng,Sân,M,B1
+131,超過,chāoguò,"Vượt lên, vượt qua",Vpt,B1
+132,超級,chāojí,"siêu, cực kì",Vs-attr,B1
+133,炒,chăo,Xào,V,B1
+134,吵,chăo,"ồn ào, ầm ĩ",V,B1
+135,吵架,chăojià,Cãi nhau,V-sep,B1
+136,車禍,chēhuò,Tai nạn xe cộ,N,B1
+137,趁,chèn,Nhân (lúc),Prep,B1
+138,成,chéng,Hoàn thành,Vpt,B1
+139,成果,chéngguǒ,"Kết quả, thành quả",N,B1
+140,成就,chéngjiù,Thành tựu,N,B1
+141,成熟,chéngshóu,Trưởng thành,Vs,B1
+142,成長,chéngzhăng,"Lớn, trưởng thành",Vs,B1
+143,程度,chéngdù,"Trình độ, mức độ",N,B1
+144,承認,chéngrèn,Thừa nhận,V,B1
+145,誠實,chéngshí,Thành thật,Vs,B1
+146,吃喝玩樂,chīhēwánlè,Sống phóng túng,Vi,B1
+147,尺,chǐ,,M,B1
+148,充實,chōngshí,"Phong phú, đầy đủ",Vs,B1
+149,重新,chóngxīn,"Lại lần nữa, lại từ đầu",Adv,B1
+150,蟲(子),chóng(zi),"Con sâu, sâu bọ",N,B1
+151,抽,chōu,Rút ra,V,B1
+152,醜,chŏu,Xấu,Vs,B1
+153,臭,chòu,Hôi,Vs,B1
+154,初,chū,"Đầu tiên, thứ nhất",N,B1
+155,出版,chūbăn,Xuất bản,V,B1
+156,出差,chūchāi,Đi công tác,V-sep,B1
+157,出門,chūmén,Đi ra ngoài,V-sep,B1
+158,出租,chūzū,Cho thuê,V,B1
+159,除了,chúle,Ngoài ra,Prep,B1
+160,除夕,chúxì,Giao thừa,N,B1
+161,廚師,chúshī,Đầu bếp,N,B1
+162,處理,chŭlĭ,Giải quyết (vấn đề),V,B1
+163,傳統,chuántŏng,Truyền thống,Vs,B1
+164,串,chuàn,Xuyên suốt,M,B1
+165,創造,chuàngzào,"Sáng tạo, tạo ra",V,B1
+166,吹,chuī,Thổi,V,B1
+167,春節,chūnjié,Tết âm lịch,N,B1
+168,詞,cí,"Lời, từ",N,B1
+169,此,cĭ,"Này, cái này",Det,B1
+170,刺激,cìjī,Sự thúc đẩy,N,B1
+171,刺激,cìjī,"Kích thích, kích động",Vs,B1
+172,從不,cóngbù,Không bao giờ,Adv,B1
+173,從來,cónglái,Từ trước đến nay,Adv,B1
+174,從小,cóngxiăo,Từ nhỏ,Adv,B1
+175,醋,cù,Giấm,N,B1
+176,存,cún,Tồn tại,V,B1
+177,存在,cúnzài,"Tồn tại, có thật",Vi,B1
+178,寸,cùn,Tấc,M,B1
+179,錯,cuò,Sai,N,B1
+180,錯誤,cuòwù,"Sai lầm, lệch lạc",N,B1
+181,挫折,cuòzhé,"Ngăn trở, chèn ép",N,B1
+182,D,,,,
+183,答應,dāyìng,Đồng ý,V,B1
+184,達成,dáchéng,Đạt đến,Vpt,B1
+185,打工,dăgōng,Làm thuê,V-sep,B1
+186,打架,dăjià,Đánh nhau,V-sep,B1
+187,打聽,dătīng,Nghe ngóng,V,B1
+188,打仗,dăzhàng,Đánh trận,V-sep,B1
+189,打折,dăzhé,Giảm giá,V-sep,B1
+190,大大,dàdà,"Rất, cực kỳ",Adv,B1
+191,大多數,dàduōshù,Đại đa số,Det,B1
+192,大方,dàfāng,"Rộng rãi, phóng khoáng",Vs,B1
+193,大概,dàgài,"Đại khái, sơ lược",Adv,B1
+194,大會,dàhuì,"Đại hội, hội nghị",N,B1
+195,大陸,dàlù,Đại lục,N,B1
+196,大門,dàmén,Cổng chính,N,B1
+197,大小,dàxiăo,Lớn nhỏ,N,B1
+198,大約,dàyuē,Khoảng chừng,Adv,B1
+199,袋,dài,"Bao, gói",M,B1
+200,代表,dàibiǎo,Đại biểu,N,B1
+201,代表,dàibiǎo,Đại diện,V,B1
+202,代替,dàitì,Thay thế,V,B1
+203,帶來,dàilái,"Đem đến, mang lại",V,B1
+204,帶領,dàilĭng,Dẫn dắt,V,B1
+205,單純,dānchún,Đơn thuần,Vs,B1
+206,單身,dānshēn,Độc thân,Vs,B1
+207,擔任,dānrèn,Đảm nhiệm,V,B1
+208,但,dàn,Nhưng,Conj,B1
+209,淡,dàn,Nhạt,Vs,B1
+210,當,dāng,"Xác đáng, thích hợp",Vst,B1
+211,當場,dāngchăng,Tại chỗ,Adv,B1
+212,當地,dāngdì,Bản địa,N,B1
+213,當面,dāngmiàn,Trước mặt,Adv,B1
+214,當年,dāngnián,Năm đó,N,B1
+215,當天,dàngtiān,Ngày hôm đó,N,B1
+216,當中,dāngzhōng,Trong khi,N,B1
+217,當作,dàngzuò,"Coi như, xem như",Vst,B1
+218,當做,dàngzuò,"Cho rằng, coi như là",Vst,B1
+219,倒,dǎo,Đảo ngược,V,B1
+220,島,dăo,Đảo,N,B1
+221,導演,dăoyăn,Đạo diễn,N,B1
+222,到,dào,Đến,Conj,B1
+223,到,dào,"Chu đáo, đầy đủ",Prep,B1
+224,到處,dàochù,Khắp nơi,Adv,B1
+225,到底,dàodĭ,Đến cuối cùng,Adv,B1
+226,到底,dàodĭ,"Rốt cuộc, suy cho cùng",Vs-pred,B1
+227,道德,dàodé,Đạo đức,N,B1
+228,道教,Dàojiào,Đạo giáo,N,B1
+229,道理,dàolĭ,"Đạo lý, quy luật",N,B1
+230,道歉,dàoqiàn,Xin thứ lỗi,V-sep,B1
+231,倒,dào,Trái lại,Adv,B1
+232,倒是,dàoshì,Ngược lại,Adv,B1
+233,得,dé,"Được, có được",Vaux,B1
+234,得到,dédào,Đạt được,Vpt,B1
+235,得意,déyì,Đắc ý,Vs,B1
+236,得很,dehěn,Rất nhiều,,B1
+237,的話,dehuà,Nếu,,B1
+238,得,děi,Phải,Vpt,B1
+239,燈光,dēngguāng,Ánh đèn,N,B1
+240,等,děng,Đợi,V,B1
+241,等/等等,děng/děngděng,Vân vân,Ptc,B1
+242,等待,děngdài,Chờ đợi,V,B1
+243,低,dī,Thấp,Vs,B1
+244,敵人,dírén,Quân địch,N,B1
+245,底,dĭ,Của,N,B1
+246,底下,dĭxia,Phía dưới,N,B1
+247,抵達,dĭdá,Đến nơi,V,B1
+248,地,dì,Một cách,Ptc,B1
+249,地板,dìbăn,"Sàn nhà, nền nhà",N,B1
+250,地帶,dìdài,"Miền, vùng",N,B1
+251,地點,dìdiăn,Địa điểm,N,B1
+252,地理,dìlĭ,Địa lý,N,B1
+253,地區,dìqū,Khu vực,N,B1
+254,地攤,dìtān,"Hàng rong, vỉa hè",N,B1
+255,地位,dìwèi,Vị trí,N,B1
+256,地下,dìxià,"Ngầm, trong lòng đất",N,B1
+257,地形,dìxíng,Địa hình,N,B1
+258,點,diăn,"Giọt, hạt, chấm",M,B1
+259,點,diăn,Điểm,N,B1
+260,點,diăn,"Ít, chút ít",V,B1
+261,點/點兒,diǍn/diǍnr,Một chút,,B1
+262,電,diàn,Điện,N,B1
+263,電車,diànchē,"Tàu điện, xe điện",N,B1
+264,電池,diànchí,"Pin, bình điện, ắc-quy",N,B1
+265,電燈,diàndēng,Đèn điện,N,B1
+266,店員,diànyuán,Nhân viên cửa hàng,N,B1
+267,調查,diàochá,Điều tra,V,B1
+268,訂,dìng,"Lập, ký kết",V,B1
+269,丟,diū,"Mất, thất lạc",Vpt,B1
+270,東北,dōngběi,Đông bắc,N,B1
+271,東方,dōngfāng,Phương Đông,N,B1
+272,東南,dōngnán,Đông nam,N,B1
+273,懂事,dǒngshì,Hiểu việc,Vs,B1
+274,逗,dòu,"Đùa, giỡn",V,B1
+275,豆腐(˙ㄈㄨ),dòufu,Đậu phụ,N,B1
+276,豆漿,dòujiāng,Sữa đậu nành,N,B1
+277,都市,dūshì,Đô thị,N,B1
+278,毒品,dúpĭn,Chất độc hại,N,B1
+279,獨特,dútè,Đặc biệt,Vs,B1
+280,讀者,dúzhě,"Độc giả, người đọc",N,B1
+281,段,duàn,"Đoạn, quãng, khúc",M,B1
+282,堆,duī,Chồng chất,M,B1
+283,對,duì,Đối với,M,B1
+284,對,duì,Hướng về,Prep,B1
+285,對,duì,Đối chiếu,V,B1
+286,對方,duìfāng,Đối phương,N,B1
+287,對話,duìhuà,Đối thoại,N,B1
+288,對了,duìle,Đúng rồi,,B1
+289,對象,duìxiàng,Đối tượng,N,B1
+290,多多少少,duōduoshăoshăo,Hoặc nhiều hoặc ít,Adv,B1
+291,多麼,duōme,"Bao nhiêu, biết bao",Adv,B1
+292,朵,duǒ,"Đóa, đám",M,B1
+293,頓,dùn,Đống,M,B1
+294,E,,,,
+295,嗯,en,ừm,Ptc,B1
+296,而,ér,Và,Conj,B1
+297,兒童,értóng,Nhi đồng,N,B1
+298,F,,,,
+299,發,fā,phát ra,V,B1
+300,發表,fābiăo,Phát biểu,V,B1
+301,發財,fācái,Phát tài,Vp-sep,B1
+302,發出,fāchū,Phát sinh,Vpt,B1
+303,發達,fādá,Phát đạt,Vs,B1
+304,發揮,fāhuī,Phát huy,V,B1
+305,發覺,fājué,Phát giác,Vpt,B1
+306,發明,fāmíng,Phát minh,N,B1
+307,發明,fāmíng,Sáng chế,Vpt,B1
+308,發脾氣,fāpíqi,Nổi nóng,Vi,B1
+309,發票,fāpiào,Hóa đơn,N,B1
+310,法律,fălǜ,Pháp luật,N,B1
+311,翻,fān,"Lật, đổ",V,B1
+312,翻譯,fānyì,Phiên dịch,V,B1
+313,煩惱,fánnăo,Phiền não,Vs,B1
+314,反而,fănér,Ngược lại,Conj,B1
+315,反應,fănyìng,Phản ứng,N,B1
+316,犯,fàn,Phạm (pháp),Vst,B1
+317,範圍,fànwéi,Phạm vi,N,B1
+318,方面,fāngmiàn,Phương diện,N,B1
+319,方式,fāngshì,"Phương thức, cách thức",N,B1
+320,房東,fángdōng,Chủ cho thuê nhà,N,B1
+321,房客,fángkè,Khách thuê nhà,N,B1
+322,房屋,fángwū,"Nhà, tòa nhà",N,B1
+323,訪問,fǎngwèn,Phỏng vấn,V,B1
+324,放心,fàngxīn,Yên tâm,Vs-sep,B1
+325,非,fēi,Không phải,Adv,B1
+326,非,fēi,"Sai, trái",Vst,B1
+327,飛,fēi,Bay,Vi,B1
+328,費用,fèiyòng,Chi phí,N,B1
+329,分開,fēnkāi,"Xa nhau, tách biệt",Vp,B1
+330,份,fèn,Tách ra,M,B1
+331,封,fēng,Phong tước,M,B1
+332,豐富,fēngfù,Phong phú,Vs,B1
+333,風格,fēnggé,Phong cách,N,B1
+334,風俗,fēngsú,Phong tục,N,B1
+335,佛教,Fójiào,Phật giáo,N,B1
+336,否則,fŏuzé,"Nếu không, bằng không thì",Conj,B1
+337,夫婦,fūfù,Vợ chồng,N,B1
+338,符合,fúhé,Phù hợp,Vst,B1
+339,福利,fúlì,Lợi ích,N,B1
+340,服裝,fúzhuāng,Trang phục,N,B1
+341,腐敗,fŭbài,"Hủ bại, mục nát",Vs,B1
+342,付出,fùchū,Trả giá,Vpt,B1
+343,負擔,fùdān,Gánh nặng,N,B1
+344,負擔,fùdān,"Gánh vác, đảm nhiệm",V,B1
+345,負責,fùzé,Chịu trách nhiệm,Vs,B1
+346,複習,fùxí,Ôn tập,V,B1
+347,G,,,,
+348,該,gāi,Nên,Vaux,B1
+349,改,gǎi,Thay đổi,V,B1
+350,改變,gǎibiàn,"Biến động, biến đổi",N,B1
+351,改變,gǎibiàn,"Cải biên, sửa đổi",V,B1
+352,改進,găijìn,Cải tiến,V,B1
+353,改善,găishàn,Cải thiện,V,B1
+354,改天,găitiān,"Ngày khác, hôm khác",Adv,B1
+355,蓋,gài,"Nắp, vung",V,B1
+356,概念,gàiniàn,Khái niệm,N,B1
+357,敢,gǎn,Dám,Vaux,B1
+358,趕,găn,"Đuổi theo, gấp, vội vàng",V,B1
+359,趕快,gǎnkuài,"Khẩn trương, vội vã",Adv,B1
+360,趕上,gănshàng,Đuổi kịp,Vpt,B1
+361,感動,găndòng,"Cảm động, xúc động",Vs,B1
+362,感想,gănxiăng,"Cảm tưởng, cảm nghĩ",N,B1
+363,感興趣,gănxìngqù,Có hứng thú với,Vs,B1
+364,剛,gāng,"Chỉ vừa, vừa mới",Adv,B1
+365,高速,gāosù,"Cao tốc, cực nhanh",Vs-attr,B1
+366,高中,gāozhōng,"Cấp 3, trung học phổ thông",N,B1
+367,搞,găo,"Làm, tạo ra",V,B1
+368,歌曲,gēqŭ,"Ca khúc, bài hát",N,B1
+369,歌星,gēxīng,Ngôi sao ca nhạc,N,B1
+370,隔壁,gébì,"Sát vách, bên cạnh",N,B1
+371,革命,gémìng,Cách mạng,Vi,B1
+372,個人,gèrén,Cá nhân,N,B1
+373,個子/個兒,gèzi/gèr,"Vóc dáng, vóc người",N,B1
+374,各式各樣,gèshìgèyàng,Đủ kiểu đủ loại,Vs-attr,B1
+375,各位,gèwèi,"Các vị, mọi người",N,B1
+376,個,ge,Cái,Ptc,B1
+377,給,gěi,"Cho, cung cấp",Prep,B1
+378,跟,gēn,"Với, cùng với",Prep,B1
+379,跟,gēn,Đi theo,V,B1
+380,根,gēn,"Cuống, gốc",M,B1
+381,根,gēn,"Rễ, rễ cây",N,B1
+382,根據,gēnjù,"Căn cứ vào, dựa vào",Prep,B1
+383,更加,gèngjiā,"Hơn nữa, thêm",Adv,B1
+384,公尺,gōngchĭ,Mét (đơn vị chiều dài),M,B1
+385,公分,gōngfēn,Cen-ti-mét,M,B1
+386,公共,gōnggòng,Công cộng,Vs-attr,B1
+387,公克,gōngkè,Gram,M,B1
+388,公路,gōnglù,"Đường cái, quốc lộ",N,B1
+389,功夫,gōngfu,"Bản lĩnh, công sức",N,B1
+390,功能,gōngnéng,"Công năng, tác dụng",N,B1
+391,工具,gōngjù,Công cụ,N,B1
+392,工業,gōngyè,Công nghiệp,N,B1
+393,工作,gōngzuò,Công việc,Vi,B1
+394,恭喜,gōngxǐ,Chúc mừng,V,B1
+395,共,gòng,"Chung, cùng nhau",Adv,B1
+396,共同,gòngtóng,"Cộng đồng, chung",Vs-attr,B1
+397,貢獻,gòngxiàn,"Cống hiến, sự đóng góp",N,B1
+398,貢獻,gòngxiàn,Cống hiến,V,B1
+399,溝通,gōutōng,"Trao đổi, giao tiếp",V,B1
+400,夠,gòu,"Đủ, đầy đủ",Adv,B1
+401,購買,gòumăi,"Mua, mua sắm",V,B1
+402,姑娘,gūniáng,Cô gái,N,B1
+403,古,gŭ,"Cổ, cổ xưa",Vs-attr,B1
+404,古代,gŭdài,Cổ đại,N,B1
+405,古蹟,gŭjī,Cổ tích,N,B1
+406,古老,gŭlăo,"Cổ kính, cũ xưa",Vs,B1
+407,顧,gù,Ngoảnh lại nhìn,V,B1
+408,故意,gùyì,"Cố ý, cố tình",Vs,B1
+409,刮,guā,Cạo,V,B1
+410,乖,guāi,Ngoan ngoãn,Vs,B1
+411,怪,guài,Kỳ quái,V,B1
+412,怪,guài,"Cực kỳ, vô cùng",Vs,B1
+413,關,guān,"Đóng lại, khép lại",Vp,B1
+414,觀察,guānchá,"Quan sát, xem xét",V,B1
+415,觀點,guāndiăn,Quan điểm,N,B1
+416,觀念,guānniàn,Quan niệm,N,B1
+417,觀眾,guānzhòng,Quần chúng,N,B1
+418,管,guăn,"Quản lý, cai quản",V,B1
+419,罐,guàn,"Hộp, vại, lọ",M,B1
+420,廣播,guǎngbò,Chương trình phát thanh,N,B1
+421,廣播,guǎngbò,Phát thanh,Vi,B1
+422,廣場,guăngchăng,Quảng trường,N,B1
+423,廣告,guănggào,Quảng cáo,N,B1
+424,逛,guàng,"Đi dạo, đi bách bộ",V,B1
+425,逛街,guàngjiē,"Tản bộ, dạo phố",V-sep,B1
+426,規矩,guījŭ,Quy tắc,N,B1
+427,規模,guīmó,Quy mô,N,B1
+428,鬼,guǐ,Ma quỷ,N,B1
+429,貴姓,guìxìng,"Quý danh, tên họ",,B1
+430,櫃子,guìzi,Cái tủ,N,B1
+431,國內,guónèi,"Quốc nội, trong nước",N,B1
+432,國外,guówài,Nước ngoài,N,B1
+433,國王,guówáng,"Quốc vương, vua",N,B1
+434,國語,guóyŭ,Quốc ngữ,N,B1
+435,過去,guòqù,"Đã qua, quá khứ",N,B1
+436,過日子,guòrìzi,"Sống, sinh hoạt",Vi,B1
+437,H,,,,
+438,嗨,hāi,Haizz (thở dài),Ptc,B1
+439,還好,háihăo,"Khá tốt, tàm tạm",Adv,B1
+440,還是,háishì,Vẫn còn,Adv,B1
+441,還要,háiyào,Cần phải,Adv,B1
+442,海報,hăibào,Áp phích,N,B1
+443,海灘,hăitān,Bãi biển,N,B1
+444,海洋,hǎiyáng,"Hải dương, biển cả",N,B1
+445,害,hài,"Hại, có hại",V,B1
+446,害怕,hàipà,Sợ hãi,Vs,B1
+447,行,háng,"Hàng lối, ngành nghề",M,B1
+448,航空,hángkōng,Hàng không,N,B1
+449,好,hào,,Vs,B1
+450,好處,hǎochù,"Có lợi, có ích",N,B1
+451,好好/好好兒,hǎohǎo/hǎohǎor,"Tốt lành, cẩn thận",Adv,B1
+452,好幾,hǎojǐ,"Nhiều, mấy",Det,B1
+453,好了,hǎole,"Được rồi, OK",Ptc,B1
+454,好些,hǎoxiē,"Nhiều, rất nhiều",Det,B1
+455,和,hé,Và,Prep,B1
+456,盒,hé,Hộp,M,B1
+457,合,hé,,Adv,B1
+458,合唱,héchàng,"Hợp xướng, đồng ca",V,B1
+459,合作,hézuò,Hợp tác,Vs,B1
+460,黑,hēi,"Đen, đen tối",Vs,B1
+461,恨,hèn,"Hận, thù hận",Vst,B1
+462,恨不得,hènbude,"Mong muốn, khao khát",Vst,B1
+463,紅,hóng,Đỏ,Vs,B1
+464,紅包,hóngbāo,Tiền lì xì,N,B1
+465,紅豆,hóngdòu,Đậu đỏ,N,B1
+466,厚,hòu,Dày,Vs,B1
+467,後,hòu,Sau,Det,B1
+468,後,hòu,Phía sau,N,B1
+469,忽然,hūrán,"Bỗng nhiên, đột nhiên",Adv,B1
+470,糊塗,hútú,Hồ đồ,Vs,B1
+471,互相,hùxiāng,"Lẫn nhau, với nhau",Adv,B1
+472,花,huā,Tiêu (tiền/thời gian),V,B1
+473,花心,huāxīn,Lăng nhăng,Vs,B1
+474,滑雪,huáxuě,Trượt tuyết,V-sep,B1
+475,畫家,huàjiā,Họa sĩ,N,B1
+476,話說回來,huàshuōhuílái,Quay lại chủ đề chính…,,B1
+477,話題,huàtí,"Đề tài, chủ đề",N,B1
+478,化妝品,huàzhuāngpĭn,Đồ trang điểm,N,B1
+479,壞處,huàichù,"Chỗ hỏng, điều có hại",N,B1
+480,還,huán,Hoán đổi,V,B1
+481,環保,huánbăo,Bảo vệ môi trường,N,B1
+482,黃,huáng,Vàng,Vs,B1
+483,回,huí,Lần,M,B1
+484,回答,huídá,"Trả lời, đáp lại",N,B1
+485,回想,huíxiăng,"Hồi tưởng, nhớ lại",V,B1
+486,會,huì,,N,B1
+487,會場,huìchăng,Hội trường,N,B1
+488,會話,huìhuà,Hội họa,N,B1
+489,會議,huìyì,Hội nghị,N,B1
+490,婚禮,hūnlǐ,"Hôn lễ, đám cưới",N,B1
+491,婚姻,hūnyīn,Hôn nhân,N,B1
+492,混亂,hùnluàn,"Hỗn loạn, lẫn lộn",Vs,B1
+493,活,huó,"Sống, sinh sống",Vs-attr,B1
+494,活動,huódòng,Hoạt động,Vi,B1
+495,或許,huòxŭ,"Có thể, có lẽ là",Adv,B1
+496,J,,,,
+497,基本,jīběn,"Căn bản, cơ bản",N,B1
+498,基本,jīběn,Chủ yếu,Vs,B1
+499,基礎,jīchŭ,"Nền móng, cơ sở",N,B1
+500,基督教,Jīdūjiào,Cơ đốc giáo,N,B1
+501,激動,jīdòng,Xúc động,Vs,B1
+502,激烈,jīliè,"Quyết liệt, dữ dội",Vs,B1
+503,積極,jījí,"Tích cực, hăng hái",Vs,B1
+504,機器,jīqì,"Cơ khí, máy móc",N,B1
+505,及,jí,Đạt đến,Conj,B1
+506,急,jí,"Gấp, vội",Vs,B1
+507,極,jí,Đỉnh điểm,Adv,B1
+508,極了,jíle,"Vô cùng, cực kỳ",,B1
+509,擠,jǐ,Chen chúc,V,B1
+510,擠,jǐ,Dồn lại,Vs,B1
+511,既,jì,"Đã, phàm đã…",Conj,B1
+512,記,jì,"Nhớ, ghi chép lại",Vst,B1
+513,記錄,jìlù,Biên bản,N,B1
+514,記錄,jìlù,Ghi chép lại,V,B1
+515,記憶,jìyì,"Hồi tưởng, ký ức",N,B1
+516,季節,jìjié,"Mùa, mùa vụ",N,B1
+517,紀念,jìniàn,Đồ kỷ niệm,N,B1
+518,紀念,jìniàn,Tưởng niệm,Vst,B1
+519,技巧,jìqiăo,Kỹ xảo,N,B1
+520,繼續,jìxù,Tiếp tục,V,B1
+521,加,jiā,"Cộng, tăng thêm",V,B1
+522,加強,jiāqiáng,Tăng cường,V,B1
+523,加入,jiārù,"Thêm vào, tham gia vào",Vpt,B1
+524,加上,jiāshàng,"Cộng vào, thêm vào đó",V,B1
+525,加油,jiāyóu,Cố lên!,Vi,B1
+526,家,jiā,"Nhà, gia đình",M,B1
+527,家鄉,jiāxiāng,"Quê nhà, quê hương",N,B1
+528,家長,jiāzhăng,Phụ huynh,N,B1
+529,假,jiă,"Giả, không thật",Vs,B1
+530,假如,jiărú,"Giá như, nếu như",Conj,B1
+531,假裝,jiăzhuāng,Giả vờ,V,B1
+532,架,jià,"Cái giá, khung",M,B1
+533,假日,jiàrì,Ngày nghỉ,N,B1
+534,價值,jiàzhí,Giá trị (hàng hóa),N,B1
+535,肩膀,jiānbăng,Bờ vài,N,B1
+536,堅持,jiānchí,Kiên trì,Vs,B1
+537,堅強,jiānqiáng,Kiên cường,Vs,B1
+538,減,jiăn,"Giảm, trừ bớt",Vst,B1
+539,減輕,jiănqīng,Giảm nhẹ,Vpt,B1
+540,減少,jiănshăo,Giảm thiểu,Vpt,B1
+541,簡直,jiănzhí,Quả thật là,Adv,B1
+542,見,jiàn,Trông thấy,Vpt,B1
+543,建立,jiànlì,Xây dựng,V,B1
+544,建設,jiànshè,Kiến thiết,N,B1
+545,建設,jiànshè,"Xây dựng, lập nên",V,B1
+546,建議,jiànyì,"Đề nghị, đề xuất",N,B1
+547,建議,jiànyì,Đưa ra lời khuyên,V,B1
+548,將來,jiānglái,"Tương lai, sau này",N,B1
+549,講價,jiăngjià,"Mặc cả, trả giá",Vi,B1
+550,講究,jiăngjiu,"Chú trọng, chú ý",Vs,B1
+551,獎學金,jiăngxuéjīn,Học bổng,N,B1
+552,降低,jiàngdī,Hạ thấp,Vpt,B1
+553,醬油,jiàngyóu,"Nước tương, xì dầu",N,B1
+554,交,jiāo,Giao nộp,V,B1
+555,交流,jiāoliú,"Giao lưu, trao đổi",Vi,B1
+556,交友,jiāoyǒu,Kết bạn,Vi,B1
+557,驕傲,jiāoào,"Kiêu ngạo, kiêu căng",Vs,B1
+558,郊區,jiāoqū,Vùng ngoại ô,N,B1
+559,角度,jiăodù,"Góc độ, quan điểm",N,B1
+560,角色,jiăo/juésè,"Nhân vật, kiểu người",N,B1
+561,叫,jiào,"Kêu, gọi",V,B1
+562,叫,jiào,Hô hoán,Vst,B1
+563,較,jiào,So sánh,Adv,B1
+564,教,jiào,Dạy dỗ,Vst,B1
+565,教材,jiàocái,Tài liệu giảng dạy,N,B1
+566,教導,jiàodăo,"Chỉ bảo, dạy bảo",V,B1
+567,教法,jiàofă,Phương pháp giảng dạy,N,B1
+568,教練,jiàoliàn,Huấn luyện viên,N,B1
+569,教授,jiàoshòu,Truyền thụ,N,B1
+570,教訓,jiàoxun,"Giáo huấn, dạy dỗ",N,B1
+571,教育,jiàoyù,"Giáo dục, đào tạo",N,B1
+572,教育,jiàoyù,"Chỉ dẫn, dạy",V,B1
+573,接觸,jiēchù,Tiếp xúc,V,B1
+574,接受,jiēshòu,Tiếp thu,V,B1
+575,接著,jiēzhe,Tiếp theo,Adv,B1
+576,結,jié,"Kết, đan thành",V,B1
+577,結果,jiéguǒ,Kết quả,Conj,B1
+578,結局,jiéjú,Kết cục,N,B1
+579,節,jié,"Mấu, khớp",M,B1
+580,節日,jiérì,"Ngày lễ, ngày hội",N,B1
+581,解決,jiějué,Giải quyết,V,B1
+582,解釋,jiěshì,Giải thích,V,B1
+583,姊妹,jiěmèi,Chị em,N,B1
+584,斤,jīn,Cân (=1/2kg),M,B1
+585,金(子),jīn(zi),Vàng,N,B1
+586,緊,jǐn,"Căng, kéo căng",Vs,B1
+587,僅,jĭn,"Vẻn vẹn, chỉ",Adv,B1
+588,儘管,jĭnguăn,"Mặc dù, cho dù",Conj,B1
+589,盡,jìn,"Hết sức, cố",Vst,B1
+590,進,jìn,Tiến vào,V,B1
+591,進行,jìnxíng,Tiến hành,V,B1
+592,進一步,jìnyíbù,Tiến lên 1 bước,Adv,B1
+593,經,jīng,Trải qua,V,B1
+594,經費,jīngfèi,Kinh phí,N,B1
+595,經過,jīngguò,Quá trình,N,B1
+596,經過,jīngguò,"Trải qua, đi qua",Vst,B1
+597,經驗,jīngyàn,Kinh nghiệm,Vpt,B1
+598,精神,jīngshén,Tinh thần,N,B1
+599,驚訝,jīngyà,Kinh ngạc,Vs,B1
+600,酒吧,jiŭbā,Quán bar,N,B1
+601,救,jiù,Cứu giúp,V,B1
+602,舅舅,jiùjiu,Cậu (em của mẹ),N,B1
+603,舅媽,jiùmā,Mợ (vợ của cậu),N,B1
+604,就,jiù,Thì,Prep,B1
+605,就是,jiùshì,Nhất định,Conj,B1
+606,就算,jiùsuàn,Cho dù,Conj,B1
+607,就要,jiùyào,"Sẽ, sẽ đến",Adv,B1
+608,居住,jūzhù,"Cư trú, sống, ở",Vi,B1
+609,橘子,júzi,"Cây quýt, quả quýt",N,B1
+610,舉,jǔ,"Giương, nâng lên",V,B1
+611,舉辦,jŭbàn,"Tổ chức, cử hành",V,B1
+612,舉手,jŭshŏu,Giơ tay,V-sep,B1
+613,舉行,jǔxíng,"Tiến hành, tổ chức",V,B1
+614,句,jù,Câu,M,B1
+615,聚,jù,Tụ tập,Vi,B1
+616,劇本,jùběn,kịch bản,N,B1
+617,劇情,jùqíng,Tình tiết vở kịch,N,B1
+618,拒絕,jùjué,"Từ chối, cự tuyệt",V,B1
+619,距離,jùlí,"Khoảng cách, cự ly",N,B1
+620,具有,jùyŏu,"Có, vốn có",Vst,B1
+621,絕對,juéduì,Tuyệt đối,Adv,B1
+622,軍隊,jūnduì,Quân đội,N,B1
+623,軍人,jūnrén,Quân nhân,N,B1
+624,K,,,,
+625,卡車,kǎchē,Xe tải,N,B1
+626,開放,kāifàng,Mở bỏ phong tỏa,V,B1
+627,開花,kāihuā,Nở hoa,Vp-sep,B1
+628,開朗,kāilăng,Thoáng mát,Vs,B1
+629,開始,kāishǐ,Bắt đầu,N,B1
+630,開玩笑,kāiwánxiào,"Đùa, giỡn",V-sep,B1
+631,看不起,kànbuqĭ,"Khinh thường, xem thường",Vst,B1
+632,看法,kànfǎ,"Cách nhìn, quan điểm",N,B1
+633,看起來,kànqĭlái,"Xem ra, coi như",Adv,B1
+634,考,kǎo,"Thi, hỏi, đố",V,B1
+635,棵,kē,"Cây, ngọn",M,B1
+636,刻,kè,"Khắc, mười lăm phút",M,B1
+637,科,kē,"Môn học, môn, khoa",M,B1
+638,科技,kējì,Khoa học kĩ thuật,N,B1
+639,科學,kēxué,"Khoa học, ngành học",Vs,B1
+640,可,kě,,Adv,B1
+641,可,kě,,Vaux,B1
+642,可靠,kěkào,Đáng tin,Vs,B1
+643,可樂,kělè,Cô-ca,N,B1
+644,可惡,kěwù,"Đáng ghét, đáng giận",Vs,B1
+645,可惜,kěxí,Đáng tiếc,Vs,B1
+646,可以,kěyǐ,Có thể,Vaux,B1
+647,渴望,kěwàng,"Khát vọng, khát khao",Vst,B1
+648,克,kè,"Khắc, khắc chế",M,B1
+649,克服,kèfú,Khắc phục,Vpt,B1
+650,課程,kèchéng,Chương trình học,N,B1
+651,課堂,kètáng,"Tại lớp, trong lớp",N,B1
+652,課文,kèwén,"Bài khóa, bài văn",N,B1
+653,客滿,kèmăn,Không còn chỗ trống,Vp,B1
+654,刻,kè,Khắc,V,B1
+655,肯,kěn,"Đồng ý, tán thành",Vaux,B1
+656,肯定,kěndìng,Khẳng định,Vs,B1
+657,空,kōng,Trống không,Vs,B1
+658,空間,kōngjiān,Không gian,N,B1
+659,空軍,kōngjūn,Không quân,N,B1
+660,恐怕,kǒngpà,"E rằng, sợ rằng",Adv,B1
+661,空,kòng,Trống rỗng,Vs,B1
+662,口,kǒu,Miệng,N,B1
+663,口袋,kǒudài,"Túi áo, túi, bao",N,B1
+664,口味,kŏuwèi,"Khẩu vị, hương vị",N,B1
+665,誇張,kuāzhāng,Khoa trương,Vs,B1
+666,快,kuài,Nhanh,Adv,B1
+667,快要,kuàiyào,"Sắp, suýt",Adv,B1
+668,寬,kuān,"Rộng, bao quát",Vs,B1
+669,況且,kuàngqiě,Vả lại,Conj,B1
+670,困難,kùnnán,"Khó khăn, trở ngại",N,B1
+671,困難,kùnnán,"Gặp trắc trở, khó khăn",Vs,B1
+672,擴大,kuòdà,"Mở rộng, tăng thêm",V,B1
+673,L,,,,
+674,拉肚子,lādùzi,"Bị đau bụng, tiêu chảy",V-sep,B1
+675,啦,la,"Đấy, nhé",Ptc,B1
+676,來,lái,Đến,Adv,B1
+677,來,lái,"Xảy đến, xảy ra",Ptc,B1
+678,來不及,láibùjí,Không kịp,Vs,B1
+679,來得及,láidejí,"Kịp, còn kịp",Vs,B1
+680,藍,lán,"Lam, xanh lam",Vs,B1
+681,浪漫,làngmàn,Lãng mạn,Vs,B1
+682,老公,lăogōng,Chồng,N,B1
+683,老虎,lăohŭ,Con hổ,N,B1
+684,老婆,lăopo,Vợ,N,B1
+685,老實,lăoshi,"Trung thành, trung thực",Vs,B1
+686,老是,lăoshì,Luôn luôn,Adv,B1
+687,樂,lè,Âm nhạc,Vs,B1
+688,樂觀,lèguān,"Lạc quan, vui vẻ",Vs,B1
+689,樂趣,lèqù,"Niềm vui, hứng thú",N,B1
+690,垃圾,lèsè,"Rác, rác thải",N,B1
+691,淚,lèi,"Nước mắt, lệ",N,B1
+692,類,lèi,Chủng loại,M,B1
+693,冷淡,lěngdàn,"Vắng lặng, lạnh nhạt",Vs,B1
+694,離,lí,"Xa rời, xa cách",Prep,B1
+695,離婚,líhūn,"Li dị, li hôn",Vp-sep,B1
+696,里,lǐ,,M,B1
+697,裡邊,lĭbiān,Bên trong,N,B1
+698,理解,lĭjiě,"Hiểu, tìm hiểu",Vst,B1
+699,理論,lĭlùn,"Lý luận, lý thuyết",N,B1
+700,理想,lĭxiăng,Lý tưởng,N,B1
+701,理想,lĭxiăng,"Ước vọng, hy vọng",Vs,B1
+702,裏面,lǐmiàn,Bên trong,N,B1
+703,禮堂,lĭtáng,Lễ đường,N,B1
+704,力,lì,"Lực, sức lực",N,B1
+705,力量,lìlìang,"Lực lượng, sức mạnh",N,B1
+706,厲害,lìhai,"Lợi hại, gay gắt, dữ dội",Vs,B1
+707,立刻,lìkè,Ngay lập tức,Adv,B1
+708,例如,lìrú,Ví dụ,Prep,B1
+709,例子,lìzi,Thí dụ,N,B1
+710,利益,lìyì,"Lợi ích, quyền lợi",N,B1
+711,利用,lìyòng,"Sử dụng, dùng, lợi dụng",V,B1
+712,連,lián,Ngay cả…,Conj,B1
+713,連,lián,"Gắn bó, nối liền",Vst,B1
+714,連/聯絡,liánluò,"Liên lạc, liên hệ",V,B1
+715,連續劇,liánxùjù,"Phim bộ, phim nhiều tập",N,B1
+716,練,liàn,Luyện tập,V,B1
+717,戀愛,liànài,Yêu đương,Vp,B1
+718,涼,liáng,Để nguội,Vs,B1
+719,良好,liánghăo,Tốt đẹp,Vs,B1
+720,亮,liàng,Phát sáng,Vs,B1
+721,聊,liáo,Nói chuyện phiếm,V,B1
+722,了不起,liăobuqĭ,"Giỏi lắm, khá lắm",Vs,B1
+723,靈魂,línghún,Linh hồn,N,B1
+724,零錢,língqián,Tiền lẻ,N,B1
+725,零用錢,língyòngqián,Tiền tiêu vặt,N,B1
+726,領,lǐng,Dẫn dắt,V,B1
+727,領導,lĭngdăo,Lãnh đạo,V,B1
+728,領域,lĭngyù,Lĩnh vực,N,B1
+729,令,lìng,Ra lệnh,Vst,B1
+730,流,liú,"Chảy, đổ, di chuyển",V,B1
+731,流汗,liúhàn,Đổ mồ hôi,V-sep,B1
+732,流血,liúxiě,Đổ máu,V-sep,B1
+733,留學,liúxué,Du học,Vi,B1
+734,留學生,liúxuéshēng,Du học sinh,N,B1
+735,龍,lóng,Con rồng,N,B1
+736,錄,lù,"Ghi chép, thu (băng)",V,B1
+737,錄取,lùqŭ,"Tuyển chọn, nhận vào",V,B1
+738,錄音,lùyīn,"Thu âm, ghi âm",V-sep,B1
+739,露營,lùyíng,Đóng quân dã ngoại,V-sep,B1
+740,亂,luàn,"Loạn, rối, lộn xộn",Vs,B1
+741,輪胎,lúntāi,Lốp xe,N,B1
+742,旅客,lǚkè,"Lữ khách, hành khách",N,B1
+743,綠,lǜ,Trở nên xanh,Vs,B1
+744,律師,lǜshī,Luật sư,N,B1
+745,M,,,,
+746,麻煩,máfan,"Phiền phức, phiền toái",Vs,B1
+747,馬桶,mătŏng,Cái bô (có nắp),N,B1
+748,碼頭,mătou,"Bến đò, bến sông",N,B1
+749,螞蟻,măyĭ,Con kiến,N,B1
+750,罵,mà,"Chửi, mắng",V,B1
+751,嘛,ma,"Đi, mà",Ptc,B1
+752,滿,măn,"Đầy, chật",Det,B1
+753,滿,măn,Thỏa mãn,Vs,B1
+754,滿足,mănzú,"Làm thỏa mãn, hài lòng",Vs,B1
+755,慢慢,mànmàn,Chậm rãi,,B1
+756,慢跑,mànpăo,Chạy bộ,Vi,B1
+757,慢用,mànyòng,"Ăn từ từ, thưởng thức món ăn",Vi,B1
+758,毛,máo,Lông,N,B1
+759,毛病,máobìng,"Khuyết điểm, thói xấu",N,B1
+760,貿易,màoyì,"Thương mại, buôn bán",N,B1
+761,沒,méi,Chưa,Ptc,B1
+762,沒,méi,"Chìm, lặn",Vp,B1
+763,沒什麼,méishénme,"Không sao, không việc gì",Vs,B1
+764,沒想到,méixiăngdào,Không ngờ rằng,,B1
+765,玫瑰,méigui,Hoa hồng,N,B1
+766,每,měi,Mỗi,Adv,B1
+767,美好,měihăo,Tốt đẹp,Vs,B1
+768,門,mén,"Cửa, cánh cửa",M,B1
+769,夢,mèng,"Mơ, giấc mơ",N,B1
+770,迷路,mílù,Lạc đường,Vp-sep,B1
+771,迷人,mírén,Mê hoặc lòng người,Vs,B1
+772,米飯,mǐfàn,Cơm,N,B1
+773,米粉,mĭfěn,"Bột gạo, bún",N,B1
+774,秘/祕密,mìmì,Bí mật,N,B1
+775,密切,mìqiè,Mật thiết,Vs,B1
+776,免費,miănfèi,Miễn phí,Vs,B1
+777,面,miàn,Mặt,M,B1
+778,面,miàn,"Trước mặt, đối diện",N,B1
+779,面積,miànjī,Diện tích,N,B1
+780,面前,miànqián,"Phía trước, trước mặt",N,B1
+781,麵條,miàntiáo,Mì sợi,N,B1
+782,描寫,miáoxiě,Miêu tả,V,B1
+783,秒,miǎo,Giây,M,B1
+784,廟,miào,"Miếu, đền thờ",N,B1
+785,民國,mínguó,Dân quốc,N,B1
+786,民族,mínzú,Dân tộc,N,B1
+787,名,míng,Tên gọi,M,B1
+788,名詞,míngcí,Danh từ,N,B1
+789,明白,míngbái,Hiểu,Vpt,B1
+790,明顯,míngxiăn,"Rõ ràng, nổi bật",Vs,B1
+791,明星,míngxīng,Ngôi sao,N,B1
+792,命,mìng,"Sinh mệnh, mạng",N,B1
+793,摸,mō,Mơ hồ,V,B1
+794,摩托車/機車,mótuōchē/jīchē,"Xe gắn máy, xe mô-tô",N,B1
+795,陌生,mòshēng,"Xa lạ, không quen",Vs,B1
+796,某,mŏu,Nào đó,Det,B1
+797,木,mù,"Mộc, cây gỗ",N,B1
+798,木頭(˙ㄊㄡ),mùtou,"Gỗ, mảnh gỗ",N,B1
+799,目的,mùdì,Mục đích,N,B1
+800,目前,mùqián,"Hiện nay, trước mắt",N,B1
+801,N,,,,
+802,拿手,náshŏu,Sở trường,Vs,B1
+803,哪些,nǎxiē,"Cái nào, người nào",Det,B1
+804,那,nà,"Kia, đó",Conj,B1
+805,那麼,nàme,"Như vậy, như thế",Conj,B1
+806,那樣,nàyàng,Như thế,Adv,B1
+807,那樣,nàyàng,như vậy,Vs,B1
+808,哪,na,,Ptc,B1
+809,奶,nǎi,Sữa,N,B1
+810,奶茶,nǎichá,Trà sữa,N,B1
+811,耐心,nàixīn,Sự kiên nhẫn,N,B1
+812,南方,nánfāng,Phương Nam,N,B1
+813,難怪,nánguài,"Thảo nào, hèn chi",Adv,B1
+814,難看,nánkàn,"Xấu xí, khó coi",Vs,B1
+815,腦,năo,Não,N,B1
+816,腦子,năozi,Não bộ,N,B1
+817,鬧鐘,nàozhōng,Đồng hồ báo thức,N,B1
+818,內,nèi,"Trong, phía trong",N,B1
+819,內容,nèiróng,Nội dung,N,B1
+820,能,néng,"Năng lực, có thể",Vaux,B1
+821,能夠,nénggòu,Có khả năng,Vaux,B1
+822,能力,nénglì,"Năng lực, khả năng",N,B1
+823,年,nián,Năm,N,B1
+824,年代,niándài,"Thời đại, thời kỳ",N,B1
+825,年齡,niánlíng,Tuổi tác,N,B1
+826,年年,niánnián,"Hằng năm, mỗi năm",Adv,B1
+827,念書,niànshū,"Học bài, đọc sách",V-sep,B1
+828,農業,nóngyè,Nông nghiệp,N,B1
+829,女士,nǚshì,"Bà, phu nhân, quý cô",N,B1
+830,O,,,,
+831,喔,ō,ờ,Ptc,B1
+832,哦,ó,Ngâm thơ,Ptc,B1
+833,噢,yǔ,ờ,Ptc,B1
+834,P,,,,
+835,拍,pāi,"Đập, vỗ, phủi",V,B1
+836,排,pái,"Xếp, sắp xếp",V,B1
+837,牌子,páizi,"Thẻ, bảng, biển hiệu",N,B1
+838,盼望,pànwàng,"Trông mong, mong mỏi",Vst,B1
+839,旁,páng,Bên cạnh,N,B1
+840,陪,péi,ở cùng với,V,B1
+841,培養,péiyăng,"Nuôi dưỡng, bồi dưỡng",V,B1
+842,配,pèi,Kết đôi,V,B1
+843,配合,pèihé,"Kết hợp, phối hợp",V,B1
+844,碰,pèng,"Đụng, chạm, vấp phải",V,B1
+845,碰到,pèngdào,"Đi qua, đụng phải",Vpt,B1
+846,碰上,pèngshàng,"Gặp gỡ, đụng trúng",Vpt,B1
+847,批評,pīpíng,Phê bình,V,B1
+848,皮,pí,"Vỏ, da",N,B1
+849,皮帶,pídài,Dây thắt lưng,N,B1
+850,皮膚,pífū,Da dẻ,N,B1
+851,皮鞋,píxié,Giày da,N,B1
+852,篇,piān,"Bài, trang vở",M,B1
+853,騙子,piànzi,Tên lừa đảo,N,B1
+854,品質,pĭnzhí,Phẩm chất,N,B1
+855,坪,píng,"Bình địa, bãi",M,B1
+856,平,píng,"Bằng phẳng, san bằng",Vs,B1
+857,平安,píngān,Bình an,Vs,B1
+858,平等,píngděng,Bình đẳng,Vs,B1
+859,平時,píngshí,Bình thường,N,B1
+860,平原,píngyuán,"Đồng bằng, bình nguyên",N,B1
+861,瓶子,píngzi,"Bình, chai",N,B1
+862,破,pò,"Vỡ, thủng",Vp,B1
+863,破壞,pòhuài,"Phá hoại, làm hỏng",V,B1
+864,葡萄,pútao,Trái nho,N,B1
+865,普遍,pŭbiàn,Phổ biến,Vs,B1
+866,Q,,,,
+867,欺負,qīfù,"Bắt nạt, ăn hiếp",V,B1
+868,其次,qícì,"Lần sau, lần tiếp theo",Conj,B1
+869,其實,qíshí,Thực ra,Adv,B1
+870,其中,qízhōng,Trong đó,Det,B1
+871,期,qí,,M,B1
+872,期間,qíjiān,"Dịp, thời kì, thời gian",N,B1
+873,起,qĭ,"Rời khỏi, nảy lên",N,B1
+874,起,qĭ,"Nhổ, nhấc, lôi lên",V,B1
+875,起來,qĭlái,"Ngồi dậy, đứng dậy",Ptc,B1
+876,氣,qì,"Không khí, hơi thở",N,B1
+877,氣,qì,"Bực bội, nổi cáu",Vst,B1
+878,氣溫,qìwēn,Nhiệt độ không khí,N,B1
+879,汽水,qìshuǐ,Nước có ga,N,B1
+880,企業,qìyè,Xí nghiệp,N,B1
+881,簽名,qiānmíng,Ký tên,V-sep,B1
+882,簽證,qiānzhèng,"Thị thực, visa",N,B1
+883,謙虛,qiānxū,"Khiêm tốn, khiêm nhường",Vs,B1
+884,前,qián,Trước,Det,B1
+885,前,qián,Phía trước,N,B1
+886,前年,qiánnián,"Năm trước, năm kia",N,B1
+887,淺,qiǎn,Róc rách (tiếng nước chảy),Vs,B1
+888,強盜,qiángdào,"Bọn giặc, bọn cướp",N,B1
+889,強調,qiángdiào,"Cường điệu, nhấn mạnh",V,B1
+890,搶,qiǎng,"Va, đập",V,B1
+891,親,qīn,"Thông gia, sui gia",V,B1
+892,親切,qīnqiè,"Thân mật, thân thiết",Vs,B1
+893,親手,qīnshŏu,"Tự tay, chính tay",Adv,B1
+894,親眼,qīnyăn,"Tận mắt, chính mắt",Adv,B1
+895,親自,qīnzì,"Tự mình, đích thân",Adv,B1
+896,清,qīng,"Trong suốt, trong veo",Vs-pred,B1
+897,青年,qīngnián,"Tuổi trẻ, thanh niên",N,B1
+898,青少年,qīngshàonián,"Vị thành niên, thiếu niên",N,B1
+899,輕鬆,qīngsōng,"Nhẹ nhàng, nhẹ nhõm",Vs,B1
+900,晴,qíng,Trời quang,Vs-pred,B1
+901,情,qíng,Tình cảm,N,B1
+902,情人,qíngrén,"Tình nhân, người yêu",N,B1
+903,情況,qíngkuàng,Tình huống,N,B1
+904,情形,qíngxíng,Tình hình,N,B1
+905,請教,qĭngjiào,"Thỉnh giáo, xin chỉ bảo",V,B1
+906,請求,qĭngqiú,"Thỉnh cầu, đề nghị",V,B1
+907,窮,qióng,Nghèo nàn,Vs,B1
+908,求,qiú,"Thỉnh cầu, yêu cầu",V,B1
+909,球,qiú,Hình cầu,N,B1
+910,球場,qiúchăng,Sân bóng,N,B1
+911,球賽,qiúsài,Cuộc thi đấu bóng,N,B1
+912,球員,qiúyuán,Cầu thủ,N,B1
+913,取代,qŭdài,"Lật đổ, thay thế địa vị",V,B1
+914,去,qù,"Rời bỏ, mất đi",Adv,B1
+915,去,qù,"Năm ngoái, mùa trước",Ptc,B1
+916,去世,qùshì,"Qua đời, mất",Vp,B1
+917,全,quán,"Đầy đủ, toàn bộ",Det,B1
+918,全球,quánqiú,"Toàn cầu, toàn thế giới",N,B1
+919,全身,quánshēn,Toàn thân,N,B1
+920,缺點,quēdiăn,Khuyết điểm,N,B1
+921,卻,què,Mà lại,Adv,B1
+922,確定,quèdìng,Xác định,Vs,B1
+923,確認,quèrèn,Xác nhận,V,B1
+924,R,,,,
+925,讓,ràng,Nhường,V,B1
+926,熱狗,règŏu,Bánh hotdog,N,B1
+927,熱水,rèshuǐ,Nước nóng,N,B1
+928,人家,rénjiā,"Nhà, hộ, gia đình",N,B1
+929,人間,rénjiān,"Nhân gian, trần gian",N,B1
+930,人口,rénkǒu,"Nhân khẩu, dân số",N,B1
+931,人類,rénlèi,"Loài người, nhân loại",N,B1
+932,人們,rénmen,Mọi người,N,B1
+933,人民,rénmín,Nhân dân,N,B1
+934,人人,rénrén,"Người người, mọi người",N,B1
+935,人數,rénshù,Số người,N,B1
+936,人物,rénwù,Nhân vật,N,B1
+937,忍,rěn,"Nhẫn nhịn, chịu đựng",Vs,B1
+938,忍耐,rěnnài,Nhẫn nại,Vst,B1
+939,認,rèn,"Nhận thức, thừa nhận",V,B1
+940,認得,rènde,"Nhận ra, biết được",Vst,B1
+941,任務,rènwù,Nhiệm vụ,N,B1
+942,扔,rēng,"Ném, vứt bỏ",Vpt,B1
+943,仍,réng,"Dựa vào, chiếu theo, dựa theo",Adv,B1
+944,仍然,réngrán,"Vẫn cứ, tiếp tục",Adv,B1
+945,日出,rìchū,Bình minh,Vi,B1
+946,日記,rìjì,Nhật ký,N,B1
+947,日子,rìzi,"Ngày, thời kỳ",N,B1
+948,如,rú,"Theo như, giống như",Conj,B1
+949,如此,rúcǐ,"Như vậy, như thế",Vs,B1
+950,如下,rúxià,"Như sau, như dưới đây",Vs,B1
+951,如意,rúyì,"Như ý, vừa ý",Vs,B1
+952,弱,ruò,"Yếu đuối, yếu sức",Vs,B1
+953,S,,,,
+954,傘,sǎn,"Cái ô, dù",N,B1
+955,殺,shā,Giết,V,B1
+956,晒,shài,"Phơi nắng, sưởi nắng",V,B1
+957,山區,shānqū,"Vùng núi, miền núi",N,B1
+958,傷害,shānghài,Làm tổn thương,V,B1
+959,商品,shāngpĭn,Hàng hóa,N,B1
+960,商人,shāngrén,Thương nhân,N,B1
+961,商業,shāngyè,Thương mại,N,B1
+962,上,shàng,"ở trên, bên trên",Det,B1
+963,上,shàng,"Trên, trước",N,B1
+964,上當,shàngdàng,"Bị lừa, mắc lừa",Vp,B1
+965,上帝,shàngdì,Thượng đế,N,B1
+966,上街,shàngjiē,Đi ra ngoài đường,Vi,B1
+967,上衣,shàngyī,Mặc quần áo,N,B1
+968,燒,shāo,"Đốt, thiêu",V,B1
+969,少,shǎo,"Ít, thiếu, mất",Adv,B1
+970,蛇,shé,Uốn khúc,N,B1
+971,設備,shèbèi,Thiết bị,N,B1
+972,設計,shèjì,Bản thiết kế,N,B1
+973,設計,shèjì,Thiết kế,V,B1
+974,深,shēn,"Sâu, độ sâu",Vs,B1
+975,深入,shēnrù,"Thâm nhập, đi sâu vào",Vs,B1
+976,身邊,shēnbiān,Bên cạnh,N,B1
+977,身高,shēngāo,Chiều cao,N,B1
+978,身上,shēnshàng,Trên người,N,B1
+979,甚至,shènzhì,"Thậm chí, đến nỗi",Adv,B1
+980,升,shēng,"Thăng lên, lên chức",V,B1
+981,聲,shēng,"Thanh, âm thanh",M,B1
+982,聲調,shēngdiào,"Thanh điệu, âm điệu",N,B1
+983,生,shēng,"Sinh đẻ, sinh trưởng",V,B1
+984,生產,shēngchăn,Sản xuất,V,B1
+985,生動,shēngdòng,"Sinh động, sống động",Vs,B1
+986,生活,shēnghuó,Cuộc sống,Vi,B1
+987,生命,shēngmìng,"Sinh mệnh, tính mạng",N,B1
+988,生意,shēngyì,"Buôn bán, làm ăn",N,B1
+989,生字,shēngzì,Từ mới,N,B1
+990,省,shěng,Tự kiểm điểm bản thân,Vst,B1
+991,省錢,shěngqián,Tiết kiệm tiền,Vs-sep,B1
+992,剩,shèng,"Thừa lại, còn lại",Vst,B1
+993,剩下,shèngxia,"Thừa, còn lại",Vpt,B1
+994,濕,shī,ẩm,Vs,B1
+995,失戀,shīliàn,Thất tình,Vp,B1
+996,失去,shīqù,Mất,Vpt,B1
+997,獅子,shīzi,Sư tử,N,B1
+998,十分,shífēn,"Rất, hết sức, vô cùng",Adv,B1
+999,石頭,shítou,Đá,N,B1
+1000,石油,shíyóu,"Dầu mỏ, dầu thô",N,B1
+1001,時,shí,Thời gian,N,B1
+1002,時代,shídài,Thời đại,N,B1
+1003,時刻,shíkè,Thời khắc,N,B1
+1004,實話,shíhuà,Lời nói thật,N,B1
+1005,實際,shíjì,Thực tế,Vs,B1
+1006,實力,shílì,"Thực lực, sức mạnh",N,B1
+1007,實行,shíxíng,"Thực hiện, thi hành",V,B1
+1008,實在,shízài,"Chắc chắn, cẩn thận",Vs,B1
+1009,使得,shĭde,"Làm cho, khiến cho",Vst,B1
+1010,使用,shĭyòng,"Sử dụng, dùng",V,B1
+1011,事實,shìshí,Sự thật,N,B1
+1012,事業,shìyè,Sự nghiệp,N,B1
+1013,適應,shìyìng,Thích ứng,Vst,B1
+1014,市長,shìzhăng,Thị trưởng,N,B1
+1015,收穫,shōuhuò,"Gặt hái, thu hoạch",N,B1
+1016,收音機,shōuyīnjī,Máy thu thanh,N,B1
+1017,熟,shóu / shú,"Quen thuộc, thành thạo",Vs,B1
+1018,首,shǒu,"Đầu, đứng đầu",M,B1
+1019,手套,shŏutào,"Găng tay, bao tay",N,B1
+1020,手續,shŏuxù,Thủ tục,N,B1
+1021,受得了,shòudeliao,Có thể chịu được,Vst,B1
+1022,書包,shūbāo,"Túi sách, cặp sách",N,B1
+1023,書架,shūjià,Giá sách,N,B1
+1024,蔬菜,shūcài,"Rau, rau cải",N,B1
+1025,舒適,shūshì,"Dễ chịu, thoải mái",Vs,B1
+1026,叔叔,shúshu,Chú,N,B1
+1027,熟悉,shoúxī,"Hiểu rõ, quen thuộc",Vst,B1
+1028,數,shŭ,Đếm,V,B1
+1029,數字,shùzì,"Chữ số, con số",N,B1
+1030,樹木,shùmù,Cây cối,N,B1
+1031,刷牙,shuāyá,Đánh răng,V-sep,B1
+1032,帥,shuài,Đẹp trai,Vs,B1
+1033,雙,shuāng,"Đôi, gấp đôi",Vs-attr,B1
+1034,水餃,shuĭjiăo,Bánh sủi cảo,N,B1
+1035,水平,shuĭpíng,Trình độ,N,B1
+1036,水準,shuĭzhŭn,Mực nước,N,B1
+1037,睡著,shuìzháo,Ngủ,Vp,B1
+1038,順便,shùnbiàn,"Thuận tiện, tiện thể",Adv,B1
+1039,順利,shùnlì,"Thuận lợi, suôn sẻ",Vs,B1
+1040,說法,shuōfă,Cách nói,N,B1
+1041,說明,shuōmíng,Lời thuyết minh,N,B1
+1042,說明,shuōmíng,"Giải thích rõ, nói rõ",V,B1
+1043,說起來,shuōqilai,"Nói về, nói đến…",Adv,B1
+1044,思考,sīkăo,"Suy xét, suy nghĩ",V,B1
+1045,思想,sīxiăng,"Tư tưởng, ý nghĩ",N,B1
+1046,似乎,sìhū,"Hình như, dường như",Adv,B1
+1047,寺廟,sìmiào,Chùa miếu,N,B1
+1048,速度,sùdù,Tốc độ,N,B1
+1049,算了,suànle,"Để nó trôi qua đi, quên nó đi",Vs,B1
+1050,隨便,suíbiàn,"Tùy thích, tùy ý",Vs,B1
+1051,隨時,suíshí,Bất cứ lúc nào,Adv,B1
+1052,所,suǒ,"Chỗ, nơi, chốn",Ptc,B1
+1053,所,suŏ,"Ngôi, nhà, gian",M,B1
+1054,所謂,suŏwèi,"Cái gọi là, điều mà họ gọi là",Vs-attr,B1
+1055,T,,,,
+1056,它,tā,"Nó, cái đó, điều đó",N,B1
+1057,它們,tāmen,Chúng nó,N,B1
+1058,台,tái,"Cái đài, bục, sân khấu",M,B1
+1059,抬,tái,"Đưa lên, ngẩng, ngước",V,B1
+1060,颱風,táifēng,Bão,N,B1
+1061,態度,tàidù,Thái độ,N,B1
+1062,談話,tánhuà,"Nói chuyện, trò chuyện",V-sep,B1
+1063,堂,táng,"Phòng khách, nhà chính",M,B1
+1064,堂,táng,Phòng,N,B1
+1065,討厭,tǎoyàn,Ghét,Vst,B1
+1066,套,tào,"Bộ, căn",M,B1
+1067,特地,tèdì,"Chuyên biệt, đặc biệt",Adv,B1
+1068,特色,tèsè,Đặc sắc,N,B1
+1069,特殊,tèshū,"Đặc thù, đặc biệt",Vs,B1
+1070,提,tí,"Xách, nhấc, nâng lên, nếu ra",V,B1
+1071,提到,tídào,Đề cập đến,Vpt,B1
+1072,提高,tígāo,"Đề cao, nâng cao",V,B1
+1073,提供,tígōng,Cung cấp,V,B1
+1074,題材,tícái,Đề tài,N,B1
+1075,題目,tímù,"Đề mục, đầu đề",N,B1
+1076,體會,tĭhuì,"Hiểu, lĩnh hội",Vst,B1
+1077,體力,tĭlì,"Thể lực, sức khỏe",N,B1
+1078,體貼,tĭtiē,"Săn sóc, quan tâm",Vst,B1
+1079,體重,tĭzhòng,"Thể trọng, trọng lượng",N,B1
+1080,替,tì,Thay thế,Prep,B1
+1081,天堂,tiāntáng,Thiên đường,N,B1
+1082,天天,tiāntiān,"Mỗi ngày, hàng ngày",Adv,B1
+1083,天下,tiānxià,Thiên hạ,N,B1
+1084,田,tián,"Ruộng, đồng",N,B1
+1085,填,tián,"Điền vào, ghi vào",V,B1
+1086,甜點,tiándiăn,Món điểm tâm ngọt,N,B1
+1087,條件,tiáojiàn,Điều kiện,N,B1
+1088,挑戰,tiăozhàn,"Thử thách, thách đấu",V,B1
+1089,貼,tiē,"Dán, kề, sát",V,B1
+1090,鐵,tiě,Sắt,N,B1
+1091,鐵路,tiělù,"Đường sắt, đường ray",N,B1
+1092,聽見,tīngjiàn,Nghe thấy,Vpt,B1
+1093,聽力,tīnglì,Khả năng nghe,N,B1
+1094,聽起來,tīngqĭlái,Nghe như là…,Adv,B1
+1095,聽眾,tīngzhòng,"Người nghe, thính giả",N,B1
+1096,挺,tĭng,Khá là,Adv,B1
+1097,通,tōng,Thông,Vs-pred,B1
+1098,通過,tōngguò,Thông qua,Vpt,B1
+1099,同,tóng,Giống nhau,Det,B1
+1100,同,tóng,Cùng nhau,Prep,B1
+1101,同情,tóngqíng,Đồng tình,Vst,B1
+1102,同時,tóngshí,"Đồng thời, cùng lúc",N,B1
+1103,同樣,tóngyàng,"Giống nhau, như nhau",Adv,B1
+1104,同樣,tóngyàng,Đồng dạng,Vs-attr,B1
+1105,痛苦,tòngkǔ,Đau khổ,Vs,B1
+1106,投,tóu,"Ném, quăng, bỏ vào",V,B1
+1107,投資,tóuzī,Đầu tư,V,B1
+1108,頭,tóu,Đầu,Det,B1
+1109,頭痛,tóutòng,"Đau đầu, nhức đầu",Vs,B1
+1110,圖,tú,"Bức vẽ, bức tranh",N,B1
+1111,突然,túrán,"Đột nhiên, bỗng nhiên",Adv,B1
+1112,土,tǔ,Đất đai,N,B1
+1113,土地,tǔdì,"Ruộng đất, đất đai",N,B1
+1114,兔子,tùzi,Con thỏ,N,B1
+1115,團體,tuántĭ,Tập thể,N,B1
+1116,團圓,tuányuán,"Đoàn viên, sum họp",Vs,B1
+1117,推,tuī,Đẩy,V,B1
+1118,推薦,tuījiàn,"Tiến cử, đề xuất, giới thiệu",V,B1
+1119,推銷,tuīxiāo,Đẩy mạnh tiêu thụ,V,B1
+1120,退步,tuìbù,"Nhượng bộ, lùi bước",Vp,B1
+1121,退休,tuìxiū,"Về hưu, nghỉ hưu",Vp,B1
+1122,脫,tuō,"Rụng, tróc, cởi ra",V,B1
+1123,W,,,,
+1124,娃娃,wáwa,"Em bé, búp bê",N,B1
+1125,外邊,wàibiān,Bên ngoài,N,B1
+1126,外公,wàigōng,Ông ngoại,N,B1
+1127,外婆,wàipó,Bà ngoại,N,B1
+1128,外文,wàiwén,"Ngoại văn, chữ nước ngoài",N,B1
+1129,外語,wàiyǔ,Ngoại ngữ,N,B1
+1130,完成,wánchéng,Hoàn thành,Vpt,B1
+1131,完全,wánquán,"Đầy đủ, trọn vẹn",Adv,B1
+1132,玩具,wánjù,Đồ chơi,N,B1
+1133,晚,wǎn,"Tối, muộn, trễ",Vs,B1
+1134,萬一,wànyī,"Nhỡ đâu, ngộ nhỡ",Adv,B1
+1135,網,wăng,Lưới,N,B1
+1136,網路,wănglù,Mạng lưới,N,B1
+1137,往往,wăngwăng,Thường thường,Adv,B1
+1138,忘記,wàngjì,"Quên, không nhớ",Vpt,B1
+1139,維持,wéichí,Duy trì,V,B1
+1140,微笑,wéixiào,Mỉm cười,Vi,B1
+1141,為主,wéizhŭ,Chủ yếu dựa vào,Vs,B1
+1142,偉大,wěidà,"Vĩ đại, lớn lao",Vs,B1
+1143,為,wèi,"Thành, biến thành",Prep,B1
+1144,未來,wèilái,Tương lai,N,B1
+1145,位置,wèizhì,Vị trí,N,B1
+1146,位子,wèizi,Chỗ ngồi,N,B1
+1147,溫柔,wēnróu,Dịu dàng,Vs,B1
+1148,文件,wénjiàn,"Văn kiện, tài liệu",N,B1
+1149,文學,wénxué,Văn học,N,B1
+1150,文字,wénzì,Chữ viết,N,B1
+1151,聞,wén,Nghe thấy,V,B1
+1152,穩定,wěndìng,ổn định,Vs,B1
+1153,問好,wènhăo,"Chào hỏi, gửi lời hỏi thăm",Vi,B1
+1154,問候,wènhòu,"Chào hỏi, gửi lời hỏi thăm",V,B1
+1155,握手,wòshǒu,"Bắt tay, cầm tay",V-sep,B1
+1156,屋子,wūzi,"Gian nhà, gian phòng",N,B1
+1157,無,wú,Không có,Vs-attr,B1
+1158,無法,wúfă,"Vô phương, không còn cách nào",Adv,B1
+1159,無論如何,wúlùnrúhé,Bất kể như thế nào,Conj,B1
+1160,無窮,wúqióng,"Vô cùng, vô hạn",Vs,B1
+1161,無所謂,wúsuŏwèi,"Không sao cả, không quan trọng",Vs,B1
+1162,誤會,wùhuì,Sự hiểu lầm,N,B1
+1163,物價,wùjià,"Vật giá, giá cả",N,B1
+1164,X,,,,
+1165,西北,xīběi,Tây bắc,N,B1
+1166,西餐,xīcān,Món Tây,N,B1
+1167,西方,xīfāng,Phương Tây,N,B1
+1168,西南,xīnán,Tây Nam,N,B1
+1169,吸毒,xīdú,Hút (chích) ma túy,V-sep,B1
+1170,吸收,xīshōu,Hấp thu,V,B1
+1171,吸引,xīyĭn,"Hấp dẫn, thu hút",Vst,B1
+1172,犧牲,xīshēng,Hi sinh,Vpt,B1
+1173,希望,xīwàng,"Hi vọng, mong muốn",N,B1
+1174,喜愛,xĭài,"Yêu thích, quý mến",Vst,B1
+1175,細,xì,"Nhỏ, mảnh",Vs,B1
+1176,細心,xìxīn,"Cẩn thận, tỉ mỉ",Vs,B1
+1177,戲,xì,Trò chơi,N,B1
+1178,戲劇,xìjù,"Kịch, hí kịch",N,B1
+1179,系統,xìtŏng,Hệ thống,N,B1
+1180,下,xià,Dưới,Det,B1
+1181,下,xià,"Lần, cái",M,B1
+1182,下,xià,,N,B1
+1183,下,xià,Hạ xuống,V,B1
+1184,下來,xiàlai,Xuống,Ptc,B1
+1185,嚇,xià,Dọa dẫm,Vs-pred,B1
+1186,嚇一跳,xiàyítiào,"Giật mình, sợ hãi",Vp,B1
+1187,線,xiàn,"Sợi, đường",N,B1
+1188,現代,xiàndài,Hiện đại,N,B1
+1189,現代,xiàndài,Hiện đại,Vs,B1
+1190,現實,xiànshí,"Hiện thực, thực tại",N,B1
+1191,現實,xiànshí,Hiện thực,Vs,B1
+1192,現象,xiànxiàng,Hiện tạng,N,B1
+1193,限制,xiànzhì,"Hạn chế, giới hạn",N,B1
+1194,相當,xiāngdāng,"Tương đương, ngang nhau",Adv,B1
+1195,相對,xiāngduì,"Trái ngược, đối lập nhau",Vs-attr,B1
+1196,相反,xiāngfăn,"Tương phản, trái ngược",Vs,B1
+1197,相關,xiāngguān,Liên quan,Vs,B1
+1198,相同,xiāngtóng,"Tương đồng, giống nhau",Vs,B1
+1199,箱子,xiāngzi,"Hòm, rương",N,B1
+1200,香水,xiāngshuĭ,"Nước hoa, dầu thơm",N,B1
+1201,詳細,xiángxì,Kỹ càng tỉ mỉ,Vs,B1
+1202,響,xiǎng,"Vang lên, kêu",Vp,B1
+1203,想到,xiăngdào,"Nghĩ đến, nghĩ về",Vpt,B1
+1204,想法,xiǎngfǎ,"Ý nghĩ, nhận xét",N,B1
+1205,想像,xiăngxiàng,Trí tưởng tượng,N,B1
+1206,想像,xiăngxiàng,"Tưởng tượng, nghĩ ra",Vst,B1
+1207,項,xiàng,Hạng mục,M,B1
+1208,相機,xiàngjī,Máy chụp hình,N,B1
+1209,相聲,xiàngshēng,,N,B1
+1210,小吃,xiăochī,Món ăn vặt,N,B1
+1211,小朋友,xiǎopéngyǒu,"Trẻ em, bạn nhỏ",N,B1
+1212,小組,xiăozŭ,"Tổ, nhóm nhỏ",N,B1
+1213,效果,xiàoguŏ,Hiệu quả,N,B1
+1214,笑話,xiàohuà,Truyện cười,N,B1
+1215,孝順,xiàoshùn,Hiếu thảo,Vs,B1
+1216,孝順,xiàoshùn,"Một ít, một vài",Vst,B1
+1217,協助,xiézhù,"Giúp đỡ, trợ giúp",V,B1
+1218,血,xiě,"Máu, ruột thịt",N,B1
+1219,謝,xiè,Cảm ơn,V,B1
+1220,心得,xīndé,Tâm đắc,N,B1
+1221,心理,xīnlĭ,Tâm lý,N,B1
+1222,心意,xīnyì,"Tâm ý, tấm lòng",N,B1
+1223,欣賞,xīnshăng,Thưởng thức,Vst,B1
+1224,新生,xīnshēng,Mới ra đời,N,B1
+1225,信,xìn,Tin tưởng,Vst,B1
+1226,信箱,xìnxiāng,"Thùng thư, hòm thư",N,B1
+1227,信心,xìnxīn,"Lòng tin, tự tin",N,B1
+1228,興奮,xīngfèn,"Phấn khởi, hăng hái",Vs,B1
+1229,行,xíng,Đi,Vs,B1
+1230,行動,xíngdòng,"Hành vi, cử động",N,B1
+1231,行為,xíngwéi,Hành vi,N,B1
+1232,形容,xíngróng,"Hình dung, miêu tả",V,B1
+1233,醒,xĭng,"Tỉnh, tỉnh ngộ",Vp,B1
+1234,醒來,xĭnglái,Đánh thức,Vp,B1
+1235,姓,xìng,Họ,N,B1
+1236,性別,xìngbié,Giới tính,N,B1
+1237,性格,xìnggé,Tính cách,N,B1
+1238,幸好,xìnghăo,"May mắn, may mà",Adv,B1
+1239,幸虧,xìngkuī,May mà,Adv,B1
+1240,幸運,xìngyùn,Vận may,Vs,B1
+1241,兇,xiōng,Hung ác,Vs,B1
+1242,兄弟,xiōngdì,Người anh em,N,B1
+1243,熊貓,xióngmāo,Gấu trúc,N,B1
+1244,修,xiū,Sửa,V,B1
+1245,修改,xiūgăi,Sửa chữa,V,B1
+1246,修理,xiūlĭ,Cắt sửa,V,B1
+1247,需求,xūqiú,Nhu cầu,N,B1
+1248,需要,xūyào,Yêu cầu,N,B1
+1249,選,xuǎn,"Chọn, lựa chọn",V,B1
+1250,選舉,xuănjŭ,Tuyển cử,N,B1
+1251,選擇,xuǎnzé,Sự lựa chọn,N,B1
+1252,選擇,xuǎnzé,Tuyển chọn,V,B1
+1253,學會,xuéhuì,Học cách,Vpt,B1
+1254,學問,xuéwèn,Học vấn,N,B1
+1255,尋找,xúnzhăo,Tìm kiếm,V,B1
+1256,訓練,xùnliàn,"Huấn luyện, tập luyện",V,B1
+1257,Y,,,,
+1258,呀,yā,"A, à, nhé",Ptc,B1
+1259,鴨(子),yā(zi),Con vịt,N,B1
+1260,押金,yājīn,"Tiền thế chấp, tiền cọc",N,B1
+1261,牙,yá,"Răng, ngà voi",N,B1
+1262,牙齒,yáchĭ,Răng,N,B1
+1263,煙火,yānhuŏ,Pháo hoa,N,B1
+1264,研究,yánjiù,Nghiên cứu,N,B1
+1265,研究,yánjiù,Tìm tòi học hỏi,V,B1
+1266,嚴重,yánzhòng,Nghiêm trọng,Vs,B1
+1267,演,yăn,Diễn,V,B1
+1268,演出,yănchū,Diễn xuất,V,B1
+1269,演講,yănjiăng,Diễn thuyết,Vi,B1
+1270,演員,yănyuán,Diễn viên,N,B1
+1271,眼光,yănguāng,Ánh mắt,N,B1
+1272,眼淚,yănlèi,Nước mắt,N,B1
+1273,陽光,yángguāng,Ánh nắng,N,B1
+1274,養,yăng,Nuôi dưỡng,V,B1
+1275,樣,yàng,"Hình dáng, kiểu",M,B1
+1276,樣樣,yàngyàng,Tất cả các loại,Det,B1
+1277,邀請,yāoqĭng,Mời,V,B1
+1278,要求,yāoqiú,Nguyện vọng,N,B1
+1279,要求,yāoqiú,Yêu cầu,V,B1
+1280,咬,yăo,"Cắn, kẹp chặt",V,B1
+1281,要,yào,"Cần,",Vst,B1
+1282,要不然,yàobùrán,Nếu không,Conj,B1
+1283,要不是,yàobúshì,Nếu nó không phải,Conj,B1
+1284,要緊,yàojĭn,"Quan trọng, gấp rút",Vs,B1
+1285,野餐,yěcān,Bữa cơm dã ngoại,Vi,B1
+1286,也好,yěhăo,Cũng tốt,,B1
+1287,頁,yè,"Tờ, trang (giấy)",M,B1
+1288,夜裡/裏,yèli/li,Ban đêm,N,B1
+1289,夜市,yèshì,Chợ đêm,N,B1
+1290,一下子/一下子兒,yīxiàzi/ yīxiàzir,Trong chốc lát,N,B1
+1291,衣櫃,yīguì,Tủ quần áo,N,B1
+1292,依靠,yīkào,"Nhờ vào, dựa vào",V,B1
+1293,一塊/一塊兒,yīkuài/yíkuàir,Một khối,Adv,B1
+1294,一切,yīqiè,"Tất cả, mọi thứ",Det,B1
+1295,一向,yīxiàng,"Gần đây, thời gian qua",Adv,B1
+1296,一樣,yīyàng,"Như nhau, giống nhau",N,B1
+1297,已,yĭ,Đã,Adv,B1
+1298,以,yĭ,"Để, nhằm",Prep,B1
+1299,以後,yĭhòu,"Về sau, sau đó",N,B1
+1300,以來,yĭlái,Trước nay,N,B1
+1301,以免,yĭmiăn,Để tránh khỏi,Conj,B1
+1302,以內,yĭnèi,Trong vòng,N,B1
+1303,以前,yĭqián,Trước đây,N,B1
+1304,以上,yĭshàng,Trở lên,N,B1
+1305,以外,yĭwài,Ngoài ra,N,B1
+1306,以為,yĭwéi,"Cho rằng, cho là",V,B1
+1307,以下,yĭxià,Trở xuống,N,B1
+1308,一般來說,yìbānláishuō,Nói chung,,B1
+1309,一點/一點兒,yìdiǍn/yìdiǍnr,Một chút,Adv,B1
+1310,一方面,yìfāngmiàn,Một mặt thì…,Conj,B1
+1311,一連,yìlián,"Liên tiếp, không ngừng",Adv,B1
+1312,一生,yìshēng,"Suốt đời, cả đời",N,B1
+1313,一時,yìshí,"Một lúc, nhất thời",N,B1
+1314,一同,yìtóng,"Cùng, chung",Adv,B1
+1315,意見,yìjiàn,Ý kiến,N,B1
+1316,意外,yìwài,"Bất ngờ, không ngờ",N,B1
+1317,意義,yìyì,Ý nghĩa,N,B1
+1318,陰,yīn,Âm,Vs,B1
+1319,因此,yīncĭ,"Vì vậy, do đó",Conj,B1
+1320,音響,yīnxiăng,"Âm thanh, giọng",N,B1
+1321,引起,yĭnqĭ,"Gây nên, dẫn tới",V,B1
+1322,應,yīng,"Trả lời, đáp lời",Vaux,B1
+1323,應該,yīnggāi,Nên,Vaux,B1
+1324,英俊,yīngjùn,Tài năng xuất chúng,Vs,B1
+1325,營養,yíngyăng,Chất dinh dưỡng,N,B1
+1326,影片,yĭngpiàn,Phim nhựa,N,B1
+1327,擁有,yŏngyŏu,"Có, hàm chứa",Vst,B1
+1328,用,yòng,"Dùng, sử dụng",Prep,B1
+1329,用法,yòngfă,Cách dùng,N,B1
+1330,用功,yònggōng,"Cố gắng, chăm chỉ",Vs,B1
+1331,用品,yòngpĭn,"Đồ dùng, vật dụng",N,B1
+1332,優點,yōudiăn,Ưu điểm,N,B1
+1333,優秀,yōuxiù,Ưu tú,Vs,B1
+1334,幽默,yōumò,Hài hước,Vs,B1
+1335,郵票,yóupiào,Tem,N,B1
+1336,尤其,yóuqí,"Nhất là, đặc biệt là…",Adv,B1
+1337,遊客,yóukè,Du khách,N,B1
+1338,游泳池,yóuyŏngchí,"Hồ bơi, bể bơi",N,B1
+1339,由於,yóuyú,Bởi vì,Conj,B1
+1340,"""有(一)點/ 有(一)點兒""",yǒu(yì)diăn/ yǒu(yì)di,"Hơi hơi, một chút",Adv,B1
+1341,有的,yǒude,Có,Det,B1
+1342,有名,yǒumíng,Nổi tiếng,Vs,B1
+1343,有錢,yǒuqián,Có tiền,Vs,B1
+1344,有效,yŏuxiào,Có hiệu quả,Vs,B1
+1345,有意思,yǒuyìsi,Thú vị,Vs,B1
+1346,友誼,yŏuyì,Hữu nghị,N,B1
+1347,於是,yúshì,Thế là,Conj,B1
+1348,與,yǔ,Với,Conj,B1
+1349,與,yǔ,,Prep,B1
+1350,玉,yù,"Ngọc, ngọc thạch",N,B1
+1351,玉米,yùmi,"Cây ngô, bắp",N,B1
+1352,預備,yùbèi,Dự bị,V,B1
+1353,預習,yùxí,"Ôn trước, chuẩn bị bài",V,B1
+1354,遇到,yùdào,Gặp phải,Vpt,B1
+1355,圓,yuán,Hình tròn,N,B1
+1356,員工,yuángōng,"Công nhân, viên chức",N,B1
+1357,原諒,yuánliàng,"Tha thứ, thứ lỗi",Vst,B1
+1358,原因,yuányīn,Nguyên nhân,N,B1
+1359,願望,yuànwàng,Nguyện vọng,N,B1
+1360,院子,yuànzi,Sân trong,N,B1
+1361,約,yuē,Cân,Adv,B1
+1362,約會,yuēhuì,Hẹn hò,N,B1
+1363,約會,yuēhuì,Hẹn gặp,Vi,B1
+1364,越,yuè,Vượt qua,Adv,B1
+1365,月餅,yuèbĭng,Bánh trung thu,N,B1
+1366,閱讀,yuèdú,"Xem, đọc",V,B1
+1367,樂團,yuètuán,"Dàn nhạc, ban nhạc",N,B1
+1368,運氣,yùnqì,Vận may,N,B1
+1369,Z,,,,
+1370,在,zài,"Tồn tại, sống, ở",Vst,B1
+1371,在意,zàiyì,Để ý,Vst,B1
+1372,在於,zàiyú,ở chỗ,Vst,B1
+1373,早,zăo,Sớm,Adv,B1
+1374,早日,zăorì,Trước kia,Adv,B1
+1375,早晚,zăowăn,Sớm tối,N,B1
+1376,造成,zàochéng,Tạo thành,Vpt,B1
+1377,噪音,zàoyīn,Tạp âm,N,B1
+1378,責任,zérèn,Trách nhiệm,N,B1
+1379,增加,zēngjiā,Tăng thêm,Vpt,B1
+1380,炸,zhà/zhá,"Chiên, rán",V,B1
+1381,摘,zhāi,"Hái, bẻ, ngắt",V,B1
+1382,站,zhàn,Trạm,N,B1
+1383,暫時,zhànshí,Tạm thời,Adv,B1
+1384,戰爭,zhànzhēng,Chiến tranh,N,B1
+1385,長,zhǎng,Lớn,Vs,B1
+1386,長大,zhǎngdà,Cao lớn,Vp,B1
+1387,掌握,zhăngwò,Nắm bắt,V,B1
+1388,障礙,zhàngài,"Trở ngại, chướng ngại vật",N,B1
+1389,招待,zhāodài,Tiếp đãi,V,B1
+1390,招牌,zhāopái,Bảng hiệu,N,B1
+1391,找錢,zhǎoqián,Trả lại tiền thừa,V-sep,B1
+1392,照,zhào,Theo như,Prep,B1
+1393,照,zhào,Chiếu rọi,V,B1
+1394,哲學,zhéxué,Triết học,N,B1
+1395,這裏,zhèlĭ,"ở đây, nơi đây",N,B1
+1396,這下子,zhèxiàzi,Lúc này,N,B1
+1397,這樣,zhèyàng,Như thế này,Vs,B1
+1398,這樣子,zhèyàngzi,Như thế,Adv,B1
+1399,這樣子,zhèyàngzi,Như thế này,Vs,B1
+1400,真的,zhēnde,Có thật không?,Adv,B1
+1401,真理,zhēnlĭ,Chân lý,N,B1
+1402,真實,zhēnshí,Chân thực,Vs,B1
+1403,真是,zhēnshì,Thật là!,Adv,B1
+1404,真心,zhēnxīn,Thật lòng,Vs,B1
+1405,真正,zhēnzhèng,Chân chính,Adv,B1
+1406,真正,zhēnzhèng,Xác thực,Vs-attr,B1
+1407,珍貴,zhēnguì,Quý giá,Vs,B1
+1408,整,zhěng,"Trọn, cả",Det,B1
+1409,整理,zhěnglĭ,"Thu xếp, thu dọn",V,B1
+1410,整齊,zhěngqí,"Ngăn nắp, ngay ngắn",Vs,B1
+1411,正,zhèng,Chính,Adv,B1
+1412,正常,zhèngcháng,Bình thường,Vs,B1
+1413,正確,zhèngquè,Chính xác,Vs,B1
+1414,正式,zhèngshì,Chính thức,Vs,B1
+1415,證明,zhèngmíng,Chứng minh,V,B1
+1416,證書,zhèngshū,"Giấy chứng nhận, chứng chỉ",N,B1
+1417,支,zhī,"Chống, đỡ",M,B1
+1418,知,zhī,Biết,Vst,B1
+1419,知識,zhīshì,Tri thức,N,B1
+1420,之後,zhīhòu,Sau khi,N,B1
+1421,之間,zhījiān,Giữa,N,B1
+1422,之前,zhīqián,Trước khi,N,B1
+1423,直,zhí,"Thẳng đứng, dọc",Vs,B1
+1424,直到,zhídào,Đến tận khi,Prep,B1
+1425,值得,zhíde,Xứng đáng,Vst,B1
+1426,殖民地,zhímíndì,Thuộc địa,N,B1
+1427,植物,zhíwù,Thực vật,N,B1
+1428,職員,zhíyuán,Nhân viên chức,N,B1
+1429,指,zhĭ,Chỉ trỏ,V,B1
+1430,只是,zhĭshì,Chỉ là,Conj,B1
+1431,只要,zhǐyào,"Chỉ cần, miễn là",Conj,B1
+1432,只有,zhĭyǒu,Chỉ có,Adv,B1
+1433,只有,zhĭyŏu,Chỉ có,Conj,B1
+1434,制度,zhìdù,Chế độ,N,B1
+1435,智慧,zhìhuì,Trí tuệ,N,B1
+1436,至少,zhìshăo,"Chí ít, ít nhất",Adv,B1
+1437,至於,zhìyú,Đến nỗi,Prep,B1
+1438,中,zhōng,Trung tâm,N,B1
+1439,中部,zhōngbù,Phần giữa,N,B1
+1440,中餐,zhōngcān,Món ăn Trung Quốc,N,B1
+1441,終於,zhōngyú,Cuối cùng,Adv,B1
+1442,鐘,zhōng,"Đồng hồ, cái chuông",N,B1
+1443,種,zhòng,Tập trung,V,B1
+1444,重點,zhòngdiăn,Trọng điểm,N,B1
+1445,重視,zhòngshì,Coi trọng,Vst,B1
+1446,周圍,zhōuwéi,"Xung quanh, chu vi",N,B1
+1447,主動,zhŭdòng,Chủ động,Vs,B1
+1448,主婦,zhŭfù,Bà chủ,N,B1
+1449,主管,zhŭguăn,Chủ quản,N,B1
+1450,主人,zhǔrén,"Chủ nhân, chủ sở hữu",N,B1
+1451,主任,zhǔrèn,Chủ nhiệm,N,B1
+1452,主題,zhŭtí,Chủ đề,N,B1
+1453,主要,zhǔyào,"Chủ yếu, chính",Adv,B1
+1454,主要,zhŭyào,Chủ yếu,Vs-attr,B1
+1455,主意,zhǔyì,"Chủ ý, biện pháp",N,B1
+1456,祝,zhù,Chúc,V,B1
+1457,祝福,zhùfú,Lời chúc,N,B1
+1458,祝福,zhùfú,Chúc phúc,V,B1
+1459,助,zhù,"Giúp đỡ, giúp",V,B1
+1460,助理,zhùlĭ,"Trợ lí, giúp việc",N,B1
+1461,著名,zhùmíng,Nổi danh,Vs,B1
+1462,抓,zhuā,"Cầm nắm, bắt",V,B1
+1463,專心,zhuānxīn,"Chuyên tâm, chăm chú",Vs,B1
+1464,專業,zhuānyè,Chuyên nghiệp,Vs-attr,B1
+1465,狀態,zhuàngtài,Trạng thái,N,B1
+1466,追求,zhuīqiú,Theo đuổi,V,B1
+1467,準時,zhŭnshí,Đúng giờ,Vs,B1
+1468,著,zhuó,Đang,V,B1
+1469,資料,zīliào,"Tư liệu, tài liệu",N,B1
+1470,資源,zīyuán,Nguồn tài nguyên,N,B1
+1471,仔細,zĭxì,Tỉ mỉ,Vs,B1
+1472,自從,zìcóng,"Từ khi, từ lúc",Prep,B1
+1473,自動,zìdòng,Tự động,Vs,B1
+1474,自然,zìrán,Tự nhiên,Vs,B1
+1475,自殺,zìshā,Tự tử,Vi,B1
+1476,自信,zìxìn,Tự tin,N,B1
+1477,自由,zìyóu,Sự tự do,N,B1
+1478,自由,zìyóu,Tự do,Vs,B1
+1479,自在,zìzài,"An nhàn, thanh thản",Vs,B1
+1480,宗教,zōngjiào,"Tôn giáo, đạo",N,B1
+1481,總而言之,zǒngéryánzhī,Tóm lại,Conj,B1
+1482,總算,zǒngsuàn,Cuối cùng cũng…,Adv,B1
+1483,總統,zǒngtǒng,Tổng thống,N,B1
+1484,總之,zǒngzhī,"Nói chung, tóm lại",Conj,B1
+1485,走走,zǒuzou,"Đi dạo, tản bộ",Vi,B1
+1486,組,zŭ,"Tổ, nhóm",M,B1
+1487,祖父,zŭfù,Ông nội,N,B1
+1488,祖母,zŭmŭ,Bà nội,N,B1
+1489,祖先,zŭxiān,Tổ tiên,N,B1
+1490,嘴,zuĭ,Miệng,N,B1
+1491,醉,zuì,"Say, say rượu",Vp,B1
+1492,最初,zuìchū,Ban đầu,N,B1
+1493,最多,zuìduō,Nhiều nhất,Adv,B1
+1494,最好,zuìhǎo,Tốt nhất,Adv,B1
+1495,最後,zuìhòu,Cuối cùng,N,B1
+1496,最佳,zuìjiā,Tốt nhất,Vs-attr,B1
+1497,尊敬,zūnjìng,Tôn kính,Vst,B1
+1498,作,zuò,Làm,V,B1
+1499,作品,zuòpĭn,Tác phẩm,N,B1
+1500,作者,zuòzhě,Tác giả,N,B1
+1501,座,zuò,Chỗ ngồi,M,B1
+1502,做/作法,zuòfă,"Cách làm, phương pháp",N,B1
+1503,做夢,zuòmèng,Nằm mơ,V-sep,B1
+1504,做人,zuòrén,Làm người,Vi,B1
+1505,做事,zuòshì,Làm việc,Vi,B1
+1506,A,,,,
+1507,哎呀,āiyā,"ơ kìa, ái chà, trời ơi",Ptc,B2
+1508,哎喲,āiyāo,chao ôi,Ptc,B2
+1509,愛好,àihào,sở thích,N,B2
+1510,愛好,àihào,"thích, yêu thích",Vst,B2
+1511,愛護,àihù,"bảo vệ, giữ gìn",Vst,B2
+1512,愛人,àirén,"vợ, chồng, người yêu",N,B2
+1513,安慰,ānwèi,an ủi,V,B2
+1514,安裝,ānzhuāng,"lắp đặt, lắp ráp",V,B2
+1515,按,àn,"nhấn, bấm, đè",V,B2
+1516,按時,ànshí,đúng hạn,Adv,B2
+1517,暗,àn,"tối, tối tăm",Vs,B2
+1518,暗中,ànzhōng,trong bóng tối,Adv,B2
+1519,骯髒,āngzhāng,dơ bẩn,Vs,B2
+1520,熬,áo,"luộc, nấu, sắc (thuốc)",V,B2
+1521,B,,,,
+1522,拔,bá,"nhổ, rút",V,B2
+1523,把,bă,"cán, quai, tay cầm",M,B2
+1524,把握,băwò,"cầm, nắm, nắm bắt",N,B2
+1525,罷工,bàgōng,"bãi công, đình công",Vi,B2
+1526,罷了,bàle,"mà thôi, thôi",Ptc,B2
+1527,擺脫,băituō,thoát khỏi,V,B2
+1528,敗,bài,"thua, bại trận",Vp,B2
+1529,拜,bài,"lạy, vái",V,B2
+1530,拜拜,bàibai,cúi chào,Vi,B2
+1531,拜訪,bàifăng,"thăm viếng, thăm hỏi",V,B2
+1532,拜年,bàinián,đi chúc tết,V-sep,B2
+1533,拜託,bàituō,nhờ vả,V,B2
+1534,般,bān,"loại, kiểu, cách, hạng",,B2
+1535,班,bān,"lớp, ca, buổi làm",M,B2
+1536,班長,bānzhăng,lớp trưởng,N,B2
+1537,搬運,bānyùn,"vận chuyển, vận tải",V,B2
+1538,拌,bàn,"trộn, trộn lẫn",V,B2
+1539,半路,bànlù,"nửa đường, giữa đường",N,B2
+1540,半數,bànshù,một nửa,Det,B2
+1541,辦公,bàngōng,làm việc,Vi,B2
+1542,辦事,bànshì,làm việc,Vi,B2
+1543,扮演,bànyăn,"đóng vai, sắm vai",V,B2
+1544,傍晚,bāngwăn,"chạng vạng, chập tối",N,B2
+1545,磅,bàng,,M,B2
+1546,棒,bàng,"gậy, thỏi",M,B2
+1547,棒子,bàngzi,cây gậy,N,B2
+1548,包裹,bāoguǒ,"gói, kiện hàng",N,B2
+1549,包括,bāokuò,bao gồm,Vst,B2
+1550,包裝,bāozhuāng,bao bì,N,B2
+1551,包裝,bāozhuāng,đóng gói,V,B2
+1552,保,băo,"giữ, gìn giữ",V,B2
+1553,保持,băochí,"duy trì, giữ nguyên",V,B2
+1554,保存,băocún,bảo tồn,V,B2
+1555,保留,băoliú,"bảo lưu, giữ nguyên",V,B2
+1556,保衛,băowèi,"bảo vệ, che chở",V,B2
+1557,保障,băozhàng,"vật bảo đảm, đồ bảo hộ",N,B2
+1558,保障,băozhàng,"bảo đảm, bảo hộ",V,B2
+1559,寶寶,băobao,"cục cưng, bé cưng",N,B2
+1560,抱,bào,"bế, bồng, ôm",Vst,B2
+1561,報,bào,báo cho biết,V,B2
+1562,報仇,bàochóu,"báo thù, trả thù",V-sep,B2
+1563,報答,bàodá,"báo đáp, đền đáp",Vpt,B2
+1564,報導,bàodăo,báo cáo tin tức,V,B2
+1565,報到,bàodào,báo cáo có mặt,Vi,B2
+1566,報警,bàojĭng,"báo nguy, báo cảnh sát",V-sep,B2
+1567,報社,bàoshè,"toà soạn, tòa báo",N,B2
+1568,暴力,bàolì,"bạo lực, vũ lực",N,B2
+1569,暴躁,bàozào,"nóng nảy, hấp tấp",Vs,B2
+1570,爆炸,bàozhà,"nổ, làm nổ tung",Vp,B2
+1571,悲劇,bēijù,bi kịch,N,B2
+1572,悲痛,bēitòng,"bi thương, đau buồn",Vs,B2
+1573,倍,bèi,"lần, gấp bội",N,B2
+1574,備,bèi,"chuẩn bị, phòng bị",V,B2
+1575,背面,bèimiàn,"mặt trái, mặt sau lưng",N,B2
+1576,奔,bēn,chạy,Vi,B2
+1577,奔跑,bēnpăo,chạy nhanh,Vi,B2
+1578,本來,běnlái,"vốn có, lúc đầu",Vs-attr,B2
+1579,本領,běnlĭng,"bản lĩnh, năng lực",N,B2
+1580,本身,běnshēn,bản thân,N,B2
+1581,本土,běntŭ,"quê hương, mảnh đất này",N,B2
+1582,笨重,bènzhòng,"cồng kềnh, to lớn",Vs,B2
+1583,比,bĭ,"so sánh, so đo",V,B2
+1584,比方,bĭfāng,"ví, so bì",N,B2
+1585,比方(說),bĭfāng(shūo),so sánh với,Vst,B2
+1586,比較,bĭjiào,so sánh,N,B2
+1587,比較,bĭjiào,"tương đối, khá",V,B2
+1588,比例,bĭlì,tỉ lệ,N,B2
+1589,彼此,bĭcĭ,lẫn nhau,N,B2
+1590,筆記,bĭjì,ghi chép,N,B2
+1591,筆試,bĭshì,cuộc thi viết,N,B2
+1592,筆試,bĭshì,thi viết,Vi,B2
+1593,閉,bì,"đóng, khép, bịt",Vi,B2
+1594,必須,bìxū,"phải, nhất định",Vs-attr,B2
+1595,必要,bìyào,"cần thiết, thiết yếu",N,B2
+1596,編,biān,"bện, đan, thắt",V,B2
+1597,扁,biăn,,Vs,B2
+1598,便,biàn,"tiện lợi, thuận tiện",Adv,B2
+1599,便利,biànlì,tiện lợi,Vs,B2
+1600,變動,biàndòng,"biến động, thay đổi",N,B2
+1601,變動,biàndòng,"thay đổi, biến đổi",Vp,B2
+1602,標題,biāotí,"đầu đề, tiêu đề",N,B2
+1603,標誌,biāozhì,ký hiệu,N,B2
+1604,表格,biăogé,"bảng, bảng hiệu",N,B2
+1605,表情,biăoqíng,biểu cảm,N,B2
+1606,表揚,biăoyáng,"khen, biểu dương",V,B2
+1607,冰,bīng,"băng, nước đá",Vs,B2
+1608,丙,bĭng,,N,B2
+1609,並,bìng,"hợp lại, nhập lại",Adv,B2
+1610,並,bìng,"song song, cùng lúc đó",Conj,B2
+1611,並且,bìngqiě,"đồng thời, và",Conj,B2
+1612,病毒,bìngdú,"siêu vi trùng, virus",N,B2
+1613,病房,bìngfáng,phòng bệnh,N,B2
+1614,撥,bō,"đẩy, gẩy",V,B2
+1615,菠菜,bōcài,rau chân vịt,N,B2
+1616,波動,bōdòng,"chập chờn, không ổn định",Vi,B2
+1617,玻璃,bōli,thủy tinh,N,B2
+1618,薄,bó,mỏng manh,Vs,B2
+1619,薄弱,bóruò,"bạc nhược, yếu kém",Vs,B2
+1620,伯父,bófù,bác trai,N,B2
+1621,伯母,bómŭ,bác gái,N,B2
+1622,捕,bŭ,"bắt, vồ, tóm",V,B2
+1623,補,bŭ,"tu bổ, sửa chữa",V,B2
+1624,補償,bŭcháng,"bồi thường, đền bù",V,B2
+1625,補充,bŭchōng,bổ sung,V,B2
+1626,補課,bŭkè,"học bù, dạy bù",V-sep,B2
+1627,補習,bŭxí,bổ túc,V-sep,B2
+1628,補助,bŭzhù,trợ cấp,N,B2
+1629,補助,bŭzhù,giúp đỡ,V,B2
+1630,步,bù,bước chân,M,B2
+1631,不大,bùdà,vừa phải,Adv,B2
+1632,不安,bùān,"bất an, bất ổn",Vs,B2
+1633,不成,bùchéng,không được phép,Vs-pred,B2
+1634,不當,bùdàng,không thích đáng,Vs,B2
+1635,不到,bùdào,"không đến, không xuất hiện",Vst,B2
+1636,不得已,bùdéyĭ,bất đắc dĩ,Vs,B2
+1637,不敢當,bùgăndāng,không dám,Vs,B2
+1638,不顧,bùgù,không quan tâm,Vst,B2
+1639,不過,bùguò,"cực kỳ, hết mức",Adv,B2
+1640,不見得,bùjiànde,chưa chắc,Adv,B2
+1641,不僅,bùjĭn,không chỉ,Conj,B2
+1642,不良,bùliáng,không tốt,Vs,B2
+1643,不平,bùpíng,không công bằng,Vs,B2
+1644,不然,bùrán,chi bằng,Conj,B2
+1645,不如,bùrú,"không bằng, kém hơn",Vst,B2
+1646,不許,bùxŭ,không được phép,Adv,B2
+1647,不宜,bùyí,không thích hợp,Vs,B2
+1648,不由得,bùyóude,đành phải,Adv,B2
+1649,不止,bùzhĭ,"không dứt, không ngớt",Vs-pred,B2
+1650,部隊,bùduì,bộ đội,N,B2
+1651,部長,bùzhăng,bộ trưởng,N,B2
+1652,布/佈告,bùgào,bản thông báo,N,B2
+1653,布/佈告欄,bùgàolán,bảng thông báo,N,B2
+1654,C,,,,
+1655,財產,cáichăn,tài sản,N,B2
+1656,財富,cáifù,của cải,N,B2
+1657,才能,cáinéng,tài năng,N,B2
+1658,裁判,cáipàn,"phán xử, xét xử",N,B2
+1659,裁員,cáiyuán,giảm biên chế,Vpt,B2
+1660,踩,căi,"giẫm, đạp",V,B2
+1661,採,căi,"hái, ngắt",V,B2
+1662,採購,căigòu,"chọn mua, mua sắm",V,B2
+1663,彩色,căisè,màu sắc,Vs-attr,B2
+1664,參與,cānyù,tham dự,V,B2
+1665,蠶,cán,tằm,N,B2
+1666,慚愧,cánkuì,"xấu hổ, hổ thẹn",Vs,B2
+1667,慘,căn,bi thảm,Vs,B2
+1668,倉庫,cāngkù,"kho, nhà kho",N,B2
+1669,藏,cáng,"giấu, trốn",V,B2
+1670,操心,cāoxīn,"bận tâm, lo nghĩ",Vs,B2
+1671,操作,cāozuò,thao tác,V,B2
+1672,冊,cè,"sổ, quyển",M,B2
+1673,策略,cèlüè,sách lược,N,B2
+1674,測量,cèliáng,đo lường,V,B2
+1675,測試,cèshì,kiểm tra,V,B2
+1676,測驗,cèyàn,"kiểm tra, sát hạch",N,B2
+1677,測驗,cèyàn,"kiểm nghiệm, đo lường",V,B2
+1678,差,chā,so le,N,B2
+1679,差錯,chācuò,"sai lầm, nhầm lẫn",N,B2
+1680,差距,chājù,"chênh lệch, khoảng cách",N,B2
+1681,插,chā,"cắm vào, chọc vào",V,B2
+1682,插花,chāhuā,"cắm hoa, bó hoa",Vi,B2
+1683,插圖,chātú,tranh minh họa,N,B2
+1684,茶館/茶館兒,cháguăn/cháguănr,quán trà,N,B2
+1685,茶會,cháhuì,tiệc trà,N,B2
+1686,茶葉,cháyè,lá trà,N,B2
+1687,拆,chāi,"mở ra, dỡ ra",V,B2
+1688,產,chăn,"đẻ, sinh sản",V,B2
+1689,產量,chănliàng,sản lượng,N,B2
+1690,產業,chănyè,sản nghiệp,N,B2
+1691,嘗/嚐試,chángshì,thử nghiệm,N,B2
+1692,常識,chángshì,thường thức,N,B2
+1693,長處,chángchù,sở trường,N,B2
+1694,長度,chángdù,độ dài,N,B2
+1695,長方形,chángfāngxíng,hình chữ nhật,N,B2
+1696,長久,chángjiŭ,lâu dài,Vs,B2
+1697,長途,chángtú,đường dài,Vs-attr,B2
+1698,場,chăng,sân phơi,M,B2
+1699,場地,chăngdì,sân bãi,N,B2
+1700,場合,chănghé,"trường hợp, nơi",N,B2
+1701,場所,chăngsuŏ,nơi chốn,N,B2
+1702,廠商,chăngshāng,nhà máy,N,B2
+1703,抄,chāo,sao chép,V,B2
+1704,鈔票,chāopiào,"tiền giấy, giấy bạc",N,B2
+1705,超出,chāochū,"vượt qua, vượt khỏi",Vpt,B2
+1706,超人,chāorén,siêu nhân,N,B2
+1707,超越,chāoyuè,"vượt quá, hơn hẳn",V,B2
+1708,超重,chāozhòng,"siêu trọng, quá tải",Vp,B2
+1709,朝,cháo,"triều, triều đại",Prep,B2
+1710,潮流,cháoliú,"thủy triều, trào lưu",N,B2
+1711,潮溼/濕,cháoshī,ẩm ướt,Vs,B2
+1712,吵鬧,chăonào,tranh cãi ầm ĩ,Vi,B2
+1713,車票,chēpiào,vé xe,N,B2
+1714,扯,chě,"kéo, lôi, căng",V,B2
+1715,澈底,chèdĭ,"triệt để, đến cùng",Vs,B2
+1716,沉,chén,"chìm, rơi xuống",Vp,B2
+1717,陳列,chénliè,"trưng bày, triển lãm",V,B2
+1718,稱,chēng,"gọi, gọi là",V,B2
+1719,撐,chēng,"chống, chống đỡ",V,B2
+1720,成,chéng,,M,B2
+1721,成,chéng,hoàn thành,Vpt,B2
+1722,成本,chéngběn,giá thành,N,B2
+1723,成分/份,chéngfèn,thành phần,N,B2
+1724,成交,chéngjiāo,thống nhất mua bán,Vp,B2
+1725,成立,chénglì,"thành lập, lập",Vpt,B2
+1726,成天,chéngtiān,"suốt ngày, cả ngày",Adv,B2
+1727,成為,chéngwéi,trở thành. biến thành,Vpt,B2
+1728,成語,chéngyŭ,thành ngữ,N,B2
+1729,乘,chéng,"đáp, đi",V,B2
+1730,乘客,chéngkè,hành khách,N,B2
+1731,誠懇,chéngkěn,"thành khẩn, chân thành",Vs,B2
+1732,誠意,chéngyì,"thành ý, lòng thành",N,B2
+1733,呈現,chéngxiàn,"lộ ra, phơi bày ra",Vpt,B2
+1734,程序,chéngxù,trình tự,N,B2
+1735,吃虧,chīkuī,chịu thiệt,Vs,B2
+1736,遲,chí,"chậm, trể",Vp,B2
+1737,遲早,chízăo,không sớm thì muộn,Adv,B2
+1738,尺寸,chĭcùn,"kích cỡ, kích thước",N,B2
+1739,翅膀,chìbăng,"cánh (chim, côn trùng)",N,B2
+1740,沖,chōng,xông lên,V,B2
+1741,充分/份,chōngfèn,"đầy đủ, trọn vẹn",Vs,B2
+1742,充滿,chōngmăn,lấp đầy,Vpt,B2
+1743,充足,chōngzú,đầy đủ,Vs,B2
+1744,重,chóng,nặng,Adv,B2
+1745,崇拜,chóngbài,"tôn thờ, sùng bái",Vst,B2
+1746,崇高,chónggāo,"cao thượng, cao quý",Vs,B2
+1747,抽屜,chōuti,"ngắn kéo, két",N,B2
+1748,愁,chóu,"ưu sầu, lo âu",Vs,B2
+1749,出,chū,"ra, xuất, đến",Vst,B2
+1750,出產,chūchăn,xuất bản,Vst,B2
+1751,出境,chūjìng,xuất cảnh,Vp,B2
+1752,出口,chūkŏu,"mở miệng, nói",V,B2
+1753,出色,chūsè,xuất sắc,Vs,B2
+1754,出身,chūshēn,xuất thân,Vpt,B2
+1755,出事,chūshì,xảy ra sự cố,Vp-sep,B2
+1756,出售,chūshòu,bán ra,V,B2
+1757,出席,chūxí,"dự họp, tham dự hội nghị",V,B2
+1758,出院,chūyuàn,"ra viện, xuất viện",Vi,B2
+1759,初,chū,"đầu, thứ nhất",Adv,B2
+1760,初步,chūbù,bước đầu,Adv,B2
+1761,初步,chūbù,"mở đầu, khởi đầu",Vs-attr,B2
+1762,初級,chūjí,"sơ cấp, sơ bộ",Vs,B2
+1763,除,chú,"ngoại lệ, không kể",Prep,B2
+1764,除,chú,"trừ, loại ra",V,B2
+1765,除,chú,"chia, phép chia",Vst,B2
+1766,除非,chúfēi,trừ phi,Conj,B2
+1767,儲存,chúcún,"dự trữ, để dành",V,B2
+1768,儲蓄,chúxù,"để dành, dành dụm",Vi,B2
+1769,處,chŭ,"nơi, chốn",M,B2
+1770,處罰,chŭfá,xử phạt,V,B2
+1771,處,chù,,V,B2
+1772,處處,chùchù,khắp nơi,Adv,B2
+1773,傳,chuán,truyện ký,V,B2
+1774,傳播,chuánbò,truyền bá,V,B2
+1775,傳達,chuándá,truyền đạt,V,B2
+1776,傳單,chuándān,truyền đơn,N,B2
+1777,傳染,chuánrăn,truyền nhiễm,V,B2
+1778,傳說,chuánshuō,truyền thuyết,N,B2
+1779,傳說,chuánshuō,"truyền lại, thuật lại",V,B2
+1780,傳送,chuánsòng,chuyên chở,V,B2
+1781,傳統,chuántŏng,truyền thống,N,B2
+1782,傳真,chuánzhēn,fax,V,B2
+1783,窗口,chuāngkŏu,"cửa bán vé, cửa chắn",N,B2
+1784,床,chuáng,giường,M,B2
+1785,床單,chuángdān,khăn trải giường,N,B2
+1786,幢,chuáng,"căn, tòa, ngôi (nhà)",M,B2
+1787,闖,chuăng,"xông, xông xáo",V,B2
+1788,創作,chuàngzuò,"sáng tác, soạn thảo",N,B2
+1789,春季,chūnjì,mùa xuân,N,B2
+1790,春假,chūnjià,"nghỉ xuân, nghỉ tết",N,B2
+1791,純,chún,thuần chủng,Vs,B2
+1792,磁帶,cídài,"băng từ, băng nhạc",N,B2
+1793,詞典,cídiăn,từ điển,N,B2
+1794,詞彙,cíhuì,"từ ngữ, từ vựng",N,B2
+1795,辭職,cízhí,từ chức,Vi,B2
+1796,此外,cĭwài,ngoài ra,Conj,B2
+1797,刺,cì,xoẹt (từ tượng thanh),V,B2
+1798,刺激,cìjī,"kích thích, kích động",V,B2
+1799,次數,cìshù,số lần,N,B2
+1800,從,cóng,thong dong,Adv,B2
+1801,從此,cóngcĭ,từ đó,Adv,B2
+1802,從沒,cóngméi,chưa bao giờ,Adv,B2
+1803,從事,cóngshì,"tham gia, dấn thân vào",Vst,B2
+1804,湊,còu,"gom góp, thu thập",V,B2
+1805,粗,cū,"thô, nhám",Vs,B2
+1806,粗心,cūxīn,"sơ ý, bất cẩn",Vs,B2
+1807,促進,cùjìn,"xúc tiến, đẩy mạnh",V,B2
+1808,催,cuī,"hối thúc, thúc giục",V,B2
+1809,存款,cúnkuăn,tiền tiết kiệm,N,B2
+1810,搓,cuō,"xoa, xoắn, vặn",V,B2
+1811,錯過,cuòguò,lỡ mất,Vpt,B2
+1812,錯字,cuòzì,"chữ sai, lỗi in",N,B2
+1813,措施,cuòshī,biện pháp,N,B2
+1814,D,,,,
+1815,答,dá,"trả lời, đáp",V,B2
+1816,答案,dáàn,"đáp án, câu trả lời",N,B2
+1817,達到,dádào,"đạt được, đạt đến",Vpt,B2
+1818,打,dă,"tá, lố",M,B2
+1819,打扮,dăbàn,trang điểm,Vi,B2
+1820,打包,dăbāo,"đóng gói, mở gói",V,B2
+1821,打斷,dăduàn,"cắt ngang, ngắt lời",Vpt,B2
+1822,打擾,dărăo,"quấy rối, làm phiền",V,B2
+1823,打算,dăsuàn,dự định,N,B2
+1824,打招呼,dăzhāohū,chào hỏi,V-sep,B2
+1825,打針,dăzhēn,"chích, tiêm",V-sep,B2
+1826,打字,dăzì,đánh chữ,V-sep,B2
+1827,大半,dàbàn,"hơn nửa, quá nửa",Det,B2
+1828,大便,dàbiàn,đi đại tiện,N,B2
+1829,大膽,dàdăn,dũng cảm,Vs,B2
+1830,大地,dàdì,"mặt đất, đất đai",N,B2
+1831,大都,dàdōu,"phần lớn, đa số",Adv,B2
+1832,大哥,dàgē,anh cả,N,B2
+1833,大哥大,dàgēdà,điện thoại di động,N,B2
+1834,大街,dàjiē,đường phố,N,B2
+1835,大力,dàlì,"ra sức, dốc sức",Adv,B2
+1836,大量,dàliàng,"nhiều, lớn",Det,B2
+1837,大腦,dànăo,đại não,N,B2
+1838,大清早,dàqīngzăo,sáng sớm,N,B2
+1839,大嫂,dàsăo,chị dâu cả,N,B2
+1840,大腿,dàtuĭ,bắp đùi,N,B2
+1841,大型,dàxíng,cỡ lớn,Vs-attr,B2
+1842,大意,dàyì,"không chú ý, sơ ý",Vs,B2
+1843,大有,dàyŏu,"được mùa, bội thu",Vst,B2
+1844,大致,dàzhì,"khoảng chừng, đại khái",Adv,B2
+1845,大眾,dàzhòng,"quần chúng, dân chúng",N,B2
+1846,大自然,dàzìrán,thiên nhiên,N,B2
+1847,待會/待會兒,dāihuì /dāihuìr,"trong chốc lát, sau này",Adv,B2
+1848,待,dài,"dừng lại, nán lại",V,B2
+1849,代,dài,thời đại,N,B2
+1850,代,dài,"thay thế, dùm",V,B2
+1851,代表,dàibiăo,đại diện,Vs,B2
+1852,代溝,dàigōu,sự khác biệt,N,B2
+1853,代價,dàijià,"tiền mua, giá tiền",N,B2
+1854,代理,dàilĭ,thay mặt,V,B2
+1855,帶動,dàidòng,"kéo theo, lôi kéo",V,B2
+1856,帶路,dàilù,dẫn đường,Vi,B2
+1857,帶子,dàizi,thắt lưng,N,B2
+1858,大夫,dàifu,bác sĩ,N,B2
+1859,貸款,dàikuăn,khoản vay,N,B2
+1860,貸款,dàikuăn,cho vay,V-sep,B2
+1861,待遇,dàiyù,đối xử,N,B2
+1862,單,dān,đơn,Adv,B2
+1863,單調,dāndiào,đơn điệu,Vs,B2
+1864,單位,dānwèi,đơn vị,N,B2
+1865,單子,dānzi,"tờ khai, tờ đơn",N,B2
+1866,擔保,dānbăo,đảm bảo,V,B2
+1867,耽誤,dānwù,"làm chậm trễ, để lỡ",V,B2
+1868,膽量,dănliàng,sự gan dạ,N,B2
+1869,膽小,dănxiăo,nhát gan,Vs,B2
+1870,蛋白質,dànbáizhí,,N,B2
+1871,誕生,dànshēng,"sinh ra, ra đời",Vp,B2
+1872,當初,dāngchū,"lúc đầu, hồi đó",N,B2
+1873,當時,dāngshí,"lúc đó, khi đó",N,B2
+1874,當選,dāngxuăn,trúng cử,Vpt,B2
+1875,當中,dāngzhōng,"ở giữa, chính giữa",N,B2
+1876,擋,dăng,"sắp đặt, thu dọn",V,B2
+1877,檔案,dăngàn,"hồ sơ, tài liệu",N,B2
+1878,當,dàng,"coi như, cho rằng",Vst,B2
+1879,倒楣,dăoméi,gặp xui xẻo,Vs,B2
+1880,導演,dăoyăn,đạo diễn,V,B2
+1881,導遊,dăoyóu,hướng dẫn du lịch,N,B2
+1882,倒,dào,"ngược, đảo ngược lại",V,B2
+1883,道,dào,đường,M,B2
+1884,道路,dàolù,con đường,N,B2
+1885,到達,dàodá,"đến, tới",Vpt,B2
+1886,得分,défēn,"được điểm, đạt điểm",Vs-sep,B2
+1887,得獎,déjiăng,đạt giải,V-sep,B2
+1888,得了,déle,được rồi,,B2
+1889,得罪,dézuì,đắc tội,Vpt,B2
+1890,登,dēng,"trèo, leo lên",V,B2
+1891,登記,dēngjì,đăng ký,Vp,B2
+1892,登山,dēngshān,leo núi,V-sep,B2
+1893,等不及,děngbují,không đợi được,Vi,B2
+1894,等到,děngdào,đợi đến lúc,Prep,B2
+1895,等級,děngjí,"đẳng cấp, bậc",N,B2
+1896,等於,děngyú,bằng với,Vst,B2
+1897,凳子,dèngzi,"ghế, băng ghế",N,B2
+1898,滴,dī,giọt,M,B2
+1899,低潮,dīcháo,,N,B2
+1900,的確,díquè,"đích thực, quả thực là",Adv,B2
+1901,抵,dĭ,chống đỡ,V,B2
+1902,抵抗,dĭkàng,"đề kháng, chống cự",V,B2
+1903,遞,dì,truyền đạt,V,B2
+1904,地面,dìmiàn,mặt đất,N,B2
+1905,地毯,dìtăn,thảm trải sàn,N,B2
+1906,地下,dìxià,"ngầm, trong long đất",Vs-attr,B2
+1907,地震,dìzhèn,động đất,Vp,B2
+1908,典禮,diănlĭ,lễ lớn,N,B2
+1909,典型,diănxíng,điển hình,Vs,B2
+1910,點燃,diănrán,"châm, đốt",V,B2
+1911,點頭,diăntóu,gật đầu,V-sep,B2
+1912,墊,diàn,"kê, lót, chèn, đệm",V,B2
+1913,電報,diànbào,bức điện báo,N,B2
+1914,電動,diàndòng,chạy bằng điện,Vs-attr,B2
+1915,電扇,diànshàn,quạt điện,N,B2
+1916,電視台,diànshìtái,đài truyền hình,N,B2
+1917,電台,diàntái,đài phát thanh,N,B2
+1918,電線,diànxiàn,dây điện,N,B2
+1919,電子,diànzĭ,điện tử,N,B2
+1920,雕刻,diāokè,điêu khắc,N,B2
+1921,雕刻,diāokè,chạm trổ,V,B2
+1922,吊,diào,"treo, buộc, kéo lên",V,B2
+1923,釣,diào,câu lên,V,B2
+1924,跌,dié,"ngã, té, rơi xuống",Vp,B2
+1925,跌倒,diédăo,"ngã, té nhào",Vp,B2
+1926,丁,dīng,tưng tưng ( từ tượng thanh),N,B2
+1927,盯,dīng,nhìn chằm chằm,V,B2
+1928,頂,dǐng,"đỉnh, chóp",M,B2
+1929,訂婚,dìnghūn,đính hôn,V-sep,B2
+1930,訂位,dìngwèi,đặt chỗ,V-sep,B2
+1931,定期,dìngqí,định kỳ,Adv,B2
+1932,定期,dìngqí,định ngày,Vs-attr,B2
+1933,丟臉,diūliăn,"mất mặt, xấu hổ",Vs-sep,B2
+1934,丟人,diūrén,"mất thể diện, bẽ mặt",Vs,B2
+1935,冬季,dōngjì,mùa đông,N,B2
+1936,懂得,dǒngde,"hiểu, biết",Vst,B2
+1937,洞,dòng,"động, hang động",N,B2
+1938,凍,dòng,"đông lại, đóng băng",Vs,B2
+1939,棟,dòng,xà ngang,M,B2
+1940,動不動,dòngbudòng,"động 1 chút, hở 1 chút là...",Adv,B2
+1941,動詞,dòngcí,động từ,N,B2
+1942,動人,dòngrén,làm cho cảm động,Vs,B2
+1943,動身,dòngshēn,"khởi hành, xuất phát",Vi,B2
+1944,動手,dòngshǒu,bắt tay vào làm,Vi,B2
+1945,動作,dòngzuò,động tác,N,B2
+1946,鬥爭,dòuzhēng,đấu tranh,Vi,B2
+1947,毒,dú,"độc, chất độc",N,B2
+1948,毒,dú,có hại,Vs,B2
+1949,獨立,dúlì,độc lập,Vs,B2
+1950,獨自,dúzì,"một mình, tự mình",Adv,B2
+1951,賭,dŭ,đánh bạc,V,B2
+1952,度,dù,đo lường,V,B2
+1953,度過,dùguò,trải qua,V,B2
+1954,端,duān,"bưng, mang, đem",V,B2
+1955,斷,duàn,"cắt đứt, đoạn tuyệt",Vp,B2
+1956,鍛鍊,duànliàn,rèn luyện,V,B2
+1957,堆,duī,"chồng chất, tích tụ",V,B2
+1958,隊,duì,"hàng ngũ, đội ngũ",M,B2
+1959,隊員,duìyuán,đội viên,N,B2
+1960,對岸,duìàn,bờ đối diện,N,B2
+1961,對策,duìcè,đối sách,N,B2
+1962,對待,duìdài,"đối đãi, đối xử",V,B2
+1963,對付,duìfù,đối phó,V,B2
+1964,對抗,duìkàng,đối kháng,V,B2
+1965,對立,duìlì,đối lập,Vs,B2
+1966,對於,duìyú,"đối với, về...",Prep,B2
+1967,蹲,dūn,ngồi xổm,Vi,B2
+1968,頓,dùn,,M,B2
+1969,噸,dùn,tấn,M,B2
+1970,多半/多半兒,duōbàn/duōbànr,hơn phân nửa,Det,B2
+1971,多多,duōduō,rất nhiều,Adv,B2
+1972,多少,duōshăo,"nhiều ít, hơi hơi",Adv,B2
+1973,多數,duōshù,"đa số, số nhiều",Det,B2
+1974,多謝,duōxiè,cảm ơn,Vst,B2
+1975,奪,duó,cướp đoạt,V,B2
+1976,躲,duŏ,trốn tránh,Vi,B2
+1977,E,,,,
+1978,鵝,é,ngỗng,N,B2
+1979,惡劣,èliè,ác liệt,Vs,B2
+1980,而已,éryĭ,"mà thôi, thế thôi",Ptc,B2
+1981,F,,,,
+1982,發,fā,"phát, gởi",Vp,B2
+1983,發動,fādòng,"phát động, bắt đầu",V,B2
+1984,發抖,fādŏu,run rẩy,Vi,B2
+1985,發起,fāqĭ,"đề nghị, đề xuất",Vp,B2
+1986,發射,fāshè,"bắn, phát ra, phóng",V,B2
+1987,發行,fāxíng,phát hành,V,B2
+1988,發言,fāyán,"phát ngôn, phát biểu",V-sep,B2
+1989,發揚,fāyáng,phát huy,V,B2
+1990,發音,fāyīn,phát âm,Vi,B2
+1991,發展,fāzhăn,phát triển,V,B2
+1992,罰,fá,"phạt, xử phạt",V,B2
+1993,法子,fázi,"phương pháp, cách thức",N,B2
+1994,法院,făyuàn,tòa án,N,B2
+1995,髮型,făxíng,kiểu tóc,N,B2
+1996,番,fān,gấp đôi,M,B2
+1997,翻,fān,"lật, đổ",V,B2
+1998,煩,fán,phiền muộn,Vs,B2
+1999,煩惱,fánnăo,phiền não,N,B2
+2000,繁忙,fánmáng,bận rộn,Vs,B2
+2001,繁榮,fánróng,phồn vinh,Vs,B2
+2002,繁殖,fánzhí,sinh sôi nảy nở,V,B2
+2003,反,făn,"ngược, trái",V,B2
+2004,反,făn,phản,Vst,B2
+2005,反對,fănduì,phản đối,Vst,B2
+2006,反覆,fănfù,lặp đi lặp lại,Adv,B2
+2007,反抗,fănkàng,phản kháng,V,B2
+2008,反面,fănmiàn,"mặt trái, phản diện",N,B2
+2009,反問,fănwèn,hỏi lại,V,B2
+2010,反映,fănyìng,phản ứng,V,B2
+2011,反應,fănyìng,phản ứng,Vi,B2
+2012,反正,fănzhèng,"cho dù, dù sao",Adv,B2
+2013,返回,fănhuí,phản hồi,V,B2
+2014,犯錯,fàncuò,phạm sai lầm,V-sep,B2
+2015,犯法,fànfă,phạm pháp,V-sep,B2
+2016,犯人,fànrén,"phạm nhân, tội phạm",N,B2
+2017,犯罪,fànzuì,phạm tội,V-sep,B2
+2018,方,fāng,vuông,Vs-attr,B2
+2019,方案,fāngàn,kế hoạch,N,B2
+2020,防,fáng,phòng ngừa,V,B2
+2021,防守,fángshǒu,phòng thủ,V,B2
+2022,防止,fángzhĭ,phòng ngừa,V,B2
+2023,放大,fàngdà,phóng đại,V,B2
+2024,放棄,fàngqì,"vứt bỏ, từ bỏ",V,B2
+2025,放手,fàngshŏu,buông tay,Vi,B2
+2026,放學,fàngxué,"tan học, nghỉ học",Vp-sep,B2
+2027,非法,fēifă,"phi pháp, không hợp pháp",Vs-attr,B2
+2028,肥,féi,"béo, mập",Vs,B2
+2029,肥胖,féipàng,béo phì,Vs,B2
+2030,肥皂,féizào,xà phòng,N,B2
+2031,肺,fèi,phổi,N,B2
+2032,費,fèi,"phí, chi phí",Vst,B2
+2033,廢話,fèihuà,lời vô ích,N,B2
+2034,廢氣,fèiqì,khí thải,N,B2
+2035,廢水,fèishuĭ,nước thải,N,B2
+2036,廢物,fèiwù,"đồ bỏ đi, phế phẩm",N,B2
+2037,分別,fēnbié,"phân biệt, lần lượt",Adv,B2
+2038,分別,fēnbié,ly biệt,N,B2
+2039,分別,fēnbié,"chia nhau, phân công nhau",V,B2
+2040,分布/佈,fēnbù,phân bố,Vs,B2
+2041,分工,fēngōng,phân công,Vi,B2
+2042,分明,fēnmíng,"rõ ràng, phân minh",Vs-pred,B2
+2043,分配,fēnpèi,phân phối,V,B2
+2044,分散,fēnsàn,"phân tán, phân ly",Vs,B2
+2045,分手,fēnshǒu,chia tay,Vp,B2
+2046,分數,fēnshù,điểm số,N,B2
+2047,分析,fēnxī,phân tích,N,B2
+2048,分析,fēnxī,phân tích,V,B2
+2049,紛紛,fēnfēn,"sôi nổi, ào ào",Adv,B2
+2050,吩咐,fēnfù,dặn dò,V,B2
+2051,粉筆,fěnbĭ,phấn viết bảng,N,B2
+2052,份/份兒,fèn/fènr,"phần, địa vị",N,B2
+2053,奮鬥,fèndòu,"phấn đấu, cố gắng",Vi,B2
+2054,憤怒,fènnù,"phẫn nộ, căm phẫn",Vs,B2
+2055,封,fēng,phong tước,V,B2
+2056,封建,fēngjiàn,phong kiến,Vs-attr,B2
+2057,蜂蜜,fēngmì,mật ong,N,B2
+2058,風氣,fēngqì,bầu không khí,N,B2
+2059,風趣,fēngqù,"dí dỏm, thú vị",Vs,B2
+2060,風險,fēngxiăn,"nguy hiểm, mạo hiểm",N,B2
+2061,瘋,fēng,điên,Vp,B2
+2062,瘋狂,fēngkuáng,điên cuồng,Vs,B2
+2063,瘋子,fēngzi,người điên,N,B2
+2064,逢,féng,gặp mặt,Vst,B2
+2065,縫,féng,"may, khâu",V,B2
+2066,諷刺,fèngcì,"châm biếm, mỉa mai",V,B2
+2067,否定,fŏudìng,phủ định,V,B2
+2068,否認,fŏurèn,phủ nhận,V,B2
+2069,夫妻,fūqī,vợ chồng,N,B2
+2070,夫人,fūrén,"phu nhân, vợ",N,B2
+2071,幅,fú,khổ (vải),M,B2
+2072,扶,fú,"đỡ, vịn, dìu",V,B2
+2073,服,fú,,V,B2
+2074,服,fú,,Vst,B2
+2075,浮,fú,"nổi, nở, phù",Vi,B2
+2076,符號,fúhào,"ký hiệu, dấu hiệu",N,B2
+2077,付,fù,"bộ, đôi, khuôn",M,B2
+2078,赴,fù,"đi đến, di dự",V,B2
+2079,副,fù,"phó, phụ",M,B2
+2080,輔導,fŭdăo,phụ đạo,V,B2
+2081,富,fù,giàu có,Vs-attr,B2
+2082,富裕,fùyù,"dồi dào, sung túc",Vs,B2
+2083,附加,fùjiā,"phụ thêm, kèm theo",Vpt,B2
+2084,婦女,fùnǚ,phụ nữ,N,B2
+2085,複雜,fùzá,phức tạp,Vs,B2
+2086,複製,fùzhì,"phục chế, làm lại",V,B2
+2087,G,,,,
+2088,該,gāi,sửa đổi,Det,B2
+2089,改革,găigé,cải cách,V,B2
+2090,改造,găizào,"cải tạo, sửa đổi",V,B2
+2091,改正,găizhèng,"cải chính, đính chính",V,B2
+2092,蓋(子),gài(zi),"nắp, vung",N,B2
+2093,肝,gān,lá gan,N,B2
+2094,乾杯,gānbēi,cạn ly,Vi,B2
+2095,乾脆,gāncuì,"thẳng thắn, dứt khoát",Vs,B2
+2096,趕,găn,"đuổi, đuổi theo, xua đuổi",Vs,B2
+2097,趕緊,gănjĭn,"vội vàng, khẩn trương",Adv,B2
+2098,感到,găndào,cảm thấy,Vpt,B2
+2099,感恩,gănēn,cảm ơn,Vs,B2
+2100,感激,gănjī,cảm kích,Vst,B2
+2101,感情,gănqíng,tình cảm,N,B2
+2102,感染,gănrăn,lây nhiễm,Vpt,B2
+2103,感受,gănshòu,cảm nhận,N,B2
+2104,感受,gănshòu,tiếp thu,Vst,B2
+2105,幹,gàn,"liên can, liên quan",V,B2
+2106,幹部,gànbù,cán bộ,N,B2
+2107,幹嘛,gànma,làm gì?,Adv,B2
+2108,幹嘛,gànma,làm gì?,Vi,B2
+2109,幹什麼,gànshénme,"làm sao, tại sao",,B2
+2110,鋼,gāng,thép,N,B2
+2111,鋼筆,gāngbĭ,bút máy,N,B2
+2112,剛好,gānghăo,"vừa vặn, vừa khít",Vs,B2
+2113,港幣,găngbì,đô la Hồng Kông,N,B2
+2114,港口,găngkŏu,"bến tàu, bến cảng",N,B2
+2115,高潮,gāocháo,"triều cường, cao trào",N,B2
+2116,高大,gāodà,cao lớn,Vs,B2
+2117,高度,gāodù,"cao độ, độ cao",N,B2
+2118,高度,gāodù,rất cao,Vs-attr,B2
+2119,高峰,gāofēng,"đỉnh núi, đỉnh cao",N,B2
+2120,高貴,gāoguì,cao quý,Vs,B2
+2121,高級,gāojí,cao cấp,Vs,B2
+2122,高明,gāomíng,"cao siêu, thông minh",Vs,B2
+2123,高手,gāoshŏu,cao thủ,N,B2
+2124,高原,gāoyuán,cao nguyên,N,B2
+2125,告,gào,nói với,V,B2
+2126,告辭,gàocí,"cáo từ, tạm biệt",Vi,B2
+2127,割,gē,"cắt, gặt",V,B2
+2128,擱,gē,chịu đựng,V,B2
+2129,歌劇,gējù,ca kịch,N,B2
+2130,隔,gé,ngăn cách,Vst,B2
+2131,革命,gémìng,cách mạng,N,B2
+2132,各,gè,"các, tất cả",Adv,B2
+2133,各行各業,gèhánggèyè,các ngành nghề,N,B2
+2134,個別,gèbié,"riêng lẻ, riêng biệt",Vs-attr,B2
+2135,個性,gèxìng,cá tính,N,B2
+2136,根本,gēnběn,"từ trước đến giờ, vốn dĩ",Adv,B2
+2137,根本,gēnběn,"căn bản, gốc rễ, cội nguồn",N,B2
+2138,根據,gēnjù,căn cứ vào,N,B2
+2139,供,gōng,"cúng, dâng",V,B2
+2140,工程,gōngchéng,công trình,N,B2
+2141,工夫,gōngfu,người làm thuê,N,B2
+2142,工會,gōnghuì,công đoàn,N,B2
+2143,工錢,gōngqián,"tiền công, tiền lương",N,B2
+2144,工資,gōngzī,tiền lương,N,B2
+2145,公布/佈,gōngbù,công bố,V,B2
+2146,公公,gōnggōng,bố chồng,N,B2
+2147,公開,gōngkāi,công khai,Vs,B2
+2148,公立,gōnglì,công lập,Vs-attr,B2
+2149,公平,gōngpíng,công bằng,Vs,B2
+2150,公式,gōngshì,công thức,N,B2
+2151,公用,gōngyòng,"công cộng, dùng chung",Vs-attr,B2
+2152,公元,gōngyuán,công nguyên,N,B2
+2153,供應,gōngyìng,"cung ứng, cung cấp",V,B2
+2154,共,gòng,tổng cộng,Adv,B2
+2155,共同,gòngtóng,"chung, cùng",Adv,B2
+2156,構成,gòuchéng,"cấu thành, tạo thành",V,B2
+2157,構造,gòuzào,"cấu tạo, cấu trúc",N,B2
+2158,孤單,gūdān,"cô đơn, lẻ loi",Vs,B2
+2159,估計,gūjì,"đánh giá, dự tính",V,B2
+2160,姑姑,gūgu,"bác, cô (chị em gái của bố)",N,B2
+2161,姑丈,gūzhàng,dượng (chồng của cô),N,B2
+2162,古典,gŭdiăn,"điển tích, cổ điển",Vs,B2
+2163,鼓,gŭ,cái trống,N,B2
+2164,鼓勵,gŭlì,sự khuyến khích,N,B2
+2165,鼓勵,gŭlì,"khích lệ, cổ vũ",V,B2
+2166,鼓舞,gŭwŭ,cổ vũ,V,B2
+2167,鼓掌,gŭzhăng,vỗ tay,Vi,B2
+2168,骨頭,gútou,xương cốt,N,B2
+2169,固定,gùdìng,cố định,Vs,B2
+2170,顧問,gùwèn,cố vấn,N,B2
+2171,故鄉,gùxiāng,"cố hương, quê nhà",N,B2
+2172,瓜,guā,"dưa, dưa chuột",N,B2
+2173,瓜子,guāzĭ,hạt dưa,N,B2
+2174,掛號信,guàhàoxìn,thư đã đăng kí,N,B2
+2175,怪,guài,kỳ quái,Adv,B2
+2176,官方,guānfāng,nhà nước,N,B2
+2177,官員,guānyuán,quan chức,N,B2
+2178,關,guān,cửa ải,M,B2
+2179,關鍵,guānjiàn,"then chốt, mấu chốt",N,B2
+2180,關上,guānshàng,"đóng lại, khép, tắt",V,B2
+2181,關於,guānyú,"về, liên quan đến",Prep,B2
+2182,觀光,guānguāng,tham quan,Vi,B2
+2183,管道,guăndào,"đường ống, ống dẫn",N,B2
+2184,管制,guănzhì,"quản chế, kiểm soát",V,B2
+2185,慣,guàn,"quen, thói quen",Vp,B2
+2186,慣例,guànlì,"lệ thường, thông lệ",N,B2
+2187,冠軍,guànjūn,quán quân,N,B2
+2188,罐頭,guàntou,"vò, lọ, vại, hũ",N,B2
+2189,罐子,guànzi,"vò, hũ (bằng sành sứ)",N,B2
+2190,光,guāng,"ánh sáng, cảnh vật",Adv,B2
+2191,光,guāng,"có lợi, có ích",Vp,B2
+2192,光亮,guāngliàng,sáng ngời,Vs,B2
+2193,光臨,guānglín,đến dự,V,B2
+2194,光明,guāngmíng,"sáng rực, sáng chói",Vs,B2
+2195,光榮,guāngróng,"quang vinh, vẻ vang",Vs,B2
+2196,光是,guāngshì,"duy nhất, chỉ",Adv,B2
+2197,光線,guāngxiàn,tia sáng,N,B2
+2198,廣,guăng,rộng rãi,Vs,B2
+2199,廣大,guăngdà,rộng lớn,Vs,B2
+2200,廣泛,guăngfàn,phổ biến,Vs,B2
+2201,廣告,guănggào,"bát ngát, mênh mông",Vi,B2
+2202,廣闊,guăngkuò,rộng lớn,Vs,B2
+2203,規定,guīdìng,nội quy,N,B2
+2204,規定,guīdìng,quy định,V,B2
+2205,規畫/劃,guīhuà,kế hoạch,N,B2
+2206,規畫/劃,guīhuà,lập kế hoạch,V,B2
+2207,規律,guīlǜ,quy luật,N,B2
+2208,規則,guīzé,quy tắc,N,B2
+2209,跪,guì,quỳ gối,Vi,B2
+2210,櫃臺/台,guìtái,quầy hàng,N,B2
+2211,貴族,guìzú,quý tộc,N,B2
+2212,滾,gŭn,cút đi,Vi,B2
+2213,鍋(子),guō(zi),cái nồi,N,B2
+2214,國會,guóhuì,quốc hội,N,B2
+2215,國籍,guójí,quốc tịch,N,B2
+2216,國際,guójì,quốc tế,N,B2
+2217,國立,guólì,"quốc lập, công lập",Vs-attr,B2
+2218,國旗,guóqí,quốc kỳ,N,B2
+2219,國小,guóxiăo,tiểu học,N,B2
+2220,國中,guózhōng,trung học cơ sở,N,B2
+2221,裹,guŏ,"quấn, bọc",V,B2
+2222,果然,guŏrán,"quả nhiên, đúng là",Adv,B2
+2223,過,guò,"qua, trải qua",Adv,B2
+2224,過程,guòchéng,quá trình,N,B2
+2225,過度,guòdù,quá mức,Vs,B2
+2226,過渡,guòdù,chuyển tiếp sang,Vi,B2
+2227,過節,guòjié,"ăn tết, chơi lễ",V-sep,B2
+2228,過濾,guòlǜ,"lọc (bột, nước)",V,B2
+2229,過期,guòqí,quá hạn,Vp,B2
+2230,過世,guòshì,"mất, qua đời",Vp,B2
+2231,H,,,,
+2232,還不如,háibùrú,chi bằng...,Conj,B2
+2233,還有,háiyŏu,vẫn còn,Conj,B2
+2234,海關,hăiguān,hải quan,N,B2
+2235,海軍,hăijūn,hải quân,N,B2
+2236,海外,hăiwài,"hải ngoại, nước ngoài",N,B2
+2237,海峽,hăixiá,eo biển,N,B2
+2238,海鮮,hăixiān,hải sản,N,B2
+2239,害處,hàichù,điều có hại,N,B2
+2240,含,hán,"ngậm, chứa",V,B2
+2241,含,hán,kín đáo,Vst,B2
+2242,含量,hánliàng,hàm lượng,N,B2
+2243,寒冷,hánlěng,lạnh lẽo,Vs,B2
+2244,喊,hăn,la hét,V,B2
+2245,汗,hàn,mồ hôi,N,B2
+2246,行業,hángyè,ngành nghề,N,B2
+2247,毫無,háowú,không hề,Vst,B2
+2248,好,hăo,tốt lành,Adv,B2
+2249,好,hăo,hòa hợp,Conj,B2
+2250,好在,hăozài,may mà,Adv,B2
+2251,耗,hào,"tiêu hao, hao tốn",Vst,B2
+2252,好客,hàokè,hiếu khách,Vs,B2
+2253,好奇,hàoqí,hiếu kỳ,Vs,B2
+2254,號召,hàozhào,kêu gọi,V,B2
+2255,合,hé,đấu,Vi,B2
+2256,合,hé,cái đấu (để đong lương thực),Vs,B2
+2257,合不來,hébulái,không hợp nhau,Vs,B2
+2258,合成,héchéng,hợp thành,Vst,B2
+2259,合得來,hédelái,"hợp nhau, hòa hợp",Vs,B2
+2260,合法,héfă,hợp pháp,Vs,B2
+2261,合格,hégé,hợp lệ,Vp,B2
+2262,合乎,héhū,phù hợp,Vst,B2
+2263,合理,hélĭ,hợp lý,Vs,B2
+2264,合適,héshì,thích hợp,Vs,B2
+2265,合算,hésuàn,có lợi,Vs,B2
+2266,和好,héhăo,hòa thuận,Vp,B2
+2267,和平,hépíng,hòa bình,Vs,B2
+2268,和氣,héqì,"ôn hòa, nhã nhặn",Vs,B2
+2269,何必,hébì,"hà tất, hà cớ",Adv,B2
+2270,何況,hékuàng,"huống hồ, vả lại",Conj,B2
+2271,河流,héliú,sông ngòi,N,B2
+2272,嘿,hēi,tối,Ptc,B2
+2273,黑暗,hēiàn,"tối tăm, đen tối",Vs,B2
+2274,黑夜,hēiyè,đêm khuya,N,B2
+2275,痕跡,hénjī,dấu vết,N,B2
+2276,恨,hèn,thù hận,N,B2
+2277,橫,héng,"ngang, hoành, vắt ngang",Vs-attr,B2
+2278,喉嚨,hóulong,"yết hầu, cổ họng",N,B2
+2279,猴子,hóuzi,con khỉ,N,B2
+2280,後代,hòudài,đời sau,N,B2
+2281,後方,hòufāng,hậu phương,N,B2
+2282,後果,hòuguŏ,hậu quả,N,B2
+2283,後悔,hòuhuĭ,hối hận,Vs,B2
+2284,後年,hòunián,năm sau nữa,N,B2
+2285,後頭,hòutou,"phía sau, mặt sau",N,B2
+2286,後退,hòutuì,lùi về sau,Vi,B2
+2287,後院,hòuyuàn,sân sau,N,B2
+2288,呼,hū,huýt sáo,V,B2
+2289,呼吸,hūxī,hít thở,Vi,B2
+2290,忽略,hūlüè,"không chú ý, sơ hở",Vst,B2
+2291,忽視,hūshì,"xem nhẹ, lơ là",Vst,B2
+2292,蝴蝶,húdié,bươm bướm,N,B2
+2293,鬍子,húzi,"râu, ria",N,B2
+2294,戶,hù,"hộ, nhà",M,B2
+2295,戶外,hùwài,ngoài trời,N,B2
+2296,互助,hùzhù,"hỗ trợ, giúp đỡ lẫn nhau",Vi,B2
+2297,花草,huācăo,hoa cỏ,N,B2
+2298,花費,huāfèi,chi phí,N,B2
+2299,花費,huāfèi,tiêu xài,V,B2
+2300,花盆,huāpén,chậu hoa,N,B2
+2301,花瓶,huāpíng,bình hoa,N,B2
+2302,花色,huāsè,màu sắc và hoa văn,N,B2
+2303,花生,huāshēng,đậu phộng,N,B2
+2304,划,huá,"trơn, nhẵn",V,B2
+2305,滑,huá,trơn bóng,Vp,B2
+2306,滑,huá,"gian xảo, lừa dối",Vs,B2
+2307,華僑,huáqiáo,Hoa Kiều,N,B2
+2308,華人,huárén,người Hoa,N,B2
+2309,化,huà,"tiêu, xài",Vst,B2
+2310,化,huà,tiêu tốn,Vp,B2
+2311,化學,huàxué,hóa học,N,B2
+2312,化妝,huàzhuāng,trang điểm,Vi,B2
+2313,化裝,huàzhuāng,hóa trang,Vi,B2
+2314,懷念,huáiniàn,"hoài niệm, nhớ nhung",Vst,B2
+2315,懷孕,huáiyùn,mang thai,Vi,B2
+2316,壞蛋,huàidàn,"đồ tồi, khốn nạn",N,B2
+2317,歡呼,huānhū,hạnh phúc,Vi,B2
+2318,歡樂,huānlè,"vui mừng, vui vẻ",Vs,B2
+2319,歡喜,huānxĭ,"vui sướng, thích thú",Vs,B2
+2320,緩和,huănhé,xoa dịu,V,B2
+2321,緩慢,huănmàn,"từ tốn, chậm chạp",Vs,B2
+2322,幻想,huànxiăng,ảo tưởng,N,B2
+2323,幻想,huànxiăng,tưởng tượng,Vi,B2
+2324,慌,huāng,hoảng sợ,Vs,B2
+2325,皇帝,huángdì,hoàng đế,N,B2
+2326,黃豆,huángdòu,"đậu tương, đậu nành",N,B2
+2327,黃昏,huánghūn,hoàng hôn,N,B2
+2328,灰,huī,"tro, than",Vs-attr,B2
+2329,灰色,huīsè,màu xám,N,B2
+2330,灰心,huīxīn,nản lòng,Vs,B2
+2331,揮,huī,"khua, vung, múa",V,B2
+2332,回,huí,"quanh co, trở về",V,B2
+2333,回電,huídiàn,gửi điện trả lời,V-sep,B2
+2334,"""回教/ 伊斯蘭教""",huíjiào / yīsīlánjià,đạo Hồi,N,B2
+2335,回收,huíshōu,thu hồi,V,B2
+2336,回頭,huítóu,"quay đầu, ngoảnh lại",V-sep,B2
+2337,回信,huíxìn,hồi âm,V-sep,B2
+2338,回憶,huíyì,"hồi tưởng, nhớ lại",Vst,B2
+2339,匯款,huìkuăn,"gửi tiền, chuyển tiền",V-sep,B2
+2340,會員,huìyuán,hội viên,N,B2
+2341,昏倒,hūndăo,ngất xỉu,Vp,B2
+2342,昏迷,hūnmí,hôn mê,Vp,B2
+2343,混,hùn,trộn lẫn,V,B2
+2344,混合,hùnhé,hỗn hợp,V,B2
+2345,活該,huógāi,đáng đời,Vs,B2
+2346,活力,huólì,"sinh lực, sức sống",N,B2
+2347,活潑,huópō,hoạt bát,Vs,B2
+2348,活躍,huóyuè,sinh động,Vs,B2
+2349,火柴,huŏchái,diêm quẹt,N,B2
+2350,火腿,huŏtuĭ,chân giò hun khói,N,B2
+2351,火災,huŏzāi,hỏa hoạn,N,B2
+2352,禍,huò,"họa, tai nạn",N,B2
+2353,或多或少,huòduōhuòshăo,dù ít dù nhiều,Adv,B2
+2354,或者,huòzhě,"có lẽ, hoặc là",Conj,B2
+2355,貨物,huòwù,hàng hóa,N,B2
+2356,獲得,huòdé,"thu được, giành được",Vpt,B2
+2357,J,,,,
+2358,肌肉,jīròu,cơ bắp,N,B2
+2359,基本上,jīběnshàng,"chủ yếu, cốt yếu",Adv,B2
+2360,基金,jījīn,"quỹ, ngân sách",N,B2
+2361,幾乎,jīhū,"hầu như, gần như",Adv,B2
+2362,機構,jīgòu,"cơ cấu, cơ quan",N,B2
+2363,機關,jīguān,bộ phận,N,B2
+2364,機票,jīpiào,vé máy bay,N,B2
+2365,機械,jīxiè,máy móc,N,B2
+2366,及格,jígé,đạt tiêu chuẩn,Vp,B2
+2367,及時,jíshí,"đúng lúc, kịp thời",Adv,B2
+2368,即將,jíjiāng,"sắp, sẽ",Adv,B2
+2369,即使,jíshĭ,cho dù,Conj,B2
+2370,極其,jíqí,cực kỳ,Adv,B2
+2371,級,jí,cấp bậc,M,B2
+2372,集,jí,tập,M,B2
+2373,集,jí,"tập hợp, tụ tập",V,B2
+2374,集合,jíhé,"thu thập, tập hợp",Vi,B2
+2375,集郵,jíyóu,sưu tập tem,Vi,B2
+2376,集中,jízhōng,tập trung,V,B2
+2377,集中,jízhōng,tập hợp,Vs,B2
+2378,疾病,jíbìng,bệnh tật,N,B2
+2379,急忙,jímáng,vội vã,Adv,B2
+2380,寂寞,jímò,"cô quạnh, cô đơn",Vs,B2
+2381,既然,jìrán,nếu đã...,Conj,B2
+2382,技術,jìshù,kỹ thuật,N,B2
+2383,計算,jìsuàn,tính toán,V,B2
+2384,計較,jìjiào,"so bì, tị nạnh",Vs,B2
+2385,記性,jìxìng,trí nhớ,N,B2
+2386,記憶,jìyì,"nhớ lại, ký ức",Vi,B2
+2387,記載,jìzài,ghi chép,V,B2
+2388,記住,jìzhù,ghi nhớ,Vpt,B2
+2389,加班,jiābān,"tăng ca, làm thêm giờ",V-sep,B2
+2390,加工,jiāgōng,gia công,V-sep,B2
+2391,加上,jiāshàng,"công, thêm vào",Conj,B2
+2392,加速,jiāsù,tăng tốc,V,B2
+2393,加以,jiāyĭ,tiến hành,Adv,B2
+2394,家事,jiāshì,"việc nhà, chuyện nhà",N,B2
+2395,夾,jiá,"kép, đôi",V,B2
+2396,甲,jiă,"giáp/ hạng, bậc",N/M,B2
+2397,嫁,jià,"lấy chồng, xuất giá",V,B2
+2398,駕駛,jiàshĭ,điều khiển,N,B2
+2399,駕駛,jiàshĭ,"lái, bẻ lái",V,B2
+2400,價值,jiàzhí,giá trị (hàng hóa),Vst,B2
+2401,尖,jiān,"nhọn, nhạy, thính",Vs,B2
+2402,尖銳,jiānruì,sắc bén,Vs,B2
+2403,肩,jiān,"vai, bả vai",N,B2
+2404,兼,jiān,gấp đôi,V,B2
+2405,間,jiān,"giữa, ở giữa",N,B2
+2406,堅定,jiāndìng,"kiên định, không dao động",Vs,B2
+2407,堅決,jiānjué,kiên quyết,Vs,B2
+2408,監視,jiānshì,"giám thị, theo dõi",V,B2
+2409,監獄,jiānyù,"nhà tù, nhà giam",N,B2
+2410,揀,jiăn,"lựa chọn, lựa",V,B2
+2411,撿,jiăn,"nhặt lấy, lượm",V,B2
+2412,剪刀,jiăndāo,cây kéo,N,B2
+2413,檢驗,jiănyàn,"kiểm tra, kiểm nghiệm",V,B2
+2414,建,jiàn,xây dựng. thiết lập,V,B2
+2415,建國,jiànguó,"kiến quốc, lấp quốc",Vi,B2
+2416,建築,jiànzhú,kiến trúc,N,B2
+2417,建築,jiànzhú,"xây dựng, gầy dựng",V,B2
+2418,箭,jiàn,mũi tên,N,B2
+2419,漸漸,jiànjiàn,dần dần,Adv,B2
+2420,間接,jiànjiē,gián tiếp,Vs-attr,B2
+2421,鍵盤,jiànpán,bàn phím,N,B2
+2422,健全,jiànquán,"khỏe mạnh, vững vàng",Vs,B2
+2423,江,jiāng,sông,N,B2
+2424,將,jiāng,"mang, xách, dìu",Adv,B2
+2425,將要,jiāngyào,"sắp sửa, sẽ",Adv,B2
+2426,獎金,jiăngjīn,tiền thưởng,N,B2
+2427,獎品,jiăngpĭn,phần thưởng,N,B2
+2428,降,jiàng,đầu hàng,Vp,B2
+2429,降價,jiàngjià,giảm giá,Vp-sep,B2
+2430,澆,jiāo,"tưới, đổ",V,B2
+2431,交代,jiāodai,bàn giao,V,B2
+2432,交換,jiāohuàn,trao đổi,V,B2
+2433,交際,jiāojì,giao tiếp,Vi,B2
+2434,交往,jiāowăng,quan hệ qua lại,Vi,B2
+2435,交易,jiāoyì,giao dịch,N,B2
+2436,交易,jiāoyì,mua bán,Vi,B2
+2437,郊外,jiāowài,ngoại ô,N,B2
+2438,角,jiăo,"sừng/ góc, góc tư",N,B2
+2439,角落,jiăoluò,"góc, xó",N,B2
+2440,繳,jiăo,giao nộp,V,B2
+2441,腳步,jiăobù,bước chân,N,B2
+2442,較,jiào,"so sánh, so đo",Prep,B2
+2443,叫喊,jiàohăn,"la hét, kêu la",V,B2
+2444,教會,jiàohuì,giáo hội,N,B2
+2445,教授,jiàoshòu,"giảng dạy, truyền thụ",V,B2
+2446,教學,jiàoxué,dạy học,Vi,B2
+2447,教訓,jiàoxun,"dạy bảo, giáo huấn",V,B2
+2448,接,jiē,"tiếp cận, tiếp xúc",Vst,B2
+2449,接待,jiēdài,"tiếp đãi, chiêu đãi",V,B2
+2450,接到,jiēdào,để nhận,Vpt,B2
+2451,接見,jiējiàn,"tiếp kiến, gặp gỡ",V,B2
+2452,接近,jiējìn,tiếp cận,V,B2
+2453,接近,jiējìn,gần kề,Vs,B2
+2454,街道,jiēdào,đường phố,N,B2
+2455,街頭,jiētóu,đầu phố,N,B2
+2456,階段,jiēduàn,"giai đoạn, bước",N,B2
+2457,節,jié,"mấu chốt, khớp",M,B2
+2458,節省,jiéshěng,"tiết kiệm, dành dụm",Vst,B2
+2459,節約,jiéyuē,tiết kiệm,Vst,B2
+2460,結,jié,"kết, đan, bện",N,B2
+2461,結構,jiégòu,"kết cấu, cấu hình",N,B2
+2462,結果,jiéguŏ,kết quả,N,B2
+2463,結果,jiéguŏ,"kết trải, ra quả",Vp-sep,B2
+2464,結合,jiéhé,kết hợp,Vpt,B2
+2465,結論,jiélùn,kết luận,N,B2
+2466,結算,jiésuàn,"kết toán, quyết đoán",Vi,B2
+2467,結帳,jiézhàng,thanh toán,Vi,B2
+2468,截止,jiézhĭ,hết hạn,Vp,B2
+2469,解,jiě,tách ra,V,B2
+2470,解除,jiěchú,"xua tan, giải trừ",V,B2
+2471,解答,jiědá,giải đáp,V,B2
+2472,屆,jiè,"lúc, lần",M,B2
+2473,界線,jièxiàn,"giới tuyến, ranh giới",N,B2
+2474,戒指,jièzhĭ,chiếc nhẫn,N,B2
+2475,今後,jīnhòu,từ nay về sau,N,B2
+2476,金額,jīné,"kim ngạch, số tiền",N,B2
+2477,金融,jīnróng,tài chính,N,B2
+2478,金屬,jīnshŭ,kim loại,N,B2
+2479,儘管,jĭnguăn,"cứ việc, vẫn cứ",Adv,B2
+2480,儘量,jĭnliàng,"có hết sức, ra sức",Adv,B2
+2481,緊急,jĭnjí,khẩn cấp,Vs,B2
+2482,僅僅,jĭnjĭn,"vẻn vẻn, chỉ, mới",Adv,B2
+2483,近,jìn,"gần, cận kề",Vst,B2
+2484,近來,jìnlái,"gần đây, dạo này",Adv,B2
+2485,近視,jìnshì,cận thị,Vs,B2
+2486,盡力,jìnlì,"tận lực, hết sức",Vs,B2
+2487,進入,jìnrù,"vào, tiến vào",V,B2
+2488,進口,jìnkŏu,nhập khẩu,V,B2
+2489,禁止,jìnzhĭ,cấm đoán,V,B2
+2490,浸,jìn,"ngâm, dầm",V,B2
+2491,精彩,jīngcăi,"ưu việt, xuất sắc",Vs,B2
+2492,精力,jīnglì,tinh thần và thể lực,N,B2
+2493,精細,jīngxì,tinh tế,Vs,B2
+2494,經濟,jīngjì,kinh tế,N,B2
+2495,經歷,jīnglì,trải nghiệm,N,B2
+2496,經歷,jīnglì,"từng trải, trải qua",Vst,B2
+2497,經營,jīngyíng,kinh doanh,V,B2
+2498,京劇,jīngjù,kinh kịch,N,B2
+2499,驚人,jīngrén,làm kinh ngạc,Vs,B2
+2500,警告,jĭnggào,cảnh cáo,N,B2
+2501,警告,jĭnggào,"nhắc nhở, cảnh cáo",V,B2
+2502,景色,jĭngsè,"cảnh sắc, phong cảnh",N,B2
+2503,靜,jìng,"yên tĩnh, tĩnh",Vs,B2
+2504,鏡(子),jìng(zi),"gương, kính",N,B2
+2505,敬愛,jìngài,kính yêu,Vst,B2
+2506,敬酒,jìngjiŭ,"mời rượu, kính rượu",V-sep,B2
+2507,敬禮,jìnglĭ,cúi chào,V-sep,B2
+2508,淨化,jìnghuà,"làm sạch, tinh chế",Vpt,B2
+2509,竟然,jìngrán,"mà, vậy mà",Adv,B2
+2510,競爭,jìngzhēng,cạnh tranh,Vi,B2
+2511,糾正,jiūzhèng,"uốn nắn, sửa chữa",V,B2
+2512,酒會,jiŭhuì,tiệc rượu,N,B2
+2513,就,jiù,"thì, sẽ",Adv,B2
+2514,就是,jiùshì,"nhất định, cứ",Adv,B2
+2515,就是說,jiùshìshuō,"đó là, chính là",Conj,B2
+2516,就業,jiùyè,"vào nghề, đi làm",Vi,B2
+2517,救火,jiùhuŏ,"cứu hỏa, chữa cháy",Vi,B2
+2518,究竟,jiùjìng,"kết quả, thành quả",Adv,B2
+2519,居民,jūmín,cư dân,N,B2
+2520,居然,jūrán,lại có thể,Adv,B2
+2521,局,jú,"cảnh, cục, cuộc",M,B2
+2522,鞠躬,júgōng,"cúi chào, khom",Vi,B2
+2523,巨大,jùdà,"to lớn, vĩ đại",Vs,B2
+2524,具,jù,cái,M,B2
+2525,具,jù,vốn có,Vst,B2
+2526,具備,jùbèi,"có đủ, có sẵn",Vst,B2
+2527,具體,jùtĭ,cụ thể,Vs,B2
+2528,俱樂部,jùlèbù,câu lạc bộ,N,B2
+2529,聚集,jùjí,"tập hợp, tụ họp",Vi,B2
+2530,距離,jùlí,"cách, khoảng cách",Prep,B2
+2531,劇場,jùchăng,"rạp, nhà hát",N,B2
+2532,劇烈,jùliè,kịch liệt,Vs,B2
+2533,劇院,jùyuàn,"rạp, nhà hát",N,B2
+2534,據說,jùshuō,nghe nói,Conj,B2
+2535,捐,juān,"vứt bỏ, bỏ đi",V,B2
+2536,捐款,juānkuăn,quyên tiền,N,B2
+2537,捐款,juānkuăn,"tặng, cúng, hiến",V-sep,B2
+2538,卷,juăn,"quyển, cuốn",M,B2
+2539,捲,juăn,"cuốn, cuộn",V,B2
+2540,決/絕,jué,quyết định,Adv,B2
+2541,決心,juéxīn,lòng quyết tâm,N,B2
+2542,決心,juéxīn,quyết tâm,Vp,B2
+2543,絕不,juébù,tuyệt đối không,Adv,B2
+2544,絕大部分,juédàbùfèn,đa số áp đảo,Det,B2
+2545,絕對,juéduì,tuyệt đối,Vs-attr,B2
+2546,覺悟,juéwù,"giác ngộ, tỉnh ngộ",Vp,B2
+2547,軍,jūn,"quân,quân đội",N,B2
+2548,軍事,jūnshì,quân sự,N,B2
+2549,K,,,,
+2550,卡,kă,"tờ, phiếu",M,B2
+2551,卡,kă,kẹt lại,Vi,B2
+2552,卡通,kătōng,phim hoạt hình,N,B2
+2553,開,kāi,mở ra,Vp,B2
+2554,開除,kāichú,"khai trừ, đuổi ra",V,B2
+2555,開刀,kāidāo,"khai đao, chặt",V-sep,B2
+2556,開發,kāifā,"chi trả, thanh toán",V,B2
+2557,開戶,kāihù,mở tài khoản,V-sep,B2
+2558,開課,kāikè,"nhập học, khai giảng",V-sep,B2
+2559,開明,kāimíng,"khai sáng, văn minh",Vs,B2
+2560,開設,kāishè,"mở lớp, bố trí",V,B2
+2561,開拓,kāituò,khai phá,V,B2
+2562,開演,kāiyăn,bắt đầu diễn,Vp,B2
+2563,看家,kānjiā,"giữ nhà, coi nhà",Vi,B2
+2564,砍,kăn,"chặt, chẻ",V,B2
+2565,看,kàn,"chăm sóc, trông giữ",Vst,B2
+2566,看得起,kàndeqĭ,"tôn trọng, nể mặt",Vst,B2
+2567,看看,kànkan,"xem qua, kiểm tra",,B2
+2568,看來,kànlái,hình như,Adv,B2
+2569,看樣子,kànyàngzi,xem ra,Adv,B2
+2570,抗議,kàngyì,kháng nghị,V,B2
+2571,考察,kăochá,khảo sát,V,B2
+2572,考卷,kăojuàn,bài thi,N,B2
+2573,考慮,kăolǜ,suy xét,V,B2
+2574,考取,kăoqŭ,thi đậu,Vpt,B2
+2575,靠,kào,dựa vào,Prep,B2
+2576,靠近,kàojìn,"kề, kế, dựa sát",V,B2
+2577,科目,kēmù,môn học,N,B2
+2578,顆,kē,"hạt, viên",M,B2
+2579,可是,kěshì,thế nhưng,Adv,B2
+2580,可喜,kěxĭ,đáng mừng,Vs,B2
+2581,可笑,kěxiào,"buồn cười, nực cười",Vs,B2
+2582,客房,kèfáng,phòng trọ,N,B2
+2583,客觀,kèguān,khách quan,Vs,B2
+2584,客戶,kèhù,khách thuê nhà,N,B2
+2585,課外,kèwài,ngoại khóa,Vs-attr,B2
+2586,空,kōng,trống không,Adv,B2
+2587,空前,kōngqián,không gian,Vs-attr,B2
+2588,空中,kōngzhōng,trong không trung,N,B2
+2589,恐怖,kŏngbù,khủng bố,Vs,B2
+2590,空/空兒,kòng/kòngr,thời gian rảnh,N,B2
+2591,控制,kòngzhì,khống chế,V,B2
+2592,口,kŏu,miệng,M,B2
+2593,口才,kŏucái,tài ăn nói,N,B2
+2594,口號,kŏuhào,khẩu hiệu,N,B2
+2595,口紅,kŏuhóng,thỏi son,N,B2
+2596,口氣,kŏuqì,khẩu khí,N,B2
+2597,口試,kŏushì,cuộc thi vấn đáp,N,B2
+2598,口試,kŏushì,thi vấn đáp,Vi,B2
+2599,口水,kŏushuĭ,nước bọt,N,B2
+2600,口音,kŏuyīn,"khẩu âm, giọng nói",N,B2
+2601,口語,kŏuyŭ,khẩu ngữ,N,B2
+2602,扣,kòu,"cài, móc",V,B2
+2603,誇獎,kuājiăng,khen ngợi,V,B2
+2604,跨,kuà,sải bước,V,B2
+2605,會計,kuàijì,kế toán viên,N,B2
+2606,寬度,kuāndù,độ rộng,N,B2
+2607,L,,,,
+2608,喇叭,lăba,"kèn đồng, còi",N,B2
+2609,蠟燭,làzhú,"cây nến, đèn cầy",N,B2
+2610,辣椒,làjiāo,"ớt, quả ớt",N,B2
+2611,來,lái,"đến, tới",N,B2
+2612,來回,láihuí,"đi về, khứ hồi",V,B2
+2613,來臨,láilín,"đến, tới, đi tới",Vp,B2
+2614,來往,láiwăng,"qua lại, vãng lai",Vi,B2
+2615,來信,láixìn,gởi thư,N,B2
+2616,來源,láiyuán,nguồn gốc,N,B2
+2617,來自,láizì,đến từ,Vpt,B2
+2618,籃子,lánzi,"làn xách, giỏ",N,B2
+2619,懶,lăn,lười nhác,Vs,B2
+2620,懶得,lănde,"lười, chẳng muốn...",Vaux,B2
+2621,爛,làn,"nát, nhừ, nhão",Vs,B2
+2622,濫用,lànyòng,lạm dụng,V,B2
+2623,狼,láng,con sói,N,B2
+2624,浪,làng,"sóng, làn sóng",N,B2
+2625,浪費,làngfèi,lãng phí,Vs,B2
+2626,撈,lāo,"kiếm, moi, vét",V,B2
+2627,牢,láo,"chuồng, nhà tù, ngục",Vs,B2
+2628,牢騷,láosāo,"kêu ca, oán than",N,B2
+2629,勞動,láodòng,lao động,V,B2
+2630,勞工,láogōng,công nhân,N,B2
+2631,勞力,láolì,sức lao động,N,B2
+2632,嘮叨,láodao,lải nhải,Vi,B2
+2633,老,lăo,"già, lão",Adv,B2
+2634,老百姓,lăobăixìng,nhân dân,N,B2
+2635,老闆娘/老板娘,lăobănniáng,bà chủ,N,B2
+2636,老大,lăodà,"lão đại, đại ca",N,B2
+2637,老家,lăojiā,"quê nhà, nguyên quán",N,B2
+2638,老實說,lăoshíshuō,nói thật lòng thì...,,B2
+2639,老太太,lăotàitai,"bà, quý bà",N,B2
+2640,樂意,lèyì,cam tâm tình nguyện,Vs,B2
+2641,類似,lèisì,"tương tự, giống",Vs,B2
+2642,冷靜,lěngjìng,"vắng vẻ, yên tĩnh",Vs,B2
+2643,冷飲,lěngyĭn,đồ uống lạnh,N,B2
+2644,梨(子),lí(zi),cây lê,N,B2
+2645,理,lĭ,"quản lý, sắp xếp",V,B2
+2646,理,lĭ,để ý,Vst,B2
+2647,理由,lĭyóu,lý do,N,B2
+2648,裡/裏頭,lĭtou,bên trong,N,B2
+2649,禮,lĭ,lễ nghi,N,B2
+2650,禮品,lĭpĭn,"quà tặng, lễ vật",N,B2
+2651,力氣,lìqi,sức lực,N,B2
+2652,立,lì,"đứng, dựng",V,B2
+2653,立場,lìchăng,lập trường,N,B2
+2654,立即,lìjí,"lập tức, ngay",Adv,B2
+2655,利,lì,sắc bén,Vs,B2
+2656,利潤,lìrùn,"lợi nhuận, lãi",N,B2
+2657,利息,lìxí,"lợi tức, lãi",N,B2
+2658,例外,lìwài,ngoại lệ,Vs,B2
+2659,粒,lì,"hạt, viên",M,B2
+2660,聯合,liánhé,"đoàn kết, kết hợp",V,B2
+2661,聯合國,liánhéguó,liên hiệp quốc,N,B2
+2662,連,lián,"gắn bó, nối liền",Adv,B2
+2663,連接,liánjiē,liên tiếp,Vst,B2
+2664,連忙,liánmáng,vội vã,Adv,B2
+2665,連續,liánxù,liên tục,Vs-attr,B2
+2666,臉色,liănsè,sắc mặt,N,B2
+2667,量,liáng,"đong, đo",V,B2
+2668,糧食,liángshí,lương thực,N,B2
+2669,倆,liăng,"ngón, trò (nói về thủ đoạn)",N,B2
+2670,亮,liàng,phát sáng,V,B2
+2671,諒解,liàngjiě,thông cảm,Vst,B2
+2672,了,liăo,hiểu,Vst,B2
+2673,列,liè,"xếp vào, liệt vào",M,B2
+2674,裂,liè,"hở, phanh ra",Vp,B2
+2675,淋,lín,"xối, dội, dầm",V,B2
+2676,臨,lín,"gần, đối diện",Vst,B2
+2677,臨時,línshí,đến lúc,N,B2
+2678,凌晨,língchén,rạng sáng,N,B2
+2679,靈活,línghuó,linh hoạt,Vs,B2
+2680,零件,língjiàn,linh kiện,N,B2
+2681,零售,língshòu,bán lẻ,V,B2
+2682,零下,língxià,"dưới 0, âm",Vs-attr,B2
+2683,領帶,lĭngdài,cà-vạt,N,B2
+2684,領導,lĭngdăo,lãnh đạo,N,B2
+2685,領土,lĭngtŭ,lãnh thổ,N,B2
+2686,領先,lĭngxiān,"vượt lên đầu, dẫn đầu",Vpt,B2
+2687,領袖,lĭngxiù,lãnh tụ,N,B2
+2688,另,lìng,"ngoài, khác",Det,B2
+2689,另外,lìngwài,ngoài ra,Conj,B2
+2690,另外,lìngwài,việc khác,Det,B2
+2691,溜,liū,"xào, lăn",Vi,B2
+2692,流動,liúdòng,"chảy, lưu động",Vi,B2
+2693,流利,liúlì,lưu loát,Vs,B2
+2694,留念,liúniàn,lưu niệm,Vs,B2
+2695,嘍,lóu,,Ptc,B2
+2696,摟,lǒu,ôm,V,B2
+2697,露,lù,"để trần, để lộ ra",V,B2
+2698,路燈,lùdēng,đèn đường,N,B2
+2699,路線,lùxiàn,tuyến đường,N,B2
+2700,陸軍,lùjūn,"lục quân, bộ binh",N,B2
+2701,陸續,lùxù,lần lượt,Adv,B2
+2702,錄用,lùyòng,tuyển dụng,V,B2
+2703,輪船,lúnchuán,tàu thủy,N,B2
+2704,輪流,lúnliú,luân phiên,Adv,B2
+2705,輪子,lúnzi,bánh xe,N,B2
+2706,論,lùn,luận,V,B2
+2707,論文,lùnwén,luận văn,N,B2
+2708,落,luò,"rơi, rụng",Vi,B2
+2709,落後,luòhòu,rớt lại phía sau,Vpt,B2
+2710,落實,luòshí,làm cho chắc chắn,V,B2
+2711,落伍,luòwŭ,lạc đơn vị,Vs,B2
+2712,旅行社,lǚxíngshè,công ty du lịch,N,B2
+2713,綠豆,lǜdòu,đậu xanh,N,B2
+2714,略,lüè,"bỏ bớt, lược bớt",Vs,B2
+2715,M,,,,
+2716,麻,má,"chập choạng, mờ tối",Vs,B2
+2717,麻雀,máquè,"chim sẻ, mạt chược",N,B2
+2718,馬虎,măhu,"qua loa, đại khái",Vs,B2
+2719,埋,mái,oán trách,V,B2
+2720,買單,măidān,thanh toán,V-sep,B2
+2721,買賣,măimài,mua bán,V,B2
+2722,饅頭,mántou,bánh bao,N,B2
+2723,滿/蠻,măn/mán,"đầy, chật",Adv,B2
+2724,漫畫,mànhuà,tranh hoạt hình,N,B2
+2725,忙碌,mánglù,bận rộn,Vs,B2
+2726,盲目,mángmù,mù quáng,Vs,B2
+2727,矛盾,máodùn,mâu thuẫn,Vs,B2
+2728,毛巾,máojīn,khăn mặt,N,B2
+2729,冒,mào,"bốc lên, tỏa ra",V,B2
+2730,煤,méi,than đá,N,B2
+2731,梅花,méihuā,hoa mai,N,B2
+2732,美觀,měiguān,"đẹp, mỹ quan",Vs,B2
+2733,美妙,měimiào,"tuyệt vời, mỹ miều",Vs,B2
+2734,魅力,mèilì,sức quyến rũ,N,B2
+2735,門,mén,"cửa, ngõ",M,B2
+2736,門票,ménpiào,vé vào cửa,N,B2
+2737,門診,ménzhěn,khám bệnh,Vi,B2
+2738,猛,měng,dũng mãnh,Vs,B2
+2739,夢到,mèngdào,mơ thấy,Vpt,B2
+2740,夢想,mèngxiăng,mộng tưởng,N,B2
+2741,夢想,mèngxiăng,"khát khao, mơ ước",V,B2
+2742,迷,mí,say đắm,Vst,B2
+2743,迷糊,míhu,bối rối,Vs,B2
+2744,迷失,míshī,mất phương hướng,Vp,B2
+2745,迷信,míxìn,mê tín,N,B2
+2746,迷信,míxìn,sùng bái,Vs,B2
+2747,密,mì,"dày, chặt chẽ",Vs,B2
+2748,蜜蜂,mìfēng,mật ong,N,B2
+2749,秘/祕書,mìshū,thư ký,N,B2
+2750,棉,mián,bong vải,N,B2
+2751,棉被,miánbèi,chăn bông,N,B2
+2752,棉花,miánhua,cây bông vải,N,B2
+2753,免得,miănde,"tránh khỏi, đỡ phải",Vaux,B2
+2754,勉強,miǎnqiǎng,miễn cưỡng,Vs,B2
+2755,面,miàn,mặt,M,B2
+2756,面對,miànduì,đối mặt,V,B2
+2757,面臨,miànlín,"đứng trước, gặp phải",Vst,B2
+2758,面貌,miànmào,diện mạo,N,B2
+2759,面子,miànzi,bề mặt,N,B2
+2760,麵粉,miànfěn,bột mì,N,B2
+2761,妙,miào,"đẹp, tuyệt diệu",Vs,B2
+2762,滅亡,mièwáng,diệt vong,Vp,B2
+2763,民間,mínjiān,dân gian,N,B2
+2764,民謠,mínyáo,ca dao,N,B2
+2765,民眾,mínzhòng,dân chúng,N,B2
+2766,民主,mínzhŭ,dân chủ,N,B2
+2767,民主,mínzhŭ,dân chủ,Vs,B2
+2768,名,míng,tên gọi,Vst,B2
+2769,名稱,míngchēng,"tên, tên gọi",N,B2
+2770,名單,míngdān,danh sách,N,B2
+2771,名牌,míngpái,nhãn hiệu nổi tiếng,N,B2
+2772,名片,míngpiàn,danh thiếp,N,B2
+2773,明白,míngbái,rõ ràng,Vs,B2
+2774,明亮,míngliàng,sáng sủa,Vs,B2
+2775,明明,míngmíng,"rõ ràng, rành rành",Adv,B2
+2776,明確,míngquè,đúng đắn,Vs,B2
+2777,命,mìng,"sinh mệnh, tính mạng",V,B2
+2778,命令,mìnglìng,mệnh lệnh,N,B2
+2779,命令,mìnglìng,ra lệnh,V,B2
+2780,命運,mìngyùn,số phận,N,B2
+2781,磨,mó,xay,V,B2
+2782,模仿,mófăng,"mô phỏng, bắt chước theo",V,B2
+2783,模糊,móhú,mơ hồ,Vs,B2
+2784,模型,móxíng,mô hình,N,B2
+2785,模樣,móyàng,dáng dấp,N,B2
+2786,抹,mŏ,lau chùi,V,B2
+2787,目標,mùbiāo,mục tiêu,N,B2
+2788,目的地,mùdìdì,"đích đến, nơi đến",N,B2
+2789,目錄,mùlù,mục lục,N,B2
+2790,N,,,,
+2791,哪怕,năpà,cho dù,Conj,B2
+2792,奶粉,năifěn,sữa bột,N,B2
+2793,耐心,nàixīn,kiên trì,Adv,B2
+2794,耐用,nàiyòng,bền,Vs,B2
+2795,難道,nándào,"lẽ nào, chẳng lẽ",Adv,B2
+2796,難得,nándé,khó có được,Vs,B2
+2797,難受,nánshòu,khó chịu,Vs,B2
+2798,難以,nányǐ,khó mà,Adv,B2
+2799,男性,nánxìng,nam giới,N,B2
+2800,腦袋,năodai,"đầu, ý thức",N,B2
+2801,腦筋,năojīn,"suy nghĩ, đầu óc",N,B2
+2802,鬧,nào,ồn ào,V,B2
+2803,鬧區,nàoqū,trung tâm thành phố,N,B2
+2804,內部,nèibù,nội bộ,N,B2
+2805,內地,nèidì,đất liền,N,B2
+2806,內行,nèiháng,"trong nghề, thành thạo",Vs,B2
+2807,內科,nèikē,nội khoa,N,B2
+2808,能幹,nénggàn,tài giỏi,Vs,B2
+2809,能源,néngyuán,nguồn năng lượng,N,B2
+2810,泥,ní,bùn,N,B2
+2811,泥土,nítŭ,thổ nhưỡng,N,B2
+2812,黏/粘,nián,dính,V,B2
+2813,黏/粘,nián,"dính, sánh",Vs,B2
+2814,尿,niào,nước tiểu,N,B2
+2815,尿,niào,đi tiểu,Vi,B2
+2816,捏,niē,"nhón, nhặt",V,B2
+2817,寧可,níngkě,"thà rằng, thà",Vaux,B2
+2818,寧願,níngyuàn,tình nguyện,Vaux,B2
+2819,鈕扣,niŭkòu,cúc áo,N,B2
+2820,農場,nóngchăng,nông trường,N,B2
+2821,農產品,nóngchănpĭn,nông sản,N,B2
+2822,農村,nóngcūn,nông thôn,N,B2
+2823,農民/農夫,nóngmín/nóngfū,nông dân,N,B2
+2824,農藥,nóngyào,thuốc trừ sâu,N,B2
+2825,濃,nóng,"đặc, đậm",Vs,B2
+2826,濃厚,nónghòu,dày đặc,Vs,B2
+2827,暖,nuăn,ấm áp,Vs,B2
+2828,暖和,nuănhuo,"ấm, sưởi ấm",Vs,B2
+2829,暖氣,nuănqì,"lò sưởi, hơi ấm",N,B2
+2830,女性,nǚxìng,nữ giới,N,B2
+2831,O,,,,
+2832,偶然,ǒurán,"ngẫu nhiên, tình cờ",Vs,B2
+2833,P,,,,
+2834,排,pái,hàng,M,B2
+2835,排,pái,"xếp, sắp xếp",V,B2
+2836,排斥,páichì,bài xích,V,B2
+2837,排列,páiliè,xếp đặt,V,B2
+2838,排球,páiqiú,bóng chuyền,N,B2
+2839,派,pài,"phái, bè cánh",V,B2
+2840,攀,pān,"leo, trèo",V,B2
+2841,盤,pán,"khay, mâm",M,B2
+2842,判斷,pànduàn,phán đoán,V,B2
+2843,泡,pào,ngâm,V,B2
+2844,炮,pào,"xào, nướng, rang",N,B2
+2845,砲,pào,,N,B2
+2846,賠,péi,"bồi thường, đền",V,B2
+2847,賠償,péicháng,đền bù,V,B2
+2848,陪同,péitóng,cùng đi,V,B2
+2849,佩服,pèifu,"bái phục, khâm phục",Vst,B2
+2850,噴,pēn,phun ra,V,B2
+2851,盆,pén,"chậu, bồn",M,B2
+2852,膨脹,péngzhàng,"giãn nở, bành trướng",Vp,B2
+2853,捧,pěng,"nâng, bê, bưng",V,B2
+2854,碰見,pèngjiàn,tình cờ gặp,Vpt,B2
+2855,匹,pī,"sánh được, xứng với",M,B2
+2856,批,pī,"tập, xấp",M,B2
+2857,批,pī,"phát, đánh",V,B2
+2858,批判,pīpàn,"phê bình, phê phán",V,B2
+2859,皮,pí,"da, vỏ",Vs,B2
+2860,披,pī,"khoác, choàng",V,B2
+2861,疲倦,píjuàn,mệt mỏi rã rời,Vs,B2
+2862,疲勞,píláo,mệt nhoài,Vs,B2
+2863,脾氣,píqi,"tính tình, tính cách",N,B2
+2864,屁股,pìgu,mông đít,N,B2
+2865,篇,piān,"bài, phần, trang",M,B2
+2866,偏/偏偏,piān/piānpiān,"lại, cứ, cố ý",Adv,B2
+2867,偏食,piānshí,kén ăn,Vs,B2
+2868,偏向,piānxiàng,khuynh hướng,Vst,B2
+2869,騙,piàn,lừa gạt,V,B2
+2870,片面,piànmiàn,phiến diện,Vs-attr,B2
+2871,片子,piànzi,"tấm, miếng, danh thiếp",N,B2
+2872,飄,piāo,tung bay,Vi,B2
+2873,拼命,pīnmìng,liều mạng,Vs,B2
+2874,貧窮,pínqióng,"bần cùng, nghèo túng",Vs,B2
+2875,品德,pĭndé,đức tính,N,B2
+2876,聘請,pìnqĭng,mời đảm nhiệm chức vụ,V,B2
+2877,憑,píng,"dựa, tựa",Prep,B2
+2878,平常,píngcháng,thường ngày,Vs,B2
+2879,平衡,pínghéng,cân bằng,Vst,B2
+2880,平靜,píngjìng,yên bình,Vs,B2
+2881,平均,píngjūn,trung bình,Vs,B2
+2882,婆婆,pópo,mẹ chồng,N,B2
+2883,頗,pŏ,tương đối,Adv,B2
+2884,破爛,pòlàn,"rách nát, tả tơi",Vs,B2
+2885,破裂,pòliè,"vỡ, rạn nứt",Vp,B2
+2886,迫切,pòqiè,cấp bách,Vs,B2
+2887,撲,pū,bổ nhào,V,B2
+2888,撲滅,pūmiè,dập tắt,V,B2
+2889,鋪,pū,"trải, lót",V,B2
+2890,普及,pŭjí,phổ cập,Vs,B2
+2891,普通,pŭtōng,phổ thông,Vs,B2
+2892,普通話,pŭtōnghuà,tiếng phổ thông,N,B2
+2893,瀑布,pùbù,thác nước,N,B2
+2894,Q,,,,
+2895,欺騙,qīpiàn,lừa dối,V,B2
+2896,妻子,qīzĭ,vợ,N,B2
+2897,期,qí,"một năm tròn, một tháng tròn",N,B2
+2898,期限,qíxiàn,kỳ hạn,N,B2
+2899,其,qí,"của nó, bọn nó",N,B2
+2900,其餘,qíyú,còn lại,Det,B2
+2901,棋,qí,"đánh cờ, chơi cờ",N,B2
+2902,齊,qí,làm cho đều nhau,Vs,B2
+2903,齊全,qíquán,đầy đủ,Vs,B2
+2904,旗袍,qípáo,sườn xám,N,B2
+2905,旗子,qízi,lá cờ,N,B2
+2906,歧視,qíshì,kỳ thị,Vst,B2
+2907,起,qĭ,"cái, vụ",M,B2
+2908,起,qĭ,"dậy, rời khỏi",V,B2
+2909,起初,qĭchū,"lúc đầu, mới đầu",Adv,B2
+2910,起火,qĭhuŏ,"nấu cơm, thổi cơm",Vp,B2
+2911,企圖,qìtú,"ý đồ, mưu đồ",N,B2
+2912,企圖,qìtú,mưu tính,Vaux,B2
+2913,汽油,qìyóu,xăng,N,B2
+2914,器材,qìcái,dụng cụ,N,B2
+2915,器官,qìguān,"bộ máy, cơ quan",N,B2
+2916,氣氛,qìfēn,bầu không khí,N,B2
+2917,氣憤,qìfèn,"tức giận, căm giận",Vs,B2
+2918,氣候,qìhòu,khí hậu,N,B2
+2919,氣味,qìwèi,mùi,N,B2
+2920,氣息,qìxí,hơi thở,N,B2
+2921,氣象,qìxiàng,khí tượng,N,B2
+2922,千萬,qiānwàn,"nhất định, tuyệt đối",Adv,B2
+2923,牽,qiān,dắt,V,B2
+2924,遷,qiān,"di chuyển, dời",V,B2
+2925,簽,qiān,"khâu, may lược",V,B2
+2926,簽訂,qiāndìng,ký kết,V,B2
+2927,簽約,qiānyuē,ký hợp đồng,V-sep,B2
+2928,簽字,qiānzì,ký tên,V-sep,B2
+2929,前方,qiánfāng,phía trước,N,B2
+2930,前進,qiánjìn,tiến lên,V,B2
+2931,前頭,qiántou,trước mặt,N,B2
+2932,前途,qiántú,tiền đồ,N,B2
+2933,前往,qiánwăng,tiến về phía trước,V,B2
+2934,前院,qiányuàn,trước sân,N,B2
+2935,欠,qiàn,ngáp,V,B2
+2936,歉意,qiànyì,áy náy,N,B2
+2937,槍,qiāng,cây giáo,N,B2
+2938,強,qiáng,kiên cường,Vs,B2
+2939,強大,qiángdà,lớn mạnh,Vs,B2
+2940,強度,qiángdù,cường độ,N,B2
+2941,強烈,qiángliè,mãnh liệt,Vs,B2
+2942,強人,qiángrén,tên cướp,N,B2
+2943,牆壁,qiángbì,"tường, bức tường",N,B2
+2944,強迫,qiăngpò,ép buộc,V,B2
+2945,搶救,qiăngjiù,cấp cứu,V,B2
+2946,敲,qiāo,"gõ, khua",V,B2
+2947,瞧,qiáo,nhìn,V,B2
+2948,巧,qiăo,"nhanh nhẹn, khéo léo",Vs,B2
+2949,巧妙,qiăomiào,"tài tình, khéo léo",Vs,B2
+2950,悄悄,qiăoqiăo,lặng lẽ,Adv,B2
+2951,切,qiē,"thân thiết, gần gũi",V,B2
+2952,且,qiě,mà còn,Conj,B2
+2953,親愛,qīnài,thân ái,Vs-attr,B2
+2954,親口,qīnkŏu,chính miệng,Adv,B2
+2955,親戚,qīnqī,thân thích,N,B2
+2956,親人,qīnrén,người thân,N,B2
+2957,侵害,qīnhài,xâm hại,V,B2
+2958,侵入,qīnrù,xâm nhập,V,B2
+2959,勤勞,qínláo,cần cù,Vs,B2
+2960,寢室,qǐnshì,phòng ngủ,N,B2
+2961,青,qīng,"xanh, màu xanh",Vs,B2
+2962,清,qīng,trong suốt,V,B2
+2963,清晨,qīngchén,sáng sớm,N,B2
+2964,清除,qīngchú,loại bỏ,V,B2
+2965,清楚,qīngchŭ,rõ ràng,Vs,B2
+2966,清淡,qīngdàn,"nhẹ, loãng, nhạt",Vs,B2
+2967,清晰,qīngxī,rõ rệt,Vs,B2
+2968,清醒,qīngxĭng,tỉnh táo,Vs,B2
+2969,輕傷,qīngshāng,bị thương nhẹ,N,B2
+2970,輕視,qīngshì,khinh thường,Vst,B2
+2971,傾向,qīngxiàng,nghiêng về,Vst,B2
+2972,情書,qíngshū,thư tình,N,B2
+2973,情緒,qíngxù,hứng thú,N,B2
+2974,秋季,qiūjì,mùa thu,N,B2
+2975,求婚,qiúhūn,cầu hôn,V-sep,B2
+2976,球隊,qiúduì,đội bóng,N,B2
+2977,球鞋,qiúxié,giày đá bóng,N,B2
+2978,曲折,qūzhé,quanh co,Vs,B2
+2979,區別,qūbié,điểm khác biệt,N,B2
+2980,區別,qūbié,phân biệt,V,B2
+2981,區域,qūyù,"khu vực, vùng",N,B2
+2982,取,qŭ,"lấy, đạt được",V,B2
+2983,取得,qŭdé,giành được,Vpt,B2
+2984,取笑,qŭxiào,pha trò,V,B2
+2985,取消,qŭxiāo,thủ tiêu,V,B2
+2986,娶,qŭ,lấy vợ,V,B2
+2987,去,qù,rời đi,V,B2
+2988,圈,quān,chuồng,M,B2
+2989,全家,quánjiā,cả nhà,N,B2
+2990,全面,quánmiàn,toàn diện,Adv,B2
+2991,全面,quánmiàn,mọi mặt,Vs-attr,B2
+2992,全體,quántĭ,toàn thể,N,B2
+2993,拳頭,quántou,"nắm đấm, nắm tay",N,B2
+2994,權利,quánlì,quyền lợi,N,B2
+2995,勸,quàn,khuyên nhủ,V,B2
+2996,缺,quē,thiếu,Vst,B2
+2997,缺乏,quēfá,thiếu hụt,Vst,B2
+2998,缺少,quēshăo,thiếu,Vst,B2
+2999,缺席,quēxí,"vắng họp, nghỉ học",Vs,B2
+3000,確實,quèshí,đích thực,Vs,B2
+3001,群,qún,"bầy, đàn",M,B2
+3002,群眾,qúnzhòng,quần chúng,N,B2
+3003,R,,,,
+3004,然而,ránér,nhưng mà,Conj,B2
+3005,燃料,ránliào,"nguyên liệu, chất đốt",N,B2
+3006,燃燒,ránshāo,bùng cháy,V,B2
+3007,染,răn,nhuộm,V,B2
+3008,讓,ràng,nhường,V,B2
+3009,讓步,ràngbù,nhường bước,Vi,B2
+3010,繞,rào,"quấn, buộc",V,B2
+3011,惹,rě,dẫn đến,V,B2
+3012,惹,rě,trêu chọc,Vst,B2
+3013,熱愛,rèài,"yêu, tha thiết",Vst,B2
+3014,熱烈,rèliè,nhiệt liệt,Vs,B2
+3015,熱門,rèmén,"hấp dẫn, lôi cuốn",Vs,B2
+3016,熱情,rèqíng,sự niềm nở,N,B2
+3017,熱情,rèqíng,nhiệt tình,Vs,B2
+3018,熱心,rèxīn,sốt sắng,Vs,B2
+3019,人才,réncái,nhân tài,N,B2
+3020,人格,réngé,tính cách,N,B2
+3021,人工,réngōng,nhân công,N,B2
+3022,人力,rénlì,nhân lực,N,B2
+3023,人情味/人情味兒,rénqíngwèi/rénqín,cảm xúc của con người,N,B2
+3024,人權,rénquán,nhân quyền,N,B2
+3025,人生,rénshēng,đời người,N,B2
+3026,人事,rénshì,việc của con người,N,B2
+3027,人體,réntĭ,"nhân thể, thân thể",N,B2
+3028,人心,rénxīn,lòng người,N,B2
+3029,人行道,rénxíngdào,đường dành cho người đi bộ,N,B2
+3030,人員,rényuán,nhân viên,N,B2
+3031,忍不住,rěnbùzhù,không thể chịu đựng,Vs,B2
+3032,忍受,rěnshòu,nén chịu,Vst,B2
+3033,忍心,rěnxīn,nhẫn tâm,Vs,B2
+3034,任,rèn,bổ nhiệm,Vst,B2
+3035,任性,rènxìng,tùy hứng,Vs,B2
+3036,日常,rìcháng,hàng ngày,Vs-attr,B2
+3037,日後,rìhòu,sau này,N,B2
+3038,日用品,rìyòngpĭn,vật dụng hàng ngày,N,B2
+3039,容,róng,dung nạp,Vst,B2
+3040,融化,rónghuà,"tan, hòa tan",Vp,B2
+3041,榮幸,róngxìng,vinh hạnh,Vs,B2
+3042,如,rú,"như, giống như",Vst,B2
+3043,如果說,rúguŏshuō,nếu nói,Conj,B2
+3044,如何,rúhé,"như thế nào, ra sao",Adv,B2
+3045,如何,rúhé,"làm sao, làm thế nào",Vs,B2
+3046,如今,rújīn,"giờ đây, đến nay",N,B2
+3047,如同,rútóng,dường như,Vst,B2
+3048,入,rù,đi vào,V,B2
+3049,入境,rùjìng,nhập cảnh,V,B2
+3050,入口,rùkŏu,nhập khẩu,N,B2
+3051,入學,rùxué,nhập học,Vp,B2
+3052,軟,ruăn,mềm mại,Vs,B2
+3053,S,,,,
+3054,塞,sāi,"nhét, đút",V,B2
+3055,賽跑,sàipăo,thi chạy,Vi,B2
+3056,三角形,sānjiăoxíng,hình tam giác,N,B2
+3057,散,sàn,"lỏng lẻo, rời rạc",V,B2
+3058,散,sàn,không tập trung,Vp,B2
+3059,喪失,sàngshī,mất mát,Vpt,B2
+3060,艘,sāo,"chiếc, con",M,B2
+3061,掃,săo,"quét, loại bỏ",V,B2
+3062,色彩,sècăi,màu sắc,N,B2
+3063,色情,sèqíng,tình dục,N,B2
+3064,沙,shā,sàng,N,B2
+3065,沙漠,shāmò,sa mạc,N,B2
+3066,沙灘,shātān,bãi cát,N,B2
+3067,沙子,shāzi,hạt cát,N,B2
+3068,殺價,shājià,ép giá,V-sep,B2
+3069,傻,shă,"dốt, ngốc",Vs,B2
+3070,曬太陽,shàitàiyáng,tắm nắng,Vi,B2
+3071,山地,shāndì,vùng núi,N,B2
+3072,閃,shăn,"lánh, trốn",Vi,B2
+3073,閃,shăn,"chớp, chợt xuất hiện",Vp,B2
+3074,善於,shànyú,có sở trường về...,Vst,B2
+3075,扇子,shànzi,cái quạt,N,B2
+3076,傷,shāng,tổn thất,N,B2
+3077,傷,shāng,làm tổn hại,Vs,B2
+3078,傷腦筋,shāngnăojīn,hao tổn tâm trí,Vs,B2
+3079,商標,shāngbiāo,nhãn hiệu,N,B2
+3080,商場,shāngchăng,thương trường,N,B2
+3081,商量,shāngliang,thương lượng,V,B2
+3082,上,shàng,ở trên,V,B2
+3083,上級,shàngjí,cấp trên,N,B2
+3084,上升,shàngshēng,"lên cao, tăng lên",Vi,B2
+3085,上市,shàngshì,đưa ra thị trường,Vp,B2
+3086,上述,shàngshù,"kể trên, nói trên",N,B2
+3087,上台/臺,shàngtái,lên sân khấu,V-sep,B2
+3088,上頭,shàngtou,búi tóc,N,B2
+3089,上下,shàngxià,trên dưới,N,B2
+3090,上游,shàngyóu,thượng nguồn,N,B2
+3091,稍,shāo,sơ qua,Adv,B2
+3092,稍微,shāowéi,"hơi, một chút",Adv,B2
+3093,少數,shăoshù,thiểu số,Det,B2
+3094,少年,shàonián,thiếu niên,N,B2
+3095,少女,shàonǚ,thiếu nữ,N,B2
+3096,舌頭,shétou,lưỡi,N,B2
+3097,捨不得,shěbùde,không nỡ,Vst,B2
+3098,捨得,shěde,cam lòng,Vst,B2
+3099,射,shè,"bắn, sút",V,B2
+3100,社會,shèhuì,xã hội,N,B2
+3101,社交,shèjiāo,giao tiếp xã hội,N,B2
+3102,社團,shètuán,đoàn thể,N,B2
+3103,設立,shèlì,thành lập,V,B2
+3104,設置,shèzhì,thiết lập,V,B2
+3105,攝影,shèyĭng,chụp ảnh,Vi,B2
+3106,申請,shēnqĭng,xin,V,B2
+3107,伸,shēn,"duỗi, dang",V,B2
+3108,伸手,shēnshŏu,chìa tay,Vi,B2
+3109,身材,shēncái,vóc người,N,B2
+3110,身分,shēnfèn,"tư cách, thân phận",N,B2
+3111,身分證,shēnfènzhèng,chứng minh nhân dân,N,B2
+3112,深刻,shēnkè,sâu sắc,Vs,B2
+3113,深淺,shēnqiăn,mức độ,N,B2
+3114,深夜,shēnyè,đêm khuya,N,B2
+3115,神,shén,thần linh,N,B2
+3116,神話,shénhuà,thần thoại,N,B2
+3117,神經,shénjīng,thần kinh,N,B2
+3118,神秘,shénmì,thần bí,Vs,B2
+3119,神奇,shénqí,thần kỳ,Vs,B2
+3120,神氣,shénqì,thần sắc,Vs,B2
+3121,神聖,shénshèng,"thần thánh, thiêng liêng",Vs,B2
+3122,神仙,shénxiān,thần tiên,N,B2
+3123,審查,shěnchá,thẩm tra,V,B2
+3124,慎重,shènzhòng,thận trọng,Vs,B2
+3125,升,shēng,"lên cao, thăng",Vp,B2
+3126,升高,shēnggāo,nâng cao,Vp,B2
+3127,升級,shēngjí,thăng chức,Vp,B2
+3128,升學,shēngxué,học lên,Vi,B2
+3129,生,shēng,sinh đẻ,Vs-attr,B2
+3130,生存,shēngcún,sinh tồn,Vs,B2
+3131,生肖,shēngxiào,cầm tinh,N,B2
+3132,生長,shēngzhăng,"sinh trưởng, lớn lên",Vs,B2
+3133,聲,shēng,âm thanh,M,B2
+3134,繩(子),shéng(zi),dây thừng,N,B2
+3135,省,shěng,tự kiểm điểm bản thân,Vs,B2
+3136,省得,shěngde,tránh khỏi,Vaux,B2
+3137,勝,shèng,,Vp,B2
+3138,勝利,shènglì,thắng lợi,Vp,B2
+3139,失敗,shībài,thất bại,Vs,B2
+3140,失掉,shīdiào,lỡ mất,Vpt,B2
+3141,失眠,shīmián,mất ngủ,Vp,B2
+3142,失望,shīwàng,thất vọng,Vs,B2
+3143,失業,shīyè,thất nghiệp,Vp,B2
+3144,溼,shī,,Vs,B2
+3145,詩,shī,thơ ca,N,B2
+3146,詩人,shīrén,nhà thơ,N,B2
+3147,師父,shīfu,sư phụ,N,B2
+3148,師傅,shīfù,"thầy dạy, sư phụ",N,B2
+3149,師母,shīmŭ,sư mẫu (vợ của thầy),N,B2
+3150,施工,shīgōng,thi công,Vi,B2
+3151,時常,shícháng,thường thường,Adv,B2
+3152,時機,shíjī,thời cơ,N,B2
+3153,時期,shíqí,thời kỳ,N,B2
+3154,時時,shíshí,luôn luôn,Adv,B2
+3155,食品,shípĭn,thực phẩm,N,B2
+3156,實用,shíyòng,thực dụng,Vs,B2
+3157,實在,shízài,chắc chắn,Adv,B2
+3158,實施,shíshī,thực thi,V,B2
+3159,實現,shíxiàn,thực hiện,V,B2
+3160,實驗,shíyàn,thí nghiệm,N,B2
+3161,實驗,shíyàn,thực nghiệm,Vi,B2
+3162,使,shĭ,sai khiến,V,B2
+3163,始終,shĭzhōng,từ đầu đến cuối,Adv,B2
+3164,示威,shìwēi,"thị uy, uy lực",Vi,B2
+3165,式樣,shìyàng,kiểu dáng,N,B2
+3166,世,shì,"đời, thế hệ",N,B2
+3167,世紀,shìjì,thế kỷ,N,B2
+3168,市立,shìlì,thành phố,Vs-attr,B2
+3169,市民,shìmín,dân thành phố,N,B2
+3170,市區,shìqū,khu vực thành thị,N,B2
+3171,視,shì,"nhìn, đối xử",Prep,B2
+3172,視野,shìyě,tầm nhìn,N,B2
+3173,適當,shìdàng,thỏa đáng,Vs,B2
+3174,適合,shìhé,phù hợp,Vst,B2
+3175,適用,shìyòng,thích hợp dùng,Vst,B2
+3176,是非,shìfēi,"phải trải, đúng sai",N,B2
+3177,是否,shìfŏu,phải chăng,Adv,B2
+3178,事件,shìjiàn,sự kiện,N,B2
+3179,事實上,shìshíshàng,trên thực tế,Adv,B2
+3180,事物,shìwù,sự vật,N,B2
+3181,事先,shìxiān,trước khi xảy ra,Adv,B2
+3182,勢力,shìlì,thế lực,N,B2
+3183,試驗,shìyàn,thử nghiệm,V,B2
+3184,收據,shōujù,"biên lai, biên nhận",N,B2
+3185,收看,shōukàn,thưởng thức,V,B2
+3186,收入,shōurù,thu nhập,N,B2
+3187,收拾,shōushí,chỉnh đốn,V,B2
+3188,手電筒,shŏudiàntŏng,đèn pin,N,B2
+3189,手段,shŏuduàn,thủ đoạn,N,B2
+3190,手工,shŏugōng,thủ công,N,B2
+3191,手術,shŏushù,phẫu thuật,N,B2
+3192,首,shŏu,"đầu, đứng đầu",Det,B2
+3193,首都,shŏudū,thủ đô,N,B2
+3194,首先,shŏuxiān,đầu tiên,Adv,B2
+3195,受,shòu,chịu đựng,Prep,B2
+3196,受,shòu,"nhận, được",Vst,B2
+3197,受不了,shòubuliăo,chịu không nổi,Vst,B2
+3198,受到,shòudào,nhận được,Vpt,B2
+3199,售,shòu,"thi hành, thực hiện",V,B2
+3200,壽命,shòumìng,tuổi thọ,N,B2
+3201,疏忽,shūhū,"lơ là, qua quýt",Vp,B2
+3202,書房,shūfáng,phòng sách,N,B2
+3203,書籍,shūjí,sách vở,N,B2
+3204,輸出,shūchū,"xuất cảng, xuất khẩu",V,B2
+3205,輸入,shūrù,"nhập cảng, nhập khẩu",V,B2
+3206,熟練,shúliàn,thuần thục,Vs,B2
+3207,熟人,shúrén,người quen,N,B2
+3208,屬,shŭ,"loài, loại",Vst,B2
+3209,屬於,shŭyú,thuộc về,Vst,B2
+3210,暑期,shŭqí,kỳ nghỉ hè,N,B2
+3211,束,shù,"buộc, cột",M,B2
+3212,數,shù,nhiều lần,N,B2
+3213,數量,shùliàng,số lượng,N,B2
+3214,數目,shùmù,con số,N,B2
+3215,樹林,shùlín,rừng cây,N,B2
+3216,刷,shuā,quẹt (thẻ),V,B2
+3217,刷(子),shuā(zi),bàn chải,N,B2
+3218,刷卡,shuākă,quẹt thẻ,V-sep,B2
+3219,耍,shuă,giở trò,V,B2
+3220,摔,shuāi,"ngã, té",V,B2
+3221,衰退,shuāituì,suy yếu,Vp,B2
+3222,甩,shuăi,"vung, vẩy",V,B2
+3223,率領,shuàilĭng,dẫn đầu,V,B2
+3224,雙,shuāng,"đôi, kép",M,B2
+3225,雙胞胎,shuāngbāotāi,thai song sinh,N,B2
+3226,雙方,shuāngfāng,"hai bên, đôi bên",N,B2
+3227,水分,shuĭfèn,hàm lượng nước,N,B2
+3228,水災,shuĭzāi,lũ lụt,N,B2
+3229,稅,shuì,thuế,N,B2
+3230,說服,shuìfú,thuyết phục,V,B2
+3231,順,shùn,"thuận, xuôi",Prep,B2
+3232,順,shùn,lần lượt,Vs,B2
+3233,順手,shùnshŏu,"thuận tay, tiện tay",Vs,B2
+3234,順序,shùnxù,"trật tự, thứ tự",N,B2
+3235,說不定,shuōbudìng,không nói chắc,Adv,B2
+3236,碩士,shuòshì,thạc sĩ,N,B2
+3237,絲,sī,"tơ tằm, sợi",N,B2
+3238,撕,sī,"xé, kéo",V,B2
+3239,私立,sīlì,tư nhân,Vs-attr,B2
+3240,私人,sīrén,"tư nhân, cá nhân",N,B2
+3241,思索,sīsuŏ,suy nghĩ tìm tòi,V,B2
+3242,死,sĭ,chết,Adv,B2
+3243,死亡,sĭwáng,tử vong,Vp,B2
+3244,四處,sìchù,khắp nơi,Adv,B2
+3245,四處,sìchù,xung quanh,N,B2
+3246,四方,sìfāng,khắp nơi,N,B2
+3247,四季,sìjì,bốn mùa,N,B2
+3248,四周/週,sìzhōu,"chu vi, xung quanh",N,B2
+3249,飼養,sìyăng,chăn nuôi,V,B2
+3250,鬆,sōng,cây thông,Vs,B2
+3251,送行,sòngxíng,tiễn đưa,Vi,B2
+3252,俗,sú,phong tục,Vs,B2
+3253,俗話,súhuà,tục ngữ,N,B2
+3254,俗話說,súhuàshuō,tục ngữ có câu...,,B2
+3255,算,suàn,tính toán,V,B2
+3256,算起來,suànqilai,"làm tròn, tính toán",Adv,B2
+3257,算是,suànshì,"rốt cuộc, xem như là",Vst,B2
+3258,算帳,suànzhàng,"tính sổ, đòi công bằng",V-sep,B2
+3259,隨,suí,"theo, đi theo",Vst,B2
+3260,隨手,suíshŏu,"thuận tay, tiện tay",Adv,B2
+3261,隨意,suíyì,tùy ý,Vs,B2
+3262,隨著,suízhe,cùng với,Prep,B2
+3263,碎,suì,"vỡ, bể",Vp,B2
+3264,歲數,suìshu,số tuổi,N,B2
+3265,孫女,sūnnǚ,cháu gái,N,B2
+3266,孫子,sūnzi,cháu trai,N,B2
+3267,損失,sŭnshī,tổn thất,N,B2
+3268,損失,sŭnshī,thiệt hại,Vpt,B2
+3269,縮,suō,"co, rút lại",V,B2
+3270,縮短,suōduăn,rút ngắn,V,B2
+3271,縮水,suōshuĭ,ngâm nước,Vp,B2
+3272,鎖,suŏ,cái khóa,N,B2
+3273,鎖,suŏ,khóa lại,V,B2
+3274,T,,,,
+3275,塌,tā,đổ sụp,Vp,B2
+3276,踏,tà,"giẫm, đạp",V,B2
+3277,抬頭,táitóu,ngẩng đầu,V-sep,B2
+3278,太空,tàikōng,vũ trụ,N,B2
+3279,攤子,tānzi,"sạp, quầy (hàng)",N,B2
+3280,彈,tán,"đánh, gảy (đàn)",V,B2
+3281,談判,tánpàn,đàm phán,Vi,B2
+3282,毯子,tănzi,tấm thảm,N,B2
+3283,探,tàn,thăm dò,V,B2
+3284,探親,tànqīn,thăm người thân,V-sep,B2
+3285,探討,tàntăo,nghiên cứu thảo luận,V,B2
+3286,趟,tàng,"lần, chuyến",M,B2
+3287,燙,tàng,"phỏng, bỏng",V,B2
+3288,燙,tàng,"là, ủi",Vs,B2
+3289,掏,tāo,"móc, đào",V,B2
+3290,逃,táo,trốn chạy,Vi,B2
+3291,逃避,táobì,trốn tránh,V,B2
+3292,逃走,táozŏu,chạy trốn,Vp,B2
+3293,陶瓷,táocí,gốm sứ,N,B2
+3294,淘氣,táoqì,tinh nghịch,Vs,B2
+3295,桃子,táozi,quả đào,N,B2
+3296,討,tăo,"thỉnh cầu, xin",V,B2
+3297,套,tào,bộ,M,B2
+3298,套,tào,"trùm ngoài, bọc ngoài",V,B2
+3299,特別,tèbié,đặc biệt,Adv,B2
+3300,特點,tèdiăn,đặc điểm,N,B2
+3301,提,tí,"đề cập, nói đến",V,B2
+3302,提起,tíqĭ,nhắc nhở,V,B2
+3303,提前,tíqián,trước thời hạn,Vp,B2
+3304,提醒,tíxĭng,nhắc nhở,V,B2
+3305,提早,tízăo,"sớm hơn, trước thời hạn",Vp,B2
+3306,題,tí,đề mục,M,B2
+3307,體溫,tĭwēn,nhiệt độ cơ thể,N,B2
+3308,體驗,tǐyàn,trải nghiệm,V,B2
+3309,天才,tiāncái,thiên tài,N,B2
+3310,天空,tiānkōng,bầu trời,N,B2
+3311,天然,tiānrán,thiên nhiên,Vs,B2
+3312,天文,tiānwén,thiên văn,N,B2
+3313,天真,tiānzhēn,ngây thơ,Vs,B2
+3314,天主教,tiānzhŭjiào,đạo Thiên Chúa,N,B2
+3315,田野,tiányě,đồng ruộng,N,B2
+3316,挑,tiāo,"khều, khêu",V,B2
+3317,挑選,tiāoxuăn,chọn lựa,V,B2
+3318,條,tiáo,"cành, nhánh",M,B2
+3319,條約,tiáoyuē,điều ước,N,B2
+3320,調,tiáo,"điều động, phân phối",V,B2
+3321,調整,tiáozhěng,điều chỉnh,V,B2
+3322,跳高,tiàogāo,nhảy cao,Vi,B2
+3323,跳遠,tiàoyuăn,nhảy xa,Vi,B2
+3324,貼心,tiēxīn,thân mật,Vs,B2
+3325,停止,tíngzhĭ,đình chỉ,Vpt,B2
+3326,挺,tĭng,"thẳng, ngay thẳng",V,B2
+3327,挺,tĭng,"ưỡn, ngửa ra",Vs,B2
+3328,通,tōng,"hồi, trận",M,B2
+3329,通,tōng,thông,Vs,B2
+3330,通常,tōngcháng,thông thường,Adv,B2
+3331,通過,tōngguò,thông qua,V,B2
+3332,通信,tōngxìn,thư từ qua lại,V-sep,B2
+3333,通訊,tōngxùn,thông tin,N,B2
+3334,同,tóng,giống nhau,Adv,B2
+3335,同,tóng,cùng nhau,Vs,B2
+3336,同胞,tóngbāo,anh chị em ruột,N,B2
+3337,同志,tóngzhì,đồng chí,N,B2
+3338,銅,tóng,đồng (kim loại),N,B2
+3339,桶,tǒng,thùng,M,B2
+3340,統計,tǒngjì,thống kê,V,B2
+3341,統一,tǒngyī,thống nhất,Vs,B2
+3342,統治,tǒngzhì,thống trị,V,B2
+3343,痛快,tòngkuai,vui vẻ,Vs,B2
+3344,偷/偷偷,tōu/tōutōu,"vụng trộm, lén lút",Adv,B2
+3345,頭,tóu,đầu,M,B2
+3346,頭腦,tóunăo,"đầu óc, tư duy",N,B2
+3347,投票,tóupiào,bỏ phiếu,V-sep,B2
+3348,投入,tóurù,đi vào,V,B2
+3349,投降,tóuxiáng,đầu hàng,Vi,B2
+3350,投資,tóuzī,đầu tư,N,B2
+3351,透,tòu,"thẩm thấu, thấm qua",Vs,B2
+3352,透過,tòuguò,qua,Prep,B2
+3353,禿,tū,"trọc, trụi",Vs,B2
+3354,突出,túchū,"xông ra, nhô ra",Vs,B2
+3355,突破,túpò,sự đột phá,N,B2
+3356,突破,túpò,đột phá,V,B2
+3357,途徑,tújìng,"con đường, đường lối",N,B2
+3358,圖書,túshū,"con dấu, con mộc",N,B2
+3359,圖章,túzhāng,"dấu ấn, dấu mộc",N,B2
+3360,吐,tŭ,"nhổ, nhả",V,B2
+3361,團,tuán,hình tròn,M,B2
+3362,團結,tuánjié,đoàn kết,Vs,B2
+3363,推動,tuīdòng,thúc đẩy,V,B2
+3364,推翻,tuīfān,lật đổ,V,B2
+3365,推廣,tuīguăng,mở rộng,V,B2
+3366,退,tuì,"lui, lùi",Vpt,B2
+3367,退出,tuìchū,rút khỏi,Vpt,B2
+3368,退回,tuìhuí,trả lại,Vpt,B2
+3369,吞,tūn,"nuốt, ngốn",V,B2
+3370,拖,tuō,"kéo, dắt",V,B2
+3371,拖鞋,tuōxié,dép lê,N,B2
+3372,托兒所,tuōérsuŏ,nhà trẻ,N,B2
+3373,脫離,tuōlí,thoát ly,V,B2
+3374,妥當,tuǒdang,thỏa đáng,Vs,B2
+3375,妥善,tuŏshàn,ổn thỏa,Vs,B2
+3376,妥協,tuŏxié,thỏa hiệp,Vi,B2
+3377,W,,,,
+3378,哇,wā,"oa oa, oe oe (từ tượng thanh)",Ptc,B2
+3379,挖,wā,"đào, khoét",V,B2
+3380,歪,wāi,"nghiêng, lệch",Vs,B2
+3381,外部,wàibù,"phần ngoài, vẻ ngoài",N,B2
+3382,外出,wàichū,đi chơi,Vi,B2
+3383,外地,wàidì,"nơi khác, vùng khác",N,B2
+3384,外觀,wàiguān,bề ngoài,N,B2
+3385,外行,wàiháng,"không chuyên môn, ngoài nghề",Vs,B2
+3386,外匯,wàihuì,ngoại hối,N,B2
+3387,外交,wàijiāo,ngoại giao,N,B2
+3388,外界,wàijiè,bên ngoài,N,B2
+3389,外科,wàikē,ngoại khoa,N,B2
+3390,外頭,wàitou,bề ngoài,N,B2
+3391,彎,wān,"cong, ngoằn ngoèo",Vs,B2
+3392,彎腰,wānyāo,cúi gập người,V-sep,B2
+3393,完畢,wánbì,hoàn tất,Vp,B2
+3394,完善,wánshàn,hoàn thiện,Vs,B2
+3395,完整,wánzhěng,toàn vẹn,Vs,B2
+3396,玩笑,wánxiào,vui đùa,N,B2
+3397,晚輩,wănbèi,"thế hệ sau, hậu bối",N,B2
+3398,往,wăng,hướng về,V,B2
+3399,望,wàng,"trông, nhìn (xa)",V,B2
+3400,威脅,wēixié,sự uy hiếp,N,B2
+3401,威脅,wēixié,uy hiếp,V,B2
+3402,圍,wéi,"vây, bao vây",V,B2
+3403,違反,wéifăn,trái với,Vst,B2
+3404,維護,wéihù,"giữ gìn, bảo vệ",V,B2
+3405,維他命,wéitāmìng,vitamin,N,B2
+3406,危機,wéijī,nguy cơ,N,B2
+3407,為難,wéinán,khó xử,Vs,B2
+3408,唯一,wéiyī,duy nhất,Vs-attr,B2
+3409,尾巴,wěiba,cái đuôi,N,B2
+3410,委屈,wěiqū,tủi thân,Vs,B2
+3411,委託,wěituō,ủy thác,V,B2
+3412,委員,wěiyuán,ủy viên,N,B2
+3413,未,wèi,"vị, chưa, không",Adv,B2
+3414,未婚,wèihūn,chưa cưới,Vs,B2
+3415,位於,wèiyú,nằm ở,Vst,B2
+3416,味/味兒,wèi/wèir,vị,N,B2
+3417,味精,wèijīng,bột ngọt,N,B2
+3418,為何,wèihé,vì sao,Adv,B2
+3419,衛生,wèishēng,vệ sinh,Vs,B2
+3420,衛生紙,wèishēngzhĭ,giấy vệ sinh,N,B2
+3421,衛星,wèixīng,vệ tinh nhân tạo,N,B2
+3422,慰問,wèiwèn,thăm hỏi,V,B2
+3423,溫和,wēnhé,ôn hòa,Vs,B2
+3424,文法,wénfă,"ngữ pháp, văn phạm",N,B2
+3425,文具,wénjù,văn phòng phẩm,N,B2
+3426,文憑,wénpíng,văn bằng,N,B2
+3427,文物,wénwù,di vật văn hóa,N,B2
+3428,文藝,wényì,văn nghệ,N,B2
+3429,蚊子,wénzi,con muỗi,N,B2
+3430,吻,wěn,mõm (động vật),N,B2
+3431,吻,wěn,hôn,V,B2
+3432,穩,wěn,"ổn định, vững",Vs,B2
+3433,握,wò,"nắm, bắt, cầm",V,B2
+3434,臥房,wòfáng,phòng ngủ,N,B2
+3435,汙/污染,wūrăn,ô nhiễm,V,B2
+3436,無可奈何,wúkěnàihé,không biết làm thế nào,Vs,B2
+3437,無論,wúlùn,"bất kể, bất luận",Conj,B2
+3438,無情,wúqíng,vô tình,Vs,B2
+3439,無數,wúshù,vô số,Det,B2
+3440,無限,wúxiàn,vô hạn,Vs,B2
+3441,無意,wúyì,vô ý,Vs,B2
+3442,武器,wŭqì,vũ khí,N,B2
+3443,武術,wŭshù,võ thuật,N,B2
+3444,舞,wŭ,"vũ, khiêu vũ",N,B2
+3445,舞蹈,wŭdào,"điệu múa, vũ đạo",N,B2
+3446,舞台/臺,wŭtái,sân khấu,N,B2
+3447,舞廳,wŭtīng,phòng nhảy,N,B2
+3448,勿,wù,"chớ, đừng, không nên",Adv,B2
+3449,物理,wùlĭ,vật lý,N,B2
+3450,物質,wùzhí,vật chất,N,B2
+3451,誤,wù,"lầm, sai",Adv,B2
+3452,誤,wù,lỡ tay,Vst,B2
+3453,誤點,wùdiăn,trễ giờ,Vp,B2
+3454,誤會,wùhuì,hiểu lầm,Vst,B2
+3455,霧,wù,sương mù,N,B2
+3456,X,,,,
+3457,西裝,xīzhuāng,âu phục,N,B2
+3458,吸,xī,"hút, hít",V,B2
+3459,吸取,xīqŭ,"rút ra, hấp thụ",V,B2
+3460,吸食,xīshí,"hút, húp",V,B2
+3461,吸菸,xīyān,hút thuốc,V-sep,B2
+3462,媳婦,xífù,con dâu,N,B2
+3463,喜酒,xĭjiŭ,rượu cưới,N,B2
+3464,喜劇,xǐjù,hài kịch,N,B2
+3465,系列,xìliè,hàng loạt,N,B2
+3466,細胞,xìbāo,tế bào,N,B2
+3467,細節,xìjié,"tình tiết, chi tiết",N,B2
+3468,細菌,xìjùn,vi trùng,N,B2
+3469,細小,xìxiăo,nhỏ bé,Vs,B2
+3470,瞎,xiā,mù lòa,Vp,B2
+3471,蝦(子),xiā(zi),con cóc,N,B2
+3472,蝦米,xiāmi,"tôm nhỏ, tép",N,B2
+3473,下巴,xiàba,"cằm, hàm",N,B2
+3474,下降,xiàjiàng,hạ thấp,Vp,B2
+3475,下來,xiàlái,xuống,N,B2
+3476,下棋,xiàqí,"chơi cờ, đánh cờ",V-sep,B2
+3477,下去,xiàqu,xuống phía dưới,Ptc,B2
+3478,下午茶,xiàwŭchá,trà chiều,N,B2
+3479,下游,xiàyóu,hạ lưu,N,B2
+3480,夏季,xiàjì,mùa hè,N,B2
+3481,先進,xiānjìn,tiên tiến,Vs,B2
+3482,鮮,xiān,"ít, hiếm",Vs,B2
+3483,鮮花,xiānhuā,hoa tươi,N,B2
+3484,鮮奶,xiānnăi,sữa tươi,N,B2
+3485,鮮血,xiānxiě,máu tươi,N,B2
+3486,閒,xián,"nhàn, rỗi",Vs,B2
+3487,嫌,xián,nghi ngờ,Vst,B2
+3488,顯得,xiănde,lộ ra,Vs,B2
+3489,顯然,xiănrán,hiển nhiên,Adv,B2
+3490,顯示,xiănshì,"biểu thị, tỏ ra",V,B2
+3491,顯著,xiănzhù,hiển thị,Vs,B2
+3492,現,xiàn,hiện nay,Adv,B2
+3493,現場,xiànchăng,hiện trường,N,B2
+3494,現成,xiànchéng,sẵn có,Vs-attr,B2
+3495,現金,xiànjīn,tiền mặt,N,B2
+3496,羨慕,xiànmù,hâm mộ,Vst,B2
+3497,限制,xiànzhì,hạn chế,V,B2
+3498,相,xiāng,,Adv,B2
+3499,相處,xiāngchŭ,sống chung với nhau,Vi,B2
+3500,相當,xiāngdāng,tương đương,Vs,B2
+3501,相互,xiānghù,lẫn nhau,Adv,B2
+3502,相親相愛,xiāngqīnxiāngài,tương thân tương ái,Vs,B2
+3503,相似,xiāngsì,tương tự,Vs,B2
+3504,箱,xiāng,"rương, hòm",M,B2
+3505,香腸,xiāngcháng,lạp xưởng,N,B2
+3506,鄉村,xiāngcūn,nông thôn,N,B2
+3507,想不到,xiăngbudào,không ngờ tới,,B2
+3508,想念,xiăngniàn,"tưởng niệm, nhớ nhung",Vst,B2
+3509,享受,xiăngshòu,"hưởng thụ, tận hưởng",Vst,B2
+3510,享有,xiăngyŏu,được hưởng (quyền lợi…),Vst,B2
+3511,響應,xiăngyìng,hưởng ứng,V,B2
+3512,象,xiàng,con voi,N,B2
+3513,相片/相片兒,xiàngpiàn/xiàngpi,ảnh chụp (người),N,B2
+3514,相親,xiàngqīn,"gặp mặt, xem mắt",V-sep,B2
+3515,巷(子),xiàng(zi),"ngõ, hẻm",N,B2
+3516,向來,xiànglái,từ trước đến nay,Adv,B2
+3517,項目,xiàngmù,hạng mục,N,B2
+3518,消,xiāo,biến mất,Vp,B2
+3519,消除,xiāochú,trừ khử,V,B2
+3520,消費,xiāofèi,chi phí,N,B2
+3521,消費,xiāofèi,tiêu dùng,V,B2
+3522,消化,xiāohuà,tiêu hóa,V,B2
+3523,消極,xiāojí,tiêu cực,Vs,B2
+3524,消滅,xiāomiè,tiêu diệt,Vpt,B2
+3525,消失,xiāoshī,tan biến,Vp,B2
+3526,消/宵夜,xiāoyè,đồ ăn khuya,N,B2
+3527,銷路,xiāolù,nguồn tiêu thụ,N,B2
+3528,銷售,xiāoshòu,tiêu thụ,V,B2
+3529,小便,xiăobiàn,tiểu tiện,Vi,B2
+3530,小費,xiăofèi,"tiền boa, tiền tip",N,B2
+3531,小麥,xiăomài,lúa mì,N,B2
+3532,小氣,xiăoqì,keo kiệt,Vs,B2
+3533,小腿,xiăotuǐ,cẳng chân,N,B2
+3534,小子,xiăozi,người trẻ tuổi,N,B2
+3535,曉得,xiăode,"biết, hiểu",Vst,B2
+3536,校車,xiàochē,xe buýt đưa đón của trường,N,B2
+3537,校友,xiàoyŏu,bạn cùng trường,N,B2
+3538,效率,xiàolǜ,hiệu suất,N,B2
+3539,笑容,xiàoróng,nụ cười,N,B2
+3540,歇,xiē,nghỉ ngơi,Vi,B2
+3541,斜,xié,nghiêng,Vs,B2
+3542,血管,xiěguăn,mạch máu,N,B2
+3543,血型,xiěxíng,nhóm máu,N,B2
+3544,血液,xiěyè,thành phần chính,N,B2
+3545,心靈,xīnlíng,"thông minh, sáng dạ",N,B2
+3546,心目中,xīnmùzhōng,trong tâm trí,N,B2
+3547,心聲,xīnshēng,tiếng lòng,N,B2
+3548,心跳,xīntiào,nhịp tim đập,N,B2
+3549,心臟,xīnzàng,trái tim,N,B2
+3550,新郎,xīnláng,chú rể,N,B2
+3551,新娘,xīnniáng,cô dâu,N,B2
+3552,新式,xīnshì,kiểu mới,Vs-attr,B2
+3553,新興,xīnxīng,mới mẻ,Vs-attr,B2
+3554,薪水,xīnshuĭ,tiền lương,N,B2
+3555,信號,xìnhào,tin hiệu,N,B2
+3556,信任,xìnrèn,tín nhiệm,Vst,B2
+3557,信仰,xìnyăng,tín ngưỡng,N,B2
+3558,信仰,xìnyăng,tin tưởng và ngưỡng mộ,Vst,B2
+3559,信用,xìnyòng,"chữ tín, tín dụng",N,B2
+3560,星光,xīngguāng,ánh sao,N,B2
+3561,行程,xíngchéng,lộ trình,N,B2
+3562,行動,xíngdòng,"hành vi, cử động",Vi,B2
+3563,行人,xíngrén,người đi đường,N,B2
+3564,形成,xíngchéng,hình thành,Vpt,B2
+3565,形式,xíngshì,hình thức,N,B2
+3566,形象,xíngxiàng,hình tượng,N,B2
+3567,形狀,xíngzhuàng,hình dạng,N,B2
+3568,性質,xìngzhí,tính chất,N,B2
+3569,雄偉,xióngwěi,"hùng vĩ, to lớn",Vs,B2
+3570,休假,xiūjià,nghỉ phép,V-sep,B2
+3571,休閒,xiūxián,nhàn rỗi,Vi,B2
+3572,修正,xiūzhèng,đính chính,V,B2
+3573,需,xū,"nhu cầu, cần",Vst,B2
+3574,須知,xūzhī,điều cần biết,N,B2
+3575,許,xŭ,"tán dương, ca ngợi",V,B2
+3576,許願,xŭyuàn,cầu nguyện,V-sep,B2
+3577,宣布/佈,xuānbù,tuyên bố,V,B2
+3578,宣傳,xuānchuán,tuyên truyền,N,B2
+3579,宣傳,xuānchuán,tuyên truyền,V,B2
+3580,懸,xuán,"treo, công bố",V,B2
+3581,選手,xuănshŏu,tuyển thủ,N,B2
+3582,靴(子),xuē(zi),chiếc ủng,N,B2
+3583,學會,xuéhuì,học cách,N,B2
+3584,學歷,xuélì,học vấn,N,B2
+3585,學術,xuéshù,học thuật,N,B2
+3586,學位,xuéwèi,học vị,N,B2
+3587,學業,xuéyè,bài tập,N,B2
+3588,學者,xuézhě,học giả,N,B2
+3589,雪花,xuěhuā,hoa tuyết,N,B2
+3590,削減,xuèjiăn,cắt giảm,V,B2
+3591,尋,xún,tìm kiếm,V,B2
+3592,循環,xúnhuán,tuần hoàn,Vi,B2
+3593,迅速,xùnsù,cấp tốc,Vs,B2
+3594,Y,,,,
+3595,壓,yā,"ép, đè",V,B2
+3596,壓力,yālì,áp lực,N,B2
+3597,壓迫,yāpò,áp bức,V,B2
+3598,牙膏,yágāo,kem đánh răng,N,B2
+3599,煙/菸,yān,khói,N,B2
+3600,沿,yán,xuôi theo,Prep,B2
+3601,嚴,yán,"chặt chẽ, nghiêm",Vs,B2
+3602,嚴格,yángé,nghiêm khắc,Vs,B2
+3603,嚴肅,yánsù,nghiêm túc,Vs,B2
+3604,鹽巴,yánbā,muối ăn,N,B2
+3605,延長,yáncháng,kéo dài,V,B2
+3606,癌症,áizhèng,ung thư,N,B2
+3607,演唱,yănchàng,biểu diễn,V,B2
+3608,演奏,yănzòu,biểu diễn (nhạc cụ),V,B2
+3609,掩蓋,yăngài,che đậy,V,B2
+3610,宴會,yànhuì,tiệc,N,B2
+3611,厭惡,yànwù,chán ghét,Vs,B2
+3612,癢,yăng,ngứa,Vs,B2
+3613,氧氣,yăngqì,khí ô-xy,N,B2
+3614,樣品,yàngpĭn,hàng mẫu,N,B2
+3615,喲,yāo,"nhé, nha",Ptc,B2
+3616,腰,yāo,"lưng, eo",N,B2
+3617,搖,yáo,"đong đưa, rung",V,B2
+3618,搖擺,yáobăi,"lúc lắc, lắc lư",V,B2
+3619,搖頭,yáotóu,lắc đầu,V-sep,B2
+3620,要不,yàobù,nếu không thì...,Conj,B2
+3621,要好,yàohăo,"thân nhau, có quan hệ tốt",Vs,B2
+3622,要命,yàomìng,"chết người, nguy hiểm",Vs,B2
+3623,藥方,yàofāng,phương thuốc,N,B2
+3624,藥水,yàoshuĭ,thuốc nước,N,B2
+3625,藥物,yàowù,thuốc,N,B2
+3626,野,yě,"ngoài đồng,vườn",Vs,B2
+3627,野獸,yěshòu,"dã thú, muông thú",N,B2
+3628,野心,yěxīn,dã tâm,N,B2
+3629,夜景,yèjǐng,cảnh đêm,N,B2
+3630,夜晚,yèwăn,ban đêm,N,B2
+3631,業務,yèwù,nghiệp vụ,N,B2
+3632,業餘,yèyú,rảnh rỗi,Vs-attr,B2
+3633,葉子,yèzi,lá cây,N,B2
+3634,一一,yīyī,từng cái một,Adv,B2
+3635,衣裳,yīshang,quần áo,N,B2
+3636,依據,yījù,căn cứ theo,N,B2
+3637,依然,yīrán,như cũ,Adv,B2
+3638,醫,yī,y khoa,V,B2
+3639,醫師,yīshī,"y sĩ, thầy thuốc",N,B2
+3640,醫學,yīxué,y học,N,B2
+3641,一帶,yīdài,"vùng, khu vực",N,B2
+3642,一旦,yīdàn,"một ngày, một khi",Conj,B2
+3643,一大早,yīdàzăo,sáng sớm,N,B2
+3644,一面,yīmiàn,một mặt,Adv,B2
+3645,一再,yīzài,"nhiều lần, năm lần bảy lượt",Adv,B2
+3646,一致,yīzhì,nhất trí,Vs,B2
+3647,移,yí,di chuyển,V,B2
+3648,移動,yídòng,di động,V,B2
+3649,移民,yímín,di dân,Vp,B2
+3650,疑問,yíwèn,"nghi vấn, nghi ngờ",N,B2
+3651,儀器,yíqì,máy móc,N,B2
+3652,儀式,yíshì,nghi thức,N,B2
+3653,乙,yĭ,ất,N,B2
+3654,已婚,yĭhūn,"đã có gia đình, đã kết hôn",Vs,B2
+3655,以,yĭ,"dùng, lấy, theo",Conj,B2
+3656,以便,yĭbiàn,"để, nhằm",Conj,B2
+3657,以及,yĭjí,"và, cùng",Conj,B2
+3658,以往,yĭwăng,ngày xưa,N,B2
+3659,一般而言,yībānéryán,nói chung,Conj,B2
+3660,一口氣,yīkŏuqì,một hơi thở,Adv,B2
+3661,一旁,yīpáng,bên cạnh,N,B2
+3662,一齊,yīqí,đồng thời,Adv,B2
+3663,一天到晚,yītiāndàowăn,"suốt ngày, từ sáng đến tối",Adv,B2
+3664,易,yì,dễ dàng,Vs,B2
+3665,意識,yìshì,ý thức,N,B2
+3666,意外,yìwài,"bất ngờ, không ngờ",Vs,B2
+3667,意願,yìyuàn,nguyện vọng,N,B2
+3668,意志,yìzhì,ý chí,N,B2
+3669,億,yì,một trăm triệu,N,B2
+3670,義務,yìwù,nghĩa vụ,N,B2
+3671,議會,yìhuì,"nghị viện, quốc hội",N,B2
+3672,因而,yīnér,"cho nên, bởi thế",Conj,B2
+3673,因素,yīnsù,nhân tố,N,B2
+3674,銀,yín,bạc,N,B2
+3675,引發,yĭnfā,gợi ra,V,B2
+3676,飲,yĭn,uống,V,B2
+3677,飲食,yĭnshí,đồ ăn thức uống,N,B2
+3678,印,yìn,con dấu,V,B2
+3679,印刷,yìnshuā,in ấn,Vi,B2
+3680,印象,yìnxiàng,ấn tượng,N,B2
+3681,印章,yìnzhāng,con dấu,N,B2
+3682,應當,yīngdāng,"nên, cần phải",Adv,B2
+3683,嬰兒,yīngér,trẻ sơ sinh,N,B2
+3684,英雄,yīngxióng,anh hùng,N,B2
+3685,贏得,yíngdé,giành được,Vpt,B2
+3686,迎接,yíngjiē,nghênh đón,V,B2
+3687,營養,yíngyăng,dinh dưỡng,Vs,B2
+3688,營業,yíngyè,kinh doanh,Vi,B2
+3689,影本,yĭngběn,bản sao,N,B2
+3690,影印,yĭngyìn,"in chụp, photocopy",V,B2
+3691,影子,yĭngzi,bóng dáng,N,B2
+3692,硬,yìng,cứng rắn,Vs,B2
+3693,應付,yìngfù,ứng phó,V,B2
+3694,應邀,yìngyāo,nhận lời mời,Vi,B2
+3695,應用,yìngyòng,ứng dụng,V,B2
+3696,擁抱,yŏngbào,ôm,V,B2
+3697,擁護,yŏnghù,"ủng hộ, tán thành",V,B2
+3698,擁擠,yŏngjĭ,chen chúc,Vs,B2
+3699,勇氣,yŏngqì,dũng khí,N,B2
+3700,用不著,yòngbùzháo,không cần,Adv,B2
+3701,用處,yòngchu,tác dụng,N,B2
+3702,用得著,yòngdezháo,có thể sử dụng,Vs,B2
+3703,用具,yòngjù,dụng cụ,N,B2
+3704,用力,yònglì,"cố sức, gắng sức",Vs-sep,B2
+3705,用心,yòngxīn,"chăm chỉ, để tâm",Vs-sep,B2
+3706,憂鬱,yōuyù,buồn thương,Vs,B2
+3707,優惠,yōuhuì,ưu đãi,Vs,B2
+3708,優良,yōuliáng,tốt đẹp,Vs,B2
+3709,優美,yōuměi,tươi đẹp,Vs,B2
+3710,優越,yōuyuè,ưu việt,Vs,B2
+3711,由,yóu,"nguyên do, do",Prep,B2
+3712,油,yóu,"dầu, mỡ",Vs,B2
+3713,油膩,yóunì,"chứa nhiều dầu mỡ, ngấy",Vs,B2
+3714,游,yóu,bơi lội,Vi,B2
+3715,郵差,yóuchāi,người đưa thư,N,B2
+3716,郵件,yóujiàn,bưu kiện,N,B2
+3717,遊戲,yóuxì,trò chơi,N,B2
+3718,遊戲,yóuxì,chơi trò chơi,Vi,B2
+3719,遊行,yóuxíng,du hành,Vi,B2
+3720,猶豫,yóuyù,do dự,Vs,B2
+3721,友好,yŏuhăo,hữu nghị,Vs,B2
+3722,有關,yŏuguān,có liên quan,Prep,B2
+3723,有關,yŏuguān,đề cập đến,Vs,B2
+3724,有力,yŏulì,mạnh mẽ,Vs,B2
+3725,有利,yŏulì,"có lợi, có ích",Vs,B2
+3726,有些,yŏuxiē,có một số,Adv,B2
+3727,有些,yŏuxiē,có phần,Det,B2
+3728,娛樂,yúlè,"tiêu khiển, giải trí",N,B2
+3729,語調,yŭdiào,ngữ điệu,N,B2
+3730,語氣,yŭqì,"ngữ khí, giọng điệu",N,B2
+3731,語音,yŭyīn,ngữ âm,N,B2
+3732,與其,yŭqí,"so với, thay vì",Conj,B2
+3733,遇,yù,gặp mặt,Vst,B2
+3734,遇見,yùjiàn,gặp phải,Vpt,B2
+3735,預報,yùbào,dự báo,N,B2
+3736,預定,yùdìng,dự định,V,B2
+3737,預訂,yùdìng,đặt trước,V,B2
+3738,預計,yùjì,dự tính,Vaux,B2
+3739,預算,yùsuàn,dự toán,N,B2
+3740,預先,yùxiān,"trước, sẵn",Adv,B2
+3741,冤枉,yuānwăng,"bị oan, làm oan",Vs,B2
+3742,冤枉,yuānwăng,xử oan,Vst,B2
+3743,元旦,yuándàn,nguyên đán,N,B2
+3744,原來,yuánlái,lúc đầu,Vs-attr,B2
+3745,原理,yuánlĭ,nguyên lý,N,B2
+3746,原料,yuánliào,nguyên liệu,N,B2
+3747,原始,yuánshĭ,"đầu tiên, nguyên thủy",Vs,B2
+3748,原先,yuánxiān,"trước kia,ban đầu",Adv,B2
+3749,原則,yuánzé,nguyên tắc,N,B2
+3750,原則上,yuánzéshàng,về nguyên tắc,Adv,B2
+3751,原子筆,yuánzĭbĭ,bút bi,N,B2
+3752,圓滿,yuánmăn,toàn vẹn,Vs,B2
+3753,圓形,yuánxíng,tròn,N,B2
+3754,緣故,yuángù,"duyên cớ, nguyên do",N,B2
+3755,遠大,yuăndà,rộng lớn,Vs,B2
+3756,願,yuàn,mong ước,Vst,B2
+3757,月分,yuèfèn,tháng,N,B2
+3758,月光,yuèguāng,ánh trăng,N,B2
+3759,月球,yuèqiú,mặt trăng,N,B2
+3760,暈,yūn,choáng váng,Vs,B2
+3761,允許,yŭnxŭ,cho phép,V,B2
+3762,運輸,yùnshū,"vận tải, vận chuyển",V,B2
+3763,運送,yùnsòng,chuyên chở,V,B2
+3764,運用,yùnyòng,vận dụng,V,B2
+3765,運轉,yùnzhuăn,"quay quanh, xoay quanh",Vi,B2
+3766,砸,zá,"đánh, đập",V,B2
+3767,雜,zá,"tạp, lặt vặt, linh tinh",Vs,B2
+3768,災害,zāihài,"tai họa, thiên tai",N,B2
+3769,災難,zāinàn,tai nạn,N,B2
+3770,在乎,zàihū,"lưu ý, để ý",Vst,B2
+3771,再度,zàidù,lại lần nữa,Adv,B2
+3772,再說,zàishuō,"vả lại, hơn nữa",Conj,B2
+3773,載,zài,chở,V,B2
+3774,咱們,zánmen,chúng ta,N,B2
+3775,贊成,zànchéng,tán thành,Vst,B2
+3776,贊同,zàntóng,đồng ý,Vst,B2
+3777,讚美,zànměi,"ca ngợi, ca tụng",V,B2
+3778,葬禮,zànglĭ,lễ tang,N,B2
+3779,糟,zāo,"mục nát, hỏng việc",Vs,B2
+3780,糟糕,zāogāo,"hỏng bét, kinh khủng",Vs,B2
+3781,遭到,zāodào,đau khổ,Vpt,B2
+3782,遭受,zāoshòu,"gặp, bị, chịu",Vst,B2
+3783,遭遇,zāoyù,cảnh ngộ,N,B2
+3784,早晨,zăochén,sáng sớm,N,B2
+3785,早點,zăodiăn,điểm tâm sáng,Adv,B2
+3786,早點,zăodiăn,điểm tâm sáng,N,B2
+3787,早晚,zǎowǎn,"sớm tối, sớm muộn thì...",Adv,B2
+3788,早已,zăoyĭ,"sớm đã, từ lâu đã",Adv,B2
+3789,造,zào,"làm ra, tạo ra",V,B2
+3790,造句,zàojù,đặt câu,V-sep,B2
+3791,則,zé,phép tắc,Adv,B2
+3792,則,zé,"điều, mục",M,B2
+3793,怎,zěn,"sao, thế nào",Adv,B2
+3794,增長,zēngzhăng,tăng trưởng,Vst,B2
+3795,贈品,zèngpĭn,quà tặng,N,B2
+3796,贈送,zèngsòng,"biếu, tặng",V,B2
+3797,窄,zhăi,"hẹp, chật",Vs,B2
+3798,展出,zhănchū,hiển thị,V,B2
+3799,展開,zhănkāi,triển khai,V,B2
+3800,展覽,zhănlăn,buổi triển lãm,N,B2
+3801,展覽,zhănlăn,triển lãm,V,B2
+3802,展示,zhănshì,"bày ra, phơi ra",V,B2
+3803,占/佔,zhàn,xem bói,V,B2
+3804,占/佔,zhàn,chiếm (%),Vst,B2
+3805,占/佔有,zhànyŏu,chiếm giữ,Vst,B2
+3806,站住,zhànzhù,"dừng lại, đứng lại",Vi,B2
+3807,戰場,zhànchăng,chiến trường,N,B2
+3808,張,zhāng,"mở ra, giương ra",V,B2
+3809,章,zhāng,"chương, mục",M,B2
+3810,長,zhǎng,"lớn, nhiều tuổi",Vst,B2
+3811,長輩,zhǍngbèi,"đàn anh, trưởng bối",N,B2
+3812,漲,zhăng,tăng lên cao,Vp,B2
+3813,漲價,zhăngjià,tăng giá,Vp-sep,B2
+3814,掌聲,zhăngshēng,tiếng vỗ tay,N,B2
+3815,帳單,zhàngdān,hóa đoan,N,B2
+3816,丈夫,zhàngfū,chồng,N,B2
+3817,招呼,zhāohu,chào hỏi,V,B2
+3818,招手,zhāoshŏu,vẫy tay,V-sep,B2
+3819,照,zhào,"chiếu, soi, rọi",Adv,B2
+3820,照常,zhàocháng,như thường lệ,Vs,B2
+3821,召開,zhàokāi,mời dự họp,V,B2
+3822,折,zhé,bẻ gãy,V,B2
+3823,折合,zhéhé,tương đương,Vst,B2
+3824,折扣,zhékòu,"chiếu khấu, giảm giá",N,B2
+3825,折磨,zhémó,"dằn vặt, dày vò",V,B2
+3826,者,zhě,"người, kẻ",N,B2
+3827,針,zhēn,cây kim,N,B2
+3828,針對,zhēnduì,"nhằm vào, chĩa vào",Prep,B2
+3829,偵探,zhēntàn,trinh thám,N,B2
+3830,珍惜,zhēnxí,trân quý,Vst,B2
+3831,珍珠,zhēnzhū,trân châu,N,B2
+3832,真心,zhēnxīn,"thật lòng, thành thật",N,B2
+3833,枕頭,zhěntou,cái gối,N,B2
+3834,陣,zhèn,trận,M,B2
+3835,陣子,zhènzi,"trận, hồi, cơn",N,B2
+3836,震動,zhèndòng,rung động,Vi,B2
+3837,爭,zhēng,tranh giành,V,B2
+3838,爭論,zhēnglùn,tranh luận,V,B2
+3839,爭取,zhēngqŭ,tranh thủ,V,B2
+3840,睜,zhēng,mở to (mắt),V,B2
+3841,徵求,zhēngqiú,trưng cầu,V,B2
+3842,正月,zhēngyuè,tháng giêng,N,B2
+3843,整,zhěng,"trọn, cả, chẵn",N,B2
+3844,整,zhěng,chỉnh đốn,Vs,B2
+3845,整潔,zhěngjié,"ngăn nắp, gọn gàng",Vs,B2
+3846,整數,zhěngshù,số nguyên,N,B2
+3847,正,zhèng,tháng 1,Vs,B2
+3848,正方形,zhèngfāngxíng,hình vuông,N,B2
+3849,正規,zhèngguī,chính quy,Vs-attr,B2
+3850,正好,zhènghăo,"vừa vặn, đúng lúc",Adv,B2
+3851,正好,zhènghăo,được dịp,Vs,B2
+3852,正經,zhèngjing,đoan trang,Vs,B2
+3853,正面,zhèngmiàn,mặt chính,N,B2
+3854,政策,zhèngcè,chính sách,N,B2
+3855,政黨,zhèngdăng,chính đảng,N,B2
+3856,政府,zhèngfŭ,chính phủ,N,B2
+3857,證件,zhèngjiàn,giấy chứng nhận,N,B2
+3858,證據,zhèngjù,chứng cứ,N,B2
+3859,證明,zhèngmíng,chứng nhận,N,B2
+3860,證實,zhèngshí,chứng thực,Vpt,B2
+3861,症狀,zhèngzhuàng,bệnh trạng,N,B2
+3862,之,zhī,"hướng, tới",N,B2
+3863,之,zhī,"này, đó",Ptc,B2
+3864,之間,zhījiān,giữa,N,B2
+3865,之類,zhīlèi,vân vân,N,B2
+3866,支,zhī,"chống, đỡ",M,B2
+3867,支持,zhīchí,ủng hộ,V,B2
+3868,支出,zhīchū,chi tiêu,Vpt,B2
+3869,支票,zhīpiào,chi phiếu,N,B2
+3870,支援,zhīyuán,chi viện,V,B2
+3871,直,zhí,thẳng đứng,Adv,B2
+3872,直接,zhíjiē,trực tiếp,Vs,B2
+3873,直線,zhíxiàn,"đường thẳng, trực tiếp",Adv,B2
+3874,值,zhí,giá trị,Vst,B2
+3875,擲,zhí,"ném, quang",V,B2
+3876,職位,zhíwèi,chức vị,N,B2
+3877,執行,zhíxíng,"chấp hành, thực thi",V,B2
+3878,止,zhǐ,dừng lại,Vs,B2
+3879,只,zhĭ,chỉ có,M,B2
+3880,只是,zhĭshì,"chỉ là, chẳng qua là, nhưng",Adv,B2
+3881,指,zhĭ,"chỉ điểm, chỉ ra",V,B2
+3882,指出,zhĭchū,chỉ ra,Vpt,B2
+3883,指導,zhĭdăo,"chỉ đạo, hướng dẫn",V,B2
+3884,指定,zhĭdìng,chỉ định,V,B2
+3885,指示,zhĭshì,chỉ thị,N,B2
+3886,指示,zhĭshì,chỉ thị,V,B2
+3887,指責,zhǐzé,chỉ trích,V,B2
+3888,紙張,zhĭzhāng,giấy,N,B2
+3889,治,zhì,"sắp đặt, sửa sang",V,B2
+3890,至,zhì,đến nỗi,V,B2
+3891,制定,zhìdìng,"lập ra, đặt ra quy định",V,B2
+3892,制止,zhìzhĭ,ngăn cấm,V,B2
+3893,志氣,zhìqì,chí khí,N,B2
+3894,志願,zhìyuàn,chí hướng và nguyện vọng,N,B2
+3895,秩序,zhìxù,trật tự,N,B2
+3896,製造,zhìzào,chế tạo,V,B2
+3897,製作,zhìzuò,"chế ra, làm ra",V,B2
+3898,中,zhōng,"trúng, bị, mắc phải",Vs-attr,B2
+3899,中級,zhōngjí,trung cấp,N,B2
+3900,中年,zhōngnián,trung niên,N,B2
+3901,中途,zhōngtú,"nửa đường, giữa đường",N,B2
+3902,中央,zhōngyāng,trung ương,N,B2
+3903,中藥,zhōngyào,thuốc Đông Y,N,B2
+3904,腫,zhŏng,"sưng, phù",Vs,B2
+3905,種類,zhŏnglèi,chủng loại,N,B2
+3906,種子,zhŏngzĭ,hạt giống,N,B2
+3907,種族,zhŏngzú,chủng tộc,N,B2
+3908,中,zhòng,trúng,Vp,B2
+3909,中毒,zhòngdú,trúng độc,Vp-sep,B2
+3910,重,zhòng,nặng,Vst,B2
+3911,重大,zhòngdà,"trọng đại, to lớn",Vs,B2
+3912,重量,zhòngliàng,trong lượng,N,B2
+3913,重傷,zhòngshāng,trọng thương,N,B2
+3914,重傷,zhòngshāng,bị thương nặng,Vs,B2
+3915,重心,zhòngxīn,trọng tâm,N,B2
+3916,州,zhōu,châu,N,B2
+3917,周/週,zhōu,tuần,M,B2
+3918,周到,zhōudào,chu đáo,Vs,B2
+3919,粥,zhōu,cháo,N,B2
+3920,竹(子),zhú(zi),"cây trúc, tre",N,B2
+3921,逐漸,zhújiàn,dần dần,Adv,B2
+3922,主辦,zhŭbàn,người chịu trách nhiệm,V,B2
+3923,主持,zhŭchí,chủ trì,V,B2
+3924,主觀,zhŭguān,chủ quan,Vs,B2
+3925,主角,zhŭjiăo/jué,"vai chính, nhân vật chính",N,B2
+3926,主席,zhŭxí,chủ tịch,N,B2
+3927,主張,zhŭzhāng,chủ trương,N,B2
+3928,主張,zhŭzhāng,cho rằng,V,B2
+3929,祝賀,zhùhè,chúc mừng,V,B2
+3930,住院,zhùyuàn,nằm viện,V-sep,B2
+3931,住宅,zhùzhái,"nơi ở, chỗ ở",N,B2
+3932,住址,zhùzhĭ,chỗ ở,N,B2
+3933,注射,zhùshè,"tiêm, chích",V,B2
+3934,註冊,zhùcè,đăng ký,V-sep,B2
+3935,專家,zhuānjiā,chuyên gia,N,B2
+3936,專利,zhuānlì,độc quyền,N,B2
+3937,專門,zhuānmén,chuyên biệt,Vs,B2
+3938,專人,zhuānrén,chuyên gia,N,B2
+3939,專業,zhuānyè,chuyên nghiệp,N,B2
+3940,轉,zhuăn,chuyển,V,B2
+3941,轉變,zhuănbiàn,chuyển biến,Vpt,B2
+3942,轉播,zhuănbò,tiếp sóng (phát thanh),V,B2
+3943,轉達,zhuăndá,truyền đạt,V,B2
+3944,轉告,zhuăngào,chuyển lời,V,B2
+3945,轉機,zhuănjī,có thể xoay chuyển,Vi,B2
+3946,轉身,zhuănshēn,quay người lại,Vi,B2
+3947,轉向,zhuănxiàng,mất phương hướng,V,B2
+3948,轉,zhuàn,chuyển,Vp,B2
+3949,賺,zhuàn,kiếm (tiền),V,B2
+3950,裝飾,zhuāngshì,trang sức,V,B2
+3951,壯,zhuàng,cường tráng,Vs,B2
+3952,撞,zhuàng,"đụng, va chạm",V,B2
+3953,狀況,zhuàngkuàng,tình trạng,N,B2
+3954,追,zhuī,truy đuổi,V,B2
+3955,准,zhŭn,cho phép,V,B2
+3956,准考證/証,zhŭnkăozhèng,thẻ dự thi,N,B2
+3957,準,zhŭn,"chuẩn, chuẩn mực",Vs,B2
+3958,準確,zhŭnquè,chính xác,Vs,B2
+3959,捉,zhuō,"cầm, nắm, bắt",V,B2
+3960,桌,zhuō,"bàn, mâm",M,B2
+3961,資本,zīběn,tư bản,N,B2
+3962,資格,zīgé,tư cách,N,B2
+3963,資金,zījīn,"tiền vốn, quỹ",N,B2
+3964,資訊,zīxùn,thông tin,N,B2
+3965,紫,zĭ,màu tím,Vs-attr,B2
+3966,子女,zĭnǚ,con cái,N,B2
+3967,字幕,zìmù,phụ đề,N,B2
+3968,字母,zìmŭ,chữ cái,N,B2
+3969,自來水,zìláishuĭ,nước máy,N,B2
+3970,自然,zìrán,tự nhiên,N,B2
+3971,自私,zìsī,ích kỷ,Vs,B2
+3972,自我,zìwǒ,"tự mình, bản thân",N,B2
+3973,自信,zìxìn,tự tin,Vs,B2
+3974,自願,zìyuàn,tự nguyện,Vs,B2
+3975,自主,zìzhŭ,tự chủ,Vs,B2
+3976,總,zǒng,tổng,Adv,B2
+3977,總共,zǒnggòng,tổng cộng,Adv,B2
+3978,總理,zǒnglĭ,thủ tướng,N,B2
+3979,綜合,zònghé,tổng hợp,V,B2
+3980,綜合,zònghé,tổng hợp,Vs-attr,B2
+3981,走道,zǒudào,"vỉa hè, hành lang",N,B2
+3982,走私,zǒusī,buôn lậu,V,B2
+3983,足,zú,"chân, giò",Vs,B2
+3984,足以,zúyĭ,đủ để,Vaux,B2
+3985,組,zŭ,tổ chức,V,B2
+3986,組織,zŭzhī,"tổ chức, hệ thống",N,B2
+3987,阻礙,zŭài,ngăn cản,V,B2
+3988,阻止,zŭzhĭ,cản trở,V,B2
+3989,祖國,zŭguó,tổ quốc,N,B2
+3990,鑽,zuān,"dùi, khoan",V,B2
+3991,鑽石,zuànshí,kim cương,N,B2
+3992,罪,zuì,tội,N,B2
+3993,最少,zuìshăo,"ít nhất, tối thiểu",Adv,B2
+3994,遵守,zūnshŏu,tuân thủ,Vst,B2
+3995,尊重,zūnzhòng,tôn trọng,Vst,B2
+3996,左右,zuŏyòu,"trái và phải, hai bên",N,B2
+3997,左右,zuŏyòu,khoảng,V,B2
+3998,作,zuò,"làm, sáng tác",V,B2
+3999,作家,zuòjiā,tác giả,N,B2
+4000,作為,zuòwéi,hành động,Vst,B2
+4001,作文,zuòwén,bài văn,N,B2
+4002,作文,zuòwén,"làm văn, viết văn",Vi,B2
+4003,作用,zuòyòng,"ảnh hưởng, tác dụng",N,B2
+4004,做,zuò,"làm ra, chế tạo ra",V,B2
+4005,做客,zuòkè,làm khách,Vi,B2
