@@ -50,19 +50,18 @@ let activeQuestions = [];
 let vocabPool = [];
 
 // ==========================================
-// 3. HỆ THỐNG ÂM THANH TIÊN GIỚI (TÁCH BIỆT BGM & SFX)
+// 3. HỆ THỐNG ÂM THANH TIÊN GIỚI (CÁCH LY AN TOÀN TUYỆT ĐỐI)
 // ==========================================
 let audioCtx = null;
-let isBgmPlaying = false; 
+let isBgmPlaying = false;
 
-// Khởi tạo AudioContext an toàn và đánh thức ngay khi có thao tác
 function getAudioContext() {
     try {
-        if (!audioCtx) {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return null;
+        if (!audioCtx) audioCtx = new AudioContextClass();
         if (audioCtx.state === 'suspended') {
-            audioCtx.resume();
+            audioCtx.resume().catch(() => {});
         }
         return audioCtx;
     } catch (e) {
@@ -70,130 +69,125 @@ function getAudioContext() {
     }
 }
 
-// 1. Âm thanh bấm nút (Tiếng gõ thanh mộc sắc nét, nghe rõ ràng)
 window.playClickSound = function() {
     try {
         const ctx = getAudioContext();
         if (!ctx) return;
-        
+        const now = ctx.currentTime;
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
-        
+
         osc.type = "sine";
-        osc.frequency.setValueAtTime(800, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.08);
-        
-        gain.gain.setValueAtTime(0.25, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
-        
+        osc.frequency.setValueAtTime(700, now);
+        osc.frequency.setValueAtTime(350, now + 0.05);
+
+        gain.gain.setValueAtTime(0.15, now);
+        gain.gain.linearRampToValueAtTime(0.001, now + 0.06);
+
         osc.connect(gain);
         gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.08);
-    } catch(e) {}
+        osc.start(now);
+        osc.stop(now + 0.06);
+    } catch (e) {}
 };
 
-// 2. Âm thanh Chọn Đúng (Hợp âm Ngũ Cung Tiên Giới ngân vang)
 function playCorrectSound() {
     try {
         const ctx = getAudioContext();
         if (!ctx) return;
-        
-        // Cung - Thương - Giốc - Vũ (Đô - Rê - Mi - Sol - Đô cao)
+        const now = ctx.currentTime;
         const notes = [523.25, 659.25, 783.99, 1046.50];
+
         notes.forEach((freq, idx) => {
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
-            
+            const start = now + (idx * 0.06);
+
             osc.type = "triangle";
-            osc.frequency.value = freq;
-            
-            const start = ctx.currentTime + (idx * 0.07);
-            const duration = 0.35;
-            
-            gain.gain.setValueAtTime(0.3, start);
-            gain.gain.exponentialRampToValueAtTime(0.001, start + duration);
-            
+            osc.frequency.setValueAtTime(freq, start);
+
+            gain.gain.setValueAtTime(0.2, start);
+            gain.gain.linearRampToValueAtTime(0.001, start + 0.25);
+
             osc.connect(gain);
             gain.connect(ctx.destination);
             osc.start(start);
-            osc.stop(start + duration);
+            osc.stop(start + 0.28);
         });
-    } catch(e) {}
+    } catch (e) {}
 }
 
-// 3. Âm thanh Chọn Sai (Sấm sét gầm & thổ huyết)
 function playWrongSound() {
     try {
         const ctx = getAudioContext();
         if (!ctx) return;
-        
+        const now = ctx.currentTime;
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
-        
+
         osc.type = "sawtooth";
-        osc.frequency.setValueAtTime(200, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.35);
-        
-        gain.gain.setValueAtTime(0.4, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
-        
+        osc.frequency.setValueAtTime(180, now);
+        osc.frequency.setValueAtTime(45, now + 0.28);
+
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.linearRampToValueAtTime(0.001, now + 0.28);
+
         osc.connect(gain);
         gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.35);
-    } catch(e) {}
+        osc.start(now);
+        osc.stop(now + 0.28);
+    } catch (e) {}
 }
 
-// 4. Âm thanh Nhặt Đan Dược (Kỳ Ngộ Linh Khí)
 function playLootSound() {
     try {
         const ctx = getAudioContext();
         if (!ctx) return;
-        
-        [1046.50, 1318.51, 1567.98, 2093.00].forEach((freq, idx) => {
+        const now = ctx.currentTime;
+        const freqs = [880, 1174, 1567, 2093];
+
+        freqs.forEach((freq, idx) => {
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
-            
+            const start = now + (idx * 0.05);
+
             osc.type = "sine";
-            osc.frequency.value = freq;
-            
-            const start = ctx.currentTime + (idx * 0.06);
-            gain.gain.setValueAtTime(0.25, start);
-            gain.gain.exponentialRampToValueAtTime(0.001, start + 0.25);
-            
+            osc.frequency.setValueAtTime(freq, start);
+
+            gain.gain.setValueAtTime(0.18, start);
+            gain.gain.linearRampToValueAtTime(0.001, start + 0.2);
+
             osc.connect(gain);
             gain.connect(ctx.destination);
             osc.start(start);
-            osc.stop(start + 0.25);
+            osc.stop(start + 0.22);
         });
-    } catch(e) {}
+    } catch (e) {}
 }
 
-// 5. Điều khiển Nhạc Nền (Không bao giờ bị đơ nút)
-window.toggleBGM = function() {
-    playClickSound();
+window.toggleBGM = async function() {
+    window.playClickSound();
     const bgm = document.getElementById('bgmAudio');
     const btn = document.getElementById('audioToggleBtn');
     if (!bgm) return;
-    
-    getAudioContext();
-    
+
+    const ctx = getAudioContext();
+    if (ctx && ctx.state === 'suspended') {
+        await ctx.resume().catch(() => {});
+    }
+
     if (bgm.paused) {
-        bgm.volume = 0.35;
-        const playPromise = bgm.play();
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                isBgmPlaying = true;
-                if (btn) {
-                    btn.innerText = "🎵 Nhạc: Bật";
-                    btn.classList.remove('muted');
-                }
-            }).catch(err => {
-                console.warn("Không thể phát nhạc nền:", err);
-                // Vẫn cập nhật trạng thái để người dùng bấm lại được
-                if (btn) btn.innerText = "🔇 Lỗi File Nhạc";
-            });
+        try {
+            bgm.volume = 0.35;
+            await bgm.play();
+            isBgmPlaying = true;
+            if (btn) {
+                btn.innerText = "🎵 Nhạc: Bật";
+                btn.classList.remove('muted');
+            }
+        } catch (err) {
+            console.warn("Lỗi phát nhạc:", err);
+            if (btn) btn.innerText = "🔇 Lỗi File Nhạc";
         }
     } else {
         bgm.pause();
@@ -205,28 +199,8 @@ window.toggleBGM = function() {
     }
 };
 
-// Kích hoạt âm thanh ở lần chạm đầu tiên của người chơi
-function initAudioOnFirstUserGesture() {
-    getAudioContext();
-    const bgm = document.getElementById('bgmAudio');
-    if (bgm && bgm.paused) {
-        bgm.volume = 0.35;
-        bgm.play().then(() => {
-            isBgmPlaying = true;
-            const btn = document.getElementById('audioToggleBtn');
-            if (btn) {
-                btn.innerText = "🎵 Nhạc: Bật";
-                btn.classList.remove('muted');
-            }
-        }).catch(() => {});
-    }
-    document.removeEventListener('click', initAudioOnFirstUserGesture);
-    document.removeEventListener('keydown', initAudioOnFirstUserGesture);
-}
-document.addEventListener('click', initAudioOnFirstUserGesture);
-document.addEventListener('keydown', initAudioOnFirstUserGesture);
 // ==========================================
-// 4. TÍNH TOÁN CẢNH GIỚI & AVATAR
+// 4. CẢNH GIỚI & AVATAR
 // ==========================================
 function calculateRealm(mana) {
     if (mana < 150) return "Phàm Nhân";
@@ -244,8 +218,7 @@ function getAvatarByMana(mana) {
 
 function setAvatarWithFallback(imgElement, mana) {
     if (!imgElement) return;
-    const initialPath = getAvatarByMana(mana);
-    imgElement.src = initialPath;
+    imgElement.src = getAvatarByMana(mana);
     imgElement.onerror = () => {
         if (imgElement.src.endsWith(".jpg")) {
             imgElement.src = imgElement.src.replace(".jpg", ".png");
@@ -274,17 +247,17 @@ function updateCharacterUI() {
 }
 
 // ==========================================
-// 5. XÁC THỰC & FIREBASE SYNC
+// 5. MÀN HÌNH & XÁC THỰC FIREBASE
 // ==========================================
 window.switchScreen = function(screenId) {
-    playClickSound();
+    window.playClickSound();
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     const targetScreen = document.getElementById(screenId);
     if (targetScreen) targetScreen.classList.add('active');
 };
 
 window.switchAuthTab = function(type) {
-    playClickSound();
+    window.playClickSound();
     document.getElementById('tab-login').classList.remove('active');
     document.getElementById('tab-signup').classList.remove('active');
     document.getElementById('displayNameGroup').style.display = 'none';
@@ -330,7 +303,7 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 window.handleSignup = async function() {
-    playClickSound();
+    window.playClickSound();
     const email = document.getElementById('authEmail').value.trim();
     const password = document.getElementById('authPassword').value.trim();
     const displayName = document.getElementById('authDisplayName').value.trim();
@@ -348,7 +321,7 @@ window.handleSignup = async function() {
 };
 
 window.handleLogin = async function() {
-    playClickSound();
+    window.playClickSound();
     const email = document.getElementById('authEmail').value.trim();
     const password = document.getElementById('authPassword').value.trim();
     if (!email || !password) { alert("Nhập Email và Mật khẩu!"); return; }
@@ -360,7 +333,7 @@ window.handleLogin = async function() {
 };
 
 window.handleGoogleLogin = async function() {
-    playClickSound();
+    window.playClickSound();
     try { 
         const result = await signInWithPopup(auth, googleProvider);
         const userRef = ref(database, 'users/' + result.user.uid);
@@ -376,7 +349,7 @@ window.handleGoogleLogin = async function() {
 };
 
 window.handleLogout = function() { 
-    playClickSound();
+    window.playClickSound();
     signOut(auth); 
 };
 
@@ -396,7 +369,7 @@ async function syncManaToDatabase() {
 // 6. HỒ SƠ & BẢNG XẾP HẠNG
 // ==========================================
 window.showProfile = function() {
-    playClickSound();
+    window.playClickSound();
     if (!currentUser) return;
     recalcStats();
     switchScreen('profile-screen');
@@ -413,7 +386,7 @@ window.showProfile = function() {
 };
 
 window.showLeaderboard = async function() {
-    playClickSound();
+    window.playClickSound();
     switchScreen('leaderboard-screen');
     let lbList = document.getElementById('lb-list');
     lbList.innerHTML = '<li>⏳ Đang tải Tiên Đạo Bảng...</li>';
@@ -441,12 +414,12 @@ window.showLeaderboard = async function() {
 };
 
 window.goHome = function() { 
-    playClickSound();
+    window.playClickSound();
     switchScreen('start-screen'); 
 };
 
 // ==========================================
-// 7. GAMEPLAY & COMBAT
+// 7. LỐI CHƠI (GAMEPLAY & COMBAT)
 // ==========================================
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -461,7 +434,6 @@ function generateQuizSession(pool, numQuestions = 10) {
     return selected.map(vocab => {
         let options = [vocab.meaning]; 
         let attempts = 0;
-        // Chốt an toàn chống treo vòng lặp (attempts < 50)
         while (options.length < 4 && attempts < 50 && pool.length > 1) {
             attempts++;
             let rand = pool[Math.floor(Math.random() * pool.length)];
@@ -483,7 +455,7 @@ function formatTime(sec) {
 }
 
 window.startGame = async function() {
-    playClickSound();
+    window.playClickSound();
     switchScreen('game-screen'); 
     if (vocabPool.length === 0) {
         document.getElementById('question').innerText = "⏳ Đang mở Tàng Kinh Các...";
@@ -491,7 +463,7 @@ window.startGame = async function() {
             Papa.parse("./a1_vocab.csv", {
                 download: true, header: true, skipEmptyLines: true,
                 complete: res => { vocabPool = res.data; resolve(); },
-                error: () => { alert("❌ Lỗi tải CSV từ vựng!"); resolve(); }
+                error: () => { alert("❌ Lỗi nạp dữ liệu từ vựng CSV!"); resolve(); }
             });
         });
     }
@@ -537,7 +509,7 @@ function loadQuestion() {
         const btn = document.createElement('button');
         btn.className = 'option-btn'; btn.innerText = opt;
         btn.onclick = () => {
-            playClickSound();
+            window.playClickSound();
             checkAnswer(index, qData.ans, btn);
         };
         optionsDiv.appendChild(btn);
@@ -562,169 +534,4 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
         currentHp = Math.min(maxHp, currentHp + 2);
         
         let lootMessage = "";
-        if (Math.random() < 0.15) {
-            const items = ["Hồi Xuân Đan", "Tụ Linh Đan", "Tẩy Tủy Đan"];
-            const droppedItem = items[Math.floor(Math.random() * items.length)];
-            inventory[droppedItem] = (inventory[droppedItem] || 0) + 1;
-            lootMessage = `<br>🎁 <b style="color:#ffa502">Kỳ Ngộ!</b> Nhặt được [<b>${droppedItem}</b>]!`;
-            playLootSound();
-        }
-
-        document.getElementById('message').innerHTML = `✅ Đáp đúng! +${bonusMana} Linh Lực (STR +${Math.floor(str * 0.2)})${lootMessage}`;
-        document.getElementById('message').style.color = "#2ed573";
-        
-        currentLevelExp += bonusMana;
-        sessionMana += bonusMana;
-        lifetimeMana += bonusMana; 
-        
-        recalcStats();
-        updateCharacterUI();
-        syncManaToDatabase();
-    } else {
-        btnElement.classList.add('wrong');
-        buttons[correctIndex].classList.add('correct');
-        playWrongSound();
-        
-        let dodgeRate = Math.min(30, agi * 0.5); 
-        if (Math.random() * 100 < dodgeRate) {
-            document.getElementById('message').innerText = "⚡ Thân pháp siêu phàm! Né thành công Tâm Ma!";
-            document.getElementById('message').style.color = "#70a1ff";
-        } else {
-            currentHp -= 20;
-            const gameScreen = document.getElementById('game-screen');
-            if (gameScreen) {
-                gameScreen.classList.add('damage-flash');
-                setTimeout(() => gameScreen.classList.remove('damage-flash'), 400);
-            }
-
-            document.getElementById('message').innerText = `❌ Tâm Ma Phản Phệ! Mất 20 Sinh Mệnh!`;
-            document.getElementById('message').style.color = "#ff4757";
-        }
-        updateCharacterUI();
-
-        if (currentHp <= 0) {
-            setTimeout(() => { alert("💥 Sinh Mệnh cạn kiệt! Đạo hữu đã Tẩu Hỏa Nhập Ma."); endGame(false); }, 500);
-            return;
-        }
-    }
-    
-    let expPercent = Math.min(100, (currentLevelExp / expToLevelUp) * 100);
-    document.getElementById('expFill').style.width = expPercent + "%";
-    document.getElementById('exp').innerText = currentLevelExp;
-    document.getElementById('totalScore').innerText = sessionMana;
-    document.getElementById('nextBtn').style.display = 'block';
-}
-
-window.nextQuestion = function() {
-    playClickSound();
-    currentQuestionIndex++;
-    if (currentQuestionIndex >= activeQuestions.length) {
-        if (currentLevelExp >= expToLevelUp) {
-            currentLevel++;
-            if (currentLevel <= 4) { alert(`🎉 Đột phá thành công sang Tầng ${currentLevel}!`); initLevel(); return; }
-        } else {
-            alert(`😢 Linh lực không đủ (Cần tối thiểu ${expToLevelUp}). Mời Đạo Hữu làm lại.`);
-            endGame(false); return;
-        }
-    }
-    loadQuestion();
-};
-
-function endGame(win) {
-    clearInterval(timerInterval);
-    document.getElementById('question').innerHTML = win ? 
-        `🏆 <b>Đột Phá Thành Công!</b><br><br>🎯 Nhận: <span style="color:#eccc68;">+${sessionMana} Linh Lực</span><br>💎 Tổng Tu Vi: <span style="color:#00d2d3;">${lifetimeMana}</span>` : 
-        `💥 <b>Tẩu Hỏa Nhập Ma!</b><br><br>🎯 Nhận: <span style="color:#eccc68;">+${sessionMana} Linh Lực</span><br>💎 Tổng Tu Vi: <span style="color:#00d2d3;">${lifetimeMana}</span>`;
-    
-    document.getElementById('options').innerHTML = "";
-    document.getElementById('counter').innerText = "";
-    document.getElementById('nextBtn').style.display = 'none';
-    document.getElementById('message').innerText = "";
-    
-    let btn = document.createElement('button');
-    btn.className = "primary-btn"; btn.innerText = "Xem Tiên Đạo Bảng 🏆";
-    btn.onclick = showLeaderboard;
-    document.getElementById('options').appendChild(btn);
-}
-
-// ==========================================
-// 8. HỆ THỐNG TÚI TRỮ VẬT (ITEM BAG)
-// ==========================================
-window.openInventory = function() {
-    playClickSound();
-    const modal = document.getElementById('inventoryModal');
-    if (modal) modal.style.display = 'block';
-    updateInventoryUI();
-};
-
-window.closeInventory = function() {
-    playClickSound();
-    const modal = document.getElementById('inventoryModal');
-    if (modal) modal.style.display = 'none';
-};
-
-function updateInventoryUI() {
-    const invList = document.getElementById('inventoryList');
-    if (!invList) return;
-    invList.innerHTML = '';
-    
-    const itemEffects = {
-        "Hồi Xuân Đan": "Hồi phục ngay 30 Sinh Mệnh.",
-        "Tụ Linh Đan": "Sử dụng nhận ngay +50 Linh Lực.",
-        "Tẩy Tủy Đan": "Sinh Mệnh phục hồi hoàn toàn."
-    };
-
-    let hasItems = false;
-    for (let item in inventory) {
-        if (inventory[item] > 0) {
-            hasItems = true;
-            invList.innerHTML += `
-            <div class="item-card">
-                <div class="item-card-info">
-                    <h4>${item} (x${inventory[item]})</h4>
-                    <p>${itemEffects[item]}</p>
-                </div>
-                <button class="primary-btn" style="background:#3742fa; width:auto; margin:0; padding:8px 15px;" onclick="useItem('${item}')">Dùng</button>
-            </div>`;
-        }
-    }
-    if (!hasItems) {
-        invList.innerHTML = '<p style="color:#aaa; font-size:14px;">Túi đồ trống không! Hãy trả lời câu hỏi để rớt đan dược.</p>';
-    }
-}
-
-window.useItem = function(item) {
-    playClickSound();
-    if (inventory[item] > 0) {
-        inventory[item]--;
-        
-        if (item === "Hồi Xuân Đan") {
-            currentHp = Math.min(maxHp, currentHp + 30);
-            alert("💊 Đã dùng Hồi Xuân Đan! Phục hồi 30 Sinh Mệnh.");
-        } else if (item === "Tụ Linh Đan") {
-            lifetimeMana += 50;
-            sessionMana += 50;
-            recalcStats();
-            alert("✨ Đã dùng Tụ Linh Đan! Tu vi tăng vọt +50 Linh Lực.");
-        } else if (item === "Tẩy Tủy Đan") {
-            currentHp = maxHp;
-            alert("💎 Đã dùng Tẩy Tủy Đan! Đạo thể khôi phục 100% Sinh Mệnh.");
-        }
-        
-        updateInventoryUI();
-        updateCharacterUI();
-        syncManaToDatabase();
-    }
-};
-
-// Kích hoạt phát nhạc ở cú click đầu tiên
-function initAudioOnFirstUserGesture() {
-    getAudioContext();
-    const bgm = document.getElementById('bgmAudio');
-    if (bgm && bgm.paused && !isAudioMuted) {
-        bgm.volume = 0.35;
-        bgm.play().catch(() => {});
-    }
-    document.removeEventListener('click', initAudioOnFirstUserGesture);
-}
-document.addEventListener('click', initAudioOnFirstUserGesture);
+        if (Math.random() < 0
