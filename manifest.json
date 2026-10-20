@@ -1,24 +1,21 @@
 {
-  "name": "Mộng Tu Tiên: Vạn Linh Tiên Đạo",
-  "short_name": "Mộng Tu Tiên",
+  "name": "Vô Lượng Tiên Đồ",
+  "short_name": "Tiên Đồ",
   "start_url": "./index.html",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "landscape",
-  "background_color": "#0a0f1d",
-  "theme_color": "#0a0f1d",
-  "scope": "./",
+  "background_color": "#050811",
+  "theme_color": "#050811",
   "icons": [
     {
       "src": "assets/pham-nhan.jpg",
       "sizes": "192x192",
-      "type": "image/jpeg",
-      "purpose": "any maskable"
+      "type": "image/jpeg"
     },
     {
       "src": "assets/pham-nhan.jpg",
       "sizes": "512x512",
-      "type": "image/jpeg",
-      "purpose": "any maskable"
+      "type": "image/jpeg"
     }
   ]
 }
