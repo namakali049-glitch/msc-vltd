@@ -184,8 +184,13 @@ h1, h2, h3 { color: #eccc68; }
     border-radius: 10px; text-align: left;
 }
 .realm-badge {
-    background: #eccc68; color: #2f3542;
-    padding: 3px 8px; border-radius: 12px; font-weight: bold;
+    background: #ffa502 !important;
+    color: #1e272e !important;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 12px;
+    display: inline-block;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 .leaderboard-list {
     list-style: none; padding: 0; text-align: left;
@@ -205,20 +210,24 @@ h1, h2, h3 { color: #eccc68; }
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: #eccc68;
-    color: #2f3542;
-    border: 2px solid #fff;
-    padding: 12px 18px;
+    background: linear-gradient(135deg, #6c5ce7, #8e44ad); /* Tím hoàng gia tu tiên */
+    color: #ffffff !important;                              /* Chữ trắng rõ nét */
+    border: 2px solid #eccc68;                             /* Viền chỉ vàng nổi bật */
+    padding: 12px 20px;
     border-radius: 50px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.6);
     cursor: pointer;
     z-index: 100;
-    transition: 0.3s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.inventory-btn:hover { background: #ffa502; transform: scale(1.1); }
 
+.inventory-btn:hover {
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(236, 204, 104, 0.6);
+}
 .modal-overlay {
     display: none; position: fixed; top: 0; left: 0; 
     width: 100%; height: 100%;
