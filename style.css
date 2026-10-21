@@ -440,3 +440,74 @@ body {
   color: #94a3b8;
   cursor: not-allowed;
 }
+/* ========================================== */
+/* HIỆU ỨNG ĐỘT PHÁ ĐẠI CẢNH GIỚI (v0.5)     */
+/* ========================================== */
+.breakthrough-card {
+  border: 2px solid #ffd700 !important;
+  background: radial-gradient(circle, #1e1b4b 0%, #090d16 100%) !important;
+  box-shadow: 0 0 35px rgba(255, 215, 0, 0.5), inset 0 0 15px rgba(255, 215, 0, 0.2);
+  text-align: center;
+  padding: 24px 20px;
+  animation: breakthroughGaze 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes breakthroughGaze {
+  from { box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
+  to { box-shadow: 0 0 45px rgba(255, 215, 0, 0.8); }
+}
+
+.breakthrough-badge {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: #f59e0b;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.breakthrough-title {
+  color: #fff;
+  font-size: 1.25rem;
+  margin-bottom: 6px;
+}
+
+.breakthrough-realm {
+  color: #ffd700;
+  font-size: 1.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.7);
+}
+
+.breakthrough-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #ffd700, transparent);
+  margin: 14px auto;
+  width: 80%;
+}
+
+.breakthrough-desc {
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+  font-style: italic;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 10px 14px;
+  border-radius: 8px;
+  border-left: 3px solid #ffd700;
+  text-align: left;
+  margin-bottom: 12px;
+}
+
+.breakthrough-bonus {
+  font-size: 0.85rem;
+  color: #38bdf8;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+
+.btn-breakthrough-close {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+}
