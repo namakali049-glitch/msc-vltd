@@ -1171,8 +1171,9 @@ window.startBattle = function() {
     window.playClickSound();
     recalcStats();
 
-    if (thanThuc < 100 || calculateRealm(lifetimeMana) === "Phàm Nhân") {
-        alert("⚠️ Đạo hữu hiện tại là Phàm Nhân, chưa ngưng tụ Thần Thức nên không thể ngự kiếm!\n\nHãy vào 'Bế Quan Khai Phá' để tích lũy Linh Lực đạt mốc 150 (Luyện Khí Sơ Kỳ).");
+    // 1. Chặn Phàm Nhân không được bước vào Bí Cảnh (Chỉ dựa vào Tu Vi thực tế)
+    if (calculateRealm(lifetimeMana) === "Phàm Nhân") {
+        alert("⚠️ Đạo hữu hiện tại là Phàm Nhân, chưa ngưng tụ đủ Linh Lực nên không thể ngự kiếm!\n\nHãy vào 'Bế Quan Khai Phá' để tích lũy Linh Lực đạt mốc 150 (Luyện Khí Sơ Kỳ).");
         return;
     }
 
