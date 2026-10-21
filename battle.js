@@ -127,7 +127,7 @@ window.startBattle = function() {
     battleLoop();
 };
 
-window.exitBattle = function() {
+window.exitBattle = function(isDeath = false) {
     if (window.playClickSound) window.playClickSound();
     if (battleAnimationFrame) cancelAnimationFrame(battleAnimationFrame);
     
@@ -140,7 +140,21 @@ window.exitBattle = function() {
     
     const survivalSec = Math.floor(battleData.frameCount / 60);
     const formatTimeFunc = window.formatTime || ((s) => `${Math.floor(s/60)}:${s%60}`);
-    alert(`🚪 Đạo hữu đã an toàn rút khỏi Bí Cảnh!\n\n📊 KẾT QUẢ RÈN LUYỆN:\n⏱️ Thời gian sống sót: ${formatTimeFunc(survivalSec)}\n👾 Ma vật đã trảm: ${battleData.kills} con`);
+
+    // Chỉ ghi nhận ván đấu nếu vượt qua kỷ lục tốt nhất cũ (KHÔNG CỘNG DỒN)
+    let recordNotice = "";
+    if (window.recordBattleResult) {
+        const isNewRecord = window.recordBattleResult(survivalSec, battleData.kills);
+        if (isNewRecord) {
+            recordNotice = "\n🔥 LẬP KỶ LỤC MỚI TRÊN TIÊN ĐẠO BẢNG!";
+        }
+    }
+
+    const titleMsg = isDeath 
+        ? "💥 Đạo thể tổn hao nặng nề! Buộc phải rút lui." 
+        : "🚪 Đạo hữu đã an toàn rút khỏi Bí Cảnh!";
+
+    alert(`${titleMsg}\n\n📊 KẾT QUẢ VÁN ĐẤU:\n⏱️ Thời gian sống sót: ${formatTimeFunc(survivalSec)}\n👾 Ma vật đã trảm: ${battleData.kills} con${recordNotice}`);
 
     if (window.syncManaToDatabase) window.syncManaToDatabase();
     if (window.goHome) window.goHome();
