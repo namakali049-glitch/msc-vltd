@@ -169,41 +169,83 @@ window.toggleBGM = async function() {
 };
 
 // ==========================================
-// 4. TIẾN TRÌNH & HÌNH ẢNH CẢNH GIỚI (CẬP NHẬT MỚI)
+// 4. TIẾN TRÌNH & HÌNH ẢNH CẢNH GIỚI (BẢN CẬP NHẬT 0.5)
 // ==========================================
+
+let highestAchievedRank = "Phàm Nhân"; // Mốc cảnh giới cao nhất để tránh lặp thông báo
+
 function getRealmData(mana) {
+    // Lấy số lượng từ vựng độc bản đã thuộc (an toàn, tránh lỗi nếu chưa khởi tạo)
+    const countA1 = (typeof masteredWordsA1 !== 'undefined' && Array.isArray(masteredWordsA1)) ? masteredWordsA1.length : 0;
+    const countB1 = (typeof masteredWordsB1 !== 'undefined' && Array.isArray(masteredWordsB1)) ? masteredWordsB1.length : 0;
+
+    // 1. PHÀM NHÂN (Dưới 150 Linh lực - Chưa có thần thức, 0 kiếm)
     if (mana < 150) {
-        return { rank: "Phàm Nhân", hp: 100, thanThuc: 0 };
+        return { rank: "Phàm Nhân", major: "Phàm Nhân", hp: 100, thanThuc: 0, swords: 0 };
     }
+
+    // 2. LUYỆN KHÍ KỲ (Chỉ cần đủ Linh lực là đột phá, tối đa 3 phi kiếm)
     if (mana < 400) {
-        return { rank: "Luyện Khí Sơ Kỳ", hp: 250, thanThuc: 100 };
+        return { rank: "Luyện Khí Sơ Kỳ", major: "Luyện Khí", hp: 250, thanThuc: 100, swords: 1 };
     }
     if (mana < 800) {
-        return { rank: "Luyện Khí Trung Kỳ", hp: 400, thanThuc: 200 };
+        return { rank: "Luyện Khí Trung Kỳ", major: "Luyện Khí", hp: 400, thanThuc: 200, swords: 2 };
     }
-    if (mana < 1500) {
-        return { rank: "Luyện Khí Hậu Kỳ", hp: 550, thanThuc: 300 };
+    if (mana < 1500 || countA1 < 600) {
+        // KHÓA BÌNH CẢNH: Chưa thuộc đủ 2/3 kho A1 (600 chữ) sẽ kẹt ở Luyện Khí Hậu Kỳ
+        let isBottleneck = (mana >= 1500 && countA1 < 600);
+        return { 
+            rank: isBottleneck ? "Luyện Khí Hậu Kỳ (Bình Cảnh)" : "Luyện Khí Hậu Kỳ", 
+            major: "Luyện Khí", 
+            hp: 550, 
+            thanThuc: 300, 
+            swords: 3 // Luyện khí tối đa 3 phi kiếm
+        };
     }
-    if (mana < 2500) return { rank: "Trúc Cơ Sơ Kỳ", hp: 700, thanThuc: 400 };
-    if (mana < 4000) return { rank: "Trúc Cơ Trung Kỳ", hp: 850, thanThuc: 500 };
-    if (mana < 8000) return { rank: "Trúc Cơ Hậu Kỳ", hp: 1000, thanThuc: 600 };
-    
-    // Bổ sung giới hạn Kim Đan / Nguyên Anh cho Trung Quyển
-    if (mana < 25000) return { rank: "Kim Đan Kỳ", hp: 3000, thanThuc: 1200 };
-    return { rank: "Nguyên Anh Kỳ", hp: 8000, thanThuc: 3000 };
+
+    // 3. TRÚC CƠ KỲ (Yêu cầu >= 600 chữ A1, tối đa 5 phi kiếm)
+    if (mana < 2500) {
+        return { rank: "Trúc Cơ Sơ Kỳ", major: "Trúc Cơ", hp: 700, thanThuc: 400, swords: 3 };
+    }
+    if (mana < 4000) {
+        return { rank: "Trúc Cơ Trung Kỳ", major: "Trúc Cơ", hp: 850, thanThuc: 500, swords: 4 };
+    }
+    if (mana < 8000 || countB1 < 2667) {
+        // KHÓA BÌNH CẢNH KẾT ĐAN: Cần 8000 Linh Lực VÀ 2/3 kho B1 (2667 chữ) mới được lên Kim Đan
+        let isBottleneck = (mana >= 8000 && countB1 < 2667);
+        return { 
+            rank: isBottleneck ? "Trúc Cơ Hậu Kỳ (Bình Cảnh)" : "Trúc Cơ Hậu Kỳ", 
+            major: "Trúc Cơ", 
+            hp: 1000, 
+            thanThuc: 600, 
+            swords: 5 // Trúc cơ tối đa 5 phi kiếm
+        };
+    }
+
+    // 4. KIM ĐAN KỲ (Hiệu: Kim Đan Chân Nhân - Yêu cầu >= 2667 chữ B1)
+    if (mana < 25000 || countB1 < 4000) {
+        let isBottleneck = (mana >= 25000 && countB1 < 4000);
+        return { 
+            rank: isBottleneck ? "Kim Đan Chân Nhân (Bình Cảnh)" : "Kim Đan Chân Nhân", 
+            major: "Kim Đan", 
+            hp: 3000, 
+            thanThuc: 1200, 
+            swords: 5 
+        };
+    }
+
+    // 5. NGUYÊN ANH KỲ (Hiệu: Nguyên Anh Chân Quân - Hoàn thành 100% kho B1)
+    return { rank: "Nguyên Anh Chân Quân", major: "Nguyên Anh", hp: 8000, thanThuc: 3000, swords: 5 };
 }
 
 function calculateRealm(mana) {
     return getRealmData(mana).rank;
 }
 
-// Điều kiện điều khiển số lượng phi kiếm theo Thần Thức
+// Lấy số lượng phi kiếm theo chuẩn v0.5 (Luyện Khí tối đa 3, Trúc Cơ tối đa 5)
 function getSwordCount(sense) {
-    if (sense >= 600) return 4;
-    if (sense >= 400) return 3;
-    if (sense >= 300) return 2;
-    if (sense >= 100) return 1;
-    return 0;
+    const data = getRealmData(lifetimeMana);
+    return data.swords;
 }
 
 function recalcStats() {
@@ -237,10 +279,77 @@ function updateCharacterUI() {
     const hpTxt = document.getElementById('profileHp');
     const senseTxt = document.getElementById('profileSense');
     const swordsTxt = document.getElementById('profileSwords');
+    const masteryA1 = document.getElementById('profileMasteryA1');
+    const masteryB1 = document.getElementById('profileMasteryB1');
+    
     if (hpTxt) hpTxt.innerText = `${currentHp}/${maxHp}`;
     if (senseTxt) senseTxt.innerText = thanThuc;
     if (swordsTxt) swordsTxt.innerText = `${getSwordCount(thanThuc)} Thanh`;
+    
+    const countA1 = (typeof masteredWordsA1 !== 'undefined' && Array.isArray(masteredWordsA1)) ? masteredWordsA1.length : 0;
+    const countB1 = (typeof masteredWordsB1 !== 'undefined' && Array.isArray(masteredWordsB1)) ? masteredWordsB1.length : 0;
+    if (masteryA1) masteryA1.innerText = `${countA1} / 900 từ (${Math.round((countA1 / 900) * 100)}%)`;
+    if (masteryB1) masteryB1.innerText = `${countB1} / 4000 từ (${Math.round((countB1 / 4000) * 100)}%)`;
 }
+
+// ==========================================
+// THÔNG BÁO VÀ NGHI THỨC ĐỘT PHÁ ĐẠI CẢNH GIỚI (v0.5)
+// ==========================================
+const BREAKTHROUGH_NOTICES = {
+    "Luyện Khí": {
+        title: "Chúc mừng đạo hữu đột phá Luyện Khí kỳ!",
+        desc: "Tu sĩ dẫn xuất thiên địa linh khí tẩm bổ tự thân kỳ kinh bát mạch lúc, gọi vì Luyện Khí kỳ.",
+        bonus: "⚔️ Tối đa điều khiển: 3 Thanh Phi Kiếm"
+    },
+    "Trúc Cơ": {
+        title: "Chúc mừng đạo hữu đột phá Trúc Cơ kỳ!",
+        desc: "Luyện khí sĩ, dùng linh khí đả thông toàn bộ kinh mạch lúc tiến hành đúc lại căn cơ gân thể mạch, gọi vì Trúc Cơ tu sĩ.",
+        bonus: "⚔️ Tối đa điều khiển: 5 Thanh Phi Kiếm (Mở khóa kiếm khí thanh sắc)"
+    },
+    "Kim Đan": {
+        title: "Chúc mừng đạo hữu đột phá Kim Đan cảnh!",
+        desc: "Trúc cơ tu sĩ dùng linh khí đúc lại căn cơ sau, linh khí tụ lại đan điền lắng đọng, kết thành kim đan, thành tựu kim đan, hiệu vì Kim Đan Chân Nhân.",
+        bonus: "⚔️ Uy áp Chân Nhân: Ngự 5 đại Phi Kiếm xuất trảm quần ma"
+    },
+    "Nguyên Anh": {
+        title: "Chúc mừng đạo hữu phá đan thành anh, chứng đạo Chân Quân!",
+        desc: "Kim đan chân nhân đem kim đan viên mãn hóa đan thành anh, thành tựu Nguyên Anh Chân Quân.",
+        bonus: "🌌 Pháp tướng thông thiên: Thần thông đại thành!"
+    }
+};
+
+function checkAndTriggerBreakthrough() {
+    const currentData = getRealmData(lifetimeMana);
+    const majorRank = currentData.major;
+
+    const rankTiers = ["Phàm Nhân", "Luyện Khí", "Trúc Cơ", "Kim Đan", "Nguyên Anh"];
+    const oldTierIndex = rankTiers.indexOf(highestAchievedRank);
+    const newTierIndex = rankTiers.indexOf(majorRank);
+
+    // Khi người chơi vượt cấp đại cảnh giới mới
+    if (newTierIndex > oldTierIndex && BREAKTHROUGH_NOTICES[majorRank]) {
+        highestAchievedRank = majorRank;
+        const info = BREAKTHROUGH_NOTICES[majorRank];
+
+        const titleEl = document.getElementById('breakthroughTitle');
+        const realmEl = document.getElementById('breakthroughRealm');
+        const descEl = document.getElementById('breakthroughDesc');
+        const bonusEl = document.getElementById('breakthroughBonus');
+        const modal = document.getElementById('breakthroughModal');
+
+        if (titleEl) titleEl.innerText = info.title;
+        if (realmEl) realmEl.innerText = currentData.rank;
+        if (descEl) descEl.innerText = info.desc;
+        if (bonusEl) bonusEl.innerHTML = info.bonus;
+        if (modal) modal.style.display = 'flex';
+    }
+}
+
+window.closeBreakthroughModal = function() {
+    if (window.playClickSound) window.playClickSound();
+    const modal = document.getElementById('breakthroughModal');
+    if (modal) modal.style.display = 'none';
+};
 // ==========================================
 // 5. CHUYỂN MÀN HÌNH & XÁC THỰC
 // ==========================================
