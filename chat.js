@@ -1,29 +1,19 @@
 // ==========================================
 // HỆ THỐNG TRUYỀN ÂM THẾ GIỚI (WORLD CHAT)
 // ==========================================
-import { 
-    getDatabase, 
-    ref, 
-    push, 
-    query, 
-    limitToLast, 
-    onChildAdded, 
-    get, 
-    remove 
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { getDatabase, ref, push, query, limitToLast, onChildAdded, get, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 let database = null;
 let chatRef = null;
 
-// Hàm hỗ trợ lấy tham chiếu Database an toàn
 function getChatRef() {
     if (!database) {
-        database = getDatabase(); // Lúc này app.js đã initializeApp xong
+        // Chỉ gọi getDatabase() khi thực sự cần dùng tới (khi đã click chat)
+        database = window.firebaseDB || getDatabase();
         chatRef = ref(database, 'chats');
     }
     return chatRef;
 }
-
 let isChatListenerAttached = false;
 
 // 1. MỞ KHUNG CHAT & NẠP TIN NHẮN
