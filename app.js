@@ -566,25 +566,45 @@ function shuffleArray(arr) {
     return arr;
 }
 
+
 function generateQuizSession(pool, numQuestions = 10) {
-    let selected = shuffleArray([...pool]).slice(0, numQuestions);
-    return selected.map(vocab => {
-        let options = [vocab.meaning]; 
-        let attempts = 0;
-        while (options.length < 4 && attempts < 50 && pool.length > 1) {
-            attempts++;
-            let rand = pool[Math.floor(Math.random() * pool.length)];
-            if (rand && rand.meaning && !options.includes(rand.meaning)) {
-                options.push(rand.meaning);
+    // 1. Lọc sạch dòng rác, chỉ nhận dòng có đủ Chữ Hán và Ý Nghĩa
+    let validPool = pool.filter(v => v && v.hanzi && v.meaning && v.hanzi.trim().length > 0 && v.meaning.trim().length > 0);
+    const isB1 = window.currentCsvFile && window.currentCsvFile.includes("b1");
+    const masteredList = isB1 ? masteredWordsB1 : masteredWordsA1;
+
+    // 2. Tách từ chưa thuộc và đã thuộc (Ưu tiên 7-8 câu từ mới)
+    let unlearned = shuffleArray(validPool.filter(v => !masteredList.includes(v.hanzi.trim())));
+    let learned = shuffleArray(validPool.filter(v => masteredList.includes(v.hanzi.trim())));
+
+    let selected = [];
+    selected.push(...unlearned.slice(0, Math.min(unlearned.length, 8)));
+    selected.push(...learned.slice(0, numQuestions - selected.length));
+
+    if (selected.length < numQuestions) {
+        let remaining = validPool.filter(v => !selected.includes(v));
+        selected.push(...shuffleArray(remaining).slice(0, numQuestions - selected.length));
+    }
+    selected = shuffleArray(selected);
+
+    let quiz = [];
+    selected.forEach(item => {
+        let options = [item.meaning];
+        let distractors = shuffleArray(validPool.filter(d => d.meaning !== item.meaning));
+        for (let i = 0; i < distractors.length && options.length < 4; i++) {
+            if (!options.includes(distractors[i].meaning)) {
+                options.push(distractors[i].meaning);
             }
         }
         options = shuffleArray(options);
-        return {
-            q: `Đạo hữu hãy cho biết ý nghĩa của từ này:\n\n✨ ${vocab.hanzi} ✨\n(Phiên âm: ${vocab.pinyin} | Loại: ${vocab.type})`,
-            options: options, 
-            ans: options.indexOf(vocab.meaning)
-        };
+        quiz.push({
+            rawVocab: item, // Lưu lại từ gốc để ghi nhận thuộc từ
+            q: `Đạo hữu hãy cho biết ý nghĩa của từ này:\n\n✨ ${item.hanzi} ✨\n(Phiên âm: ${item.pinyin || ''} | Loại: ${item.type || 'Từ'})`,
+            options: options,
+            ans: options.indexOf(item.meaning)
+        });
     });
+    return quiz;
 }
 
 function formatTime(sec) {
@@ -659,8 +679,10 @@ window.startGame = async function() {
 function initLevel() {
     currentLevelExp = 0; currentQuestionIndex = 0;
     activeQuestions = generateQuizSession(vocabPool, 10);
-    // Độ khó cao sẽ x5 lượng Linh lực cần thiết để đột phá tầng
-    expToLevelUp = Math.floor(activeQuestions.length * 0.8) * expPerQuestion * window.difficultyMultiplier * 2; 
+    
+    // CÂN BẰNG ĐIỂM HỢP LÝ: Đúng 8/10 câu là qua tầng bình thường (không bị kẹt 800 điểm)
+    let bonusPerQ = Math.floor(10 + str * 0.2);
+    expToLevelUp = Math.floor(activeQuestions.length * 0.8) * bonusPerQ; 
     
     document.getElementById('level').innerText = currentLevel;
     document.getElementById('maxExp').innerText = expToLevelUp;
