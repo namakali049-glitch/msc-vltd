@@ -296,22 +296,7 @@ window.showProfile = function() {
 };
 
 // Nhận thưởng Điểm tiềm năng khi tăng tiểu cảnh giới
-window.addLifetimeMana = function(amount) {
-    window.lifetimeMana += amount;
-    
-    if (window.MINOR_REALM_REWARDS) {
-        window.MINOR_REALM_REWARDS.forEach(tier => {
-            if (window.lifetimeMana >= tier.mana && !window.stats.rewardedTiers.includes(tier.id)) {
-                window.stats.freePoints += tier.points;
-                window.stats.rewardedTiers.push(tier.id);
-                console.log(`Đột phá ${tier.name}! Nhận ${tier.points} điểm tiềm năng.`);
-            }
-        });
-    }
-    
-    if (window.checkAndTriggerBreakthrough) window.checkAndTriggerBreakthrough(window.lifetimeMana);
-    window.syncManaToDatabase();
-};
+window.addLifetimeMana = function(amount
 
 // ==========================================
 // 9. TIÊN ĐẠO BẢNG (LEADERBOARD)
