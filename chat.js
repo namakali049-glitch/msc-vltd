@@ -31,7 +31,6 @@ window.openWorldChat = function() {
         };
     }
 
-    // Chỉ kết nối listener 1 lần duy nhất
     if (!isChatListenerAttached) {
         attachChatListener();
         isChatListenerAttached = true;
@@ -51,7 +50,6 @@ function attachChatListener() {
     if (!box) return;
     box.innerHTML = '';
 
-    // Chỉ lấy 50 tin nhắn mới nhất về máy
     const chatQuery = query(chatRef, limitToLast(50));
 
     onChildAdded(chatQuery, (snapshot) => {
@@ -90,7 +88,6 @@ window.sendChatMessage = async function() {
     const text = input.value.trim();
     if (!text) return;
 
-    // Giới hạn cứng 100 ký tự
     if (text.length > 100) {
         alert("⚠️ Nội dung truyền âm không được vượt quá 100 ký tự!");
         return;
@@ -107,7 +104,6 @@ window.sendChatMessage = async function() {
     if (window.playClickSound) window.playClickSound();
 
     try {
-        // Đẩy tin nhắn mới lên Firebase
         await push(chatRef, {
             sender: senderName,
             realm: currentRealm,
@@ -115,7 +111,6 @@ window.sendChatMessage = async function() {
             timestamp: Date.now()
         });
 
-        // DỌN DẸP SERVER: Nếu tổng tin vượt quá 50, tự động xóa các tin cũ nhất
         cleanOldMessages();
     } catch (e) {
         console.error("Lỗi gửi tin nhắn:", e);
@@ -123,7 +118,6 @@ window.sendChatMessage = async function() {
     }
 };
 
-// Hàm tự động xóa tin nhắn cũ trên Firebase để giữ danh sách <= 50 tin
 async function cleanOldMessages() {
     try {
         const snapshot = await get(chatRef);
@@ -131,7 +125,6 @@ async function cleanOldMessages() {
             const data = snapshot.val();
             const keys = Object.keys(data);
             if (keys.length > 50) {
-                // Sắp xếp theo timestamp cũ nhất
                 keys.sort((a, b) => (data[a].timestamp || 0) - (data[b].timestamp || 0));
                 const deleteCount = keys.length - 50;
                 for (let i = 0; i < deleteCount; i++) {
@@ -140,7 +133,7 @@ async function cleanOldMessages() {
             }
         }
     } catch(e) {
-        // Không chặn luồng chat nếu dọn dẹp gặp trục trặc
+        // Bỏ qua lỗi dọn dẹp để không gián đoạn giao diện chat
     }
 }
 
