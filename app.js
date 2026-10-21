@@ -512,6 +512,18 @@ function parseFirebaseArray(data) {
     return [];
 }
 
+// Sinh ngẫu nhiên thuộc tính ban đầu cho Phàm Nhân (từ 1 đến 10 điểm cho mỗi chỉ số)
+function generateRandomBaseStats() {
+    return {
+        str: Math.floor(Math.random() * 10) + 1, // 1 đến 10
+        vit: Math.floor(Math.random() * 10) + 1, // 1 đến 10
+        agi: Math.floor(Math.random() * 10) + 1, // 1 đến 10
+        spi: Math.floor(Math.random() * 10) + 1, // 1 đến 10
+        freePoints: 0,
+        rewardedTiers: []
+    };
+}
+
 async function loadUserLifetimeMana(uid) {
     try {
         const userRef = ref(database, 'users/' + uid);
@@ -522,17 +534,20 @@ async function loadUserLifetimeMana(uid) {
             inventory = val.inventory || { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
             masteredWordsA1 = parseFirebaseArray(val.masteredA1);
             masteredWordsB1 = parseFirebaseArray(val.masteredB1);
+            // Nạp thông số thuộc tính đã lưu, nếu tài khoản cũ chưa có thì random bộ mới
+            playerStats = val.stats || generateRandomBaseStats();
             highestAchievedRank = getRealmData(lifetimeMana).major;
         }
     } catch(e) { 
         lifetimeMana = 0; 
         masteredWordsA1 = [];
         masteredWordsB1 = [];
+        playerStats = generateRandomBaseStats();
     }
     recalcStats();
 }
 
-// Dùng update() thay vì set() để chỉ cập nhật các trường thay đổi, không xóa mất trường khác
+// Lưu toàn bộ Linh Lực, Túi đồ, Từ đã thuộc và 4 Thuộc Tính lên Firebase
 async function syncManaToDatabase() {
     if (!currentUser) return;
     try {
@@ -541,6 +556,7 @@ async function syncManaToDatabase() {
             name: currentUser.displayName || currentUser.email.split('@')[0],
             mana: lifetimeMana,
             inventory: inventory,
+            stats: playerStats, // Lưu 4 thuộc tính
             masteredA1: masteredWordsA1,
             masteredB1: masteredWordsB1,
             lastUpdated: Date.now()
