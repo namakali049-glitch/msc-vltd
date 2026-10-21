@@ -1,3 +1,4 @@
+import './chat.js';
 import './quiz.js';
 import './battle.js';
 import './inventory.js';
