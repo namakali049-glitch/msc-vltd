@@ -530,7 +530,6 @@ async function loadUserLifetimeMana(uid) {
     }
     recalcStats();
 }
-
 async function syncManaToDatabase() {
     if (!currentUser) return;
     try {
