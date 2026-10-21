@@ -472,7 +472,7 @@ function parseFirebaseArray(data) {
     return [];
 }
 
-// CĂN CỐT PHÀM NHÂN CÁCH B: TỔNG BẰNG ĐÚNG 10 ĐIỂM
+// CĂN CỐT PHÀM NHÂN THEO CÁCH B: TỔNG BẰNG ĐÚNG 10 ĐIỂM
 function generateRandomBaseStats() {
     let stats = { str: 1, vit: 1, agi: 1, spi: 1 };
     let remainingPoints = 6; // 10 - 4 = 6 điểm phân bổ ngẫu nhiên
@@ -490,7 +490,8 @@ function generateRandomBaseStats() {
         agi: stats.agi,
         spi: stats.spi,
         freePoints: 0,
-        rewardedTiers: []
+        rewardedTiers: [],
+        version: "v0.6_B" // Đánh dấu nhận diện Cách B
     };
 }
 async function loadUserLifetimeMana(uid) {
