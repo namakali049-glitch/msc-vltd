@@ -409,9 +409,7 @@ function battleLoop() {
 
                 if ((window.currentHp || 0) <= 0) {
                     battleCtx.restore();
-                    const formatTimeFunc = window.formatTime || ((s) => `${Math.floor(s/60)}:${s%60}`);
-                    alert(`💥 Đạo thể tổn hao nặng nề! Buộc phải rút lui.\n\n📊 KẾT QUẢ RÈN LUYỆN:\n⏱️ Thời gian sống sót: ${formatTimeFunc(survivalSec)}\n👾 Ma vật đã trảm: ${battleData.kills} con`);
-                    window.exitBattle();
+                    window.exitBattle(true);
                     return;
                 }
             }
