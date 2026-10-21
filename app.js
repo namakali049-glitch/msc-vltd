@@ -142,6 +142,7 @@ window.allocateStat = function(statKey) {
 
         recalcStats();
         updateCharacterUI();
+        window.updateCharacterUI = updateCharacterUI;
         syncManaToDatabase();
     }
 };
