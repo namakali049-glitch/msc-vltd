@@ -490,7 +490,7 @@ window.renderLeaderboardList = function() {
     if (!lbList) return;
     
     if (!cachedLeaderboardData || cachedLeaderboardData.length === 0) {
-        lbList.innerHTML = '<li>Chưa có cao thủ nào!</li>';
+        lbList.innerHTML = '<li style="justify-content:center; color:#94a3b8;">Chưa có cao thủ nào!</li>';
         return;
     }
 
@@ -498,7 +498,7 @@ window.renderLeaderboardList = function() {
     const formatTimeFunc = window.formatTime || ((s) => `${String(Math.floor(s/60)).padStart(2, '0')}:${String(s%60).padStart(2, '0')}`);
 
     if (currentLeaderboardTab === 'mana') {
-        // TAB 1: GIỮ NGUYÊN 100% BẢN GỐC (Sắp xếp theo Linh Lực trọn đời)
+        // TAB 1: TU VI BẢNG (Giữ nguyên 100% gốc - Top 10 tổng Linh Lực trọn đời)
         let records = [...cachedLeaderboardData]
             .sort((a, b) => (b.mana || 0) - (a.mana || 0))
             .slice(0, 10);
@@ -518,17 +518,18 @@ window.renderLeaderboardList = function() {
                 </li>`;
         });
     } else {
-        // TAB 2: BẢNG XẾP HẠNG BÍ CẢNH (TOP 10 VÁN TỐT NHẤT - KHÔNG CỘNG DỒN)
-        // Tiêu chí: 1. Thời gian sống sót lâu nhất; 2. Số quái trảm nhiều nhất
+        // TAB 2: BÍ CẢNH BẢNG (Top 10 ván tốt nhất - Không cộng dồn)
+        // Tiêu chí: 1. Thời gian sống lâu nhất -> 2. Diệt nhiều quái nhất
         let records = [...cachedLeaderboardData]
             .filter(p => p.battleRecord && (p.battleRecord.maxSurvivalSec > 0 || p.battleRecord.maxKills > 0))
             .sort((a, b) => {
                 const secA = a.battleRecord?.maxSurvivalSec || 0;
                 const secB = b.battleRecord?.maxSurvivalSec || 0;
-                if (secB !== secA) return secB - secA; // Ưu tiên 1: Thời gian sống lâu hơn đứng trước
-                return (b.battleRecord?.maxKills || 0) - (a.battleRecord?.maxKills || 0); // Ưu tiên 2: Diệt nhiều quái hơn
+                // Nếu thời gian bằng nhau, ưu tiên người diệt nhiều quái hơn
+                if (secB !== secA) return secB - secA;
+                return (b.battleRecord?.maxKills || 0) - (a.battleRecord?.maxKills || 0);
             })
-            .slice(0, 10); // Lấy chuẩn Top 10 người chơi
+            .slice(0, 10);
 
         if (records.length === 0) {
             lbList.innerHTML = '<li style="justify-content:center; color:#94a3b8;">Chưa có chiến tích Bí Cảnh nào được ghi nhận!</li>';
