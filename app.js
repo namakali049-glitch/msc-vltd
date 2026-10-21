@@ -396,11 +396,29 @@ async function loadUserLifetimeMana(uid) {
         const userRef = ref(database, 'users/' + uid);
         const snapshot = await get(userRef);
         if (snapshot.exists()) {
-            lifetimeMana = snapshot.val().mana || 0;
-            inventory = snapshot.val().inventory || { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
+            const val = snapshot.val();
+            lifetimeMana = val.mana || 0;
+            inventory = val.inventory || { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
+            masteredWordsA1 = Array.isArray(val.masteredA1) ? val.masteredA1 : [];
+            masteredWordsB1 = Array.isArray(val.masteredB1) ? val.masteredB1 : [];
+            highestAchievedRank = getRealmData(lifetimeMana).major;
         }
     } catch(e) { lifetimeMana = 0; }
     recalcStats();
+}
+
+async function syncManaToDatabase() {
+    if (!currentUser) return;
+    try {
+        await set(ref(database, 'users/' + currentUser.uid), {
+            name: currentUser.displayName || currentUser.email.split('@')[0],
+            mana: lifetimeMana,
+            inventory: inventory,
+            masteredA1: masteredWordsA1,
+            masteredB1: masteredWordsB1,
+            lastUpdated: Date.now()
+        });
+    } catch(e) { console.error("Lỗi đồng bộ:", e); }
 }
 
 onAuthStateChanged(auth, async (user) => {
