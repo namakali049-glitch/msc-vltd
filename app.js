@@ -173,7 +173,6 @@ window.toggleBGM = async function() {
 // ==========================================
 // 4. TIẾN TRÌNH & HÌNH ẢNH CẢNH GIỚI (BẢN CẬP NHẬT 0.5)
 // ==========================================
-
 let highestAchievedRank = "Phàm Nhân"; // Mốc cảnh giới cao nhất để tránh lặp thông báo
 
 function getRealmData(mana) {
@@ -350,6 +349,7 @@ window.closeBreakthroughModal = function() {
     const modal = document.getElementById('breakthroughModal');
     if (modal) modal.style.display = 'none';
 };
+
 // ==========================================
 // 5. CHUYỂN MÀN HÌNH & XÁC THỰC FIREBASE (ĐÃ FIX CHUẨN)
 // ==========================================
@@ -518,6 +518,7 @@ window.showProfile = function() {
     if (senseEl) senseEl.innerText = thanThuc;
     const swordEl = document.getElementById('profileSwords');
     if (swordEl) swordEl.innerText = `${getSwordCount(thanThuc)} Thanh`;
+    updateCharacterUI();
 };
 
 window.showLeaderboard = async function() {
@@ -563,7 +564,6 @@ function shuffleArray(arr) {
     }
     return arr;
 }
-
 
 function generateQuizSession(pool, numQuestions = 10) {
     // 1. Lọc sạch dòng rác, chỉ nhận dòng có đủ Chữ Hán và Ý Nghĩa
@@ -613,21 +613,23 @@ function formatTime(sec) {
 window.currentCsvFile = "./a1_vocab.csv";
 window.difficultyMultiplier = 1;
 
-// Hàm kiểm tra Cảnh Giới trước khi vào Quyển
+// Hàm kiểm tra Cảnh Giới trước khi vào Quyển (Bản 0.5: Yêu cầu Kim Đan Chân Nhân = 8000 mana & thuộc >= 600 từ A1)
 window.checkAndStartVolume = function(vol) {
     if (vol === 'trung_quyen') {
-        if (lifetimeMana < 8000) { // 8000 là mốc lên Kim Đan
-            alert("⚠️ Cảnh giới chưa đủ!\nĐạo hữu cần đạt ít nhất [Kim Đan Kỳ] (8000 Linh Lực) mới có thể chịu đựng áp lực của Trung Quyển.");
+        const realmData = getRealmData(lifetimeMana);
+        if (realmData.major !== "Kim Đan" && realmData.major !== "Nguyên Anh") {
+            alert("⚠️ Cảnh giới chưa đủ!\nĐạo hữu cần đột phá lên [Kim Đan Chân Nhân] (cần 8.000 Linh Lực và thuộc tối thiểu 600 từ Hạ Quyển A1) mới có thể mở khóa Trung Quyển.");
             return;
         }
         window.currentCsvFile = "./b1_vocab.csv";
-        window.difficultyMultiplier = 5; // Yêu cầu EXP cực cao để qua ải
+        window.difficultyMultiplier = 1;
     } else {
         window.currentCsvFile = "./a1_vocab.csv";
         window.difficultyMultiplier = 1;
     }
     
-    document.getElementById('hanNguModal').style.display = 'none';
+    const hanNguModal = document.getElementById('hanNguModal');
+    if (hanNguModal) hanNguModal.style.display = 'none';
     window.startGame();
 };
 
@@ -663,6 +665,10 @@ window.startGame = async function() {
         document.getElementById('quizStatLabel').innerText = "Sinh Mệnh";
         document.getElementById('quizStatValue').innerText = `${currentHp}/${maxHp}`;
     }
+
+    const hudCount = document.getElementById('sessionMasteryCount');
+    const isB1 = window.currentCsvFile && window.currentCsvFile.includes("b1");
+    if (hudCount) hudCount.innerText = isB1 ? masteredWordsB1.length : masteredWordsA1.length;
 
     document.getElementById('timerDisplay').innerText = "00:00";
     if (timerInterval) clearInterval(timerInterval);
@@ -716,7 +722,7 @@ function loadQuestion() {
 }
 
 function checkAnswer(selectedIndex, correctIndex, btnElement) {
-    const buttons = document.querySelectorAll('.options-container .option-btn');
+    const buttons = document.querySelectorAll('#options .option-btn');
     buttons.forEach(b => b.onclick = null); 
     
     if (selectedIndex === correctIndex) {
@@ -770,6 +776,9 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
                 }
             }
         }
+
+        const masteryHUD = document.getElementById('sessionMasteryCount');
+        if (masteryHUD) masteryHUD.innerText = isB1 ? masteredWordsB1.length : masteredWordsA1.length;
 
         let newWordNotice = isNewWord ? `<br>🌟 <b style="color:#4ade80;">Lĩnh ngộ khẩu quyết mới: [${currentQ.rawVocab.hanzi}]!</b>` : '';
         document.getElementById('message').innerHTML = `✅ Đáp đúng! +${bonusMana} Linh Lực (STR +${Math.floor(str * 0.2)})${newWordNotice}${lootMessage}`;
@@ -852,14 +861,13 @@ window.nextQuestion = function() {
 window.stopCultivationEarly = function() {
     window.playClickSound();
     if(confirm("Đạo hữu muốn xuất quan sớm?\nLinh Lực đã lĩnh ngộ trong lần này vẫn sẽ được giữ lại!")) {
-        endGame(true, true); // Gọi endGame với trạng thái thắng (true) và xuất quan sớm (true)
+        endGame(true, true);
     }
 };
 
 function endGame(win, earlyExit = false) {
     clearInterval(timerInterval);
     
-    // Đổi tiêu đề và màu sắc tùy trạng thái
     let title = win ? (earlyExit ? "🚪 Đã Xuất Quan Sớm" : "🏆 Bế Quan Viên Mãn!") : "💥 Tẩu Hỏa Nhập Ma!";
     let titleColor = win ? (earlyExit ? "#38bdf8" : "#2ed573") : "#ff4757";
     
@@ -1325,8 +1333,9 @@ function unlockAudioOnInteraction() {
 }
 document.addEventListener('click', unlockAudioOnInteraction);
 document.addEventListener('keydown', unlockAudioOnInteraction);
+
 // ==========================================
-// ĐIỀU KHIỂN TÀNG KINH CÁC
+// ĐIỀU KHIỂN TÀNG KINH CÁC & HÁN NGỮ CHÂN GIẢI
 // ==========================================
 window.openLibraryModal = function() {
     window.playClickSound();
@@ -1340,14 +1349,38 @@ window.closeLibraryModal = function() {
     if (modal) modal.style.display = 'none';
 };
 
+window.openHanNguModal = function() {
+    window.playClickSound();
+    const libModal = document.getElementById('libraryModal');
+    if (libModal) libModal.style.display = 'none';
+    const modal = document.getElementById('hanNguModal');
+    if (modal) modal.style.display = 'flex';
+};
+
+window.closeHanNguModal = function() {
+    window.playClickSound();
+    const modal = document.getElementById('hanNguModal');
+    if (modal) modal.style.display = 'none';
+    const libModal = document.getElementById('libraryModal');
+    if (libModal) libModal.style.display = 'flex';
+};
+
 window.chooseLibraryOption = function(type) {
     window.playClickSound();
     if (type === 'han_ngu') {
-        // Đóng modal Tàng Kinh Các và bắt đầu tu luyện Hán Ngữ Chân Giải như cũ
         window.closeLibraryModal();
-        window.startGame();
+        const hanNguModal = document.getElementById('hanNguModal');
+        if (hanNguModal) {
+            hanNguModal.style.display = 'flex';
+        } else {
+            window.startGame();
+        }
     } else if (type === 'anh_ngu') {
-        // Thông báo khi bấm vào Anh Ngữ Công
         alert("🔒 Cấm chế phong ấn!\n\nĐiển tịch 'Anh Ngữ Công' hiện chưa khai mở. Đạo hữu hãy chuyên tâm lĩnh ngộ 'Hán Ngữ Chân Giải' để nâng cao tu vi!");
     }
+};
+
+window.startVolume = function(vol) {
+    if (window.playClickSound) window.playClickSound();
+    window.checkAndStartVolume(vol);
 };
