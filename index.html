@@ -169,8 +169,23 @@
   <div id="leaderboard-screen" class="screen">
     <div class="leaderboard-card">
       <h2 class="lb-header">🏆 TIÊN ĐẠO BẢNG 🏆</h2>
-      <p class="lb-desc">Bảng xếp hạng Linh lực trọn đời</p>
-      <ul id="lb-list" class="lb-container"></ul>
+      <p id="lb-desc-text" class="lb-desc">Bảng xếp hạng Linh lực trọn đời</p>
+
+      <!-- 2 Tab lớn phía trên theo bản vẽ phác thảo -->
+      <div class="lb-tabs-container">
+        <button id="lb-tab-mana" class="lb-big-tab active" onclick="switchLeaderboardTab('mana')">
+          ⚡ Tu Vi Bảng
+        </button>
+        <button id="lb-tab-battle" class="lb-big-tab" onclick="switchLeaderboardTab('battle')">
+          ⚔️ Bí Cảnh Bảng
+        </button>
+      </div>
+
+      <!-- Khung danh sách lớn bên dưới -->
+      <div class="lb-content-box">
+        <ul id="lb-list" class="lb-container"></ul>
+      </div>
+
       <button class="btn-back-lobby btn-red mt-15" onclick="goHome()">Trở về Động phủ 🏯</button>
     </div>
   </div>
