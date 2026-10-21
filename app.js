@@ -177,58 +177,56 @@ window.toggleBGM = async function() {
 let highestAchievedRank = "Phàm Nhân"; // Mốc cảnh giới cao nhất để tránh lặp thông báo
 
 function getRealmData(mana) {
-    // Lấy số lượng từ vựng độc bản đã thuộc (an toàn, tránh lỗi nếu chưa khởi tạo)
     const countA1 = (typeof masteredWordsA1 !== 'undefined' && Array.isArray(masteredWordsA1)) ? masteredWordsA1.length : 0;
     const countB1 = (typeof masteredWordsB1 !== 'undefined' && Array.isArray(masteredWordsB1)) ? masteredWordsB1.length : 0;
 
-    // 1. PHÀM NHÂN (Dưới 150 Linh lực - Chưa có thần thức, 0 kiếm)
+    // 1. PHÀM NHÂN
     if (mana < 150) {
         return { rank: "Phàm Nhân", major: "Phàm Nhân", hp: 100, thanThuc: 0, swords: 0 };
     }
 
-    // 2. LUYỆN KHÍ KỲ (Chỉ cần đủ Linh lực là đột phá, tối đa 3 phi kiếm)
+    // 2. LUYỆN KHÍ KỲ (KHÔNG CÓ BÌNH CẢNH - ĐỦ LINH LỰC LÀ LÊN THẲNG TRÚC CƠ)
     if (mana < 400) {
         return { rank: "Luyện Khí Sơ Kỳ", major: "Luyện Khí", hp: 250, thanThuc: 100, swords: 1 };
     }
     if (mana < 800) {
         return { rank: "Luyện Khí Trung Kỳ", major: "Luyện Khí", hp: 400, thanThuc: 200, swords: 2 };
     }
-    if (mana < 1500 || countA1 < 600) {
-        // KHÓA BÌNH CẢNH: Chưa thuộc đủ 2/3 kho A1 (600 chữ) sẽ kẹt ở Luyện Khí Hậu Kỳ
-        let isBottleneck = (mana >= 1500 && countA1 < 600);
-        return { 
-            rank: isBottleneck ? "Luyện Khí Hậu Kỳ (Bình Cảnh)" : "Luyện Khí Hậu Kỳ", 
-            major: "Luyện Khí", 
-            hp: 550, 
-            thanThuc: 300, 
-            swords: 3 // Luyện khí tối đa 3 phi kiếm
-        };
+    if (mana < 1500) {
+        return { rank: "Luyện Khí Hậu Kỳ", major: "Luyện Khí", hp: 550, thanThuc: 300, swords: 3 };
     }
 
-    // 3. TRÚC CƠ KỲ (Yêu cầu >= 600 chữ A1, tối đa 5 phi kiếm)
+    // 3. TRÚC CƠ KỲ (LÊN KIM ĐAN MỚI BẮT ĐẦU CẦN 2/3 KHO HẠ QUYỂN = 600 TỪ A1)
     if (mana < 2500) {
         return { rank: "Trúc Cơ Sơ Kỳ", major: "Trúc Cơ", hp: 700, thanThuc: 400, swords: 3 };
     }
     if (mana < 4000) {
         return { rank: "Trúc Cơ Trung Kỳ", major: "Trúc Cơ", hp: 850, thanThuc: 500, swords: 4 };
     }
-    if (mana < 8000 || countB1 < 2667) {
-        // KHÓA BÌNH CẢNH KẾT ĐAN: Cần 8000 Linh Lực VÀ 2/3 kho B1 (2667 chữ) mới được lên Kim Đan
-        let isBottleneck = (mana >= 8000 && countB1 < 2667);
+    if (mana < 8000 || countA1 < 600) {
+        // BÌNH CẢNH KẾT ĐAN: Cần 8000 Linh Lực VÀ 600 từ A1 mới được đột phá Kim Đan Chân Nhân
+        let isBottleneck = (mana >= 8000 && countA1 < 600);
         return { 
             rank: isBottleneck ? "Trúc Cơ Hậu Kỳ (Bình Cảnh)" : "Trúc Cơ Hậu Kỳ", 
             major: "Trúc Cơ", 
             hp: 1000, 
             thanThuc: 600, 
-            swords: 5 // Trúc cơ tối đa 5 phi kiếm
+            swords: 5 
         };
     }
 
-    // 4. KIM ĐAN KỲ (Hiệu: Kim Đan Chân Nhân - Yêu cầu >= 2667 chữ B1)
-    if (mana < 25000 || countB1 < 4000) {
-        let isBottleneck = (mana >= 25000 && countB1 < 4000);
+    // 4. KIM ĐAN KỲ (Hiệu: Kim Đan Chân Nhân - CẦN 2/3 KHO TRUNG QUYỂN = 2667 TỪ B1 ĐỂ HÓA ANH)
+    if (mana < 15000) {
+        return { rank: "Kim Đan Sơ Kỳ", major: "Kim Đan", hp: 2000, thanThuc: 800, swords: 5 };
+    }
+    if (mana < 20000) {
+        return { rank: "Kim Đan Trung Kỳ", major: "Kim Đan", hp: 2500, thanThuc: 1000, swords: 5 };
+    }
+    if (mana < 25000 || countB1 < 2667) {
+        // BÌNH CẢNH HÓA ANH: Cần 25000 Linh Lực VÀ 2667 từ B1 mới được đột phá Nguyên Anh Chân Quân
+        let isBottleneck = (mana >= 25000 && countB1 < 2667);
         return { 
-            rank: isBottleneck ? "Kim Đan Chân Nhân (Bình Cảnh)" : "Kim Đan Chân Nhân", 
+            rank: isBottleneck ? "Kim Đan Hậu Kỳ (Bình Cảnh)" : "Kim Đan Hậu Kỳ", 
             major: "Kim Đan", 
             hp: 3000, 
             thanThuc: 1200, 
@@ -236,7 +234,7 @@ function getRealmData(mana) {
         };
     }
 
-    // 5. NGUYÊN ANH KỲ (Hiệu: Nguyên Anh Chân Quân - Hoàn thành 100% kho B1)
+    // 5. NGUYÊN ANH KỲ (Hiệu: Nguyên Anh Chân Quân)
     return { rank: "Nguyên Anh Chân Quân", major: "Nguyên Anh", hp: 8000, thanThuc: 3000, swords: 5 };
 }
 
