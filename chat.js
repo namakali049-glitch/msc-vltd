@@ -1,19 +1,15 @@
 // ==========================================
-// HỆ THỐNG TRUYỀN ÂM THẾ GIỚI (WORLD CHAT)
+// HỆ THỐNG TRUYỀN ÂM THẾ GIỚI (WORLD CHAT) - FIXED
 // ==========================================
-import { getDatabase, ref, push, query, limitToLast, onChildAdded, get, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { 
+    ref, push, query, limitToLast, onChildAdded, get, remove 
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-let database = null;
-let chatRef = null;
-
+// KHÔNG dùng biến tạm để lưu trữ nữa, lấy trực tiếp từ window.firebaseDB của app.js
 function getChatRef() {
-    if (!database) {
-        // Chỉ gọi getDatabase() khi thực sự cần dùng tới (khi đã click chat)
-        database = window.firebaseDB || getDatabase();
-        chatRef = ref(database, 'chats');
-    }
-    return chatRef;
+    return ref(window.firebaseDB, 'chats');
 }
+
 let isChatListenerAttached = false;
 
 // 1. MỞ KHUNG CHAT & NẠP TIN NHẮN
@@ -50,6 +46,7 @@ function attachChatListener() {
     box.innerHTML = '';
 
     const chatQuery = query(getChatRef(), limitToLast(50));
+
     onChildAdded(chatQuery, (snapshot) => {
         const msg = snapshot.val();
         renderMessageItem(msg);
@@ -126,12 +123,12 @@ async function cleanOldMessages() {
                 keys.sort((a, b) => (data[a].timestamp || 0) - (data[b].timestamp || 0));
                 const deleteCount = keys.length - 50;
                 for (let i = 0; i < deleteCount; i++) {
-                    await remove(ref(getDatabase(), 'chats/' + keys[i]));
+                    await remove(ref(window.firebaseDB, 'chats/' + keys[i]));
                 }
             }
         }
     } catch(e) {
-        // Bỏ qua lỗi dọn dẹp để không gián đoạn giao diện chat
+        // Không báo lỗi để tránh làm phiền người chơi nếu dọn rác thất bại
     }
 }
 
