@@ -258,12 +258,87 @@ function getSwordCount(sense) {
     return data.swords;
 }
 
-function recalcStats() {
-    const data = getRealmData(lifetimeMana);
-    maxHp = data.hp;
-    thanThuc = data.thanThuc;
-    if (currentHp > maxHp) currentHp = maxHp;
+// Danh sách mốc tiểu cảnh giới và số điểm thưởng (Luyện khí +10, Trúc cơ +15, Kim đan +25, Nguyên anh +35)
+const MINOR_REALM_REWARDS = [
+    // Luyện Khí Kỳ (+10 điểm mỗi cấp)
+    { id: "LK_1", mana: 150, points: 10, name: "Luyện Khí Sơ Kỳ" },
+    { id: "LK_2", mana: 400, points: 10, name: "Luyện Khí Trung Kỳ" },
+    { id: "LK_3", mana: 800, points: 10, name: "Luyện Khí Hậu Kỳ" },
+
+    // Trúc Cơ Kỳ (+15 điểm mỗi cấp)
+    { id: "TC_1", mana: 1500, points: 15, name: "Trúc Cơ Sơ Kỳ" },
+    { id: "TC_2", mana: 2500, points: 15, name: "Trúc Cơ Trung Kỳ" },
+    { id: "TC_3", mana: 4000, points: 15, name: "Trúc Cơ Hậu Kỳ" },
+
+    // Kim Đan Kỳ (+25 điểm mỗi cấp)
+    { id: "KD_1", mana: 8000, points: 25, name: "Kim Đan Sơ Kỳ" },
+    { id: "KD_2", mana: 15000, points: 25, name: "Kim Đan Trung Kỳ" },
+    { id: "KD_3", mana: 20000, points: 25, name: "Kim Đan Hậu Kỳ" },
+
+    // Nguyên Anh Kỳ (+35 điểm mỗi cấp)
+    { id: "NA_1", mana: 25000, points: 35, name: "Nguyên Anh Sơ Kỳ" },
+    { id: "NA_2", mana: 35000, points: 35, name: "Nguyên Anh Trung Kỳ" },
+    { id: "NA_3", mana: 50000, points: 35, name: "Nguyên Anh Hậu Kỳ" }
+];
+
+// Hàm kiểm tra và tự động phát điểm tiềm năng khi lên tiểu cảnh giới
+function checkMinorRealmRewards() {
+    if (!Array.isArray(playerStats.rewardedTiers)) {
+        playerStats.rewardedTiers = [];
+    }
+
+    let hasReward = false;
+    MINOR_REALM_REWARDS.forEach(tier => {
+        if (lifetimeMana >= tier.mana && !playerStats.rewardedTiers.includes(tier.id)) {
+            playerStats.freePoints += tier.points;
+            playerStats.rewardedTiers.push(tier.id);
+            hasReward = true;
+            if (window.playLootSound) window.playLootSound();
+            alert(`🎉 Chúc mừng đạo hữu bước vào [${tier.name}]!\nĐược ban thưởng +${tier.points} Điểm Tiềm Năng.`);
+        }
+    });
+
+    if (hasReward) {
+        syncManaToDatabase();
+    }
 }
+
+// Hàm quy đổi 1 điểm thuộc tính = 10 chỉ số thực chiến
+function recalcStats() {
+    checkMinorRealmRewards();
+
+    // 1 Khí Huyết = 10 HP
+    maxHp = Math.max(10, playerStats.vit * 10);
+    if (currentHp > maxHp || currentHp <= 0) currentHp = maxHp;
+
+    // 1 Sức Mạnh = 10 Sát Thương
+    str = playerStats.str;
+    swordDamage = playerStats.str * 10;
+
+    // 1 Tinh Thần = 10 Thần Thức
+    thanThuc = playerStats.spi * 10;
+
+    // 1 Nhanh Nhẹn = 10 Thân Pháp
+    agi = playerStats.agi;
+}
+
+// Hàm xử lý khi người chơi bấm nút dấu [+] để tăng điểm
+window.allocateStat = function(statKey) {
+    if (playerStats.freePoints <= 0) {
+        alert("⚠️ Đạo hữu đã dùng hết điểm tiềm năng! Hãy đột phá tiểu cảnh giới để nhận thêm.");
+        return;
+    }
+
+    if (playerStats.hasOwnProperty(statKey)) {
+        if (window.playClickSound) window.playClickSound();
+        playerStats[statKey] += 1;
+        playerStats.freePoints -= 1;
+
+        recalcStats();
+        updateCharacterUI();
+        syncManaToDatabase();
+    }
+};
 
 function getAvatarByMana(mana) {
     if (mana < 150) return "assets/pham-nhan.jpg";
