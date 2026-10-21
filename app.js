@@ -37,6 +37,24 @@ let currentUser = null;
 let lifetimeMana = 0; 
 let sessionMana = 0;  
 let inventory = { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
+// Lưu kỷ lục của VÁN TỐT NHẤT (Không cộng dồn)
+let battleRecord = { maxSurvivalSec: 0, maxKills: 0 };
+window.battleRecord = battleRecord;
+
+// Hàm kiểm tra ván đấu vừa chơi có phải là ván tốt nhất từ trước đến nay không
+window.recordBattleResult = function(survivalSec, kills) {
+    let updated = false;
+    // Tiêu chí: 1. Sống sót lâu nhất (survivalSec); 2. Nếu bằng giây thì ai trảm nhiều quái hơn (kills)
+    if (survivalSec > battleRecord.maxSurvivalSec || 
+       (survivalSec === battleRecord.maxSurvivalSec && kills > battleRecord.maxKills)) {
+        battleRecord.maxSurvivalSec = survivalSec;
+        battleRecord.maxKills = kills;
+        battleRecord.lastUpdated = Date.now();
+        window.battleRecord = battleRecord;
+        updated = true;
+    }
+    return updated;
+};
 window.inventory = inventory;
 let masteredWordsA1 = [];
 window.masteredWordsA1 = masteredWordsA1;
