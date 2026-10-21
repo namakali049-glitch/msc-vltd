@@ -1306,7 +1306,7 @@ function battleLoop() {
             for (let i = battleData.enemies.length - 1; i >= 0; i--) {
                 const en = battleData.enemies[i];
                 if (Math.hypot(sx - en.x, sy - en.y) < en.radius + 15) {
-                    en.hp -= (str * 2 + 10);
+                    en.hp -= swordDamage;
                     sword.active = false; 
 
                     const kdx = en.x - battleData.player.x;
