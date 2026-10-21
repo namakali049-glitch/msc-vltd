@@ -136,7 +136,7 @@ async function cleanOldMessages() {
                 keys.sort((a, b) => (data[a].timestamp || 0) - (data[b].timestamp || 0));
                 const deleteCount = keys.length - 50;
                 for (let i = 0; i < deleteCount; i++) {
-                    await remove(ref(database, 'chats/' + keys[i]));
+                    await remove(ref(getDatabase(), 'chats/' + keys[i]));
                 }
             }
         }
