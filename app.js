@@ -303,17 +303,17 @@ const BREAKTHROUGH_NOTICES = {
     },
     "Trúc Cơ": {
         title: "Chúc mừng đạo hữu đột phá Trúc Cơ kỳ!",
-        desc: "Luyện khí sĩ, dùng linh khí đả thông toàn bộ kinh mạch lúc tiến hành đúc lại căn cơ gân thể mạch, gọi vì Trúc Cơ tu sĩ.",
+        desc: "Luyện khí sĩ, dùng linh khí đả thông toàn bộ kinh mạch lúc tiến hành đúc lại căn cơ gân thể mạch, gọi vì Trúc Cơ tu sĩ. (Tiếp tục tích lũy đủ 2/3 Hạ Quyển để chuẩn bị Kết Đan).",
         bonus: "⚔️ Tối đa điều khiển: 5 Thanh Phi Kiếm (Mở khóa kiếm khí thanh sắc)"
     },
     "Kim Đan": {
         title: "Chúc mừng đạo hữu đột phá Kim Đan cảnh!",
-        desc: "Trúc cơ tu sĩ dùng linh khí đúc lại căn cơ sau, linh khí tụ lại đan điền lắng đọng, kết thành kim đan, thành tựu kim đan, hiệu vì Kim Đan Chân Nhân.",
-        bonus: "⚔️ Uy áp Chân Nhân: Ngự 5 đại Phi Kiếm xuất trảm quần ma"
+        desc: "Lĩnh ngộ 2/3 khẩu quyết Hạ Quyển, linh khí tụ lại đan điền lắng đọng kết thành kim đan, thành tựu Kim Đan Chân Nhân!",
+        bonus: "⚔️ Uy áp Chân Nhân: Mở khóa điển tịch Trung Quyển B1"
     },
     "Nguyên Anh": {
         title: "Chúc mừng đạo hữu phá đan thành anh, chứng đạo Chân Quân!",
-        desc: "Kim đan chân nhân đem kim đan viên mãn hóa đan thành anh, thành tựu Nguyên Anh Chân Quân.",
+        desc: "Tham ngộ 2/3 điển tịch Trung Quyển, kim đan viên mãn hóa đan thành anh, thành tựu Nguyên Anh Chân Quân!",
         bonus: "🌌 Pháp tướng thông thiên: Thần thông đại thành!"
     }
 };
