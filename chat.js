@@ -12,8 +12,17 @@ import {
     remove 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-const database = getDatabase();
-const chatRef = ref(database, 'chats');
+let database = null;
+let chatRef = null;
+
+// Hàm hỗ trợ lấy tham chiếu Database an toàn
+function getChatRef() {
+    if (!database) {
+        database = getDatabase(); // Lúc này app.js đã initializeApp xong
+        chatRef = ref(database, 'chats');
+    }
+    return chatRef;
+}
 
 let isChatListenerAttached = false;
 
