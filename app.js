@@ -45,6 +45,11 @@ window.masteredWordsB1 = masteredWordsB1;
 window.masteredWordsA1 = masteredWordsA1;
 window.masteredWordsB1 = masteredWordsB1;
 window.lifetimeMana = lifetimeMana;
+window.addLifetimeMana = function(amount) {
+    lifetimeMana += amount;
+    window.lifetimeMana = lifetimeMana;
+    return lifetimeMana;
+};
 // 4 ĐẠI THUỘC TÍNH BẢN NGUYÊN (v0.6)
 let playerStats = {
     str: 1,
