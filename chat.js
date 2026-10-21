@@ -1,13 +1,19 @@
 // ==========================================
-// HỆ THỐNG TRUYỀN ÂM THẾ GIỚI (WORLD CHAT) - FIXED
+// HỆ THỐNG TRUYỀN ÂM THẾ GIỚI (WORLD CHAT)
 // ==========================================
 import { 
-    ref, push, query, limitToLast, onChildAdded, get, remove 
+    getDatabase, ref, push, query, limitToLast, onChildAdded, get, remove 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-// KHÔNG dùng biến tạm để lưu trữ nữa, lấy trực tiếp từ window.firebaseDB của app.js
-function getChatRef() {
-    return ref(window.firebaseDB, 'chats');
+let database = null;
+let chatRef = null;
+
+function getDbRef() {
+    if (!database) {
+        database = window.firebaseDB || getDatabase();
+        chatRef = ref(database, 'chats');
+    }
+    return { database, chatRef };
 }
 
 let isChatListenerAttached = false;
@@ -45,7 +51,8 @@ function attachChatListener() {
     if (!box) return;
     box.innerHTML = '';
 
-    const chatQuery = query(getChatRef(), limitToLast(50));
+    const { chatRef: cRef } = getDbRef();
+    const chatQuery = query(cRef, limitToLast(50));
 
     onChildAdded(chatQuery, (snapshot) => {
         const msg = snapshot.val();
@@ -99,7 +106,8 @@ window.sendChatMessage = async function() {
     if (window.playClickSound) window.playClickSound();
 
     try {
-        await push(getChatRef(), {
+        const { chatRef: cRef } = getDbRef();
+        await push(cRef, {
             sender: senderName,
             realm: currentRealm,
             text: text,
@@ -115,7 +123,8 @@ window.sendChatMessage = async function() {
 
 async function cleanOldMessages() {
     try {
-        const snapshot = await get(getChatRef());
+        const { database: db, chatRef: cRef } = getDbRef();
+        const snapshot = await get(cRef);
         if (snapshot.exists()) {
             const data = snapshot.val();
             const keys = Object.keys(data);
@@ -123,12 +132,12 @@ async function cleanOldMessages() {
                 keys.sort((a, b) => (data[a].timestamp || 0) - (data[b].timestamp || 0));
                 const deleteCount = keys.length - 50;
                 for (let i = 0; i < deleteCount; i++) {
-                    await remove(ref(window.firebaseDB, 'chats/' + keys[i]));
+                    await remove(ref(db, 'chats/' + keys[i]));
                 }
             }
         }
     } catch(e) {
-        // Không báo lỗi để tránh làm phiền người chơi nếu dọn rác thất bại
+        // Bỏ qua lỗi dọn dẹp để không làm gián đoạn người chơi
     }
 }
 
