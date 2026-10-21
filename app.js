@@ -334,7 +334,6 @@ async function loadUserLifetimeMana(uid) {
 }
 
             highestAchievedRank = getRealmData(lifetimeMana).major;
-        }
     } catch(e) { 
         lifetimeMana = 0; 
         masteredWordsA1 = [];
