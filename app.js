@@ -710,10 +710,12 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
         
         currentLevelExp += bonusMana;
         sessionMana += bonusMana;
-        lifetimeMana += bonusMana; 
+        lifetimeMana += bonusMana;
         
-        recalcStats();
+        // Cập nhật giao diện, đồng bộ DB và kiểm tra Đột Phá Đại Cảnh Giới
+        updateCharacterUI();
         syncManaToDatabase();
+        checkAndTriggerBreakthrough();
     } else {
         btnElement.classList.add('wrong');
         buttons[correctIndex].classList.add('correct');
