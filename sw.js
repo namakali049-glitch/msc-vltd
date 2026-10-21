@@ -1,6 +1,7 @@
 const CACHE_NAME = 'tutien-v4';
 const STATIC_ASSETS = [
   './',
+  './chat.js',
   './index.html',
   './style.css',
   './app.js',
