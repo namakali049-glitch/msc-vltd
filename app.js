@@ -751,7 +751,30 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
             playLootSound();
         }
 
-        document.getElementById('message').innerHTML = `✅ Đáp đúng! +${bonusMana} Linh Lực (STR +${Math.floor(str * 0.2)})${lootMessage}`;
+        // ==========================================
+        // GHI NHẬN TỪ MỚI VÀO ĐAN ĐIỀN
+        // ==========================================
+        const currentQ = activeQuestions[currentQuestionIndex];
+        const isB1 = window.currentCsvFile && window.currentCsvFile.includes("b1");
+        let isNewWord = false;
+
+        if (currentQ && currentQ.rawVocab) {
+            const word = currentQ.rawVocab.hanzi.trim();
+            if (isB1) {
+                if (!masteredWordsB1.includes(word)) {
+                    masteredWordsB1.push(word);
+                    isNewWord = true;
+                }
+            } else {
+                if (!masteredWordsA1.includes(word)) {
+                    masteredWordsA1.push(word);
+                    isNewWord = true;
+                }
+            }
+        }
+
+        let newWordNotice = isNewWord ? `<br>🌟 <b style="color:#4ade80;">Lĩnh ngộ khẩu quyết mới: [${currentQ.rawVocab.hanzi}]!</b>` : '';
+        document.getElementById('message').innerHTML = `✅ Đáp đúng! +${bonusMana} Linh Lực (STR +${Math.floor(str * 0.2)})${newWordNotice}${lootMessage}`;
         document.getElementById('message').style.color = "#2ed573";
         
         currentLevelExp += bonusMana;
