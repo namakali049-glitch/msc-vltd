@@ -9,6 +9,7 @@ import {
 import { 
     getDatabase, ref, set, get, update 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
 const firebaseConfig = {
     apiKey: "AIzaSyBBn3CGkftYVVl1wr9fY8OhBAd8LKzUSyE",
     authDomain: "msc-vltd.firebaseapp.com",
@@ -50,7 +51,7 @@ let currentHp = 100;
 let str = 10; 
 let agi = 10; 
 let thanThuc = 100;
-let swordDamage = 100; // Sát thương kiếm
+let swordDamage = 100;
 
 let currentLevel = 1;
 let currentLevelExp = 0; 
@@ -184,18 +185,15 @@ window.toggleBGM = async function() {
 // ==========================================
 // 4. TIẾN TRÌNH & HÌNH ẢNH CẢNH GIỚI (BẢN CẬP NHẬT 0.5)
 // ==========================================
-let highestAchievedRank = "Phàm Nhân"; // Mốc cảnh giới cao nhất để tránh lặp thông báo
+let highestAchievedRank = "Phàm Nhân";
 
 function getRealmData(mana) {
     const countA1 = (typeof masteredWordsA1 !== 'undefined' && Array.isArray(masteredWordsA1)) ? masteredWordsA1.length : 0;
     const countB1 = (typeof masteredWordsB1 !== 'undefined' && Array.isArray(masteredWordsB1)) ? masteredWordsB1.length : 0;
 
-    // 1. PHÀM NHÂN
     if (mana < 150) {
         return { rank: "Phàm Nhân", major: "Phàm Nhân", hp: 100, thanThuc: 0, swords: 0 };
     }
-
-    // 2. LUYỆN KHÍ KỲ (KHÔNG CÓ BÌNH CẢNH - ĐỦ LINH LỰC LÀ LÊN THẲNG TRÚC CƠ)
     if (mana < 400) {
         return { rank: "Luyện Khí Sơ Kỳ", major: "Luyện Khí", hp: 250, thanThuc: 100, swords: 1 };
     }
@@ -205,8 +203,6 @@ function getRealmData(mana) {
     if (mana < 1500) {
         return { rank: "Luyện Khí Hậu Kỳ", major: "Luyện Khí", hp: 550, thanThuc: 300, swords: 3 };
     }
-
-    // 3. TRÚC CƠ KỲ (LÊN KIM ĐAN MỚI BẮT ĐẦU CẦN 2/3 KHO HẠ QUYỂN = 600 TỪ A1)
     if (mana < 2500) {
         return { rank: "Trúc Cơ Sơ Kỳ", major: "Trúc Cơ", hp: 700, thanThuc: 400, swords: 3 };
     }
@@ -214,7 +210,6 @@ function getRealmData(mana) {
         return { rank: "Trúc Cơ Trung Kỳ", major: "Trúc Cơ", hp: 850, thanThuc: 500, swords: 4 };
     }
     if (mana < 8000 || countA1 < 600) {
-        // BÌNH CẢNH KẾT ĐAN: Cần 8000 Linh Lực VÀ 600 từ A1 mới được đột phá Kim Đan Chân Nhân
         let isBottleneck = (mana >= 8000 && countA1 < 600);
         return { 
             rank: isBottleneck ? "Trúc Cơ Hậu Kỳ (Bình Cảnh)" : "Trúc Cơ Hậu Kỳ", 
@@ -224,8 +219,6 @@ function getRealmData(mana) {
             swords: 5 
         };
     }
-
-    // 4. KIM ĐAN KỲ (Hiệu: Kim Đan Chân Nhân - CẦN 2/3 KHO TRUNG QUYỂN = 2667 TỪ B1 ĐỂ HÓA ANH)
     if (mana < 15000) {
         return { rank: "Kim Đan Sơ Kỳ", major: "Kim Đan", hp: 2000, thanThuc: 800, swords: 5 };
     }
@@ -233,7 +226,6 @@ function getRealmData(mana) {
         return { rank: "Kim Đan Trung Kỳ", major: "Kim Đan", hp: 2500, thanThuc: 1000, swords: 5 };
     }
     if (mana < 25000 || countB1 < 2667) {
-        // BÌNH CẢNH HÓA ANH: Cần 25000 Linh Lực VÀ 2667 từ B1 mới được đột phá Nguyên Anh Chân Quân
         let isBottleneck = (mana >= 25000 && countB1 < 2667);
         return { 
             rank: isBottleneck ? "Kim Đan Hậu Kỳ (Bình Cảnh)" : "Kim Đan Hậu Kỳ", 
@@ -243,8 +235,6 @@ function getRealmData(mana) {
             swords: 5 
         };
     }
-
-    // 5. NGUYÊN ANH KỲ (Hiệu: Nguyên Anh Chân Quân)
     return { rank: "Nguyên Anh Chân Quân", major: "Nguyên Anh", hp: 8000, thanThuc: 3000, swords: 5 };
 }
 
@@ -252,36 +242,26 @@ function calculateRealm(mana) {
     return getRealmData(mana).rank;
 }
 
-// Lấy số lượng phi kiếm theo chuẩn v0.5 (Luyện Khí tối đa 3, Trúc Cơ tối đa 5)
 function getSwordCount(sense) {
     const data = getRealmData(lifetimeMana);
     return data.swords;
 }
 
-// Danh sách mốc tiểu cảnh giới và số điểm thưởng (Luyện khí +10, Trúc cơ +15, Kim đan +25, Nguyên anh +35)
 const MINOR_REALM_REWARDS = [
-    // Luyện Khí Kỳ (+10 điểm mỗi cấp)
     { id: "LK_1", mana: 150, points: 10, name: "Luyện Khí Sơ Kỳ" },
     { id: "LK_2", mana: 400, points: 10, name: "Luyện Khí Trung Kỳ" },
     { id: "LK_3", mana: 800, points: 10, name: "Luyện Khí Hậu Kỳ" },
-
-    // Trúc Cơ Kỳ (+15 điểm mỗi cấp)
     { id: "TC_1", mana: 1500, points: 15, name: "Trúc Cơ Sơ Kỳ" },
     { id: "TC_2", mana: 2500, points: 15, name: "Trúc Cơ Trung Kỳ" },
     { id: "TC_3", mana: 4000, points: 15, name: "Trúc Cơ Hậu Kỳ" },
-
-    // Kim Đan Kỳ (+25 điểm mỗi cấp)
     { id: "KD_1", mana: 8000, points: 25, name: "Kim Đan Sơ Kỳ" },
     { id: "KD_2", mana: 15000, points: 25, name: "Kim Đan Trung Kỳ" },
     { id: "KD_3", mana: 20000, points: 25, name: "Kim Đan Hậu Kỳ" },
-
-    // Nguyên Anh Kỳ (+35 điểm mỗi cấp)
     { id: "NA_1", mana: 25000, points: 35, name: "Nguyên Anh Sơ Kỳ" },
     { id: "NA_2", mana: 35000, points: 35, name: "Nguyên Anh Trung Kỳ" },
     { id: "NA_3", mana: 50000, points: 35, name: "Nguyên Anh Hậu Kỳ" }
 ];
 
-// Hàm kiểm tra và tự động phát điểm tiềm năng khi lên tiểu cảnh giới
 function checkMinorRealmRewards() {
     if (!Array.isArray(playerStats.rewardedTiers)) {
         playerStats.rewardedTiers = [];
@@ -303,26 +283,18 @@ function checkMinorRealmRewards() {
     }
 }
 
-// Hàm quy đổi 1 điểm thuộc tính = 10 chỉ số thực chiến
 function recalcStats() {
     checkMinorRealmRewards();
 
-    // 1 Khí Huyết = 10 HP
     maxHp = Math.max(10, playerStats.vit * 10);
     if (currentHp > maxHp || currentHp <= 0) currentHp = maxHp;
 
-    // 1 Sức Mạnh = 10 Sát Thương
     str = playerStats.str;
     swordDamage = playerStats.str * 10;
-
-    // 1 Tinh Thần = 10 Thần Thức
     thanThuc = playerStats.spi * 10;
-
-    // 1 Nhanh Nhẹn = 10 Thân Pháp
     agi = playerStats.agi;
 }
 
-// Hàm xử lý khi người chơi bấm nút dấu [+] để tăng điểm
 window.allocateStat = function(statKey) {
     if (playerStats.freePoints <= 0) {
         alert("⚠️ Đạo hữu đã dùng hết điểm tiềm năng! Hãy đột phá tiểu cảnh giới để nhận thêm.");
@@ -362,11 +334,9 @@ function getBattleSwordSkin() {
 function updateCharacterUI() {
     recalcStats();
 
-    // Hiển thị điểm tiềm năng còn lại
     const fpEl = document.getElementById('profileFreePoints');
     if (fpEl) fpEl.innerText = playerStats.freePoints;
 
-    // Hiển thị 4 thuộc tính và chỉ số quy đổi (nhân 10)
     const strEl = document.getElementById('profileStr');
     if (strEl) strEl.innerText = playerStats.str;
     const strEff = document.getElementById('profileStrEffect');
@@ -387,19 +357,11 @@ function updateCharacterUI() {
     const spiEff = document.getElementById('profileSpiEffect');
     if (spiEff) spiEff.innerText = `(${playerStats.spi * 10} Thần thức)`;
 
-    // Cập nhật số lượng phi kiếm
     const swordsTxt = document.getElementById('profileSwords');
     if (swordsTxt) swordsTxt.innerText = `${getSwordCount(thanThuc)} Thanh`;
 
-    // Cập nhật tiến độ từ vựng A1 và B1
     const masteryA1 = document.getElementById('profileMasteryA1');
     const masteryB1 = document.getElementById('profileMasteryB1');
-    const countA1 = (typeof masteredWordsA1 !== 'undefined' && Array.isArray(masteredWordsA1)) ? masteredWordsA1.length : 0;
-    const countB1 = (typeof masteredWordsB1 !== 'undefined' && Array.isArray(masteredWordsB1)) ? masteredWordsB1.length : 0;
-    if (masteryA1) masteryA1.innerText = `${countA1} / 900 từ (${Math.round((countA1 / 900) * 100)}%)`;
-    if (masteryB1) masteryB1.innerText = `${countB1} / 4000 từ (${Math.round((countB1 / 4000) * 100)}%)`;
-}
-    
     const countA1 = (typeof masteredWordsA1 !== 'undefined' && Array.isArray(masteredWordsA1)) ? masteredWordsA1.length : 0;
     const countB1 = (typeof masteredWordsB1 !== 'undefined' && Array.isArray(masteredWordsB1)) ? masteredWordsB1.length : 0;
     if (masteryA1) masteryA1.innerText = `${countA1} / 900 từ (${Math.round((countA1 / 900) * 100)}%)`;
@@ -440,7 +402,6 @@ function checkAndTriggerBreakthrough() {
     const oldTierIndex = rankTiers.indexOf(highestAchievedRank);
     const newTierIndex = rankTiers.indexOf(majorRank);
 
-    // Khi người chơi vượt cấp đại cảnh giới mới
     if (newTierIndex > oldTierIndex && BREAKTHROUGH_NOTICES[majorRank]) {
         highestAchievedRank = majorRank;
         const info = BREAKTHROUGH_NOTICES[majorRank];
@@ -504,7 +465,6 @@ window.switchAuthTab = function(type) {
     }
 };
 
-// Hàm chuyển đổi an toàn: Bảo đảm luôn trả về mảng dù Firebase lưu dạng Array hay Object
 function parseFirebaseArray(data) {
     if (!data) return [];
     if (Array.isArray(data)) return data;
@@ -512,13 +472,12 @@ function parseFirebaseArray(data) {
     return [];
 }
 
-// Sinh ngẫu nhiên thuộc tính ban đầu cho Phàm Nhân (từ 1 đến 10 điểm cho mỗi chỉ số)
 function generateRandomBaseStats() {
     return {
-        str: Math.floor(Math.random() * 10) + 1, // 1 đến 10
-        vit: Math.floor(Math.random() * 10) + 1, // 1 đến 10
-        agi: Math.floor(Math.random() * 10) + 1, // 1 đến 10
-        spi: Math.floor(Math.random() * 10) + 1, // 1 đến 10
+        str: Math.floor(Math.random() * 10) + 1,
+        vit: Math.floor(Math.random() * 10) + 1,
+        agi: Math.floor(Math.random() * 10) + 1,
+        spi: Math.floor(Math.random() * 10) + 1,
         freePoints: 0,
         rewardedTiers: []
     };
@@ -534,7 +493,6 @@ async function loadUserLifetimeMana(uid) {
             inventory = val.inventory || { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
             masteredWordsA1 = parseFirebaseArray(val.masteredA1);
             masteredWordsB1 = parseFirebaseArray(val.masteredB1);
-            // Nạp thông số thuộc tính đã lưu, nếu tài khoản cũ chưa có thì random bộ mới
             playerStats = val.stats || generateRandomBaseStats();
             highestAchievedRank = getRealmData(lifetimeMana).major;
         }
@@ -547,7 +505,6 @@ async function loadUserLifetimeMana(uid) {
     recalcStats();
 }
 
-// Lưu toàn bộ Linh Lực, Túi đồ, Từ đã thuộc và 4 Thuộc Tính lên Firebase
 async function syncManaToDatabase() {
     if (!currentUser) return;
     try {
@@ -556,7 +513,7 @@ async function syncManaToDatabase() {
             name: currentUser.displayName || currentUser.email.split('@')[0],
             mana: lifetimeMana,
             inventory: inventory,
-            stats: playerStats, // Lưu 4 thuộc tính
+            stats: playerStats,
             masteredA1: masteredWordsA1,
             masteredB1: masteredWordsB1,
             lastUpdated: Date.now()
@@ -589,10 +546,12 @@ window.handleSignup = async function() {
     try {
         const userCred = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(userCred.user, { displayName: displayName });
+        playerStats = generateRandomBaseStats();
         await set(ref(database, 'users/' + userCred.user.uid), { 
             name: displayName, 
             mana: 0, 
             inventory: inventory,
+            stats: playerStats,
             masteredA1: [],
             masteredB1: [],
             joinedAt: Date.now()
@@ -614,7 +573,6 @@ window.handleLogin = async function() {
 window.handleGoogleLogin = async function() {
     window.playClickSound();
     
-    // Cảnh báo nếu người dùng đang mở trong trình duyệt nhúng (Zalo/FB)
     const isEmbedded = /FBAN|FBAV|Instagram|Line|Zalo/i.test(navigator.userAgent);
     if (isEmbedded) {
         alert("⚠️ Bạn đang mở game từ ứng dụng tin nhắn!\n\nVui lòng bấm dấu (⋮) ở góc trên bên phải màn hình và chọn 'Mở bằng trình duyệt' (Chrome hoặc Safari) để đăng nhập được bằng Google.");
@@ -626,10 +584,12 @@ window.handleGoogleLogin = async function() {
         const userRef = ref(database, 'users/' + result.user.uid);
         const snapshot = await get(userRef);
         if (!snapshot.exists()) {
+            playerStats = generateRandomBaseStats();
             await set(userRef, { 
                 name: result.user.displayName || "Đạo Hữu", 
                 mana: 0, 
                 inventory: inventory,
+                stats: playerStats,
                 masteredA1: [],
                 masteredB1: [],
                 joinedAt: Date.now()
@@ -723,12 +683,10 @@ function shuffleArray(arr) {
 }
 
 function generateQuizSession(pool, numQuestions = 10) {
-    // 1. Lọc sạch dòng rác, chỉ nhận dòng có đủ Chữ Hán và Ý Nghĩa
     let validPool = pool.filter(v => v && v.hanzi && v.meaning && v.hanzi.trim().length > 0 && v.meaning.trim().length > 0);
     const isB1 = window.currentCsvFile && window.currentCsvFile.includes("b1");
     const masteredList = isB1 ? masteredWordsB1 : masteredWordsA1;
 
-    // 2. Tách từ chưa thuộc và đã thuộc (Ưu tiên 7-8 câu từ mới)
     let unlearned = shuffleArray(validPool.filter(v => !masteredList.includes(v.hanzi.trim())));
     let learned = shuffleArray(validPool.filter(v => masteredList.includes(v.hanzi.trim())));
 
@@ -753,7 +711,7 @@ function generateQuizSession(pool, numQuestions = 10) {
         }
         options = shuffleArray(options);
         quiz.push({
-            rawVocab: item, // Lưu lại từ gốc để ghi nhận thuộc từ
+            rawVocab: item,
             q: `Đạo hữu hãy cho biết ý nghĩa của từ này:\n\n✨ ${item.hanzi} ✨\n(Phiên âm: ${item.pinyin || ''} | Loại: ${item.type || 'Từ'})`,
             options: options,
             ans: options.indexOf(item.meaning)
@@ -766,11 +724,9 @@ function formatTime(sec) {
     return `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`;
 }
 
-// Khai báo biến lưu file CSV và độ khó
 window.currentCsvFile = "./a1_vocab.csv";
 window.difficultyMultiplier = 1;
 
-// Hàm kiểm tra Cảnh Giới trước khi vào Quyển (Bản 0.5: Yêu cầu Kim Đan Chân Nhân = 8000 mana & thuộc >= 600 từ A1)
 window.checkAndStartVolume = function(vol) {
     if (vol === 'trung_quyen') {
         const realmData = getRealmData(lifetimeMana);
@@ -796,7 +752,6 @@ window.startGame = async function() {
     
     document.getElementById('question').innerText = "⏳ Đang trích xuất Khẩu Quyết...";
     
-    // Luôn tải lại file CSV theo sự lựa chọn (A1 hay B1)
     await new Promise(resolve => {
         Papa.parse(window.currentCsvFile, {
             download: true, header: true, skipEmptyLines: true,
@@ -809,16 +764,14 @@ window.startGame = async function() {
     recalcStats();
     currentHp = maxHp; 
     
-    // Nạp Avatar, Tên và Chỉ số cho màn hình Bế Quan
     document.getElementById('quizAvatar').src = getAvatarByMana(lifetimeMana);
     document.getElementById('quizName').innerText = currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : "Đạo Hữu";
     
-    window.sessionThanThuc = thanThuc; // Lưu thần thức hiện tại
+    window.sessionThanThuc = thanThuc;
     if (thanThuc > 0) {
         document.getElementById('quizStatLabel').innerText = "Thần Thức";
         document.getElementById('quizStatValue').innerText = `${window.sessionThanThuc}/${thanThuc}`;
     } else {
-        // Phàm Nhân: Hiển thị Sinh Mệnh theo dạng hiện tại/tối đa
         document.getElementById('quizStatLabel').innerText = "Sinh Mệnh";
         document.getElementById('quizStatValue').innerText = `${currentHp}/${maxHp}`;
     }
@@ -841,7 +794,6 @@ function initLevel() {
     currentLevelExp = 0; currentQuestionIndex = 0;
     activeQuestions = generateQuizSession(vocabPool, 10);
     
-    // CÂN BẰNG ĐIỂM HỢP LÝ: Đúng 8/10 câu là qua tầng bình thường (không bị kẹt 800 điểm)
     let bonusPerQ = Math.floor(10 + str * 0.2);
     expToLevelUp = Math.floor(activeQuestions.length * 0.8) * bonusPerQ; 
     
@@ -889,17 +841,13 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
         let bonusMana = Math.floor(10 + str * 0.2); 
         currentHp = Math.min(maxHp, currentHp + 2);
 
-        // ==========================================
-        // CƠ CHẾ BÓP KINH NGHIỆM (NERF EXP V0.5)
-        // Kim Đan / Nguyên Anh xuống tu Hạ Quyển (A1) bị bóp 90% Linh Lực
-        // ==========================================
         const currentData = getRealmData(lifetimeMana);
         const isHighRealm = (currentData.major === "Kim Đan" || currentData.major === "Nguyên Anh");
         const isFarmingLowQuyen = (!window.currentCsvFile || window.currentCsvFile.includes("a1"));
         let isNerfed = false;
 
         if (isHighRealm && isFarmingLowQuyen) {
-            bonusMana = Math.max(1, Math.floor(bonusMana * 0.1)); // Giảm 90%, tối thiểu nhận 1 điểm
+            bonusMana = Math.max(1, Math.floor(bonusMana * 0.1));
             isNerfed = true;
         }
         
@@ -912,9 +860,6 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
             playLootSound();
         }
 
-        // ==========================================
-        // GHI NHẬN TỪ MỚI VÀO ĐAN ĐIỀN
-        // ==========================================
         const currentQ = activeQuestions[currentQuestionIndex];
         const isB1 = window.currentCsvFile && window.currentCsvFile.includes("b1");
         let isNewWord = false;
@@ -945,7 +890,6 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
         sessionMana += bonusMana;
         lifetimeMana += bonusMana;
         
-        // Cập nhật giao diện, đồng bộ DB và kiểm tra Đột Phá Đại Cảnh Giới
         updateCharacterUI();
         syncManaToDatabase();
         checkAndTriggerBreakthrough();
@@ -959,9 +903,7 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
             document.getElementById('message').innerText = "⚡ Thân pháp siêu phàm! Né thành công chướng ngại!";
             document.getElementById('message').style.color = "#70a1ff";
         } else {
-            // CƠ CHẾ TRỪ ĐÚNG 1/3 MỨC CAO NHẤT (SAI 3 CÂU LÀ VỀ 0)
             if (thanThuc > 0) {
-                // Tu sĩ: Trừ 1/3 Thần Thức tối đa (thanThuc)
                 let damage = Math.ceil(thanThuc / 3);
                 window.sessionThanThuc -= damage;
                 if (window.sessionThanThuc < 0) window.sessionThanThuc = 0;
@@ -975,7 +917,6 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
                     return;
                 }
             } else {
-                // Phàm Nhân: Trừ 1/3 Sinh Mệnh tối đa (maxHp)
                 let damage = Math.ceil(maxHp / 3);
                 currentHp -= damage;
                 if (currentHp < 0) currentHp = 0;
@@ -1014,7 +955,6 @@ window.nextQuestion = function() {
     loadQuestion();
 };
 
-// Hàm xuất quan sớm (Tạm dừng)
 window.stopCultivationEarly = function() {
     window.playClickSound();
     if(confirm("Đạo hữu muốn xuất quan sớm?\nLinh Lực đã lĩnh ngộ trong lần này vẫn sẽ được giữ lại!")) {
@@ -1186,7 +1126,6 @@ window.startBattle = function() {
     window.playClickSound();
     recalcStats();
 
-    // 1. Chặn Phàm Nhân không được bước vào Bí Cảnh
     if (thanThuc < 100 || calculateRealm(lifetimeMana) === "Phàm Nhân") {
         alert("⚠️ Đạo hữu hiện tại là Phàm Nhân, chưa ngưng tụ Thần Thức nên không thể ngự kiếm!\n\nHãy vào 'Bế Quan Khai Phá' để tích lũy Linh Lực đạt mốc 150 (Luyện Khí Sơ Kỳ).");
         return;
@@ -1201,7 +1140,6 @@ window.startBattle = function() {
 
     resizeBattleCanvas();
     
-    // 2. Cấp chính xác số lượng phi kiếm xoay quanh thân dựa trên Thần Thức
     const count = getSwordCount(thanThuc);
     battleData.swords = Array.from({ length: count }, () => ({ active: true }));
     battleData.enemies = [];
@@ -1301,7 +1239,6 @@ function battleLoop() {
     battleData.player.x = Math.max(35, Math.min(battleCanvas.width - 35, battleData.player.x));
     battleData.player.y = Math.max(45, Math.min(battleCanvas.height - 45, battleData.player.y));
 
-    // Vẽ nền hắc ám sơn động
     if (battleAssets.bg.complete && battleAssets.bg.naturalWidth > 0) {
         battleCtx.drawImage(battleAssets.bg, 0, 0, battleCanvas.width, battleCanvas.height);
     } else {
@@ -1309,7 +1246,6 @@ function battleLoop() {
         battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
     }
 
-    // Hiệu ứng nổ hạt linh lực
     for (let i = battleData.particles.length - 1; i >= 0; i--) {
         const p = battleData.particles[i];
         p.x += p.vx;
@@ -1327,7 +1263,6 @@ function battleLoop() {
         battleCtx.globalAlpha = 1.0;
     }
 
-    // Nhân vật chibi
     const pImg = getBattleCharacterSkin();
     battleCtx.save();
     const bobbingY = Math.sin(battleData.frameCount * 0.12) * 4;
@@ -1343,7 +1278,6 @@ function battleLoop() {
     }
     battleCtx.restore();
 
-    // Kiếm khí xoay tròn
     let activeSwordCount = 0;
     const orbitRadius = 75;
     const rotSpeed = 0.04 + (agi * 0.0008);
@@ -1406,7 +1340,6 @@ function battleLoop() {
         }
     });
 
-    // Quỷ hồn bám đuổi
     if (battleData.frameCount % 50 === 0) spawnBattleEnemy();
 
     for (let i = battleData.enemies.length - 1; i >= 0; i--) {
@@ -1464,7 +1397,6 @@ function battleLoop() {
 
     battleCtx.restore();
 
-    // Cập nhật số liệu HUD
     const hpEl = document.getElementById('battleHpText');
     const swordEl = document.getElementById('battleSwordText');
     const killsEl = document.getElementById('battleKillsText');
