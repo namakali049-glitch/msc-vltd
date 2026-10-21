@@ -37,21 +37,21 @@ let masteredWordsB1 = [];
 
 // 4 ĐẠI THUỘC TÍNH BẢN NGUYÊN (v0.6)
 let playerStats = {
-    str: 10,          // Sức mạnh (1 điểm = 10 Sát thương)
-    vit: 10,          // Khí huyết (1 điểm = 10 Sinh mệnh HP)
-    agi: 10,          // Nhanh nhẹn (1 điểm = 10 Thân pháp né đòn)
-    spi: 10,          // Tinh thần (1 điểm = 10 Thần thức ngự kiếm)
-    freePoints: 0,    // Điểm tiềm năng chưa cộng
-    rewardedTiers: [] // Danh sách tiểu cảnh giới đã phát thưởng (tránh nhận trùng)
+    str: 1,
+    vit: 1,
+    agi: 1,
+    spi: 1,
+    freePoints: 0,
+    rewardedTiers: [],
+    version: "v0.6_FINAL"
 };
 
-// Các chỉ số thực chiến sau khi quy đổi (nhân 10)
 let maxHp = 100;
 let currentHp = 100;
-let str = 10; 
-let agi = 10; 
-let thanThuc = 100;
-let swordDamage = 100;
+let str = 1; 
+let agi = 1; 
+let thanThuc = 10;
+let swordDamage = 10;
 
 let currentLevel = 1;
 let currentLevelExp = 0; 
@@ -183,7 +183,7 @@ window.toggleBGM = async function() {
 };
 
 // ==========================================
-// 4. TIẾN TRÌNH & HÌNH ẢNH CẢNH GIỚI (BẢN CẬP NHẬT 0.5)
+// 4. TIẾN TRÌNH & HÌNH ẢNH CẢNH GIỚI
 // ==========================================
 let highestAchievedRank = "Phàm Nhân";
 
@@ -242,15 +242,9 @@ function calculateRealm(mana) {
     return getRealmData(mana).rank;
 }
 
-// Tính số lượng phi kiếm dựa theo Thần Thức
-// Thanh thứ 1: Cần 100 điểm.
-// Từ thanh thứ 2 trở đi: Cần thêm 50 điểm mỗi thanh.
+// 100 Thần Thức = 1 thanh kiếm, từ thanh thứ 2 mỗi thanh cần thêm 50 Thần Thức
 function getSwordCount(sense) {
-    if (sense < 100) return 0; // Dưới 100 Thần Thức thì không có kiếm nào
-    
-    // (sense - 100) / 50 -> Số kiếm cộng thêm
-    // Math.floor làm tròn xuống để đảm bảo đủ mốc 50 mới được tính
-    // Cộng 1 là thanh kiếm cơ bản ban đầu
+    if (sense < 100) return 0;
     return 1 + Math.floor((sense - 100) / 50);
 }
 
@@ -376,27 +370,27 @@ function updateCharacterUI() {
 }
 
 // ==========================================
-// THÔNG BÁO VÀ NGHI THỨC ĐỘT PHÁ ĐẠI CẢNH GIỚI (v0.5)
+// THÔNG BÁO VÀ NGHI THỨC ĐỘT PHÁ
 // ==========================================
 const BREAKTHROUGH_NOTICES = {
     "Luyện Khí": {
         title: "Chúc mừng đạo hữu đột phá Luyện Khí kỳ!",
-        desc: "Tu sĩ dẫn xuất thiên địa linh khí tẩm bổ tự thân kỳ kinh bát mạch lúc, gọi vì Luyện Khí kỳ.",
+        desc: "Tu sĩ dẫn xuất thiên địa linh khí tẩm bổ tự thân kỳ kinh bát mạch.",
         bonus: "⚔️ Tối đa điều khiển: 3 Thanh Phi Kiếm"
     },
     "Trúc Cơ": {
         title: "Chúc mừng đạo hữu đột phá Trúc Cơ kỳ!",
-        desc: "Luyện khí sĩ, dùng linh khí đả thông toàn bộ kinh mạch lúc tiến hành đúc lại căn cơ gân thể mạch, gọi vì Trúc Cơ tu sĩ. (Tiếp tục tích lũy đủ 2/3 Hạ Quyển để chuẩn bị Kết Đan).",
+        desc: "Dùng linh khí đả thông toàn bộ kinh mạch tiến hành đúc lại căn cơ.",
         bonus: "⚔️ Tối đa điều khiển: 5 Thanh Phi Kiếm (Mở khóa kiếm khí thanh sắc)"
     },
     "Kim Đan": {
         title: "Chúc mừng đạo hữu đột phá Kim Đan cảnh!",
-        desc: "Lĩnh ngộ 2/3 khẩu quyết Hạ Quyển, linh khí tụ lại đan điền lắng đọng kết thành kim đan, thành tựu Kim Đan Chân Nhân!",
+        desc: "Lĩnh ngộ 2/3 khẩu quyết Hạ Quyển, kết thành kim đan viên mãn!",
         bonus: "⚔️ Uy áp Chân Nhân: Mở khóa điển tịch Trung Quyển B1"
     },
     "Nguyên Anh": {
         title: "Chúc mừng đạo hữu phá đan thành anh, chứng đạo Chân Quân!",
-        desc: "Tham ngộ 2/3 điển tịch Trung Quyển, kim đan viên mãn hóa đan thành anh, thành tựu Nguyên Anh Chân Quân!",
+        desc: "Tham ngộ 2/3 điển tịch Trung Quyển, hóa đan thành anh!",
         bonus: "🌌 Pháp tướng thông thiên: Thần thông đại thành!"
     }
 };
@@ -434,7 +428,7 @@ window.closeBreakthroughModal = function() {
 };
 
 // ==========================================
-// 5. CHUYỂN MÀN HÌNH & XÁC THỰC FIREBASE (ĐÃ FIX CHUẨN)
+// 5. CHUYỂN MÀN HÌNH & XÁC THỰC FIREBASE
 // ==========================================
 window.switchScreen = function(screenId) {
     window.playClickSound();
@@ -479,11 +473,10 @@ function parseFirebaseArray(data) {
     return [];
 }
 
-// THUẬT TOÁN RANDOM CHUẨN: TỔNG 4 THUỘC TÍNH LUÔN ĐÚNG 10 ĐIỂM
+// Căn cốt Phàm Nhân tổng đúng 10 điểm (Mỗi dòng tối thiểu 1)
 function generateRandomBaseStats() {
-    let stats = { str: 1, vit: 1, agi: 1, spi: 1 }; // Mỗi dòng cơ bản có 1 điểm (Tổng = 4)
-    let remaining = 6; // Còn lại 6 điểm để chia ngẫu nhiên
-    
+    let stats = { str: 1, vit: 1, agi: 1, spi: 1 };
+    let remaining = 6;
     const keys = ['str', 'vit', 'agi', 'spi'];
     for (let i = 0; i < remaining; i++) {
         let randKey = keys[Math.floor(Math.random() * keys.length)];
@@ -497,7 +490,7 @@ function generateRandomBaseStats() {
         spi: stats.spi,
         freePoints: 0,
         rewardedTiers: [],
-        version: "v0.6_FINAL" // ĐỔI SANG FINAL ĐỂ ÉP RESET TOÀN BỘ TÀI KHOẢN BỊ LỖI
+        version: "v0.6_FINAL"
     };
 }
 
@@ -512,11 +505,10 @@ async function loadUserLifetimeMana(uid) {
             masteredWordsA1 = parseFirebaseArray(val.masteredA1);
             masteredWordsB1 = parseFirebaseArray(val.masteredB1);
 
-            // BỘ LỌC THÉP: Nếu chưa có stats HOẶC version cũ (không phải v0.6_FINAL) -> Ép Random Lại!
+            // Bắt buộc nâng cấp nhân vật cũ lên v0.6_FINAL
             if (!val.stats || val.stats.version !== "v0.6_FINAL") {
-                playerStats = generateRandomBaseStats(); // Chạy lại thuật toán chia 10 điểm
-                
-                // Trả lại điểm tiềm năng nếu tài khoản đã có sẵn Tu Vi
+                playerStats = generateRandomBaseStats();
+
                 let accumulatedPoints = 0;
                 let awardedTiers = [];
                 MINOR_REALM_REWARDS.forEach(tier => {
@@ -529,10 +521,9 @@ async function loadUserLifetimeMana(uid) {
                 playerStats.freePoints = accumulatedPoints;
                 playerStats.rewardedTiers = awardedTiers;
 
-                // Ghi đè ngay lên Firebase
                 await update(userRef, { stats: playerStats });
             } else {
-                playerStats = val.stats; // Nếu đã là bản FINAL thì nạp bình thường
+                playerStats = val.stats;
             }
 
             highestAchievedRank = getRealmData(lifetimeMana).major;
@@ -545,6 +536,7 @@ async function loadUserLifetimeMana(uid) {
     }
     recalcStats();
 }
+
 async function syncManaToDatabase() {
     if (!currentUser) return;
     try {
@@ -612,10 +604,9 @@ window.handleLogin = async function() {
 
 window.handleGoogleLogin = async function() {
     window.playClickSound();
-    
     const isEmbedded = /FBAN|FBAV|Instagram|Line|Zalo/i.test(navigator.userAgent);
     if (isEmbedded) {
-        alert("⚠️ Bạn đang mở game từ ứng dụng tin nhắn!\n\nVui lòng bấm dấu (⋮) ở góc trên bên phải màn hình và chọn 'Mở bằng trình duyệt' (Chrome hoặc Safari) để đăng nhập được bằng Google.");
+        alert("⚠️ Bạn đang mở game từ ứng dụng tin nhắn! Vui lòng chọn 'Mở bằng trình duyệt' để tiếp tục.");
         return;
     }
 
@@ -637,13 +628,6 @@ window.handleGoogleLogin = async function() {
         }
     } catch(e) { 
         console.error("Chi tiết lỗi đăng nhập:", e);
-        if (e.code === 'auth/popup-blocked') {
-            alert("Trình duyệt đã chặn cửa sổ đăng nhập! Vui lòng cho phép 'Cửa sổ bật lên (Pop-up)' trong cài đặt trình duyệt để tiếp tục.");
-        } else if (e.code === 'auth/unauthorized-domain') {
-            alert("Tên miền trang web chưa được cấp phép trong hệ thống Firebase!");
-        } else if (e.code !== 'auth/popup-closed-by-user') {
-            alert("Đăng nhập thất bại: " + (e.message || "Vui lòng thử lại"));
-        }
     }
 };
 
@@ -686,7 +670,6 @@ window.showProfile = function() {
     const swordEl = document.getElementById('profileSwords');
     if (swordEl) swordEl.innerText = `${getSwordCount(thanThuc)} Thanh`;
 
-    // Gọi cập nhật 4 chỉ số hiển thị lên màn hình
     updateCharacterUI();
 };
 
@@ -724,7 +707,7 @@ window.goHome = function() {
 };
 
 // ==========================================
-// 7. LỐI CHƠI BẾ QUAN (HỌC TỪ VỰNG GỐC)
+// 7. LỐI CHƠI BẾ QUAN
 // ==========================================
 function shuffleArray(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -783,7 +766,7 @@ window.checkAndStartVolume = function(vol) {
     if (vol === 'trung_quyen') {
         const realmData = getRealmData(lifetimeMana);
         if (realmData.major !== "Kim Đan" && realmData.major !== "Nguyên Anh") {
-            alert("⚠️ Cảnh giới chưa đủ!\nĐạo hữu cần đột phá lên [Kim Đan Chân Nhân] (cần 8.000 Linh Lực và thuộc tối thiểu 600 từ Hạ Quyển A1) mới có thể mở khóa Trung Quyển.");
+            alert("⚠️ Cảnh giới chưa đủ!\nĐạo hữu cần đột phá lên [Kim Đan Chân Nhân] mới có thể mở khóa Trung Quyển.");
             return;
         }
         window.currentCsvFile = "./b1_vocab.csv";
@@ -896,11 +879,9 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
         const currentData = getRealmData(lifetimeMana);
         const isHighRealm = (currentData.major === "Kim Đan" || currentData.major === "Nguyên Anh");
         const isFarmingLowQuyen = (!window.currentCsvFile || window.currentCsvFile.includes("a1"));
-        let isNerfed = false;
 
         if (isHighRealm && isFarmingLowQuyen) {
             bonusMana = Math.max(1, Math.floor(bonusMana * 0.1));
-            isNerfed = true;
         }
         
         let lootMessage = "";
@@ -935,7 +916,7 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
         if (masteryHUD) masteryHUD.innerText = isB1 ? masteredWordsB1.length : masteredWordsA1.length;
 
         let newWordNotice = isNewWord ? `<br>🌟 <b style="color:#4ade80;">Lĩnh ngộ khẩu quyết mới: [${currentQ.rawVocab.hanzi}]!</b>` : '';
-        document.getElementById('message').innerHTML = `✅ Đáp đúng! +${bonusMana} Linh Lực (STR +${Math.floor(str * 0.2)})${newWordNotice}${lootMessage}`;
+        document.getElementById('message').innerHTML = `✅ Đáp đúng! +${bonusMana} Linh Lực${newWordNotice}${lootMessage}`;
         document.getElementById('message').style.color = "#2ed573";
         
         currentLevelExp += bonusMana;
@@ -961,11 +942,11 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
                 if (window.sessionThanThuc < 0) window.sessionThanThuc = 0;
                 
                 document.getElementById('quizStatValue').innerText = `${window.sessionThanThuc}/${thanThuc}`;
-                document.getElementById('message').innerText = `❌ Sai lầm! Hư tổn ${damage} Thần Thức (1/3 mức tối đa)!`;
+                document.getElementById('message').innerText = `❌ Sai lầm! Hư tổn ${damage} Thần Thức!`;
                 document.getElementById('message').style.color = "#ff4757";
                 
                 if (window.sessionThanThuc <= 0) {
-                    setTimeout(() => { alert("💥 Thần Thức cạn kiệt! Đạo hữu đã Tẩu Hỏa Nhập Ma, buộc phải xuất quan."); endGame(false); }, 500);
+                    setTimeout(() => { alert("💥 Thần Thức cạn kiệt! Đạo hữu đã Tẩu Hỏa Nhập Ma."); endGame(false); }, 500);
                     return;
                 }
             } else {
@@ -974,11 +955,11 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
                 if (currentHp < 0) currentHp = 0;
                 
                 document.getElementById('quizStatValue').innerText = `${currentHp}/${maxHp}`;
-                document.getElementById('message').innerText = `❌ Khí huyết đảo nghịch! Mất ${damage} Sinh Mệnh (1/3 mức tối đa)!`;
+                document.getElementById('message').innerText = `❌ Mất ${damage} Sinh Mệnh!`;
                 document.getElementById('message').style.color = "#ff4757";
                 
                 if (currentHp <= 0) {
-                    setTimeout(() => { alert("💥 Sinh Mệnh cạn kiệt! Ngất xỉu và bị đẩy khỏi Tàng Kinh Các."); endGame(false); }, 500);
+                    setTimeout(() => { alert("💥 Sinh Mệnh cạn kiệt! Bị đẩy khỏi Tàng Kinh Các."); endGame(false); }, 500);
                     return;
                 }
             }
@@ -1000,7 +981,7 @@ window.nextQuestion = function() {
             currentLevel++;
             if (currentLevel <= 4) { alert(`🎉 Đột phá thành công sang Tầng ${currentLevel}!`); initLevel(); return; }
         } else {
-            alert(`😢 Linh lực không đủ (Cần tối thiểu ${expToLevelUp}). Mời Đạo Hữu làm lại.`);
+            alert(`😢 Linh lực không đủ. Mời Đạo Hữu làm lại.`);
             endGame(false); return;
         }
     }
@@ -1009,14 +990,13 @@ window.nextQuestion = function() {
 
 window.stopCultivationEarly = function() {
     window.playClickSound();
-    if(confirm("Đạo hữu muốn xuất quan sớm?\nLinh Lực đã lĩnh ngộ trong lần này vẫn sẽ được giữ lại!")) {
+    if(confirm("Đạo hữu muốn xuất quan sớm? Linh Lực lĩnh ngộ vẫn sẽ được giữ lại!")) {
         endGame(true, true);
     }
 };
 
 function endGame(win, earlyExit = false) {
     clearInterval(timerInterval);
-    
     let title = win ? (earlyExit ? "🚪 Đã Xuất Quan Sớm" : "🏆 Bế Quan Viên Mãn!") : "💥 Tẩu Hỏa Nhập Ma!";
     let titleColor = win ? (earlyExit ? "#38bdf8" : "#2ed573") : "#ff4757";
     
@@ -1078,7 +1058,7 @@ function updateInventoryUI() {
         }
     }
     if (!hasItems) {
-        invList.innerHTML = '<p style="color:#aaa; font-size:14px; padding:10px 0;">Túi đồ trống không! Hãy trả lời câu hỏi để rớt đan dược.</p>';
+        invList.innerHTML = '<p style="color:#aaa; font-size:14px; padding:10px 0;">Túi đồ trống không!</p>';
     }
 }
 
@@ -1178,7 +1158,6 @@ window.startBattle = function() {
     window.playClickSound();
     recalcStats();
 
-    // 1. Chặn Phàm Nhân không được bước vào Bí Cảnh (Chỉ dựa vào Tu Vi thực tế)
     if (calculateRealm(lifetimeMana) === "Phàm Nhân") {
         alert("⚠️ Đạo hữu hiện tại là Phàm Nhân, chưa ngưng tụ đủ Linh Lực nên không thể ngự kiếm!\n\nHãy vào 'Bế Quan Khai Phá' để tích lũy Linh Lực đạt mốc 150 (Luyện Khí Sơ Kỳ).");
         return;
@@ -1194,7 +1173,12 @@ window.startBattle = function() {
     resizeBattleCanvas();
     
     const count = getSwordCount(thanThuc);
-    battleData.swords = Array.from({ length: count }, () => ({ active: true }));
+    battleData.swords = Array.from({ length: count }, () => ({
+        active: true,
+        durability: swordDamage,
+        maxDurability: swordDamage
+    }));
+
     battleData.enemies = [];
     battleData.particles = [];
     battleData.kills = 0;
@@ -1222,6 +1206,10 @@ window.exitBattle = function() {
     if (audioBtn) audioBtn.style.display = 'block';
 
     moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
+    
+    const survivalSec = Math.floor(battleData.frameCount / 60);
+    alert(`🚪 Đạo hữu đã an toàn rút khỏi Bí Cảnh!\n\n📊 KẾT QUẢ RÈN LUYỆN:\n⏱️ Thời gian sống sót: ${formatTime(survivalSec)}\n👾 Ma vật đã trảm: ${battleData.kills} con`);
+
     syncManaToDatabase();
     goHome();
 };
@@ -1237,9 +1225,13 @@ function spawnBattleEnemy() {
         y = Math.random() < 0.5 ? -30 : battleCanvas.height + 30;
     }
     battleData.enemies.push({
-        x: x, y: y, radius: 18,
+        x: x, 
+        y: y, 
+        radius: 18,
         speed: 1.1 + Math.random() * 0.7,
-        hp: 20 + Math.floor(lifetimeMana / 250)
+        hp: 30,
+        maxHp: 30,
+        biteCooldown: 0
     });
 }
 
@@ -1260,6 +1252,7 @@ function spawnDeathParticles(x, y, color = "#00d2d3") {
 function battleLoop() {
     if (!battleCtx) return;
     battleData.frameCount++;
+    const survivalSec = Math.floor(battleData.frameCount / 60);
 
     let shakeX = 0, shakeY = 0;
     if (battleData.screenShake > 0) {
@@ -1359,15 +1352,20 @@ function battleLoop() {
             for (let i = battleData.enemies.length - 1; i >= 0; i--) {
                 const en = battleData.enemies[i];
                 if (Math.hypot(sx - en.x, sy - en.y) < en.radius + 15) {
-                    en.hp -= swordDamage;
-                    sword.active = false; 
-
                     const kdx = en.x - battleData.player.x;
                     const kdy = en.y - battleData.player.y;
                     const kdist = Math.hypot(kdx, kdy);
                     if (kdist > 0.001) {
-                        en.x += (kdx / kdist) * 20;
-                        en.y += (kdy / kdist) * 20;
+                        en.x += (kdx / kdist) * 25;
+                        en.y += (kdy / kdist) * 25;
+                    }
+
+                    if (sword.durability >= en.hp) {
+                        sword.durability -= en.hp;
+                        en.hp = 0;
+                    } else {
+                        en.hp -= sword.durability;
+                        sword.durability = 0;
                     }
 
                     if (en.hp <= 0) {
@@ -1385,18 +1383,33 @@ function battleLoop() {
                         }
                     }
 
-                    const cd = Math.max(1000, 3200 - agi * 25);
-                    setTimeout(() => { sword.active = true; }, cd);
-                    break;
+                    if (sword.durability <= 0) {
+                        sword.active = false;
+                        const cd = Math.max(1000, 3200 - agi * 25);
+                        setTimeout(() => {
+                            sword.active = true;
+                            sword.durability = swordDamage;
+                        }, cd);
+                        break;
+                    }
                 }
             }
         }
     });
 
-    if (battleData.frameCount % 50 === 0) spawnBattleEnemy();
+    const spawnInterval = Math.max(12, 60 - Math.floor(survivalSec / 15) * 5);
+    const spawnBatch = 1 + Math.floor(survivalSec / 45);
+
+    if (battleData.enemies.length < 65 && battleData.frameCount % spawnInterval === 0) {
+        for (let b = 0; b < spawnBatch; b++) {
+            spawnBattleEnemy();
+        }
+    }
 
     for (let i = battleData.enemies.length - 1; i >= 0; i--) {
         const en = battleData.enemies[i];
+        if (en.biteCooldown > 0) en.biteCooldown--;
+
         const dx = battleData.player.x - en.x;
         const dy = battleData.player.y - en.y;
         const dist = Math.hypot(dx, dy);
@@ -1423,21 +1436,32 @@ function battleLoop() {
         battleCtx.restore();
 
         if (dist < battleData.player.radius + en.radius) {
-            let dodge = Math.min(30, agi * 0.5);
-            if (Math.random() * 100 >= dodge) {
-                currentHp -= 15;
-                battleData.screenShake = 12;
-                battleData.damageFlash = 6;
-                playWrongSound();
-            }
-            spawnDeathParticles(en.x, en.y, "#ff4757");
-            battleData.enemies.splice(i, 1);
+            if (en.biteCooldown <= 0) {
+                let dodge = Math.min(30, agi * 0.5);
+                if (Math.random() * 100 >= dodge) {
+                    currentHp -= 15;
+                    battleData.screenShake = 12;
+                    battleData.damageFlash = 6;
+                    playWrongSound();
+                }
 
-            if (currentHp <= 0) {
-                battleCtx.restore();
-                alert(`💥 Đạo thể tổn hao nặng nề! Buộc phải rút lui. Đã trảm sát ${battleData.kills} Quái vật.`);
-                exitBattle();
-                return;
+                spawnDeathParticles(en.x, en.y, "#ff4757");
+
+                const bdx = en.x - battleData.player.x;
+                const bdy = en.y - battleData.player.y;
+                const bdist = Math.hypot(bdx, bdy);
+                if (bdist > 0.001) {
+                    en.x += (bdx / bdist) * 20;
+                    en.y += (bdy / bdist) * 20;
+                }
+                en.biteCooldown = 45;
+
+                if (currentHp <= 0) {
+                    battleCtx.restore();
+                    alert(`💥 Đạo thể tổn hao nặng nề! Buộc phải rút lui.\n\n📊 KẾT QUẢ RÈN LUYỆN:\n⏱️ Thời gian sống sót: ${formatTime(survivalSec)}\n👾 Ma vật đã trảm: ${battleData.kills} con`);
+                    exitBattle();
+                    return;
+                }
             }
         }
     }
@@ -1450,9 +1474,12 @@ function battleLoop() {
 
     battleCtx.restore();
 
+    const timeEl = document.getElementById('battleTimeText');
     const hpEl = document.getElementById('battleHpText');
     const swordEl = document.getElementById('battleSwordText');
     const killsEl = document.getElementById('battleKillsText');
+    
+    if (timeEl) timeEl.innerText = `⏱️ Sinh Tồn: ${formatTime(survivalSec)}`;
     if (hpEl) hpEl.innerText = `❤️ Sinh Mệnh: ${Math.max(0, currentHp)}/${maxHp}`;
     if (swordEl) swordEl.innerText = `⚔️ Kiếm Khí: ${activeSwordCount}/${battleData.swords.length}`;
     if (killsEl) killsEl.innerText = `👾 Ma Vật Trảm: ${battleData.kills}`;
@@ -1475,54 +1502,3 @@ function unlockAudioOnInteraction() {
 }
 document.addEventListener('click', unlockAudioOnInteraction);
 document.addEventListener('keydown', unlockAudioOnInteraction);
-
-// ==========================================
-// ĐIỀU KHIỂN TÀNG KINH CÁC & HÁN NGỮ CHÂN GIẢI
-// ==========================================
-window.openLibraryModal = function() {
-    window.playClickSound();
-    const modal = document.getElementById('libraryModal');
-    if (modal) modal.style.display = 'flex';
-};
-
-window.closeLibraryModal = function() {
-    window.playClickSound();
-    const modal = document.getElementById('libraryModal');
-    if (modal) modal.style.display = 'none';
-};
-
-window.openHanNguModal = function() {
-    window.playClickSound();
-    const libModal = document.getElementById('libraryModal');
-    if (libModal) libModal.style.display = 'none';
-    const modal = document.getElementById('hanNguModal');
-    if (modal) modal.style.display = 'flex';
-};
-
-window.closeHanNguModal = function() {
-    window.playClickSound();
-    const modal = document.getElementById('hanNguModal');
-    if (modal) modal.style.display = 'none';
-    const libModal = document.getElementById('libraryModal');
-    if (libModal) libModal.style.display = 'flex';
-};
-
-window.chooseLibraryOption = function(type) {
-    window.playClickSound();
-    if (type === 'han_ngu') {
-        window.closeLibraryModal();
-        const hanNguModal = document.getElementById('hanNguModal');
-        if (hanNguModal) {
-            hanNguModal.style.display = 'flex';
-        } else {
-            window.startGame();
-        }
-    } else if (type === 'anh_ngu') {
-        alert("🔒 Cấm chế phong ấn!\n\nĐiển tịch 'Anh Ngữ Công' hiện chưa khai mở. Đạo hữu hãy chuyên tâm lĩnh ngộ 'Hán Ngữ Chân Giải' để nâng cao tu vi!");
-    }
-};
-
-window.startVolume = function(vol) {
-    if (window.playClickSound) window.playClickSound();
-    window.checkAndStartVolume(vol);
-};
