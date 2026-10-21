@@ -35,6 +35,7 @@ let currentUser = null;
 let lifetimeMana = 0; 
 let sessionMana = 0;  
 let inventory = { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
+window.inventory = inventory;
 let masteredWordsA1 = [];
 window.masteredWordsA1 = masteredWordsA1;
 let masteredWordsB1 = [];
