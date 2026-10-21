@@ -128,7 +128,7 @@ window.sendChatMessage = async function() {
 
 async function cleanOldMessages() {
     try {
-        const snapshot = await get(chatRef);
+        const snapshot = await get(getChatRef());
         if (snapshot.exists()) {
             const data = snapshot.val();
             const keys = Object.keys(data);
