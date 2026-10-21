@@ -602,29 +602,120 @@ window.renderLeaderboardList = function() {
     }
 };
 
+// ==========================================
+// 9. TIÊN ĐẠO BẢNG (LEADERBOARD - ĐÃ FIX CHUẨN CẢNH GIỚI)
+// ==========================================
 window.showLeaderboard = async function() {
     if (window.playClickSound) window.playClickSound();
-    switchScreen('leaderboard-screen');
-    const lbList = document.getElementById('lb-list');
-    if (lbList) lbList.innerHTML = '<li>⏳ Đang tải Tiên Đạo Bảng...</li>';
+    window.switchScreen('leaderboard-screen');
+    const listEl = document.getElementById('lb-list');
+    if (listEl) listEl.innerHTML = "<p style='color:#94a3b8; text-align:center; padding-top: 20px;'>⏳ Đang kết nối Tiên Đạo Bảng...</p>";
     
     try {
-        const snapshot = await get(ref(database, 'users'));
+        const lbRef = ref(window.firebaseDB || (typeof db !== 'undefined' ? db : database), 'users');
+        const snapshot = await get(lbRef);
         if (snapshot.exists()) {
-            cachedLeaderboardData = Object.values(snapshot.val());
-            window.renderLeaderboardList();
+            cachedLeaderboardData = [];
+            snapshot.forEach(childSnap => {
+                const data = childSnap.val();
+                cachedLeaderboardData.push({
+                    name: data.name || "Ẩn Danh",
+                    mana: Number(data.mana) || 0,
+                    battleRecord: data.battleRecord || { maxSurvivalSec: 0, maxKills: 0 },
+                    masteredA1: data.masteredA1 || [],
+                    masteredB1: data.masteredB1 || []
+                });
+            });
+            window.switchLeaderboardTab(currentLeaderboardTab || 'mana');
         } else {
-            if (lbList) lbList.innerHTML = '<li style="justify-content:center; color:#94a3b8;">Chưa có cao thủ nào!</li>';
+            if (listEl) listEl.innerHTML = "<p style='color:#94a3b8; text-align:center;'>Chưa có dữ liệu Tiên Đạo Bảng.</p>";
         }
-    } catch(e) {
+    } catch (e) {
         console.error("Lỗi tải Leaderboard:", e);
-        if (lbList) lbList.innerHTML = '<li style="justify-content:center; color:#ef4444;">❌ Lỗi kết nối Thiên Giới. Vui lòng thử lại.</li>';
+        if (listEl) listEl.innerHTML = "<p style='color:#ef4444; text-align:center;'>❌ Mất kết nối tới Database!</p>";
     }
+};
+
+window.switchLeaderboardTab = function(tab) {
+    if (window.playClickSound) window.playClickSound();
+    currentLeaderboardTab = tab;
+
+    document.querySelectorAll('.lb-big-tab').forEach(btn => btn.classList.remove('active'));
+    const activeTab = document.getElementById('lb-tab-' + tab);
+    if (activeTab) activeTab.classList.add('active');
+    
+    const listEl = document.getElementById('lb-list');
+    if (!listEl) return;
+    listEl.innerHTML = "";
+    
+    if (!cachedLeaderboardData || cachedLeaderboardData.length === 0) {
+        listEl.innerHTML = "<li style='justify-content:center; color:#94a3b8;'>Chưa có cao thủ nào!</li>";
+        return;
+    }
+
+    let sorted = [...cachedLeaderboardData];
+    const descText = document.getElementById('lb-desc-text');
+    
+    if (tab === 'mana') {
+        sorted.sort((a, b) => b.mana - a.mana);
+        if (descText) descText.innerText = "Bảng xếp hạng tổng Tu Vi";
+    } else {
+        sorted.sort((a, b) => {
+            const aTime = a.battleRecord?.maxSurvivalSec || 0;
+            const bTime = b.battleRecord?.maxSurvivalSec || 0;
+            if (bTime !== aTime) return bTime - aTime;
+            return (b.battleRecord?.maxKills || 0) - (a.battleRecord?.maxKills || 0);
+        });
+        if (descText) descText.innerText = "Kỷ lục sinh tồn Bí Cảnh xuất sắc nhất";
+    }
+    
+    const formatTime = window.formatTime || ((s) => `${String(Math.floor(s/60)).padStart(2, '0')}:${String(s%60).padStart(2, '0')}`);
+    
+    sorted.slice(0, 10).forEach((u, index) => {
+        let rankHtml = index < 3 ? ["🥇", "🥈", "🥉"][index] : `<b>${index + 1}.</b>`;
+        let scoreHtml = tab === 'mana' 
+            ? `<div class="lb-mana">⚡ ${u.mana} Linh Lực</div>`
+            : `<div class="lb-score-tag"><span style="color:#38bdf8; font-weight:bold;">⏱️ ${formatTime(u.battleRecord?.maxSurvivalSec || 0)}</span><br><small style="color:#ffa502;">👾 ${u.battleRecord?.maxKills || 0} quái</small></div>`;
+        
+        // 1. Lấy số lượng từ vựng độc bản của từng người chơi
+        const countA1 = u.masteredA1 ? (Array.isArray(u.masteredA1) ? u.masteredA1.length : Object.keys(u.masteredA1).length) : 0;
+        const countB1 = u.masteredB1 ? (Array.isArray(u.masteredB1) ? u.masteredB1.length : Object.keys(u.masteredB1).length) : 0;
+        
+        // 2. Tính cảnh giới chuẩn xác (kèm cơ chế dự phòng tự suy luận theo Linh Lực)
+        let exactRealm = "Phàm Nhân";
+        if (typeof window.calculateRealm === 'function') {
+            exactRealm = window.calculateRealm(u.mana, countA1, countB1);
+        } else {
+            const m = u.mana;
+            if (m >= 15000) exactRealm = "Kim Đan Trung Kỳ";
+            else if (m >= 8000) exactRealm = countA1 >= 600 ? "Kim Đan Sơ Kỳ" : "Trúc Cơ Hậu Kỳ (Bình Cảnh)";
+            else if (m >= 4000) exactRealm = "Trúc Cơ Hậu Kỳ";
+            else if (m >= 2500) exactRealm = "Trúc Cơ Trung Kỳ";
+            else if (m >= 1500) exactRealm = "Trúc Cơ Sơ Kỳ";
+            else if (m >= 800) exactRealm = "Luyện Khí Hậu Kỳ";
+            else if (m >= 400) exactRealm = "Luyện Khí Trung Kỳ";
+            else if (m >= 150) exactRealm = "Luyện Khí Sơ Kỳ";
+        }
+
+        listEl.innerHTML += `
+        <li>
+            <div class="lb-user-info">
+                <span class="lb-rank">${rankHtml}</span>
+                <div class="lb-details">
+                    <span class="lb-name">${u.name}</span>
+                    <span class="realm-badge">${exactRealm}</span>
+                </div>
+            </div>
+            ${scoreHtml}
+        </li>`;
+    });
 };
 
 window.goHome = function() { 
     if (window.playClickSound) window.playClickSound();
-    switchScreen('start-screen'); 
+    if (window.recalcStats) window.recalcStats();
+    if (window.updateCharacterUI) window.updateCharacterUI();
+    window.switchScreen('start-screen'); 
 };
 
 // ==========================================
