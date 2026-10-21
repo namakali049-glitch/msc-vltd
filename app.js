@@ -561,21 +561,47 @@ window.showLeaderboard = async function() {
     if (window.playClickSound) window.playClickSound();
     switchScreen('leaderboard-screen');
     const lbList = document.getElementById('lb-list');
-    if (lbList) lbList.innerHTML = '<li>⏳ Đang tải Tiên Đạo Bảng...</li>';
+    if (lbList) lbList.innerHTML = '<li>⏳ Đang tải Tiên Đạo Bảng từ Thiên Giới...</li>';
     
     try {
-        const snapshot = await get(ref(database, 'users'));
-        if (snapshot.exists()) {
-            cachedLeaderboardData = Object.values(snapshot.val());
+        let records = [];
+        
+        // KIỂM TRA XEM NGƯỜI CHƠI ĐANG MỞ TAB NÀO ĐỂ TẢI ĐÚNG DỮ LIỆU ĐÓ
+        if (currentLeaderboardTab === 'mana') {
+            // Truy vấn Server: Lấy đúng 10 người có 'mana' cao nhất
+            const manaQuery = query(ref(database, 'users'), orderByChild('mana'), limitToLast(10));
+            const snapshot = await get(manaQuery);
+            
+            if (snapshot.exists()) {
+                snapshot.forEach(childSnapshot => {
+                    records.push(childSnapshot.val());
+                });
+            }
+        } else {
+            // Truy vấn Server: Lấy 20 người có thời gian sinh tồn 'maxSurvivalSec' cao nhất
+            // (Lấy dư 20 người để dự phòng client sắp xếp lại ưu tiên số quái nếu bằng giây)
+            const battleQuery = query(ref(database, 'users'), orderByChild('battleRecord/maxSurvivalSec'), limitToLast(20));
+            const snapshot = await get(battleQuery);
+            
+            if (snapshot.exists()) {
+                snapshot.forEach(childSnapshot => {
+                    records.push(childSnapshot.val());
+                });
+            }
+        }
+
+        if (records.length > 0) {
+            // Cập nhật biến cache toàn cục và gọi hàm vẽ giao diện đã viết sẵn
+            cachedLeaderboardData = records;
             window.renderLeaderboardList();
         } else {
             if (lbList) lbList.innerHTML = '<li>Chưa có cao thủ nào!</li>';
         }
     } catch(e) {
-        if (lbList) lbList.innerHTML = '<li>❌ Lỗi tải bảng xếp hạng.</li>';
+        console.error("Lỗi tải Leaderboard:", e);
+        if (lbList) lbList.innerHTML = '<li>❌ Lỗi kết nối Thiên Giới. Vui lòng thử lại.</li>';
     }
 };
-
 window.goHome = function() { 
     window.playClickSound();
     switchScreen('start-screen'); 
