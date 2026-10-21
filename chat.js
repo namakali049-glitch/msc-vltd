@@ -112,7 +112,7 @@ window.sendChatMessage = async function() {
     if (window.playClickSound) window.playClickSound();
 
     try {
-        await push(chatRef, {
+        await push(getChatRef(), {
             sender: senderName,
             realm: currentRealm,
             text: text,
