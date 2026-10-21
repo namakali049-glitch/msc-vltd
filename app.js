@@ -421,7 +421,24 @@ window.handleGoogleLogin = async function() {
 };
 
 window.handleLogout = function() { 
-    window.playClickSound();
+    if (window.playClickSound) window.playClickSound();
+    
+    // Dọn sạch hoàn toàn dấu vết của tài khoản cũ
+    lifetimeMana = 0;
+    sessionMana = 0;
+    masteredWordsA1 = [];
+    masteredWordsB1 = [];
+    inventory = { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
+    battleRecord = { maxSurvivalSec: 0, maxKills: 0 };
+    playerStats = { str: 1, vit: 1, agi: 1, spi: 1, freePoints: 0, rewardedTiers: [], version: "v0.6_FINAL" };
+    
+    // Đồng bộ vào window
+    window.lifetimeMana = 0;
+    window.masteredWordsA1 = [];
+    window.masteredWordsB1 = [];
+    window.inventory = inventory;
+    window.battleRecord = battleRecord;
+    
     signOut(auth); 
 };
 
