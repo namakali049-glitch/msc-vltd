@@ -6,7 +6,6 @@
   <title>Mộng Tu Tiên: Vạn Linh Tiên Đạo</title>
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css">
-  <!-- Thư viện nạp tệp CSV từ vựng -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 </head>
 <body>
@@ -46,7 +45,6 @@
   <!-- 2. SẢNH CHÍNH: ĐỘNG PHỦ TU TIÊN           -->
   <!-- ========================================== -->
   <div id="start-screen" class="screen">
-    <!-- Thanh trạng thái người dùng góc trên -->
     <div class="top-user-bar">
       <div class="user-pill">
         <span class="user-icon">👤</span>
@@ -55,7 +53,6 @@
       <button class="btn-logout" onclick="handleLogout()">Đăng xuất</button>
     </div>
 
-    <!-- Khung chức năng chính giữa màn hình -->
     <div class="lobby-center-card">
       <h2 class="lobby-title">☯️ ĐỘNG PHỦ TU TIÊN ☯️</h2>
       <p class="lobby-desc">Luyện tập Tiếng Trung - Tích lũy Linh lực thăng cảnh giới</p>
@@ -81,7 +78,6 @@
   <!-- 3. MÀN HÌNH BẾ QUAN KHAI PHÁ (CÂU HỎI CSV) -->
   <!-- ========================================== -->
   <div id="game-screen" class="screen">
-    <!-- INFO NGƯỜI CHƠI & NÚT XUẤT QUAN -->
     <div style="display: flex; align-items: center; width: 100%; max-width: 460px; padding: 10px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; margin-bottom: 10px; border: 1px solid rgba(255, 215, 0, 0.3);">
       <img id="quizAvatar" src="assets/pham-nhan.jpg" style="width: 42px; height: 42px; border-radius: 50%; border: 2px solid #00ffcc; margin-right: 12px; object-fit: cover;">
       <div style="text-align: left;">
@@ -126,46 +122,42 @@
       <div class="profile-meta-list">
         <p>Đạo Hiệu: <b id="profileName">Nam</b></p>
         <p>Cảnh Giới: <span id="profileRealm" class="realm-pill">Phàm Nhân</span></p>
-        <p>Tổng Tu Vi (Linh Lực): <b id="profileMana" class="gold-txt">24</b></p>
+        <p>Tổng Tu Vi (Linh Lực): <b id="profileMana" class="gold-txt">0</b></p>
       </div>
 
-      <!-- KHỐI THUỘC TÍNH & CỘNG ĐIỂM TIỀM NĂNG (v0.6) -->
-    <div class="profile-attributes-box">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <h3 class="attr-title" style="margin: 0;">☯️ Thuộc Tính Bản Nguyên</h3>
-        <span style="color: #ffd700; font-size: 0.95rem;">Điểm tiềm năng: <b id="profileFreePoints" style="font-size: 1.2rem; color: #4ade80;">0</b></span>
+      <!-- KHỐI THUỘC TÍNH & CỘNG ĐIỂM TIỀM NĂNG -->
+      <div class="profile-attributes-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h3 class="attr-title" style="margin: 0;">☯️ Thuộc Tính Bản Nguyên</h3>
+          <span style="color: #ffd700; font-size: 0.95rem;">Điểm tiềm năng: <b id="profileFreePoints" style="font-size: 1.2rem; color: #4ade80;">0</b></span>
+        </div>
+
+        <div class="stat-alloc-row">
+          <span>⚔️ Sức Mạnh: <b id="profileStr" class="text-gold">1</b> <small id="profileStrEffect" style="color: #94a3b8;">(10 Sát thương)</small></span>
+          <button class="btn-stat-add" onclick="allocateStat('str')">+</button>
+        </div>
+
+        <div class="stat-alloc-row">
+          <span>❤️ Khí Huyết: <b id="profileVit" class="text-green">1</b> <small id="profileVitEffect" style="color: #94a3b8;">(10 HP)</small></span>
+          <button class="btn-stat-add" onclick="allocateStat('vit')">+</button>
+        </div>
+
+        <div class="stat-alloc-row">
+          <span>⚡ Nhanh Nhẹn: <b id="profileAgi" class="text-blue">1</b> <small id="profileAgiEffect" style="color: #94a3b8;">(10 Thân pháp)</small></span>
+          <button class="btn-stat-add" onclick="allocateStat('agi')">+</button>
+        </div>
+
+        <div class="stat-alloc-row">
+          <span>🌀 Tinh Thần: <b id="profileSpi" class="text-purple">1</b> <small id="profileSpiEffect" style="color: #94a3b8;">(10 Thần thức)</small></span>
+          <button class="btn-stat-add" onclick="allocateStat('spi')">+</button>
+        </div>
+
+        <div style="height: 1px; background: rgba(255, 215, 0, 0.2); margin: 12px 0;"></div>
+
+        <p class="attr-row">⚔️ Phi Kiếm Ngự Trận: <b id="profileSwords" style="color: #ffd700;">0 Thanh</b></p>
+        <p class="attr-row">📜 Lĩnh Ngộ Hạ Quyển (A1): <b id="profileMasteryA1" style="color: #4ade80;">0 / 900 từ</b></p>
+        <p class="attr-row">📘 Lĩnh Ngộ Trung Quyển (B1): <b id="profileMasteryB1" style="color: #60a5fa;">0 / 4000 từ</b></p>
       </div>
-
-      <!-- 1. Sức Mạnh -->
-      <div class="stat-alloc-row">
-        <span>⚔️ Sức Mạnh: <b id="profileStr" class="text-gold">10</b> <small id="profileStrEffect" style="color: #94a3b8;">(100 Sát thương)</small></span>
-        <button class="btn-stat-add" onclick="allocateStat('str')">+</button>
-      </div>
-
-      <!-- 2. Khí Huyết -->
-      <div class="stat-alloc-row">
-        <span>❤️ Khí Huyết: <b id="profileVit" class="text-green">10</b> <small id="profileVitEffect" style="color: #94a3b8;">(100 HP)</small></span>
-        <button class="btn-stat-add" onclick="allocateStat('vit')">+</button>
-      </div>
-
-      <!-- 3. Nhanh Nhẹn -->
-      <div class="stat-alloc-row">
-        <span>⚡ Nhanh Nhẹn: <b id="profileAgi" class="text-blue">10</b> <small id="profileAgiEffect" style="color: #94a3b8;">(100 Thân pháp)</small></span>
-        <button class="btn-stat-add" onclick="allocateStat('agi')">+</button>
-      </div>
-
-      <!-- 4. Tinh Thần -->
-      <div class="stat-alloc-row">
-        <span>🌀 Tinh Thần: <b id="profileSpi" class="text-purple">10</b> <small id="profileSpiEffect" style="color: #94a3b8;">(100 Thần thức)</small></span>
-        <button class="btn-stat-add" onclick="allocateStat('spi')">+</button>
-      </div>
-
-      <div style="height: 1px; background: rgba(255, 215, 0, 0.2); margin: 12px 0;"></div>
-
-      <p class="attr-row">⚔️ Phi Kiếm Ngự Trận: <b id="profileSwords" style="color: #ffd700;">0 Thanh</b></p>
-      <p class="attr-row">📜 Lĩnh Ngộ Hạ Quyển (A1): <b id="profileMasteryA1" style="color: #4ade80;">0 / 900 từ</b></p>
-      <p class="attr-row">📘 Lĩnh Ngộ Trung Quyển (B1): <b id="profileMasteryB1" style="color: #60a5fa;">0 / 4000 từ</b></p>
-    </div>
 
       <button class="btn-back-lobby btn-blue" onclick="goHome()">Về động phủ 🏯</button>
     </div>
@@ -178,9 +170,7 @@
     <div class="leaderboard-card">
       <h2 class="lb-header">🏆 TIÊN ĐẠO BẢNG 🏆</h2>
       <p class="lb-desc">Bảng xếp hạng Linh lực trọn đời</p>
-
       <ul id="lb-list" class="lb-container"></ul>
-
       <button class="btn-back-lobby btn-red mt-15" onclick="goHome()">Trở về Động phủ 🏯</button>
     </div>
   </div>
@@ -191,17 +181,15 @@
   <div id="battle-screen" class="screen">
     <canvas id="gameCanvas"></canvas>
 
-    <!-- HUD chỉ số chiến đấu góc trên bên trái -->
     <div class="battle-hud-box">
+      <div id="battleTimeText" style="color: #ffd700;">⏱️ Sinh Tồn: 00:00</div>
       <div id="battleHpText">❤️ Sinh Mệnh: 100/100</div>
-      <div id="battleSwordText">⚔️ Kiếm Khí: 2/2</div>
+      <div id="battleSwordText">⚔️ Kiếm Khí: 0/0</div>
       <div id="battleKillsText">👾 Ma Vật Trảm: 0</div>
     </div>
 
-    <!-- Nút rút lui góc trên bên phải -->
     <button class="btn-battle-escape" onclick="exitBattle()">🚪 Rút lui</button>
 
-    <!-- Cụm phím di chuyển D-Pad góc dưới bên trái -->
     <div class="dpad-wrapper">
       <button class="dpad-key dpad-up" 
               ontouchstart="setMoveDir('up', true)" ontouchend="setMoveDir('up', false)"
@@ -220,9 +208,7 @@
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- MODAL: TÚI TRỮ VẬT                         -->
-  <!-- ========================================== -->
+  <!-- MODAL: TÚI TRỮ VẬT -->
   <div id="inventoryModal" class="modal-overlay" style="display: none;">
     <div class="inventory-card">
       <h3 class="inv-header">🎒 TÚI TRỮ VẬT</h3>
@@ -231,16 +217,13 @@
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- MODAL: TÀNG KINH CÁC (CŨ)                  -->
-  <!-- ========================================== -->
+  <!-- MODAL: TÀNG KINH CÁC -->
   <div id="libraryModal" class="modal-overlay" style="display: none;">
     <div class="library-card">
       <h3 class="library-header">📖 TÀNG KINH CÁC 📖</h3>
       <p class="library-desc">Chọn công pháp điển tịch để nhập định tu luyện:</p>
       
       <div class="library-options">
-        <!-- Lựa chọn 1: Hán Ngữ Chân Giải -> Chuyển hướng mở Modal mới -->
         <div class="library-item" onclick="openHanNguModal()">
           <div class="lib-icon">📜</div>
           <div class="lib-info">
@@ -250,7 +233,6 @@
           <button class="btn-lib-action">Lĩnh Ngộ</button>
         </div>
 
-        <!-- Lựa chọn 2: Anh Ngữ Công (Chưa mở khóa) -->
         <div class="library-item locked" onclick="alert('🔒 Cấm chế phong ấn!\n\nĐiển tịch Anh Ngữ Công hiện chưa khai mở.')">
           <div class="lib-icon">🔒</div>
           <div class="lib-info">
@@ -265,16 +247,13 @@
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- MODAL: HÁN NGỮ CHÂN GIẢI (HẠ - TRUNG - THƯỢNG) -->
-  <!-- ========================================== -->
+  <!-- MODAL: HÁN NGỮ CHÂN GIẢI -->
   <div id="hanNguModal" class="modal-overlay" style="display: none;">
     <div class="library-card">
-      <h3 class="library-header">📜 HÁN NGỮ CHÂN GIẢI (v0.4)</h3>
+      <h3 class="library-header">📜 HÁN NGỮ CHÂN GIẢI</h3>
       <p class="library-desc">Cảnh giới càng cao, thiên đạo càng vô tình. Hãy chọn quyển tịch phù hợp:</p>
       
       <div class="library-options">
-        <!-- Hạ Quyển -->
         <div class="library-item" onclick="startVolume('ha_quyen')">
           <div class="lib-icon">📗</div>
           <div class="lib-info">
@@ -284,7 +263,6 @@
           <button class="btn-lib-action">Tu Luyện</button>
         </div>
 
-        <!-- Trung Quyển -->
         <div class="library-item" onclick="startVolume('trung_quyen')">
           <div class="lib-icon">📘</div>
           <div class="lib-info">
@@ -294,7 +272,6 @@
           <button class="btn-lib-action">Tu Luyện</button>
         </div>
 
-        <!-- Thượng Quyển -->
         <div class="library-item locked" onclick="alert('Thượng Quyển (C1-C2) chứa đựng thiên cơ của Hóa Thần trở lên. Tạm thời chưa xuất thế!')">
           <div class="lib-icon">📕</div>
           <div class="lib-info">
@@ -309,7 +286,19 @@
     </div>
   </div>
 
-  <!-- Gắn trực tiếp các Script xử lý Modal vào HTML để tránh lỗi Uncaught ReferenceError -->
+  <!-- MODAL: THIÊN ĐẠO CHÚC PHÚC -->
+  <div id="breakthroughModal" class="modal-overlay" style="display: none; z-index: 9999;">
+    <div class="library-card breakthrough-card">
+      <div class="breakthrough-badge">⚡ THIÊN ĐẠO CHÚC PHÚC ⚡</div>
+      <h2 id="breakthroughTitle" class="breakthrough-title">Chúc mừng đạo hữu đột phá!</h2>
+      <div id="breakthroughRealm" class="breakthrough-realm">Luyện Khí Kỳ</div>
+      <div class="breakthrough-divider"></div>
+      <p id="breakthroughDesc" class="breakthrough-desc"></p>
+      <div id="breakthroughBonus" class="breakthrough-bonus"></div>
+      <button class="btn-lib-action btn-breakthrough-close" onclick="closeBreakthroughModal()">Củng Cố Tu Vi 🧘‍♂️</button>
+    </div>
+  </div>
+
   <script>
     function openLibraryModal() {
       if (window.playClickSound) window.playClickSound();
@@ -338,7 +327,6 @@
 
     function startVolume(vol) {
       if (window.playClickSound) window.playClickSound();
-      // Chuyển lệnh xử lý vào file app.js
       if (typeof window.checkAndStartVolume === 'function') {
         window.checkAndStartVolume(vol);
       } else {
@@ -346,26 +334,7 @@
       }
     }
   </script>
-<!-- ========================================== -->
-  <!-- MODAL: THÔNG CÁO ĐỘT PHÁ ĐẠI CẢNH GIỚI (v0.5) -->
-  <!-- ========================================== -->
-  <div id="breakthroughModal" class="modal-overlay" style="display: none; z-index: 9999;">
-    <div class="library-card breakthrough-card">
-      <div class="breakthrough-badge">⚡ THIÊN ĐẠO CHÚC PHÚC ⚡</div>
-      <h2 id="breakthroughTitle" class="breakthrough-title">Chúc mừng đạo hữu đột phá!</h2>
-      <div id="breakthroughRealm" class="breakthrough-realm">Luyện Khí Kỳ</div>
-      <div class="breakthrough-divider"></div>
-      <p id="breakthroughDesc" class="breakthrough-desc">
-        Tu sĩ dẫn xuất thiên địa linh khí tẩm bổ tự thân kỳ kinh bát mạch lúc, gọi vì Luyện Khí kỳ.
-      </p>
-      <div id="breakthroughBonus" class="breakthrough-bonus">
-        ⚔️ Mở khóa ngự kiếm tối đa: <b>3 Thanh Phi Kiếm</b>
-      </div>
-      <button class="btn-lib-action btn-breakthrough-close" onclick="closeBreakthroughModal()">Củng Cố Tu Vi 🧘‍♂️</button>
-    </div>
-  </div>
 
   <script type="module" src="app.js"></script>
 </body>
 </html>
-  
