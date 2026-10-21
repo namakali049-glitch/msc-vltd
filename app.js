@@ -1,3 +1,4 @@
+import './quiz.js';
 import './battle.js';
 import './inventory.js';
 import './audio.js';
