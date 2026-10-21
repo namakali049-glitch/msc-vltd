@@ -361,15 +361,44 @@ function getBattleSwordSkin() {
 
 function updateCharacterUI() {
     recalcStats();
-    const hpTxt = document.getElementById('profileHp');
-    const senseTxt = document.getElementById('profileSense');
+
+    // Hiển thị điểm tiềm năng còn lại
+    const fpEl = document.getElementById('profileFreePoints');
+    if (fpEl) fpEl.innerText = playerStats.freePoints;
+
+    // Hiển thị 4 thuộc tính và chỉ số quy đổi (nhân 10)
+    const strEl = document.getElementById('profileStr');
+    if (strEl) strEl.innerText = playerStats.str;
+    const strEff = document.getElementById('profileStrEffect');
+    if (strEff) strEff.innerText = `(${playerStats.str * 10} Sát thương)`;
+
+    const vitEl = document.getElementById('profileVit');
+    if (vitEl) vitEl.innerText = playerStats.vit;
+    const vitEff = document.getElementById('profileVitEffect');
+    if (vitEff) vitEff.innerText = `(${playerStats.vit * 10} HP)`;
+
+    const agiEl = document.getElementById('profileAgi');
+    if (agiEl) agiEl.innerText = playerStats.agi;
+    const agiEff = document.getElementById('profileAgiEffect');
+    if (agiEff) agiEff.innerText = `(${playerStats.agi * 10} Thân pháp)`;
+
+    const spiEl = document.getElementById('profileSpi');
+    if (spiEl) spiEl.innerText = playerStats.spi;
+    const spiEff = document.getElementById('profileSpiEffect');
+    if (spiEff) spiEff.innerText = `(${playerStats.spi * 10} Thần thức)`;
+
+    // Cập nhật số lượng phi kiếm
     const swordsTxt = document.getElementById('profileSwords');
+    if (swordsTxt) swordsTxt.innerText = `${getSwordCount(thanThuc)} Thanh`;
+
+    // Cập nhật tiến độ từ vựng A1 và B1
     const masteryA1 = document.getElementById('profileMasteryA1');
     const masteryB1 = document.getElementById('profileMasteryB1');
-    
-    if (hpTxt) hpTxt.innerText = `${currentHp}/${maxHp}`;
-    if (senseTxt) senseTxt.innerText = thanThuc;
-    if (swordsTxt) swordsTxt.innerText = `${getSwordCount(thanThuc)} Thanh`;
+    const countA1 = (typeof masteredWordsA1 !== 'undefined' && Array.isArray(masteredWordsA1)) ? masteredWordsA1.length : 0;
+    const countB1 = (typeof masteredWordsB1 !== 'undefined' && Array.isArray(masteredWordsB1)) ? masteredWordsB1.length : 0;
+    if (masteryA1) masteryA1.innerText = `${countA1} / 900 từ (${Math.round((countA1 / 900) * 100)}%)`;
+    if (masteryB1) masteryB1.innerText = `${countB1} / 4000 từ (${Math.round((countB1 / 4000) * 100)}%)`;
+}
     
     const countA1 = (typeof masteredWordsA1 !== 'undefined' && Array.isArray(masteredWordsA1)) ? masteredWordsA1.length : 0;
     const countB1 = (typeof masteredWordsB1 !== 'undefined' && Array.isArray(masteredWordsB1)) ? masteredWordsB1.length : 0;
