@@ -503,7 +503,23 @@ async function loadUserLifetimeMana(uid) {
             inventory = val.inventory || { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
             masteredWordsA1 = parseFirebaseArray(val.masteredA1);
             masteredWordsB1 = parseFirebaseArray(val.masteredB1);
-            playerStats = val.stats || generateRandomBaseStats();
+
+            // KIỂM TRA NẾU NICK ĐANG BỊ DÍNH BỘ SỐ CŨ 10/10/10/10 -> RANDOM LẠI THEO CÁCH B
+            const isOldDefaultStats = val.stats && 
+                                      val.stats.str === 10 && 
+                                      val.stats.vit === 10 && 
+                                      val.stats.agi === 10 && 
+                                      val.stats.spi === 10 && 
+                                      (!val.stats.rewardedTiers || val.stats.rewardedTiers.length === 0);
+
+            if (!val.stats || isOldDefaultStats) {
+                playerStats = generateRandomBaseStats();
+                // Lưu ngay bộ số mới chia tổng bằng 10 lên Firebase
+                await update(userRef, { stats: playerStats });
+            } else {
+                playerStats = val.stats;
+            }
+
             highestAchievedRank = getRealmData(lifetimeMana).major;
         }
     } catch(e) { 
