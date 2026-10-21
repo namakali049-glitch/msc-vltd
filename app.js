@@ -472,16 +472,15 @@ function parseFirebaseArray(data) {
     return [];
 }
 
-// CĂN CỐT PHÀM NHÂN THEO CÁCH B: TỔNG BẰNG ĐÚNG 10 ĐIỂM
+// THUẬT TOÁN RANDOM CHUẨN: TỔNG 4 THUỘC TÍNH LUÔN ĐÚNG 10 ĐIỂM
 function generateRandomBaseStats() {
-    let stats = { str: 1, vit: 1, agi: 1, spi: 1 };
-    let remainingPoints = 6; // 10 - 4 = 6 điểm phân bổ ngẫu nhiên
-    const keys = ['str', 'vit', 'agi', 'spi'];
+    let stats = { str: 1, vit: 1, agi: 1, spi: 1 }; // Mỗi dòng cơ bản có 1 điểm (Tổng = 4)
+    let remaining = 6; // Còn lại 6 điểm để chia ngẫu nhiên
     
-    while (remainingPoints > 0) {
+    const keys = ['str', 'vit', 'agi', 'spi'];
+    for (let i = 0; i < remaining; i++) {
         let randKey = keys[Math.floor(Math.random() * keys.length)];
-        stats[randKey]++;
-        remainingPoints--;
+        stats[randKey] += 1;
     }
 
     return {
@@ -491,9 +490,10 @@ function generateRandomBaseStats() {
         spi: stats.spi,
         freePoints: 0,
         rewardedTiers: [],
-        version: "v0.6_B" // Đánh dấu nhận diện Cách B
+        version: "v0.6_FINAL" // ĐỔI SANG FINAL ĐỂ ÉP RESET TOÀN BỘ TÀI KHOẢN BỊ LỖI
     };
 }
+
 async function loadUserLifetimeMana(uid) {
     try {
         const userRef = ref(database, 'users/' + uid);
@@ -505,12 +505,11 @@ async function loadUserLifetimeMana(uid) {
             masteredWordsA1 = parseFirebaseArray(val.masteredA1);
             masteredWordsB1 = parseFirebaseArray(val.masteredB1);
 
-            // KIỂM TRA PHIÊN BẢN: Nếu chưa có stats HOẶC chưa có cờ "v0.6_B"
-            if (!val.stats || val.stats.version !== "v0.6_B") {
-                // 1. Tạo ngẫu nhiên lại căn cốt Phàm Nhân có tổng bằng đúng 10
-                playerStats = generateRandomBaseStats();
-
-                // 2. Tính lại toàn bộ điểm tiềm năng từ các tiểu cảnh giới đã vượt qua để hoàn trả cho người chơi
+            // BỘ LỌC THÉP: Nếu chưa có stats HOẶC version cũ (không phải v0.6_FINAL) -> Ép Random Lại!
+            if (!val.stats || val.stats.version !== "v0.6_FINAL") {
+                playerStats = generateRandomBaseStats(); // Chạy lại thuật toán chia 10 điểm
+                
+                // Trả lại điểm tiềm năng nếu tài khoản đã có sẵn Tu Vi
                 let accumulatedPoints = 0;
                 let awardedTiers = [];
                 MINOR_REALM_REWARDS.forEach(tier => {
@@ -523,10 +522,10 @@ async function loadUserLifetimeMana(uid) {
                 playerStats.freePoints = accumulatedPoints;
                 playerStats.rewardedTiers = awardedTiers;
 
-                // 3. Ghi đè ngay bộ dữ liệu mới lên Firebase
+                // Ghi đè ngay lên Firebase
                 await update(userRef, { stats: playerStats });
             } else {
-                playerStats = val.stats;
+                playerStats = val.stats; // Nếu đã là bản FINAL thì nạp bình thường
             }
 
             highestAchievedRank = getRealmData(lifetimeMana).major;
