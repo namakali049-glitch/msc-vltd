@@ -233,7 +233,9 @@ body {
 .btn-blue { background: #3867d6; }
 .btn-red { background: #eb4d4b; }
 
-/* TIÊN ĐẠO BẢNG */
+/* ========================================== */
+/* TIÊN ĐẠO BẢNG CHUẨN BẢN VẼ PHÁC THẢO       */
+/* ========================================== */
 #leaderboard-screen { justify-content: center; align-items: center; }
 .leaderboard-card {
   background: rgba(18, 24, 38, 0.92); border: 2px solid #ffd700;
@@ -242,7 +244,59 @@ body {
 }
 .lb-header { color: #ffd700; font-size: 1.35rem; }
 .lb-desc { font-size: 0.78rem; color: #cbd5e1; margin-bottom: 12px; }
-.lb-container { list-style: none; max-height: 250px; overflow-y: auto; text-align: left; }
+
+/* 2 TAB LỚN PHÍA TRÊN */
+.lb-tabs-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 2;
+}
+.lb-big-tab {
+  flex: 1;
+  padding: 10px 8px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid #475569;
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+.lb-big-tab.active {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: #ffd700;
+  color: #ffd700;
+}
+/* Mũi nhọn chỉ thị tab đang chọn nối xuống khung */
+.lb-big-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 7px 7px 0 7px;
+  border-style: solid;
+  border-color: #ffd700 transparent transparent transparent;
+}
+
+/* KHUNG NỘI DUNG CHÍNH (KHUNG CHỮ NHẬT BÊN DƯỚI) */
+.lb-content-box {
+  background: rgba(30, 41, 59, 0.95);
+  border: 2px solid #ffd700;
+  border-radius: 0 0 12px 12px;
+  padding: 10px 8px;
+  margin-top: -1px;
+  position: relative;
+  z-index: 1;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.lb-container { list-style: none; max-height: 230px; overflow-y: auto; text-align: left; }
 .lb-container li {
   display: flex; justify-content: space-between; align-items: center;
   padding: 8px 6px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.85rem;
@@ -253,6 +307,7 @@ body {
   padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(255, 215, 0, 0.4);
 }
 .lb-mana { color: #38bdf8; font-weight: bold; }
+.lb-score-tag { text-align: right; line-height: 1.35; font-size: 0.82rem; }
 
 /* BÍ CẢNH TRẢM YÊU (CANVAS 2D) */
 #battle-screen canvas { width: 100vw; height: 100vh; display: block; }
