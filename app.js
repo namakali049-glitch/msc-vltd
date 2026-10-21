@@ -679,8 +679,22 @@ function checkAnswer(selectedIndex, correctIndex, btnElement) {
         btnElement.classList.add('correct');
         playCorrectSound();
         
-        let bonusMana = Math.floor(expPerQuestion + (str * 0.2));
+        let bonusMana = Math.floor(10 + str * 0.2); 
         currentHp = Math.min(maxHp, currentHp + 2);
+
+        // ==========================================
+        // CƠ CHẾ BÓP KINH NGHIỆM (NERF EXP V0.5)
+        // Kim Đan / Nguyên Anh xuống tu Hạ Quyển (A1) bị bóp 90% Linh Lực
+        // ==========================================
+        const currentData = getRealmData(lifetimeMana);
+        const isHighRealm = (currentData.major === "Kim Đan" || currentData.major === "Nguyên Anh");
+        const isFarmingLowQuyen = (!window.currentCsvFile || window.currentCsvFile.includes("a1"));
+        let isNerfed = false;
+
+        if (isHighRealm && isFarmingLowQuyen) {
+            bonusMana = Math.max(1, Math.floor(bonusMana * 0.1)); // Giảm 90%, tối thiểu nhận 1 điểm
+            isNerfed = true;
+        }
         
         let lootMessage = "";
         if (Math.random() < 0.15) {
