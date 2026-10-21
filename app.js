@@ -653,21 +653,33 @@ window.showProfile = function() {
     if (!currentUser) return;
     recalcStats();
     switchScreen('profile-screen');
-    document.getElementById('profileName').innerText = currentUser.displayName || currentUser.email.split('@')[0];
-    document.getElementById('profileMana').innerText = lifetimeMana;
+    
+    const nameEl = document.getElementById('profileName');
+    if (nameEl) nameEl.innerText = currentUser.displayName || currentUser.email.split('@')[0];
+    
+    const manaEl = document.getElementById('profileMana');
+    if (manaEl) manaEl.innerText = lifetimeMana;
+    
     const realm = calculateRealm(lifetimeMana);
-    document.getElementById('profileRealm').innerText = realm;
+    const realmEl = document.getElementById('profileRealm');
+    if (realmEl) realmEl.innerText = realm;
+    
     const badge = document.getElementById('profileRealmBadge');
     if (badge) badge.innerText = realm;
     
     const profileAvatar = document.getElementById('profileAvatar');
     if (profileAvatar) profileAvatar.src = getAvatarByMana(lifetimeMana);
     
-    document.getElementById('profileHp').innerText = `${maxHp}/${maxHp}`;
+    const hpEl = document.getElementById('profileHp');
+    if (hpEl) hpEl.innerText = `${maxHp}/${maxHp}`;
+    
     const senseEl = document.getElementById('profileSense');
     if (senseEl) senseEl.innerText = thanThuc;
+    
     const swordEl = document.getElementById('profileSwords');
     if (swordEl) swordEl.innerText = `${getSwordCount(thanThuc)} Thanh`;
+
+    // Gọi cập nhật 4 chỉ số hiển thị lên màn hình
     updateCharacterUI();
 };
 
