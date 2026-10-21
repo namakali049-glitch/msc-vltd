@@ -140,16 +140,7 @@ window.allocateStat = function(statKey) {
     }
 };
 
-function getBattleCharacterSkin() {
-    if (lifetimeMana >= 4000) return battleAssets.playerTrucCoVienMan;
-    if (lifetimeMana >= 2500) return battleAssets.playerTrucCoTrungKy;
-    if (lifetimeMana >= 1500) return battleAssets.playerTrucCo;
-    return battleAssets.playerLuyenKhi;
-}
 
-function getBattleSwordSkin() {
-    return lifetimeMana >= 1500 ? battleAssets.swordCyan : battleAssets.swordWood;
-}
 
 function updateCharacterUI() {
     recalcStats();
