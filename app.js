@@ -257,12 +257,13 @@ function parseFirebaseArray(data) {
     return [];
 }
 
-// Căn cốt Phàm Nhân tổng đúng 10 điểm (Mỗi dòng tối thiểu 1)
 function generateRandomBaseStats() {
+    // 1. Phân bổ cơ bản: Mỗi thuộc tính được 1 điểm (Tổng: 4 điểm)
     let stats = { str: 1, vit: 1, agi: 1, spi: 1 };
-    let remaining = 6;
+    
+    // 2. Chia ngẫu nhiên 6 điểm còn lại (Khóa chặt bằng vòng lặp for)
     const keys = ['str', 'vit', 'agi', 'spi'];
-    for (let i = 0; i < remaining; i++) {
+    for (let i = 0; i < 6; i++) {
         let randKey = keys[Math.floor(Math.random() * keys.length)];
         stats[randKey] += 1;
     }
@@ -274,7 +275,7 @@ function generateRandomBaseStats() {
         spi: stats.spi,
         freePoints: 0,
         rewardedTiers: [],
-        version: "v0.6_FINAL"
+        version: "v0.6_FINAL" // Đổi tên Version để reset lại tất cả
     };
 }
 
