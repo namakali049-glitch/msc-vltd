@@ -1,3 +1,4 @@
+import './inventory.js';
 import './audio.js';
 import './realm.js';
 // ==========================================
