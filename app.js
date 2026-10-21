@@ -152,6 +152,16 @@ function recalcStats() {
     window.lifetimeMana = lifetimeMana;
 }
 window.recalcStats = recalcStats;
+// Thêm hàm này để sửa lỗi chưa định nghĩa
+function formatTime(totalSeconds) {
+    const m = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+    const s = (totalSeconds % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+}
+
+window.recalcStats = recalcStats;
+window.formatTime = formatTime; // Giờ thì dòng này sẽ chạy trơn tru
+window.syncManaToDatabase = syncManaToDatabase;
 window.formatTime = formatTime;
 window.syncManaToDatabase = syncManaToDatabase;
 
