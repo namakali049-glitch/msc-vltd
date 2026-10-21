@@ -481,6 +481,14 @@ window.handleLogin = async function() {
 
 window.handleGoogleLogin = async function() {
     window.playClickSound();
+    
+    // Cảnh báo nếu người dùng đang mở trong trình duyệt nhúng (Zalo/FB)
+    const isEmbedded = /FBAN|FBAV|Instagram|Line|Zalo/i.test(navigator.userAgent);
+    if (isEmbedded) {
+        alert("⚠️ Bạn đang mở game từ ứng dụng tin nhắn!\n\nVui lòng bấm dấu (⋮) ở góc trên bên phải màn hình và chọn 'Mở bằng trình duyệt' (Chrome hoặc Safari) để đăng nhập được bằng Google.");
+        return;
+    }
+
     try { 
         const result = await signInWithPopup(auth, googleProvider);
         const userRef = ref(database, 'users/' + result.user.uid);
@@ -495,7 +503,16 @@ window.handleGoogleLogin = async function() {
                 joinedAt: Date.now()
             });
         }
-    } catch(e) { alert("Lỗi Google: " + e.message); }
+    } catch(e) { 
+        console.error("Chi tiết lỗi đăng nhập:", e);
+        if (e.code === 'auth/popup-blocked') {
+            alert("Trình duyệt đã chặn cửa sổ đăng nhập! Vui lòng cho phép 'Cửa sổ bật lên (Pop-up)' trong cài đặt trình duyệt để tiếp tục.");
+        } else if (e.code === 'auth/unauthorized-domain') {
+            alert("Tên miền trang web chưa được cấp phép trong hệ thống Firebase!");
+        } else if (e.code !== 'auth/popup-closed-by-user') {
+            alert("Đăng nhập thất bại: " + (e.message || "Vui lòng thử lại"));
+        }
+    }
 };
 
 window.handleLogout = function() { 
