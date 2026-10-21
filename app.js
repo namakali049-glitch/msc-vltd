@@ -328,6 +328,7 @@ async function syncManaToDatabase() {
             stats: playerStats,
             masteredA1: masteredWordsA1,
             masteredB1: masteredWordsB1,
+            battleRecord: battleRecord, // <-- Lưu ván tốt nhất lên Firebase
             lastUpdated: Date.now()
         });
     } catch(e) { console.error("Lỗi đồng bộ Firebase:", e); }
