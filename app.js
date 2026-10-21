@@ -354,28 +354,29 @@ async function syncManaToDatabase() {
             stats: playerStats,
             masteredA1: masteredWordsA1,
             masteredB1: masteredWordsB1,
-            battleRecord: battleRecord, // <-- Lưu ván tốt nhất lên Firebase
-            lastUpdated: Date.now()
-        });
-    } catch(e) { console.error("Lỗi đồng bộ Firebase:", e); }
-}
-
-async function syncManaToDatabase() {
-    if (!currentUser) return;
-    try {
-        const userRef = ref(database, 'users/' + currentUser.uid);
-        await update(userRef, {
-            name: currentUser.displayName || currentUser.email.split('@')[0],
-            mana: lifetimeMana,
-            inventory: inventory,
-            stats: playerStats,
-            masteredA1: masteredWordsA1,
-            masteredB1: masteredWordsB1,
             battleRecord: battleRecord,
             lastUpdated: Date.now()
         });
     } catch(e) { console.error("Lỗi đồng bộ Firebase:", e); }
 }
+
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        currentUser = user;
+        window.currentUser = user;
+        const nameEl = document.getElementById('userDisplayName');
+        if (nameEl) nameEl.innerText = user.displayName || user.email.split('@')[0];
+        await loadUserLifetimeMana(user.uid);
+        switchScreen('start-screen');
+    } else {
+        currentUser = null;
+        window.currentUser = null;
+        lifetimeMana = 0;
+        masteredWordsA1 = [];
+        masteredWordsB1 = [];
+        switchScreen('auth-screen');
+    }
+});
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
