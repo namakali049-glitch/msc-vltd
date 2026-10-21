@@ -293,19 +293,22 @@ async function loadUserLifetimeMana(uid) {
             masteredWordsA1 = parseFirebaseArray(val.masteredA1);
             masteredWordsB1 = parseFirebaseArray(val.masteredB1);
 
-            // Bắt buộc nâng cấp nhân vật cũ lên v0.6_FINAL
+            // TỰ ĐỘNG CHUẨN HÓA CĂN CỐT CHO NHÂN VẬT:
+            // Bắt buộc reset nếu chưa mang dấu ấn "v0.6_FINAL"
             if (!val.stats || val.stats.version !== "v0.6_FINAL") {
                 playerStats = generateRandomBaseStats();
-
+                
+                // Trả lại Điểm Tiềm Năng nếu nick này đã có tu vi từ trước
                 let accumulatedPoints = 0;
                 let awardedTiers = [];
-                MINOR_REALM_REWARDS.forEach(tier => {
-                    if (lifetimeMana >= tier.mana) {
-                        accumulatedPoints += tier.points;
-                        awardedTiers.push(tier.id);
-                    }
-                });
-
+                if (window.MINOR_REALM_REWARDS) {
+                    window.MINOR_REALM_REWARDS.forEach(tier => {
+                        if (lifetimeMana >= tier.mana) {
+                            accumulatedPoints += tier.points;
+                            awardedTiers.push(tier.id);
+                        }
+                    });
+                }
                 playerStats.freePoints = accumulatedPoints;
                 playerStats.rewardedTiers = awardedTiers;
 
@@ -313,6 +316,21 @@ async function loadUserLifetimeMana(uid) {
             } else {
                 playerStats = val.stats;
             }
+
+            if (window.getRealmData) {
+                window.highestAchievedRank = window.getRealmData(lifetimeMana).major;
+            }
+        }
+    } catch(e) { 
+        console.error("Lỗi tải data:", e);
+        lifetimeMana = 0; 
+        masteredWordsA1 = [];
+        masteredWordsB1 = [];
+        playerStats = generateRandomBaseStats();
+    }
+    
+    if (window.recalcStats) window.recalcStats();
+}
 
             highestAchievedRank = getRealmData(lifetimeMana).major;
         }
