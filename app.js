@@ -1379,11 +1379,3 @@ window.addEventListener('resize', () => {
     }
 });
 
-function unlockAudioOnInteraction() {
-    const ctx = getAudioContext();
-    if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {});
-    document.removeEventListener('click', unlockAudioOnInteraction);
-    document.removeEventListener('keydown', unlockAudioOnInteraction);
-}
-document.addEventListener('click', unlockAudioOnInteraction);
-document.addEventListener('keydown', unlockAudioOnInteraction);
