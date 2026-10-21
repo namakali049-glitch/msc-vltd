@@ -205,6 +205,10 @@ async function loadUserData(uid) {
     if (window.updateInventoryUI) window.updateInventoryUI();
     window.recalcStats();
     window.updateCharacterUI();
+    // ĐỒNG BỘ CẢNH GIỚI VÀO CUỐI HÀM loadUserData
+    if (window.getRealmData) {
+        window.highestAchievedRank = window.getRealmData(window.lifetimeMana).major;
+    }
 }
 
 window.syncManaToDatabase = async function() {
