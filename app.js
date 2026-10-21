@@ -16,14 +16,16 @@ import {
 // 1. CẤU HÌNH FIREBASE 
 // (Đạo hữu hãy điền Config của mình vào đây)
 // ==========================================
+
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBBn3CGkftYVVl1wr9fY8OhBAd8LKzUSyE",
+  authDomain: "msc-vltd.firebaseapp.com",
+  databaseURL: "https://msc-vltd-default-rtdb.firebaseio.com",
+  projectId: "msc-vltd",
+  storageBucket: "msc-vltd.firebasestorage.app",
+  messagingSenderId: "684705162429",
+  appId: "1:684705162429:web:2ed8e08891060f61f103d4",
+  measurementId: "G-53PPGGS0ZN"
 };
 
 const app = initializeApp(firebaseConfig);
