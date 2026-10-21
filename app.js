@@ -454,32 +454,119 @@ window.showProfile = function() {
     updateCharacterUI();
 };
 
+let currentLeaderboardTab = 'mana';
+let cachedLeaderboardData = [];
+
+window.switchLeaderboardTab = function(tab) {
+    if (window.playClickSound) window.playClickSound();
+    currentLeaderboardTab = tab;
+    
+    const tabMana = document.getElementById('lb-tab-mana');
+    const tabBattle = document.getElementById('lb-tab-battle');
+    const descText = document.getElementById('lb-desc-text');
+    
+    if (tab === 'mana') {
+        if (tabMana) tabMana.classList.add('active');
+        if (tabBattle) tabBattle.classList.remove('active');
+        if (descText) descText.innerText = "Bảng xếp hạng Linh lực trọn đời";
+    } else {
+        if (tabBattle) tabBattle.classList.add('active');
+        if (tabMana) tabMana.classList.remove('active');
+        if (descText) descText.innerText = "Bảng xếp hạng Bí Cảnh (Ván Đấu Tốt Nhất)";
+    }
+    
+    window.renderLeaderboardList();
+};
+
+window.renderLeaderboardList = function() {
+    const lbList = document.getElementById('lb-list');
+    if (!lbList) return;
+    
+    if (!cachedLeaderboardData || cachedLeaderboardData.length === 0) {
+        lbList.innerHTML = '<li>Chưa có cao thủ nào!</li>';
+        return;
+    }
+
+    lbList.innerHTML = '';
+    const formatTimeFunc = window.formatTime || ((s) => `${String(Math.floor(s/60)).padStart(2, '0')}:${String(s%60).padStart(2, '0')}`);
+
+    if (currentLeaderboardTab === 'mana') {
+        // TAB 1: GIỮ NGUYÊN 100% BẢN GỐC (Sắp xếp theo Linh Lực trọn đời)
+        let records = [...cachedLeaderboardData]
+            .sort((a, b) => (b.mana || 0) - (a.mana || 0))
+            .slice(0, 10);
+
+        records.forEach((p, idx) => {
+            let medal = idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : `<b>${idx + 1}.</b>`;
+            lbList.innerHTML += `
+                <li>
+                    <div class="lb-user-info">
+                        <span class="lb-rank">${medal}</span>
+                        <div class="lb-details">
+                            <span class="lb-name">${p.name || 'Đạo Hữu'}</span>
+                            <span class="realm-badge">${calculateRealm(p.mana || 0)}</span>
+                        </div>
+                    </div>
+                    <div class="lb-mana">⚡ ${p.mana || 0} Linh Lực</div>
+                </li>`;
+        });
+    } else {
+        // TAB 2: BẢNG XẾP HẠNG BÍ CẢNH (TOP 10 VÁN TỐT NHẤT - KHÔNG CỘNG DỒN)
+        // Tiêu chí: 1. Thời gian sống sót lâu nhất; 2. Số quái trảm nhiều nhất
+        let records = [...cachedLeaderboardData]
+            .filter(p => p.battleRecord && (p.battleRecord.maxSurvivalSec > 0 || p.battleRecord.maxKills > 0))
+            .sort((a, b) => {
+                const secA = a.battleRecord?.maxSurvivalSec || 0;
+                const secB = b.battleRecord?.maxSurvivalSec || 0;
+                if (secB !== secA) return secB - secA; // Ưu tiên 1: Thời gian sống lâu hơn đứng trước
+                return (b.battleRecord?.maxKills || 0) - (a.battleRecord?.maxKills || 0); // Ưu tiên 2: Diệt nhiều quái hơn
+            })
+            .slice(0, 10); // Lấy chuẩn Top 10 người chơi
+
+        if (records.length === 0) {
+            lbList.innerHTML = '<li style="justify-content:center; color:#94a3b8;">Chưa có chiến tích Bí Cảnh nào được ghi nhận!</li>';
+            return;
+        }
+
+        records.forEach((p, idx) => {
+            let medal = idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : `<b>${idx + 1}.</b>`;
+            const kills = p.battleRecord?.maxKills || 0;
+            const timeStr = formatTimeFunc(p.battleRecord?.maxSurvivalSec || 0);
+            lbList.innerHTML += `
+                <li>
+                    <div class="lb-user-info">
+                        <span class="lb-rank">${medal}</span>
+                        <div class="lb-details">
+                            <span class="lb-name">${p.name || 'Đạo Hữu'}</span>
+                            <span class="realm-badge">${calculateRealm(p.mana || 0)}</span>
+                        </div>
+                    </div>
+                    <div class="lb-score-tag">
+                        <span style="color:#38bdf8; font-weight:bold;">⏱️ ${timeStr}</span><br>
+                        <small style="color:#ffa502;">👾 ${kills} quái</small>
+                    </div>
+                </li>`;
+        });
+    }
+};
+
 window.showLeaderboard = async function() {
-    window.playClickSound();
+    if (window.playClickSound) window.playClickSound();
     switchScreen('leaderboard-screen');
-    let lbList = document.getElementById('lb-list');
-    lbList.innerHTML = '<li>⏳ Đang tải Tiên Đạo Bảng...</li>';
+    const lbList = document.getElementById('lb-list');
+    if (lbList) lbList.innerHTML = '<li>⏳ Đang tải Tiên Đạo Bảng...</li>';
+    
     try {
         const snapshot = await get(ref(database, 'users'));
         if (snapshot.exists()) {
-            let records = Object.values(snapshot.val()).sort((a, b) => (b.mana || 0) - (a.mana || 0)).slice(0, 10);
-            lbList.innerHTML = '';
-            records.forEach((p, idx) => {
-                let medal = idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : `<b>${idx + 1}.</b>`;
-                lbList.innerHTML += `
-                    <li>
-                        <div class="lb-user-info">
-                            <span class="lb-rank">${medal}</span>
-                            <div class="lb-details">
-                                <span class="lb-name">${p.name}</span>
-                                <span class="realm-badge">${calculateRealm(p.mana || 0)}</span>
-                            </div>
-                        </div>
-                        <div class="lb-mana">⚡ ${p.mana || 0} Linh Lực</div>
-                    </li>`;
-            });
-        } else { lbList.innerHTML = '<li>Chưa có cao thủ nào!</li>'; }
-    } catch(e) { lbList.innerHTML = '<li>❌ Lỗi tải bảng xếp hạng.</li>'; }
+            cachedLeaderboardData = Object.values(snapshot.val());
+            window.renderLeaderboardList();
+        } else {
+            if (lbList) lbList.innerHTML = '<li>Chưa có cao thủ nào!</li>';
+        }
+    } catch(e) {
+        if (lbList) lbList.innerHTML = '<li>❌ Lỗi tải bảng xếp hạng.</li>';
+    }
 };
 
 window.goHome = function() { 
