@@ -472,17 +472,27 @@ function parseFirebaseArray(data) {
     return [];
 }
 
+// CĂN CỐT PHÀM NHÂN CÁCH B: TỔNG BẰNG ĐÚNG 10 ĐIỂM
 function generateRandomBaseStats() {
+    let stats = { str: 1, vit: 1, agi: 1, spi: 1 };
+    let remainingPoints = 6; // 10 - 4 = 6 điểm phân bổ ngẫu nhiên
+    const keys = ['str', 'vit', 'agi', 'spi'];
+    
+    while (remainingPoints > 0) {
+        let randKey = keys[Math.floor(Math.random() * keys.length)];
+        stats[randKey]++;
+        remainingPoints--;
+    }
+
     return {
-        str: Math.floor(Math.random() * 10) + 1,
-        vit: Math.floor(Math.random() * 10) + 1,
-        agi: Math.floor(Math.random() * 10) + 1,
-        spi: Math.floor(Math.random() * 10) + 1,
+        str: stats.str,
+        vit: stats.vit,
+        agi: stats.agi,
+        spi: stats.spi,
         freePoints: 0,
         rewardedTiers: []
     };
 }
-
 async function loadUserLifetimeMana(uid) {
     try {
         const userRef = ref(database, 'users/' + uid);
