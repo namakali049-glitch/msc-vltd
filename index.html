@@ -13,7 +13,7 @@
   
   <!-- Âm thanh nền -->
   <audio id="bgmAudio" loop src="assets/bgm.mp3"></audio>
-  
+
   <!-- Nút Bật/Tắt nhạc cố định góc trên bên phải -->
   <button id="audioToggleBtn" class="fixed-music-btn" onclick="toggleBGM()">🎵 Nhạc: Bật</button>
 
@@ -280,7 +280,7 @@
           <button class="btn-lib-action">Tu Luyện</button>
         </div>
 
-        <div class="library-item" onclick="startVolume('trung_quyen')">
+        <div class="library-item locked" onclick="alert('Trung Quyển (B1-B2) yêu cầu Kim Đan Chân Nhân trở lên mới được khai mở!')">
           <div class="lib-icon">📘</div>
           <div class="lib-info">
             <h4>Trung Quyển (B1-B2)</h4>
@@ -313,6 +313,32 @@
       <p id="breakthroughDesc" class="breakthrough-desc"></p>
       <div id="breakthroughBonus" class="breakthrough-bonus"></div>
       <button class="btn-lib-action btn-breakthrough-close" onclick="closeBreakthroughModal()">Củng Cố Tu Vi 🧘‍♂️</button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL KÊNH CHAT THẾ GIỚI                   -->
+  <!-- ========================================== -->
+  <div id="chatModal" class="modal-overlay" style="display:none;">
+    <div class="chat-card">
+      <div class="chat-header">
+        <h3>💬 TRUYỀN ÂM THẾ GIỚI</h3>
+        <button class="btn-close-modal" onclick="closeWorldChat()">✖</button>
+      </div>
+      
+      <!-- Khung hiển thị tin nhắn -->
+      <div id="chatMessages" class="chat-messages-box">
+        <p style="color:#64748b; font-size:13px; text-align:center;">Đang kết nối thần thức thiên địa...</p>
+      </div>
+
+      <!-- Thanh nhập tin nhắn -->
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" maxlength="100" placeholder="Nhập truyền âm (tối đa 100 chữ)..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+        <button class="btn-send-chat" onclick="sendChatMessage()">Gửi</button>
+      </div>
+      <div class="chat-counter-box">
+        <span id="chatCharCount" style="color:#64748b; font-size:11px;">0/100 ký tự</span>
+      </div>
     </div>
   </div>
 
@@ -353,30 +379,5 @@
   </script>
 
   <script type="module" src="app.js"></script>
-  <!-- ========================================== -->
-  <!-- MODAL KÊNH CHAT THẾ GIỚI                   -->
-  <!-- ========================================== -->
-  <div id="chatModal" class="modal-overlay" style="display:none;">
-    <div class="chat-card">
-      <div class="chat-header">
-        <h3>💬 TRUYỀN ÂM THẾ GIỚI</h3>
-        <button class="btn-close-modal" onclick="closeWorldChat()">✖</button>
-      </div>
-      
-      <!-- Khung hiển thị tin nhắn -->
-      <div id="chatMessages" class="chat-messages-box">
-        <p style="color:#64748b; font-size:13px; text-align:center;">Đang kết nối thần thức thiên địa...</p>
-      </div>
-
-      <!-- Thanh nhập tin nhắn -->
-      <div class="chat-input-row">
-        <input type="text" id="chatInput" maxlength="100" placeholder="Nhập truyền âm (tối đa 100 chữ)..." onkeydown="if(event.key==='Enter') sendChatMessage()">
-        <button class="btn-send-chat" onclick="sendChatMessage()">Gửi</button>
-      </div>
-      <div class="chat-counter-box">
-        <span id="chatCharCount" style="color:#64748b; font-size:11px;">0/100 ký tự</span>
-      </div>
-    </div>
-  </div>
 </body>
 </html>
