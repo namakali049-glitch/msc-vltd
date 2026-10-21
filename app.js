@@ -388,6 +388,14 @@ window.switchAuthTab = function(type) {
     }
 };
 
+// Hàm chuyển đổi an toàn: Bảo đảm luôn trả về mảng dù Firebase lưu dạng Array hay Object
+function parseFirebaseArray(data) {
+    if (!data) return [];
+    if (Array.isArray(data)) return data;
+    if (typeof data === 'object') return Object.values(data);
+    return [];
+}
+
 async function loadUserLifetimeMana(uid) {
     try {
         const userRef = ref(database, 'users/' + uid);
@@ -396,8 +404,8 @@ async function loadUserLifetimeMana(uid) {
             const val = snapshot.val();
             lifetimeMana = val.mana || 0;
             inventory = val.inventory || { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
-            masteredWordsA1 = Array.isArray(val.masteredA1) ? val.masteredA1 : [];
-            masteredWordsB1 = Array.isArray(val.masteredB1) ? val.masteredB1 : [];
+            masteredWordsA1 = parseFirebaseArray(val.masteredA1);
+            masteredWordsB1 = parseFirebaseArray(val.masteredB1);
             highestAchievedRank = getRealmData(lifetimeMana).major;
         }
     } catch(e) { 
@@ -408,11 +416,12 @@ async function loadUserLifetimeMana(uid) {
     recalcStats();
 }
 
-// Hàm đồng bộ duy nhất: Lưu vĩnh viễn Linh lực, Túi đan dược và Từ đã lĩnh ngộ
+// Dùng update() thay vì set() để chỉ cập nhật các trường thay đổi, không xóa mất trường khác
 async function syncManaToDatabase() {
     if (!currentUser) return;
     try {
-        await set(ref(database, 'users/' + currentUser.uid), {
+        const userRef = ref(database, 'users/' + currentUser.uid);
+        await update(userRef, {
             name: currentUser.displayName || currentUser.email.split('@')[0],
             mana: lifetimeMana,
             inventory: inventory,
