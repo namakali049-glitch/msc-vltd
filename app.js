@@ -109,7 +109,19 @@ function recalcStats() {
     swordDamage = playerStats.str * 10;
     thanThuc = playerStats.spi * 10;
     agi = playerStats.agi;
+
+    // Đồng bộ ra window cho battle.js & các mô-đun khác
+    window.maxHp = maxHp;
+    window.currentHp = currentHp;
+    window.str = str;
+    window.swordDamage = swordDamage;
+    window.thanThuc = thanThuc;
+    window.agi = agi;
+    window.lifetimeMana = lifetimeMana;
 }
+window.recalcStats = recalcStats;
+window.formatTime = formatTime;
+window.syncManaToDatabase = syncManaToDatabase;
 
 window.allocateStat = function(statKey) {
     if (playerStats.freePoints <= 0) {
