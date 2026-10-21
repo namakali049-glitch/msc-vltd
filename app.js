@@ -409,7 +409,7 @@ async function loadUserLifetimeMana(uid) {
     recalcStats();
 }
 
-// Hàm đồng bộ duy nhất: Lưu đủ Linh Lực, Túi Đồ và Từ Đã Lĩnh Ngộ
+// Hàm đồng bộ duy nhất: Lưu vĩnh viễn Linh lực, Túi đan dược và Từ đã lĩnh ngộ
 async function syncManaToDatabase() {
     if (!currentUser) return;
     try {
