@@ -505,17 +505,25 @@ async function loadUserLifetimeMana(uid) {
             masteredWordsA1 = parseFirebaseArray(val.masteredA1);
             masteredWordsB1 = parseFirebaseArray(val.masteredB1);
 
-            // KIỂM TRA NẾU NICK ĐANG BỊ DÍNH BỘ SỐ CŨ 10/10/10/10 -> RANDOM LẠI THEO CÁCH B
-            const isOldDefaultStats = val.stats && 
-                                      val.stats.str === 10 && 
-                                      val.stats.vit === 10 && 
-                                      val.stats.agi === 10 && 
-                                      val.stats.spi === 10 && 
-                                      (!val.stats.rewardedTiers || val.stats.rewardedTiers.length === 0);
-
-            if (!val.stats || isOldDefaultStats) {
+            // KIỂM TRA PHIÊN BẢN: Nếu chưa có stats HOẶC chưa có cờ "v0.6_B"
+            if (!val.stats || val.stats.version !== "v0.6_B") {
+                // 1. Tạo ngẫu nhiên lại căn cốt Phàm Nhân có tổng bằng đúng 10
                 playerStats = generateRandomBaseStats();
-                // Lưu ngay bộ số mới chia tổng bằng 10 lên Firebase
+
+                // 2. Tính lại toàn bộ điểm tiềm năng từ các tiểu cảnh giới đã vượt qua để hoàn trả cho người chơi
+                let accumulatedPoints = 0;
+                let awardedTiers = [];
+                MINOR_REALM_REWARDS.forEach(tier => {
+                    if (lifetimeMana >= tier.mana) {
+                        accumulatedPoints += tier.points;
+                        awardedTiers.push(tier.id);
+                    }
+                });
+
+                playerStats.freePoints = accumulatedPoints;
+                playerStats.rewardedTiers = awardedTiers;
+
+                // 3. Ghi đè ngay bộ dữ liệu mới lên Firebase
                 await update(userRef, { stats: playerStats });
             } else {
                 playerStats = val.stats;
