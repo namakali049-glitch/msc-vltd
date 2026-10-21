@@ -1,20 +1,26 @@
-// ==========================================
-// APP.JS - LÕI ĐIỀU HÀNH HỆ THỐNG (MAIN THREAD)
-// Phiên bản: v0.6_FINAL (Đã chuẩn hóa sạch lỗi)
-// ==========================================
+import './chat.js';
+import './quiz.js';
+import './battle.js';
+import './inventory.js';
+import './audio.js';
+import './realm.js';
 
+// ==========================================
+// 1. CẤU HÌNH FIREBASE
+// ==========================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { 
     getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, 
     signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, updateProfile
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { 
-    getDatabase, ref, set, get, update 
+    getDatabase, 
+    ref, 
+    set, 
+    get, 
+    update 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-// ==========================================
-// 1. CẤU HÌNH FIREBASE
-// ==========================================
 const firebaseConfig = {
     apiKey: "AIzaSyBBn3CGkftYVVl1wr9fY8OhBAd8LKzUSyE",
     authDomain: "msc-vltd.firebaseapp.com",
@@ -30,15 +36,8 @@ const auth = getAuth(app);
 const database = getDatabase(app);
 const googleProvider = new GoogleAuthProvider();
 
-// Gắn database ra window để chat.js và các module khác dùng chung an toàn
+// Gắn database vào window để chat.js và các module khác dùng chung an toàn
 window.firebaseDB = database;
-
-// Nạp các module phụ trợ
-import './realm.js';
-import './inventory.js';
-import './quiz.js';
-import './battle.js';
-import './chat.js';
 
 // ==========================================
 // 2. BIẾN TOÀN CỤC & CHỈ SỐ NHÂN VẬT
@@ -68,6 +67,7 @@ let playerStats = {
     version: "v0.6_FINAL"
 };
 window.playerStats = playerStats;
+window.stats = playerStats; // Tương thích ngược
 
 let maxHp = 100;
 let currentHp = 100;
@@ -82,6 +82,17 @@ window.str = str;
 window.agi = agi;
 window.thanThuc = thanThuc;
 window.swordDamage = swordDamage;
+
+let currentLevel = 1;
+let currentLevelExp = 0; 
+let currentQuestionIndex = 0;
+let expToLevelUp = 0; 
+const expPerQuestion = 10;
+
+let timerInterval = null;
+let totalSeconds = 0;
+let activeQuestions = []; 
+let vocabPool = [];
 
 // ==========================================
 // 3. THUỘC TÍNH & GIAO DIỆN NHÂN VẬT
@@ -131,11 +142,13 @@ function recalcStats() {
 
 window.recalcStats = recalcStats;
 
+// Hàm addLifetimeMana hoàn chỉnh (không bị ngắt dòng)
 window.addLifetimeMana = function(amount) {
     lifetimeMana += amount;
     window.lifetimeMana = lifetimeMana;
     recalcStats();
     updateCharacterUI();
+    syncManaToDatabase();
     return lifetimeMana;
 };
 
@@ -195,14 +208,32 @@ function updateCharacterUI() {
     const spiEff = document.getElementById('profileSpiEffect');
     if (spiEff) spiEff.innerText = `(${playerStats.spi * 10} Thần thức)`;
 
+    const nameEl = document.getElementById('profileName');
+    if (nameEl) nameEl.innerText = currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : "Đạo Hữu";
+
+    const manaEl = document.getElementById('profileMana');
+    if (manaEl) manaEl.innerText = lifetimeMana;
+
+    const realmFunc = window.calculateRealm || (() => "Phàm Nhân");
+    const realm = realmFunc(lifetimeMana);
+    const realmEl = document.getElementById('profileRealm');
+    if (realmEl) realmEl.innerText = realm;
+
+    const badge = document.getElementById('profileRealmBadge');
+    if (badge) badge.innerText = realm;
+
+    const profileAvatar = document.getElementById('profileAvatar');
+    const avatarFunc = window.getAvatarByMana || (() => "assets/pham-nhan.jpg");
+    if (profileAvatar) profileAvatar.src = avatarFunc(lifetimeMana);
+
     const swordsTxt = document.getElementById('profileSwords');
     const swordCountFunc = window.getSwordCount || (() => 0);
     if (swordsTxt) swordsTxt.innerText = `${swordCountFunc(thanThuc)} Thanh`;
 
     const masteryA1 = document.getElementById('profileMasteryA1');
     const masteryB1 = document.getElementById('profileMasteryB1');
-    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
-    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+    const countA1 = (masteredWordsA1 && Array.isArray(masteredWordsA1)) ? masteredWordsA1.length : 0;
+    const countB1 = (masteredWordsB1 && Array.isArray(masteredWordsB1)) ? masteredWordsB1.length : 0;
     if (masteryA1) masteryA1.innerText = `${countA1} / 900 từ (${Math.round((countA1 / 900) * 100)}%)`;
     if (masteryB1) masteryB1.innerText = `${countB1} / 4000 từ (${Math.round((countB1 / 4000) * 100)}%)`;
 }
@@ -310,6 +341,9 @@ async function loadUserLifetimeMana(uid) {
                 playerStats = val.stats;
             }
 
+            window.playerStats = playerStats;
+            window.stats = playerStats;
+
             if (window.getRealmData) {
                 window.highestAchievedRank = window.getRealmData(lifetimeMana).major;
             }
@@ -320,6 +354,8 @@ async function loadUserLifetimeMana(uid) {
         masteredWordsA1 = [];
         masteredWordsB1 = [];
         playerStats = generateRandomBaseStats();
+        window.playerStats = playerStats;
+        window.stats = playerStats;
     }
     
     recalcStats();
@@ -371,6 +407,8 @@ window.handleSignup = async function() {
         const userCred = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(userCred.user, { displayName: displayName });
         playerStats = generateRandomBaseStats();
+        window.playerStats = playerStats;
+        window.stats = playerStats;
         await set(ref(database, 'users/' + userCred.user.uid), { 
             name: displayName, 
             mana: 0, 
@@ -408,6 +446,8 @@ window.handleGoogleLogin = async function() {
         const snapshot = await get(userRef);
         if (!snapshot.exists()) {
             playerStats = generateRandomBaseStats();
+            window.playerStats = playerStats;
+            window.stats = playerStats;
             await set(userRef, { 
                 name: result.user.displayName || "Đạo Hữu", 
                 mana: 0, 
@@ -439,6 +479,8 @@ window.handleLogout = function() {
     window.masteredWordsB1 = [];
     window.inventory = inventory;
     window.battleRecord = battleRecord;
+    window.playerStats = playerStats;
+    window.stats = playerStats;
     
     signOut(auth); 
 };
@@ -451,25 +493,6 @@ window.showProfile = function() {
     if (!currentUser) return;
     recalcStats();
     switchScreen('profile-screen');
-    
-    const nameEl = document.getElementById('profileName');
-    if (nameEl) nameEl.innerText = currentUser.displayName || currentUser.email.split('@')[0];
-    
-    const manaEl = document.getElementById('profileMana');
-    if (manaEl) manaEl.innerText = lifetimeMana;
-    
-    const realmFunc = window.calculateRealm || (() => "Phàm Nhân");
-    const realm = realmFunc(lifetimeMana);
-    const realmEl = document.getElementById('profileRealm');
-    if (realmEl) realmEl.innerText = realm;
-    
-    const badge = document.getElementById('profileRealmBadge');
-    if (badge) badge.innerText = realm;
-    
-    const profileAvatar = document.getElementById('profileAvatar');
-    const avatarFunc = window.getAvatarByMana || (() => "assets/pham-nhan.jpg");
-    if (profileAvatar) profileAvatar.src = avatarFunc(lifetimeMana);
-
     updateCharacterUI();
 };
 
