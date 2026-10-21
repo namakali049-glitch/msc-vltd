@@ -31,14 +31,26 @@ let currentUser = null;
 let lifetimeMana = 0; 
 let sessionMana = 0;  
 let inventory = { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
-let masteredWordsA1 = []; // Danh sách chữ Hán A1 đã thuộc độc bản
-let masteredWordsB1 = []; // Danh sách chữ Hán B1 đã thuộc độc bản
+let masteredWordsA1 = [];
+let masteredWordsB1 = [];
 
+// 4 ĐẠI THUỘC TÍNH BẢN NGUYÊN (v0.6)
+let playerStats = {
+    str: 10,          // Sức mạnh (1 điểm = 10 Sát thương)
+    vit: 10,          // Khí huyết (1 điểm = 10 Sinh mệnh HP)
+    agi: 10,          // Nhanh nhẹn (1 điểm = 10 Thân pháp né đòn)
+    spi: 10,          // Tinh thần (1 điểm = 10 Thần thức ngự kiếm)
+    freePoints: 0,    // Điểm tiềm năng chưa cộng
+    rewardedTiers: [] // Danh sách tiểu cảnh giới đã phát thưởng (tránh nhận trùng)
+};
+
+// Các chỉ số thực chiến sau khi quy đổi (nhân 10)
 let maxHp = 100;
 let currentHp = 100;
 let str = 10; 
 let agi = 10; 
-let thanThuc = 0; // Thần thức điều khiển phi kiếm 
+let thanThuc = 100;
+let swordDamage = 100; // Sát thương kiếm
 
 let currentLevel = 1;
 let currentLevelExp = 0; 
