@@ -601,7 +601,6 @@ window.showLeaderboard = async function() {
     if (lbList) lbList.innerHTML = '<li style="justify-content:center; color:#94a3b8;">Đang kết nối Thiên Đạo Bảng...</li>';
     
     try {
-        // Lấy danh sách user từ Firebase
         const snapshot = await get(ref(database, 'users'));
         let records = [];
         if (snapshot.exists()) {
@@ -612,7 +611,6 @@ window.showLeaderboard = async function() {
         }
 
         if (records.length > 0) {
-            // Cập nhật biến cache toàn cục và gọi hàm vẽ giao diện đã viết sẵn
             cachedLeaderboardData = records;
             window.renderLeaderboardList();
         } else {
