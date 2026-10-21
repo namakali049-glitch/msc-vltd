@@ -353,7 +353,7 @@ window.closeBreakthroughModal = function() {
     if (modal) modal.style.display = 'none';
 };
 // ==========================================
-// 5. CHUYỂN MÀN HÌNH & XÁC THỰC
+// 5. CHUYỂN MÀN HÌNH & XÁC THỰC FIREBASE (ĐÃ FIX CHUẨN)
 // ==========================================
 window.switchScreen = function(screenId) {
     window.playClickSound();
@@ -403,10 +403,15 @@ async function loadUserLifetimeMana(uid) {
             masteredWordsB1 = Array.isArray(val.masteredB1) ? val.masteredB1 : [];
             highestAchievedRank = getRealmData(lifetimeMana).major;
         }
-    } catch(e) { lifetimeMana = 0; }
+    } catch(e) { 
+        lifetimeMana = 0; 
+        masteredWordsA1 = [];
+        masteredWordsB1 = [];
+    }
     recalcStats();
 }
 
+// Hàm đồng bộ duy nhất: Lưu đủ Linh Lực, Túi Đồ và Từ Đã Lĩnh Ngộ
 async function syncManaToDatabase() {
     if (!currentUser) return;
     try {
@@ -418,7 +423,7 @@ async function syncManaToDatabase() {
             masteredB1: masteredWordsB1,
             lastUpdated: Date.now()
         });
-    } catch(e) { console.error("Lỗi đồng bộ:", e); }
+    } catch(e) { console.error("Lỗi đồng bộ Firebase:", e); }
 }
 
 onAuthStateChanged(auth, async (user) => {
@@ -431,6 +436,8 @@ onAuthStateChanged(auth, async (user) => {
     } else {
         currentUser = null;
         lifetimeMana = 0;
+        masteredWordsA1 = [];
+        masteredWordsB1 = [];
         switchScreen('auth-screen');
     }
 });
@@ -445,7 +452,12 @@ window.handleSignup = async function() {
         const userCred = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(userCred.user, { displayName: displayName });
         await set(ref(database, 'users/' + userCred.user.uid), { 
-            name: displayName, mana: 0, inventory: inventory 
+            name: displayName, 
+            mana: 0, 
+            inventory: inventory,
+            masteredA1: [],
+            masteredB1: [],
+            joinedAt: Date.now()
         });
         alert("Đăng ký thành công!");
     } catch(e) { alert("Lỗi: " + e.message); }
@@ -470,7 +482,11 @@ window.handleGoogleLogin = async function() {
         if (!snapshot.exists()) {
             await set(userRef, { 
                 name: result.user.displayName || "Đạo Hữu", 
-                mana: 0, inventory: inventory 
+                mana: 0, 
+                inventory: inventory,
+                masteredA1: [],
+                masteredB1: [],
+                joinedAt: Date.now()
             });
         }
     } catch(e) { alert("Lỗi Google: " + e.message); }
@@ -480,18 +496,6 @@ window.handleLogout = function() {
     window.playClickSound();
     signOut(auth); 
 };
-
-async function syncManaToDatabase() {
-    if (!currentUser) return;
-    try {
-        await set(ref(database, 'users/' + currentUser.uid), {
-            name: currentUser.displayName || currentUser.email.split('@')[0],
-            mana: lifetimeMana,
-            inventory: inventory,
-            lastUpdated: Date.now()
-        });
-    } catch(e) { console.error("Lỗi đồng bộ:", e); }
-}
 
 // ==========================================
 // 6. HỒ SƠ & BẢNG XẾP HẠNG
