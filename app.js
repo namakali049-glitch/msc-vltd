@@ -364,6 +364,7 @@ async function syncManaToDatabase() {
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         currentUser = user;
+        window.currentUser = user; // <-- Đảm bảo dòng này có mặt
         const nameEl = document.getElementById('userDisplayName');
         if (nameEl) nameEl.innerText = user.displayName || user.email.split('@')[0];
         await loadUserLifetimeMana(user.uid);
