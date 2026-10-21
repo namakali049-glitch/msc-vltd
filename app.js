@@ -540,13 +540,19 @@ window.renderLeaderboardList = function() {
 
         records.forEach((p, idx) => {
             let medal = idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : `<b>${idx + 1}.</b>`;
+            
+            // TRÍCH XUẤT CHÍNH XÁC SỐ TỪ VỰNG CỦA TỪNG NGƯỜI CHƠI TRÊN BẢNG
+            const pCountA1 = p.masteredA1 ? (Array.isArray(p.masteredA1) ? p.masteredA1.length : Object.keys(p.masteredA1).length) : 0;
+            const pCountB1 = p.masteredB1 ? (Array.isArray(p.masteredB1) ? p.masteredB1.length : Object.keys(p.masteredB1).length) : 0;
+            const exactRealm = realmFunc(p.mana || 0, pCountA1, pCountB1);
+
             lbList.innerHTML += `
                 <li>
                     <div class="lb-user-info">
                         <span class="lb-rank">${medal}</span>
                         <div class="lb-details">
                             <span class="lb-name">${p.name || 'Đạo Hữu'}</span>
-                            <span class="realm-badge">${realmFunc(p.mana || 0)}</span>
+                            <span class="realm-badge">${exactRealm}</span>
                         </div>
                     </div>
                     <div class="lb-mana">⚡ ${p.mana || 0} Linh Lực</div>
@@ -572,13 +578,19 @@ window.renderLeaderboardList = function() {
             let medal = idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : `<b>${idx + 1}.</b>`;
             const kills = p.battleRecord?.maxKills || 0;
             const timeStr = formatTimeFunc(p.battleRecord?.maxSurvivalSec || 0);
+
+            // TRÍCH XUẤT CHÍNH XÁC SỐ TỪ VỰNG CỦA TỪNG NGƯỜI CHƠI TRÊN BẢNG
+            const pCountA1 = p.masteredA1 ? (Array.isArray(p.masteredA1) ? p.masteredA1.length : Object.keys(p.masteredA1).length) : 0;
+            const pCountB1 = p.masteredB1 ? (Array.isArray(p.masteredB1) ? p.masteredB1.length : Object.keys(p.masteredB1).length) : 0;
+            const exactRealm = realmFunc(p.mana || 0, pCountA1, pCountB1);
+
             lbList.innerHTML += `
                 <li>
                     <div class="lb-user-info">
                         <span class="lb-rank">${medal}</span>
                         <div class="lb-details">
                             <span class="lb-name">${p.name || 'Đạo Hữu'}</span>
-                            <span class="realm-badge">${realmFunc(p.mana || 0)}</span>
+                            <span class="realm-badge">${exactRealm}</span>
                         </div>
                     </div>
                     <div class="lb-score-tag">
