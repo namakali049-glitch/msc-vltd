@@ -59,8 +59,7 @@ function attachChatListener() {
     if (!box) return;
     box.innerHTML = '';
 
-    const chatQuery = query(chatRef, limitToLast(50));
-
+    const chatQuery = query(getChatRef(), limitToLast(50));
     onChildAdded(chatQuery, (snapshot) => {
         const msg = snapshot.val();
         renderMessageItem(msg);
