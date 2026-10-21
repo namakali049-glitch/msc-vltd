@@ -1,11 +1,17 @@
-const CACHE_NAME = 'tutien-v3';
+const CACHE_NAME = 'tutien-v4';
 const STATIC_ASSETS = [
   './',
   './index.html',
   './style.css',
   './app.js',
+  './audio.js',
+  './realm.js',
+  './inventory.js',
+  './battle.js',
+  './quiz.js',
   './manifest.json',
   './a1_vocab.csv',
+  './b1_vocab.csv',
   './assets/bgm.mp3',
   './assets/pham-nhan.jpg',
   './assets/luyen-khi.jpg',
@@ -38,37 +44,48 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  const url = new URL(event.request.url);
+  const req = event.request;
+  const url = new URL(req.url);
 
-  // Network-First cho HTML, CSS, JS để client luôn cập nhật bản mới nhất từ Vercel
+  // BỎ QUA các yêu cầu không phải http/https (như chrome-extension) và chỉ nhận phương thức GET
+  if (!url.protocol.startsWith('http') || req.method !== 'GET') {
+    return;
+  }
+
+  // BỎ QUA các request động của Firebase để không ghi đè dữ liệu
+  if (url.origin.includes('firebase') || url.origin.includes('googleapis') || url.origin.includes('gstatic')) {
+    return;
+  }
+
+  // Network-First cho mã nguồn giao diện để luôn nhận code mới nhất
   if (
-    event.request.mode === 'navigate' ||
+    req.mode === 'navigate' ||
     url.pathname.endsWith('.js') ||
     url.pathname.endsWith('.css') ||
     url.pathname.endsWith('.html')
   ) {
     event.respondWith(
-      fetch(event.request)
+      fetch(req)
         .then((networkResponse) => {
           if (networkResponse.status === 200) {
             const copy = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+            caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
           }
           return networkResponse;
         })
-        .catch(() => caches.match(event.request))
+        .catch(() => caches.match(req))
     );
     return;
   }
 
-  // Cache-First cho hình ảnh, âm thanh, font và CSV
+  // Cache-First cho hình ảnh, âm thanh và file CSV
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
+    caches.match(req).then((cachedResponse) => {
       if (cachedResponse) return cachedResponse;
-      return fetch(event.request).then((networkResponse) => {
+      return fetch(req).then((networkResponse) => {
         if (networkResponse.status === 200) {
           const copy = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
         }
         return networkResponse;
       });
