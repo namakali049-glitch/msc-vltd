@@ -242,9 +242,16 @@ function calculateRealm(mana) {
     return getRealmData(mana).rank;
 }
 
+// Tính số lượng phi kiếm dựa theo Thần Thức
+// Thanh thứ 1: Cần 100 điểm.
+// Từ thanh thứ 2 trở đi: Cần thêm 50 điểm mỗi thanh.
 function getSwordCount(sense) {
-    const data = getRealmData(lifetimeMana);
-    return data.swords;
+    if (sense < 100) return 0; // Dưới 100 Thần Thức thì không có kiếm nào
+    
+    // (sense - 100) / 50 -> Số kiếm cộng thêm
+    // Math.floor làm tròn xuống để đảm bảo đủ mốc 50 mới được tính
+    // Cộng 1 là thanh kiếm cơ bản ban đầu
+    return 1 + Math.floor((sense - 100) / 50);
 }
 
 const MINOR_REALM_REWARDS = [
