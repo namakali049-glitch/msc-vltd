@@ -36,7 +36,9 @@ let sessionMana = 0;
 let inventory = { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
 let masteredWordsA1 = [];
 let masteredWordsB1 = [];
-
+window.masteredWordsA1 = masteredWordsA1;
+window.masteredWordsB1 = masteredWordsB1;
+window.lifetimeMana = lifetimeMana;
 // 4 ĐẠI THUỘC TÍNH BẢN NGUYÊN (v0.6)
 let playerStats = {
     str: 1,
