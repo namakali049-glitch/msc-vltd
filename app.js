@@ -294,12 +294,10 @@ async function loadUserLifetimeMana(uid) {
             masteredWordsA1 = parseFirebaseArray(val.masteredA1);
             masteredWordsB1 = parseFirebaseArray(val.masteredB1);
 
-            // TỰ ĐỘNG CHUẨN HÓA CĂN CỐT CHO NHÂN VẬT:
-            // Bắt buộc reset nếu chưa mang dấu ấn "v0.6_FINAL"
+            // Bắt buộc nâng cấp chuẩn căn cốt cho nhân vật
             if (!val.stats || val.stats.version !== "v0.6_FINAL") {
                 playerStats = generateRandomBaseStats();
                 
-                // Trả lại Điểm Tiềm Năng nếu nick này đã có tu vi từ trước
                 let accumulatedPoints = 0;
                 let awardedTiers = [];
                 if (window.MINOR_REALM_REWARDS) {
@@ -331,16 +329,6 @@ async function loadUserLifetimeMana(uid) {
     }
     
     if (window.recalcStats) window.recalcStats();
-}
-
-            highestAchievedRank = getRealmData(lifetimeMana).major;
-    } catch(e) { 
-        lifetimeMana = 0; 
-        masteredWordsA1 = [];
-        masteredWordsB1 = [];
-        playerStats = generateRandomBaseStats();
-    }
-    recalcStats();
 }
 
 async function syncManaToDatabase() {
@@ -377,25 +365,6 @@ onAuthStateChanged(auth, async (user) => {
         switchScreen('auth-screen');
     }
 });
-
-onAuthStateChanged(auth, async (user) => {
-    if (user) {
-        currentUser = user;
-        window.currentUser = user;
-        const nameEl = document.getElementById('userDisplayName');
-        if (nameEl) nameEl.innerText = user.displayName || user.email.split('@')[0];
-        await loadUserLifetimeMana(user.uid);
-        switchScreen('start-screen');
-    } else {
-        currentUser = null;
-        window.currentUser = null;
-        lifetimeMana = 0;
-        masteredWordsA1 = [];
-        masteredWordsB1 = [];
-        switchScreen('auth-screen');
-    }
-});
-
 window.handleSignup = async function() {
     window.playClickSound();
     const email = document.getElementById('authEmail').value.trim();
