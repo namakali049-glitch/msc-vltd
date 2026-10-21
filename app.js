@@ -280,6 +280,8 @@ async function loadUserLifetimeMana(uid) {
             lifetimeMana = val.mana || 0;
             inventory = val.inventory || { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
             window.inventory = inventory;
+            battleRecord = val.battleRecord || { maxSurvivalSec: 0, maxKills: 0 };
+            window.battleRecord = battleRecord;
             masteredWordsA1 = parseFirebaseArray(val.masteredA1);
             masteredWordsB1 = parseFirebaseArray(val.masteredB1);
 
