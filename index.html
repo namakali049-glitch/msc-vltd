@@ -129,12 +129,43 @@
         <p>Tổng Tu Vi (Linh Lực): <b id="profileMana" class="gold-txt">24</b></p>
       </div>
 
-      <div class="profile-attributes-box">
-        <h3 class="attr-title">☯️ Thuộc Tính Bản Nguyên</h3>
-        <p class="attr-row">❤️ Sinh Mệnh (HP): <span id="profileHp" class="hp-red">100/100</span></p>
-        <p class="attr-row">🌀 Thần Thức: <b id="profileSense" style="color: #38bdf8;">0</b> <small>(Ngự kiếm thuật)</small></p>
-        <p class="attr-row">⚔️ Phi Kiếm Điều Khiển: <b id="profileSwords" style="color: #ffd700;">0 Thanh</b></p>
+      <!-- KHỐI THUỘC TÍNH & CỘNG ĐIỂM TIỀM NĂNG (v0.6) -->
+    <div class="profile-attributes-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h3 class="attr-title" style="margin: 0;">☯️ Thuộc Tính Bản Nguyên</h3>
+        <span style="color: #ffd700; font-size: 0.95rem;">Điểm tiềm năng: <b id="profileFreePoints" style="font-size: 1.2rem; color: #4ade80;">0</b></span>
       </div>
+
+      <!-- 1. Sức Mạnh -->
+      <div class="stat-alloc-row">
+        <span>⚔️ Sức Mạnh: <b id="profileStr" class="text-gold">10</b> <small id="profileStrEffect" style="color: #94a3b8;">(100 Sát thương)</small></span>
+        <button class="btn-stat-add" onclick="allocateStat('str')">+</button>
+      </div>
+
+      <!-- 2. Khí Huyết -->
+      <div class="stat-alloc-row">
+        <span>❤️ Khí Huyết: <b id="profileVit" class="text-green">10</b> <small id="profileVitEffect" style="color: #94a3b8;">(100 HP)</small></span>
+        <button class="btn-stat-add" onclick="allocateStat('vit')">+</button>
+      </div>
+
+      <!-- 3. Nhanh Nhẹn -->
+      <div class="stat-alloc-row">
+        <span>⚡ Nhanh Nhẹn: <b id="profileAgi" class="text-blue">10</b> <small id="profileAgiEffect" style="color: #94a3b8;">(100 Thân pháp)</small></span>
+        <button class="btn-stat-add" onclick="allocateStat('agi')">+</button>
+      </div>
+
+      <!-- 4. Tinh Thần -->
+      <div class="stat-alloc-row">
+        <span>🌀 Tinh Thần: <b id="profileSpi" class="text-purple">10</b> <small id="profileSpiEffect" style="color: #94a3b8;">(100 Thần thức)</small></span>
+        <button class="btn-stat-add" onclick="allocateStat('spi')">+</button>
+      </div>
+
+      <div style="height: 1px; background: rgba(255, 215, 0, 0.2); margin: 12px 0;"></div>
+
+      <p class="attr-row">⚔️ Phi Kiếm Ngự Trận: <b id="profileSwords" style="color: #ffd700;">0 Thanh</b></p>
+      <p class="attr-row">📜 Lĩnh Ngộ Hạ Quyển (A1): <b id="profileMasteryA1" style="color: #4ade80;">0 / 900 từ</b></p>
+      <p class="attr-row">📘 Lĩnh Ngộ Trung Quyển (B1): <b id="profileMasteryB1" style="color: #60a5fa;">0 / 4000 từ</b></p>
+    </div>
 
       <button class="btn-back-lobby btn-blue" onclick="goHome()">Về động phủ 🏯</button>
     </div>
