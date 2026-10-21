@@ -268,7 +268,7 @@ function generateRandomBaseStats() {
         spi: stats.spi,
         freePoints: 0,
         rewardedTiers: [],
-        version: "v0.6_FINAL"
+        version: "v0.6_FINAL" 
     };
 }
 
