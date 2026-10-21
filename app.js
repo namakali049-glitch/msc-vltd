@@ -32,6 +32,8 @@ let currentUser = null;
 let lifetimeMana = 0; 
 let sessionMana = 0;  
 let inventory = { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
+let masteredWordsA1 = []; // Danh sách chữ Hán A1 đã thuộc độc bản
+let masteredWordsB1 = []; // Danh sách chữ Hán B1 đã thuộc độc bản
 
 let maxHp = 100;
 let currentHp = 100;
