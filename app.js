@@ -318,8 +318,12 @@ function updateCharacterUI() {
 
     const masteryA1 = document.getElementById('profileMasteryA1');
     const masteryB1 = document.getElementById('profileMasteryB1');
-    const countA1 = (masteredWordsA1 && Array.isArray(masteredWordsA1)) ? masteredWordsA1.length : 0;
-    const countB1 = (masteredWordsB1 && Array.isArray(masteredWordsB1)) ? masteredWordsB1.length : 0;
+    // CHUẨN HÓA MẢNG TỪ VỰNG TRƯỚC KHI ĐẾM (Ngăn chặn lỗi đếm object/chuỗi)
+const countA1 = (u.masteredA1 && Array.isArray(u.masteredA1)) ? u.masteredA1.length : 
+                (u.masteredA1 && typeof u.masteredA1 === 'object') ? Object.keys(u.masteredA1).length : 0;
+
+const countB1 = (u.masteredB1 && Array.isArray(u.masteredB1)) ? u.masteredB1.length : 
+                (u.masteredB1 && typeof u.masteredB1 === 'object') ? Object.keys(u.masteredB1).length : 0;
     if (masteryA1) masteryA1.innerText = `${countA1} / 900 từ (${Math.round((countA1 / 900) * 100)}%)`;
     if (masteryB1) masteryB1.innerText = `${countB1} / 4000 từ (${Math.round((countB1 / 4000) * 100)}%)`;
 }
