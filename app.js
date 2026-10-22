@@ -179,8 +179,12 @@ const countB1 = (u.masteredB1 && Array.isArray(u.masteredB1)) ? u.masteredB1.len
 window.checkAndTriggerBreakthrough = function(oldMana, newMana) {
     if (!window.getRealmData) return;
     
-    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
-    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+    // CHUẨN HÓA MẢNG TỪ VỰNG TRƯỚC KHI ĐẾM (Ngăn chặn lỗi đếm object/chuỗi)
+const countA1 = (u.masteredA1 && Array.isArray(u.masteredA1)) ? u.masteredA1.length : 
+                (u.masteredA1 && typeof u.masteredA1 === 'object') ? Object.keys(u.masteredA1).length : 0;
+
+const countB1 = (u.masteredB1 && Array.isArray(u.masteredB1)) ? u.masteredB1.length : 
+                (u.masteredB1 && typeof u.masteredB1 === 'object') ? Object.keys(u.masteredB1).length : 0;
     
     const oldRealm = window.getRealmData(oldMana, countA1, countB1);
     const newRealm = window.getRealmData(newMana, countA1, countB1);
