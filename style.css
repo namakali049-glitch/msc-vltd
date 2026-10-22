@@ -32,11 +32,11 @@ body {
   background: #0c1017;
 }
 
-/* NÚT TIỆN ÍCH CỐ ĐỊNH */
+/* NÚT TIỆN ÍCH CỐ ĐỊNH (FIX TAI THỎ / DYNAMIC ISLAND) */
 .fixed-music-btn {
   position: fixed;
-  top: 14px;
-  right: 14px;
+  top: max(14px, env(safe-area-inset-top));
+  right: max(14px, env(safe-area-inset-right));
   background: rgba(18, 24, 38, 0.85);
   border: 1px solid rgba(255, 215, 0, 0.6);
   color: #ffd700;
@@ -55,8 +55,8 @@ body {
 
 .fixed-inventory-btn {
   position: fixed;
-  bottom: 18px;
-  right: 18px;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  right: max(18px, env(safe-area-inset-right));
   background: linear-gradient(135deg, #6c5ce7, #8e44ad);
   border: 1px solid #a29bfe;
   color: #fff;
@@ -113,8 +113,8 @@ body {
 }
 .top-user-bar {
   position: absolute;
-  top: 14px;
-  left: 14px;
+  top: max(14px, env(safe-area-inset-top));
+  left: max(14px, env(safe-area-inset-left));
   display: flex;
   align-items: center;
   gap: 10px;
@@ -198,6 +198,8 @@ body {
   max-width: 380px;
   text-align: center;
   backdrop-filter: blur(8px);
+  max-height: 95vh;
+  overflow-y: auto;
 }
 .profile-header { color: #facc15; font-size: 1.35rem; margin-bottom: 12px; }
 .avatar-container { position: relative; width: 85px; height: 85px; margin: 0 auto 12px; }
@@ -312,24 +314,39 @@ body {
 /* BÍ CẢNH TRẢM YÊU (CANVAS 2D) */
 #battle-screen canvas { width: 100vw; height: 100vh; display: block; }
 .battle-hud-box {
-  position: absolute; top: 12px; left: 12px; background: rgba(0, 0, 0, 0.75);
+  position: absolute; top: max(12px, env(safe-area-inset-top)); left: max(12px, env(safe-area-inset-left)); 
+  background: rgba(0, 0, 0, 0.75);
   border: 1px solid #38bdf8; border-radius: 8px; padding: 6px 12px;
   font-size: 0.8rem; font-weight: bold; display: flex; flex-direction: column; gap: 3px;
 }
 .btn-battle-escape {
-  position: absolute; top: 12px; right: 12px; background: #991b1b;
+  position: absolute; top: max(12px, env(safe-area-inset-top)); right: max(12px, env(safe-area-inset-right)); 
+  background: #991b1b;
   border: 1px solid #ef4444; color: #fff; padding: 6px 14px;
   border-radius: 6px; font-weight: bold; cursor: pointer;
 }
+
+/* FIX D-PAD: CHUYỂN SANG GRID ĐỂ CHỐNG TRƯỢT TỌA ĐỘ VÀ SAFE AREA */
 .dpad-wrapper {
-  position: absolute; bottom: 18px; left: 18px;
-  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  position: absolute; 
+  bottom: max(18px, env(safe-area-inset-bottom)); 
+  left: max(18px, env(safe-area-inset-left));
+  display: grid; 
+  grid-template-columns: repeat(3, 48px); 
+  grid-template-rows: repeat(3, 48px); 
+  gap: 6px;
+  z-index: 100;
 }
-.dpad-horizontal { display: flex; gap: 38px; }
+.dpad-horizontal { display: contents; } /* Xóa bỏ rào cản HTML cũ để Grid hoạt động */
+.dpad-up { grid-column: 2; grid-row: 1; }
+.dpad-left { grid-column: 1; grid-row: 2; }
+.dpad-right { grid-column: 3; grid-row: 2; }
+.dpad-down { grid-column: 2; grid-row: 3; }
+
 .dpad-key {
-  width: 44px; height: 44px; background: rgba(255, 255, 255, 0.25);
+  width: 100%; height: 100%; background: rgba(255, 255, 255, 0.25);
   border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 8px;
-  color: #fff; font-size: 1.1rem; display: flex; align-items: center;
+  color: #fff; font-size: 1.2rem; display: flex; align-items: center;
   justify-content: center; cursor: pointer; touch-action: none;
 }
 .dpad-key:active { background: rgba(56, 189, 248, 0.6); }
@@ -389,6 +406,7 @@ body {
 }
 .mt-10 { margin-top: 10px; }
 .mt-15 { margin-top: 15px; }
+
 /* ========================================== */
 /* GIAO DIỆN MODAL TÀNG KINH CÁC             */
 /* ========================================== */
@@ -495,8 +513,9 @@ body {
   color: #94a3b8;
   cursor: not-allowed;
 }
+
 /* ========================================== */
-/* HIỆU ỨNG ĐỘT PHÁ ĐẠI CẢNH GIỚI (v0.5)     */
+/* HIỆU ỨNG ĐỘT PHÁ ĐẠI CẢNH GIỚI             */
 /* ========================================== */
 .breakthrough-card {
   border: 2px solid #ffd700 !important;
@@ -566,8 +585,9 @@ body {
   padding: 10px;
   font-size: 1rem;
 }
+
 /* ========================================== */
-/* GIAO DIỆN PHÂN PHỐI ĐIỂM TIỀM NĂNG (v0.6) */
+/* GIAO DIỆN PHÂN PHỐI ĐIỂM TIỀM NĂNG         */
 /* ========================================== */
 .stat-alloc-row {
   display: flex;
