@@ -142,8 +142,12 @@ function recalcStats() {
     checkMinorRealmRewards();
 
     // 1. Lấy dữ liệu nền tảng của Cảnh giới hiện tại
-    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
-    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+    // CHUẨN HÓA MẢNG TỪ VỰNG TRƯỚC KHI ĐẾM (Ngăn chặn lỗi đếm object/chuỗi)
+const countA1 = (u.masteredA1 && Array.isArray(u.masteredA1)) ? u.masteredA1.length : 
+                (u.masteredA1 && typeof u.masteredA1 === 'object') ? Object.keys(u.masteredA1).length : 0;
+
+const countB1 = (u.masteredB1 && Array.isArray(u.masteredB1)) ? u.masteredB1.length : 
+                (u.masteredB1 && typeof u.masteredB1 === 'object') ? Object.keys(u.masteredB1).length : 0; 0;
     const realmData = window.getRealmData ? window.getRealmData(lifetimeMana, countA1, countB1) : { hp: 100, thanThuc: 0, major: "Phàm Nhân" };
 
     // 2. Tính Sinh Mệnh: HP Cảnh Giới + (VIT * 10)
