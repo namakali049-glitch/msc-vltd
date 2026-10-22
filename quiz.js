@@ -1,5 +1,5 @@
 // ==========================================
-// ĐỘNG CƠ BẾ QUAN KHAI PHÁ (MÔ-ĐUN ĐỘC LẬP) - VÁ LỖI VÀ TỐI ƯU
+// ĐỘNG CƠ BẾ QUAN KHAI PHÁ (MÔ-ĐUN ĐỘC LẬP)
 // ==========================================
 
 let activeQuestions = [];
@@ -8,11 +8,6 @@ let wrongCount = 0;
 let vocabPool = [];
 let quizSessionTimer = null;
 let sessionSeconds = 0;
-
-// Các biến phục vụ thanh tiến trình
-let currentLevel = 1;
-let currentLevelExp = 0; 
-let expToLevelUp = 0; 
 
 // Tiện ích: Xáo trộn mảng (Fisher-Yates)
 function shuffleArray(array) {
@@ -63,8 +58,6 @@ window.startGame = function() {
     wrongCount = 0;
     window.sessionMana = 0;
     sessionSeconds = 0;
-    currentLevel = 1;
-    currentLevelExp = 0;
     
     document.getElementById('totalScore').innerText = window.sessionMana;
     document.getElementById('timerDisplay').innerText = "00:00";
@@ -72,23 +65,13 @@ window.startGame = function() {
     document.getElementById('options').innerHTML = "";
     document.getElementById('nextBtn').style.display = "none";
 
-    // Đồng bộ chỉ số trước khi chơi
-    if (window.recalcStats) window.recalcStats();
-    
-    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
-    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
-    const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana, countA1, countB1) : { major: "Phàm Nhân" };
-    
-    window.sessionThanThuc = window.thanThuc || 0;
-    
+    // Cập nhật UI thanh trạng thái nhân vật
+    const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana, window.masteredWordsA1?.length || 0, window.masteredWordsB1?.length || 0) : { major: "Phàm Nhân" };
     document.getElementById('quizStatLabel').innerText = realmData.major === "Phàm Nhân" ? "Sinh Mệnh" : "Thần Thức";
-    document.getElementById('quizStatValue').innerText = realmData.major === "Phàm Nhân" ? `${window.currentHp}/${window.maxHp}` : `${window.sessionThanThuc}/${window.thanThuc}`;
+    document.getElementById('quizStatValue').innerText = realmData.major === "Phàm Nhân" ? `${window.currentHp}/${window.maxHp}` : window.thanThuc;
     
     const avatarFunc = window.getAvatarByMana || (() => "assets/pham-nhan.jpg");
     document.getElementById('quizAvatar').src = avatarFunc(window.lifetimeMana || 0);
-
-    const userName = (window.currentUser && (window.currentUser.displayName || (window.currentUser.email && window.currentUser.email.split('@')[0]))) || "Đạo Hữu";
-    document.getElementById('quizName').innerText = userName;
 
     if (quizSessionTimer) clearInterval(quizSessionTimer);
     quizSessionTimer = setInterval(() => {
@@ -96,13 +79,14 @@ window.startGame = function() {
         document.getElementById('timerDisplay').innerText = window.formatTime(sessionSeconds);
     }, 1000);
 
+    // Dùng PapaParse đọc file CSV
     Papa.parse(window.currentCsvFile, {
         download: true,
         header: true,
         skipEmptyLines: true,
         complete: function(results) {
-            vocabPool = results.data.filter(row => row.hanzi && row.meaning && row.hanzi.trim() !== "");
-            initLevel();
+            vocabPool = results.data.filter(row => row.hanzi && row.meaning);
+            processVocabData();
         },
         error: function(err) {
             document.getElementById('message').innerHTML = "❌ Lỗi đọc ngọc giản: " + err.message;
@@ -110,25 +94,11 @@ window.startGame = function() {
     });
 };
 
-function initLevel() {
-    currentLevelExp = 0; 
-    currentQuestionIndex = 0;
-    processVocabData();
-
-    const str = window.str || 1;
-    let bonusPerQ = Math.floor(10 + str * 0.2);
-    expToLevelUp = Math.floor(activeQuestions.length * 0.8) * bonusPerQ; 
-    
-    document.getElementById('level').innerText = currentLevel;
-    document.getElementById('maxExp').innerText = expToLevelUp;
-    document.getElementById('exp').innerText = "0";
-    document.getElementById('expFill').style.width = "0%";
-}
-
-// 3. THUẬT TOÁN RÚT THẺ TỐI ƯU HIỆU SUẤT
+// 3. THUẬT TOÁN RÚT THẺ THÔNG MINH (8 TỪ MỚI - 2 TỪ CŨ)
 function processVocabData() {
     const isA1 = window.currentCsvFile.includes("a1");
     let masteredList = isA1 ? (window.masteredWordsA1 || []) : (window.masteredWordsB1 || []);
+    if (!Array.isArray(masteredList)) masteredList = Object.keys(masteredList);
 
     const learned = vocabPool.filter(w => masteredList.includes(w.hanzi));
     const unlearned = vocabPool.filter(w => !masteredList.includes(w.hanzi));
@@ -137,37 +107,30 @@ function processVocabData() {
     shuffleArray(unlearned);
 
     let drawPool = [];
+    // Ưu tiên bốc tối đa 8 từ chưa thuộc
     const unlearnedToDraw = Math.min(8, unlearned.length);
     drawPool = drawPool.concat(unlearned.slice(0, unlearnedToDraw));
     
+    // Bổ sung từ đã thuộc cho đủ 10 câu
     const needed = 10 - drawPool.length;
     drawPool = drawPool.concat(learned.slice(0, needed));
 
     shuffleArray(drawPool);
     activeQuestions = [];
 
-    // TỐI ƯU: Chọn ngẫu nhiên đáp án nhiễu bằng Set thay vì filter và shuffle cả mảng 4000 từ
+    // Tạo đề bài với 1 đáp án đúng và 3 đáp án nhiễu
     drawPool.forEach(word => {
-        let optionsSet = new Set();
-        optionsSet.add(word);
-        
-        let attempts = 0;
-        while(optionsSet.size < 4 && attempts < 50) {
-            let randomWord = vocabPool[Math.floor(Math.random() * vocabPool.length)];
-            if(randomWord.meaning !== word.meaning) {
-                optionsSet.add(randomWord);
-            }
-            attempts++;
-        }
-        
-        let optionsArr = Array.from(optionsSet);
-        shuffleArray(optionsArr);
-        let ansIdx = optionsArr.findIndex(opt => opt.hanzi === word.hanzi);
+        let distractors = vocabPool.filter(w => w.hanzi !== word.hanzi);
+        shuffleArray(distractors);
+        let options = [word, distractors[0], distractors[1], distractors[2]];
+        shuffleArray(options);
+
+        let ansIdx = options.findIndex(opt => opt.hanzi === word.hanzi);
         
         activeQuestions.push({
-            q: `Đạo hữu hãy cho biết ý nghĩa của từ này:\n\n✨ ${word.hanzi} ✨\n(Phiên âm: ${word.pinyin || ''} | Loại: ${word.type || 'Từ'})`,
+            q: word.hanzi,
             fullWord: word,
-            options: optionsArr.map(opt => opt.meaning),
+            options: options.map(opt => `[${opt.pinyin}] ${opt.meaning}`),
             ans: ansIdx
         });
     });
@@ -182,7 +145,6 @@ function processVocabData() {
 
 // 4. HIỂN THỊ CÂU HỎI
 function showQuestion() {
-    if (currentLevel > 4) { endGame(true); return; }
     const qData = activeQuestions[currentQuestionIndex];
     document.getElementById('counter').innerText = `Câu hỏi: ${currentQuestionIndex + 1} / ${activeQuestions.length}`;
     document.getElementById('question').innerText = qData.q;
@@ -202,6 +164,7 @@ function showQuestion() {
 
 // 5. KIỂM TRA ĐÁP ÁN & CƠ CHẾ LOGIC
 window.checkAnswer = function(selectedIdx, btnElement) {
+    // Khóa các nút sau khi chọn
     const btns = document.querySelectorAll('.option-btn');
     btns.forEach(b => b.disabled = true);
 
@@ -213,28 +176,21 @@ window.checkAnswer = function(selectedIdx, btnElement) {
         btnElement.classList.add('correct');
         if (window.playCorrectSound) window.playCorrectSound();
         
-        // Ghi nhận từ vựng trước
-        const wordHanzi = qData.fullWord.hanzi.trim();
-        let isNewWord = false;
-        const isA1 = window.currentCsvFile.includes("a1");
-
-        if (isA1) {
-            if (!window.masteredWordsA1.includes(wordHanzi)) {
-                window.masteredWordsA1.push(wordHanzi);
-                isNewWord = true;
-            }
-        } else {
-            if (!window.masteredWordsB1.includes(wordHanzi)) {
-                window.masteredWordsB1.push(wordHanzi);
-                isNewWord = true;
-            }
-        }
-
+        // 5.1. Xác định số từ vựng độc bản & Tính toán phần thưởng
         const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
         const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
         
         let bonusMana = Math.floor(10 + (window.str || 1) * 0.2); 
-        
+        const isA1 = window.currentCsvFile.includes("a1");
+
+        // Ghi nhận từ vựng
+        if (isA1) {
+            if (!window.masteredWordsA1.includes(qData.q)) window.masteredWordsA1.push(qData.q);
+        } else {
+            if (!window.masteredWordsB1.includes(qData.q)) window.masteredWordsB1.push(qData.q);
+        }
+
+        // 5.2. Phạt EXP nếu Cảnh giới cao học Hạ Quyển
         const currentData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0, countA1, countB1) : { major: "Phàm Nhân" };
         const isHighRealm = (currentData.major === "Kim Đan" || currentData.major === "Nguyên Anh");
         
@@ -242,40 +198,35 @@ window.checkAnswer = function(selectedIdx, btnElement) {
             bonusMana = Math.max(1, Math.floor(bonusMana * 0.1));
         }
 
-        // KHÓA BÌNH CẢNH (Chỉ chặn cộng Mana, KHÔNG CHẶN TỪ VỰNG MỚI)
+        // 5.3. KHÓA BÌNH CẢNH (Khống chế trần Linh Lực)
         let currentMana = window.lifetimeMana || 0;
         let canGainMana = true;
         let bottleneckMsg = "";
 
-        if (countA1 < 600 && currentMana >= 7999) {
-            canGainMana = false;
-            bottleneckMsg = "<br><span style='color:#ef4444; font-weight:bold;'>⚠️ Đạo cơ bất ổn! Cần lĩnh ngộ đủ 600 từ A1 mới có thể ngưng tụ thêm Linh Lực.</span>";
-        } else if (countB1 < 2667 && currentMana >= 24999) {
-            canGainMana = false;
-            bottleneckMsg = "<br><span style='color:#ef4444; font-weight:bold;'>⚠️ Bình Cảnh tột cùng! Cần lĩnh ngộ đủ 2667 từ B1 mới đột phá Nguyên Anh.</span>";
-        }
-
-        if (canGainMana) {
-            // Ngăn chặn vượt mốc nếu đang cày mà chạm trần (Ví dụ: Từ 7990 + 10 = 8000 -> Ép về 7999)
-            if (countA1 < 600 && currentMana + bonusMana >= 8000) {
-                bonusMana = 7999 - currentMana;
-                bottleneckMsg = "<br><span style='color:#ef4444; font-weight:bold;'>⚠️ Đã chạm đỉnh Trúc Cơ! Hãy học thêm từ vựng để phá cảnh.</span>";
+        if (countA1 < 600 && currentMana + bonusMana >= 8000) {
+            bonusMana = Math.max(0, 7999 - currentMana);
+            if (bonusMana === 0) {
+                canGainMana = false;
+                bottleneckMsg = "<br><span style='color:#ef4444; font-weight:bold;'>⚠️ Kẹt Bình Cảnh! Cần lĩnh ngộ đủ 600 từ A1 để tích lũy thêm.</span>";
             }
-            if (countB1 < 2667 && currentMana + bonusMana >= 25000) {
-                bonusMana = 24999 - currentMana;
-                bottleneckMsg = "<br><span style='color:#ef4444; font-weight:bold;'>⚠️ Đã chạm đỉnh Kim Đan! Hãy học thêm từ vựng để phá cảnh.</span>";
-            }
-
-            if (bonusMana > 0) {
-                window.sessionMana += bonusMana;
-                currentLevelExp += bonusMana;
-                if (window.addLifetimeMana) window.addLifetimeMana(bonusMana);
+        } else if (countB1 < 2667 && currentMana + bonusMana >= 25000) {
+            bonusMana = Math.max(0, 24999 - currentMana);
+            if (bonusMana === 0) {
+                canGainMana = false;
+                bottleneckMsg = "<br><span style='color:#ef4444; font-weight:bold;'>⚠️ Kẹt Bình Cảnh! Cần lĩnh ngộ đủ 2667 từ B1 để tích lũy thêm.</span>";
             }
         }
-        
-        window.currentHp = Math.min(window.maxHp || 100, (window.currentHp || 100) + 2);
 
-        // Cơ chế rớt đồ
+        if (canGainMana && bonusMana > 0) {
+            window.sessionMana += bonusMana;
+            if (window.addLifetimeMana) window.addLifetimeMana(bonusMana);
+            document.getElementById('totalScore').innerText = window.sessionMana;
+            
+            // Hồi HP
+            window.currentHp = Math.min(window.maxHp || 100, (window.currentHp || 100) + 2);
+        }
+
+        // 5.4. Cơ chế rớt đồ (15%)
         let lootMsg = "";
         if (Math.random() < 0.15 && window.inventory) {
             const items = ["Hồi Xuân Đan", "Tụ Linh Đan", "Tẩy Tủy Đan"];
@@ -285,12 +236,10 @@ window.checkAnswer = function(selectedIdx, btnElement) {
             if (window.playLootSound) window.playLootSound();
         }
 
-        let newWordNotice = isNewWord ? `<br>🌟 <b style="color:#4ade80;">Lĩnh ngộ khẩu quyết mới: [${wordHanzi}]!</b>` : '';
-        let gainText = (canGainMana && bonusMana > 0) ? `+${bonusMana} Linh Lực.` : `Chỉ ngộ đạo, không tăng tu vi.`;
-        msgDiv.innerHTML = `<span style='color:#4ade80;'>✅ Đáp đúng! ${gainText}</span>${newWordNotice}${bottleneckMsg}${lootMsg}`;
+        msgDiv.innerHTML = `<span style='color:#4ade80;'>✅ Đốn Ngộ! +${bonusMana} Linh Lực.</span>${bottleneckMsg}${lootMsg}`;
 
     } else {
-        // Trả lời sai
+        // 5.5. Trả lời sai - Phạt Tâm Ma Phản Phệ
         btnElement.classList.add('wrong');
         btns[qData.ans].classList.add('correct');
         wrongCount++;
@@ -311,21 +260,20 @@ window.checkAnswer = function(selectedIdx, btnElement) {
                 window.currentHp -= dmg;
                 statName = "Sinh Mệnh";
             } else {
+                // Tính Thần thức tối đa để trừ
                 const maxThanThuc = realmData.thanThuc + ((window.playerStats?.spi || 1) * 10);
                 dmg = Math.ceil(maxThanThuc / 3);
-                window.sessionThanThuc -= dmg; 
+                window.currentHp -= dmg; // Quy đổi sát thương thần thức vào HP để hiển thị dễ hiểu
                 statName = "Thần Thức";
             }
             
             msgDiv.innerHTML = `💥 <span style='color:#ef4444;'>Tâm Ma Xâm Nhập! Tổn thất ${dmg} ${statName}.</span>`;
 
-            if (window.currentHp <= 0 || window.sessionThanThuc <= 0 || wrongCount >= 3) {
-                if (window.currentHp < 0) window.currentHp = 0;
-                if (window.sessionThanThuc < 0) window.sessionThanThuc = 0;
-                
+            // Kiểm tra Tẩu Hỏa Nhập Ma
+            if (window.currentHp <= 0 || wrongCount >= 3) {
+                window.currentHp = 0;
                 msgDiv.innerHTML += "<br><br>💀 <b>TẨU HỎA NHẬP MA! Đạo thể suy kiệt, bị văng khỏi Tàng Kinh Các.</b>";
                 document.getElementById('nextBtn').style.display = "none";
-                updateMiniHUD(realmData.major);
                 setTimeout(() => { stopCultivationEarly(); }, 2500);
                 return;
             }
@@ -333,26 +281,11 @@ window.checkAnswer = function(selectedIdx, btnElement) {
     }
     
     // Cập nhật thanh UI mini
-    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
-    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
-    const rData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0, countA1, countB1) : { major: "Phàm Nhân" };
-    updateMiniHUD(rData.major);
+    const realmDataUpdate = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0) : { major: "Phàm Nhân" };
+    document.getElementById('quizStatValue').innerText = realmDataUpdate.major === "Phàm Nhân" ? `${Math.max(0, window.currentHp)}/${window.maxHp}` : window.thanThuc;
     
-    let expPercent = Math.min(100, (currentLevelExp / expToLevelUp) * 100);
-    document.getElementById('expFill').style.width = expPercent + "%";
-    document.getElementById('exp').innerText = currentLevelExp;
-    document.getElementById('totalScore').innerText = window.sessionMana;
-
     document.getElementById('nextBtn').style.display = "inline-block";
 };
-
-function updateMiniHUD(majorRealm) {
-    if (majorRealm === "Phàm Nhân") {
-        document.getElementById('quizStatValue').innerText = `${Math.max(0, window.currentHp)}/${window.maxHp}`;
-    } else {
-        document.getElementById('quizStatValue').innerText = `${Math.max(0, window.sessionThanThuc)}/${window.thanThuc}`;
-    }
-}
 
 // 6. CHUYỂN CÂU HỎI
 window.nextQuestion = function() {
@@ -361,51 +294,24 @@ window.nextQuestion = function() {
     if (currentQuestionIndex < activeQuestions.length) {
         showQuestion();
     } else {
-        if (currentLevelExp >= expToLevelUp) {
-            currentLevel++;
-            if (currentLevel > 4) {
-                endGame(true, false);
-                return;
-            }
-            alert(`🎉 Đột phá thành công sang Tầng ${currentLevel}!`); 
-            initLevel(); 
-        } else {
-            alert(`😢 Linh lực không đủ để qua Tầng. Bế quan kết thúc.`);
-            endGame(false, false); 
-        }
+        document.getElementById('message').innerHTML = "🌟 <span style='color:#ffd700;'>Hoàn thành chu kỳ chu thiên! Củng cố tu vi thành công.</span>";
+        document.getElementById('options').innerHTML = "";
+        document.getElementById('nextBtn').style.display = "none";
+        
+        setTimeout(() => {
+            stopCultivationEarly();
+        }, 2000);
     }
 };
 
 // 7. XUẤT QUAN (THOÁT SỚM)
 window.stopCultivationEarly = function() {
     if (window.playClickSound) window.playClickSound();
-    if(confirm("Đạo hữu muốn xuất quan sớm? Linh Lực lĩnh ngộ vẫn sẽ được giữ lại!")) {
-        endGame(true, true);
-    }
-};
-
-function endGame(win, earlyExit = false) {
     if (quizSessionTimer) clearInterval(quizSessionTimer);
-    let title = win ? (earlyExit ? "🚪 Đã Xuất Quan Sớm" : "🏆 Bế Quan Viên Mãn!") : "💥 Tẩu Hỏa Nhập Ma!";
-    let titleColor = win ? (earlyExit ? "#38bdf8" : "#2ed573") : "#ff4757";
     
-    document.getElementById('question').innerHTML = 
-        `<span style="color:${titleColor}; font-size:1.3rem;"><b>${title}</b></span><br><br>
-        🎯 Nhận: <span style="color:#eccc68;">+${window.sessionMana} Linh Lực</span><br>
-        💎 Tổng Tu Vi: <span style="color:#00d2d3;">${window.lifetimeMana || 0}</span>`;
+    if (window.syncManaToDatabase) window.syncManaToDatabase();
+    if (window.recalcStats) window.recalcStats();
+    if (window.updateCharacterUI) window.updateCharacterUI();
     
-    document.getElementById('options').innerHTML = "";
-    document.getElementById('counter').innerText = "";
-    document.getElementById('nextBtn').style.display = 'none';
-    document.getElementById('message').innerText = "";
-    
-    let btn = document.createElement('button');
-    btn.className = "btn-main mt-10"; btn.innerText = "Trở Về Động Phủ 🏯";
-    btn.onclick = () => {
-        if (window.syncManaToDatabase) window.syncManaToDatabase();
-        if (window.recalcStats) window.recalcStats();
-        if (window.updateCharacterUI) window.updateCharacterUI();
-        if (window.goHome) window.goHome();
-    };
-    document.getElementById('options').appendChild(btn);
-}
+    window.goHome();
+};
