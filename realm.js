@@ -3,16 +3,18 @@
 // ==========================================
 window.highestAchievedRank = "Phàm Nhân";
 
-function getRealmData(mana, customA1Count = null, customB1Count = null) {
-    const m = Number(mana) || 0;
+// Thay thế hàm getRealmData cũ bằng đoạn này:
+function getRealmData(mana, customA1 = null, customB1 = null) {
+    const listA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1 : [];
+    const listB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1 : [];
+    
+    // Nếu có truyền vào (từ Leaderboard) thì dùng, không thì lấy của bản thân
+    const countA1 = customA1 !== null ? customA1 : listA1.length;
+    const countB1 = customB1 !== null ? customB1 : listB1.length;
 
-    // Lấy số từ vựng của người chơi cụ thể, nếu không có thì lấy của người đang xem
-    const countA1 = customA1Count !== null 
-        ? customA1Count 
-        : ((window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0);
-    const countB1 = customB1Count !== null 
-        ? customB1Count 
-        : ((window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0);
+    if (mana < 150) {
+        return { rank: "Phàm Nhân", major: "Phàm Nhân", hp: 100, thanThuc: 0, swords: 0 };
+    }
 
     if (m < 150) {
         return { rank: "Phàm Nhân", major: "Phàm Nhân", hp: 100, thanThuc: 0, swords: 0 };
