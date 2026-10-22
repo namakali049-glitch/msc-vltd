@@ -256,14 +256,14 @@ window.checkAnswer = function(selectedIdx, btnElement) {
             let dmg = 0;
             let statName = "";
             if (realmData.major === "Phàm Nhân") {
-                dmg = Math.ceil((window.maxHp || 100) / 3);
+                dmg = Math.ceil((window.maxHp || 10) / 3);
                 window.currentHp -= dmg;
                 statName = "Sinh Mệnh";
             } else {
-                // Tính Thần thức tối đa để trừ
-                const maxThanThuc = realmData.thanThuc + ((window.playerStats?.spi || 1) * 10);
-                dmg = Math.ceil(maxThanThuc / 3);
-                window.currentHp -= dmg; // Quy đổi sát thương thần thức vào HP để hiển thị dễ hiểu
+                // Trừ theo đúng Thần Thức thuần túy (SPI * 10)
+                const totalThanThuc = window.thanThuc || ((window.playerStats?.spi || 1) * 10);
+                dmg = Math.ceil(totalThanThuc / 3);
+                window.currentHp -= dmg;
                 statName = "Thần Thức";
             }
             
