@@ -167,29 +167,7 @@ function recalcStats() {
     window.lifetimeMana = lifetimeMana;
 }
 
-// BỔ SUNG: Logic kiểm tra và kích hoạt Modal Đột Phá Đại Cảnh Giới
-window.checkAndTriggerBreakthrough = function(oldMana, newMana) {
-    if (!window.getRealmData) return;
-    
-    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
-    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
-    
-    const oldRealm = window.getRealmData(oldMana, countA1, countB1);
-    const newRealm = window.getRealmData(newMana, countA1, countB1);
 
-    // Kích hoạt nếu Đại Cảnh Giới thay đổi và không phải Phàm Nhân
-    if (oldRealm.major !== newRealm.major && newRealm.major !== "Phàm Nhân") {
-        const modal = document.getElementById('breakthroughModal');
-        const realmEl = document.getElementById('breakthroughRealm');
-        const descEl = document.getElementById('breakthroughDesc');
-        
-        if (realmEl) realmEl.innerText = newRealm.rank;
-        if (descEl) descEl.innerText = `Phá vỡ gông cùm, thoát thai hoán cốt!\nĐạo hữu đã bước vào ${newRealm.major}.`;
-        
-        if (modal) modal.style.display = 'flex';
-        if (window.playLootSound) window.playLootSound();
-    }
-};
 
 window.recalcStats = recalcStats;
 
