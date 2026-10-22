@@ -322,11 +322,10 @@ window.switchScreen = function(screenId) {
         s.classList.remove('active');
         s.style.display = 'none';
     });
-// Thêm đoạn mã này vào app.js
 window.goHome = function() {
     if (window.playClickSound) window.playClickSound();
     window.switchScreen('start-screen');
-};    
+}; 
     const targetScreen = document.getElementById(screenId);
     if (targetScreen) {
         targetScreen.classList.add('active');
