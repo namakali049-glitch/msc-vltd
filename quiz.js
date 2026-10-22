@@ -148,10 +148,15 @@ function processVocabData() {
 function showQuestion() {
     const qData = activeQuestions[currentQuestionIndex];
     document.getElementById('counter').innerText = `Câu hỏi: ${currentQuestionIndex + 1} / ${activeQuestions.length}`;
-    document.getElementById('question').innerText = qData.q;
+    
+    // Hiển thị chữ Hán lớn kèm Pinyin đặt ngay phía dưới
+    document.getElementById('question').innerHTML = `
+        <div class="quiz-hanzi">${qData.q}</div>
+        <div class="quiz-pinyin">[ ${qData.pinyin || ''} ]</div>
+    `;
+    
     document.getElementById('message').innerHTML = "";
     document.getElementById('nextBtn').style.display = "none";
-
     const optsDiv = document.getElementById('options');
     optsDiv.innerHTML = "";
     qData.options.forEach((opt, idx) => {
