@@ -312,6 +312,14 @@ window.goHome = function() {
     window.switchScreen('start-screen');
 };
 
+// ==========================================
+// 4. CHUYỂN MÀN HÌNH & XÁC THỰC FIREBASE
+// ==========================================
+window.goHome = function() {
+    if (window.playClickSound) window.playClickSound();
+    window.switchScreen('start-screen');
+};
+
 window.switchScreen = function(screenId) {
     if (window.playClickSound) window.playClickSound();
     document.querySelectorAll('.screen').forEach(s => {
