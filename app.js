@@ -359,6 +359,11 @@ async function loadUserLifetimeMana(uid) {
         if (snapshot.exists()) {
             const val = snapshot.val();
             lifetimeMana = val.mana || 0;
+            if (val.currentHp !== undefined) {
+                window.currentHp = val.currentHp;
+            } else {
+                window.currentHp = window.maxHp || 100;
+            }
             inventory = val.inventory || { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
             window.inventory = inventory;
             battleRecord = val.battleRecord || { maxSurvivalSec: 0, maxKills: 0 };
