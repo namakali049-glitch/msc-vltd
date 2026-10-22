@@ -103,9 +103,23 @@ function checkMinorRealmRewards() {
     }
 
     let hasReward = false;
+    
+    // Lấy cảnh giới thực tế để đối chiếu
+    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
+    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+    const currentRealmData = window.getRealmData ? window.getRealmData(lifetimeMana, countA1, countB1) : { rank: "Phàm Nhân" };
+    const currentRank = currentRealmData.rank;
+
     if (window.MINOR_REALM_REWARDS) {
         window.MINOR_REALM_REWARDS.forEach(tier => {
-            if (lifetimeMana >= tier.mana && !playerStats.rewardedTiers.includes(tier.id)) {
+            let canReward = (lifetimeMana >= tier.mana);
+            
+            // Khóa thưởng Kim Đan nếu kẹt bình cảnh Trúc Cơ
+            if (tier.mana >= 8000 && currentRank === "Trúc Cơ Hậu Kỳ (Bình Cảnh)") canReward = false;
+            // Khóa thưởng Nguyên Anh nếu kẹt bình cảnh Kim Đan
+            if (tier.mana >= 25000 && currentRank === "Kim Đan Hậu Kỳ (Bình Cảnh)") canReward = false;
+
+            if (canReward && !playerStats.rewardedTiers.includes(tier.id)) {
                 playerStats.freePoints += tier.points;
                 playerStats.rewardedTiers.push(tier.id);
                 hasReward = true;
