@@ -198,19 +198,19 @@ window.checkAnswer = function(selectedIdx, btnElement) {
             bonusMana = Math.max(1, Math.floor(bonusMana * 0.1));
         }
 
-        // 5.3. KHÓA BÌNH CẢNH (Khống chế trần Linh Lực)
+        // 5.3. KHÓA BÌNH CẢNH (Cho phép đạt đúng mốc trần 8000 và 25000)
         let currentMana = window.lifetimeMana || 0;
         let canGainMana = true;
         let bottleneckMsg = "";
 
         if (countA1 < 600 && currentMana + bonusMana >= 8000) {
-            bonusMana = Math.max(0, 7999 - currentMana);
+            bonusMana = Math.max(0, 8000 - currentMana);
             if (bonusMana === 0) {
                 canGainMana = false;
                 bottleneckMsg = "<br><span style='color:#ef4444; font-weight:bold;'>⚠️ Kẹt Bình Cảnh! Cần lĩnh ngộ đủ 600 từ A1 để tích lũy thêm.</span>";
             }
         } else if (countB1 < 2667 && currentMana + bonusMana >= 25000) {
-            bonusMana = Math.max(0, 24999 - currentMana);
+            bonusMana = Math.max(0, 25000 - currentMana);
             if (bonusMana === 0) {
                 canGainMana = false;
                 bottleneckMsg = "<br><span style='color:#ef4444; font-weight:bold;'>⚠️ Kẹt Bình Cảnh! Cần lĩnh ngộ đủ 2667 từ B1 để tích lũy thêm.</span>";
