@@ -761,7 +761,9 @@ window.switchLeaderboardTab = function(tab) {
             exactRealm = window.calculateRealm(u.mana, countA1, countB1);
         } else {
             const m = u.mana;
-            if (m >= 15000) exactRealm = "Kim Đan Trung Kỳ";
+            if (m >= 25000) exactRealm = countB1 >= 2667 ? "Nguyên Anh Chân Quân" : "Kim Đan Hậu Kỳ (Bình Cảnh)";
+            else if (m >= 20000) exactRealm = countA1 >= 600 ? "Kim Đan Hậu Kỳ" : "Trúc Cơ Hậu Kỳ (Bình Cảnh)";
+            else if (m >= 15000) exactRealm = countA1 >= 600 ? "Kim Đan Trung Kỳ" : "Trúc Cơ Hậu Kỳ (Bình Cảnh)";
             else if (m >= 8000) exactRealm = countA1 >= 600 ? "Kim Đan Sơ Kỳ" : "Trúc Cơ Hậu Kỳ (Bình Cảnh)";
             else if (m >= 4000) exactRealm = "Trúc Cơ Hậu Kỳ";
             else if (m >= 2500) exactRealm = "Trúc Cơ Trung Kỳ";
@@ -770,7 +772,6 @@ window.switchLeaderboardTab = function(tab) {
             else if (m >= 400) exactRealm = "Luyện Khí Trung Kỳ";
             else if (m >= 150) exactRealm = "Luyện Khí Sơ Kỳ";
         }
-
         listEl.innerHTML += `
         <li>
             <div class="lb-user-info">
