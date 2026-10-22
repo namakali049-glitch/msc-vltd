@@ -677,7 +677,7 @@ window.renderLeaderboardList = function() {
 };
 
 // ==========================================
-// 9. TIÊN ĐẠO BẢNG (LEADERBOARD - ĐÃ FIX CHUẨN CẢNH GIỚI)
+// 9. TIÊN ĐẠO BẢNG (LEADERBOARD - BẢN SẠCH)
 // ==========================================
 window.showLeaderboard = async function() {
     if (window.playClickSound) window.playClickSound();
@@ -686,7 +686,7 @@ window.showLeaderboard = async function() {
     if (listEl) listEl.innerHTML = "<p style='color:#94a3b8; text-align:center; padding-top: 20px;'>⏳ Đang kết nối Tiên Đạo Bảng...</p>";
     
     try {
-        const lbRef = ref(window.firebaseDB || (typeof db !== 'undefined' ? db : database), 'users');
+        const lbRef = ref(window.firebaseDB || database, 'users');
         const snapshot = await get(lbRef);
         if (snapshot.exists()) {
             cachedLeaderboardData = [];
@@ -751,27 +751,12 @@ window.switchLeaderboardTab = function(tab) {
             ? `<div class="lb-mana">⚡ ${u.mana} Linh Lực</div>`
             : `<div class="lb-score-tag"><span style="color:#38bdf8; font-weight:bold;">⏱️ ${formatTime(u.battleRecord?.maxSurvivalSec || 0)}</span><br><small style="color:#ffa502;">👾 ${u.battleRecord?.maxKills || 0} quái</small></div>`;
         
-        // 1. Lấy số lượng từ vựng độc bản của từng người chơi
         const countA1 = u.masteredA1 ? (Array.isArray(u.masteredA1) ? u.masteredA1.length : Object.keys(u.masteredA1).length) : 0;
         const countB1 = u.masteredB1 ? (Array.isArray(u.masteredB1) ? u.masteredB1.length : Object.keys(u.masteredB1).length) : 0;
         
-        // 2. Tính cảnh giới chuẩn xác (kèm cơ chế dự phòng tự suy luận theo Linh Lực)
-        let exactRealm = "Phàm Nhân";
-        if (typeof window.calculateRealm === 'function') {
-            exactRealm = window.calculateRealm(u.mana, countA1, countB1);
-        } else {
-            const m = u.mana;
-            if (m >= 25000) exactRealm = countB1 >= 2667 ? "Nguyên Anh Chân Quân" : "Kim Đan Hậu Kỳ (Bình Cảnh)";
-            else if (m >= 20000) exactRealm = countA1 >= 600 ? "Kim Đan Hậu Kỳ" : "Trúc Cơ Hậu Kỳ (Bình Cảnh)";
-            else if (m >= 15000) exactRealm = countA1 >= 600 ? "Kim Đan Trung Kỳ" : "Trúc Cơ Hậu Kỳ (Bình Cảnh)";
-            else if (m >= 8000) exactRealm = countA1 >= 600 ? "Kim Đan Sơ Kỳ" : "Trúc Cơ Hậu Kỳ (Bình Cảnh)";
-            else if (m >= 4000) exactRealm = "Trúc Cơ Hậu Kỳ";
-            else if (m >= 2500) exactRealm = "Trúc Cơ Trung Kỳ";
-            else if (m >= 1500) exactRealm = "Trúc Cơ Sơ Kỳ";
-            else if (m >= 800) exactRealm = "Luyện Khí Hậu Kỳ";
-            else if (m >= 400) exactRealm = "Luyện Khí Trung Kỳ";
-            else if (m >= 150) exactRealm = "Luyện Khí Sơ Kỳ";
-        }
+        // Gọi thẳng hàm tính cảnh giới gốc, bỏ qua toàn bộ fallback hardcode gây lỗi
+        const exactRealm = window.calculateRealm ? window.calculateRealm(u.mana, countA1, countB1) : "Phàm Nhân";
+
         listEl.innerHTML += `
         <li>
             <div class="lb-user-info">
@@ -785,14 +770,6 @@ window.switchLeaderboardTab = function(tab) {
         </li>`;
     });
 };
-
-window.goHome = function() { 
-    if (window.playClickSound) window.playClickSound();
-    if (window.recalcStats) window.recalcStats();
-    if (window.updateCharacterUI) window.updateCharacterUI();
-    window.switchScreen('start-screen'); 
-};
-
 // ==========================================
 // 6. TÚI TRỮ VẬT & HIỆU ỨNG VẬT PHẨM
 // ==========================================
