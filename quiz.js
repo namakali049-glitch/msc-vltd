@@ -34,13 +34,13 @@ window.checkAndStartVolume = function(vol) {
     const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0, countA1, countB1) : { major: "Phàm Nhân" };
     
     if (vol === 'trung_quyen') {
-        if (realmData.major !== "Kim Đan" && realmData.major !== "Nguyên Anh") {
+        if (realmData.major !== "Kim Đan Kỳ" && realmData.major !== "Nguyên Anh Kỳ") {
             alert("⚠️ Cảnh giới chưa đủ!\nĐạo hữu cần phá vỡ Bình Cảnh, đột phá lên [Kim Đan Chân Nhân] mới có thể mở khóa Trung Quyển.");
             return;
         }
         window.currentCsvFile = "b1_vocab.csv";
     } else {
-        if (realmData.major === "Kim Đan" || realmData.major === "Nguyên Anh") {
+        if (realmData.major === "Kim Đan Kỳ" || realmData.major === "Nguyên Anh Kỳ") {
             alert("⚠️ CẢNH BÁO THIÊN ĐẠO:\nĐạo hữu đã đạt cảnh giới cao. Tiếp tục tu luyện Hạ Quyển sẽ bị giáng phạt giảm 90% Linh Lực nhận được!");
         }
         window.currentCsvFile = "a1_vocab.csv";
