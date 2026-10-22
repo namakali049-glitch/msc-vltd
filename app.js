@@ -142,9 +142,12 @@ function recalcStats() {
     const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
     const realmData = window.getRealmData ? window.getRealmData(lifetimeMana, countA1, countB1) : { hp: 100, thanThuc: 0, major: "Phàm Nhân" };
 
-    // 2. Tính Sinh Mệnh: HP Cảnh Giới + (VIT * 10)
+    // 2. Tính Sinh Mệnh: Đồng bộ an toàn hai chiều với window.currentHp
     maxHp = realmData.hp + (playerStats.vit * 10);
-    if (currentHp > maxHp || currentHp <= 0) currentHp = maxHp;
+    if (window.currentHp === undefined || window.currentHp > maxHp) {
+        window.currentHp = maxHp;
+    }
+    currentHp = window.currentHp;
 
     // 3. Tính Thần Thức: Phàm Nhân = 0, Luyện Khí trở lên = Thần Thức Cảnh Giới + (SPI * 10)
     if (realmData.major === "Phàm Nhân") {
