@@ -191,7 +191,9 @@ window.checkAndTriggerBreakthrough = function(oldMana, newMana) {
     }
 };
 
-// SỬA LẠI: Hàm addLifetimeMana để theo dõi tiến trình đột phá
+window.recalcStats = recalcStats;
+
+// Hàm addLifetimeMana hoàn chỉnh
 window.addLifetimeMana = function(amount) {
     const oldMana = lifetimeMana;
     lifetimeMana += amount;
@@ -212,18 +214,6 @@ window.closeBreakthroughModal = function() {
     if (window.playClickSound) window.playClickSound();
     const modal = document.getElementById('breakthroughModal');
     if (modal) modal.style.display = 'none';
-};
-
-window.recalcStats = recalcStats;
-
-// Hàm addLifetimeMana hoàn chỉnh (không bị ngắt dòng)
-window.addLifetimeMana = function(amount) {
-    lifetimeMana += amount;
-    window.lifetimeMana = lifetimeMana;
-    recalcStats();
-    updateCharacterUI();
-    syncManaToDatabase();
-    return lifetimeMana;
 };
 
 window.recordBattleResult = function(survivalSec, kills) {
@@ -288,8 +278,11 @@ function updateCharacterUI() {
     const manaEl = document.getElementById('profileMana');
     if (manaEl) manaEl.innerText = lifetimeMana;
 
+    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
+    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+    
     const realmFunc = window.calculateRealm || (() => "Phàm Nhân");
-    const realm = realmFunc(lifetimeMana);
+    const realm = realmFunc(lifetimeMana, countA1, countB1);
     const realmEl = document.getElementById('profileRealm');
     if (realmEl) realmEl.innerText = realm;
 
@@ -306,8 +299,6 @@ function updateCharacterUI() {
 
     const masteryA1 = document.getElementById('profileMasteryA1');
     const masteryB1 = document.getElementById('profileMasteryB1');
-    const countA1 = (masteredWordsA1 && Array.isArray(masteredWordsA1)) ? masteredWordsA1.length : 0;
-    const countB1 = (masteredWordsB1 && Array.isArray(masteredWordsB1)) ? masteredWordsB1.length : 0;
     if (masteryA1) masteryA1.innerText = `${countA1} / 900 từ (${Math.round((countA1 / 900) * 100)}%)`;
     if (masteryB1) masteryB1.innerText = `${countB1} / 4000 từ (${Math.round((countB1 / 4000) * 100)}%)`;
 }
@@ -316,6 +307,11 @@ window.updateCharacterUI = updateCharacterUI;
 // ==========================================
 // 4. CHUYỂN MÀN HÌNH & XÁC THỰC FIREBASE
 // ==========================================
+window.goHome = function() {
+    if (window.playClickSound) window.playClickSound();
+    window.switchScreen('start-screen');
+};
+
 window.switchScreen = function(screenId) {
     if (window.playClickSound) window.playClickSound();
     document.querySelectorAll('.screen').forEach(s => {
@@ -417,10 +413,6 @@ async function loadUserLifetimeMana(uid) {
 
             window.playerStats = playerStats;
             window.stats = playerStats;
-
-            if (window.getRealmData) {
-                window.highestAchievedRank = window.getRealmData(lifetimeMana).major;
-            }
         }
     } catch(e) { 
         console.error("Lỗi tải data:", e);
@@ -576,108 +568,74 @@ let cachedLeaderboardData = [];
 window.switchLeaderboardTab = function(tab) {
     if (window.playClickSound) window.playClickSound();
     currentLeaderboardTab = tab;
-    
-    const tabMana = document.getElementById('lb-tab-mana');
-    const tabBattle = document.getElementById('lb-tab-battle');
-    const descText = document.getElementById('lb-desc-text');
-    
-    if (tab === 'mana') {
-        if (tabMana) tabMana.classList.add('active');
-        if (tabBattle) tabBattle.classList.remove('active');
-        if (descText) descText.innerText = "Bảng xếp hạng Linh lực trọn đời";
-    } else {
-        if (tabBattle) tabBattle.classList.add('active');
-        if (tabMana) tabMana.classList.remove('active');
-        if (descText) descText.innerText = "Bảng xếp hạng Bí Cảnh (Ván Đấu Tốt Nhất)";
-    }
-    
-    window.renderLeaderboardList();
-};
 
-window.renderLeaderboardList = function() {
-    const lbList = document.getElementById('lb-list');
-    if (!lbList) return;
+    document.querySelectorAll('.lb-big-tab').forEach(btn => btn.classList.remove('active'));
+    const activeTab = document.getElementById('lb-tab-' + tab);
+    if (activeTab) activeTab.classList.add('active');
+    
+    const listEl = document.getElementById('lb-list');
+    if (!listEl) return;
+    listEl.innerHTML = "";
     
     if (!cachedLeaderboardData || cachedLeaderboardData.length === 0) {
-        lbList.innerHTML = '<li style="justify-content:center; color:#94a3b8;">Chưa có cao thủ nào!</li>';
+        listEl.innerHTML = "<li style='justify-content:center; color:#94a3b8;'>Chưa có cao thủ nào!</li>";
         return;
     }
 
-    lbList.innerHTML = '';
-    const formatTimeFunc = window.formatTime || ((s) => `${String(Math.floor(s/60)).padStart(2, '0')}:${String(s%60).padStart(2, '0')}`);
-    const realmFunc = window.calculateRealm || (() => "Phàm Nhân");
-
-    if (currentLeaderboardTab === 'mana') {
-        let records = [...cachedLeaderboardData]
-            .sort((a, b) => (b.mana || 0) - (a.mana || 0))
-            .slice(0, 10);
-
-        records.forEach((p, idx) => {
-            let medal = idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : `<b>${idx + 1}.</b>`;
-            
-            // TRÍCH XUẤT CHÍNH XÁC SỐ TỪ VỰNG CỦA TỪNG NGƯỜI CHƠI TRÊN BẢNG
-            const pCountA1 = p.masteredA1 ? (Array.isArray(p.masteredA1) ? p.masteredA1.length : Object.keys(p.masteredA1).length) : 0;
-            const pCountB1 = p.masteredB1 ? (Array.isArray(p.masteredB1) ? p.masteredB1.length : Object.keys(p.masteredB1).length) : 0;
-            const exactRealm = realmFunc(p.mana || 0, pCountA1, pCountB1);
-
-            lbList.innerHTML += `
-                <li>
-                    <div class="lb-user-info">
-                        <span class="lb-rank">${medal}</span>
-                        <div class="lb-details">
-                            <span class="lb-name">${p.name || 'Đạo Hữu'}</span>
-                            <span class="realm-badge">${exactRealm}</span>
-                        </div>
-                    </div>
-                    <div class="lb-mana">⚡ ${p.mana || 0} Linh Lực</div>
-                </li>`;
-        });
+    let sorted = [...cachedLeaderboardData];
+    const descText = document.getElementById('lb-desc-text');
+    
+    if (tab === 'mana') {
+        sorted.sort((a, b) => b.mana - a.mana);
+        if (descText) descText.innerText = "Bảng xếp hạng tổng Tu Vi";
     } else {
-        let records = [...cachedLeaderboardData]
-            .filter(p => p.battleRecord && (p.battleRecord.maxSurvivalSec > 0 || p.battleRecord.maxKills > 0))
-            .sort((a, b) => {
-                const secA = a.battleRecord?.maxSurvivalSec || 0;
-                const secB = b.battleRecord?.maxSurvivalSec || 0;
-                if (secB !== secA) return secB - secA;
-                return (b.battleRecord?.maxKills || 0) - (a.battleRecord?.maxKills || 0);
-            })
-            .slice(0, 10);
-
-        if (records.length === 0) {
-            lbList.innerHTML = '<li style="justify-content:center; color:#94a3b8;">Chưa có chiến tích Bí Cảnh nào được ghi nhận!</li>';
-            return;
-        }
-
-        records.forEach((p, idx) => {
-            let medal = idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : `<b>${idx + 1}.</b>`;
-            const kills = p.battleRecord?.maxKills || 0;
-            const timeStr = formatTimeFunc(p.battleRecord?.maxSurvivalSec || 0);
-
-            // TRÍCH XUẤT CHÍNH XÁC SỐ TỪ VỰNG CỦA TỪNG NGƯỜI CHƠI TRÊN BẢNG
-            const pCountA1 = p.masteredA1 ? (Array.isArray(p.masteredA1) ? p.masteredA1.length : Object.keys(p.masteredA1).length) : 0;
-            const pCountB1 = p.masteredB1 ? (Array.isArray(p.masteredB1) ? p.masteredB1.length : Object.keys(p.masteredB1).length) : 0;
-            const exactRealm = realmFunc(p.mana || 0, pCountA1, pCountB1);
-
-            lbList.innerHTML += `
-                <li>
-                    <div class="lb-user-info">
-                        <span class="lb-rank">${medal}</span>
-                        <div class="lb-details">
-                            <span class="lb-name">${p.name || 'Đạo Hữu'}</span>
-                            <span class="realm-badge">${exactRealm}</span>
-                        </div>
-                    </div>
-                    <div class="lb-score-tag">
-                        <span style="color:#38bdf8; font-weight:bold;">⏱️ ${timeStr}</span><br>
-                        <small style="color:#ffa502;">👾 ${kills} quái</small>
-                    </div>
-                </li>`;
+        sorted.sort((a, b) => {
+            const aTime = a.battleRecord?.maxSurvivalSec || 0;
+            const bTime = b.battleRecord?.maxSurvivalSec || 0;
+            if (bTime !== aTime) return bTime - aTime;
+            return (b.battleRecord?.maxKills || 0) - (a.battleRecord?.maxKills || 0);
         });
+        if (descText) descText.innerText = "Kỷ lục sinh tồn Bí Cảnh xuất sắc nhất";
     }
+    
+    const formatTime = window.formatTime || ((s) => `${String(Math.floor(s/60)).padStart(2, '0')}:${String(s%60).padStart(2, '0')}`);
+    const realmFunc = window.calculateRealm || (() => "Phàm Nhân");
+    
+    sorted.slice(0, 10).forEach((u, index) => {
+        let rankHtml = index < 3 ? ["🥇", "🥈", "🥉"][index] : `<b>${index + 1}.</b>`;
+        let scoreHtml = tab === 'mana' 
+            ? `<div class="lb-mana">⚡ ${u.mana} Linh Lực</div>`
+            : `<div class="lb-score-tag"><span style="color:#38bdf8; font-weight:bold;">⏱️ ${formatTime(u.battleRecord?.maxSurvivalSec || 0)}</span><br><small style="color:#ffa502;">👾 ${u.battleRecord?.maxKills || 0} quái</small></div>`;
+        
+        // CHUẨN HÓA MẢNG TỪ VỰNG TRƯỚC KHI ĐẾM CHO LEADERBOARD
+        const countA1 = (u.masteredA1 && Array.isArray(u.masteredA1)) ? u.masteredA1.length : 
+                        (u.masteredA1 && typeof u.masteredA1 === 'object') ? Object.keys(u.masteredA1).length : 0;
+
+        const countB1 = (u.masteredB1 && Array.isArray(u.masteredB1)) ? u.masteredB1.length : 
+                        (u.masteredB1 && typeof u.masteredB1 === 'object') ? Object.keys(u.masteredB1).length : 0;
+        
+        const exactRealm = realmFunc(u.mana, countA1, countB1);
+
+        listEl.innerHTML += `
+        <li>
+            <div class="lb-user-info">
+                <span class="lb-rank">${rankHtml}</span>
+                <div class="lb-details">
+                    <span class="lb-name">${u.name}</span>
+                    <span class="realm-badge">${exactRealm}</span>
+                </div>
+            </div>
+            ${scoreHtml}
+        </li>`;
+    });
+};
+
+window.renderLeaderboardList = function() {
+    window.switchLeaderboardTab(currentLeaderboardTab);
 };
 
 // ==========================================
-// 9. TIÊN ĐẠO BẢNG (LEADERBOARD - BẢN SẠCH)
+// 9. TIÊN ĐẠO BẢNG (LEADERBOARD LOAD)
 // ==========================================
 window.showLeaderboard = async function() {
     if (window.playClickSound) window.playClickSound();
@@ -710,66 +668,6 @@ window.showLeaderboard = async function() {
     }
 };
 
-window.switchLeaderboardTab = function(tab) {
-    if (window.playClickSound) window.playClickSound();
-    currentLeaderboardTab = tab;
-
-    document.querySelectorAll('.lb-big-tab').forEach(btn => btn.classList.remove('active'));
-    const activeTab = document.getElementById('lb-tab-' + tab);
-    if (activeTab) activeTab.classList.add('active');
-    
-    const listEl = document.getElementById('lb-list');
-    if (!listEl) return;
-    listEl.innerHTML = "";
-    
-    if (!cachedLeaderboardData || cachedLeaderboardData.length === 0) {
-        listEl.innerHTML = "<li style='justify-content:center; color:#94a3b8;'>Chưa có cao thủ nào!</li>";
-        return;
-    }
-
-    let sorted = [...cachedLeaderboardData];
-    const descText = document.getElementById('lb-desc-text');
-    
-    if (tab === 'mana') {
-        sorted.sort((a, b) => b.mana - a.mana);
-        if (descText) descText.innerText = "Bảng xếp hạng tổng Tu Vi";
-    } else {
-        sorted.sort((a, b) => {
-            const aTime = a.battleRecord?.maxSurvivalSec || 0;
-            const bTime = b.battleRecord?.maxSurvivalSec || 0;
-            if (bTime !== aTime) return bTime - aTime;
-            return (b.battleRecord?.maxKills || 0) - (a.battleRecord?.maxKills || 0);
-        });
-        if (descText) descText.innerText = "Kỷ lục sinh tồn Bí Cảnh xuất sắc nhất";
-    }
-    
-    const formatTime = window.formatTime || ((s) => `${String(Math.floor(s/60)).padStart(2, '0')}:${String(s%60).padStart(2, '0')}`);
-    
-    sorted.slice(0, 10).forEach((u, index) => {
-        let rankHtml = index < 3 ? ["🥇", "🥈", "🥉"][index] : `<b>${index + 1}.</b>`;
-        let scoreHtml = tab === 'mana' 
-            ? `<div class="lb-mana">⚡ ${u.mana} Linh Lực</div>`
-            : `<div class="lb-score-tag"><span style="color:#38bdf8; font-weight:bold;">⏱️ ${formatTime(u.battleRecord?.maxSurvivalSec || 0)}</span><br><small style="color:#ffa502;">👾 ${u.battleRecord?.maxKills || 0} quái</small></div>`;
-        
-        const countA1 = u.masteredA1 ? (Array.isArray(u.masteredA1) ? u.masteredA1.length : Object.keys(u.masteredA1).length) : 0;
-        const countB1 = u.masteredB1 ? (Array.isArray(u.masteredB1) ? u.masteredB1.length : Object.keys(u.masteredB1).length) : 0;
-        
-        // Gọi thẳng hàm tính cảnh giới gốc, bỏ qua toàn bộ fallback hardcode gây lỗi
-        const exactRealm = window.calculateRealm ? window.calculateRealm(u.mana, countA1, countB1) : "Phàm Nhân";
-
-        listEl.innerHTML += `
-        <li>
-            <div class="lb-user-info">
-                <span class="lb-rank">${rankHtml}</span>
-                <div class="lb-details">
-                    <span class="lb-name">${u.name}</span>
-                    <span class="realm-badge">${exactRealm}</span>
-                </div>
-            </div>
-            ${scoreHtml}
-        </li>`;
-    });
-};
 // ==========================================
 // 6. TÚI TRỮ VẬT & HIỆU ỨNG VẬT PHẨM
 // ==========================================
@@ -789,4 +687,3 @@ window.applyItemEffect = function(item) {
     updateCharacterUI();
     syncManaToDatabase();
 };
-
