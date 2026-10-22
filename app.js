@@ -1,8 +1,3 @@
-Dưới đây là tệp **`app.js`** hoàn chỉnh đã được dọn dẹp, sửa toàn bộ các lỗi chèn nhầm biến và vá triệt để lỗi không thể về động phủ cũng như đếm sai từ vựng trên Bảng xếp hạng.
-
-Bạn chỉ cần **xóa trắng (Ctrl+A -> Delete)** toàn bộ nội dung file `app.js` hiện tại của bạn, sau đó **Copy và Paste** toàn bộ đoạn mã dưới đây vào:
-
-```javascript
 import './chat.js';
 import './quiz.js';
 import './battle.js';
@@ -692,5 +687,3 @@ window.applyItemEffect = function(item) {
     updateCharacterUI();
     syncManaToDatabase();
 };
-
-```
