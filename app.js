@@ -610,11 +610,18 @@ window.switchLeaderboardTab = function(tab) {
             : `<div class="lb-score-tag"><span style="color:#38bdf8; font-weight:bold;">⏱️ ${formatTime(u.battleRecord?.maxSurvivalSec || 0)}</span><br><small style="color:#ffa502;">👾 ${u.battleRecord?.maxKills || 0} quái</small></div>`;
         
         // CHUẨN HÓA MẢNG TỪ VỰNG TRƯỚC KHI ĐẾM CHO LEADERBOARD
-        const countA1 = (u.masteredA1 && Array.isArray(u.masteredA1)) ? u.masteredA1.length : 
-                        (u.masteredA1 && typeof u.masteredA1 === 'object') ? Object.keys(u.masteredA1).length : 0;
+        // BẢO VỆ DỮ LIỆU TỪ VỰNG TỪ DATABASE
+        let countA1 = 0;
+        if (u.masteredA1) {
+            if (Array.isArray(u.masteredA1)) countA1 = u.masteredA1.length;
+            else if (typeof u.masteredA1 === 'object') countA1 = Object.keys(u.masteredA1).length;
+        }
 
-        const countB1 = (u.masteredB1 && Array.isArray(u.masteredB1)) ? u.masteredB1.length : 
-                        (u.masteredB1 && typeof u.masteredB1 === 'object') ? Object.keys(u.masteredB1).length : 0;
+        let countB1 = 0;
+        if (u.masteredB1) {
+            if (Array.isArray(u.masteredB1)) countB1 = u.masteredB1.length;
+            else if (typeof u.masteredB1 === 'object') countB1 = Object.keys(u.masteredB1).length;
+        }
         
         const exactRealm = realmFunc(u.mana, countA1, countB1);
 
