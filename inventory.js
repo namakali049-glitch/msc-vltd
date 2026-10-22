@@ -57,3 +57,19 @@ window.useItem = function(item) {
         updateInventoryUI();
     }
 };
+window.applyItemEffect = function(item) {
+    if (item === "Hồi Xuân Đan") {
+        currentHp = Math.min(maxHp, currentHp + 30);
+        alert("💊 Đã dùng Hồi Xuân Đan! Phục hồi 30 Sinh Mệnh.");
+    } else if (item === "Tụ Linh Đan") {
+        lifetimeMana += 50;
+        sessionMana += 50;
+        recalcStats();
+        alert("✨ Đã dùng Tụ Linh Đan! Tu vi tăng vọt +50 Linh Lực.");
+    } else if (item === "Tẩy Tủy Đan") {
+        currentHp = maxHp;
+        alert("💎 Đã dùng Tẩy Tủy Đan! Đạo thể khôi phục 100% Sinh Mệnh.");
+    }
+    updateCharacterUI();
+    syncManaToDatabase();
+};
