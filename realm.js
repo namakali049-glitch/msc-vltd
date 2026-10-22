@@ -61,37 +61,45 @@ function getRealmData(mana, customA1Count = null, customB1Count = null) {
     return { rank: "Nguyên Anh Chân Quân", major: "Nguyên Anh", hp: 8000, thanThuc: 3000, swords: 5 };
 }
 
-function calculateRealm(mana, customA1Count = null, customB1Count = null) {
-    return getRealmData(mana, customA1Count, customB1Count).rank;
-}
+window.calculateRealm = function(mana, countA1 = 0, countB1 = 0) {
+    if (mana < 150) return "Phàm Nhân";
+    if (mana < 400) return "Luyện Khí Sơ Kỳ";
+    if (mana < 800) return "Luyện Khí Trung Kỳ";
+    if (mana < 1500) return "Luyện Khí Hậu Kỳ";
+    if (mana < 2500) return "Trúc Cơ Sơ Kỳ";
+    if (mana < 4000) return "Trúc Cơ Trung Kỳ";
+    if (mana < 8000) return "Trúc Cơ Hậu Kỳ";
+    
+    // NGUYÊN TẮC BÌNH CẢNH TRÚC CƠ: Bắt buộc >= 600 từ A1
+    if (mana >= 8000 && countA1 < 600) {
+        return "Trúc Cơ Hậu Kỳ (Bình Cảnh)";
+    }
+    
+    if (mana < 15000) return "Kim Đan Sơ Kỳ";
+    if (mana < 20000) return "Kim Đan Trung Kỳ";
+    if (mana < 25000) return "Kim Đan Hậu Kỳ";
 
-window.getRealmData = getRealmData;
-window.calculateRealm = calculateRealm;
-// BỔ SUNG: Mảng cấu hình điểm thưởng khi đột phá tiểu cảnh giới
-window.MINOR_REALM_REWARDS = [
-    { id: "LK_1", mana: 150, name: "Luyện Khí Sơ Kỳ", points: 10 },
-    { id: "LK_2", mana: 400, name: "Luyện Khí Trung Kỳ", points: 10 },
-    { id: "LK_3", mana: 800, name: "Luyện Khí Hậu Kỳ", points: 10 },
-    { id: "TC_1", mana: 1500, name: "Trúc Cơ Sơ Kỳ", points: 15 },
-    { id: "TC_2", mana: 2500, name: "Trúc Cơ Trung Kỳ", points: 15 },
-    { id: "TC_3", mana: 4000, name: "Trúc Cơ Hậu Kỳ", points: 15 },
-    { id: "KD_1", mana: 8000, name: "Kim Đan Sơ Kỳ", points: 25 },
-    { id: "KD_2", mana: 15000, name: "Kim Đan Trung Kỳ", points: 25 },
-    { id: "KD_3", mana: 20000, name: "Kim Đan Hậu Kỳ", points: 25 },
-    { id: "NA_1", mana: 25000, name: "Nguyên Anh Chân Quân", points: 35 }
-];
+    // NGUYÊN TẮC BÌNH CẢNH KIM ĐAN: Bắt buộc >= 2667 từ B1
+    if (mana >= 25000 && countB1 < 2667) {
+        return "Kim Đan Hậu Kỳ (Bình Cảnh)";
+    }
+    
+    return "Nguyên Anh Chân Quân";
+};
 
-// BỔ SUNG: Hàm tính toán số lượng phi kiếm (có khống chế trần theo cảnh giới)
-window.getSwordCount = function(thanThucValue) {
-    if (thanThucValue < 100) return 0;
+window.getRealmData = function(mana, countA1 = 0, countB1 = 0) {
+    const rank = window.calculateRealm(mana, countA1, countB1);
     
-    // Tính số kiếm theo công thức gốc
-    let calculatedSwords = 1 + Math.floor((thanThucValue - 100) / 50);
+    if (rank === "Phàm Nhân") return { rank, hp: 100, thanThuc: 0, major: "Phàm Nhân" };
+    if (rank === "Luyện Khí Sơ Kỳ") return { rank, hp: 250, thanThuc: 100, major: "Luyện Khí Kỳ" };
+    if (rank === "Luyện Khí Trung Kỳ") return { rank, hp: 400, thanThuc: 200, major: "Luyện Khí Kỳ" };
+    if (rank === "Luyện Khí Hậu Kỳ") return { rank, hp: 550, thanThuc: 300, major: "Luyện Khí Kỳ" };
+    if (rank === "Trúc Cơ Sơ Kỳ") return { rank, hp: 700, thanThuc: 400, major: "Trúc Cơ Kỳ" };
+    if (rank === "Trúc Cơ Trung Kỳ") return { rank, hp: 850, thanThuc: 500, major: "Trúc Cơ Kỳ" };
+    if (rank === "Trúc Cơ Hậu Kỳ" || rank === "Trúc Cơ Hậu Kỳ (Bình Cảnh)") return { rank, hp: 1000, thanThuc: 600, major: "Trúc Cơ Kỳ" };
+    if (rank === "Kim Đan Sơ Kỳ") return { rank, hp: 2000, thanThuc: 800, major: "Kim Đan Kỳ" };
+    if (rank === "Kim Đan Trung Kỳ") return { rank, hp: 2500, thanThuc: 1000, major: "Kim Đan Kỳ" };
+    if (rank === "Kim Đan Hậu Kỳ" || rank === "Kim Đan Hậu Kỳ (Bình Cảnh)") return { rank, hp: 3000, thanThuc: 1200, major: "Kim Đan Kỳ" };
     
-    // Khống chế trần tối đa theo cảnh giới hiện tại
-    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
-    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
-    const realmData = window.getRealmData(window.lifetimeMana || 0, countA1, countB1);
-    
-    return Math.min(calculatedSwords, realmData.swords);
+    return { rank, hp: 8000, thanThuc: 3000, major: "Nguyên Anh Kỳ" };
 };
