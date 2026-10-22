@@ -177,7 +177,21 @@ window.recalcStats = recalcStats;
 // Hàm addLifetimeMana hoàn chỉnh
 window.addLifetimeMana = function(amount) {
     const oldMana = lifetimeMana;
-    lifetimeMana += amount;
+    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
+    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+
+    let targetMana = lifetimeMana + amount;
+
+    // Khóa trần cứng nếu kẹt Bình Cảnh Trúc Cơ
+    if (countA1 < 600 && targetMana > 8000) {
+        targetMana = 8000;
+    }
+    // Khóa trần cứng nếu kẹt Bình Cảnh Kim Đan
+    else if (countB1 < 2667 && targetMana > 25000) {
+        targetMana = 25000;
+    }
+
+    lifetimeMana = targetMana;
     window.lifetimeMana = lifetimeMana;
     
     recalcStats();
