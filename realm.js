@@ -8,8 +8,12 @@ window.getRealmData = function(mana, customA1 = null, customB1 = null) {
     const listA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1 : [];
     const listB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1 : [];
     
-    const countA1 = customA1 !== null ? customA1 : listA1.length;
-    const countB1 = customB1 !== null ? customB1 : listB1.length;
+    // Ép kiểu Number an toàn tuyệt đối, nếu không hợp lệ sẽ về 0
+    let countA1 = customA1 !== null ? Number(customA1) : listA1.length;
+    if (isNaN(countA1)) countA1 = 0;
+
+    let countB1 = customB1 !== null ? Number(customB1) : listB1.length;
+    if (isNaN(countB1)) countB1 = 0;
 
     if (mana < 150) return { rank: "Phàm Nhân", major: "Phàm Nhân", swords: 0 };
     if (mana < 400) return { rank: "Luyện Khí Sơ Kỳ", major: "Luyện Khí Kỳ", swords: 1 };
@@ -18,10 +22,11 @@ window.getRealmData = function(mana, customA1 = null, customB1 = null) {
     if (mana < 2500) return { rank: "Trúc Cơ Sơ Kỳ", major: "Trúc Cơ Kỳ", swords: 3 };
     if (mana < 4000) return { rank: "Trúc Cơ Trung Kỳ", major: "Trúc Cơ Kỳ", swords: 4 };
     
+    // BẮT BUỘC >= 600 TỪ A1: Dù có 1.000.000 Linh Lực vẫn bị giam ở Trúc Cơ (Bình Cảnh)
     if (mana < 8000 || countA1 < 600) {
         let isBottleneck = (mana >= 8000 && countA1 < 600);
         return { 
-            rank: isBottleneck ? "Trúc Cơ Hậu Kỳ (Bình Cảnh)" : "Trúc Cơ Hậu Kỳ", 
+            rank: isBottleneck ? "Trúc Cơ (Bình Cảnh)" : "Trúc Cơ Hậu Kỳ", 
             major: "Trúc Cơ Kỳ", 
             swords: 5 
         };
@@ -30,10 +35,11 @@ window.getRealmData = function(mana, customA1 = null, customB1 = null) {
     if (mana < 15000) return { rank: "Kim Đan Sơ Kỳ", major: "Kim Đan Kỳ", swords: 5 };
     if (mana < 20000) return { rank: "Kim Đan Trung Kỳ", major: "Kim Đan Kỳ", swords: 5 };
     
+    // BẮT BUỘC >= 2667 TỪ B1: Chưa đủ từ thì vĩnh viễn không thể xưng Nguyên Anh
     if (mana < 25000 || countB1 < 2667) {
         let isBottleneck = (mana >= 25000 && countB1 < 2667);
         return { 
-            rank: isBottleneck ? "Kim Đan Hậu Kỳ (Bình Cảnh)" : "Kim Đan Hậu Kỳ", 
+            rank: isBottleneck ? "Kim Đan (Bình Cảnh)" : "Kim Đan Hậu Kỳ", 
             major: "Kim Đan Kỳ", 
             swords: 5 
         };
