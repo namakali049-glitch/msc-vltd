@@ -129,8 +129,9 @@ function processVocabData() {
         
         activeQuestions.push({
             q: word.hanzi,
+            pinyin: word.pinyin,
             fullWord: word,
-            options: options.map(opt => `[${opt.pinyin}] ${opt.meaning}`),
+            options: options.map(opt => opt.meaning), // Chỉ hiển thị nghĩa tiếng Việt
             ans: ansIdx
         });
     });
