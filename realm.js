@@ -67,3 +67,31 @@ function calculateRealm(mana, customA1Count = null, customB1Count = null) {
 
 window.getRealmData = getRealmData;
 window.calculateRealm = calculateRealm;
+// BỔ SUNG: Mảng cấu hình điểm thưởng khi đột phá tiểu cảnh giới
+window.MINOR_REALM_REWARDS = [
+    { id: "LK_1", mana: 150, name: "Luyện Khí Sơ Kỳ", points: 10 },
+    { id: "LK_2", mana: 400, name: "Luyện Khí Trung Kỳ", points: 10 },
+    { id: "LK_3", mana: 800, name: "Luyện Khí Hậu Kỳ", points: 10 },
+    { id: "TC_1", mana: 1500, name: "Trúc Cơ Sơ Kỳ", points: 15 },
+    { id: "TC_2", mana: 2500, name: "Trúc Cơ Trung Kỳ", points: 15 },
+    { id: "TC_3", mana: 4000, name: "Trúc Cơ Hậu Kỳ", points: 15 },
+    { id: "KD_1", mana: 8000, name: "Kim Đan Sơ Kỳ", points: 25 },
+    { id: "KD_2", mana: 15000, name: "Kim Đan Trung Kỳ", points: 25 },
+    { id: "KD_3", mana: 20000, name: "Kim Đan Hậu Kỳ", points: 25 },
+    { id: "NA_1", mana: 25000, name: "Nguyên Anh Chân Quân", points: 35 }
+];
+
+// BỔ SUNG: Hàm tính toán số lượng phi kiếm (có khống chế trần theo cảnh giới)
+window.getSwordCount = function(thanThucValue) {
+    if (thanThucValue < 100) return 0;
+    
+    // Tính số kiếm theo công thức gốc
+    let calculatedSwords = 1 + Math.floor((thanThucValue - 100) / 50);
+    
+    // Khống chế trần tối đa theo cảnh giới hiện tại
+    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
+    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+    const realmData = window.getRealmData(window.lifetimeMana || 0, countA1, countB1);
+    
+    return Math.min(calculatedSwords, realmData.swords);
+};
