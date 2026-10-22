@@ -373,7 +373,32 @@ body {
   backdrop-filter: blur(8px);
 }
 .quiz-counter { font-size: 0.75rem; color: #94a3b8; }
-.quiz-question { font-size: 1.05rem; font-weight: bold; margin: 8px 0 12px; white-space: pre-line; }
+.quiz-question { 
+  margin: 6px 0 14px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Chữ Hán nổi bật với kích thước lớn và hiệu ứng kim quang */
+.quiz-hanzi {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #ffd700;
+  line-height: 1.15;
+  letter-spacing: 2px;
+  text-shadow: 0 0 16px rgba(255, 215, 0, 0.45);
+}
+
+/* Pinyin đặt ngay dưới chữ Hán với màu lam thanh thoát */
+.quiz-pinyin {
+  font-size: 1.15rem;
+  color: #38bdf8;
+  font-weight: 600;
+  margin-top: 4px;
+  letter-spacing: 1px;
+}
 .options-container { display: flex; flex-direction: column; gap: 8px; }
 .option-btn {
   padding: 10px; background: rgba(30, 41, 59, 0.75); border: 1px solid rgba(255, 255, 255, 0.15);
