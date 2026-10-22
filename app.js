@@ -467,6 +467,7 @@ window.handleSignup = async function() {
             mana: 0, 
             inventory: inventory,
             stats: playerStats,
+            battleRecord: { maxSurvivalSec: 0, maxKills: 0, lastUpdated: Date.now() },
             masteredA1: [],
             masteredB1: [],
             joinedAt: Date.now()
