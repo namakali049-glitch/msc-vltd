@@ -412,6 +412,7 @@ async function syncManaToDatabase() {
         await update(userRef, {
             name: currentUser.displayName || currentUser.email.split('@')[0],
             mana: lifetimeMana,
+            currentHp: window.currentHp,
             inventory: inventory,
             stats: playerStats,
             masteredA1: masteredWordsA1,
