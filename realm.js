@@ -48,7 +48,58 @@ window.getRealmData = function(mana, customA1 = null, customB1 = null) {
     
     return { rank: "Nguyên Anh Chân Quân", major: "Nguyên Anh Kỳ", hp: 8000, thanThuc: 3000, swords: 5 };
 };
+// ==========================================
+// BỔ SUNG CƠ CHẾ CỐT LÕI THEO ĐẶC TẢ v0.6_FINAL
+// ==========================================
 
+// 1. Danh mục phần thưởng Điểm Tiềm Năng các tiểu cảnh giới
+window.MINOR_REALM_REWARDS = [
+    { id: "LK_1", name: "Luyện Khí Sơ Kỳ", mana: 150, points: 10 },
+    { id: "LK_2", name: "Luyện Khí Trung Kỳ", mana: 400, points: 10 },
+    { id: "LK_3", name: "Luyện Khí Hậu Kỳ", mana: 800, points: 10 },
+    { id: "TC_1", name: "Trúc Cơ Sơ Kỳ", mana: 1500, points: 15 },
+    { id: "TC_2", name: "Trúc Cơ Trung Kỳ", mana: 2500, points: 15 },
+    { id: "TC_3", name: "Trúc Cơ Hậu Kỳ", mana: 4000, points: 15 },
+    { id: "KD_1", name: "Kim Đan Sơ Kỳ", mana: 8000, points: 25 },
+    { id: "KD_2", name: "Kim Đan Trung Kỳ", mana: 15000, points: 25 },
+    { id: "KD_3", name: "Kim Đan Hậu Kỳ", mana: 20000, points: 25 },
+    { id: "NA_1", name: "Nguyên Anh Chân Quân", mana: 25000, points: 35 }
+];
+
+// 2. Thuật toán ngự kiếm theo Thần Thức: 1 + floor((Thần Thức - 100) / 50)
+window.getSwordCount = function(thanThuc) {
+    if (!thanThuc || thanThuc < 100) return 0;
+    const calculated = 1 + Math.floor((thanThuc - 100) / 50);
+    return Math.min(5, calculated);
+};
+
+// 3. Tiến hóa ngoại trang Avatar theo mốc Linh Lực
+window.getAvatarByMana = function(mana) {
+    if (mana < 150) return "assets/pham-nhan.jpg";
+    if (mana < 1500) return "assets/luyen-khi.jpg";
+    if (mana < 2500) return "assets/truc-co.jpg";
+    if (mana < 4000) return "assets/truc-co-trung-ky.png";
+    return "assets/truc-co-vien-man.png";
+};
+
+// 4. Kích hoạt Modal Thiên Đạo Chúc Phúc khi vượt đại cảnh giới
+window.checkAndTriggerBreakthrough = function(oldMana, newMana) {
+    const oldRealm = window.getRealmData(oldMana);
+    const newRealm = window.getRealmData(newMana);
+    if (newRealm.major !== oldRealm.major && newRealm.major !== "Phàm Nhân") {
+        const modal = document.getElementById('breakthroughModal');
+        const realmEl = document.getElementById('breakthroughRealm');
+        const descEl = document.getElementById('breakthroughDesc');
+        const bonusEl = document.getElementById('breakthroughBonus');
+        if (modal && realmEl) {
+            realmEl.innerText = newRealm.rank;
+            if (descEl) descEl.innerText = `Chúc mừng đạo hữu phá vỡ gông cùm, đăng lâm ${newRealm.major}!`;
+            if (bonusEl) bonusEl.innerText = `Sinh Mệnh cơ bản: ${newRealm.hp} | Thần Thức cơ bản: ${newRealm.thanThuc}`;
+            modal.style.display = 'flex';
+            if (window.playLootSound) window.playLootSound();
+        }
+    }
+};
 // 2. Hàm lấy chuỗi tên Cảnh Giới (Tái sử dụng hàm trên)
 window.calculateRealm = function(mana, countA1 = null, countB1 = null) {
     return window.getRealmData(mana, countA1, countB1).rank;
