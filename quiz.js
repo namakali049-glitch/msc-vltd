@@ -66,15 +66,23 @@ function generateQuizSession(pool, numQuestions = 10) {
 }
 
 window.checkAndStartVolume = function(vol) {
-    const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0) : { major: "Phàm Nhân" };
+    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
+    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+    const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0, countA1, countB1) : { major: "Phàm Nhân" };
+    
     if (vol === 'trung_quyen') {
         if (realmData.major !== "Kim Đan" && realmData.major !== "Nguyên Anh") {
-            alert("⚠️ Cảnh giới chưa đủ!\nĐạo hữu cần đột phá lên [Kim Đan Chân Nhân] mới có thể mở khóa Trung Quyển.");
+            alert("⚠️ Cảnh giới chưa đủ!\nĐạo hữu cần phá vỡ Bình Cảnh, đột phá lên [Kim Đan Chân Nhân] mới có thể mở khóa Trung Quyển.");
             return;
         }
         window.currentCsvFile = "./b1_vocab.csv";
         window.difficultyMultiplier = 1;
     } else {
+        if (realmData.major === "Kim Đan" || realmData.major === "Nguyên Anh") {
+            if (!confirm("⚠️ Đạo hữu đã đạt cảnh giới cao!\nTiếp tục tu luyện Hạ Quyển sẽ bị cơ chế thiên đạo giáng phạt, giảm 90% Linh Lực thu được. Vẫn muốn tiếp tục?")) {
+                return; // Người chơi bấm Hủy sẽ không vào quiz nữa
+            }
+        }
         window.currentCsvFile = "./a1_vocab.csv";
         window.difficultyMultiplier = 1;
     }
