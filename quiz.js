@@ -192,7 +192,7 @@ window.checkAnswer = function(selectedIdx, btnElement) {
 
         // 5.2. Phạt EXP nếu Cảnh giới cao học Hạ Quyển
         const currentData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0, countA1, countB1) : { major: "Phàm Nhân" };
-        const isHighRealm = (currentData.major === "Kim Đan" || currentData.major === "Nguyên Anh");
+        const isHighRealm = (currentData.major === "Kim Đan Kỳ" || currentData.major === "Nguyên Anh Kỳ");
         
         if (isHighRealm && isA1) {
             bonusMana = Math.max(1, Math.floor(bonusMana * 0.1));
