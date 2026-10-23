@@ -22,8 +22,8 @@ window.getRealmData = function(mana, customA1 = null, customB1 = null) {
     if (mana < 2500) return { rank: "Trúc Cơ Sơ Kỳ", major: "Trúc Cơ Kỳ", swords: 3 };
     if (mana < 4000) return { rank: "Trúc Cơ Trung Kỳ", major: "Trúc Cơ Kỳ", swords: 4 };
     
-    // BẮT BUỘC >= 600 TỪ A1: Dù có 1.000.000 Linh Lực vẫn bị giam ở Trúc Cơ (Bình Cảnh)
-    if (mana < 8000 || countA1 < 600) {
+    // BẮT BUỘC >= 600 TỪ A1 (Admin được đặc cách bỏ qua)
+    if (!window.isAdmin && (mana < 8000 || countA1 < 600)) {
         let isBottleneck = (mana >= 8000 && countA1 < 600);
         return { 
             rank: isBottleneck ? "Trúc Cơ (Bình Cảnh)" : "Trúc Cơ Hậu Kỳ", 
@@ -35,8 +35,8 @@ window.getRealmData = function(mana, customA1 = null, customB1 = null) {
     if (mana < 15000) return { rank: "Kim Đan Sơ Kỳ", major: "Kim Đan Kỳ", swords: 5 };
     if (mana < 20000) return { rank: "Kim Đan Trung Kỳ", major: "Kim Đan Kỳ", swords: 5 };
     
-    // BẮT BUỘC >= 2667 TỪ B1: Chưa đủ từ thì vĩnh viễn không thể xưng Nguyên Anh
-    if (mana < 25000 || countB1 < 2667) {
+    // BẮT BUỘC >= 2667 TỪ B1 (Admin được đặc cách bỏ qua)
+    if (!window.isAdmin && (mana < 25000 || countB1 < 2667)) {
         let isBottleneck = (mana >= 25000 && countB1 < 2667);
         return { 
             rank: isBottleneck ? "Kim Đan (Bình Cảnh)" : "Kim Đan Hậu Kỳ", 
