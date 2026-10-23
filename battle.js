@@ -123,6 +123,23 @@ window.startBattle = function() {
     battleData.player.y = battleCanvas.height / 2;
     window.currentHp = window.maxHp || 100;
 
+    // CẬP NHẬT TÊN, CẢNH GIỚI VÀ PHỤC HỒI LINH LỰC KHI VÀO BÍ CẢNH
+    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
+    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+    const realmName = window.calculateRealm ? window.calculateRealm(window.lifetimeMana || 0, countA1, countB1) : "Luyện Khí";
+    const playerName = (window.currentUser && (window.currentUser.displayName || (window.currentUser.email && window.currentUser.email.split('@')[0]))) || "Đạo Hữu";
+
+    const bName = document.getElementById('battleName');
+    const bBadge = document.getElementById('battleRealmBadge');
+    const bAvatar = document.getElementById('battleAvatar');
+    const avatarFunc = window.getAvatarByMana || (() => "assets/pham-nhan.jpg");
+
+    if (bName) bName.innerText = playerName;
+    if (bBadge) bBadge.innerText = realmName;
+    if (bAvatar) bAvatar.src = avatarFunc(window.lifetimeMana || 0);
+
+    window.currentLinhLuc = window.maxLinhLuc || 0;
+
     if (battleAnimationFrame) cancelAnimationFrame(battleAnimationFrame);
     battleLoop();
 };
