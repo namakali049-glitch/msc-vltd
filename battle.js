@@ -8,6 +8,7 @@ let battleData = {
     swords: [],
     enemies: [],
     particles: [],
+    textPopups: [], // Thêm mảng chứa hiệu ứng chữ nổi khi rớt đồ
     screenShake: 0,
     damageFlash: 0,
     kills: 0,
@@ -43,37 +44,28 @@ const battleAssets = {
     playerTrucCo: new Image(),
     playerTrucCoTrungKy: new Image(),
     playerTrucCoVienMan: new Image(),
-    playerKimDan: new Image(),        // THÊM MỚI
-    playerNguyenAnh: new Image(),     // THÊM MỚI
+    playerKimDan: new Image(),        
+    playerNguyenAnh: new Image(),     
     swordWood: new Image(),
     swordCyan: new Image(),
-    swordKimDan: new Image(),         // THÊM MỚI (Kiếm lửa)
-    swordNguyenAnh: new Image(),      // THÊM MỚI (Kiếm sét)
+    swordKimDan: new Image(),         
+    swordNguyenAnh: new Image(),      
     enemyGhost: new Image()
 };
 
+// Đã gộp gọn các khai báo đường dẫn ảnh, xóa bỏ các dòng trùng lặp
 battleAssets.bg.src = "assets/hac-am-son-dong.png";
 battleAssets.playerPhamNhan.src = "assets/pham-nhan.png";
 battleAssets.playerLuyenKhi.src = "assets/luyen-khi.png";
 battleAssets.playerTrucCo.src = "assets/truc-co.png";
 battleAssets.playerTrucCoTrungKy.src = "assets/truc-co-trung-ky.png";
 battleAssets.playerTrucCoVienMan.src = "assets/truc-co-vien-man.png";
-battleAssets.playerKimDan.src = "assets/kim-dan-ky.png";              // Gán ảnh Kim Đan
-battleAssets.playerNguyenAnh.src = "assets/nguyen-anh-ky.png";          // Gán ảnh Nguyên Anh
+battleAssets.playerKimDan.src = "assets/kim-dan-ky.png";              
+battleAssets.playerNguyenAnh.src = "assets/nguyen-anh-ky.png";          
 battleAssets.swordWood.src = "assets/kiem-khi-luyen-khi.png";
 battleAssets.swordCyan.src = "assets/kiem-khi-truc-co.png";
-battleAssets.swordKimDan.src = "assets/kim-dan-kiem-khi.png";       // Gán kiếm lửa
-battleAssets.swordNguyenAnh.src = "assets/nguyen-anh-kiem-khi.png"; // Gán kiếm sét
-battleAssets.enemyGhost.src = "assets/quy-hon.png";
-
-battleAssets.bg.src = "assets/hac-am-son-dong.png";
-battleAssets.playerPhamNhan.src = "assets/pham-nhan.png";
-battleAssets.playerLuyenKhi.src = "assets/luyen-khi.png";
-battleAssets.playerTrucCo.src = "assets/truc-co.png";
-battleAssets.playerTrucCoTrungKy.src = "assets/truc-co-trung-ky.png";
-battleAssets.playerTrucCoVienMan.src = "assets/truc-co-vien-man.png";
-battleAssets.swordWood.src = "assets/kiem-khi-luyen-khi.png";
-battleAssets.swordCyan.src = "assets/kiem-khi-truc-co.png";
+battleAssets.swordKimDan.src = "assets/kim-dan-kiem-khi.png";       
+battleAssets.swordNguyenAnh.src = "assets/nguyen-anh-kiem-khi.png"; 
 battleAssets.enemyGhost.src = "assets/quy-hon.png";
 
 function getBattleCharacterSkin() {
@@ -138,6 +130,7 @@ window.startBattle = function() {
 
     battleData.enemies = [];
     battleData.particles = [];
+    battleData.textPopups = [];
     battleData.kills = 0;
     battleData.orbitAngle = 0;
     battleData.frameCount = 0;
@@ -258,6 +251,7 @@ function battleLoop() {
     battleCtx.translate(shakeX, shakeY);
     battleCtx.clearRect(0, 0, battleCanvas.width, battleCanvas.height);
 
+    // Di chuyển nhân vật
     let moveX = 0;
     let moveY = 0;
     if (moveDir.up) moveY -= 1;
@@ -277,6 +271,7 @@ function battleLoop() {
     battleData.player.x = Math.max(35, Math.min(battleCanvas.width - 35, battleData.player.x));
     battleData.player.y = Math.max(45, Math.min(battleCanvas.height - 45, battleData.player.y));
 
+    // Vẽ Background
     if (battleAssets.bg.complete && battleAssets.bg.naturalWidth > 0) {
         battleCtx.drawImage(battleAssets.bg, 0, 0, battleCanvas.width, battleCanvas.height);
     } else {
@@ -284,6 +279,7 @@ function battleLoop() {
         battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
     }
 
+    // Vẽ Particles (Hiệu ứng chém)
     for (let i = battleData.particles.length - 1; i >= 0; i--) {
         const p = battleData.particles[i];
         p.x += p.vx;
@@ -301,6 +297,29 @@ function battleLoop() {
         battleCtx.globalAlpha = 1.0;
     }
 
+    // Vẽ Text Popups (Thông báo nhặt đồ)
+    for (let i = battleData.textPopups.length - 1; i >= 0; i--) {
+        const tp = battleData.textPopups[i];
+        tp.y -= 0.8; // Bay lên trên
+        tp.life -= 1;
+        if (tp.life <= 0) {
+            battleData.textPopups.splice(i, 1);
+            continue;
+        }
+        battleCtx.save();
+        battleCtx.globalAlpha = tp.life / 60;
+        battleCtx.fillStyle = tp.color || "#ffd700";
+        battleCtx.font = "bold 16px Arial";
+        battleCtx.textAlign = "center";
+        // Viền chữ
+        battleCtx.strokeStyle = "black";
+        battleCtx.lineWidth = 2;
+        battleCtx.strokeText(tp.text, tp.x, tp.y);
+        battleCtx.fillText(tp.text, tp.x, tp.y);
+        battleCtx.restore();
+    }
+
+    // Vẽ Nhân Vật
     const pImg = getBattleCharacterSkin();
     battleCtx.save();
     const bobbingY = Math.sin(battleData.frameCount * 0.12) * 4;
@@ -316,6 +335,7 @@ function battleLoop() {
     }
     battleCtx.restore();
 
+    // Vẽ & Xử lý Kiếm Khí (Va chạm)
     let activeSwordCount = 0;
     const orbitRadius = 75;
     const rotSpeed = 0.04 + (agi * 0.0008);
@@ -341,9 +361,12 @@ function battleLoop() {
             }
             battleCtx.restore();
 
+            // Va chạm với Quái
             for (let i = battleData.enemies.length - 1; i >= 0; i--) {
                 const en = battleData.enemies[i];
                 if (Math.hypot(sx - en.x, sy - en.y) < en.radius + 15) {
+                    
+                    // Knockback
                     const kdx = en.x - battleData.player.x;
                     const kdy = en.y - battleData.player.y;
                     const kdist = Math.hypot(kdx, kdy);
@@ -352,6 +375,7 @@ function battleLoop() {
                         en.y += (kdy / kdist) * 25;
                     }
 
+                    // Trừ HP
                     if (sword.durability >= en.hp) {
                         sword.durability -= en.hp;
                         en.hp = 0;
@@ -360,23 +384,42 @@ function battleLoop() {
                         sword.durability = 0;
                     }
 
+                    // Quái chết
                     if (en.hp <= 0) {
                         spawnDeathParticles(en.x, en.y, "#00d2d3");
                         battleData.enemies.splice(i, 1);
                         battleData.kills++;
 
-                        const roll = Math.random();
-                        if (window.inventory) {
-                            if (roll < 0.15) {
-                                window.inventory["Hồi Xuân Đan"] = (window.inventory["Hồi Xuân Đan"] || 0) + 1;
-                                if (window.playLootSound) window.playLootSound();
-                            } else if (roll < 0.20) {
-                                window.inventory["Tụ Linh Đan"] = (window.inventory["Tụ Linh Đan"] || 0) + 1;
-                                if (window.playLootSound) window.playLootSound();
-                            }
+                        // HỆ THỐNG RỚT ĐỒ MỚI 
+                        if (!window.inventory) window.inventory = {};
+                        const roll = Math.random() * 100; 
+                        
+                        let droppedItem = null;
+                        if (roll < 1.0) droppedItem = "hoi_huyet_dan";                 
+                        else if (roll < 2.0) droppedItem = "hoi_khi_dan";              
+                        else if (roll < 2.5) droppedItem = "tu_linh_dan";              
+                        else if (roll < 2.6) droppedItem = "than_luc_dan";             
+                        else if (roll < 2.7) droppedItem = "khi_huyet_dan";            
+                        else if (roll < 2.8) droppedItem = "linh_man_dan";             
+                        else if (roll < 2.9) droppedItem = "tinh_than_dan";            
+
+                        if (droppedItem) {
+                            window.inventory[droppedItem] = (window.inventory[droppedItem] || 0) + 1;
+                            const itemName = window.ITEM_DATABASE ? window.ITEM_DATABASE[droppedItem].name : "Vật phẩm";
+                            const itemColor = window.ITEM_DATABASE ? window.ITEM_DATABASE[droppedItem].color : "#ffd700";
+                            
+                            // Tạo hiệu ứng chữ nổi báo nhặt đồ
+                            battleData.textPopups.push({
+                                x: en.x,
+                                y: en.y,
+                                text: `+ ${itemName}`,
+                                color: itemColor,
+                                life: 60 // Tồn tại trong 60 frames (~1s)
+                            });
                         }
                     }
 
+                    // Kích hoạt hồi chiêu cho kiếm nếu hỏng
                     if (sword.durability <= 0) {
                         sword.active = false;
                         const cd = Math.max(1000, 3200 - agi * 25);
@@ -384,13 +427,14 @@ function battleLoop() {
                             sword.active = true;
                             sword.durability = swordDmg;
                         }, cd);
-                        break;
+                        break; // Thoát vòng lặp quái vì kiếm đã gãy
                     }
                 }
             }
         }
     });
 
+    // Spawn quái vật
     const spawnInterval = Math.max(12, 60 - Math.floor(survivalSec / 15) * 5);
     const spawnBatch = 1 + Math.floor(survivalSec / 45);
 
@@ -400,6 +444,7 @@ function battleLoop() {
         }
     }
 
+    // Cập nhật vị trí và hành vi quái vật
     for (let i = battleData.enemies.length - 1; i >= 0; i--) {
         const en = battleData.enemies[i];
         if (en.biteCooldown > 0) en.biteCooldown--;
@@ -429,6 +474,7 @@ function battleLoop() {
         }
         battleCtx.restore();
 
+        // Xử lý quái cắn nhân vật
         if (dist < battleData.player.radius + en.radius) {
             if (en.biteCooldown <= 0) {
                 let dodge = Math.min(30, agi * 0.5);
@@ -455,51 +501,3 @@ function battleLoop() {
                     window.exitBattle(true);
                     return;
                 }
-            }
-        }
-    }
-
-    if (battleData.damageFlash > 0) {
-        battleCtx.fillStyle = `rgba(255, 0, 0, ${battleData.damageFlash * 0.06})`;
-        battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
-        battleData.damageFlash--;
-    }
-
-    battleCtx.restore();
-
-    // CẬP NHẬT THANH MÁU ĐỘNG (HP)
-    const curHp = Math.max(0, window.currentHp || 0);
-    const hpPercent = Math.min(100, Math.max(0, (curHp / maxHp) * 100));
-    const hpFill = document.getElementById('battleHpFill');
-    const hpText = document.getElementById('battleHpText');
-    if (hpFill) hpFill.style.width = hpPercent + "%";
-    if (hpText) hpText.innerText = `❤️ ${curHp}/${maxHp}`;
-
-    // CẬP NHẬT THANH MANA ĐỘNG (LINH LỰC)
-    const curMana = Math.max(0, window.currentLinhLuc || 0);
-    const maxMana = window.maxLinhLuc || 0;
-    const manaPercent = maxMana > 0 ? Math.min(100, Math.max(0, (curMana / maxMana) * 100)) : 0;
-    const manaFill = document.getElementById('battleManaFill');
-    const manaText = document.getElementById('battleManaText');
-    if (manaFill) manaFill.style.width = manaPercent + "%";
-    if (manaText) manaText.innerText = `🌀 ${curMana}/${maxMana}`;
-
-    // THÔNG TIN SINH TỒN VÀ TRẢM YÊU
-    const timeEl = document.getElementById('battleTimeText');
-    const swordEl = document.getElementById('battleSwordText');
-    const killsEl = document.getElementById('battleKillsText');
-
-    const formatTimeFunc = window.formatTime || ((s) => `${Math.floor(s/60)}:${s%60}`);
-    if (timeEl) timeEl.innerText = `⏱️ Sinh Tồn: ${formatTimeFunc(survivalSec)}`;
-    if (swordEl) swordEl.innerText = `⚔️ Kiếm Khí: ${activeSwordCount}/${battleData.swords.length}`;
-    if (killsEl) killsEl.innerText = `👾 Ma Vật Trảm: ${battleData.kills}`;
-
-    battleAnimationFrame = requestAnimationFrame(battleLoop);
-}
-
-window.addEventListener('resize', () => {
-    const battleScreen = document.getElementById('battle-screen');
-    if (battleScreen && battleScreen.classList.contains('active')) {
-        resizeBattleCanvas();
-    }
-});
