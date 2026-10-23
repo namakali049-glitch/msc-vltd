@@ -80,18 +80,33 @@
   <!-- 3. MÀN HÌNH BẾ QUAN KHAI PHÁ (CÂU HỎI CSV) -->
   <!-- ========================================== -->
   <div id="game-screen" class="screen">
-    <div style="display: flex; align-items: center; width: 100%; max-width: 460px; padding: 10px; background: rgba(15, 23, 42, 0.85); border-radius: 8px; margin-bottom: 10px; border: 1px solid rgba(255, 215, 0, 0.3);">
-      <img id="quizAvatar" src="assets/pham-nhan.jpg" style="width: 42px; height: 42px; border-radius: 50%; border: 2px solid #00ffcc; margin-right: 12px; object-fit: cover;">
-      <div style="text-align: left;">
-        <div id="quizName" style="font-weight: bold; color: #ffd700; font-size: 0.95rem;">Đạo Hữu</div>
-        <div style="font-size: 0.82rem; color: #38bdf8;"><span id="quizStatLabel">Thần Thức</span>: <b id="quizStatValue">0</b></div>
+    <!-- HUD NHÂN VẬT: TÊN, CẢNH GIỚI, THANH MÁU & MANA TRONG BẾ QUAN -->
+    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 460px; margin-bottom: 8px;">
+      <div class="hud-player-card" style="flex: 1; margin-right: 10px;">
+        <img id="quizAvatar" class="hud-avatar" src="assets/pham-nhan.jpg" alt="Avatar">
+        <div class="hud-info-box">
+          <div class="hud-name-row">
+            <span id="quizName" class="hud-player-name">Đạo Hữu</span>
+            <span id="quizRealmBadge" class="hud-realm-badge">Phàm Nhân</span>
+          </div>
+          <!-- Thanh Máu (HP) -->
+          <div class="hud-bar-wrapper">
+            <div id="quizHpFill" class="hud-bar-fill-hp"></div>
+            <div id="quizHpText" class="hud-bar-text">❤️ 100/100</div>
+          </div>
+          <!-- Thanh Mana (Linh Lực) -->
+          <div class="hud-bar-wrapper">
+            <div id="quizManaFill" class="hud-bar-fill-mana"></div>
+            <div id="quizManaText" class="hud-bar-text">🌀 0/0</div>
+          </div>
+        </div>
       </div>
-      <button onclick="stopCultivationEarly()" style="margin-left: auto; padding: 7px 14px; background: #991b1b; color: #fff; border: 1px solid #ef4444; border-radius: 6px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.5);">🚪 Xuất Quan</button>
+      <button onclick="stopCultivationEarly()" style="padding: 10px 14px; background: #991b1b; color: #fff; border: 1px solid #ef4444; border-radius: 8px; font-weight: bold; cursor: pointer;">🚪 Xuất Quan</button>
     </div>
 
     <div class="cultivation-hud">
       <span>Tầng: <b id="level">1</b></span>
-      <span>Linh Lực: <b id="totalScore">0</b></span>
+      <span>Linh Khí Thu Được: <b id="totalScore">0</b></span>
       <span>⏱️ <b id="timerDisplay">00:00</b></span>
     </div>
 
