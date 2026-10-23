@@ -137,23 +137,33 @@ function checkMinorRealmRewards() {
 function recalcStats() {
     checkMinorRealmRewards();
 
-    // 1. Lấy dữ liệu nền tảng của Cảnh giới hiện tại
     const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
     const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
-    const realmData = window.getRealmData ? window.getRealmData(lifetimeMana, countA1, countB1) : { hp: 100, thanThuc: 0, major: "Phàm Nhân" };
+    const realmData = window.getRealmData ? window.getRealmData(lifetimeMana, countA1, countB1) : { major: "Phàm Nhân" };
 
-    // 2. Tính Sinh Mệnh: HP Cảnh Giới + (VIT * 10)
-    maxHp = realmData.hp + (playerStats.vit * 10);
-    if (currentHp > maxHp || currentHp <= 0) currentHp = maxHp;
+    // 1. Sinh Mệnh (HP): Thuần túy Khí Huyết (VIT * 10)
+    maxHp = playerStats.vit * 10;
+    if (window.currentHp === undefined || window.currentHp > maxHp || window.currentHp <= 0) {
+        window.currentHp = maxHp;
+    }
+    currentHp = window.currentHp;
 
-    // 3. Tính Thần Thức: Phàm Nhân = 0, Luyện Khí trở lên = Thần Thức Cảnh Giới + (SPI * 10)
-    if (realmData.major === "Phàm Nhân") {
-        thanThuc = 0;
-    } else {
-        thanThuc = realmData.thanThuc + (playerStats.spi * 10);
+    // 2. Linh Lực (Thay thế Thần Thức cũ): Thuần túy Tinh Thần (SPI * 10)
+    let maxLinhLuc = 0;
+    if (realmData.major !== "Phàm Nhân") {
+        maxLinhLuc = playerStats.spi * 10;
+    }
+    window.maxLinhLuc = maxLinhLuc;
+
+    if (window.currentLinhLuc === undefined || window.currentLinhLuc > maxLinhLuc) {
+        window.currentLinhLuc = maxLinhLuc;
     }
 
-    // 4. Các chỉ số khác
+    // Duy trì biến thanThuc cũ để không gây lỗi logic ngự kiếm
+    thanThuc = maxLinhLuc;
+    window.thanThuc = thanThuc;
+
+    // 3. Các thuộc tính chiến đấu khác
     str = playerStats.str;
     swordDamage = playerStats.str * 10;
     agi = playerStats.agi;
@@ -162,11 +172,9 @@ function recalcStats() {
     window.currentHp = currentHp;
     window.str = str;
     window.swordDamage = swordDamage;
-    window.thanThuc = thanThuc;
     window.agi = agi;
     window.lifetimeMana = lifetimeMana;
 }
-
 
 
 window.recalcStats = recalcStats;
