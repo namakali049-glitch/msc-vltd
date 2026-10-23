@@ -38,15 +38,33 @@ window.addEventListener('keyup', (e) => {
 
 const battleAssets = {
     bg: new Image(),
-    playerPhamNhan: new Image(), // Bổ sung để đồng bộ hoàn toàn
+    playerPhamNhan: new Image(),
     playerLuyenKhi: new Image(),
     playerTrucCo: new Image(),
     playerTrucCoTrungKy: new Image(),
     playerTrucCoVienMan: new Image(),
+    playerKimDan: new Image(),        // THÊM MỚI
+    playerNguyenAnh: new Image(),     // THÊM MỚI
     swordWood: new Image(),
     swordCyan: new Image(),
+    swordKimDan: new Image(),         // THÊM MỚI (Kiếm lửa)
+    swordNguyenAnh: new Image(),      // THÊM MỚI (Kiếm sét)
     enemyGhost: new Image()
 };
+
+battleAssets.bg.src = "assets/hac-am-son-dong.png";
+battleAssets.playerPhamNhan.src = "assets/pham-nhan.png";
+battleAssets.playerLuyenKhi.src = "assets/luyen-khi.png";
+battleAssets.playerTrucCo.src = "assets/truc-co.png";
+battleAssets.playerTrucCoTrungKy.src = "assets/truc-co-trung-ky.png";
+battleAssets.playerTrucCoVienMan.src = "assets/truc-co-vien-man.png";
+battleAssets.playerKimDan.src = "assets/kim-dan-ky.png";              // Gán ảnh Kim Đan
+battleAssets.playerNguyenAnh.src = "assets/nguyen-anh-ky.png";          // Gán ảnh Nguyên Anh
+battleAssets.swordWood.src = "assets/kiem-khi-luyen-khi.png";
+battleAssets.swordCyan.src = "assets/kiem-khi-truc-co.png";
+battleAssets.swordKimDan.src = "assets/kim-dan-kiem-khi.png";       // Gán kiếm lửa
+battleAssets.swordNguyenAnh.src = "assets/nguyen-anh-kiem-khi.png"; // Gán kiếm sét
+battleAssets.enemyGhost.src = "assets/quy-hon.png";
 
 battleAssets.bg.src = "assets/hac-am-son-dong.png";
 battleAssets.playerPhamNhan.src = "assets/pham-nhan.png";
