@@ -51,6 +51,27 @@ window.checkAndStartVolume = function(vol) {
     window.startGame();
 };
 
+// HÀM CẬP NHẬT THANH MÁU VÀ THANH MANA (LINH LỰC) BẾ QUAN
+window.updateQuizHUD = function() {
+    const curHp = Math.max(0, window.currentHp || 0);
+    const maxHp = window.maxHp || 10;
+    const hpPercent = Math.min(100, Math.max(0, (curHp / maxHp) * 100));
+
+    const hpFill = document.getElementById('quizHpFill');
+    const hpText = document.getElementById('quizHpText');
+    if (hpFill) hpFill.style.width = hpPercent + "%";
+    if (hpText) hpText.innerText = `❤️ ${curHp}/${maxHp}`;
+
+    const curMana = Math.max(0, window.currentLinhLuc || 0);
+    const maxMana = window.maxLinhLuc || 0;
+    const manaPercent = maxMana > 0 ? Math.min(100, Math.max(0, (curMana / maxMana) * 100)) : 0;
+
+    const manaFill = document.getElementById('quizManaFill');
+    const manaText = document.getElementById('quizManaText');
+    if (manaFill) manaFill.style.width = manaPercent + "%";
+    if (manaText) manaText.innerText = `🌀 ${curMana}/${maxMana}`;
+};
+
 // 2. KHỞI CHẠY BẾ QUAN
 window.startGame = function() {
     window.switchScreen('game-screen');
@@ -58,20 +79,30 @@ window.startGame = function() {
     wrongCount = 0;
     window.sessionMana = 0;
     sessionSeconds = 0;
-    
+
     document.getElementById('totalScore').innerText = window.sessionMana;
     document.getElementById('timerDisplay').innerText = "00:00";
     document.getElementById('message').innerHTML = "Đang kết nối thần thức vào Tàng Kinh Các...";
     document.getElementById('options').innerHTML = "";
     document.getElementById('nextBtn').style.display = "none";
 
-    // Cập nhật UI thanh trạng thái nhân vật
-    const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana, window.masteredWordsA1?.length || 0, window.masteredWordsB1?.length || 0) : { major: "Phàm Nhân" };
-    document.getElementById('quizStatLabel').innerText = realmData.major === "Phàm Nhân" ? "Sinh Mệnh" : "Thần Thức";
-    document.getElementById('quizStatValue').innerText = realmData.major === "Phàm Nhân" ? `${window.currentHp}/${window.maxHp}` : window.thanThuc;
-    
+    // Cập nhật Tên, Cảnh giới, Avatar vào HUD Bế Quan
+    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
+    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+    const realmName = window.calculateRealm ? window.calculateRealm(window.lifetimeMana || 0, countA1, countB1) : "Phàm Nhân";
+    const playerName = (window.currentUser && (window.currentUser.displayName || (window.currentUser.email && window.currentUser.email.split('@')[0]))) || "Đạo Hữu";
+
+    const qName = document.getElementById('quizName');
+    const qBadge = document.getElementById('quizRealmBadge');
+    const qAvatar = document.getElementById('quizAvatar');
+    if (qName) qName.innerText = playerName;
+    if (qBadge) qBadge.innerText = realmName;
+
     const avatarFunc = window.getAvatarByMana || (() => "assets/pham-nhan.jpg");
-    document.getElementById('quizAvatar').src = avatarFunc(window.lifetimeMana || 0);
+    if (qAvatar) qAvatar.src = avatarFunc(window.lifetimeMana || 0);
+
+    // Cập nhật 2 thanh Máu và Mana
+    window.updateQuizHUD();
 
     if (quizSessionTimer) clearInterval(quizSessionTimer);
     quizSessionTimer = setInterval(() => {
