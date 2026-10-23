@@ -289,27 +289,29 @@ window.checkAnswer = function(selectedIdx, btnElement) {
             msgDiv.innerHTML = "🌀 <span style='color:#38bdf8;'>Thân pháp linh hoạt! Đạo hữu đã né được Tâm Ma phản phệ.</span>";
         } else {
             if (window.playWrongSound) window.playWrongSound();
-            const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0) : { major: "Phàm Nhân", hp: 100 };
-            
+            const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0) : { major: "Phàm Nhân" };
             let dmg = 0;
             let statName = "";
+
             if (realmData.major === "Phàm Nhân") {
                 dmg = Math.ceil((window.maxHp || 10) / 3);
-                window.currentHp -= dmg;
+                window.currentHp = Math.max(0, (window.currentHp || 10) - dmg);
                 statName = "Sinh Mệnh";
             } else {
-                // Trừ theo đúng Thần Thức thuần túy (SPI * 10)
-                const totalThanThuc = window.thanThuc || ((window.playerStats?.spi || 1) * 10);
-                dmg = Math.ceil(totalThanThuc / 3);
-                window.currentHp -= dmg;
-                statName = "Thần Thức";
+                // Tu sĩ: Trừ trực tiếp vào Linh Lực (Thanh Mana)
+                dmg = Math.ceil((window.maxLinhLuc || 10) / 3);
+                window.currentLinhLuc = Math.max(0, (window.currentLinhLuc || 0) - dmg);
+                statName = "Linh Lực";
             }
-            
-            msgDiv.innerHTML = `💥 <span style='color:#ef4444;'>Tâm Ma Xâm Nhập! Tổn thất ${dmg} ${statName}.</span>`;
 
-            // Kiểm tra Tẩu Hỏa Nhập Ma
-            if (window.currentHp <= 0 || wrongCount >= 3) {
-                window.currentHp = 0;
+            msgDiv.innerHTML = `💥 <span style='color:#ef4444;'>Tâm Ma Xâm Nhập! Tổn thất ${dmg} ${statName}.</span>`;
+            window.updateQuizHUD();
+
+            // Hết máu hoặc hết Linh Lực hoặc sai 3 lần => Tẩu Hỏa Nhập Ma
+            const isOutOfEnergy = (realmData.major === "Phàm Nhân" && window.currentHp <= 0) || 
+                                  (realmData.major !== "Phàm Nhân" && window.currentLinhLuc <= 0);
+
+            if (isOutOfEnergy || wrongCount >= 3) {
                 msgDiv.innerHTML += "<br><br>💀 <b>TẨU HỎA NHẬP MA! Đạo thể suy kiệt, bị văng khỏi Tàng Kinh Các.</b>";
                 document.getElementById('nextBtn').style.display = "none";
                 setTimeout(() => { stopCultivationEarly(); }, 2500);
@@ -317,10 +319,7 @@ window.checkAnswer = function(selectedIdx, btnElement) {
             }
         }
     }
-    
-    // Cập nhật thanh UI mini
-    const realmDataUpdate = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0) : { major: "Phàm Nhân" };
-    document.getElementById('quizStatValue').innerText = realmDataUpdate.major === "Phàm Nhân" ? `${Math.max(0, window.currentHp)}/${window.maxHp}` : window.thanThuc;
+    window.updateQuizHUD();
     
     document.getElementById('nextBtn').style.display = "inline-block";
 };
