@@ -187,12 +187,11 @@ window.addLifetimeMana = function(amount) {
 
     let targetMana = lifetimeMana + amount;
 
-    // Khóa trần cứng nếu kẹt Bình Cảnh Trúc Cơ
-    if (countA1 < 600 && targetMana > 8000) {
+    // Khóa trần cứng (Trừ Admin)
+    if (!window.isAdmin && countA1 < 600 && targetMana > 8000) {
         targetMana = 8000;
     }
-    // Khóa trần cứng nếu kẹt Bình Cảnh Kim Đan
-    else if (countB1 < 2667 && targetMana > 25000) {
+    else if (!window.isAdmin && countB1 < 2667 && targetMana > 25000) {
         targetMana = 25000;
     }
 
@@ -686,3 +685,29 @@ window.showLeaderboard = async function() {
     }
 };
 
+// ==========================================
+// BỘ CÔNG CỤ QUẢN TRỊ ADMIN (DEV TOOLS)
+// Dùng F12 Console để gọi các hàm này
+// ==========================================
+
+window.adminSetMana = function(targetMana) {
+    if (!window.isAdmin) return "⛔ Quyền hạn bị từ chối!";
+    const oldMana = lifetimeMana;
+    lifetimeMana = targetMana;
+    window.lifetimeMana = lifetimeMana;
+    recalcStats();
+    updateCharacterUI();
+    syncManaToDatabase();
+    if (window.checkAndTriggerBreakthrough) window.checkAndTriggerBreakthrough(oldMana, lifetimeMana);
+    return `✅ [Admin] Đã thiết lập Tu Vi thành ${targetMana} Linh Khí!`;
+};
+
+window.adminAddItems = function(amount = 99) {
+    if (!window.isAdmin) return "⛔ Quyền hạn bị từ chối!";
+    window.inventory["Hồi Xuân Đan"] = (window.inventory["Hồi Xuân Đan"] || 0) + amount;
+    window.inventory["Tụ Linh Đan"] = (window.inventory["Tụ Linh Đan"] || 0) + amount;
+    window.inventory["Tẩy Tủy Đan"] = (window.inventory["Tẩy Tủy Đan"] || 0) + amount;
+    syncManaToDatabase();
+    if (window.updateInventoryUI) window.updateInventoryUI();
+    return `✅ [Admin] Đã bơm ${amount} Đan dược mỗi loại vào túi đồ!`;
+};
