@@ -588,7 +588,7 @@ window.handleLogout = function() {
     sessionMana = 0;
     masteredWordsA1 = [];
     masteredWordsB1 = [];
-    inventory = { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
+    inventory = {};
     battleRecord = { maxSurvivalSec: 0, maxKills: 0 };
     playerStats = { str: 1, vit: 1, agi: 1, spi: 1, freePoints: 0, rewardedTiers: [], version: "v0.6_FINAL" };
     
