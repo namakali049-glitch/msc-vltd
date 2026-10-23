@@ -227,30 +227,40 @@ window.checkAnswer = function(selectedIdx, btnElement) {
             if (!window.masteredWordsB1.includes(qData.q)) window.masteredWordsB1.push(qData.q);
         }
 
-        // 5.2. Phạt EXP nếu Cảnh giới cao học Hạ Quyển
+        // 5.2. HỆ THỐNG PHẠT CHÉO CẢNH GIỚI VÀ CÔNG PHÁP
         const currentData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0, countA1, countB1) : { major: "Phàm Nhân" };
         const isHighRealm = (currentData.major === "Kim Đan Kỳ" || currentData.major === "Nguyên Anh Kỳ");
+        const isLowRealm = !isHighRealm; // Phàm Nhân, Luyện Khí, Trúc Cơ
         
-        if (isHighRealm && isA1) {
+        let penaltyMsg = "";
+
+        // Trúc Cơ trở xuống học Trung Quyển (B1)
+        if (isLowRealm && !isA1) {
             bonusMana = Math.max(1, Math.floor(bonusMana * 0.1));
+            penaltyMsg = "<br><span style='color:#fbbf24; font-size:0.85rem;'>⚠️ Đạo hạnh chưa đủ, cưỡng ép tu luyện Trung Quyển khiến linh khí tiêu tán!</span>";
+        } 
+        // Kim Đan trở lên quay lại học Hạ Quyển (A1)
+        else if (isHighRealm && isA1) {
+            bonusMana = Math.max(1, Math.floor(bonusMana * 0.1));
+            penaltyMsg = "<br><span style='color:#fbbf24; font-size:0.85rem;'>⚠️ Cảnh giới quá cao, tu luyện Hạ Quyển không còn nhiều tác dụng!</span>";
         }
 
-        // 5.3. KHÓA BÌNH CẢNH (Cho phép đạt đúng mốc trần 8000 và 25000)
+        // 5.3. KHÓA BÌNH CẢNH (Khống chế trần Linh Lực)
         let currentMana = window.lifetimeMana || 0;
         let canGainMana = true;
         let bottleneckMsg = "";
 
-        if (countA1 < 600 && currentMana + bonusMana >= 8000) {
-            bonusMana = Math.max(0, 8000 - currentMana);
+        if (!window.isAdmin && countA1 < 600 && currentMana + bonusMana >= 12000) {
+            bonusMana = Math.max(0, 11999 - currentMana);
             if (bonusMana === 0) {
                 canGainMana = false;
-                bottleneckMsg = "<br><span style='color:#ef4444; font-weight:bold;'>⚠️ Kẹt Bình Cảnh! Cần lĩnh ngộ đủ 600 từ A1 để tích lũy thêm.</span>";
+                bottleneckMsg = "<br><span style='color:#ef4444; font-weight:bold;'>⚠️ Kẹt Bình Cảnh! Cần lĩnh ngộ đủ 600 từ A1 để đột phá.</span>";
             }
-        } else if (countB1 < 2667 && currentMana + bonusMana >= 25000) {
-            bonusMana = Math.max(0, 25000 - currentMana);
+        } else if (!window.isAdmin && countB1 < 2667 && currentMana + bonusMana >= 50000) {
+            bonusMana = Math.max(0, 49999 - currentMana);
             if (bonusMana === 0) {
                 canGainMana = false;
-                bottleneckMsg = "<br><span style='color:#ef4444; font-weight:bold;'>⚠️ Kẹt Bình Cảnh! Cần lĩnh ngộ đủ 2667 từ B1 để tích lũy thêm.</span>";
+                bottleneckMsg = "<br><span style='color:#ef4444; font-weight:bold;'>⚠️ Kẹt Bình Cảnh! Cần lĩnh ngộ đủ 2667 từ B1 để đột phá.</span>";
             }
         }
 
