@@ -69,11 +69,11 @@ window.getSwordCount = function(thanThuc) {
     return Math.min(5, calculated);
 };
 
-// 3. Tiến hóa ngoại trang Avatar theo mốc Linh Lực
+// 3. Tiến hóa ngoại trang Avatar theo mốc Linh Lực (Đồng bộ 100% với Bí Cảnh)
 window.getAvatarByMana = function(mana) {
-    if (mana < 150) return "assets/pham-nhan.jpg";
-    if (mana < 1500) return "assets/luyen-khi.jpg";
-    if (mana < 2500) return "assets/truc-co.jpg";
+    if (mana < 150) return "assets/pham-nhan.png"; // Yêu cầu có file pham-nhan.png dạng pixel
+    if (mana < 1500) return "assets/luyen-khi.png";
+    if (mana < 2500) return "assets/truc-co.png";
     if (mana < 4000) return "assets/truc-co-trung-ky.png";
     return "assets/truc-co-vien-man.png";
 };
