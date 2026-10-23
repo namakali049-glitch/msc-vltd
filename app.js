@@ -85,6 +85,63 @@ window.useItem = function(itemId) {
     window.renderInventory();
 };
 // ==========================================
+// CÁC HÀM XỬ LÝ GIAO DIỆN TÚI ĐỒ
+// ==========================================
+
+window.openInventory = function() {
+    if (window.playClickSound) window.playClickSound();
+    const modal = document.getElementById('inventoryModal');
+    if (modal) modal.style.display = 'flex';
+    window.renderInventory(); // Tự động gọi hàm vẽ đồ khi mở túi
+};
+
+window.closeInventory = function() {
+    if (window.playClickSound) window.playClickSound();
+    const modal = document.getElementById('inventoryModal');
+    if (modal) modal.style.display = 'none';
+};
+
+window.renderInventory = function() {
+    const list = document.getElementById('inventoryList');
+    if (!list) return;
+    list.innerHTML = "";
+    
+    if (!window.inventory) window.inventory = {};
+
+    // 1. TỰ ĐỘNG XÓA SẠCH VẬT PHẨM CŨ (Thanh trừng đồ rác)
+    for (let key in window.inventory) {
+        if (!window.ITEM_DATABASE[key]) {
+            delete window.inventory[key];
+        }
+    }
+    
+    const keys = Object.keys(window.inventory);
+    if (keys.length === 0) {
+        list.innerHTML = "<p style='text-align:center; color:#94a3b8; font-size:14px;'>Túi trữ vật trống rỗng...</p>";
+        return;
+    }
+
+    // 2. VẼ DANH SÁCH VẬT PHẨM MỚI
+    keys.forEach(key => {
+        const amount = window.inventory[key];
+        const itemData = window.ITEM_DATABASE[key];
+        if (amount <= 0) return; 
+
+        const itemBox = document.createElement('div');
+        itemBox.style.cssText = "background: rgba(255,255,255,0.05); padding: 10px; margin-bottom: 8px; border-radius: 6px; border: 1px solid #334155; display: flex; flex-direction: column; gap: 6px;";
+        
+        itemBox.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: ${itemData.color}; font-weight: bold;">${itemData.name} (x${amount})</span>
+                <span style="font-size: 11px; padding: 2px 6px; background: rgba(255,255,255,0.1); border-radius: 4px; color:${itemData.color}">${itemData.rarity}</span>
+            </div>
+            <div style="font-size: 12px; color: #cbd5e1; line-height: 1.4;">${itemData.desc}</div>
+            <button onclick="window.useItem('${key}')" style="align-self: flex-end; background: #3b82f6; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 4px;">Sử Dụng</button>
+        `;
+        list.appendChild(itemBox);
+    });
+};
+// ==========================================
 // 1. CẤU HÌNH FIREBASE
 // ==========================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
