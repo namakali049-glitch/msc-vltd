@@ -283,7 +283,7 @@ window.checkAnswer = function(selectedIdx, btnElement) {
             if (window.playLootSound) window.playLootSound();
         }
 
-        msgDiv.innerHTML = `<span style='color:#4ade80;'>✅ Đốn Ngộ! +${bonusMana} Linh Khí.</span>${bottleneckMsg}${lootMsg}`;
+        msgDiv.innerHTML = `<span style='color:#4ade80;'>✅ Đốn Ngộ! +${bonusMana} Linh Khí.</span>${penaltyMsg}${bottleneckMsg}${lootMsg}`;
         window.updateQuizHUD();
 
     } else {
