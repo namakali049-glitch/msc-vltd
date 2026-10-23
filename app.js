@@ -276,7 +276,7 @@ function updateCharacterUI() {
     if (nameEl) nameEl.innerText = currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : "Đạo Hữu";
 
     const manaEl = document.getElementById('profileMana');
-    if (manaEl) manaEl.innerText = lifetimeMana;
+    if (manaEl) manaEl.innerText = `${lifetimeMana} Linh Khí`;
 
     const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
     const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
