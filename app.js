@@ -456,7 +456,7 @@ onAuthStateChanged(auth, async (user) => {
         window.currentUser = user;
         
         // [ADMIN CẤP QUYỀN]: Thay thế email dưới đây bằng email test của bạn
-        window.isAdmin = (user.email === "email_cua_ban@gmail.com"); 
+        window.isAdmin = (user.email === "namakali049@gmail.com"); 
 
         const nameEl = document.getElementById('userDisplayName');
         if (nameEl) nameEl.innerText = user.displayName || user.email.split('@')[0];
