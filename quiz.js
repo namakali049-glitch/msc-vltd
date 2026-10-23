@@ -269,17 +269,15 @@ window.checkAnswer = function(selectedIdx, btnElement) {
             window.currentHp = Math.min(window.maxHp || 100, (window.currentHp || 100) + 2);
         }
 
-        // 5.4. Cơ chế rớt đồ (15%)
-        let lootMsg = "";
-        if (Math.random() < 0.15 && window.inventory) {
-            const items = ["Hồi Xuân Đan", "Tụ Linh Đan", "Tẩy Tủy Đan"];
-            const dropped = items[Math.floor(Math.random() * items.length)];
-            window.inventory[dropped] = (window.inventory[dropped] || 0) + 1;
-            lootMsg = `<br><span style='color:#ffd700;'>🎁 Nhặt được: ${dropped}</span>`;
-            if (window.playLootSound) window.playLootSound();
+        // 5.4. HIỆU ỨNG TỤ LINH ĐAN (x2 Linh Khí)
+        let buffMsg = "";
+        if (window.tuLinhBuff && window.tuLinhBuff > 0) {
+            bonusMana *= 2;
+            window.tuLinhBuff--;
+            buffMsg = `<br><span style='color:#c084fc;'>✨ Tụ Linh Đan kích hoạt! x2 Linh Khí (Còn ${window.tuLinhBuff} câu)</span>`;
         }
 
-        msgDiv.innerHTML = `<span style='color:#4ade80;'>✅ Đốn Ngộ! +${bonusMana} Linh Khí.</span>${penaltyMsg}${bottleneckMsg}${lootMsg}`;
+        msgDiv.innerHTML = `<span style='color:#4ade80;'>✅ Đốn Ngộ! +${bonusMana} Linh Khí.</span>${penaltyMsg}${bottleneckMsg}${buffMsg}`;
         window.updateQuizHUD();
 
     } else {
