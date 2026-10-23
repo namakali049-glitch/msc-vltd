@@ -273,7 +273,8 @@ window.checkAnswer = function(selectedIdx, btnElement) {
             if (window.playLootSound) window.playLootSound();
         }
 
-        msgDiv.innerHTML = `<span style='color:#4ade80;'>✅ Đốn Ngộ! +${bonusMana} Linh Lực.</span>${bottleneckMsg}${lootMsg}`;
+        msgDiv.innerHTML = `<span style='color:#4ade80;'>✅ Đốn Ngộ! +${bonusMana} Linh Khí.</span>${bottleneckMsg}${lootMsg}`;
+        window.updateQuizHUD();
 
     } else {
         // 5.5. Trả lời sai - Phạt Tâm Ma Phản Phệ
