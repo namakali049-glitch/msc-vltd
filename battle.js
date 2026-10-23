@@ -38,6 +38,7 @@ window.addEventListener('keyup', (e) => {
 
 const battleAssets = {
     bg: new Image(),
+    playerPhamNhan: new Image(), // Bổ sung để đồng bộ hoàn toàn
     playerLuyenKhi: new Image(),
     playerTrucCo: new Image(),
     playerTrucCoTrungKy: new Image(),
@@ -48,6 +49,7 @@ const battleAssets = {
 };
 
 battleAssets.bg.src = "assets/hac-am-son-dong.png";
+battleAssets.playerPhamNhan.src = "assets/pham-nhan.png";
 battleAssets.playerLuyenKhi.src = "assets/luyen-khi.png";
 battleAssets.playerTrucCo.src = "assets/truc-co.png";
 battleAssets.playerTrucCoTrungKy.src = "assets/truc-co-trung-ky.png";
@@ -61,7 +63,8 @@ function getBattleCharacterSkin() {
     if (mana >= 4000) return battleAssets.playerTrucCoVienMan;
     if (mana >= 2500) return battleAssets.playerTrucCoTrungKy;
     if (mana >= 1500) return battleAssets.playerTrucCo;
-    return battleAssets.playerLuyenKhi;
+    if (mana >= 150) return battleAssets.playerLuyenKhi;
+    return battleAssets.playerPhamNhan;
 }
 
 function getBattleSwordSkin() {
