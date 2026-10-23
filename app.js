@@ -5,46 +5,6 @@ import './inventory.js';
 import './audio.js';
 import './realm.js';
 
-
-    const list = document.getElementById('inventoryList');
-    if (!list) return;
-    list.innerHTML = "";
-    
-    if (!window.inventory) window.inventory = {};
-
-    // 1. TỰ ĐỘNG XÓA SẠCH VẬT PHẨM CŨ (Thanh trừng đồ rác)
-    for (let key in window.inventory) {
-        if (!window.ITEM_DATABASE[key]) {
-            delete window.inventory[key];
-        }
-    }
-    
-    const keys = Object.keys(window.inventory);
-    if (keys.length === 0) {
-        list.innerHTML = "<p style='text-align:center; color:#94a3b8; font-size:14px;'>Túi trữ vật trống rỗng...</p>";
-        return;
-    }
-
-    // 2. VẼ DANH SÁCH VẬT PHẨM MỚI
-    keys.forEach(key => {
-        const amount = window.inventory[key];
-        const itemData = window.ITEM_DATABASE[key];
-        if (amount <= 0) return; 
-
-        const itemBox = document.createElement('div');
-        itemBox.style.cssText = "background: rgba(255,255,255,0.05); padding: 10px; margin-bottom: 8px; border-radius: 6px; border: 1px solid #334155; display: flex; flex-direction: column; gap: 6px;";
-        
-        itemBox.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span style="color: ${itemData.color}; font-weight: bold;">${itemData.name} (x${amount})</span>
-                <span style="font-size: 11px; padding: 2px 6px; background: rgba(255,255,255,0.1); border-radius: 4px; color:${itemData.color}">${itemData.rarity}</span>
-            </div>
-            <div style="font-size: 12px; color: #cbd5e1; line-height: 1.4;">${itemData.desc}</div>
-            <button onclick="window.useItem('${key}')" style="align-self: flex-end; background: #3b82f6; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 4px;">Sử Dụng</button>
-        `;
-        list.appendChild(itemBox);
-    });
-};
 // ==========================================
 // 1. CẤU HÌNH FIREBASE
 // ==========================================
@@ -54,11 +14,7 @@ import {
     signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, updateProfile
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { 
-    getDatabase, 
-    ref, 
-    set, 
-    get, 
-    update 
+    getDatabase, ref, set, get, update 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -76,7 +32,6 @@ const auth = getAuth(app);
 const database = getDatabase(app);
 const googleProvider = new GoogleAuthProvider();
 
-// Gắn database vào window để chat.js và các module khác dùng chung an toàn
 window.firebaseDB = database;
 
 // ==========================================
@@ -85,8 +40,7 @@ window.firebaseDB = database;
 let currentUser = null;
 let lifetimeMana = 0; 
 let sessionMana = 0;  
-window.currentHp = val.currentHp !== undefined ? Math.max(val.currentHp, 1) : (window.maxHp || 100);
-inventory = val.inventory || {};
+let inventory = {}; // Khởi tạo túi đồ trống chuẩn
 let battleRecord = { maxSurvivalSec: 0, maxKills: 0 };
 let masteredWordsA1 = [];
 let masteredWordsB1 = [];
@@ -99,16 +53,13 @@ window.masteredWordsB1 = masteredWordsB1;
 window.lifetimeMana = lifetimeMana;
 
 let playerStats = {
-    str: 1,
-    vit: 1,
-    agi: 1,
-    spi: 1,
+    str: 1, vit: 1, agi: 1, spi: 1,
     freePoints: 0,
     rewardedTiers: [],
     version: "v0.6_FINAL"
 };
 window.playerStats = playerStats;
-window.stats = playerStats; // Tương thích ngược
+window.stats = playerStats;
 
 let maxHp = 100;
 let currentHp = 100;
@@ -139,13 +90,9 @@ let vocabPool = [];
 // 3. THUỘC TÍNH & GIAO DIỆN NHÂN VẬT
 // ==========================================
 function checkMinorRealmRewards() {
-    if (!Array.isArray(playerStats.rewardedTiers)) {
-        playerStats.rewardedTiers = [];
-    }
-
+    if (!Array.isArray(playerStats.rewardedTiers)) playerStats.rewardedTiers = [];
     let hasReward = false;
     
-    // Lấy cảnh giới thực tế để đối chiếu
     const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
     const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
     const currentRealmData = window.getRealmData ? window.getRealmData(lifetimeMana, countA1, countB1) : { rank: "Phàm Nhân" };
@@ -154,10 +101,7 @@ function checkMinorRealmRewards() {
     if (window.MINOR_REALM_REWARDS) {
         window.MINOR_REALM_REWARDS.forEach(tier => {
             let canReward = (lifetimeMana >= tier.mana);
-            
-            // Khóa thưởng Kim Đan nếu kẹt bình cảnh Trúc Cơ
             if (tier.mana >= 8000 && currentRank === "Trúc Cơ Hậu Kỳ (Bình Cảnh)") canReward = false;
-            // Khóa thưởng Nguyên Anh nếu kẹt bình cảnh Kim Đan
             if (tier.mana >= 25000 && currentRank === "Kim Đan Hậu Kỳ (Bình Cảnh)") canReward = false;
 
             if (canReward && !playerStats.rewardedTiers.includes(tier.id)) {
@@ -169,10 +113,7 @@ function checkMinorRealmRewards() {
             }
         });
     }
-
-    if (hasReward) {
-        syncManaToDatabase();
-    }
+    if (hasReward) syncManaToDatabase();
 }
 
 function recalcStats() {
@@ -182,14 +123,12 @@ function recalcStats() {
     const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
     const realmData = window.getRealmData ? window.getRealmData(lifetimeMana, countA1, countB1) : { major: "Phàm Nhân" };
 
-    // 1. Sinh Mệnh (HP): Thuần túy Khí Huyết (VIT * 10)
     maxHp = playerStats.vit * 10;
     if (window.currentHp === undefined || window.currentHp > maxHp || window.currentHp <= 0) {
         window.currentHp = maxHp;
     }
     currentHp = window.currentHp;
 
-    // 2. Linh Lực (Thay thế Thần Thức cũ): Thuần túy Tinh Thần (SPI * 10)
     let maxLinhLuc = 0;
     if (realmData.major !== "Phàm Nhân") {
         maxLinhLuc = playerStats.spi * 10;
@@ -200,11 +139,8 @@ function recalcStats() {
         window.currentLinhLuc = maxLinhLuc;
     }
 
-    // Duy trì biến thanThuc cũ để không gây lỗi logic ngự kiếm
     thanThuc = maxLinhLuc;
     window.thanThuc = thanThuc;
-
-    // 3. Các thuộc tính chiến đấu khác
     str = playerStats.str;
     swordDamage = playerStats.str * 10;
     agi = playerStats.agi;
@@ -216,26 +152,17 @@ function recalcStats() {
     window.agi = agi;
     window.lifetimeMana = lifetimeMana;
 }
-
-
 window.recalcStats = recalcStats;
 
-// Hàm addLifetimeMana hoàn chỉnh
 window.addLifetimeMana = function(amount) {
     const oldMana = lifetimeMana;
     const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
     const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
 
     let targetMana = lifetimeMana + amount;
-
     
-    // Khóa trần cứng (Trừ Admin)
-    if (!window.isAdmin && countA1 < 600 && targetMana > 12000) {
-        targetMana = 12000;
-    }
-    else if (!window.isAdmin && countB1 < 2667 && targetMana > 50000) {
-        targetMana = 50000;
-    }
+    if (!window.isAdmin && countA1 < 600 && targetMana > 12000) targetMana = 12000;
+    else if (!window.isAdmin && countB1 < 2667 && targetMana > 50000) targetMana = 50000;
 
     lifetimeMana = targetMana;
     window.lifetimeMana = lifetimeMana;
@@ -244,13 +171,10 @@ window.addLifetimeMana = function(amount) {
     updateCharacterUI();
     syncManaToDatabase();
     
-    if (window.checkAndTriggerBreakthrough) {
-        window.checkAndTriggerBreakthrough(oldMana, lifetimeMana);
-    }
+    if (window.checkAndTriggerBreakthrough) window.checkAndTriggerBreakthrough(oldMana, lifetimeMana);
     return lifetimeMana;
 };
 
-// BỔ SUNG: Hàm đóng Modal chúc phúc (Đã được gọi từ HTML)
 window.closeBreakthroughModal = function() {
     if (window.playClickSound) window.playClickSound();
     const modal = document.getElementById('breakthroughModal');
@@ -275,12 +199,10 @@ window.allocateStat = function(statKey) {
         alert("⚠️ Đạo hữu đã dùng hết điểm tiềm năng! Hãy đột phá tiểu cảnh giới để nhận thêm.");
         return;
     }
-
     if (playerStats.hasOwnProperty(statKey)) {
         if (window.playClickSound) window.playClickSound();
         playerStats[statKey] += 1;
         playerStats.freePoints -= 1;
-
         recalcStats();
         updateCharacterUI();
         syncManaToDatabase();
@@ -403,18 +325,13 @@ function generateRandomBaseStats() {
         let randKey = keys[Math.floor(Math.random() * keys.length)];
         stats[randKey] += 1;
     }
-
     return {
-        str: stats.str,
-        vit: stats.vit,
-        agi: stats.agi,
-        spi: stats.spi,
-        freePoints: 0,
-        rewardedTiers: [],
-        version: "v0.6_FINAL"
+        str: stats.str, vit: stats.vit, agi: stats.agi, spi: stats.spi,
+        freePoints: 0, rewardedTiers: [], version: "v0.6_FINAL"
     };
 }
 
+// SỬA LỖI TẢI HP VÀ TÚI ĐỒ Ở ĐÂY
 async function loadUserLifetimeMana(uid) {
     try {
         const userRef = ref(database, 'users/' + uid);
@@ -422,13 +339,11 @@ async function loadUserLifetimeMana(uid) {
         if (snapshot.exists()) {
             const val = snapshot.val();
             lifetimeMana = val.mana || 0;
-            if (val.currentHp !== undefined) {
-                window.currentHp = val.currentHp;
-            } else {
-                window.currentHp = window.maxHp || 100;
-            }
-            inventory = val.inventory || { "Hồi Xuân Đan": 0, "Tụ Linh Đan": 0, "Tẩy Tủy Đan": 0 };
+            
+            window.currentHp = val.currentHp !== undefined ? Math.max(val.currentHp, 1) : (window.maxHp || 100);
+            inventory = val.inventory || {};
             window.inventory = inventory;
+            
             battleRecord = val.battleRecord || { maxSurvivalSec: 0, maxKills: 0 };
             window.battleRecord = battleRecord;
             masteredWordsA1 = parseFirebaseArray(val.masteredA1);
@@ -438,7 +353,6 @@ async function loadUserLifetimeMana(uid) {
 
             if (!val.stats || val.stats.version !== "v0.6_FINAL") {
                 playerStats = generateRandomBaseStats();
-                
                 let accumulatedPoints = 0;
                 let awardedTiers = [];
                 if (window.MINOR_REALM_REWARDS) {
@@ -451,25 +365,20 @@ async function loadUserLifetimeMana(uid) {
                 }
                 playerStats.freePoints = accumulatedPoints;
                 playerStats.rewardedTiers = awardedTiers;
-
                 await update(userRef, { stats: playerStats });
             } else {
                 playerStats = val.stats;
             }
-
             window.playerStats = playerStats;
             window.stats = playerStats;
         }
     } catch(e) { 
         console.error("Lỗi tải data:", e);
         lifetimeMana = 0; 
-        masteredWordsA1 = [];
-        masteredWordsB1 = [];
+        masteredWordsA1 = []; masteredWordsB1 = []; inventory = {};
         playerStats = generateRandomBaseStats();
-        window.playerStats = playerStats;
-        window.stats = playerStats;
+        window.playerStats = playerStats; window.stats = playerStats; window.inventory = inventory;
     }
-    
     recalcStats();
 }
 
@@ -481,7 +390,7 @@ async function syncManaToDatabase() {
             name: currentUser.displayName || currentUser.email.split('@')[0],
             mana: lifetimeMana,
             currentHp: window.currentHp,
-            inventory: inventory,
+            inventory: window.inventory || {},
             stats: playerStats,
             masteredA1: masteredWordsA1,
             masteredB1: masteredWordsB1,
@@ -497,7 +406,6 @@ onAuthStateChanged(auth, async (user) => {
         currentUser = user;
         window.currentUser = user;
         
-        // [ADMIN CẤP QUYỀN]: Thay thế email dưới đây bằng email test của bạn
         window.isAdmin = (user.email === "namakali049@gmail.com"); 
 
         const nameEl = document.getElementById('userDisplayName');
@@ -510,6 +418,8 @@ onAuthStateChanged(auth, async (user) => {
         lifetimeMana = 0;
         masteredWordsA1 = [];
         masteredWordsB1 = [];
+        inventory = {};
+        window.inventory = inventory;
         switchScreen('auth-screen');
     }
 });
@@ -529,12 +439,10 @@ window.handleSignup = async function() {
         await set(ref(database, 'users/' + userCred.user.uid), { 
             name: displayName, 
             mana: 0, 
-            inventory: inventory,
+            inventory: {},
             stats: playerStats,
             battleRecord: { maxSurvivalSec: 0, maxKills: 0, lastUpdated: Date.now() },
-            masteredA1: [],
-            masteredB1: [],
-            joinedAt: Date.now()
+            masteredA1: [], masteredB1: [], joinedAt: Date.now()
         });
         alert("Đăng ký thành công!");
     } catch(e) { alert("Lỗi: " + e.message); }
@@ -557,7 +465,6 @@ window.handleGoogleLogin = async function() {
         alert("⚠️ Bạn đang mở game từ ứng dụng tin nhắn! Vui lòng chọn 'Mở bằng trình duyệt' để tiếp tục.");
         return;
     }
-
     try { 
         const result = await signInWithPopup(auth, googleProvider);
         const userRef = ref(database, 'users/' + result.user.uid);
@@ -568,37 +475,24 @@ window.handleGoogleLogin = async function() {
             window.stats = playerStats;
             await set(userRef, { 
                 name: result.user.displayName || "Đạo Hữu", 
-                mana: 0, 
-                inventory: inventory,
-                stats: playerStats,
-                masteredA1: [],
-                masteredB1: [],
-                joinedAt: Date.now()
+                mana: 0, inventory: {}, stats: playerStats,
+                masteredA1: [], masteredB1: [], joinedAt: Date.now()
             });
         }
-    } catch(e) { 
-        console.error("Chi tiết lỗi đăng nhập:", e);
-    }
+    } catch(e) { console.error("Chi tiết lỗi đăng nhập:", e); }
 };
 
 window.handleLogout = function() { 
     if (window.playClickSound) window.playClickSound();
     
-    lifetimeMana = 0;
-    sessionMana = 0;
-    masteredWordsA1 = [];
-    masteredWordsB1 = [];
-    inventory = {};
+    lifetimeMana = 0; sessionMana = 0;
+    masteredWordsA1 = []; masteredWordsB1 = []; inventory = {};
     battleRecord = { maxSurvivalSec: 0, maxKills: 0 };
     playerStats = { str: 1, vit: 1, agi: 1, spi: 1, freePoints: 0, rewardedTiers: [], version: "v0.6_FINAL" };
     
-    window.lifetimeMana = 0;
-    window.masteredWordsA1 = [];
-    window.masteredWordsB1 = [];
-    window.inventory = inventory;
-    window.battleRecord = battleRecord;
-    window.playerStats = playerStats;
-    window.stats = playerStats;
+    window.lifetimeMana = 0; window.masteredWordsA1 = []; window.masteredWordsB1 = [];
+    window.inventory = inventory; window.battleRecord = battleRecord;
+    window.playerStats = playerStats; window.stats = playerStats;
     
     signOut(auth); 
 };
@@ -614,142 +508,4 @@ window.showProfile = function() {
     updateCharacterUI();
 };
 
-let currentLeaderboardTab = 'mana';
-let cachedLeaderboardData = [];
-
-window.switchLeaderboardTab = function(tab) {
-    if (window.playClickSound) window.playClickSound();
-    currentLeaderboardTab = tab;
-
-    document.querySelectorAll('.lb-big-tab').forEach(btn => btn.classList.remove('active'));
-    const activeTab = document.getElementById('lb-tab-' + tab);
-    if (activeTab) activeTab.classList.add('active');
-    
-    const listEl = document.getElementById('lb-list');
-    if (!listEl) return;
-    listEl.innerHTML = "";
-    
-    if (!cachedLeaderboardData || cachedLeaderboardData.length === 0) {
-        listEl.innerHTML = "<li style='justify-content:center; color:#94a3b8;'>Chưa có cao thủ nào!</li>";
-        return;
-    }
-
-    let sorted = [...cachedLeaderboardData];
-    const descText = document.getElementById('lb-desc-text');
-    
-    if (tab === 'mana') {
-        sorted.sort((a, b) => b.mana - a.mana);
-        if (descText) descText.innerText = "Bảng xếp hạng tổng Tu Vi";
-    } else {
-        sorted.sort((a, b) => {
-            const aTime = a.battleRecord?.maxSurvivalSec || 0;
-            const bTime = b.battleRecord?.maxSurvivalSec || 0;
-            if (bTime !== aTime) return bTime - aTime;
-            return (b.battleRecord?.maxKills || 0) - (a.battleRecord?.maxKills || 0);
-        });
-        if (descText) descText.innerText = "Kỷ lục sinh tồn Bí Cảnh xuất sắc nhất";
-    }
-    
-    const formatTime = window.formatTime || ((s) => `${String(Math.floor(s/60)).padStart(2, '0')}:${String(s%60).padStart(2, '0')}`);
-    const realmFunc = window.calculateRealm || (() => "Phàm Nhân");
-    
-    sorted.slice(0, 10).forEach((u, index) => {
-        let rankHtml = index < 3 ? ["🥇", "🥈", "🥉"][index] : `<b>${index + 1}.</b>`;
-        let scoreHtml = tab === 'mana' 
-            ? `<div class="lb-mana">⚡ ${u.mana} Linh Lực</div>`
-            : `<div class="lb-score-tag"><span style="color:#38bdf8; font-weight:bold;">⏱️ ${formatTime(u.battleRecord?.maxSurvivalSec || 0)}</span><br><small style="color:#ffa502;">👾 ${u.battleRecord?.maxKills || 0} quái</small></div>`;
-        
-        // CHUẨN HÓA MẢNG TỪ VỰNG TRƯỚC KHI ĐẾM CHO LEADERBOARD
-        // BẢO VỆ DỮ LIỆU TỪ VỰNG TỪ DATABASE
-        let countA1 = 0;
-        if (u.masteredA1) {
-            if (Array.isArray(u.masteredA1)) countA1 = u.masteredA1.length;
-            else if (typeof u.masteredA1 === 'object') countA1 = Object.keys(u.masteredA1).length;
-        }
-
-        let countB1 = 0;
-        if (u.masteredB1) {
-            if (Array.isArray(u.masteredB1)) countB1 = u.masteredB1.length;
-            else if (typeof u.masteredB1 === 'object') countB1 = Object.keys(u.masteredB1).length;
-        }
-        
-        const exactRealm = realmFunc(u.mana, countA1, countB1);
-
-        listEl.innerHTML += `
-        <li>
-            <div class="lb-user-info">
-                <span class="lb-rank">${rankHtml}</span>
-                <div class="lb-details">
-                    <span class="lb-name">${u.name}</span>
-                    <span class="realm-badge">${exactRealm}</span>
-                </div>
-            </div>
-            ${scoreHtml}
-        </li>`;
-    });
-};
-
-window.renderLeaderboardList = function() {
-    window.switchLeaderboardTab(currentLeaderboardTab);
-};
-
-// ==========================================
-// 9. TIÊN ĐẠO BẢNG (LEADERBOARD LOAD)
-// ==========================================
-window.showLeaderboard = async function() {
-    if (window.playClickSound) window.playClickSound();
-    window.switchScreen('leaderboard-screen');
-    const listEl = document.getElementById('lb-list');
-    if (listEl) listEl.innerHTML = "<p style='color:#94a3b8; text-align:center; padding-top: 20px;'>⏳ Đang kết nối Tiên Đạo Bảng...</p>";
-    
-    try {
-        const lbRef = ref(window.firebaseDB || database, 'users');
-        const snapshot = await get(lbRef);
-        if (snapshot.exists()) {
-            cachedLeaderboardData = [];
-            snapshot.forEach(childSnap => {
-                const data = childSnap.val();
-                cachedLeaderboardData.push({
-                    name: data.name || "Ẩn Danh",
-                    mana: Number(data.mana) || 0,
-                    battleRecord: data.battleRecord || { maxSurvivalSec: 0, maxKills: 0 },
-                    masteredA1: data.masteredA1 || [],
-                    masteredB1: data.masteredB1 || []
-                });
-            });
-            window.switchLeaderboardTab(currentLeaderboardTab || 'mana');
-        } else {
-            if (listEl) listEl.innerHTML = "<p style='color:#94a3b8; text-align:center;'>Chưa có dữ liệu Tiên Đạo Bảng.</p>";
-        }
-    } catch (e) {
-        console.error("Lỗi tải Leaderboard:", e);
-        if (listEl) listEl.innerHTML = "<p style='color:#ef4444; text-align:center;'>❌ Mất kết nối tới Database!</p>";
-    }
-};
-
-// ==========================================
-// BỘ CÔNG CỤ QUẢN TRỊ ADMIN (DEV TOOLS)
-// Dùng F12 Console để gọi các hàm này
-// ==========================================
-
-window.adminSetMana = function(targetMana) {
-    if (!window.isAdmin) return "⛔ Quyền hạn bị từ chối!";
-    const oldMana = lifetimeMana;
-    lifetimeMana = targetMana;
-    window.lifetimeMana = lifetimeMana;
-    recalcStats();
-    updateCharacterUI();
-    syncManaToDatabase();
-    if (window.checkAndTriggerBreakthrough) window.checkAndTriggerBreakthrough(oldMana, lifetimeMana);
-    return `✅ [Admin] Đã thiết lập Tu Vi thành ${targetMana} Linh Khí!`;
-};
-
-window.adminAddItems = function(amount = 99) {
-    if (!window.isAdmin) return "⛔ Quyền hạn bị từ chối!";
-    window.inventory["Hồi Xuân Đan"] = (window.inventory["Hồi Xuân Đan"] || 0) + amount;
-    window.inventory["Tụ Linh Đan"] = (window.inventory["Tụ Linh Đan"] || 0) + amount;
-    window.inventory["Tẩy Tủy Đan"] = (window.inventory["Tẩy Tủy Đan"] || 0) + amount;
-    syncManaToDatabase();
-    if (window.updateInventoryUI) window.updateInventoryUI();
-    return `✅ [Admin] Đã bơm ${amount} Đan dược mỗi loại vào túi đồ!`;
-};
+let currentLeaderboardTab = 'mana
