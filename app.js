@@ -40,7 +40,7 @@ window.firebaseDB = database;
 let currentUser = null;
 let lifetimeMana = 0; 
 let sessionMana = 0;  
-let inventory = {}; // Khởi tạo túi đồ trống chuẩn
+let inventory = {}; 
 let battleRecord = { maxSurvivalSec: 0, maxKills: 0 };
 let masteredWordsA1 = [];
 let masteredWordsB1 = [];
@@ -331,7 +331,6 @@ function generateRandomBaseStats() {
     };
 }
 
-// SỬA LỖI TẢI HP VÀ TÚI ĐỒ Ở ĐÂY
 async function loadUserLifetimeMana(uid) {
     try {
         const userRef = ref(database, 'users/' + uid);
@@ -508,4 +507,126 @@ window.showProfile = function() {
     updateCharacterUI();
 };
 
-let currentLeaderboardTab = 'mana
+let currentLeaderboardTab = 'mana';
+let cachedLeaderboardData = [];
+
+window.switchLeaderboardTab = function(tab) {
+    if (window.playClickSound) window.playClickSound();
+    currentLeaderboardTab = tab;
+
+    document.querySelectorAll('.lb-big-tab').forEach(btn => btn.classList.remove('active'));
+    const activeTab = document.getElementById('lb-tab-' + tab);
+    if (activeTab) activeTab.classList.add('active');
+    
+    const listEl = document.getElementById('lb-list');
+    if (!listEl) return;
+    listEl.innerHTML = "";
+    
+    if (!cachedLeaderboardData || cachedLeaderboardData.length === 0) {
+        listEl.innerHTML = "<li style='justify-content:center; color:#94a3b8;'>Chưa có cao thủ nào!</li>";
+        return;
+    }
+
+    let sorted = [...cachedLeaderboardData];
+    const descText = document.getElementById('lb-desc-text');
+    
+    if (tab === 'mana') {
+        sorted.sort((a, b) => b.mana - a.mana);
+        if (descText) descText.innerText = "Bảng xếp hạng tổng Tu Vi";
+    } else {
+        sorted.sort((a, b) => {
+            const aTime = a.battleRecord?.maxSurvivalSec || 0;
+            const bTime = b.battleRecord?.maxSurvivalSec || 0;
+            if (bTime !== aTime) return bTime - aTime;
+            return (b.battleRecord?.maxKills || 0) - (a.battleRecord?.maxKills || 0);
+        });
+        if (descText) descText.innerText = "Kỷ lục sinh tồn Bí Cảnh xuất sắc nhất";
+    }
+    
+    const formatTime = window.formatTime || ((s) => `${String(Math.floor(s/60)).padStart(2, '0')}:${String(s%60).padStart(2, '0')}`);
+    const realmFunc = window.calculateRealm || (() => "Phàm Nhân");
+    
+    sorted.slice(0, 10).forEach((u, index) => {
+        let rankHtml = index < 3 ? ["🥇", "🥈", "🥉"][index] : `<b>${index + 1}.</b>`;
+        let scoreHtml = tab === 'mana' 
+            ? `<div class="lb-mana">⚡ ${u.mana} Linh Lực</div>`
+            : `<div class="lb-score-tag"><span style="color:#38bdf8; font-weight:bold;">⏱️ ${formatTime(u.battleRecord?.maxSurvivalSec || 0)}</span><br><small style="color:#ffa502;">👾 ${u.battleRecord?.maxKills || 0} quái</small></div>`;
+        
+        let countA1 = 0;
+        if (u.masteredA1) {
+            if (Array.isArray(u.masteredA1)) countA1 = u.masteredA1.length;
+            else if (typeof u.masteredA1 === 'object') countA1 = Object.keys(u.masteredA1).length;
+        }
+
+        let countB1 = 0;
+        if (u.masteredB1) {
+            if (Array.isArray(u.masteredB1)) countB1 = u.masteredB1.length;
+            else if (typeof u.masteredB1 === 'object') countB1 = Object.keys(u.masteredB1).length;
+        }
+        
+        const exactRealm = realmFunc(u.mana, countA1, countB1);
+
+        listEl.innerHTML += `
+        <li>
+            <div class="lb-user-info">
+                <span class="lb-rank">${rankHtml}</span>
+                <div class="lb-details">
+                    <span class="lb-name">${u.name}</span>
+                    <span class="realm-badge">${exactRealm}</span>
+                </div>
+            </div>
+            ${scoreHtml}
+        </li>`;
+    });
+};
+
+window.renderLeaderboardList = function() { window.switchLeaderboardTab(currentLeaderboardTab); };
+
+window.showLeaderboard = async function() {
+    if (window.playClickSound) window.playClickSound();
+    window.switchScreen('leaderboard-screen');
+    const listEl = document.getElementById('lb-list');
+    if (listEl) listEl.innerHTML = "<p style='color:#94a3b8; text-align:center; padding-top: 20px;'>⏳ Đang kết nối Tiên Đạo Bảng...</p>";
+    try {
+        const lbRef = ref(window.firebaseDB || database, 'users');
+        const snapshot = await get(lbRef);
+        if (snapshot.exists()) {
+            cachedLeaderboardData = [];
+            snapshot.forEach(childSnap => {
+                const data = childSnap.val();
+                cachedLeaderboardData.push({
+                    name: data.name || "Ẩn Danh",
+                    mana: Number(data.mana) || 0,
+                    battleRecord: data.battleRecord || { maxSurvivalSec: 0, maxKills: 0 },
+                    masteredA1: data.masteredA1 || [], masteredB1: data.masteredB1 || []
+                });
+            });
+            window.switchLeaderboardTab(currentLeaderboardTab || 'mana');
+        } else {
+            if (listEl) listEl.innerHTML = "<p style='color:#94a3b8; text-align:center;'>Chưa có dữ liệu Tiên Đạo Bảng.</p>";
+        }
+    } catch (e) {
+        console.error("Lỗi tải Leaderboard:", e);
+        if (listEl) listEl.innerHTML = "<p style='color:#ef4444; text-align:center;'>❌ Mất kết nối tới Database!</p>";
+    }
+};
+
+window.adminSetMana = function(targetMana) {
+    if (!window.isAdmin) return "⛔ Quyền hạn bị từ chối!";
+    const oldMana = lifetimeMana;
+    lifetimeMana = targetMana; window.lifetimeMana = lifetimeMana;
+    recalcStats(); updateCharacterUI(); syncManaToDatabase();
+    if (window.checkAndTriggerBreakthrough) window.checkAndTriggerBreakthrough(oldMana, lifetimeMana);
+    return `✅ [Admin] Đã thiết lập Tu Vi thành ${targetMana} Linh Khí!`;
+};
+
+window.adminAddItems = function(amount = 99) {
+    if (!window.isAdmin) return "⛔ Quyền hạn bị từ chối!";
+    if (!window.inventory) window.inventory = {};
+    window.inventory["hoi_huyet_dan"] = (window.inventory["hoi_huyet_dan"] || 0) + amount;
+    window.inventory["tu_linh_dan"] = (window.inventory["tu_linh_dan"] || 0) + amount;
+    window.inventory["than_luc_dan"] = (window.inventory["than_luc_dan"] || 0) + amount;
+    syncManaToDatabase();
+    if (window.renderInventory) window.renderInventory();
+    return `✅ [Admin] Đã bơm ${amount} đan dược mới vào túi đồ!`;
+};
