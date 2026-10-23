@@ -51,25 +51,30 @@ window.checkAndStartVolume = function(vol) {
     window.startGame();
 };
 
-// HÀM CẬP NHẬT THANH MÁU VÀ THANH MANA (LINH LỰC) BẾ QUAN
-window.updateQuizHUD = function() {
-    const curHp = Math.max(0, window.currentHp || 0);
-    const maxHp = window.maxHp || 10;
-    const hpPercent = Math.min(100, Math.max(0, (curHp / maxHp) * 100));
 
-    const hpFill = document.getElementById('quizHpFill');
-    const hpText = document.getElementById('quizHpText');
-    if (hpFill) hpFill.style.width = hpPercent + "%";
-    if (hpText) hpText.innerText = `❤️ ${curHp}/${maxHp}`;
+// HÀM MỚI ĐÃ ĐƯỢC GỠ BỎ HOÀN TOÀN CẤM CHẾ
+window.checkAndStartVolume = function(vol) {
+    if (window.playClickSound) window.playClickSound();
 
-    const curMana = Math.max(0, window.currentLinhLuc || 0);
-    const maxMana = window.maxLinhLuc || 0;
-    const manaPercent = maxMana > 0 ? Math.min(100, Math.max(0, (curMana / maxMana) * 100)) : 0;
-
-    const manaFill = document.getElementById('quizManaFill');
-    const manaText = document.getElementById('quizManaText');
-    if (manaFill) manaFill.style.width = manaPercent + "%";
-    if (manaText) manaText.innerText = `🌀 ${curMana}/${maxMana}`;
+    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
+    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+    const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0, countA1, countB1) : { major: "Phàm Nhân" };
+    
+    if (vol === 'trung_quyen') {
+        // KHÔNG CÒN LỆNH CHẶN (ALERT BỊ XÓA)
+        window.currentCsvFile = "b1_vocab.csv";
+        
+    } else {
+        // Vẫn giữ lại cảnh báo nếu cảnh giới cao quay lại học Hạ Quyển (A1)
+        if (realmData.major === "Kim Đan Kỳ" || realmData.major === "Nguyên Anh Kỳ") {
+            alert("⚠️ CẢNH BÁO THIÊN ĐẠO:\nĐạo hữu đã đạt cảnh giới cao. Tiếp tục tu luyện Hạ Quyển sẽ bị giáng phạt giảm 90% Linh Lực nhận được!");
+        }
+        window.currentCsvFile = "a1_vocab.csv";
+    }
+    
+    const hanNguModal = document.getElementById('hanNguModal');
+    if (hanNguModal) hanNguModal.style.display = 'none';
+    window.startGame();
 };
 
 // 2. KHỞI CHẠY BẾ QUAN
