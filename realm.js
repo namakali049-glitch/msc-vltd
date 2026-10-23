@@ -8,23 +8,22 @@ window.getRealmData = function(mana, customA1 = null, customB1 = null) {
     const listA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1 : [];
     const listB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1 : [];
     
-    // Ép kiểu Number an toàn tuyệt đối, nếu không hợp lệ sẽ về 0
-    let countA1 = customA1 !== null ? Number(customA1) : listA1.length;
-    if (isNaN(countA1)) countA1 = 0;
+    const countA1 = customA1 !== null ? customA1 : listA1.length;
+    const countB1 = customB1 !== null ? customB1 : listB1.length;
 
-    let countB1 = customB1 !== null ? Number(customB1) : listB1.length;
-    if (isNaN(countB1)) countB1 = 0;
-
-    if (mana < 150) return { rank: "Phàm Nhân", major: "Phàm Nhân", swords: 0 };
-    if (mana < 400) return { rank: "Luyện Khí Sơ Kỳ", major: "Luyện Khí Kỳ", swords: 1 };
-    if (mana < 800) return { rank: "Luyện Khí Trung Kỳ", major: "Luyện Khí Kỳ", swords: 2 };
-    if (mana < 1500) return { rank: "Luyện Khí Hậu Kỳ", major: "Luyện Khí Kỳ", swords: 3 };
-    if (mana < 2500) return { rank: "Trúc Cơ Sơ Kỳ", major: "Trúc Cơ Kỳ", swords: 3 };
-    if (mana < 4000) return { rank: "Trúc Cơ Trung Kỳ", major: "Trúc Cơ Kỳ", swords: 4 };
+    // PHÀM NHÂN & LUYỆN KHÍ
+    if (mana < 300) return { rank: "Phàm Nhân", major: "Phàm Nhân", swords: 0 };
+    if (mana < 1000) return { rank: "Luyện Khí Sơ Kỳ", major: "Luyện Khí Kỳ", swords: 1 };
+    if (mana < 2200) return { rank: "Luyện Khí Trung Kỳ", major: "Luyện Khí Kỳ", swords: 2 };
+    if (mana < 4000) return { rank: "Luyện Khí Hậu Kỳ", major: "Luyện Khí Kỳ", swords: 3 };
     
-    // BẮT BUỘC >= 600 TỪ A1 (Admin được đặc cách bỏ qua)
-    if (!window.isAdmin && (mana < 8000 || countA1 < 600)) {
-        let isBottleneck = (mana >= 8000 && countA1 < 600);
+    // TRÚC CƠ
+    if (mana < 6500) return { rank: "Trúc Cơ Sơ Kỳ", major: "Trúc Cơ Kỳ", swords: 4 };
+    if (mana < 9000) return { rank: "Trúc Cơ Trung Kỳ", major: "Trúc Cơ Kỳ", swords: 5 };
+    
+    // BÌNH CẢNH TRÚC CƠ: Mốc 12.000
+    if (!window.isAdmin && (mana < 12000 || countA1 < 600)) {
+        let isBottleneck = (mana >= 12000 && countA1 < 600);
         return { 
             rank: isBottleneck ? "Trúc Cơ (Bình Cảnh)" : "Trúc Cơ Hậu Kỳ", 
             major: "Trúc Cơ Kỳ", 
@@ -32,20 +31,25 @@ window.getRealmData = function(mana, customA1 = null, customB1 = null) {
         };
     }
     
-    if (mana < 15000) return { rank: "Kim Đan Sơ Kỳ", major: "Kim Đan Kỳ", swords: 5 };
-    if (mana < 20000) return { rank: "Kim Đan Trung Kỳ", major: "Kim Đan Kỳ", swords: 5 };
+    // KIM ĐAN
+    if (mana < 22000) return { rank: "Kim Đan Sơ Kỳ", major: "Kim Đan Kỳ", swords: 6 };
+    if (mana < 35000) return { rank: "Kim Đan Trung Kỳ", major: "Kim Đan Kỳ", swords: 6 };
     
-    // BẮT BUỘC >= 2667 TỪ B1 (Admin được đặc cách bỏ qua)
-    if (!window.isAdmin && (mana < 25000 || countB1 < 2667)) {
-        let isBottleneck = (mana >= 25000 && countB1 < 2667);
+    // BÌNH CẢNH KIM ĐAN: Mốc 50.000
+    if (!window.isAdmin && (mana < 50000 || countB1 < 2667)) {
+        let isBottleneck = (mana >= 50000 && countB1 < 2667);
         return { 
             rank: isBottleneck ? "Kim Đan (Bình Cảnh)" : "Kim Đan Hậu Kỳ", 
             major: "Kim Đan Kỳ", 
-            swords: 5 
+            swords: 7 
         };
     }
     
-    return { rank: "Nguyên Anh Chân Quân", major: "Nguyên Anh Kỳ", swords: 5 };
+    // NGUYÊN ANH
+    if (mana < 65000) return { rank: "Nguyên Anh Sơ Kỳ", major: "Nguyên Anh Kỳ", swords: 7 };
+    if (mana < 85000) return { rank: "Nguyên Anh Trung Kỳ", major: "Nguyên Anh Kỳ", swords: 8 };
+    
+    return { rank: "Nguyên Anh Hậu Kỳ", major: "Nguyên Anh Kỳ", swords: 8 };
 };
 
 // 1. Danh mục phần thưởng Điểm Tiềm Năng các tiểu cảnh giới
