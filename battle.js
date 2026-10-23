@@ -89,7 +89,10 @@ function getBattleCharacterSkin() {
 
 function getBattleSwordSkin() {
     const mana = window.lifetimeMana || 0;
-    return mana >= 1500 ? battleAssets.swordCyan : battleAssets.swordWood;
+    if (mana >= 50000) return battleAssets.swordNguyenAnh; // Kiếm sét Cửu Tiêu
+    if (mana >= 12000) return battleAssets.swordKimDan;    // Kiếm lửa Xích Kim
+    if (mana >= 4000) return battleAssets.swordCyan;       // Kiếm khí Trúc Cơ
+    return battleAssets.swordWood;                         // Mộc kiếm / Kiếm khí Luyện Khí
 }
 
 const battleCanvas = document.getElementById('gameCanvas');
