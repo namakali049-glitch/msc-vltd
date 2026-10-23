@@ -78,9 +78,11 @@ battleAssets.enemyGhost.src = "assets/quy-hon.png";
 
 function getBattleCharacterSkin() {
     const mana = window.lifetimeMana || 0;
+    if (mana >= 50000) return battleAssets.playerNguyenAnh;
+    if (mana >= 12000) return battleAssets.playerKimDan;
     if (mana >= 4000) return battleAssets.playerTrucCoVienMan;
     if (mana >= 2500) return battleAssets.playerTrucCoTrungKy;
-    if (mana >= 1500) return battleAssets.playerTrucCo;
+    if (mana >= 1000) return battleAssets.playerTrucCo;
     if (mana >= 150) return battleAssets.playerLuyenKhi;
     return battleAssets.playerPhamNhan;
 }
