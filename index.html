@@ -213,13 +213,35 @@
   <div id="battle-screen" class="screen">
     <canvas id="gameCanvas"></canvas>
 
-    <div class="battle-hud-box">
-      <div id="battleTimeText" style="color: #ffd700;">⏱️ Sinh Tồn: 00:00</div>
-      <div id="battleHpText">❤️ Sinh Mệnh: 100/100</div>
-      <div id="battleSwordText">⚔️ Kiếm Khí: 0/0</div>
-      <div id="battleKillsText">👾 Ma Vật Trảm: 0</div>
-    </div>
+    <!-- HUD NHÂN VẬT TRONG BÍ CẢNH TRẢM YÊU -->
+    <div style="position: absolute; top: 12px; left: 12px; display: flex; flex-direction: column; gap: 8px; z-index: 10;">
+      <div class="hud-player-card" style="min-width: 240px;">
+        <img id="battleAvatar" class="hud-avatar" src="assets/pham-nhan.jpg" alt="Avatar">
+        <div class="hud-info-box">
+          <div class="hud-name-row">
+            <span id="battleName" class="hud-player-name">Đạo Hữu</span>
+            <span id="battleRealmBadge" class="hud-realm-badge">Phàm Nhân</span>
+          </div>
+          <!-- Thanh Máu -->
+          <div class="hud-bar-wrapper">
+            <div id="battleHpFill" class="hud-bar-fill-hp"></div>
+            <div id="battleHpText" class="hud-bar-text">❤️ 100/100</div>
+          </div>
+          <!-- Thanh Mana (Linh Lực) -->
+          <div class="hud-bar-wrapper">
+            <div id="battleManaFill" class="hud-bar-fill-mana"></div>
+            <div id="battleManaText" class="hud-bar-text">🌀 0/0</div>
+          </div>
+        </div>
+      </div>
 
+      <!-- Chỉ số chiến đấu phụ -->
+      <div class="battle-hud-box" style="position: static;">
+        <div id="battleTimeText" style="color: #ffd700;">⏱️ Sinh Tồn: 00:00</div>
+        <div id="battleSwordText">⚔️ Kiếm Khí: 0/0</div>
+        <div id="battleKillsText">👾 Ma Vật Trảm: 0</div>
+      </div>
+    </div>
     <button class="btn-battle-escape" onclick="exitBattle()">🚪 Rút lui</button>
 
     <div class="dpad-wrapper">
