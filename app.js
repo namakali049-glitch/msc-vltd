@@ -187,12 +187,13 @@ window.addLifetimeMana = function(amount) {
 
     let targetMana = lifetimeMana + amount;
 
+    
     // Khóa trần cứng (Trừ Admin)
-    if (!window.isAdmin && countA1 < 600 && targetMana > 8000) {
-        targetMana = 8000;
+    if (!window.isAdmin && countA1 < 600 && targetMana > 12000) {
+        targetMana = 12000;
     }
-    else if (!window.isAdmin && countB1 < 2667 && targetMana > 25000) {
-        targetMana = 25000;
+    else if (!window.isAdmin && countB1 < 2667 && targetMana > 50000) {
+        targetMana = 50000;
     }
 
     lifetimeMana = targetMana;
