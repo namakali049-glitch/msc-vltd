@@ -5,6 +5,85 @@ import './inventory.js';
 import './audio.js';
 import './realm.js';
 
+// HỆ THỐNG VẬT PHẨM MỚI
+window.tuLinhBuff = window.tuLinhBuff || 0; 
+window.itemUsageHistory = window.itemUsageHistory || {}; 
+
+window.ITEM_DATABASE = {
+    "hoi_huyet_dan": {
+        name: "Hồi Huyết Đan", rarity: "Thường", color: "#a3e635",
+        desc: "Hồi phục 15 chỉ số HP.",
+        use: function() {
+            window.currentHp = Math.min(window.maxHp || 100, (window.currentHp || 0) + 15);
+            return "Đã hồi 15 HP!";
+        }
+    },
+    "hoi_khi_dan": {
+        name: "Hồi Khí Đan", rarity: "Thường", color: "#38bdf8",
+        desc: "Hồi phục 30 chỉ số Linh Lực.",
+        use: function() {
+            window.currentLinhLuc = Math.min(window.maxLinhLuc || 100, (window.currentLinhLuc || 0) + 30);
+            return "Đã hồi 30 Linh Lực!";
+        }
+    },
+    "tu_linh_dan": {
+        name: "Tụ Linh Đan", rarity: "Hiếm", color: "#c084fc",
+        desc: "Nhân đôi (x2) lượng Linh Khí thu được trong 50 câu hỏi bế quan tiếp theo (5 vòng).",
+        use: function() {
+            window.tuLinhBuff = (window.tuLinhBuff || 0) + 50;
+            return "Kích hoạt x2 Linh Khí trong 50 câu tới!";
+        }
+    },
+    "than_luc_dan": {
+        name: "Thần Lực Đan", attr: "str", rarity: "Siêu Siêu Hiếm", color: "#f87171",
+        desc: "Tăng vĩnh viễn 1 điểm Sức Mạnh. (Tối đa 5 viên / 1 Đại Cảnh Giới)"
+    },
+    "khi_huyet_dan": {
+        name: "Khí Huyết Đan", attr: "vit", rarity: "Siêu Siêu Hiếm", color: "#4ade80",
+        desc: "Tăng vĩnh viễn 1 điểm Khí Huyết. (Tối đa 5 viên / 1 Đại Cảnh Giới)"
+    },
+    "linh_man_dan": {
+        name: "Linh Mẫn Đan", attr: "agi", rarity: "Siêu Siêu Hiếm", color: "#fbbf24",
+        desc: "Tăng vĩnh viễn 1 điểm Nhanh Nhẹn. (Tối đa 5 viên / 1 Đại Cảnh Giới)"
+    },
+    "tinh_than_dan": {
+        name: "Tỉnh Thần Đan", attr: "spi", rarity: "Siêu Siêu Hiếm", color: "#818cf8",
+        desc: "Tăng vĩnh viễn 1 điểm Tinh Thần. (Tối đa 5 viên / 1 Đại Cảnh Giới)"
+    }
+};
+
+window.useItem = function(itemId) {
+    if (!window.inventory || !window.inventory[itemId] || window.inventory[itemId] <= 0) return;
+    const item = window.ITEM_DATABASE[itemId];
+    
+    if (item.attr) {
+        const realmData = window.getRealmData(window.lifetimeMana || 0);
+        const currentMajor = realmData.major; 
+        
+        window.itemUsageHistory[currentMajor] = window.itemUsageHistory[currentMajor] || {};
+        const usedCount = window.itemUsageHistory[currentMajor][itemId] || 0;
+        
+        if (usedCount >= 5) {
+            alert(`⚠️ Cảnh giới [${currentMajor}] thân thể đã bão hòa, không thể hấp thụ thêm ${item.name}! Cần đột phá cảnh giới lớn tiếp theo.`);
+            return;
+        }
+        
+        window[item.attr] = (window[item.attr] || 1) + 1;
+        window.itemUsageHistory[currentMajor][itemId] = usedCount + 1;
+        alert(`🌟 Hấp thụ thành công! Tăng 1 điểm ${item.name.split(" ")[0]}.\n(Đã dùng: ${usedCount + 1}/5 tại ${currentMajor})`);
+        
+        if (window.recalcStats) window.recalcStats();
+        if (window.updateCharacterUI) window.updateCharacterUI();
+    } else {
+        const msg = item.use();
+        alert(`✨ ${msg}`);
+        if (window.updateQuizHUD) window.updateQuizHUD();
+    }
+
+    window.inventory[itemId]--;
+    if (window.inventory[itemId] <= 0) delete window.inventory[itemId];
+    window.renderInventory();
+};
 // ==========================================
 // 1. CẤU HÌNH FIREBASE
 // ==========================================
