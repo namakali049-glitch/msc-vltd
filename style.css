@@ -787,6 +787,9 @@ body {
   border: 2px solid #ffd700;
   object-fit: cover;
   flex-shrink: 0;
+  image-rendering: pixelated; /* BỔ SUNG DÒNG NÀY */
+  image-rendering: crisp-edges;
+  background-color: #1e293b; /* Thêm nền tối */
 }
 
 .hud-info-box {
