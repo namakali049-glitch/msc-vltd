@@ -441,14 +441,30 @@ function battleLoop() {
 
     battleCtx.restore();
 
+    // CẬP NHẬT THANH MÁU ĐỘNG (HP)
+    const curHp = Math.max(0, window.currentHp || 0);
+    const hpPercent = Math.min(100, Math.max(0, (curHp / maxHp) * 100));
+    const hpFill = document.getElementById('battleHpFill');
+    const hpText = document.getElementById('battleHpText');
+    if (hpFill) hpFill.style.width = hpPercent + "%";
+    if (hpText) hpText.innerText = `❤️ ${curHp}/${maxHp}`;
+
+    // CẬP NHẬT THANH MANA ĐỘNG (LINH LỰC)
+    const curMana = Math.max(0, window.currentLinhLuc || 0);
+    const maxMana = window.maxLinhLuc || 0;
+    const manaPercent = maxMana > 0 ? Math.min(100, Math.max(0, (curMana / maxMana) * 100)) : 0;
+    const manaFill = document.getElementById('battleManaFill');
+    const manaText = document.getElementById('battleManaText');
+    if (manaFill) manaFill.style.width = manaPercent + "%";
+    if (manaText) manaText.innerText = `🌀 ${curMana}/${maxMana}`;
+
+    // THÔNG TIN SINH TỒN VÀ TRẢM YÊU
     const timeEl = document.getElementById('battleTimeText');
-    const hpEl = document.getElementById('battleHpText');
     const swordEl = document.getElementById('battleSwordText');
     const killsEl = document.getElementById('battleKillsText');
-    
+
     const formatTimeFunc = window.formatTime || ((s) => `${Math.floor(s/60)}:${s%60}`);
     if (timeEl) timeEl.innerText = `⏱️ Sinh Tồn: ${formatTimeFunc(survivalSec)}`;
-    if (hpEl) hpEl.innerText = `❤️ Sinh Mệnh: ${Math.max(0, window.currentHp || 0)}/${maxHp}`;
     if (swordEl) swordEl.innerText = `⚔️ Kiếm Khí: ${activeSwordCount}/${battleData.swords.length}`;
     if (killsEl) killsEl.innerText = `👾 Ma Vật Trảm: ${battleData.kills}`;
 
