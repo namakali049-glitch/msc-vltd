@@ -74,14 +74,15 @@ window.getSwordCount = function(thanThuc) {
 };
 
 // 3. Tiến hóa ngoại trang Avatar theo mốc Linh Lực (Đồng bộ 100% với Bí Cảnh)
+// Cập nhật Avatar hiển thị trên Hồ sơ và HUD Bế Quan
 window.getAvatarByMana = function(mana) {
-    if (mana < 150) return "assets/pham-nhan.png"; // Yêu cầu có file pham-nhan.png dạng pixel
-    if (mana < 1500) return "assets/luyen-khi.png";
-    if (mana < 2500) return "assets/truc-co.png";
-    if (mana < 4000) return "assets/truc-co-trung-ky.png";
-    return "assets/truc-co-vien-man.png";
+    if (mana < 150) return "assets/pham-nhan.png";
+    if (mana < 1000) return "assets/luyen-khi.png";
+    if (mana < 4000) return "assets/truc-co.png";
+    if (mana < 12000) return "assets/truc-co-vien-man.png";
+    if (mana < 50000) return "assets/kim-dan-ky.png";     // Mốc Kim Đan (12.000 - 49.999 LK)
+    return "assets/nguyen-anh-ky.png";                    // Mốc Nguyên Anh (>= 50.000 LK)
 };
-
 // 4. Kích hoạt Modal Thiên Đạo Chúc Phúc khi vượt đại cảnh giới
 window.checkAndTriggerBreakthrough = function(oldMana, newMana) {
     const oldRealm = window.getRealmData(oldMana);
