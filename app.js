@@ -137,26 +137,23 @@ function checkMinorRealmRewards() {
 function recalcStats() {
     checkMinorRealmRewards();
 
-    // 1. Lấy thông tin cảnh giới (chỉ lấy danh hiệu, không lấy HP/Thần Thức nền)
+    // 1. Lấy dữ liệu nền tảng của Cảnh giới hiện tại
     const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
     const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
-    const realmData = window.getRealmData ? window.getRealmData(lifetimeMana, countA1, countB1) : { major: "Phàm Nhân" };
+    const realmData = window.getRealmData ? window.getRealmData(lifetimeMana, countA1, countB1) : { hp: 100, thanThuc: 0, major: "Phàm Nhân" };
 
-    // 2. Sinh Mệnh: Thuần túy phụ thuộc tuyệt đối vào Khí Huyết (VIT * 10)
-    maxHp = playerStats.vit * 10;
-    if (window.currentHp === undefined || window.currentHp > maxHp || window.currentHp <= 0) {
-        window.currentHp = maxHp;
-    }
-    currentHp = window.currentHp;
+    // 2. Tính Sinh Mệnh: HP Cảnh Giới + (VIT * 10)
+    maxHp = realmData.hp + (playerStats.vit * 10);
+    if (currentHp > maxHp || currentHp <= 0) currentHp = maxHp;
 
-    // 3. Thần Thức: Phàm Nhân = 0, Từ Luyện Khí trở lên = Tinh Thần * 10
+    // 3. Tính Thần Thức: Phàm Nhân = 0, Luyện Khí trở lên = Thần Thức Cảnh Giới + (SPI * 10)
     if (realmData.major === "Phàm Nhân") {
         thanThuc = 0;
     } else {
-        thanThuc = playerStats.spi * 10;
+        thanThuc = realmData.thanThuc + (playerStats.spi * 10);
     }
 
-    // 4. Các chỉ số chiến đấu khác
+    // 4. Các chỉ số khác
     str = playerStats.str;
     swordDamage = playerStats.str * 10;
     agi = playerStats.agi;
