@@ -270,7 +270,7 @@ function updateCharacterUI() {
     const spiEl = document.getElementById('profileSpi');
     if (spiEl) spiEl.innerText = playerStats.spi;
     const spiEff = document.getElementById('profileSpiEffect');
-    if (spiEff) spiEff.innerText = `(${playerStats.spi * 10} Thần thức)`;
+    if (spiEff) spiEff.innerText = `(+${playerStats.spi * 10} Linh Lực)`;
 
     const nameEl = document.getElementById('profileName');
     if (nameEl) nameEl.innerText = currentUser ? (currentUser.displayName || currentUser.email.split('@')[0]) : "Đạo Hữu";
