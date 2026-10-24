@@ -10,8 +10,8 @@ let battleData = {
     particles: [],
     textPopups: [], 
     drops: [],
-    projectiles: [], // <--- THÊM MẢNG CHỨA PHI KIẾM PHÓNG ĐI
-    aimState: { active: false, startX: 0, startY: 0, curX: 0, curY: 0, dirX: 0, dirY: 0 }, // <--- THÊM TRẠNG THÁI NGẮM
+    projectiles: [],
+    aimState: { active: false, startX: 0, startY: 0, curX: 0, curY: 0, dirX: 0, dirY: 0 },
     screenShake: 0,
     damageFlash: 0,
     kills: 0,
@@ -133,16 +133,18 @@ window.startBattle = function() {
     battleData.enemies = [];
     battleData.particles = [];
     battleData.textPopups = [];
-    battleData.drops = []; // Khởi tạo lại mảng vật phẩm
+    battleData.drops = [];
     battleData.projectiles = [];
-    battleData.aimState.active = false;
+    battleData.aimState = { active: false, startX: 0, startY: 0, curX: 0, curY: 0, dirX: 0, dirY: 0 };
 
-    // Kiểm tra nếu đã lĩnh ngộ Ngự Kiếm Thuật thì hiển thị nút
+    // Kiểm tra đã học Ngự Kiếm Thuật thì hiển thị nút
     const skillWrap = document.getElementById('skillControlWrapper');
     const hasSkill = window.learnedSkills && window.learnedSkills.includes('skill_ngu_kiem');
     if (skillWrap) {
         skillWrap.style.display = hasSkill ? 'block' : 'none';
     }
+    initSkillAimControls();
+
     battleData.kills = 0;
     battleData.orbitAngle = 0;
     battleData.frameCount = 0;
@@ -180,6 +182,7 @@ window.exitBattle = function(isDeath = false) {
     
     const skillWrap = document.getElementById('skillControlWrapper');
     if (skillWrap) skillWrap.style.display = 'none';
+    battleData.aimState.active = false;
     
     const invBtn = document.querySelector('.fixed-inventory-btn');
     const audioBtn = document.getElementById('audioToggleBtn');
@@ -290,6 +293,7 @@ function battleLoop() {
         battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
     }
 
+    // Hiệu ứng hạt
     for (let i = battleData.particles.length - 1; i >= 0; i--) {
         const p = battleData.particles[i];
         p.x += p.vx;
@@ -307,6 +311,7 @@ function battleLoop() {
         battleCtx.globalAlpha = 1.0;
     }
 
+    // Chữ nổi thông báo
     for (let i = battleData.textPopups.length - 1; i >= 0; i--) {
         const tp = battleData.textPopups[i];
         tp.y -= 0.8; 
@@ -368,6 +373,126 @@ function battleLoop() {
         }
     }
 
+    // ----------------------------------------------------
+    // 1. VẼ ĐƯỜNG ĐỊNH HƯỚNG KÉO THẢ (AIM LINE)
+    // ----------------------------------------------------
+    if (battleData.aimState && battleData.aimState.active) {
+        const adx = battleData.aimState.dirX || 1;
+        const ady = battleData.aimState.dirY || 0;
+        
+        battleCtx.save();
+        battleCtx.beginPath();
+        battleCtx.setLineDash([8, 6]);
+        battleCtx.moveTo(battleData.player.x, battleData.player.y);
+        battleCtx.lineTo(battleData.player.x + adx * 220, battleData.player.y + ady * 220);
+        battleCtx.strokeStyle = "#22d3ee";
+        battleCtx.lineWidth = 3;
+        battleCtx.shadowColor = "#00d2d3";
+        battleCtx.shadowBlur = 12;
+        battleCtx.stroke();
+
+        battleCtx.beginPath();
+        battleCtx.arc(battleData.player.x + adx * 220, battleData.player.y + ady * 220, 6, 0, Math.PI * 2);
+        battleCtx.fillStyle = "#ffd700";
+        battleCtx.fill();
+        battleCtx.restore();
+    }
+
+    // ----------------------------------------------------
+    // 2. XỬ LÝ & VẼ PHI KIẾM PHÓNG ĐI (PROJECTILES XUYÊN THẤU)
+    // ----------------------------------------------------
+    const pSwordImg = getBattleSwordSkin();
+    if (battleData.projectiles) {
+        for (let pIdx = battleData.projectiles.length - 1; pIdx >= 0; pIdx--) {
+            const proj = battleData.projectiles[pIdx];
+            proj.x += proj.vx;
+            proj.y += proj.vy;
+            proj.life--;
+
+            // Vẽ phi kiếm bay
+            battleCtx.save();
+            battleCtx.translate(proj.x, proj.y);
+            battleCtx.rotate(proj.angle + Math.PI / 2);
+            battleCtx.shadowColor = "#38bdf8";
+            battleCtx.shadowBlur = 15;
+            if (pSwordImg.complete && pSwordImg.naturalWidth > 0) {
+                battleCtx.drawImage(pSwordImg, -9, -24, 18, 48);
+            } else {
+                battleCtx.fillStyle = "#ffd700";
+                battleCtx.fillRect(-4, -20, 8, 40);
+            }
+            battleCtx.restore();
+
+            // Va chạm đạn đạo với quái
+            for (let eIdx = battleData.enemies.length - 1; eIdx >= 0; eIdx--) {
+                const en = battleData.enemies[eIdx];
+                if (!proj.hitList.has(en)) {
+                    const dist = Math.hypot(proj.x - en.x, proj.y - en.y);
+                    if (dist < en.radius + 18) {
+                        proj.hitList.add(en);
+                        en.hp -= proj.damage;
+                        proj.durability--;
+
+                        // Knockback
+                        en.x += Math.cos(proj.angle) * 35;
+                        en.y += Math.sin(proj.angle) * 35;
+                        spawnDeathParticles(en.x, en.y, "#ffd700");
+
+                        // Quái chết
+                        if (en.hp <= 0) {
+                            spawnDeathParticles(en.x, en.y, "#00d2d3");
+                            battleData.enemies.splice(eIdx, 1);
+                            battleData.kills++;
+
+                            // Rớt Linh Thạch tỷ lệ 10%
+                            if (Math.random() * 100 < 10.0) {
+                                battleData.drops.push({
+                                    x: en.x, y: en.y, radius: 12, type: 'linh_thach',
+                                    life: 600, bob: Math.random() * Math.PI * 2
+                                });
+                            }
+
+                            // Rớt đan dược
+                            if (!window.inventory) window.inventory = {};
+                            const roll = Math.random() * 100;
+                            let droppedItem = null;
+                            if (roll < 1.0) droppedItem = "hoi_huyet_dan";
+                            else if (roll < 2.0) droppedItem = "hoi_khi_dan";
+                            else if (roll < 2.5) droppedItem = "tu_linh_dan";
+                            else if (roll < 2.6) droppedItem = "than_luc_dan";
+                            else if (roll < 2.7) droppedItem = "khi_huyet_dan";
+                            else if (roll < 2.8) droppedItem = "linh_man_dan";
+                            else if (roll < 2.9) droppedItem = "tinh_than_dan";
+
+                            if (droppedItem) {
+                                window.inventory[droppedItem] = (window.inventory[droppedItem] || 0) + 1;
+                                const itemName = window.ITEM_DATABASE ? window.ITEM_DATABASE[droppedItem].name : "Vật phẩm";
+                                const itemColor = window.ITEM_DATABASE ? window.ITEM_DATABASE[droppedItem].color : "#ffd700";
+                                battleData.textPopups.push({
+                                    x: en.x,
+                                    y: en.y,
+                                    text: `+ ${itemName}`,
+                                    color: itemColor,
+                                    life: 60
+                                });
+                            }
+                        }
+
+                        if (proj.durability <= 0) break;
+                    }
+                }
+            }
+
+            // Hủy phi kiếm khi hết độ bền, hết thời gian hoặc ra khỏi màn hình
+            const outScreen = proj.x < -60 || proj.x > battleCanvas.width + 60 || proj.y < -60 || proj.y > battleCanvas.height + 60;
+            if (proj.durability <= 0 || proj.life <= 0 || outScreen) {
+                spawnDeathParticles(proj.x, proj.y, "#22d3ee");
+                battleData.projectiles.splice(pIdx, 1);
+            }
+        }
+    }
+
+    // Vẽ Nhân Vật
     const pImg = getBattleCharacterSkin();
     battleCtx.save();
     const bobbingY = Math.sin(battleData.frameCount * 0.12) * 4;
@@ -383,6 +508,7 @@ function battleLoop() {
     }
     battleCtx.restore();
 
+    // Kiếm Hộ Thể xoay tròn
     let activeSwordCount = 0;
     const orbitRadius = 75;
     const rotSpeed = 0.04 + (agi * 0.0008);
@@ -443,7 +569,7 @@ function battleLoop() {
                             });
                         }
 
-                        // HỆ THỐNG RỚT ĐỒ CŨ 
+                        // Rớt đan dược
                         if (!window.inventory) window.inventory = {};
                         const roll = Math.random() * 100; 
                         
@@ -485,6 +611,7 @@ function battleLoop() {
         }
     });
 
+    // Spawn quái
     const spawnInterval = Math.max(12, 60 - Math.floor(survivalSec / 15) * 5);
     const spawnBatch = 1 + Math.floor(survivalSec / 45);
 
@@ -494,6 +621,7 @@ function battleLoop() {
         }
     }
 
+    // Cập nhật quái & cắn nhân vật
     for (let i = battleData.enemies.length - 1; i >= 0; i--) {
         const en = battleData.enemies[i];
         if (en.biteCooldown > 0) en.biteCooldown--;
@@ -601,7 +729,7 @@ window.addEventListener('resize', () => {
 function launchNguKiem(targetDirX, targetDirY) {
     if (!battleData.swords || battleData.swords.length === 0) return;
 
-    // Tìm 1 thanh phi kiếm đang còn hoạt động trong quỹ đạo xoay
+    // Tìm 1 phi kiếm đang hoạt động trong quỹ đạo xoay
     const availableSword = battleData.swords.find(s => s.active);
     if (!availableSword) {
         battleData.textPopups.push({
@@ -614,20 +742,19 @@ function launchNguKiem(targetDirX, targetDirY) {
         return;
     }
 
-    // 1. RÚT THANH KIẾM HỘ THỂ
+    // 1. Rút kiếm hộ thể và bắt đầu đếm hồi chiêu
     availableSword.active = false;
     const agi = window.agi || 1;
     const swordDmg = window.swordDamage || 10;
-    // Bắt đầu hồi lại kiếm sau thời gian hồi chiêu
     const cd = Math.max(1200, 3500 - agi * 25);
     setTimeout(() => {
         availableSword.active = true;
         availableSword.durability = swordDmg;
     }, cd);
 
-    // 2. KHỞI TẠO ĐẠN ĐẠO XUYÊN THẤU BAY THẲNG
+    // 2. Khởi tạo đạn đạo xuyên thấu
     const angle = Math.atan2(targetDirY, targetDirX);
-    const speed = 12; // Tốc độ phi kiếm bay nhanh gấp đôi vận tốc quái
+    const speed = 12;
 
     battleData.projectiles.push({
         x: battleData.player.x,
@@ -635,10 +762,10 @@ function launchNguKiem(targetDirX, targetDirY) {
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
         angle: angle,
-        damage: Math.floor(swordDmg * 1.5), // Uy lực phóng kiếm cao gấp 1.5 lần
-        durability: 3,                      // Xuyên thấu tối đa 3 mục tiêu
-        hitList: new Set(),                 // Tránh gây sát thương trùng 1 con trong nhiều frame
-        life: 180                           // Biến mất sau 3 giây nếu không trúng đủ quái
+        damage: Math.floor(swordDmg * 1.5),
+        durability: 3,
+        hitList: new Set(),
+        life: 180
     });
 
     battleData.screenShake = 6;
@@ -649,6 +776,8 @@ function launchNguKiem(targetDirX, targetDirY) {
 function initSkillAimControls() {
     const btn = document.getElementById('skillNguKiemBtn');
     if (!btn) return;
+    if (btn.dataset.bound) return;
+    btn.dataset.bound = "true";
 
     const startAim = (cx, cy) => {
         battleData.aimState.active = true;
@@ -680,7 +809,7 @@ function initSkillAimControls() {
         let dx = battleData.aimState.dirX;
         let dy = battleData.aimState.dirY;
 
-        // Nếu chỉ bấm nhanh mà không kéo hướng: tự động phóng theo hướng quái gần nhất
+        // Bấm nhanh không kéo hướng: tự động ngắm quái gần nhất
         if (dx === 0 && dy === 0) {
             if (battleData.enemies.length > 0) {
                 let nearest = null;
@@ -706,18 +835,17 @@ function initSkillAimControls() {
         battleData.aimState.dirY = 0;
     };
 
-    // Sự kiện Cảm ứng di động
+    // Cảm ứng Mobile
     btn.addEventListener('touchstart', (e) => { e.preventDefault(); const t = e.touches[0]; startAim(t.clientX, t.clientY); }, { passive: false });
     window.addEventListener('touchmove', (e) => { if (battleData.aimState.active) { const t = e.touches[0]; moveAim(t.clientX, t.clientY); } }, { passive: false });
     window.addEventListener('touchend', () => { if (battleData.aimState.active) endAim(); });
 
-    // Sự kiện Chuột máy tính
+    // Chuột PC
     btn.addEventListener('mousedown', (e) => { e.preventDefault(); startAim(e.clientX, e.clientY); });
     window.addEventListener('mousemove', (e) => { if (battleData.aimState.active) moveAim(e.clientX, e.clientY); });
     window.addEventListener('mouseup', () => { if (battleData.aimState.active) endAim(); });
 }
 
-// Khởi động gắn sự kiện
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initSkillAimControls);
 } else {
