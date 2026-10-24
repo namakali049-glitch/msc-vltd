@@ -41,7 +41,6 @@ let currentUser = null;
 let lifetimeMana = 0; 
 let sessionMana = 0;  
 let playerLinhThach = 0;
-window.playerLinhThach = playerLinhThach;
 let inventory = {}; 
 let battleRecord = { maxSurvivalSec: 0, maxKills: 0 };
 let masteredWordsA1 = [];
@@ -53,7 +52,7 @@ window.battleRecord = battleRecord;
 window.masteredWordsA1 = masteredWordsA1;
 window.masteredWordsB1 = masteredWordsB1;
 window.lifetimeMana = lifetimeMana;
-window.playerLinhThach = 0;
+window.playerLinhThach = playerLinhThach;
 
 let playerStats = {
     str: 1, vit: 1, agi: 1, spi: 1,
@@ -341,7 +340,9 @@ async function loadUserLifetimeMana(uid) {
         if (snapshot.exists()) {
             const val = snapshot.val();
             lifetimeMana = val.mana || 0;
-            
+            window.playerLinhThach = val.linhThach || 0;
+            const ltEl = document.getElementById('ui-linh-thach-main');
+            if (ltEl) ltEl.innerText = window.playerLinhThach;
             window.currentHp = val.currentHp !== undefined ? Math.max(val.currentHp, 1) : (window.maxHp || 100);
             inventory = val.inventory || {};
             window.inventory = inventory;
@@ -391,6 +392,7 @@ async function syncManaToDatabase() {
         await update(userRef, {
             name: currentUser.displayName || currentUser.email.split('@')[0],
             mana: lifetimeMana,
+            linhThach: window.playerLinhThach,
             currentHp: window.currentHp,
             inventory: window.inventory || {},
             stats: playerStats,
@@ -442,6 +444,7 @@ window.handleSignup = async function() {
         await set(ref(database, 'users/' + userCred.user.uid), { 
             name: displayName, 
             mana: 0, 
+            linhThach: 0,
             inventory: {},
             stats: playerStats,
             battleRecord: { maxSurvivalSec: 0, maxKills: 0, lastUpdated: Date.now() },
@@ -478,7 +481,10 @@ window.handleGoogleLogin = async function() {
             window.stats = playerStats;
             await set(userRef, { 
                 name: result.user.displayName || "Đạo Hữu", 
-                mana: 0, inventory: {}, stats: playerStats,
+                mana: 0, 
+                linhThach: 0,
+                inventory: {}, 
+                stats: playerStats,
                 masteredA1: [], masteredB1: [], joinedAt: Date.now()
             });
         }
@@ -634,6 +640,7 @@ window.adminAddItems = function(amount = 99) {
     if (window.renderInventory) window.renderInventory();
     return `✅ [Admin] Đã bơm ${amount} đan dược mới vào túi đồ!`;
 };
+
 // ==========================================
 // HỆ THỐNG THÔNG BÁO THIÊN ĐẠO (ĐỘNG TỪ FIREBASE)
 // ==========================================
@@ -702,6 +709,7 @@ async function checkAutoShowAnnouncement() {
         }
     } catch(e) {}
 }
+
 window.updateLinhThach = async function(amount) {
     if (!window.currentUser) return;
     window.playerLinhThach += amount;
