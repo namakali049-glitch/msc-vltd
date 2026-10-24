@@ -19,6 +19,7 @@ let battleData = {
 };
 
 const moveDir = { up: false, down: false, left: false, right: false };
+window.analogMove = { x: 0, y: 0 }; // Vector di chuyển 360 độ
 
 window.setMoveDir = function(dir, active) {
     if (moveDir.hasOwnProperty(dir)) {
