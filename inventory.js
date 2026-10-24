@@ -76,7 +76,9 @@ window.useItem = function(itemId) {
             return;
         }
         
-        window[item.attr] = (window[item.attr] || 1) + 1;
+        // Phải cộng trực tiếp vào playerStats để hàm recalcStats() không ghi đè mất
+        window.playerStats[item.attr] = (window.playerStats[item.attr] || 1) + 1;
+        window[item.attr] = window.playerStats[item.attr];
         window.itemUsageHistory[currentMajor][itemId] = usedCount + 1;
         alert(`🌟 Hấp thụ thành công! Tăng 1 điểm ${item.name.split(" ")[0]}.`);
         if (window.recalcStats) window.recalcStats();
