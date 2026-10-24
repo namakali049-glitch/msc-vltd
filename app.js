@@ -702,3 +702,14 @@ async function checkAutoShowAnnouncement() {
         }
     } catch(e) {}
 }
+window.updateLinhThach = async function(amount) {
+    if (!window.currentUser) return;
+    window.playerLinhThach += amount;
+    const ltEl = document.getElementById('ui-linh-thach-main');
+    if (ltEl) ltEl.innerText = window.playerLinhThach;
+    
+    try {
+        const userRef = ref(window.firebaseDB || database, 'users/' + window.currentUser.uid);
+        await update(userRef, { linhThach: window.playerLinhThach });
+    } catch(e) {}
+};
