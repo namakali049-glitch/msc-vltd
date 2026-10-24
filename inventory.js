@@ -92,4 +92,5 @@ window.useItem = function(itemId) {
     window.inventory[itemId]--;
     if (window.inventory[itemId] <= 0) delete window.inventory[itemId];
     window.renderInventory();
+    if (window.syncManaToDatabase) window.syncManaToDatabase(); // Thêm dòng này để lưu lên Firebase ngay lập tức
 };
