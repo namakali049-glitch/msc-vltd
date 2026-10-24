@@ -134,6 +134,15 @@ window.startBattle = function() {
     battleData.particles = [];
     battleData.textPopups = [];
     battleData.drops = []; // Khởi tạo lại mảng vật phẩm
+    battleData.projectiles = [];
+    battleData.aimState.active = false;
+
+    // Kiểm tra nếu đã lĩnh ngộ Ngự Kiếm Thuật thì hiển thị nút
+    const skillWrap = document.getElementById('skillControlWrapper');
+    const hasSkill = window.learnedSkills && window.learnedSkills.includes('skill_ngu_kiem');
+    if (skillWrap) {
+        skillWrap.style.display = hasSkill ? 'block' : 'none';
+    }
     battleData.kills = 0;
     battleData.orbitAngle = 0;
     battleData.frameCount = 0;
