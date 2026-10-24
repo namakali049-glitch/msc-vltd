@@ -9,6 +9,7 @@ let battleData = {
     enemies: [],
     particles: [],
     textPopups: [], // Thêm mảng chứa hiệu ứng chữ nổi khi rớt đồ
+    drops: [], // <--- THÊM DÒNG NÀY ĐỂ CHỨA LINH THẠCH
     screenShake: 0,
     damageFlash: 0,
     kills: 0,
