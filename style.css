@@ -329,30 +329,43 @@ body {
   border-radius: 6px; font-weight: bold; cursor: pointer;
 }
 
-/* FIX D-PAD: CHUYỂN SANG GRID ĐỂ CHỐNG TRƯỢT TỌA ĐỘ VÀ SAFE AREA */
-.dpad-wrapper {
-  position: absolute; 
-  bottom: max(18px, env(safe-area-inset-bottom)); 
-  left: max(18px, env(safe-area-inset-left));
-  display: grid; 
-  grid-template-columns: repeat(3, 48px); 
-  grid-template-rows: repeat(3, 48px); 
-  gap: 6px;
-  z-index: 100;
+/* VIRTUAL JOYSTICK */
+.joystick-zone {
+  position: absolute;
+  top: 0; left: 0; width: 50vw; height: 100vh;
+  z-index: 100; touch-action: none;
 }
-.dpad-horizontal { display: contents; } /* Xóa bỏ rào cản HTML cũ để Grid hoạt động */
-.dpad-up { grid-column: 2; grid-row: 1; }
-.dpad-left { grid-column: 1; grid-row: 2; }
-.dpad-right { grid-column: 3; grid-row: 2; }
-.dpad-down { grid-column: 2; grid-row: 3; }
+.joystick-base {
+  position: absolute; width: 100px; height: 100px;
+  background: rgba(255, 255, 255, 0.15); border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%; opacity: 0; pointer-events: none;
+  transform: translate(-50%, -50%); transition: opacity 0.2s;
+}
+.joystick-stick {
+  position: absolute; top: 25px; left: 25px; width: 50px; height: 50px;
+  background: rgba(56, 189, 248, 0.8); border-radius: 50%;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.6); pointer-events: none;
+}
 
-.dpad-key {
-  width: 100%; height: 100%; background: rgba(255, 255, 255, 0.25);
-  border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 8px;
-  color: #fff; font-size: 1.2rem; display: flex; align-items: center;
-  justify-content: center; cursor: pointer; touch-action: none;
+/* SKILL INDICATOR & COOLDOWN */
+.skill-control-wrapper {
+  position: absolute;
+  bottom: max(30px, env(safe-area-inset-bottom)); right: max(30px, env(safe-area-inset-right));
+  z-index: 90; pointer-events: none; /* Xuyên thấu cảm ứng */
 }
-.dpad-key:active { background: rgba(56, 189, 248, 0.6); }
+.skill-indicator {
+  position: relative; width: 72px; height: 72px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.35) 0%, rgba(15, 23, 42, 0.9) 100%);
+  border: 2px solid #22d3ee; color: #fff;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.5); overflow: hidden;
+}
+.skill-indicator span { font-size: 1.5rem; line-height: 1; position: relative; z-index: 2; }
+.skill-indicator small { font-size: 0.55rem; color: #38bdf8; font-weight: bold; margin-top: 4px; position: relative; z-index: 2; text-align: center; }
+.skill-cd-overlay {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 0%;
+  background: rgba(0, 0, 0, 0.75); z-index: 1; transition: height 0.1s linear;
+}
 
 /* BẾ QUAN KHAI PHÁ */
 #game-screen { flex-direction: column; align-items: center; padding: 12px; }
