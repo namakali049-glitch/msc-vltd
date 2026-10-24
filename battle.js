@@ -319,7 +319,47 @@ function battleLoop() {
         battleCtx.fillText(tp.text, tp.x, tp.y);
         battleCtx.restore();
     }
+    
+// XỬ LÝ VẬT PHẨM RỚT TRÊN BẢN ĐỒ (LINH THẠCH)
+    for (let i = battleData.drops.length - 1; i >= 0; i--) {
+        const drop = battleData.drops[i];
+        drop.life--;
+        if (drop.life <= 0) {
+            battleData.drops.splice(i, 1);
+            continue;
+        }
 
+        drop.bob += 0.1;
+        const offsetY = Math.sin(drop.bob) * 4;
+
+        // Vẽ Linh Thạch 💎 có hiệu ứng phát sáng
+        battleCtx.save();
+        battleCtx.globalAlpha = Math.min(1.0, drop.life / 60);
+        battleCtx.font = "18px Arial";
+        battleCtx.textAlign = "center";
+        battleCtx.textBaseline = "middle";
+        battleCtx.shadowColor = "#22d3ee";
+        battleCtx.shadowBlur = 10 + Math.sin(drop.bob) * 5;
+        battleCtx.fillText("💎", drop.x, drop.y + offsetY);
+        battleCtx.restore();
+
+        // Kiểm tra va chạm: Nhân vật nhặt Linh Thạch (Phạm vi hút: 15px)
+        const ddist = Math.hypot(battleData.player.x - drop.x, battleData.player.y - drop.y);
+        if (ddist < battleData.player.radius + drop.radius + 15) {
+            if (drop.type === 'linh_thach') {
+                const amount = 10 + Math.floor(Math.random() * 6); // Rớt ngẫu nhiên 10-15 💎
+                if (window.updateLinhThach) window.updateLinhThach(amount);
+                
+                // Bật chữ nổi thông báo
+                battleData.textPopups.push({
+                    x: battleData.player.x, y: battleData.player.y - 30,
+                    text: `+${amount} 💎`, color: "#22d3ee", life: 60
+                });
+                if (window.playClickSound) window.playClickSound(); // Có thể thay bằng playLootSound
+            }
+            battleData.drops.splice(i, 1);
+        }
+    }
     // Vẽ Nhân Vật
     const pImg = getBattleCharacterSkin();
     battleCtx.save();
