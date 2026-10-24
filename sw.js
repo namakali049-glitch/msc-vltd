@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tutien-v7';
+const CACHE_NAME = 'tutien-v8';
 const STATIC_ASSETS = [
   './',
   './chat.js',
