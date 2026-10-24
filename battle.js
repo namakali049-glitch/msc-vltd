@@ -8,8 +8,8 @@ let battleData = {
     swords: [],
     enemies: [],
     particles: [],
-    textPopups: [], // Thêm mảng chứa hiệu ứng chữ nổi khi rớt đồ
-    drops: [], // <--- THÊM DÒNG NÀY ĐỂ CHỨA LINH THẠCH
+    textPopups: [], 
+    drops: [], // <--- THÊM MẢNG CHỨA LINH THẠCH
     screenShake: 0,
     damageFlash: 0,
     kills: 0,
@@ -54,7 +54,6 @@ const battleAssets = {
     enemyGhost: new Image()
 };
 
-// Đã gộp gọn các khai báo đường dẫn ảnh, xóa bỏ các dòng trùng lặp
 battleAssets.bg.src = "assets/hac-am-son-dong.png";
 battleAssets.playerPhamNhan.src = "assets/pham-nhan.png";
 battleAssets.playerLuyenKhi.src = "assets/luyen-khi.png";
@@ -82,10 +81,10 @@ function getBattleCharacterSkin() {
 
 function getBattleSwordSkin() {
     const mana = window.lifetimeMana || 0;
-    if (mana >= 50000) return battleAssets.swordNguyenAnh; // Kiếm sét Cửu Tiêu
-    if (mana >= 12000) return battleAssets.swordKimDan;    // Kiếm lửa Xích Kim
-    if (mana >= 4000) return battleAssets.swordCyan;       // Kiếm khí Trúc Cơ
-    return battleAssets.swordWood;                         // Mộc kiếm / Kiếm khí Luyện Khí
+    if (mana >= 50000) return battleAssets.swordNguyenAnh; 
+    if (mana >= 12000) return battleAssets.swordKimDan;    
+    if (mana >= 4000) return battleAssets.swordCyan;       
+    return battleAssets.swordWood;                         
 }
 
 const battleCanvas = document.getElementById('gameCanvas');
@@ -132,6 +131,7 @@ window.startBattle = function() {
     battleData.enemies = [];
     battleData.particles = [];
     battleData.textPopups = [];
+    battleData.drops = []; // Khởi tạo lại mảng vật phẩm
     battleData.kills = 0;
     battleData.orbitAngle = 0;
     battleData.frameCount = 0;
@@ -143,7 +143,6 @@ window.startBattle = function() {
     battleData.player.y = battleCanvas.height / 2;
     window.currentHp = window.maxHp || 100;
 
-    // CẬP NHẬT TÊN, CẢNH GIỚI VÀ PHỤC HỒI LINH LỰC KHI VÀO BÍ CẢNH
     const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
     const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
     const realmName = window.calculateRealm ? window.calculateRealm(window.lifetimeMana || 0, countA1, countB1) : "Luyện Khí";
@@ -178,7 +177,6 @@ window.exitBattle = function(isDeath = false) {
     const survivalSec = Math.floor(battleData.frameCount / 60);
     const formatTimeFunc = window.formatTime || ((s) => `${Math.floor(s/60)}:${s%60}`);
 
-    // Chỉ ghi nhận ván đấu nếu vượt qua kỷ lục tốt nhất cũ (KHÔNG CỘNG DỒN)
     let recordNotice = "";
     if (window.recordBattleResult) {
         const isNewRecord = window.recordBattleResult(survivalSec, battleData.kills);
@@ -252,7 +250,6 @@ function battleLoop() {
     battleCtx.translate(shakeX, shakeY);
     battleCtx.clearRect(0, 0, battleCanvas.width, battleCanvas.height);
 
-    // Di chuyển nhân vật
     let moveX = 0;
     let moveY = 0;
     if (moveDir.up) moveY -= 1;
@@ -272,7 +269,6 @@ function battleLoop() {
     battleData.player.x = Math.max(35, Math.min(battleCanvas.width - 35, battleData.player.x));
     battleData.player.y = Math.max(45, Math.min(battleCanvas.height - 45, battleData.player.y));
 
-    // Vẽ Background
     if (battleAssets.bg.complete && battleAssets.bg.naturalWidth > 0) {
         battleCtx.drawImage(battleAssets.bg, 0, 0, battleCanvas.width, battleCanvas.height);
     } else {
@@ -280,7 +276,6 @@ function battleLoop() {
         battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
     }
 
-    // Vẽ Particles (Hiệu ứng chém)
     for (let i = battleData.particles.length - 1; i >= 0; i--) {
         const p = battleData.particles[i];
         p.x += p.vx;
@@ -298,10 +293,9 @@ function battleLoop() {
         battleCtx.globalAlpha = 1.0;
     }
 
-    // Vẽ Text Popups (Thông báo nhặt đồ)
     for (let i = battleData.textPopups.length - 1; i >= 0; i--) {
         const tp = battleData.textPopups[i];
-        tp.y -= 0.8; // Bay lên trên
+        tp.y -= 0.8; 
         tp.life -= 1;
         if (tp.life <= 0) {
             battleData.textPopups.splice(i, 1);
@@ -312,15 +306,14 @@ function battleLoop() {
         battleCtx.fillStyle = tp.color || "#ffd700";
         battleCtx.font = "bold 16px Arial";
         battleCtx.textAlign = "center";
-        // Viền chữ
         battleCtx.strokeStyle = "black";
         battleCtx.lineWidth = 2;
         battleCtx.strokeText(tp.text, tp.x, tp.y);
         battleCtx.fillText(tp.text, tp.x, tp.y);
         battleCtx.restore();
     }
-    
-// XỬ LÝ VẬT PHẨM RỚT TRÊN BẢN ĐỒ (LINH THẠCH)
+
+    // XỬ LÝ VẬT PHẨM RỚT TRÊN BẢN ĐỒ (LINH THẠCH)
     for (let i = battleData.drops.length - 1; i >= 0; i--) {
         const drop = battleData.drops[i];
         drop.life--;
@@ -332,9 +325,8 @@ function battleLoop() {
         drop.bob += 0.1;
         const offsetY = Math.sin(drop.bob) * 4;
 
-        // Vẽ Linh Thạch 💎 có hiệu ứng phát sáng
         battleCtx.save();
-        battleCtx.globalAlpha = Math.min(1.0, drop.life / 60);
+        battleCtx.globalAlpha = Math.min(1.0, drop.life / 60); 
         battleCtx.font = "18px Arial";
         battleCtx.textAlign = "center";
         battleCtx.textBaseline = "middle";
@@ -343,24 +335,25 @@ function battleLoop() {
         battleCtx.fillText("💎", drop.x, drop.y + offsetY);
         battleCtx.restore();
 
-        // Kiểm tra va chạm: Nhân vật nhặt Linh Thạch (Phạm vi hút: 15px)
         const ddist = Math.hypot(battleData.player.x - drop.x, battleData.player.y - drop.y);
-        if (ddist < battleData.player.radius + drop.radius + 15) {
+        if (ddist < battleData.player.radius + drop.radius + 15) { 
             if (drop.type === 'linh_thach') {
-                const amount = 10 + Math.floor(Math.random() * 6); // Rớt ngẫu nhiên 10-15 💎
+                const amount = 10 + Math.floor(Math.random() * 6); 
                 if (window.updateLinhThach) window.updateLinhThach(amount);
                 
-                // Bật chữ nổi thông báo
                 battleData.textPopups.push({
-                    x: battleData.player.x, y: battleData.player.y - 30,
-                    text: `+${amount} 💎`, color: "#22d3ee", life: 60
+                    x: battleData.player.x,
+                    y: battleData.player.y - 30,
+                    text: `+${amount} 💎`,
+                    color: "#22d3ee",
+                    life: 60
                 });
-                if (window.playClickSound) window.playClickSound(); // Có thể thay bằng playLootSound
+                if (window.playClickSound) window.playClickSound(); 
             }
             battleData.drops.splice(i, 1);
         }
     }
-    // Vẽ Nhân Vật
+
     const pImg = getBattleCharacterSkin();
     battleCtx.save();
     const bobbingY = Math.sin(battleData.frameCount * 0.12) * 4;
@@ -376,7 +369,6 @@ function battleLoop() {
     }
     battleCtx.restore();
 
-    // Vẽ & Xử lý Kiếm Khí (Va chạm)
     let activeSwordCount = 0;
     const orbitRadius = 75;
     const rotSpeed = 0.04 + (agi * 0.0008);
@@ -402,12 +394,10 @@ function battleLoop() {
             }
             battleCtx.restore();
 
-            // Va chạm với Quái
             for (let i = battleData.enemies.length - 1; i >= 0; i--) {
                 const en = battleData.enemies[i];
                 if (Math.hypot(sx - en.x, sy - en.y) < en.radius + 15) {
                     
-                    // Knockback
                     const kdx = en.x - battleData.player.x;
                     const kdy = en.y - battleData.player.y;
                     const kdist = Math.hypot(kdx, kdy);
@@ -416,7 +406,6 @@ function battleLoop() {
                         en.y += (kdy / kdist) * 25;
                     }
 
-                    // Trừ HP
                     if (sword.durability >= en.hp) {
                         sword.durability -= en.hp;
                         en.hp = 0;
@@ -425,22 +414,22 @@ function battleLoop() {
                         sword.durability = 0;
                     }
 
-                    // Quái chết
                     if (en.hp <= 0) {
                         spawnDeathParticles(en.x, en.y, "#00d2d3");
                         battleData.enemies.splice(i, 1);
                         battleData.kills++;
+
                         // TỈ LỆ 10% RỚT LINH THẠCH 💎
                         const dropRoll = Math.random() * 100;
                         if (dropRoll < 10.0) {
                             battleData.drops.push({
                                 x: en.x, y: en.y, radius: 12, type: 'linh_thach',
-                                life: 600, // Tồn tại trên mặt đất 10 giây (60fps)
-                                bob: Math.random() * Math.PI * 2
+                                life: 600, 
+                                bob: Math.random() * Math.PI * 2 
                             });
                         }
 
-                        // HỆ THỐNG RỚT ĐỒ MỚI 
+                        // HỆ THỐNG RỚT ĐỒ CŨ 
                         if (!window.inventory) window.inventory = {};
                         const roll = Math.random() * 100; 
                         
@@ -458,18 +447,16 @@ function battleLoop() {
                             const itemName = window.ITEM_DATABASE ? window.ITEM_DATABASE[droppedItem].name : "Vật phẩm";
                             const itemColor = window.ITEM_DATABASE ? window.ITEM_DATABASE[droppedItem].color : "#ffd700";
                             
-                            // Tạo hiệu ứng chữ nổi báo nhặt đồ
                             battleData.textPopups.push({
                                 x: en.x,
                                 y: en.y,
                                 text: `+ ${itemName}`,
                                 color: itemColor,
-                                life: 60 // Tồn tại trong 60 frames (~1s)
+                                life: 60 
                             });
                         }
                     }
 
-                    // Kích hoạt hồi chiêu cho kiếm nếu hỏng
                     if (sword.durability <= 0) {
                         sword.active = false;
                         const cd = Math.max(1000, 3200 - agi * 25);
@@ -477,14 +464,13 @@ function battleLoop() {
                             sword.active = true;
                             sword.durability = swordDmg;
                         }, cd);
-                        break; // Thoát vòng lặp quái vì kiếm đã gãy
+                        break; 
                     }
                 }
             }
         }
     });
 
-    // Spawn quái vật
     const spawnInterval = Math.max(12, 60 - Math.floor(survivalSec / 15) * 5);
     const spawnBatch = 1 + Math.floor(survivalSec / 45);
 
@@ -494,7 +480,6 @@ function battleLoop() {
         }
     }
 
-    // Cập nhật vị trí và hành vi quái vật
     for (let i = battleData.enemies.length - 1; i >= 0; i--) {
         const en = battleData.enemies[i];
         if (en.biteCooldown > 0) en.biteCooldown--;
@@ -524,7 +509,6 @@ function battleLoop() {
         }
         battleCtx.restore();
 
-        // Xử lý quái cắn nhân vật
         if (dist < battleData.player.radius + en.radius) {
             if (en.biteCooldown <= 0) {
                 let dodge = Math.min(30, agi * 0.5);
@@ -555,7 +539,6 @@ function battleLoop() {
         }
     }
 
-    // Hiệu ứng chớp máu khi dính đòn
     if (battleData.damageFlash > 0) {
         battleCtx.fillStyle = `rgba(255, 0, 0, ${battleData.damageFlash * 0.06})`;
         battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
@@ -564,7 +547,6 @@ function battleLoop() {
 
     battleCtx.restore();
 
-    // CẬP NHẬT THANH MÁU ĐỘNG (HP)
     const curHp = Math.max(0, window.currentHp || 0);
     const hpPercent = Math.min(100, Math.max(0, (curHp / maxHp) * 100));
     const hpFill = document.getElementById('battleHpFill');
@@ -572,7 +554,6 @@ function battleLoop() {
     if (hpFill) hpFill.style.width = hpPercent + "%";
     if (hpText) hpText.innerText = `❤️ ${curHp}/${maxHp}`;
 
-    // CẬP NHẬT THANH MANA ĐỘNG (LINH LỰC)
     const curMana = Math.max(0, window.currentLinhLuc || 0);
     const maxMana = window.maxLinhLuc || 0;
     const manaPercent = maxMana > 0 ? Math.min(100, Math.max(0, (curMana / maxMana) * 100)) : 0;
@@ -581,7 +562,6 @@ function battleLoop() {
     if (manaFill) manaFill.style.width = manaPercent + "%";
     if (manaText) manaText.innerText = `🌀 ${curMana}/${maxMana}`;
 
-    // THÔNG TIN SINH TỒN VÀ TRẢM YÊU
     const timeEl = document.getElementById('battleTimeText');
     const swordEl = document.getElementById('battleSwordText');
     const killsEl = document.getElementById('battleKillsText');
