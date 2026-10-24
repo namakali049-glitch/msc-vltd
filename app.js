@@ -4,7 +4,7 @@ import './battle.js';
 import './inventory.js';
 import './audio.js';
 import './realm.js';
-
+import './shop.js'
 // ==========================================
 // 1. CẤU HÌNH FIREBASE
 // ==========================================
