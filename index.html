@@ -262,10 +262,20 @@
     </div>
 
     <!-- HUD HIỂN THỊ KỸ NĂNG BÊN PHẢI (KHÔNG CẢM ỨNG) -->
+    <!-- VIRTUAL JOYSTICK TÀNG HÌNH BÊN TRÁI (Di chuyển) -->
+    <div id="joystickZone" class="joystick-zone">
+      <div id="joystickBase" class="joystick-base">
+        <div id="joystickStick" class="joystick-stick"></div>
+      </div>
+    </div>
+
+    <!-- CẦN GẠT KỸ NĂNG BÊN PHẢI (Twin-stick Ngắm Bắn) -->
     <div id="skillControlWrapper" class="skill-control-wrapper" style="display: none;">
-      <div id="skillNguKiemUI" class="skill-indicator">
-        <span>⚔️</span>
-        <small>Vuốt màn hình</small>
+      <div id="activeSkillName" class="skill-name-tag">Ngự Kiếm Thuật</div>
+      <div id="skillAimBase" class="skill-aim-base">
+        <div id="skillAimStick" class="skill-aim-stick">
+          <span id="activeSkillIcon">⚔️</span>
+        </div>
         <div id="skillCooldownOverlay" class="skill-cd-overlay"></div>
       </div>
     </div>
