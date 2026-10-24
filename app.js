@@ -420,6 +420,7 @@ onAuthStateChanged(auth, async (user) => {
         inventory = {};
         window.inventory = inventory;
         switchScreen('auth-screen');
+        checkAutoShowAnnouncement();
     }
 });
 
