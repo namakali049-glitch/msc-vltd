@@ -73,6 +73,9 @@
         <button class="lobby-btn btn-cultivate" onclick="openLibraryModal()">
           📖 Tàng Kinh Các 🚀
         </button>
+        <button class="lobby-btn btn-shop" onclick="openShopModal()">
+          🏪 Trân Bảo Các
+        </button>
         <button class="lobby-btn btn-battle" onclick="startBattle()">
           Bí Cảnh Trảm Yêu ⚔️
         </button>
@@ -453,6 +456,28 @@
       </div>
 
       <button class="btn-main mt-10" onclick="closeAnnouncementModal()">Đã Lĩnh Ngộ 🧘‍♂️</button>
+    </div>
+  </div>
+  <!-- MODAL: TRÂN BẢO CÁC (SHOP) -->
+  <div id="shopModal" class="modal-overlay" style="display: none; z-index: 10000;">
+    <div class="shop-card">
+      <div class="shop-header">
+        <h3>🏪 TRÂN BẢO CÁC</h3>
+        <div class="currency-badge">
+          <span class="icon-linh-thach">💎</span>
+          <span id="ui-linh-thach-shop">0</span>
+        </div>
+        <button class="btn-close-modal" onclick="closeShopModal()">✖</button>
+      </div>
+      
+      <div class="shop-tabs">
+        <button id="shop-tab-duoc" class="shop-tab-btn active" onclick="renderShop('dieu_duoc')">💊 Diệu Dược</button>
+        <button id="shop-tab-ky" class="shop-tab-btn" onclick="renderShop('than_ky')">📜 Thần Kỹ</button>
+      </div>
+
+      <div id="shopContent" class="shop-content-box">
+        <!-- Danh sách vật phẩm sẽ được JS render tại đây -->
+      </div>
     </div>
   </div>
   <script type="module" src="app.js"></script>
