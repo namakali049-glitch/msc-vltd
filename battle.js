@@ -263,9 +263,12 @@ function battleLoop() {
         if (battleData.screenShake < 0.5) battleData.screenShake = 0;
     }
 
+    // Xóa sạch toàn bộ màn hình trước
+    battleCtx.clearRect(0, 0, battleCanvas.width, battleCanvas.height);
+    
+    // Sau đó mới lưu trạng thái và rung màn hình
     battleCtx.save();
     battleCtx.translate(shakeX, shakeY);
-    battleCtx.clearRect(0, 0, battleCanvas.width, battleCanvas.height);
 
     let moveX = 0;
     let moveY = 0;
