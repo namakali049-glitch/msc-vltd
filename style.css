@@ -1430,3 +1430,29 @@ body {
   font-weight: bold;
   margin-top: 2px;
 }
+/* ====================================================== */
+/* CẢNH BÁO XOAY MÀN HÌNH NGANG (PORTRAIT WARNING)        */
+/* ====================================================== */
+#orientation-warning {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: #050811;
+  color: #ffd700;
+  z-index: 999999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+#orientation-warning h2 { margin-bottom: 10px; font-size: 1.5rem; }
+#orientation-warning p { color: #cbd5e1; font-size: 0.95rem; line-height: 1.5; }
+
+/* Kích hoạt cảnh báo nếu màn hình đang ở chiều dọc (chiều cao > chiều rộng) */
+@media screen and (orientation: portrait) {
+  #orientation-warning {
+    display: flex;
+  }
+}
