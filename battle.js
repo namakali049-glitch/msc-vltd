@@ -350,8 +350,9 @@ function battleLoop() {
         battleCtx.font = "18px Arial";
         battleCtx.textAlign = "center";
         battleCtx.textBaseline = "middle";
-        battleCtx.shadowColor = "#22d3ee";
-        battleCtx.shadowBlur = 10 + Math.sin(drop.bob) * 5;
+        // ĐÃ TẮT SHADOW ĐỂ TĂNG FPS
+        // battleCtx.shadowColor = "#22d3ee";
+        // battleCtx.shadowBlur = 10 + Math.sin(drop.bob) * 5;
         battleCtx.fillText("💎", drop.x, drop.y + offsetY);
         battleCtx.restore();
 
@@ -388,8 +389,9 @@ function battleLoop() {
         battleCtx.lineTo(battleData.player.x + adx * 220, battleData.player.y + ady * 220);
         battleCtx.strokeStyle = "#22d3ee";
         battleCtx.lineWidth = 3;
-        battleCtx.shadowColor = "#00d2d3";
-        battleCtx.shadowBlur = 12;
+        // ĐÃ TẮT SHADOW ĐỂ TĂNG FPS
+        // battleCtx.shadowColor = "#00d2d3";
+        // battleCtx.shadowBlur = 12;
         battleCtx.stroke();
 
         battleCtx.beginPath();
@@ -414,8 +416,9 @@ function battleLoop() {
             battleCtx.save();
             battleCtx.translate(proj.x, proj.y);
             battleCtx.rotate(proj.angle + Math.PI / 2);
-            battleCtx.shadowColor = "#38bdf8";
-            battleCtx.shadowBlur = 15;
+            // ĐÃ TẮT SHADOW ĐỂ TĂNG FPS
+            // battleCtx.shadowColor = "#38bdf8";
+            // battleCtx.shadowBlur = 15;
             if (pSwordImg.complete && pSwordImg.naturalWidth > 0) {
                 battleCtx.drawImage(pSwordImg, -9, -24, 18, 48);
             } else {
@@ -690,29 +693,32 @@ function battleLoop() {
 
     battleCtx.restore();
 
-    const curHp = Math.max(0, window.currentHp || 0);
-    const hpPercent = Math.min(100, Math.max(0, (curHp / maxHp) * 100));
-    const hpFill = document.getElementById('battleHpFill');
-    const hpText = document.getElementById('battleHpText');
-    if (hpFill) hpFill.style.width = hpPercent + "%";
-    if (hpText) hpText.innerText = `❤️ ${curHp}/${maxHp}`;
+    // [FIX LAG] CHỈ CẬP NHẬT GIAO DIỆN DOM MỖI 10 FRAME (6 LẦN/GIÂY)
+    if (battleData.frameCount % 10 === 0) {
+        const curHp = Math.max(0, window.currentHp || 0);
+        const hpPercent = Math.min(100, Math.max(0, (curHp / maxHp) * 100));
+        const hpFill = document.getElementById('battleHpFill');
+        const hpText = document.getElementById('battleHpText');
+        if (hpFill) hpFill.style.width = hpPercent + "%";
+        if (hpText) hpText.innerText = `❤️ ${curHp}/${maxHp}`;
 
-    const curMana = Math.max(0, window.currentLinhLuc || 0);
-    const maxMana = window.maxLinhLuc || 0;
-    const manaPercent = maxMana > 0 ? Math.min(100, Math.max(0, (curMana / maxMana) * 100)) : 0;
-    const manaFill = document.getElementById('battleManaFill');
-    const manaText = document.getElementById('battleManaText');
-    if (manaFill) manaFill.style.width = manaPercent + "%";
-    if (manaText) manaText.innerText = `🌀 ${curMana}/${maxMana}`;
+        const curMana = Math.max(0, window.currentLinhLuc || 0);
+        const maxMana = window.maxLinhLuc || 0;
+        const manaPercent = maxMana > 0 ? Math.min(100, Math.max(0, (curMana / maxMana) * 100)) : 0;
+        const manaFill = document.getElementById('battleManaFill');
+        const manaText = document.getElementById('battleManaText');
+        if (manaFill) manaFill.style.width = manaPercent + "%";
+        if (manaText) manaText.innerText = `🌀 ${curMana}/${maxMana}`;
 
-    const timeEl = document.getElementById('battleTimeText');
-    const swordEl = document.getElementById('battleSwordText');
-    const killsEl = document.getElementById('battleKillsText');
+        const timeEl = document.getElementById('battleTimeText');
+        const swordEl = document.getElementById('battleSwordText');
+        const killsEl = document.getElementById('battleKillsText');
 
-    const formatTimeFunc = window.formatTime || ((s) => `${Math.floor(s/60)}:${s%60}`);
-    if (timeEl) timeEl.innerText = `⏱️ Sinh Tồn: ${formatTimeFunc(survivalSec)}`;
-    if (swordEl) swordEl.innerText = `⚔️ Kiếm Khí: ${activeSwordCount}/${battleData.swords.length}`;
-    if (killsEl) killsEl.innerText = `👾 Ma Vật Trảm: ${battleData.kills}`;
+        const formatTimeFunc = window.formatTime || ((s) => `${Math.floor(s/60)}:${s%60}`);
+        if (timeEl) timeEl.innerText = `⏱️ Sinh Tồn: ${formatTimeFunc(survivalSec)}`;
+        if (swordEl) swordEl.innerText = `⚔️ Kiếm Khí: ${activeSwordCount}/${battleData.swords.length}`;
+        if (killsEl) killsEl.innerText = `👾 Ma Vật Trảm: ${battleData.kills}`;
+    }
 
     battleAnimationFrame = requestAnimationFrame(battleLoop);
 }
