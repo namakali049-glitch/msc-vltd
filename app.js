@@ -630,3 +630,71 @@ window.adminAddItems = function(amount = 99) {
     if (window.renderInventory) window.renderInventory();
     return `✅ [Admin] Đã bơm ${amount} đan dược mới vào túi đồ!`;
 };
+// ==========================================
+// HỆ THỐNG THÔNG BÁO THIÊN ĐẠO (ĐỘNG TỪ FIREBASE)
+// ==========================================
+let cachedAnnouncement = null;
+let currentFanpageUrl = "https://www.facebook.com/share/1bMhNss7GZ/";
+
+window.openAnnouncementModal = async function() {
+    if (window.playClickSound) window.playClickSound();
+    const modal = document.getElementById('announcementModal');
+    if (modal) modal.style.display = 'flex';
+    await fetchAndRenderAnnouncement();
+};
+
+window.closeAnnouncementModal = function() {
+    if (window.playClickSound) window.playClickSound();
+    const modal = document.getElementById('announcementModal');
+    if (modal) modal.style.display = 'none';
+    if (cachedAnnouncement && cachedAnnouncement.version) {
+        localStorage.setItem('last_seen_announce_ver', cachedAnnouncement.version);
+    }
+};
+
+window.goToFanpage = function() {
+    if (window.playClickSound) window.playClickSound();
+    window.open(currentFanpageUrl, '_blank');
+};
+
+async function fetchAndRenderAnnouncement() {
+    try {
+        const announceRef = ref(window.firebaseDB || database, 'announcement');
+        const snapshot = await get(announceRef);
+        
+        if (snapshot.exists()) {
+            cachedAnnouncement = snapshot.val();
+            
+            const titleEl = document.getElementById('announceTitle');
+            const patchEl = document.getElementById('announcePatchNotes');
+            const guideEl = document.getElementById('announceGuide');
+            const fanDescEl = document.getElementById('announceFanpageText');
+            
+            if (titleEl) titleEl.innerText = cachedAnnouncement.title || "THIÊN ĐẠO THÔNG CÁO";
+            if (patchEl) patchEl.innerText = cachedAnnouncement.patchNotes || "Không có thay đổi mới.";
+            if (guideEl) guideEl.innerText = cachedAnnouncement.gameplayGuide || "Hãy chú ý bế quan tu luyện!";
+            if (fanDescEl && cachedAnnouncement.fanpageText) fanDescEl.innerText = cachedAnnouncement.fanpageText;
+            if (cachedAnnouncement.fanpageUrl) currentFanpageUrl = cachedAnnouncement.fanpageUrl;
+        } else {
+            document.getElementById('announceTitle').innerText = "THIÊN ĐẠO THÔNG CÁO v0.8.4";
+            document.getElementById('announcePatchNotes').innerText = "• Tối ưu hóa cụm phím tiện ích sảnh chính.\n• Khai mở bảng tin tức cập nhật.";
+            document.getElementById('announceGuide').innerText = "Vào Tàng Kinh Các để tích lũy Linh Lực thăng cảnh giới.";
+        }
+    } catch (e) {
+        console.error("Lỗi tải thông báo Firebase:", e);
+    }
+}
+
+async function checkAutoShowAnnouncement() {
+    try {
+        const announceRef = ref(window.firebaseDB || database, 'announcement');
+        const snapshot = await get(announceRef);
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            const lastSeen = localStorage.getItem('last_seen_announce_ver');
+            if (data.version && data.version !== lastSeen) {
+                await window.openAnnouncementModal();
+            }
+        }
+    } catch(e) {}
+}
