@@ -184,10 +184,9 @@ window.exitBattle = function(isDeath = false) {
     battleData.aimState.active = false;
     
     const invBtn = document.querySelector('.fixed-inventory-btn');
-    const audioBtn = document.getElementById('audioToggleBtn');
+    const topBar = document.querySelector('.fixed-top-right-bar');
     if (invBtn) invBtn.style.display = 'block';
-    if (audioBtn) audioBtn.style.display = 'block';
-
+    if (topBar) topBar.style.display = 'flex'; // Dùng 'flex' để thanh giữ đúng cấu trúc hàng ngang
     moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
     
     const survivalSec = Math.floor(battleData.frameCount / 60);
