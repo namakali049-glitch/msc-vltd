@@ -247,13 +247,13 @@ window.checkAnswer = function(selectedIdx, btnElement) {
         let bottleneckMsg = "";
 
         if (!window.isAdmin && countA1 < 600 && currentMana + bonusMana >= 12000) {
-            bonusMana = Math.max(0, 11999 - currentMana);
+            bonusMana = Math.max(0, 12000 - currentMana);
             if (bonusMana === 0) {
                 canGainMana = false;
                 bottleneckMsg = "<br><span style='color:#ef4444; font-weight:bold;'>⚠️ Kẹt Bình Cảnh! Cần lĩnh ngộ đủ 600 từ A1 để đột phá.</span>";
             }
         } else if (!window.isAdmin && countB1 < 2667 && currentMana + bonusMana >= 50000) {
-            bonusMana = Math.max(0, 49999 - currentMana);
+            bonusMana = Math.max(0, 50000 - currentMana);
             if (bonusMana === 0) {
                 canGainMana = false;
                 bottleneckMsg = "<br><span style='color:#ef4444; font-weight:bold;'>⚠️ Kẹt Bình Cảnh! Cần lĩnh ngộ đủ 2667 từ B1 để đột phá.</span>";
