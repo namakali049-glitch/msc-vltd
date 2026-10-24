@@ -115,10 +115,9 @@ window.startBattle = function() {
     if (window.switchScreen) window.switchScreen('battle-screen');
     
     const invBtn = document.querySelector('.fixed-inventory-btn');
-    const audioBtn = document.getElementById('audioToggleBtn');
+    const topBar = document.querySelector('.fixed-top-right-bar');
     if (invBtn) invBtn.style.display = 'none';
-    if (audioBtn) audioBtn.style.display = 'none';
-
+    if (topBar) topBar.style.display = 'none';
     resizeBattleCanvas();
     
     const swordCountFunc = window.getSwordCount || (typeof getSwordCount === 'function' ? getSwordCount : () => 1);
