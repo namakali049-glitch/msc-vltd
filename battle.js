@@ -9,7 +9,9 @@ let battleData = {
     enemies: [],
     particles: [],
     textPopups: [], 
-    drops: [], // <--- THÊM MẢNG CHỨA LINH THẠCH
+    drops: [],
+    projectiles: [], // <--- THÊM MẢNG CHỨA PHI KIẾM PHÓNG ĐI
+    aimState: { active: false, startX: 0, startY: 0, curX: 0, curY: 0, dirX: 0, dirY: 0 }, // <--- THÊM TRẠNG THÁI NGẮM
     screenShake: 0,
     damageFlash: 0,
     kills: 0,
