@@ -66,7 +66,7 @@ window.useItem = function(itemId) {
     const item = window.ITEM_DATABASE[itemId];
     
     if (item.attr) {
-        const realmData = window.getRealmData(window.lifetimeMana || 0);
+        const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0) : { major: "Phàm Nhân" };
         const currentMajor = realmData.major; 
         window.itemUsageHistory[currentMajor] = window.itemUsageHistory[currentMajor] || {};
         const usedCount = window.itemUsageHistory[currentMajor][itemId] || 0;
@@ -76,9 +76,11 @@ window.useItem = function(itemId) {
             return;
         }
         
-        // Phải cộng trực tiếp vào playerStats để hàm recalcStats() không ghi đè mất
+        // Cập nhật trực tiếp vào stats để recalcStats không ghi đè
+        if (!window.playerStats) window.playerStats = { str: 1, vit: 1, agi: 1, spi: 1 };
         window.playerStats[item.attr] = (window.playerStats[item.attr] || 1) + 1;
         window[item.attr] = window.playerStats[item.attr];
+        
         window.itemUsageHistory[currentMajor][itemId] = usedCount + 1;
         alert(`🌟 Hấp thụ thành công! Tăng 1 điểm ${item.name.split(" ")[0]}.`);
         if (window.recalcStats) window.recalcStats();
@@ -92,5 +94,7 @@ window.useItem = function(itemId) {
     window.inventory[itemId]--;
     if (window.inventory[itemId] <= 0) delete window.inventory[itemId];
     window.renderInventory();
-    if (window.syncManaToDatabase) window.syncManaToDatabase(); // Thêm dòng này để lưu lên Firebase ngay lập tức
+    
+    // Đồng bộ ngay lập tức lên Firebase
+    if (window.syncManaToDatabase) window.syncManaToDatabase();
 };
