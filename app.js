@@ -348,6 +348,7 @@ async function loadUserLifetimeMana(uid) {
             window.currentHp = val.currentHp !== undefined ? Math.max(val.currentHp, 1) : (window.maxHp || 100);
             inventory = val.inventory || {};
             window.inventory = inventory;
+            window.learnedSkills = val.learnedSkills || [];
             
             battleRecord = val.battleRecord || { maxSurvivalSec: 0, maxKills: 0 };
             window.battleRecord = battleRecord;
