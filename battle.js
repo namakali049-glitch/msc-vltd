@@ -40,6 +40,34 @@ window.addEventListener('keyup', (e) => {
     if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveDir.right = false;
 });
 
+// BỘ LẮNG NGHE D-PAD CHỐNG TRƯỢT (MOBILE)
+window.addEventListener('DOMContentLoaded', () => {
+    const dpadWrapper = document.querySelector('.dpad-wrapper');
+    if (dpadWrapper) {
+        dpadWrapper.addEventListener('touchmove', (e) => {
+            e.preventDefault(); // Chặn cuộn màn hình
+            moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
+            
+            for (let i = 0; i < e.touches.length; i++) {
+                const touch = e.touches[i];
+                const el = document.elementFromPoint(touch.clientX, touch.clientY);
+                if (el) {
+                    if (el.classList.contains('dpad-up')) moveDir.up = true;
+                    if (el.classList.contains('dpad-down')) moveDir.down = true;
+                    if (el.classList.contains('dpad-left')) moveDir.left = true;
+                    if (el.classList.contains('dpad-right')) moveDir.right = true;
+                }
+            }
+        }, { passive: false });
+
+        dpadWrapper.addEventListener('touchend', (e) => {
+            if (e.touches.length === 0) {
+                moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
+            }
+        });
+    }
+});
+
 const battleAssets = {
     bg: new Image(),
     playerPhamNhan: new Image(),
@@ -186,7 +214,7 @@ window.exitBattle = function(isDeath = false) {
     const invBtn = document.querySelector('.fixed-inventory-btn');
     const topBar = document.querySelector('.fixed-top-right-bar');
     if (invBtn) invBtn.style.display = 'block';
-    if (topBar) topBar.style.display = 'flex'; // Dùng 'flex' để thanh giữ đúng cấu trúc hàng ngang
+    if (topBar) topBar.style.display = 'flex'; 
     moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
     
     const survivalSec = Math.floor(battleData.frameCount / 60);
@@ -351,8 +379,6 @@ function battleLoop() {
         battleCtx.textAlign = "center";
         battleCtx.textBaseline = "middle";
         // ĐÃ TẮT SHADOW ĐỂ TĂNG FPS
-        // battleCtx.shadowColor = "#22d3ee";
-        // battleCtx.shadowBlur = 10 + Math.sin(drop.bob) * 5;
         battleCtx.fillText("💎", drop.x, drop.y + offsetY);
         battleCtx.restore();
 
@@ -390,8 +416,6 @@ function battleLoop() {
         battleCtx.strokeStyle = "#22d3ee";
         battleCtx.lineWidth = 3;
         // ĐÃ TẮT SHADOW ĐỂ TĂNG FPS
-        // battleCtx.shadowColor = "#00d2d3";
-        // battleCtx.shadowBlur = 12;
         battleCtx.stroke();
 
         battleCtx.beginPath();
@@ -417,8 +441,6 @@ function battleLoop() {
             battleCtx.translate(proj.x, proj.y);
             battleCtx.rotate(proj.angle + Math.PI / 2);
             // ĐÃ TẮT SHADOW ĐỂ TĂNG FPS
-            // battleCtx.shadowColor = "#38bdf8";
-            // battleCtx.shadowBlur = 15;
             if (pSwordImg.complete && pSwordImg.naturalWidth > 0) {
                 battleCtx.drawImage(pSwordImg, -9, -24, 18, 48);
             } else {
@@ -779,20 +801,24 @@ function launchNguKiem(targetDirX, targetDirY) {
     if (window.playClickSound) window.playClickSound();
 }
 
-// BỘ LẮNG NGHE SỰ KIỆN KÉO THẢ TRÊN NÚT KỸ NĂNG
+// BỘ LẮNG NGHE SỰ KIỆN KÉO THẢ TRÊN NỬA PHẢI MÀN HÌNH
 function initSkillAimControls() {
     const btn = document.getElementById('skillNguKiemBtn');
-    if (!btn) return;
-    if (btn.dataset.bound) return;
-    btn.dataset.bound = "true";
+    const bCanvas = document.getElementById('gameCanvas');
+    if (!btn || !bCanvas) return;
+    if (bCanvas.dataset.aimBound) return;
+    bCanvas.dataset.aimBound = "true";
 
     const startAim = (cx, cy) => {
-        battleData.aimState.active = true;
-        battleData.aimState.startX = cx;
-        battleData.aimState.startY = cy;
-        battleData.aimState.curX = cx;
-        battleData.aimState.curY = cy;
-        btn.classList.add('aiming');
+        // Chỉ kích hoạt ngắm nếu chạm vào nửa bên phải màn hình
+        if (cx > window.innerWidth / 2) {
+            battleData.aimState.active = true;
+            battleData.aimState.startX = cx;
+            battleData.aimState.startY = cy;
+            battleData.aimState.curX = cx;
+            battleData.aimState.curY = cy;
+            btn.classList.add('aiming');
+        }
     };
 
     const moveAim = (cx, cy) => {
@@ -816,7 +842,7 @@ function initSkillAimControls() {
         let dx = battleData.aimState.dirX;
         let dy = battleData.aimState.dirY;
 
-        // Bấm nhanh không kéo hướng: tự động ngắm quái gần nhất
+        // Auto-aim nếu chỉ chạm nhanh (Tap)
         if (dx === 0 && dy === 0) {
             if (battleData.enemies.length > 0) {
                 let nearest = null;
@@ -836,21 +862,41 @@ function initSkillAimControls() {
                 dx = 1; dy = 0;
             }
         }
-
         launchNguKiem(dx, dy);
         battleData.aimState.dirX = 0;
         battleData.aimState.dirY = 0;
     };
 
-    // Cảm ứng Mobile
-    btn.addEventListener('touchstart', (e) => { e.preventDefault(); const t = e.touches[0]; startAim(t.clientX, t.clientY); }, { passive: false });
-    window.addEventListener('touchmove', (e) => { if (battleData.aimState.active) { const t = e.touches[0]; moveAim(t.clientX, t.clientY); } }, { passive: false });
-    window.addEventListener('touchend', () => { if (battleData.aimState.active) endAim(); });
+    // Bắt sự kiện trực tiếp trên Canvas (Nửa phải màn hình)
+    bCanvas.addEventListener('touchstart', (e) => { 
+        if (window.learnedSkills && window.learnedSkills.includes('skill_ngu_kiem')) {
+            const t = e.touches[0]; 
+            startAim(t.clientX, t.clientY); 
+        }
+    }, { passive: false });
+    
+    window.addEventListener('touchmove', (e) => { 
+        if (battleData.aimState.active) { 
+            const t = e.touches[0]; moveAim(t.clientX, t.clientY); 
+        } 
+    }, { passive: false });
+    
+    window.addEventListener('touchend', () => { 
+        if (battleData.aimState.active) endAim(); 
+    });
 
-    // Chuột PC
-    btn.addEventListener('mousedown', (e) => { e.preventDefault(); startAim(e.clientX, e.clientY); });
-    window.addEventListener('mousemove', (e) => { if (battleData.aimState.active) moveAim(e.clientX, e.clientY); });
-    window.addEventListener('mouseup', () => { if (battleData.aimState.active) endAim(); });
+    // Hỗ trợ cả chuột trên PC
+    bCanvas.addEventListener('mousedown', (e) => { 
+        if (window.learnedSkills && window.learnedSkills.includes('skill_ngu_kiem')) {
+            startAim(e.clientX, e.clientY);
+        }
+    });
+    window.addEventListener('mousemove', (e) => { 
+        if (battleData.aimState.active) moveAim(e.clientX, e.clientY); 
+    });
+    window.addEventListener('mouseup', () => { 
+        if (battleData.aimState.active) endAim(); 
+    });
 }
 
 if (document.readyState === 'loading') {
