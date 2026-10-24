@@ -390,6 +390,15 @@ function battleLoop() {
                         spawnDeathParticles(en.x, en.y, "#00d2d3");
                         battleData.enemies.splice(i, 1);
                         battleData.kills++;
+                        // TỈ LỆ 10% RỚT LINH THẠCH 💎
+                        const dropRoll = Math.random() * 100;
+                        if (dropRoll < 10.0) {
+                            battleData.drops.push({
+                                x: en.x, y: en.y, radius: 12, type: 'linh_thach',
+                                life: 600, // Tồn tại trên mặt đất 10 giây (60fps)
+                                bob: Math.random() * Math.PI * 2
+                            });
+                        }
 
                         // HỆ THỐNG RỚT ĐỒ MỚI 
                         if (!window.inventory) window.inventory = {};
