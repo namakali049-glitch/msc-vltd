@@ -51,6 +51,7 @@ window.battleRecord = battleRecord;
 window.masteredWordsA1 = masteredWordsA1;
 window.masteredWordsB1 = masteredWordsB1;
 window.lifetimeMana = lifetimeMana;
+window.playerLinhThach = 0;
 
 let playerStats = {
     str: 1, vit: 1, agi: 1, spi: 1,
