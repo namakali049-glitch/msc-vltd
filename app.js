@@ -397,6 +397,7 @@ async function syncManaToDatabase() {
             linhThach: window.playerLinhThach,
             currentHp: window.currentHp,
             inventory: window.inventory || {},
+            learnedSkills: window.learnedSkills || [], // <--- Đã thêm dòng này
             stats: playerStats,
             masteredA1: masteredWordsA1,
             masteredB1: masteredWordsB1,
