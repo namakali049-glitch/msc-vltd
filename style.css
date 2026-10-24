@@ -1310,4 +1310,31 @@ body {
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-
+/* GIAO DIỆN TRÂN BẢO CÁC (SHOP) */
+.btn-shop { background: linear-gradient(90deg, #f59e0b, #d97706); color: #000; }
+.shop-card {
+  background: rgba(15, 23, 42, 0.95); border: 2px solid #f59e0b;
+  border-radius: 14px; width: 92%; max-width: 480px; height: 75vh; max-height: 520px;
+  display: flex; flex-direction: column; padding: 14px;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3); backdrop-filter: blur(10px);
+}
+.shop-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(245, 158, 11, 0.3); padding-bottom: 8px; margin-bottom: 8px; }
+.shop-header h3 { color: #f59e0b; font-size: 1.1rem; margin: 0; }
+.shop-tabs { display: flex; gap: 8px; margin-bottom: 10px; }
+.shop-tab-btn {
+  flex: 1; padding: 8px; background: rgba(30, 41, 59, 0.8); border: 1px solid #475569;
+  color: #94a3b8; border-radius: 6px; font-weight: bold; cursor: pointer;
+}
+.shop-tab-btn.active { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border-color: #f59e0b; }
+.shop-content-box { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+.shop-item {
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 8px; border: 1px solid #334155;
+}
+.shop-item-info h4 { font-size: 0.95rem; color: #fff; margin-bottom: 4px; }
+.shop-item-info p { font-size: 0.75rem; color: #cbd5e1; }
+.btn-buy {
+  background: #2563eb; color: #fff; border: none; padding: 6px 12px;
+  border-radius: 6px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 4px;
+}
+.btn-buy:disabled { background: #475569; color: #94a3b8; cursor: not-allowed; }
