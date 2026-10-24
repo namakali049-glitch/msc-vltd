@@ -254,30 +254,21 @@
     </div>
     <button class="btn-battle-escape" onclick="exitBattle()">🚪 Rút lui</button>
 
-    <div class="dpad-wrapper">
-      <button class="dpad-key dpad-up" 
-              ontouchstart="setMoveDir('up', true)" ontouchend="setMoveDir('up', false)"
-              onmousedown="setMoveDir('up', true)" onmouseup="setMoveDir('up', false)">▲</button>
-      <div class="dpad-horizontal">
-        <button class="dpad-key dpad-left" 
-                ontouchstart="setMoveDir('left', true)" ontouchend="setMoveDir('left', false)"
-                onmousedown="setMoveDir('left', true)" onmouseup="setMoveDir('left', false)">◀</button>
-        <button class="dpad-key dpad-right" 
-                ontouchstart="setMoveDir('right', true)" ontouchend="setMoveDir('right', false)"
-                onmousedown="setMoveDir('right', true)" onmouseup="setMoveDir('right', false)">▶</button>
+    <!-- VIRTUAL JOYSTICK TÀNG HÌNH BÊN TRÁI -->
+    <div id="joystickZone" class="joystick-zone">
+      <div id="joystickBase" class="joystick-base">
+        <div id="joystickStick" class="joystick-stick"></div>
       </div>
-      <button class="dpad-key dpad-down" 
-              ontouchstart="setMoveDir('down', true)" ontouchend="setMoveDir('down', false)"
-              onmousedown="setMoveDir('down', true)" onmouseup="setMoveDir('down', false)">▼</button>
     </div>
-    <!-- NÚT THẦN KỸ NGỰ KIẾM THUẬT (GÓC DƯỚI PHẢI) -->
+
+    <!-- HUD HIỂN THỊ KỸ NĂNG BÊN PHẢI (KHÔNG CẢM ỨNG) -->
     <div id="skillControlWrapper" class="skill-control-wrapper" style="display: none;">
-      <button id="skillNguKiemBtn" class="skill-aim-btn">
+      <div id="skillNguKiemUI" class="skill-indicator">
         <span>⚔️</span>
-        <small>Ngự Kiếm</small>
-      </button>
+        <small>Vuốt màn hình</small>
+        <div id="skillCooldownOverlay" class="skill-cd-overlay"></div>
+      </div>
     </div>
-  </div>
 
   <!-- MODAL: TÚI TRỮ VẬT -->
   <div id="inventoryModal" class="modal-overlay" style="display: none;">
