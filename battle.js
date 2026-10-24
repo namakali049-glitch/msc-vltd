@@ -27,6 +27,7 @@ window.setMoveDir = function(dir, active) {
     }
 };
 
+// Vẫn giữ lại điều khiển bàn phím cho PC
 window.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') moveDir.up = true;
     if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') moveDir.down = true;
@@ -39,34 +40,6 @@ window.addEventListener('keyup', (e) => {
     if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') moveDir.down = false;
     if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveDir.left = false;
     if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveDir.right = false;
-});
-
-// BỘ LẮNG NGHE D-PAD CHỐNG TRƯỢT (MOBILE)
-window.addEventListener('DOMContentLoaded', () => {
-    const dpadWrapper = document.querySelector('.dpad-wrapper');
-    if (dpadWrapper) {
-        dpadWrapper.addEventListener('touchmove', (e) => {
-            e.preventDefault(); // Chặn cuộn màn hình
-            moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
-            
-            for (let i = 0; i < e.touches.length; i++) {
-                const touch = e.touches[i];
-                const el = document.elementFromPoint(touch.clientX, touch.clientY);
-                if (el) {
-                    if (el.classList.contains('dpad-up')) moveDir.up = true;
-                    if (el.classList.contains('dpad-down')) moveDir.down = true;
-                    if (el.classList.contains('dpad-left')) moveDir.left = true;
-                    if (el.classList.contains('dpad-right')) moveDir.right = true;
-                }
-            }
-        }, { passive: false });
-
-        dpadWrapper.addEventListener('touchend', (e) => {
-            if (e.touches.length === 0) {
-                moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
-            }
-        });
-    }
 });
 
 const battleAssets = {
@@ -165,13 +138,15 @@ window.startBattle = function() {
     battleData.projectiles = [];
     battleData.aimState = { active: false, startX: 0, startY: 0, curX: 0, curY: 0, dirX: 0, dirY: 0 };
 
-    // Kiểm tra đã học Ngự Kiếm Thuật thì hiển thị nút
+    // Kiểm tra đã học Ngự Kiếm Thuật thì hiển thị UI chỉ báo
     const skillWrap = document.getElementById('skillControlWrapper');
     const hasSkill = window.learnedSkills && window.learnedSkills.includes('skill_ngu_kiem');
     if (skillWrap) {
         skillWrap.style.display = hasSkill ? 'block' : 'none';
     }
-    initSkillAimControls();
+    
+    // Gọi hàm khởi tạo bộ điều khiển Joystick & Ngắm bắn
+    initControls();
 
     battleData.kills = 0;
     battleData.orbitAngle = 0;
@@ -179,6 +154,7 @@ window.startBattle = function() {
     battleData.screenShake = 0;
     battleData.damageFlash = 0;
     moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
+    window.analogMove = { x: 0, y: 0 };
     
     battleData.player.x = battleCanvas.width / 2;
     battleData.player.y = battleCanvas.height / 2;
@@ -217,6 +193,7 @@ window.exitBattle = function(isDeath = false) {
     if (invBtn) invBtn.style.display = 'block';
     if (topBar) topBar.style.display = 'flex'; 
     moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
+    window.analogMove = { x: 0, y: 0 };
     
     const survivalSec = Math.floor(battleData.frameCount / 60);
     const formatTimeFunc = window.formatTime || ((s) => `${Math.floor(s/60)}:${s%60}`);
@@ -297,16 +274,20 @@ function battleLoop() {
     battleCtx.save();
     battleCtx.translate(shakeX, shakeY);
 
-    let moveX = 0;
-    let moveY = 0;
-    if (moveDir.up) moveY -= 1;
-    if (moveDir.down) moveY += 1;
-    if (moveDir.left) moveX -= 1;
-    if (moveDir.right) moveX += 1;
+    // Hỗ trợ Joystick 360 độ mượt mà
+    let moveX = window.analogMove.x || 0;
+    let moveY = window.analogMove.y || 0;
 
-    if (moveX !== 0 && moveY !== 0) {
-        moveX *= 0.7071;
-        moveY *= 0.7071;
+    // Dự phòng cho Keyboard (PC)
+    if (moveX === 0 && moveY === 0) {
+        if (moveDir.up) moveY -= 1;
+        if (moveDir.down) moveY += 1;
+        if (moveDir.left) moveX -= 1;
+        if (moveDir.right) moveX += 1;
+        if (moveX !== 0 && moveY !== 0) {
+            moveX *= 0.7071;
+            moveY *= 0.7071;
+        }
     }
 
     const pSpeed = 4.5 + (agi * 0.05);
@@ -754,154 +735,179 @@ window.addEventListener('resize', () => {
 });
 
 // ==========================================
-// THẦN KỸ: NGỰ KIẾM THUẬT (KÉO THẢ & BẮN KIẾM)
+// HỆ THỐNG VIRTUAL JOYSTICK & NGẮM BẮN
 // ==========================================
+function initControls() {
+    // 1. JOYSTICK BÊN TRÁI
+    const zone = document.getElementById('joystickZone');
+    const base = document.getElementById('joystickBase');
+    const stick = document.getElementById('joystickStick');
+    
+    if (zone && base && stick) {
+        let active = false;
+        let startX, startY;
+        const maxDist = 35; // Bán kính Joystick
+
+        zone.addEventListener('touchstart', (e) => {
+            active = true;
+            const t = e.touches[0];
+            base.style.left = t.clientX + 'px';
+            base.style.top = t.clientY + 'px';
+            base.style.opacity = '1';
+            startX = t.clientX;
+            startY = t.clientY;
+            window.analogMove = { x: 0, y: 0 };
+            stick.style.transform = `translate(0px, 0px)`;
+        }, { passive: false });
+
+        zone.addEventListener('touchmove', (e) => {
+            if (!active) return;
+            e.preventDefault();
+            const t = e.touches[0];
+            let dx = t.clientX - startX;
+            let dy = t.clientY - startY;
+            const dist = Math.hypot(dx, dy);
+            if (dist > maxDist) {
+                dx = (dx / dist) * maxDist;
+                dy = (dy / dist) * maxDist;
+            }
+            stick.style.transform = `translate(${dx}px, ${dy}px)`;
+            window.analogMove = { x: dx / maxDist, y: dy / maxDist };
+        }, { passive: false });
+
+        zone.addEventListener('touchend', () => {
+            active = false;
+            stick.style.transform = `translate(0px, 0px)`;
+            base.style.opacity = '0';
+            window.analogMove = { x: 0, y: 0 };
+        });
+    }
+
+    // 2. NGẮM BẮN & COOLDOWN BÊN PHẢI
+    const bCanvas = document.getElementById('gameCanvas');
+    if (bCanvas && !bCanvas.dataset.aimBound) {
+        bCanvas.dataset.aimBound = "true";
+
+        const startAim = (cx, cy) => {
+            if (cx > window.innerWidth / 2) {
+                battleData.aimState.active = true;
+                battleData.aimState.startX = cx;
+                battleData.aimState.startY = cy;
+                battleData.aimState.curX = cx;
+                battleData.aimState.curY = cy;
+            }
+        };
+
+        const moveAim = (cx, cy) => {
+            if (!battleData.aimState.active) return;
+            battleData.aimState.curX = cx;
+            battleData.aimState.curY = cy;
+            const dx = cx - battleData.aimState.startX;
+            const dy = cy - battleData.aimState.startY;
+            const len = Math.hypot(dx, dy);
+            if (len > 15) {
+                battleData.aimState.dirX = dx / len;
+                battleData.aimState.dirY = dy / len;
+            }
+        };
+
+        const endAim = () => {
+            if (!battleData.aimState.active) return;
+            battleData.aimState.active = false;
+
+            let dx = battleData.aimState.dirX;
+            let dy = battleData.aimState.dirY;
+
+            if (dx === 0 && dy === 0) {
+                if (battleData.enemies.length > 0) {
+                    let nearest = null;
+                    let minDist = Infinity;
+                    battleData.enemies.forEach(en => {
+                        const d = Math.hypot(en.x - battleData.player.x, en.y - battleData.player.y);
+                        if (d < minDist) { minDist = d; nearest = en; }
+                    });
+                    if (nearest) {
+                        const angle = Math.atan2(nearest.y - battleData.player.y, nearest.x - battleData.player.x);
+                        dx = Math.cos(angle); dy = Math.sin(angle);
+                    } else { dx = 1; dy = 0; }
+                } else { dx = 1; dy = 0; }
+            }
+
+            launchNguKiem(dx, dy);
+            battleData.aimState.dirX = 0;
+            battleData.aimState.dirY = 0;
+        };
+
+        bCanvas.addEventListener('touchstart', (e) => { 
+            if (window.learnedSkills && window.learnedSkills.includes('skill_ngu_kiem')) {
+                startAim(e.touches[0].clientX, e.touches[0].clientY); 
+            }
+        }, { passive: false });
+        
+        window.addEventListener('touchmove', (e) => { 
+            if (battleData.aimState.active) moveAim(e.touches[0].clientX, e.touches[0].clientY); 
+        }, { passive: false });
+        
+        window.addEventListener('touchend', () => { 
+            if (battleData.aimState.active) endAim(); 
+        });
+        
+        bCanvas.addEventListener('mousedown', (e) => { 
+            if (window.learnedSkills && window.learnedSkills.includes('skill_ngu_kiem')) startAim(e.clientX, e.clientY); 
+        });
+        window.addEventListener('mousemove', (e) => { 
+            if (battleData.aimState.active) moveAim(e.clientX, e.clientY); 
+        });
+        window.addEventListener('mouseup', () => { 
+            if (battleData.aimState.active) endAim(); 
+        });
+    }
+}
+
+// CẬP NHẬT LẠI HÀM BẮN ĐỂ CHẠY HIỆU ỨNG COOLDOWN UI
 function launchNguKiem(targetDirX, targetDirY) {
     if (!battleData.swords || battleData.swords.length === 0) return;
-
-    // Tìm 1 phi kiếm đang hoạt động trong quỹ đạo xoay
+    
     const availableSword = battleData.swords.find(s => s.active);
     if (!availableSword) {
-        battleData.textPopups.push({
-            x: battleData.player.x,
-            y: battleData.player.y - 40,
-            text: "Cạn Kiếm Khí!",
-            color: "#ef4444",
-            life: 45
-        });
+        battleData.textPopups.push({ x: battleData.player.x, y: battleData.player.y - 40, text: "Cạn Kiếm Khí!", color: "#ef4444", life: 45 });
         return;
     }
 
-    // 1. Rút kiếm hộ thể và bắt đầu đếm hồi chiêu
     availableSword.active = false;
     const agi = window.agi || 1;
     const swordDmg = window.swordDamage || 10;
     const cd = Math.max(1200, 3500 - agi * 25);
+    
+    // Hiệu ứng hồi chiêu (Cooldown) trên Giao diện UI
+    const cdOverlay = document.getElementById('skillCooldownOverlay');
+    if (cdOverlay) {
+        cdOverlay.style.transition = 'none';
+        cdOverlay.style.height = '100%';
+        setTimeout(() => {
+            cdOverlay.style.transition = `height ${cd}ms linear`;
+            cdOverlay.style.height = '0%';
+        }, 50);
+    }
+
     setTimeout(() => {
         availableSword.active = true;
         availableSword.durability = swordDmg;
     }, cd);
 
-    // 2. Khởi tạo đạn đạo xuyên thấu
     const angle = Math.atan2(targetDirY, targetDirX);
-    const speed = 12;
-
     battleData.projectiles.push({
-        x: battleData.player.x,
-        y: battleData.player.y,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        angle: angle,
-        damage: Math.floor(swordDmg * 1.5),
-        durability: 3,
-        hitList: new Set(),
-        life: 180
+        x: battleData.player.x, y: battleData.player.y,
+        vx: Math.cos(angle) * 12, vy: Math.sin(angle) * 12, angle: angle,
+        damage: Math.floor(swordDmg * 1.5), durability: 3, hitList: new Set(), life: 180
     });
-
+    
     battleData.screenShake = 6;
     if (window.playClickSound) window.playClickSound();
 }
 
-// BỘ LẮNG NGHE SỰ KIỆN KÉO THẢ TRÊN NỬA PHẢI MÀN HÌNH
-function initSkillAimControls() {
-    const btn = document.getElementById('skillNguKiemBtn');
-    const bCanvas = document.getElementById('gameCanvas');
-    if (!btn || !bCanvas) return;
-    if (bCanvas.dataset.aimBound) return;
-    bCanvas.dataset.aimBound = "true";
-
-    const startAim = (cx, cy) => {
-        // Chỉ kích hoạt ngắm nếu chạm vào nửa bên phải màn hình
-        if (cx > window.innerWidth / 2) {
-            battleData.aimState.active = true;
-            battleData.aimState.startX = cx;
-            battleData.aimState.startY = cy;
-            battleData.aimState.curX = cx;
-            battleData.aimState.curY = cy;
-            btn.classList.add('aiming');
-        }
-    };
-
-    const moveAim = (cx, cy) => {
-        if (!battleData.aimState.active) return;
-        battleData.aimState.curX = cx;
-        battleData.aimState.curY = cy;
-        const dx = cx - battleData.aimState.startX;
-        const dy = cy - battleData.aimState.startY;
-        const len = Math.hypot(dx, dy);
-        if (len > 15) {
-            battleData.aimState.dirX = dx / len;
-            battleData.aimState.dirY = dy / len;
-        }
-    };
-
-    const endAim = () => {
-        if (!battleData.aimState.active) return;
-        btn.classList.remove('aiming');
-        battleData.aimState.active = false;
-
-        let dx = battleData.aimState.dirX;
-        let dy = battleData.aimState.dirY;
-
-        // Auto-aim nếu chỉ chạm nhanh (Tap)
-        if (dx === 0 && dy === 0) {
-            if (battleData.enemies.length > 0) {
-                let nearest = null;
-                let minDist = Infinity;
-                battleData.enemies.forEach(en => {
-                    const d = Math.hypot(en.x - battleData.player.x, en.y - battleData.player.y);
-                    if (d < minDist) { minDist = d; nearest = en; }
-                });
-                if (nearest) {
-                    const angle = Math.atan2(nearest.y - battleData.player.y, nearest.x - battleData.player.x);
-                    dx = Math.cos(angle);
-                    dy = Math.sin(angle);
-                } else {
-                    dx = 1; dy = 0;
-                }
-            } else {
-                dx = 1; dy = 0;
-            }
-        }
-        launchNguKiem(dx, dy);
-        battleData.aimState.dirX = 0;
-        battleData.aimState.dirY = 0;
-    };
-
-    // Bắt sự kiện trực tiếp trên Canvas (Nửa phải màn hình)
-    bCanvas.addEventListener('touchstart', (e) => { 
-        if (window.learnedSkills && window.learnedSkills.includes('skill_ngu_kiem')) {
-            const t = e.touches[0]; 
-            startAim(t.clientX, t.clientY); 
-        }
-    }, { passive: false });
-    
-    window.addEventListener('touchmove', (e) => { 
-        if (battleData.aimState.active) { 
-            const t = e.touches[0]; moveAim(t.clientX, t.clientY); 
-        } 
-    }, { passive: false });
-    
-    window.addEventListener('touchend', () => { 
-        if (battleData.aimState.active) endAim(); 
-    });
-
-    // Hỗ trợ cả chuột trên PC
-    bCanvas.addEventListener('mousedown', (e) => { 
-        if (window.learnedSkills && window.learnedSkills.includes('skill_ngu_kiem')) {
-            startAim(e.clientX, e.clientY);
-        }
-    });
-    window.addEventListener('mousemove', (e) => { 
-        if (battleData.aimState.active) moveAim(e.clientX, e.clientY); 
-    });
-    window.addEventListener('mouseup', () => { 
-        if (battleData.aimState.active) endAim(); 
-    });
-}
-
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSkillAimControls);
+    document.addEventListener('DOMContentLoaded', initControls);
 } else {
-    initSkillAimControls();
+    initControls();
 }
