@@ -125,9 +125,11 @@ function recalcStats() {
 
     maxHp = playerStats.vit * 10; 
 
+    // ĐÃ VÁ LỖI BƠM MÁU VÔ HẠN KHI VẬN KHÍ
     if (window.currentHp === undefined || window.currentHp > maxHp) {
         window.currentHp = maxHp;
-    } else if (window.currentHp < 0) {
+    } 
+    if (window.currentHp < 0) {
         window.currentHp = 0;
     }
     currentHp = window.currentHp;
@@ -407,7 +409,6 @@ function generateRandomBaseStats() {
 // ==========================================
 // HỆ THỐNG LƯU VÀ TẢI DỮ LIỆU ĐÃ VÁ LỖI
 // ==========================================
-
 async function syncManaToDatabase() {
     if (!currentUser || !isDataLoaded) return; // CHẶN TUYỆT ĐỐI GHI ĐÈ KHI CHƯA TẢI XONG
     
@@ -514,7 +515,6 @@ async function loadUserLifetimeMana(uid) {
 // ==========================================
 // CÁC HÀM XÁC THỰC
 // ==========================================
-
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         currentUser = user;
