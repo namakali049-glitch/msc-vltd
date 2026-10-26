@@ -313,7 +313,8 @@ if (masteryA1) masteryA1.innerText = `${countA1} / 900 từ (${Math.round((count
             expLabel.innerText = prog.isMax ? "Đỉnh Phong Tiên Đạo" : `${prog.currentTier} ➔ ${prog.nextTier}`;
         }
         if (expText) {
-            expText.innerText = prog.isMax ? "Viên Mãn" : `${prog.currentInTier} / ${prog.neededInTier} LK (${Math.floor(prog.percent)}%)`;
+            // Thay đổi từ currentInTier/neededInTier thành currentTotal/tierMax
+            expText.innerText = prog.isMax ? "Viên Mãn" : `${prog.currentTotal} / ${prog.tierMax} LK (${Math.floor(prog.percent)}%)`;
         }
         if (expFill) {
             expFill.style.width = `${prog.percent}%`;
