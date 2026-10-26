@@ -1,5 +1,5 @@
 // ==========================================
-// ĐỘNG CƠ ĐỘNG PHỦ IDLE (v0.8.3.6)
+// ĐỘNG CƠ ĐỘNG PHỦ IDLE (v0.8.3.7)
 // ==========================================
 let idleState = {
     isActive: false,
@@ -47,21 +47,20 @@ function initIdleParams() {
     idleState.glowColor = config.glow;
     
     const baseName = getAvatarBaseName(majorKey);
-const staticEl = document.getElementById('idleAvatarStatic');
-const activeEl = document.getElementById('idleAvatarActive');
+    const staticEl = document.getElementById('idleAvatarStatic');
+    const activeEl = document.getElementById('idleAvatarActive');
 
-// Chỉ gán lại src khi cảnh giới thay đổi để tránh chớp nháy và mất hiệu ứng chuyển cảnh
-if (staticEl && (!staticEl.src || !staticEl.src.includes(`${baseName}-ngoi-thien`))) {
-    staticEl.src = `assets/${baseName}-ngoi-thien.png`;
-}
-if (activeEl && (!activeEl.src || !activeEl.src.includes(`${baseName}-tu-luyen`))) {
-    activeEl.src = `assets/${baseName}-tu-luyen.png`;
-}
+    // Chỉ gán lại src khi cảnh giới thay đổi để tránh chớp nháy
+    if (staticEl && (!staticEl.src || !staticEl.src.includes(`${baseName}-ngoi-thien`))) {
+        staticEl.src = `assets/${baseName}-ngoi-thien.png`;
+    }
+    if (activeEl && (!activeEl.src || !activeEl.src.includes(`${baseName}-tu-luyen`))) {
+        activeEl.src = `assets/${baseName}-tu-luyen.png`;
+    }
     document.documentElement.style.setProperty('--glow-color', idleState.glowColor);
 
     checkBottleneck(realmData.rank);
 }
-window.initIdleParams = initIdleParams;
 
 function checkBottleneck(rankStr) {
     const btn = document.getElementById('btnCultivate');
@@ -79,14 +78,14 @@ function checkBottleneck(rankStr) {
         idleState.isBottleneck = false;
         btn.classList.remove('btn-breakthrough');
         btn.onclick = toggleCultivation;
-        // Chỉ đặt lại chữ khi nhân vật đang KHÔNG trong trạng thái tu luyện
         if (!idleState.isActive) {
             btn.innerText = idleState.mode === 'manual' ? "Vận Khí" : "Nhập Định";
             status.innerHTML = idleState.mode === 'manual' ? "Nhấp để thổ nạp 1 chu thiên" : "Sẵn sàng nhập định";
         }
     }
 }
-window.toggleCultivation = function() {
+
+function toggleCultivation() {
     if (window.playClickSound) window.playClickSound();
     if (idleState.isBottleneck) return;
 
@@ -95,7 +94,7 @@ window.toggleCultivation = function() {
     } else {
         startCultivation();
     }
-};
+}
 
 function startCultivation() {
     initIdleParams();
@@ -156,8 +155,6 @@ function idleLoop(timestamp) {
     idleState.lastFrameTime = timestamp;
     
     let currentDuration = idleState.cycleDuration;
-// Đã gỡ bỏ lỗi buff Tụ Linh Đan nhầm sang chế độ Idle
-
     idleState.progress += dt;
     let ratio = Math.min(1, idleState.progress / currentDuration);
     
@@ -191,7 +188,10 @@ function attemptBreakthrough() {
     if (window.playClickSound) window.playClickSound();
     
     const realmFunc = window.getRealmData || (() => ({ major: "Phàm Nhân" }));
-    const realmData = realmFunc(window.lifetimeMana || 0);
+    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
+    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+    const realmData = realmFunc(window.lifetimeMana || 0, countA1, countB1);
+
     const majorKey = realmData.major.replace(" Kỳ", ""); 
     const baseRate = IDLE_CONFIG[majorKey] ? IDLE_CONFIG[majorKey].rate : 50;
 
@@ -214,10 +214,10 @@ function attemptBreakthrough() {
             const currentTotal = window.lifetimeMana || 0;
             const penalty = Math.floor(currentTotal * 0.25);
             if (window.setLifetimeMana) {
-    window.setLifetimeMana(currentTotal - penalty);
-} else {
-    window.lifetimeMana = Math.max(0, currentTotal - penalty);
-}
+                window.setLifetimeMana(currentTotal - penalty);
+            } else {
+                window.lifetimeMana = Math.max(0, currentTotal - penalty);
+            }
             
             alert(`💥 ĐỘT PHÁ THẤT BẠI!\nTâm ma phản phệ khiến kinh mạch đứt đoạn, đánh mất ${penalty} Linh Khí.`);
             
@@ -259,20 +259,22 @@ function spawnFloatingText(text, color) {
     setTimeout(() => el.remove(), 850);
 }
 
+// Khởi chạy khi tài nguyên trang sẵn sàng
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(initIdleParams, 300);
 });
+
+// Xuất các hàm ra phạm vi toàn cục
 window.initIdleParams = initIdleParams;
-if (typeof toggleCultivation === 'function') window.toggleCultivation = toggleCultivation;
-// Gắn IDLE_CONFIG vào window để app.js có thể đọc được
+window.toggleCultivation = toggleCultivation;
 window.IDLE_CONFIG = IDLE_CONFIG;
 
-// Hàm xử lý tu luyện ngoại tuyến
+// Hàm xử lý tu luyện ngoại tuyến (Tích hợp Quảng cáo x2)
 window.processOfflineProgress = function(lastUpdated) {
     if (!lastUpdated) return;
     const elapsedMs = Date.now() - lastUpdated;
     
-    // Yêu cầu vắng mặt tối thiểu 1 phút (60000ms) mới tính offline
+    // Yêu cầu vắng mặt tối thiểu 1 phút (60000ms)
     if (elapsedMs < 60000) return; 
 
     const realmFunc = window.getRealmData || (() => ({ rank: "Phàm Nhân", major: "Phàm Nhân" }));
@@ -283,28 +285,38 @@ window.processOfflineProgress = function(lastUpdated) {
     const majorKey = realmData.major.replace(" Kỳ", "");
     const config = window.IDLE_CONFIG[majorKey];
 
-    // Chỉ cộng dồn nếu ở trạng thái tự động tu luyện (Từ Luyện Khí trở lên)
+    // Chỉ tính offline nếu cảnh giới tự động tu luyện (Từ Luyện Khí trở lên)
     if (config && config.mode === 'auto') {
         const cycles = Math.floor(elapsedMs / config.duration);
         const offlineMana = cycles * config.reward;
 
         if (offlineMana > 0) {
-            // Tính toán chuỗi thời gian hiển thị
             const elapsedSec = Math.floor(elapsedMs / 1000);
             let timeStr = elapsedSec > 3600 
-                ? `${Math.floor(elapsedSec/3600)} giờ ${Math.floor((elapsedSec%3600)/60)} phút` 
-                : `${Math.floor(elapsedSec/60)} phút`;
+                ? `${Math.floor(elapsedSec / 3600)} giờ ${Math.floor((elapsedSec % 3600) / 60)} phút` 
+                : `${Math.floor(elapsedSec / 60)} phút`;
 
-            // Gọi addLifetimeMana để hệ thống tự động kiểm tra và chặn Bình Cảnh
             const oldMana = window.lifetimeMana || 0;
             window.addLifetimeMana(offlineMana);
             const actualGained = (window.lifetimeMana || 0) - oldMana;
 
-            // Hiển thị thông báo khi đăng nhập
             setTimeout(() => {
                 if (actualGained > 0) {
                     if (window.playLootSound) window.playLootSound();
-                    alert(`🌙 BẾ QUAN NGOẠI TUYẾN 🌙\n\nĐạo hữu đã tĩnh tu trong Động Phủ suốt ${timeStr}.\nTự động vận chuyển ${cycles} chu thiên.\n\n✨ Hấp thu được: +${actualGained} Linh Khí!`);
+                    
+                    const wantX2 = confirm(
+                        `🌙 BẾ QUAN NGOẠI TUYẾN 🌙\n\n` +
+                        `Đạo hữu tĩnh tu ${timeStr}, vận chuyển ${cycles} chu thiên.\n` +
+                        `✨ Thu được: +${actualGained} Linh Khí.\n\n` +
+                        `[THIÊN ĐẠO CHIẾU CƠ]: Đạo hữu có muốn khám phá cơ duyên để NHÂN ĐÔI (+${actualGained} Linh Khí nữa) không?`
+                    );
+
+                    if (wantX2 && window.AdsManager) {
+                        window.AdsManager.showRewarded(() => {
+                            window.addLifetimeMana(actualGained);
+                            alert(`🎉 ĐẠI NGỘ THIÊN CƠ!\n\nĐạo hữu đã nhận thêm +${actualGained} Linh Khí bế quan!`);
+                        });
+                    }
                 } else {
                     alert(`🌙 BẾ QUAN NGOẠI TUYẾN 🌙\n\nĐạo hữu đã tĩnh tu suốt ${timeStr} nhưng do chạm Bình Cảnh nên không thể hấp thu thêm Linh Khí.\n\nNhanh chóng Đột Phá để khai thông kinh mạch!`);
                 }
