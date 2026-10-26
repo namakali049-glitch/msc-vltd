@@ -443,6 +443,12 @@ async function loadUserLifetimeMana(uid) {
             }
             window.playerStats = playerStats;
             window.stats = playerStats;
+            const lastUpdated = val.lastUpdated || Date.now();
+            setTimeout(() => {
+                if (window.processOfflineProgress) {
+                    window.processOfflineProgress(lastUpdated);
+                }
+            }, 600);
         }
     } catch(e) { 
         console.error("Lỗi tải data:", e);
@@ -843,3 +849,9 @@ window.learnSkill = function(skillId) {
         }
     });
 })();
+// Lưu lại thời điểm cuối cùng khi người chơi đóng tab hoặc thoát game
+window.addEventListener('beforeunload', () => {
+    if (window.syncManaToDatabase && window.currentUser) {
+        window.syncManaToDatabase();
+    }
+});
