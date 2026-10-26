@@ -264,3 +264,51 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 window.initIdleParams = initIdleParams;
 if (typeof toggleCultivation === 'function') window.toggleCultivation = toggleCultivation;
+// Gắn IDLE_CONFIG vào window để app.js có thể đọc được
+window.IDLE_CONFIG = IDLE_CONFIG;
+
+// Hàm xử lý tu luyện ngoại tuyến
+window.processOfflineProgress = function(lastUpdated) {
+    if (!lastUpdated) return;
+    const elapsedMs = Date.now() - lastUpdated;
+    
+    // Yêu cầu vắng mặt tối thiểu 1 phút (60000ms) mới tính offline
+    if (elapsedMs < 60000) return; 
+
+    const realmFunc = window.getRealmData || (() => ({ rank: "Phàm Nhân", major: "Phàm Nhân" }));
+    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
+    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+
+    const realmData = realmFunc(window.lifetimeMana || 0, countA1, countB1);
+    const majorKey = realmData.major.replace(" Kỳ", "");
+    const config = window.IDLE_CONFIG[majorKey];
+
+    // Chỉ cộng dồn nếu ở trạng thái tự động tu luyện (Từ Luyện Khí trở lên)
+    if (config && config.mode === 'auto') {
+        const cycles = Math.floor(elapsedMs / config.duration);
+        const offlineMana = cycles * config.reward;
+
+        if (offlineMana > 0) {
+            // Tính toán chuỗi thời gian hiển thị
+            const elapsedSec = Math.floor(elapsedMs / 1000);
+            let timeStr = elapsedSec > 3600 
+                ? `${Math.floor(elapsedSec/3600)} giờ ${Math.floor((elapsedSec%3600)/60)} phút` 
+                : `${Math.floor(elapsedSec/60)} phút`;
+
+            // Gọi addLifetimeMana để hệ thống tự động kiểm tra và chặn Bình Cảnh
+            const oldMana = window.lifetimeMana || 0;
+            window.addLifetimeMana(offlineMana);
+            const actualGained = (window.lifetimeMana || 0) - oldMana;
+
+            // Hiển thị thông báo khi đăng nhập
+            setTimeout(() => {
+                if (actualGained > 0) {
+                    if (window.playLootSound) window.playLootSound();
+                    alert(`🌙 BẾ QUAN NGOẠI TUYẾN 🌙\n\nĐạo hữu đã tĩnh tu trong Động Phủ suốt ${timeStr}.\nTự động vận chuyển ${cycles} chu thiên.\n\n✨ Hấp thu được: +${actualGained} Linh Khí!`);
+                } else {
+                    alert(`🌙 BẾ QUAN NGOẠI TUYẾN 🌙\n\nĐạo hữu đã tĩnh tu suốt ${timeStr} nhưng do chạm Bình Cảnh nên không thể hấp thu thêm Linh Khí.\n\nNhanh chóng Đột Phá để khai thông kinh mạch!`);
+                }
+            }, 1200);
+        }
+    }
+};
