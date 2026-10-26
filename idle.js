@@ -269,12 +269,10 @@ window.initIdleParams = initIdleParams;
 window.toggleCultivation = toggleCultivation;
 window.IDLE_CONFIG = IDLE_CONFIG;
 
-// Hàm xử lý tu luyện ngoại tuyến (Tích hợp Quảng cáo x2)
+// Hàm xử lý tu luyện ngoại tuyến (Tối ưu chống chặn Pop-up)
 window.processOfflineProgress = function(lastUpdated) {
     if (!lastUpdated) return;
     const elapsedMs = Date.now() - lastUpdated;
-    
-    // Yêu cầu vắng mặt tối thiểu 1 phút (60000ms)
     if (elapsedMs < 60000) return; 
 
     const realmFunc = window.getRealmData || (() => ({ rank: "Phàm Nhân", major: "Phàm Nhân" }));
@@ -285,7 +283,6 @@ window.processOfflineProgress = function(lastUpdated) {
     const majorKey = realmData.major.replace(" Kỳ", "");
     const config = window.IDLE_CONFIG[majorKey];
 
-    // Chỉ tính offline nếu cảnh giới tự động tu luyện (Từ Luyện Khí trở lên)
     if (config && config.mode === 'auto') {
         const cycles = Math.floor(elapsedMs / config.duration);
         const offlineMana = cycles * config.reward;
@@ -301,25 +298,54 @@ window.processOfflineProgress = function(lastUpdated) {
             const actualGained = (window.lifetimeMana || 0) - oldMana;
 
             setTimeout(() => {
-                if (actualGained > 0) {
-                    if (window.playLootSound) window.playLootSound();
-                    
-                    const wantX2 = confirm(
-                        `🌙 BẾ QUAN NGOẠI TUYẾN 🌙\n\n` +
-                        `Đạo hữu tĩnh tu ${timeStr}, vận chuyển ${cycles} chu thiên.\n` +
-                        `✨ Thu được: +${actualGained} Linh Khí.\n\n` +
-                        `[THIÊN ĐẠO CHIẾU CƠ]: Đạo hữu có muốn khám phá cơ duyên để NHÂN ĐÔI (+${actualGained} Linh Khí nữa) không?`
-                    );
+                if (actualGained <= 0) {
+                    alert(`🌙 BẾ QUAN NGOẠI TUYẾN 🌙\n\nĐạo hữu đã tĩnh tu suốt ${timeStr} nhưng do chạm Bình Cảnh nên không thể hấp thu thêm Linh Khí.\n\nNhanh chóng Đột Phá để tiếp tục!`);
+                    return;
+                }
 
-                    if (wantX2 && window.AdsManager) {
+                if (window.playLootSound) window.playLootSound();
+
+                // Tạo Modal nhận thưởng HTML trực tiếp trên màn hình
+                const popup = document.createElement('div');
+                popup.id = "offline-reward-modal";
+                popup.style = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:sans-serif;padding:16px;box-sizing:border-box;";
+                popup.innerHTML = `
+                    <div style="background:#0f172a;border:2px solid #eab308;border-radius:12px;padding:24px;max-width:340px;width:100%;text-align:center;box-shadow:0 0 25px rgba(234,179,8,0.3);color:#fff;">
+                        <div style="font-size:28px;margin-bottom:8px;">🌙</div>
+                        <h3 style="color:#facc15;margin:0 0 12px 0;font-size:20px;">BẾ QUAN NGOẠI TUYẾN</h3>
+                        <p style="font-size:14px;color:#cbd5e1;line-height:1.5;margin-bottom:16px;">
+                            Đạo hữu đã tĩnh tu <b>${timeStr}</b>.<br>
+                            Vận chuyển thành công <b>${cycles}</b> chu thiên.<br>
+                            Hấp thu được: <b style="color:#4ade80;">+${actualGained} Linh Khí</b>
+                        </p>
+                        <div style="display:flex;flex-direction:column;gap:10px;">
+                            <button id="btn-claim-x2" style="background:linear-gradient(135deg, #f59e0b, #d97706);color:#fff;border:none;padding:12px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:14px;box-shadow:0 4px 10px rgba(245,158,11,0.4);">
+                                🎬 Xem Cơ Duyên (x2 = +${actualGained * 2} LK)
+                            </button>
+                            <button id="btn-claim-normal" style="background:#334155;color:#cbd5e1;border:none;padding:10px;border-radius:8px;cursor:pointer;font-size:13px;">
+                                Thu Nhận Bình Thường
+                            </button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(popup);
+
+                // Nút x2: Click chuột trực tiếp sẽ vượt qua bộ lọc chặn Pop-up của trình duyệt
+                document.getElementById('btn-claim-x2').onclick = () => {
+                    popup.remove();
+                    if (window.AdsManager) {
                         window.AdsManager.showRewarded(() => {
                             window.addLifetimeMana(actualGained);
                             alert(`🎉 ĐẠI NGỘ THIÊN CƠ!\n\nĐạo hữu đã nhận thêm +${actualGained} Linh Khí bế quan!`);
                         });
                     }
-                } else {
-                    alert(`🌙 BẾ QUAN NGOẠI TUYẾN 🌙\n\nĐạo hữu đã tĩnh tu suốt ${timeStr} nhưng do chạm Bình Cảnh nên không thể hấp thu thêm Linh Khí.\n\nNhanh chóng Đột Phá để khai thông kinh mạch!`);
-                }
+                };
+
+                // Nút đóng bình thường
+                document.getElementById('btn-claim-normal').onclick = () => {
+                    popup.remove();
+                };
+
             }, 1200);
         }
     }
