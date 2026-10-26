@@ -638,7 +638,7 @@ window.switchLeaderboardTab = function(tab) {
     sorted.slice(0, 10).forEach((u, index) => {
         let rankHtml = index < 3 ? ["🥇", "🥈", "🥉"][index] : `<b>${index + 1}.</b>`;
         let scoreHtml = tab === 'mana' 
-            ? `<div class="lb-mana">⚡ ${u.mana} Linh Khí</div>``
+            ? `<div class="lb-mana">⚡ ${u.mana} Linh Khí</div>`
             : `<div class="lb-score-tag"><span style="color:#38bdf8; font-weight:bold;">⏱️ ${formatTime(u.battleRecord?.maxSurvivalSec || 0)}</span><br><small style="color:#ffa502;">👾 ${u.battleRecord?.maxKills || 0} quái</small></div>`;
         
         let countA1 = u.masteredA1 ? (Array.isArray(u.masteredA1) ? u.masteredA1.length : Object.keys(u.masteredA1).length) : 0;
