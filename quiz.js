@@ -257,6 +257,7 @@ window.checkAnswer = function(selectedIdx, btnElement) {
         let rewardText = bonusLT > 0 ? `Nhận được ${bonusLT} 💎.` : `Không nhận được Linh Thạch.`;
         msgDiv.innerHTML = `<span style='color:#22d3ee;'>✅ Đốn Ngộ! ${rewardText}</span>${warningMsg}${buffMsg}`;
         window.updateQuizHUD();
+        if (window.syncManaToDatabase) window.syncManaToDatabase();
     } else {
         // 5.5. Trả lời sai - Phạt Tâm Ma Phản Phệ
         btnElement.classList.add('wrong');
