@@ -164,11 +164,15 @@ window.getSwordCount = function() {
     const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0, countA1, countB1) : { major: "Phàm Nhân" };
     const major = realmData.major;
 
+    // Phàm nhân không có linh lực để ngự kiếm
     if (major === "Phàm Nhân") return 0;
 
     const spi = window.playerStats ? window.playerStats.spi : 1;
-    let calculatedSwords = Math.max(1, Math.floor(spi / 10)); 
+    
+    // CÔNG THỨC MỚI: Mặc định có 1 thanh, cứ đạt mốc 10 điểm Tinh Thần sẽ được +1 thanh
+    let calculatedSwords = Math.floor(spi / 10) + 1; 
 
+    // Giới hạn trần phi kiếm theo từng đại cảnh giới
     let maxSwords = 1;
     if (major === "Luyện Khí Kỳ") maxSwords = 3;
     else if (major === "Trúc Cơ Kỳ") maxSwords = 5;
