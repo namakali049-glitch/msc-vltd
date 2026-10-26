@@ -125,7 +125,6 @@ function recalcStats() {
 
     maxHp = playerStats.vit * 10; 
 
-    // ĐÃ VÁ LỖI BƠM MÁU VÔ HẠN KHI VẬN KHÍ
     if (window.currentHp === undefined || window.currentHp > maxHp) {
         window.currentHp = maxHp;
     } 
@@ -195,7 +194,6 @@ window.addLifetimeMana = function(amount) {
 
     let targetMana = oldMana + amount;
     
-    // Đã sửa: Chỉ chặn vượt mốc nếu chưa đủ điều kiện, KHÔNG kéo tụt người đã vượt mốc
     if (!window.isAdmin && countA1 < 600 && oldMana <= 12000 && targetMana > 12000) {
         targetMana = 12000;
     } else if (!window.isAdmin && countB1 < 2667 && oldMana <= 50000 && targetMana > 50000) {
@@ -407,13 +405,14 @@ function generateRandomBaseStats() {
 }
 
 // ==========================================
-// HỆ THỐNG LƯU VÀ TẢI DỮ LIỆU ĐÃ VÁ LỖI
+// HỆ THỐNG LƯU VÀ TẢI DỮ LIỆU ĐÃ VÁ LỖI (CHUYỂN SANG MÙA 2)
 // ==========================================
 async function syncManaToDatabase() {
-    if (!currentUser || !isDataLoaded) return; // CHẶN TUYỆT ĐỐI GHI ĐÈ KHI CHƯA TẢI XONG
+    if (!currentUser || !isDataLoaded) return; 
     
     try {
-        const userRef = ref(database, 'users/' + currentUser.uid);
+        // ĐỔI ĐƯỜNG DẪN TỪ 'users/' THÀNH 'users_v2/'
+        const userRef = ref(database, 'users_v2/' + currentUser.uid);
         
         const currentTotalMana = window.lifetimeMana !== undefined ? window.lifetimeMana : lifetimeMana;
         const currentStats = window.playerStats || playerStats;
@@ -426,7 +425,6 @@ async function syncManaToDatabase() {
             linhThach: window.playerLinhThach || 0,
             currentHp: window.currentHp !== undefined ? window.currentHp : 100,
             
-            // LƯU THÊM 3 BIẾN NÀY ĐỂ CHỐNG GIAN LẬN
             currentLinhLuc: window.currentLinhLuc !== undefined ? window.currentLinhLuc : 100,
             tuLinhBuff: window.tuLinhBuff || 0,
             itemUsageHistory: window.itemUsageHistory || {},
@@ -445,7 +443,8 @@ window.syncManaToDatabase = syncManaToDatabase;
 
 async function loadUserLifetimeMana(uid) {
     try {
-        const userRef = ref(database, 'users/' + uid);
+        // ĐỔI ĐƯỜNG DẪN TỪ 'users/' THÀNH 'users_v2/'
+        const userRef = ref(database, 'users_v2/' + uid);
         const snapshot = await get(userRef);
         if (snapshot.exists()) {
             const val = snapshot.val();
@@ -459,7 +458,6 @@ async function loadUserLifetimeMana(uid) {
 
             window.currentHp = val.currentHp !== undefined ? Math.max(val.currentHp, 1) : 100;
             
-            // TẢI THÊM 3 BIẾN CHỐNG GIAN LẬN
             window.currentLinhLuc = val.currentLinhLuc !== undefined ? val.currentLinhLuc : 100;
             window.tuLinhBuff = val.tuLinhBuff || 0;
             window.itemUsageHistory = val.itemUsageHistory || {};
@@ -487,7 +485,6 @@ async function loadUserLifetimeMana(uid) {
                 window.stats = playerStats;
             }
 
-            // ĐÁNH DẤU TẢI THÀNH CÔNG VÀ MỞ KHÓA GHI DỮ LIỆU
             isDataLoaded = true;
             window.isDataLoaded = true;
 
@@ -498,12 +495,10 @@ async function loadUserLifetimeMana(uid) {
                 }
             }, 600);
         } else {
-            // Tài khoản mới tinh, cho phép ghi đè
             isDataLoaded = true;
             window.isDataLoaded = true;
         }
     } catch(e) { 
-        // LỖI MẠNG -> KHÔNG CHO GHI ĐÈ ĐỂ BẢO VỆ TÀI KHOẢN
         console.error("Lỗi tải data:", e);
     }
     
@@ -557,7 +552,9 @@ window.handleSignup = async function() {
         playerStats = generateRandomBaseStats();
         window.playerStats = playerStats;
         window.stats = playerStats;
-        await set(ref(database, 'users/' + userCred.user.uid), { 
+        
+        // ĐỔI ĐƯỜNG DẪN TỪ 'users/' THÀNH 'users_v2/'
+        await set(ref(database, 'users_v2/' + userCred.user.uid), { 
             name: displayName, 
             mana: 0, 
             linhThach: 0,
@@ -589,7 +586,9 @@ window.handleGoogleLogin = async function() {
     }
     try { 
         const result = await signInWithPopup(auth, googleProvider);
-        const userRef = ref(database, 'users/' + result.user.uid);
+        
+        // ĐỔI ĐƯỜNG DẪN TỪ 'users/' THÀNH 'users_v2/'
+        const userRef = ref(database, 'users_v2/' + result.user.uid);
         const snapshot = await get(userRef);
         if (!snapshot.exists()) {
             playerStats = generateRandomBaseStats();
@@ -705,7 +704,8 @@ window.showLeaderboard = async function() {
     const listEl = document.getElementById('lb-list');
     if (listEl) listEl.innerHTML = "<p style='color:#94a3b8; text-align:center; padding-top: 20px;'>⏳ Đang kết nối Tiên Đạo Bảng...</p>";
     try {
-        const lbRef = ref(window.firebaseDB || database, 'users');
+        // ĐỔI ĐƯỜNG DẪN TỪ 'users' THÀNH 'users_v2' ĐỂ BẢNG XẾP HẠNG CHỈ LẤY DATA MỚI
+        const lbRef = ref(window.firebaseDB || database, 'users_v2');
         const snapshot = await get(lbRef);
         if (snapshot.exists()) {
             cachedLeaderboardData = [];
@@ -814,7 +814,7 @@ window.updateLinhThach = async function(amount) {
     if (ltEl) ltEl.innerText = window.playerLinhThach;
     
     try {
-        const userRef = ref(window.firebaseDB || database, 'users/' + window.currentUser.uid);
+        const userRef = ref(window.firebaseDB || database, 'users_v2/' + window.currentUser.uid);
         await update(userRef, { linhThach: window.playerLinhThach });
     } catch(e) {}
 };
