@@ -464,28 +464,45 @@ async function loadUserLifetimeMana(uid) {
     }
 }
 
+// A. THÊM CỜ KHÓA VÀ CẬP NHẬT HÀM ĐỒNG BỘ
+let isDataLoaded = false;
+window.isDataLoaded = false;
+
 async function syncManaToDatabase() {
-    if (!currentUser) return;
+    // CHẶN TUYỆT ĐỐI: Chưa tải xong từ Firebase thì cấm ghi đè!
+    if (!currentUser || !isDataLoaded) return;
+    
     try {
         const userRef = ref(database, 'users/' + currentUser.uid);
+        
+        // Luôn đọc từ window để lấy dữ liệu mới nhất (sửa lỗi lệch biến)
+        const currentTotalMana = window.lifetimeMana !== undefined ? window.lifetimeMana : lifetimeMana;
+        const currentStats = window.playerStats || playerStats;
+        const currentA1 = window.masteredWordsA1 || masteredWordsA1;
+        const currentB1 = window.masteredWordsB1 || masteredWordsB1;
+        
         await update(userRef, {
             name: currentUser.displayName || currentUser.email.split('@')[0],
-            mana: lifetimeMana,
-            linhThach: window.playerLinhThach,
+            mana: currentTotalMana,
+            linhThach: window.playerLinhThach || 0,
+            currentHp: window.currentHp !== undefined ? window.currentHp : 100,
             
-            currentHp: window.currentHp,
+            // LƯU THÊM 3 BIẾN NÀY ĐỂ CHỐNG GIAN LẬN ĐAN DƯỢC & BUFF
+            currentLinhLuc: window.currentLinhLuc !== undefined ? window.currentLinhLuc : 100,
+            tuLinhBuff: window.tuLinhBuff || 0,
+            itemUsageHistory: window.itemUsageHistory || {},
+            
             inventory: window.inventory || {},
             learnedSkills: window.learnedSkills || [], 
-            stats: playerStats,
-            masteredA1: masteredWordsA1,
-            masteredB1: masteredWordsB1,
-            battleRecord: battleRecord,
+            stats: currentStats,
+            masteredA1: currentA1,
+            masteredB1: currentB1,
+            battleRecord: window.battleRecord || battleRecord,
             lastUpdated: Date.now()
         });
     } catch(e) { console.error("Lỗi đồng bộ Firebase:", e); }
 }
 window.syncManaToDatabase = syncManaToDatabase;
-
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         currentUser = user;
