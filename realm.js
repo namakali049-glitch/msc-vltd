@@ -96,10 +96,10 @@ window.REALM_PROGRESS_TIERS = [
     { name: "Luyện Khí Hậu Kỳ", min: 300, max: 600, next: "Trúc Cơ Sơ Kỳ" },
     { name: "Trúc Cơ Sơ Kỳ", min: 600, max: 1500, next: "Trúc Cơ Trung Kỳ" },
     { name: "Trúc Cơ Trung Kỳ", min: 1500, max: 4000, next: "Trúc Cơ Hậu Kỳ" },
-    { name: "Trúc Cơ (Bình Cảnh)", min: 4000, max: 12000, next: "Kim Đan Sơ Kỳ" },
+    { name: "Trúc Cơ Hậu Kỳ", min: 4000, max: 12000, next: "Kim Đan Sơ Kỳ" }, // Sửa ở đây
     { name: "Kim Đan Sơ Kỳ", min: 12000, max: 22000, next: "Kim Đan Trung Kỳ" },
     { name: "Kim Đan Trung Kỳ", min: 22000, max: 35000, next: "Kim Đan Hậu Kỳ" },
-    { name: "Kim Đan (Bình Cảnh)", min: 35000, max: 50000, next: "Nguyên Anh Sơ Kỳ" },
+    { name: "Kim Đan Hậu Kỳ", min: 35000, max: 50000, next: "Nguyên Anh Sơ Kỳ" }, // Sửa ở đây
     { name: "Nguyên Anh Sơ Kỳ", min: 50000, max: 65000, next: "Nguyên Anh Trung Kỳ" },
     { name: "Nguyên Anh Trung Kỳ", min: 65000, max: 85000, next: "Nguyên Anh Hậu Kỳ" },
     { name: "Nguyên Anh Hậu Kỳ", min: 85000, max: 100000, next: "Đỉnh Phong" }
