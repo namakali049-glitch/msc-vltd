@@ -187,39 +187,46 @@ function completeCycle() {
 function attemptBreakthrough() {
     if (window.playClickSound) window.playClickSound();
     
-    const realmFunc = window.getRealmData || (() => ({ major: "Phàm Nhân" }));
+    const realmFunc = window.getRealmData || (() => ({ major: "Phàm Nhân", rank: "Phàm Nhân" }));
     const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
     const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
-    const realmData = realmFunc(window.lifetimeMana || 0, countA1, countB1);
+    const currentMana = window.lifetimeMana || 0;
+    const realmData = realmFunc(currentMana, countA1, countB1);
+
+    // XÉT TỪ VỰNG TRƯỚC
+    if (realmData.rank && realmData.rank.includes("Trúc Cơ (Bình Cảnh)") && countA1 < 600) {
+        alert(`📜 TÂM THÁI CHƯA ĐỦ!\n\nCần nắm vững ít nhất 600 từ vựng A1 tại Tàng Kinh Các (Hiện tại: ${countA1}/600 từ).`);
+        return;
+    }
+    if (realmData.rank && realmData.rank.includes("Kim Đan (Bình Cảnh)") && countB1 < 2667) {
+        alert(`📜 TÂM THÁI CHƯA ĐỦ!\n\nCần nắm vững ít nhất 2667 từ vựng B1 tại Tàng Kinh Các (Hiện tại: ${countB1}/2667 từ).`);
+        return;
+    }
 
     const majorKey = realmData.major.replace(" Kỳ", ""); 
     const baseRate = IDLE_CONFIG[majorKey] ? IDLE_CONFIG[majorKey].rate : 50;
 
     const confirmed = confirm(
-        `⚡ ĐỘT PHÁ CẢNH GIỚI ⚡\n\n` +
-        `• Cảnh giới hiện tại: ${realmData.rank || realmData.major}\n` +
-        `• Tỷ lệ thành công: ${baseRate}%\n` +
-        `• Thất bại sẽ tẩu hỏa nhập ma, tổn thất 25% tổng Tu Vi.\n\n` +
-        `Đạo hữu có chắc chắn muốn trùng kích bình cảnh?`
+        `⚡ ĐỘT PHÁ CẢNH GIỚI ⚡\n\n• Cảnh giới hiện tại: ${realmData.rank || realmData.major}\n• Tỷ lệ thành công: ${baseRate}%\n• Thất bại tổn thất 25% Tu Vi.\n\nĐạo hữu có chắc chắn trùng kích?`
     );
 
     if (confirmed) {
         const roll = Math.random() * 100;
         if (roll <= baseRate) {
-            if (window.addLifetimeMana) window.addLifetimeMana(1);
-            alert("🎉 ĐỘT PHÁ THÀNH CÔNG!\nĐạo hữu đã phá tan gông cùm, đăng lâm tầng cảnh giới mới!");
+            // Thành công: Cộng thẳng 50 để vọt qua Bình Cảnh
+            if (window.addLifetimeMana) window.addLifetimeMana(50);
+            alert("🎉 ĐỘT PHÁ THÀNH CÔNG!\n\nĐạo hữu đã phá tan gông cùm kinh mạch!");
             initIdleParams();
+            if (window.updateCharacterUI) window.updateCharacterUI();
         } else {
             if (window.playWrongSound) window.playWrongSound();
-            const currentTotal = window.lifetimeMana || 0;
-            const penalty = Math.floor(currentTotal * 0.25);
-            if (window.setLifetimeMana) {
-                window.setLifetimeMana(currentTotal - penalty);
-            } else {
-                window.lifetimeMana = Math.max(0, currentTotal - penalty);
-            }
+            const penalty = Math.floor(currentMana * 0.25);
+            const remainingMana = Math.max(0, currentMana - penalty);
             
-            alert(`💥 ĐỘT PHÁ THẤT BẠI!\nTâm ma phản phệ khiến kinh mạch đứt đoạn, đánh mất ${penalty} Linh Khí.`);
+            if (window.setLifetimeMana) window.setLifetimeMana(remainingMana);
+            else window.lifetimeMana = remainingMana;
+            
+            alert(`💥 ĐỘT PHÁ THẤT BẠI!\n\nTổn thất ${penalty} Linh Khí.`);
             
             if (window.recalcStats) window.recalcStats();
             if (window.updateCharacterUI) window.updateCharacterUI();
