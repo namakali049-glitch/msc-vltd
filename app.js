@@ -59,6 +59,10 @@ window.masteredWordsB1 = masteredWordsB1;
 window.lifetimeMana = lifetimeMana;
 window.playerLinhThach = playerLinhThach;
 
+// --- CỜ KHÓA DỮ LIỆU ĐỂ CHỐNG RESET TÀI KHOẢN ---
+let isDataLoaded = false;
+window.isDataLoaded = false;
+
 let playerStats = {
     str: 1, vit: 1, agi: 1, spi: 1,
     freePoints: 0,
@@ -119,13 +123,13 @@ function recalcStats() {
     const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
     const realmData = window.getRealmData ? window.getRealmData(lifetimeMana, countA1, countB1) : { major: "Phàm Nhân" };
 
-    maxHp = playerStats.vit * 10; // KHÔI PHỤC LẠI DÒNG NÀY ĐỂ ĐỒNG BỘ MÁU
+    maxHp = playerStats.vit * 10; 
 
     if (window.currentHp === undefined || window.currentHp > maxHp) {
-    window.currentHp = maxHp;
-} else if (window.currentHp < 0) {
-    window.currentHp = 0;
-}
+        window.currentHp = maxHp;
+    } else if (window.currentHp < 0) {
+        window.currentHp = 0;
+    }
     currentHp = window.currentHp;
 
     let maxLinhLuc = 0;
@@ -152,19 +156,18 @@ function recalcStats() {
     window.lifetimeMana = lifetimeMana;
 }
 window.recalcStats = recalcStats;
-// FIX LỖI TÍNH TOÁN SỐ LƯỢNG PHI KIẾM THEO CẢNH GIỚI
+
 window.getSwordCount = function() {
-    const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0) : { major: "Phàm Nhân" };
+    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
+    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+    const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0, countA1, countB1) : { major: "Phàm Nhân" };
     const major = realmData.major;
 
-    // Phàm nhân không thể ngự kiếm
     if (major === "Phàm Nhân") return 0;
 
-    // Mỗi 10 điểm Tinh Thần (spi) = 1 phi kiếm. Mặc định Tu sĩ có ít nhất 1 thanh.
     const spi = window.playerStats ? window.playerStats.spi : 1;
     let calculatedSwords = Math.max(1, Math.floor(spi / 10)); 
 
-    // Giới hạn số lượng phi kiếm tối đa theo Cảnh Giới
     let maxSwords = 1;
     if (major === "Luyện Khí Kỳ") maxSwords = 3;
     else if (major === "Trúc Cơ Kỳ") maxSwords = 5;
@@ -174,6 +177,7 @@ window.getSwordCount = function() {
 
     return Math.min(calculatedSwords, maxSwords);
 };
+
 window.setLifetimeMana = function(targetMana) {
     lifetimeMana = Math.max(0, targetMana);
     window.lifetimeMana = lifetimeMana;
@@ -181,15 +185,20 @@ window.setLifetimeMana = function(targetMana) {
     updateCharacterUI();
     syncManaToDatabase();
 };
+
 window.addLifetimeMana = function(amount) {
-    const oldMana = lifetimeMana;
+    const oldMana = window.lifetimeMana !== undefined ? window.lifetimeMana : lifetimeMana;
     const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
     const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
 
-    let targetMana = lifetimeMana + amount;
+    let targetMana = oldMana + amount;
     
-    if (!window.isAdmin && countA1 < 600 && targetMana > 12000) targetMana = 12000;
-    else if (!window.isAdmin && countB1 < 2667 && targetMana > 50000) targetMana = 50000;
+    // Đã sửa: Chỉ chặn vượt mốc nếu chưa đủ điều kiện, KHÔNG kéo tụt người đã vượt mốc
+    if (!window.isAdmin && countA1 < 600 && oldMana <= 12000 && targetMana > 12000) {
+        targetMana = 12000;
+    } else if (!window.isAdmin && countB1 < 2667 && oldMana <= 50000 && targetMana > 50000) {
+        targetMana = 50000;
+    }
 
     lifetimeMana = targetMana;
     window.lifetimeMana = lifetimeMana;
@@ -289,7 +298,7 @@ function updateCharacterUI() {
 
     const masteryA1 = document.getElementById('profileMasteryA1');
     const masteryB1 = document.getElementById('profileMasteryB1');
-if (masteryA1) masteryA1.innerText = `${countA1} / 900 từ (${Math.round((countA1 / 900) * 100)}%)`;
+    if (masteryA1) masteryA1.innerText = `${countA1} / 900 từ (${Math.round((countA1 / 900) * 100)}%)`;
     if (masteryB1) masteryB1.innerText = `${countB1} / 4000 từ (${Math.round((countB1 / 4000) * 100)}%)`;
 
     // HUD thông tin Động Phủ
@@ -300,9 +309,9 @@ if (masteryA1) masteryA1.innerText = `${countA1} / 900 từ (${Math.round((count
     if (stageRealmEl) stageRealmEl.innerText = realm;
     if (stageAvatarEl) stageAvatarEl.src = profileAvatar ? profileAvatar.src : avatarFunc(lifetimeMana);
 
-    // === CẬP NHẬT THANH KINH NGHIỆM ĐỘNG PHỦ ===
+    // Cập nhật Thanh Tiến Độ
     if (typeof window.getRealmProgress === 'function') {
-        const currentMana = window.lifetimeMana || (typeof lifetimeMana !== 'undefined' ? lifetimeMana : 0);
+        const currentMana = window.lifetimeMana !== undefined ? window.lifetimeMana : (lifetimeMana || 0);
         const prog = window.getRealmProgress(currentMana);
         
         const expLabel = document.getElementById('realmExpLabel');
@@ -313,7 +322,6 @@ if (masteryA1) masteryA1.innerText = `${countA1} / 900 từ (${Math.round((count
             expLabel.innerText = prog.isMax ? "Đỉnh Phong Tiên Đạo" : `${prog.currentTier} ➔ ${prog.nextTier}`;
         }
         if (expText) {
-            // Thay đổi từ currentInTier/neededInTier thành currentTotal/tierMax
             expText.innerText = prog.isMax ? "Viên Mãn" : `${prog.currentTotal} / ${prog.tierMax} LK (${Math.floor(prog.percent)}%)`;
         }
         if (expFill) {
@@ -321,12 +329,10 @@ if (masteryA1) masteryA1.innerText = `${countA1} / 900 từ (${Math.round((count
         }
     }
 
-    // 👇 ĐÃ THÊM: Đồng bộ ngay lập tức nhân vật ngồi thiền ở Động Phủ
     if (typeof window.initIdleParams === 'function') {
         window.initIdleParams();
     }
-} // Kết thúc hàm updateCharacterUI
-
+} 
 window.updateCharacterUI = updateCharacterUI;
 
 // ==========================================
@@ -341,6 +347,7 @@ window.goHome = function() {
     }
     window.switchScreen('start-screen');
 };
+
 window.switchScreen = function(screenId) {
     if (window.playClickSound) window.playClickSound();
     document.querySelectorAll('.screen').forEach(s => {
@@ -397,85 +404,16 @@ function generateRandomBaseStats() {
     };
 }
 
-async function loadUserLifetimeMana(uid) {
-    try {
-        const userRef = ref(database, 'users/' + uid);
-        const snapshot = await get(userRef);
-        if (snapshot.exists()) {
-            const val = snapshot.val();
-            lifetimeMana = val.mana || 0;
-            
-            window.playerLinhThach = val.linhThach || 0;
-            const ltEl = document.getElementById('ui-linh-thach-main');
-            if (ltEl) ltEl.innerText = window.playerLinhThach;
-            
-             
-
-            window.currentHp = val.currentHp !== undefined ? Math.max(val.currentHp, 1) : (window.maxHp || 100);
-            inventory = val.inventory || {};
-            window.inventory = inventory;
-            window.learnedSkills = val.learnedSkills || [];
-            
-            battleRecord = val.battleRecord || { maxSurvivalSec: 0, maxKills: 0 };
-            window.battleRecord = battleRecord;
-            masteredWordsA1 = parseFirebaseArray(val.masteredA1);
-            masteredWordsB1 = parseFirebaseArray(val.masteredB1);
-            window.masteredWordsA1 = masteredWordsA1;
-            window.masteredWordsB1 = masteredWordsB1;
-
-            if (!val.stats || val.stats.version !== "v0.6_FINAL") {
-                playerStats = generateRandomBaseStats();
-                let accumulatedPoints = 0;
-                let awardedTiers = [];
-                if (window.MINOR_REALM_REWARDS) {
-                    window.MINOR_REALM_REWARDS.forEach(tier => {
-                        if (lifetimeMana >= tier.mana) {
-                            accumulatedPoints += tier.points;
-                            awardedTiers.push(tier.id);
-                        }
-                    });
-                }
-                playerStats.freePoints = accumulatedPoints;
-                playerStats.rewardedTiers = awardedTiers;
-                await update(userRef, { stats: playerStats });
-            } else {
-                playerStats = val.stats;
-            }
-            window.playerStats = playerStats;
-            window.stats = playerStats;
-            const lastUpdated = val.lastUpdated || Date.now();
-            setTimeout(() => {
-                if (window.processOfflineProgress) {
-                    window.processOfflineProgress(lastUpdated);
-                }
-            }, 600);
-        }
-    } catch(e) { 
-        console.error("Lỗi tải data:", e);
-        lifetimeMana = 0; 
-        masteredWordsA1 = []; masteredWordsB1 = []; inventory = {};
-        playerStats = generateRandomBaseStats();
-        window.playerStats = playerStats; window.stats = playerStats; window.inventory = inventory;
-    }
-    recalcStats();
-    updateCharacterUI();
-    if (typeof window.initIdleParams === 'function') {
-        window.initIdleParams();
-    }
-}
-
-// A. THÊM CỜ KHÓA VÀ CẬP NHẬT HÀM ĐỒNG BỘ
-let isDataLoaded = false;
-window.isDataLoaded = false;
+// ==========================================
+// HỆ THỐNG LƯU VÀ TẢI DỮ LIỆU ĐÃ VÁ LỖI
+// ==========================================
 
 async function syncManaToDatabase() {
-    // CHẶN TUYỆT ĐỐI: Chưa tải xong từ Firebase thì cấm ghi đè!
-    if (!currentUser || !isDataLoaded) return;
+    if (!currentUser || !isDataLoaded) return; // CHẶN TUYỆT ĐỐI GHI ĐÈ KHI CHƯA TẢI XONG
     
     try {
         const userRef = ref(database, 'users/' + currentUser.uid);
         
-        // Luôn đọc từ window để lấy dữ liệu mới nhất (sửa lỗi lệch biến)
         const currentTotalMana = window.lifetimeMana !== undefined ? window.lifetimeMana : lifetimeMana;
         const currentStats = window.playerStats || playerStats;
         const currentA1 = window.masteredWordsA1 || masteredWordsA1;
@@ -487,7 +425,7 @@ async function syncManaToDatabase() {
             linhThach: window.playerLinhThach || 0,
             currentHp: window.currentHp !== undefined ? window.currentHp : 100,
             
-            // LƯU THÊM 3 BIẾN NÀY ĐỂ CHỐNG GIAN LẬN ĐAN DƯỢC & BUFF
+            // LƯU THÊM 3 BIẾN NÀY ĐỂ CHỐNG GIAN LẬN
             currentLinhLuc: window.currentLinhLuc !== undefined ? window.currentLinhLuc : 100,
             tuLinhBuff: window.tuLinhBuff || 0,
             itemUsageHistory: window.itemUsageHistory || {},
@@ -503,6 +441,80 @@ async function syncManaToDatabase() {
     } catch(e) { console.error("Lỗi đồng bộ Firebase:", e); }
 }
 window.syncManaToDatabase = syncManaToDatabase;
+
+async function loadUserLifetimeMana(uid) {
+    try {
+        const userRef = ref(database, 'users/' + uid);
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+            const val = snapshot.val();
+            
+            lifetimeMana = Number(val.mana) || 0;
+            window.lifetimeMana = lifetimeMana;
+            
+            window.playerLinhThach = Number(val.linhThach) || 0;
+            const ltEl = document.getElementById('ui-linh-thach-main');
+            if (ltEl) ltEl.innerText = window.playerLinhThach;
+
+            window.currentHp = val.currentHp !== undefined ? Math.max(val.currentHp, 1) : 100;
+            
+            // TẢI THÊM 3 BIẾN CHỐNG GIAN LẬN
+            window.currentLinhLuc = val.currentLinhLuc !== undefined ? val.currentLinhLuc : 100;
+            window.tuLinhBuff = val.tuLinhBuff || 0;
+            window.itemUsageHistory = val.itemUsageHistory || {};
+
+            inventory = val.inventory || {};
+            window.inventory = inventory;
+            window.learnedSkills = val.learnedSkills || [];
+            
+            battleRecord = val.battleRecord || { maxSurvivalSec: 0, maxKills: 0 };
+            window.battleRecord = battleRecord;
+            
+            masteredWordsA1 = parseFirebaseArray(val.masteredA1);
+            masteredWordsB1 = parseFirebaseArray(val.masteredB1);
+            window.masteredWordsA1 = masteredWordsA1;
+            window.masteredWordsB1 = masteredWordsB1;
+
+            if (!val.stats || val.stats.version !== "v0.6_FINAL") {
+                playerStats = generateRandomBaseStats();
+                window.playerStats = playerStats;
+                window.stats = playerStats;
+                await update(userRef, { stats: playerStats });
+            } else {
+                playerStats = val.stats;
+                window.playerStats = playerStats;
+                window.stats = playerStats;
+            }
+
+            // ĐÁNH DẤU TẢI THÀNH CÔNG VÀ MỞ KHÓA GHI DỮ LIỆU
+            isDataLoaded = true;
+            window.isDataLoaded = true;
+
+            const lastUpdated = val.lastUpdated || Date.now();
+            setTimeout(() => {
+                if (window.processOfflineProgress) {
+                    window.processOfflineProgress(lastUpdated);
+                }
+            }, 600);
+        } else {
+            // Tài khoản mới tinh, cho phép ghi đè
+            isDataLoaded = true;
+            window.isDataLoaded = true;
+        }
+    } catch(e) { 
+        // LỖI MẠNG -> KHÔNG CHO GHI ĐÈ ĐỂ BẢO VỆ TÀI KHOẢN
+        console.error("Lỗi tải data:", e);
+    }
+    
+    recalcStats();
+    updateCharacterUI();
+    if (typeof window.initIdleParams === 'function') window.initIdleParams();
+}
+
+// ==========================================
+// CÁC HÀM XÁC THỰC
+// ==========================================
+
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         currentUser = user;
@@ -511,12 +523,14 @@ onAuthStateChanged(auth, async (user) => {
 
         const nameEl = document.getElementById('userDisplayName');
         if (nameEl) nameEl.innerText = user.displayName || user.email.split('@')[0];
+        
         await loadUserLifetimeMana(user.uid);
-    updateCharacterUI();
-    if (typeof window.initIdleParams === 'function') {
-        window.initIdleParams();
-    }
-    switchScreen('start-screen');
+        
+        updateCharacterUI();
+        if (typeof window.initIdleParams === 'function') {
+            window.initIdleParams();
+        }
+        switchScreen('start-screen');
     } else {
         currentUser = null;
         window.currentUser = null;
@@ -547,7 +561,6 @@ window.handleSignup = async function() {
             name: displayName, 
             mana: 0, 
             linhThach: 0,
-            
             inventory: {},
             stats: playerStats,
             battleRecord: { maxSurvivalSec: 0, maxKills: 0, lastUpdated: Date.now() },
@@ -586,7 +599,6 @@ window.handleGoogleLogin = async function() {
                 name: result.user.displayName || "Đạo Hữu", 
                 mana: 0, 
                 linhThach: 0,
-                
                 inventory: {}, 
                 stats: playerStats,
                 masteredA1: [], masteredB1: [], joinedAt: Date.now()
@@ -605,6 +617,8 @@ window.handleLogout = function() {
     window.lifetimeMana = 0; window.masteredWordsA1 = []; window.masteredWordsB1 = [];
     window.inventory = inventory; window.battleRecord = battleRecord;
     window.playerStats = playerStats; window.stats = playerStats;
+    isDataLoaded = false;
+    window.isDataLoaded = false;
     
     signOut(auth); 
 };
@@ -804,19 +818,20 @@ window.updateLinhThach = async function(amount) {
         await update(userRef, { linhThach: window.playerLinhThach });
     } catch(e) {}
 };
+
 window.learnSkill = function(skillId) {
     if (!window.learnedSkills) window.learnedSkills = [];
     if (!window.learnedSkills.includes(skillId)) {
         window.learnedSkills.push(skillId);
-        learnedSkills = window.learnedSkills; // Đồng bộ biến cục bộ
+        learnedSkills = window.learnedSkills;
         syncManaToDatabase();
     }
 };
+
 // ==========================================
-// HỆ THỐNG BẢO VỆ CHỐNG F12 (CÓ BỘ LỌC CHO ADMIN)
+// HỆ THỐNG BẢO VỆ CHỐNG F12
 // ==========================================
 (function initAntiInspect() {
-    // 1. Kiểm tra cờ kích hoạt chế độ nhà phát triển qua URL (?dev=true)
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('dev') === 'true') {
         localStorage.setItem('admin_dev_mode', 'enabled');
@@ -826,7 +841,6 @@ window.learnSkill = function(skillId) {
         alert("🔒 Đã khóa lại chế độ kiểm tra!");
     }
 
-    // 2. Hàm kiểm tra quyền miễn trừ
     function isDeveloper() {
         const isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
         const hasDevKey = localStorage.getItem('admin_dev_mode') === 'enabled';
@@ -834,31 +848,26 @@ window.learnSkill = function(skillId) {
         return isLocal || hasDevKey || isAdminAccount;
     }
 
-    // 3. Chặn menu chuột phải đối với người chơi thông thường
     document.addEventListener('contextmenu', (e) => {
         if (isDeveloper()) return;
         e.preventDefault();
     });
 
-    // 4. Chặn các phím tắt DevTools đối với người chơi thông thường
     document.addEventListener('keydown', (e) => {
         if (isDeveloper()) return;
 
-        // Chặn F12
         if (e.key === 'F12') {
             e.preventDefault();
             e.stopPropagation();
             return false;
         }
 
-        // Chặn Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C (Inspect Element / Console)
         if (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase())) {
             e.preventDefault();
             e.stopPropagation();
             return false;
         }
 
-        // Chặn Ctrl+U (Xem mã nguồn HTML)
         if (e.ctrlKey && e.key.toUpperCase() === 'U') {
             e.preventDefault();
             e.stopPropagation();
@@ -866,9 +875,9 @@ window.learnSkill = function(skillId) {
         }
     });
 })();
-// Lưu lại thời điểm cuối cùng khi người chơi đóng tab hoặc thoát game
+
 window.addEventListener('beforeunload', () => {
-    if (window.syncManaToDatabase && window.currentUser) {
+    if (window.syncManaToDatabase && window.currentUser && window.isDataLoaded) {
         window.syncManaToDatabase();
     }
 });
