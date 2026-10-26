@@ -725,11 +725,4 @@ window.updateLinhThach = async function(amount) {
         await update(userRef, { linhThach: window.playerLinhThach });
     } catch(e) {}
 };
-window.learnSkill = function(skillId) {
-    if (!window.learnedSkills) window.learnedSkills = [];
-    if (!window.learnedSkills.includes(skillId)) {
-        window.learnedSkills.push(skillId);
-        learnedSkills = window.learnedSkills; // Đồng bộ biến cục bộ
-        syncManaToDatabase();
-    }
-};
+
