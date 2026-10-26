@@ -952,6 +952,7 @@ function initControls() {
 function launchNguKiem(targetDirX, targetDirY) {
     if (!battleData.swords || battleData.swords.length === 0) return;
     
+    // 1. Kiểm tra phi kiếm hộ thể sẵn sàng
     const availableSword = battleData.swords.find(s => s.active);
     if (!availableSword) {
         battleData.textPopups.push({ 
@@ -963,6 +964,23 @@ function launchNguKiem(targetDirX, targetDirY) {
         });
         return;
     }
+
+    // 2. Kiểm tra lượng Linh Lực (Mana) tiêu hao
+    const manaCost = 10; // Tiêu hao 10 Linh Lực mỗi lần xuất kiếm
+    if ((window.currentLinhLuc || 0) < manaCost) {
+        battleData.textPopups.push({ 
+            x: battleData.player.x, 
+            y: battleData.player.y - 40, 
+            text: "Cạn Linh Lực!", 
+            color: "#38bdf8", 
+            life: 45 
+        });
+        if (window.playWrongSound) window.playWrongSound();
+        return;
+    }
+
+    // 3. Trừ Linh Lực
+    window.currentLinhLuc -= manaCost;
 
     availableSword.active = false;
     const agi = window.agi || 1;
