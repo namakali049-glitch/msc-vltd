@@ -106,7 +106,6 @@ window.REALM_PROGRESS_TIERS = [
 ];
 
 window.getRealmProgress = function(mana) {
-    // Ép kiểu về số nguyên để phép so sánh luôn chuẩn xác
     const currentMana = Number(mana) || 0;
     const tiers = window.REALM_PROGRESS_TIERS;
     for (let i = 0; i < tiers.length; i++) {
@@ -120,6 +119,8 @@ window.getRealmProgress = function(mana) {
                 nextTier: t.next,
                 currentInTier: currentInTier,
                 neededInTier: neededInTier,
+                currentTotal: currentMana, // Khai báo thêm Tổng Tu Vi
+                tierMax: t.max,            // Khai báo thêm Mốc Tu Vi cấp tiếp theo
                 percent: percent,
                 isMax: false
             };
@@ -130,6 +131,8 @@ window.getRealmProgress = function(mana) {
         nextTier: "Đỉnh Phong",
         currentInTier: 15000,
         neededInTier: 15000,
+        currentTotal: currentMana,
+        tierMax: currentMana,
         percent: 100,
         isMax: true
     };
