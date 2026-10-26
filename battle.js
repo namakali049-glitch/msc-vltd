@@ -753,6 +753,7 @@ function battleLoop() {
         if (hpCountEl) hpCountEl.innerText = (window.inventory && window.inventory['hoi_huyet_dan']) || 0;
         if (manaCountEl) manaCountEl.innerText = (window.inventory && window.inventory['hoi_khi_dan']) || 0;
     }
+    if ((window.currentHp || 0) <= 0) return;
 
     battleAnimationFrame = requestAnimationFrame(battleLoop);
 }
