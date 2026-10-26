@@ -11,7 +11,7 @@ window.getRealmData = function(mana, customA1 = null, customB1 = null) {
     const countA1 = customA1 !== null ? customA1 : listA1.length;
     const countB1 = customB1 !== null ? customB1 : listB1.length;
 
-    // PHÀM NHÂN & LUYỆN KHÍ (10 chu thiên = 20 Linh Khí)
+    // PHÀM NHÂN & LUYỆN KHÍ
     if (mana < 20) return { rank: "Phàm Nhân", major: "Phàm Nhân", swords: 0 };
     if (mana < 100) return { rank: "Luyện Khí Sơ Kỳ", major: "Luyện Khí Kỳ", swords: 1 };
     if (mana < 300) return { rank: "Luyện Khí Trung Kỳ", major: "Luyện Khí Kỳ", swords: 2 };
@@ -20,29 +20,21 @@ window.getRealmData = function(mana, customA1 = null, customB1 = null) {
     // TRÚC CƠ
     if (mana < 1500) return { rank: "Trúc Cơ Sơ Kỳ", major: "Trúc Cơ Kỳ", swords: 4 };
     if (mana < 4000) return { rank: "Trúc Cơ Trung Kỳ", major: "Trúc Cơ Kỳ", swords: 5 };
+    if (mana < 12000) return { rank: "Trúc Cơ Hậu Kỳ", major: "Trúc Cơ Kỳ", swords: 5 };
     
-    // BÌNH CẢNH TRÚC CƠ: Mốc 12.000
-    if (!window.isAdmin && (mana < 12000 || countA1 < 600)) {
-        let isBottleneck = (mana >= 12000 && countA1 < 600);
-        return { 
-            rank: isBottleneck ? "Trúc Cơ (Bình Cảnh)" : "Trúc Cơ Hậu Kỳ", 
-            major: "Trúc Cơ Kỳ", 
-            swords: 5 
-        };
+    // BÌNH CẢNH TRÚC CƠ: Chặn ở mốc 12.000 nếu chưa đủ từ vựng
+    if (!window.isAdmin && countA1 < 600) {
+        return { rank: "Trúc Cơ (Bình Cảnh)", major: "Trúc Cơ Kỳ", swords: 5 };
     }
     
     // KIM ĐAN
     if (mana < 22000) return { rank: "Kim Đan Sơ Kỳ", major: "Kim Đan Kỳ", swords: 6 };
     if (mana < 35000) return { rank: "Kim Đan Trung Kỳ", major: "Kim Đan Kỳ", swords: 6 };
+    if (mana < 50000) return { rank: "Kim Đan Hậu Kỳ", major: "Kim Đan Kỳ", swords: 7 };
     
-    // BÌNH CẢNH KIM ĐAN: Mốc 50.000
-    if (!window.isAdmin && (mana < 50000 || countB1 < 2667)) {
-        let isBottleneck = (mana >= 50000 && countB1 < 2667);
-        return { 
-            rank: isBottleneck ? "Kim Đan (Bình Cảnh)" : "Kim Đan Hậu Kỳ", 
-            major: "Kim Đan Kỳ", 
-            swords: 7 
-        };
+    // BÌNH CẢNH KIM ĐAN: Chặn ở mốc 50.000 nếu chưa đủ từ vựng
+    if (!window.isAdmin && countB1 < 2667) {
+        return { rank: "Kim Đan (Bình Cảnh)", major: "Kim Đan Kỳ", swords: 7 };
     }
     
     // NGUYÊN ANH
