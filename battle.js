@@ -708,7 +708,7 @@ function battleLoop() {
                 if ((window.currentHp || 0) <= 0) {
                     battleCtx.restore();
                     window.exitBattle(true);
-                    return;
+                    return; // Đã thoát khỏi battleLoop, không gọi requestAnimationFrame ở cuối nữa.
                 }
             }
         }
