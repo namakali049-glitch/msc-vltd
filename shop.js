@@ -78,12 +78,11 @@ window.buyShopItem = function(tab, itemId, price) {
         window.inventory[itemId] = (window.inventory[itemId] || 0) + 1;
         alert(`Giao dịch thành công! Nhận được ${itemId}.`);
     } else if (tab === 'than_ky') {
-        if (!window.learnedSkills) window.learnedSkills = [];
-        if (!window.learnedSkills.includes(itemId)) {
-            window.learnedSkills.push(itemId);
-            alert("✨ Lĩnh ngộ thành công bí kíp!");
-        }
+    if (window.learnSkill) {
+        window.learnSkill(itemId);
+        alert("✨ Lĩnh ngộ thành công bí kíp!");
     }
+}
     
     // Lưu lại Firebase
     if (window.syncManaToDatabase) window.syncManaToDatabase();
