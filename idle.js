@@ -213,15 +213,13 @@ function attemptBreakthrough() {
     if (confirmed) {
         const roll = Math.random() * 100;
         if (roll <= baseRate) {
-            // Thành công: Cộng thẳng 50 để vọt qua Bình Cảnh
-            if (window.addLifetimeMana) window.addLifetimeMana(50);
+            // Thành công: Cộng thẳng 50 và truyền cờ 'true' báo hiệu đột phá hợp lệ
+            if (window.addLifetimeMana) window.addLifetimeMana(50, true);
+            
             alert("🎉 ĐỘT PHÁ THÀNH CÔNG!\n\nĐạo hữu đã phá tan gông cùm kinh mạch!");
             initIdleParams();
             if (window.updateCharacterUI) window.updateCharacterUI();
         } else {
-            if (window.playWrongSound) window.playWrongSound();
-            const penalty = Math.floor(currentMana * 0.25);
-            const remainingMana = Math.max(0, currentMana - penalty);
             
             if (window.setLifetimeMana) window.setLifetimeMana(remainingMana);
             else window.lifetimeMana = remainingMana;
