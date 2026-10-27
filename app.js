@@ -193,14 +193,12 @@ window.setLifetimeMana = function(targetMana) {
 
 window.addLifetimeMana = function(amount) {
     const oldMana = window.lifetimeMana !== undefined ? window.lifetimeMana : lifetimeMana;
-    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
-    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
-
     let targetMana = oldMana + amount;
     
-    if (!window.isAdmin && countA1 < 600 && oldMana <= 12000 && targetMana > 12000) {
+    // Bắt buộc dừng ở đúng mốc Bình Cảnh để tung xúc xắc đột phá
+    if (!window.isAdmin && oldMana <= 12000 && targetMana > 12000 && oldMana !== 12000) {
         targetMana = 12000;
-    } else if (!window.isAdmin && countB1 < 2667 && oldMana <= 50000 && targetMana > 50000) {
+    } else if (!window.isAdmin && oldMana <= 50000 && targetMana > 50000 && oldMana !== 50000) {
         targetMana = 50000;
     }
 
