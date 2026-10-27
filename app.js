@@ -191,15 +191,25 @@ window.setLifetimeMana = function(targetMana) {
     syncManaToDatabase();
 };
 
-window.addLifetimeMana = function(amount) {
+window.addLifetimeMana = function(amount, isBreakthrough = false) {
     const oldMana = window.lifetimeMana !== undefined ? window.lifetimeMana : lifetimeMana;
+    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
+    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+
     let targetMana = oldMana + amount;
     
-    // Bắt buộc dừng ở đúng mốc Bình Cảnh để tung xúc xắc đột phá
-    if (!window.isAdmin && oldMana <= 12000 && targetMana > 12000 && oldMana !== 12000) {
-        targetMana = 12000;
-    } else if (!window.isAdmin && oldMana <= 50000 && targetMana > 50000 && oldMana !== 50000) {
-        targetMana = 50000;
+    if (!window.isAdmin) {
+        // Chặn không cho vượt mốc 12.000 nếu không phải hành động Đột Phá hợp lệ
+        if (oldMana < 12000 && targetMana >= 12000) targetMana = 12000;
+        else if (oldMana === 12000 && !isBreakthrough) targetMana = 12000;
+
+        // Chặn không cho vượt mốc 50.000 nếu không phải hành động Đột Phá hợp lệ
+        if (oldMana < 50000 && targetMana >= 50000) targetMana = 50000;
+        else if (oldMana === 50000 && !isBreakthrough) targetMana = 50000;
+
+        // Chặn tuyệt đối nếu cố tình đột phá (hack/lag) mà chưa đủ từ vựng
+        if (countA1 < 600 && targetMana > 12000) targetMana = 12000;
+        if (countB1 < 2667 && targetMana > 50000) targetMana = 50000;
     }
 
     lifetimeMana = targetMana;
