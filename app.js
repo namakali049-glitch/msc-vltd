@@ -462,6 +462,35 @@ async function loadUserLifetimeMana(uid) {
             const val = snapshot.val();
             
             lifetimeMana = Number(val.mana) || 0;
+            
+            masteredWordsA1 = parseFirebaseArray(val.masteredA1);
+            masteredWordsB1 = parseFirebaseArray(val.masteredB1);
+            window.masteredWordsA1 = masteredWordsA1;
+            window.masteredWordsB1 = masteredWordsB1;
+
+            // =======================================================
+            // CHỐT CHẶN B2: GIÁNG CẤP NGƯỜI CHƠI CŨ VƯỢT RÀO TRÁI PHÉP
+            // =======================================================
+            let countA1 = masteredWordsA1.length;
+            let countB1 = masteredWordsB1.length;
+            let isIllegitimate = false;
+
+            if (!window.isAdmin) {
+                if (countA1 < 600 && lifetimeMana > 12000) {
+                    lifetimeMana = 12000;
+                    isIllegitimate = true;
+                } else if (countB1 < 2667 && lifetimeMana > 50000) {
+                    lifetimeMana = 50000;
+                    isIllegitimate = true;
+                }
+            }
+
+            if (isIllegitimate) {
+                alert("⚠️ THIÊN ĐẠO CẢNH BÁO!\n\nPhát hiện đạo hữu chưa lĩnh ngộ đủ từ vựng nhưng đã đột phá. Đạo thể lập tức bị áp chế quay về Bình Cảnh!");
+                await update(userRef, { mana: lifetimeMana }); // Ghi đè mốc phạt lên Server
+            }
+            // =======================================================
+
             window.lifetimeMana = lifetimeMana;
             
             window.playerLinhThach = Number(val.linhThach) || 0;
@@ -480,11 +509,6 @@ async function loadUserLifetimeMana(uid) {
             
             battleRecord = val.battleRecord || { maxSurvivalSec: 0, maxKills: 0 };
             window.battleRecord = battleRecord;
-            
-            masteredWordsA1 = parseFirebaseArray(val.masteredA1);
-            masteredWordsB1 = parseFirebaseArray(val.masteredB1);
-            window.masteredWordsA1 = masteredWordsA1;
-            window.masteredWordsB1 = masteredWordsB1;
 
             if (!val.stats || val.stats.version !== "v0.6_FINAL") {
                 playerStats = generateRandomBaseStats();
@@ -518,7 +542,6 @@ async function loadUserLifetimeMana(uid) {
     updateCharacterUI();
     if (typeof window.initIdleParams === 'function') window.initIdleParams();
 }
-
 // ==========================================
 // CÁC HÀM XÁC THỰC
 // ==========================================
