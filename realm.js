@@ -3,6 +3,7 @@
 // ==========================================
 window.highestAchievedRank = "Phàm Nhân";
 
+
 // 1. Nguồn chân lý duy nhất tính toán Cảnh Giới
 window.getRealmData = function(mana, customA1 = null, customB1 = null) {
     const listA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1 : [];
@@ -22,8 +23,8 @@ window.getRealmData = function(mana, customA1 = null, customB1 = null) {
     if (mana < 4000) return { rank: "Trúc Cơ Trung Kỳ", major: "Trúc Cơ Kỳ", swords: 5 };
     if (mana < 12000) return { rank: "Trúc Cơ Hậu Kỳ", major: "Trúc Cơ Kỳ", swords: 5 };
     
-    // BÌNH CẢNH TRÚC CƠ: Chặn ở mốc 12.000 nếu chưa đủ từ vựng
-    if (!window.isAdmin && countA1 < 600) {
+    // BÌNH CẢNH TRÚC CƠ: neo cứng ở chính xác 12.000
+    if (!window.isAdmin && mana === 12000) {
         return { rank: "Trúc Cơ (Bình Cảnh)", major: "Trúc Cơ Kỳ", swords: 5 };
     }
     
@@ -32,8 +33,8 @@ window.getRealmData = function(mana, customA1 = null, customB1 = null) {
     if (mana < 35000) return { rank: "Kim Đan Trung Kỳ", major: "Kim Đan Kỳ", swords: 6 };
     if (mana < 50000) return { rank: "Kim Đan Hậu Kỳ", major: "Kim Đan Kỳ", swords: 7 };
     
-    // BÌNH CẢNH KIM ĐAN: Chặn ở mốc 50.000 nếu chưa đủ từ vựng
-    if (!window.isAdmin && countB1 < 2667) {
+    // BÌNH CẢNH KIM ĐAN: neo cứng ở chính xác 50.000
+    if (!window.isAdmin && mana === 50000) {
         return { rank: "Kim Đan (Bình Cảnh)", major: "Kim Đan Kỳ", swords: 7 };
     }
     
