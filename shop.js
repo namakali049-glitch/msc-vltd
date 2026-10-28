@@ -12,12 +12,13 @@ window.SHOP_CATALOG = {
         { id: 'tinh_than_dan', name: 'Tỉnh Thần Đan', desc: 'Tăng 1 Tinh Thần.', price: 150, currency: 'linh_thach', color: '#818cf8', icon: '🌀' }
     ],
     than_ky: [
-        { id: 'skill_ngu_kiem', name: 'Ngự Kiếm Thuật', desc: 'Tuyệt kỹ điều khiển phi kiếm bay công kích ma vật.', price: 1200, currency: 'linh_thach', color: '#ffd700', icon: '⚔️' }
+        { id: 'skill_ngu_kiem', name: 'Ngự Kiếm Thuật', desc: 'Tuyệt kỹ điều khiển phi kiếm bay công kích ma vật.', price: 1200, currency: 'linh_thach', color: '#ffd700', icon: '⚔️' }, // <--- THÊM DẤU PHẨY Ở ĐÂY
         { id: 'skill_loi_chu', name: 'Thiên Lôi Chú', desc: 'Kỹ năng bị động. Mỗi 3 giây giáng sét ngẫu nhiên tiêu diệt ma vật.', price: 300, currency: 'linh_thach', color: '#a855f7', icon: '⚡' }
     ]
 };
 
 window.openShopModal = function() {
+// ... phần code bên dưới giữ nguyên
     if (window.playClickSound) window.playClickSound();
     const modal = document.getElementById('shopModal');
     if (modal) modal.style.display = 'flex';
