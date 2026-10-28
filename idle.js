@@ -50,7 +50,6 @@ function initIdleParams() {
     const staticEl = document.getElementById('idleAvatarStatic');
     const activeEl = document.getElementById('idleAvatarActive');
 
-    // Chỉ gán lại src khi cảnh giới thay đổi để tránh chớp nháy
     if (staticEl && (!staticEl.src || !staticEl.src.includes(`${baseName}-ngoi-thien`))) {
         staticEl.src = `assets/${baseName}-ngoi-thien.png`;
     }
@@ -213,13 +212,15 @@ function attemptBreakthrough() {
     if (confirmed) {
         const roll = Math.random() * 100;
         if (roll <= baseRate) {
-            // Thành công: Cộng thẳng 50 và truyền cờ 'true' báo hiệu đột phá hợp lệ
+            // Thành công: Cộng thẳng 50 và truyền tham số true để được phép vượt mốc Bình Cảnh
             if (window.addLifetimeMana) window.addLifetimeMana(50, true);
-            
             alert("🎉 ĐỘT PHÁ THÀNH CÔNG!\n\nĐạo hữu đã phá tan gông cùm kinh mạch!");
             initIdleParams();
             if (window.updateCharacterUI) window.updateCharacterUI();
         } else {
+            if (window.playWrongSound) window.playWrongSound();
+            const penalty = Math.floor(currentMana * 0.25);
+            const remainingMana = Math.max(0, currentMana - penalty);
             
             if (window.setLifetimeMana) window.setLifetimeMana(remainingMana);
             else window.lifetimeMana = remainingMana;
@@ -264,17 +265,14 @@ function spawnFloatingText(text, color) {
     setTimeout(() => el.remove(), 850);
 }
 
-// Khởi chạy khi tài nguyên trang sẵn sàng
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(initIdleParams, 300);
 });
 
-// Xuất các hàm ra phạm vi toàn cục
 window.initIdleParams = initIdleParams;
 window.toggleCultivation = toggleCultivation;
 window.IDLE_CONFIG = IDLE_CONFIG;
 
-// Hàm xử lý tu luyện ngoại tuyến (Tối ưu chống chặn Pop-up)
 window.processOfflineProgress = function(lastUpdated) {
     if (!lastUpdated) return;
     const elapsedMs = Date.now() - lastUpdated;
@@ -310,7 +308,6 @@ window.processOfflineProgress = function(lastUpdated) {
 
                 if (window.playLootSound) window.playLootSound();
 
-                // Tạo Modal nhận thưởng HTML trực tiếp trên màn hình
                 const popup = document.createElement('div');
                 popup.id = "offline-reward-modal";
                 popup.style = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:sans-serif;padding:16px;box-sizing:border-box;";
@@ -335,7 +332,6 @@ window.processOfflineProgress = function(lastUpdated) {
                 `;
                 document.body.appendChild(popup);
 
-                // Nút x2: Click chuột trực tiếp sẽ vượt qua bộ lọc chặn Pop-up của trình duyệt
                 document.getElementById('btn-claim-x2').onclick = () => {
                     popup.remove();
                     if (window.AdsManager) {
@@ -346,7 +342,6 @@ window.processOfflineProgress = function(lastUpdated) {
                     }
                 };
 
-                // Nút đóng bình thường
                 document.getElementById('btn-claim-normal').onclick = () => {
                     popup.remove();
                 };
