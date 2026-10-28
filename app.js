@@ -805,13 +805,60 @@ window.closeAnnouncementModal = function() {
     }
 };
 
-window.goToFanpage = function() {
+window.goToFanpage = async function() {
     if (window.playClickSound) window.playClickSound();
+    
+    // 1. Mở Fanpage ở tab mới
     window.open(currentFanpageUrl, '_blank');
+
+    if (!window.currentUser) return; // Nếu chưa đăng nhập thì không xét thưởng
+
+    try {
+        const userRef = ref(window.firebaseDB || database, 'users_v2/' + window.currentUser.uid);
+        const snapshot = await get(userRef);
+        
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            
+            // 2. Kiểm tra xem tài khoản đã nhận thưởng Fanpage chưa
+            if (!data.fanpageRewardClaimed) {
+                // Thưởng 200 Linh Thạch
+                window.playerLinhThach = (Number(data.linhThach) || 0) + 200;
+                
+                // Cập nhật UI ngay lập tức
+                const ltEl = document.getElementById('ui-linh-thach-main');
+                if (ltEl) ltEl.innerText = window.playerLinhThach;
+
+                // 3. Lưu trạng thái đã nhận và Linh Thạch mới lên Firebase
+                await update(userRef, { 
+                    linhThach: window.playerLinhThach,
+                    fanpageRewardClaimed: true 
+                });
+
+                // Thông báo cho người chơi (delay 1s tạo cảm giác đi rồi quay lại)
+                setTimeout(() => {
+                    alert("🎁 CẢM ƠN ĐẠO HỮU ĐÃ GIA NHẬP!\n\nThiên Đạo ban thưởng +200 Linh Thạch làm lộ phí tu tiên.");
+                    
+                    // Vô hiệu hóa nút bấm
+                    const btn = document.getElementById('announceFanpageBtn');
+                    if (btn) {
+                        btn.innerText = "✔️ Đã gia nhập hội (Đã nhận thưởng)";
+                        btn.style.background = "#334155"; 
+                        btn.style.color = "#94a3b8";
+                        btn.style.borderColor = "#475569";
+                        btn.style.pointerEvents = "none";
+                    }
+                }, 1000);
+            }
+        }
+    } catch (e) {
+        console.error("Lỗi nhận thưởng fanpage:", e);
+    }
 };
 
 async function fetchAndRenderAnnouncement() {
     try {
+        // Tải nội dung thông báo
         const announceRef = ref(window.firebaseDB || database, 'announcement');
         const snapshot = await get(announceRef);
         
@@ -823,23 +870,35 @@ async function fetchAndRenderAnnouncement() {
             if (cachedAnnouncement.fanpageText) document.getElementById('announceFanpageText').innerText = cachedAnnouncement.fanpageText;
             if (cachedAnnouncement.fanpageUrl) currentFanpageUrl = cachedAnnouncement.fanpageUrl;
         }
+
+        // KIỂM TRA TRẠNG THÁI NÚT FANPAGE KHI MỞ BẢNG
+        if (window.currentUser) {
+            const userRef = ref(window.firebaseDB || database, 'users_v2/' + window.currentUser.uid);
+            const userSnap = await get(userRef);
+            if (userSnap.exists() && userSnap.val().fanpageRewardClaimed) {
+                const btn = document.getElementById('announceFanpageBtn');
+                if (btn) {
+                    btn.innerText = "✔️ Đã gia nhập hội (Đã nhận thưởng)";
+                    btn.style.background = "#334155";
+                    btn.style.color = "#94a3b8";
+                    btn.style.borderColor = "#475569";
+                    btn.style.pointerEvents = "none"; // Khóa không cho bấm lại
+                }
+            } else {
+                // Khôi phục nút nếu chưa nhận (trường hợp đổi acc)
+                const btn = document.getElementById('announceFanpageBtn');
+                if (btn) {
+                    btn.innerText = '🌐 Mở Fanpage "Tu Tiên Lộ" ➔';
+                    btn.style.background = "linear-gradient(135deg, #1877f2, #0d65d9)";
+                    btn.style.color = "#fff";
+                    btn.style.borderColor = "#38bdf8";
+                    btn.style.pointerEvents = "auto";
+                }
+            }
+        }
     } catch (e) {
         console.error("Lỗi tải thông báo Firebase:", e);
     }
-}
-
-async function checkAutoShowAnnouncement() {
-    try {
-        const announceRef = ref(window.firebaseDB || database, 'announcement');
-        const snapshot = await get(announceRef);
-        if (snapshot.exists()) {
-            const data = snapshot.val();
-            const lastSeen = localStorage.getItem('last_seen_announce_ver');
-            if (data.version && data.version !== lastSeen) {
-                await window.openAnnouncementModal();
-            }
-        }
-    } catch(e) {}
 }
 
 window.updateLinhThach = async function(amount) {
