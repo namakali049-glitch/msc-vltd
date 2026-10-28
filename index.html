@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta name="monetag" content="fab869ceb5ebb482550cbb6c4e74a7c0">
+  <link rel="icon" type="image/png" href="assets/pham-nhan-ngoi-thien.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Mộng Tu Tiên: Vạn Linh Tiên Đạo</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+  <!-- MÀN HÌNH YÊU CẦU XOAY NGANG -->
+  <div id="orientation-warning">
+    <div style="font-size: 3rem; margin-bottom: 15px;">🔄📱</div>
+    <h2>Cảnh Báo Thiên Đạo!</h2>
+    <p>Bí cảnh không gian đang bị bóp méo.<br>Vui lòng <b>tắt khóa xoay</b> và <b>xoay ngang điện thoại</b> để tiếp tục tu luyện!</p>
+  </div>
+  
+  <!-- Âm thanh nền -->
+  <audio id="bgmAudio" loop src="assets/bgm.mp3"></audio>
+
+  <!-- Cụm nút tiện ích góc trên bên phải -->
+  <div class="fixed-top-right-bar">
+    <div class="currency-badge" title="Linh Thạch">
+      <span class="icon-linh-thach">💎</span>
+      <span id="ui-linh-thach-main">0</span>
+    </div>
+    <button id="worldChatBtn" class="utility-btn" onclick="openWorldChat()">💬 Kênh TG</button>
+    <button id="announcementBtn" class="utility-btn" onclick="openAnnouncementModal()">🔔 Thông Báo</button>
+    <button id="audioToggleBtn" class="utility-btn" onclick="toggleBGM()">🎵 Nhạc: Bật</button>
+  </div>
+
+  <!-- Nút Túi Trữ Vật cố định góc dưới bên phải -->
+  <button class="fixed-inventory-btn" onclick="openInventory()">🎒 Túi Trữ Vật</button>
+
+  <!-- ========================================== -->
+  <!-- 1. MÀN HÌNH ĐĂNG NHẬP / ĐĂNG KÝ            -->
+  <!-- ========================================== -->
+  <div id="auth-screen" class="screen active">
+    <div class="auth-box">
+      <h1 class="auth-title">Vô Lượng Tiên Đồ</h1>
+      <div class="auth-tabs">
+        <button id="tab-login" class="tab-btn active" onclick="switchAuthTab('login')">Đăng Nhập</button>
+        <button id="tab-signup" class="tab-btn" onclick="switchAuthTab('signup')">Đăng Ký</button>
+      </div>
+      <div class="auth-inputs">
+        <div id="displayNameGroup" style="display: none;">
+          <input type="text" id="authDisplayName" placeholder="Đạo hiệu (Tên hiển thị)">
+        </div>
+        <input type="email" id="authEmail" placeholder="Tiên thư (Email)">
+        <input type="password" id="authPassword" placeholder="Mật khẩu">
+        <button id="authSubmitBtn" class="btn-main" onclick="handleLogin()">Bắt đầu Tu Luyện 🚀</button>
+        <button class="btn-google" onclick="handleGoogleLogin()">Đăng nhập bằng Google 🌐</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 2. SẢNH CHÍNH: ĐỘNG PHỦ TU TIÊN           -->
+  <!-- ========================================== -->
+  <div id="start-screen" class="screen">
+    <div class="top-user-bar">
+      <div class="user-pill">
+        <span class="user-icon">👤</span>
+        <span>Đạo Hữu: <b id="userDisplayName">Nam</b></span>
+      </div>
+      
+      <button class="btn-logout" onclick="handleLogout()">Đăng xuất</button>
+    </div>
+
+    <!-- CỘT TÍNH NĂNG TRÁI -->
+    <div class="side-nav left-nav">
+      <button class="nav-icon-btn" onclick="openLibraryModal()">
+        <div class="icon-circle">📖</div>
+        <span>Tàng Kinh Các</span>
+      </button>
+      <button class="nav-icon-btn" onclick="openShopModal()">
+        <div class="icon-circle">🏪</div>
+        <span>Trân Bảo Các</span>
+      </button>
+    </div>
+
+    <!-- TRUNG TÂM: ĐỘNG PHỦ TỌA THIỀN -->
+    <div class="idle-center-zone">
+      <h2 class="dong-phu-title">Bất Chu Sơn Động Phủ</h2>
+
+      <!-- HUD Góc trái: Avatar, Tên, Cảnh giới -->
+      <div class="stage-player-info">
+        <img id="stageAvatar" class="stage-avatar-mini" src="assets/pham-nhan-ngoi-thien.png" alt="Avatar">
+        <div class="stage-name-realm">
+          <span id="stageName" class="stage-name">Đạo Hữu</span>
+          <span id="stageRealm" class="stage-realm">Phàm Nhân</span>
+        </div>
+      </div>
+
+      <!-- Nhân vật ngồi tu luyện & Vòng Chu Thiên -->
+      <div class="cultivation-avatar-box" id="idleAvatarBox">
+        <div class="chu-thien-aura"></div>
+        <img id="idleAvatarStatic" class="idle-avatar state-idle" src="assets/pham-nhan-ngoi-thien.png">
+        <img id="idleAvatarActive" class="idle-avatar state-practice" src="assets/pham-nhan-tu-luyen.png">
+      </div>
+
+      <!-- CỤM ĐIỀU KHIỂN & TIẾN ĐỘ DƯỚI CHÂN BỆ ĐÁ -->
+      <div class="cultivation-controls-cluster">
+        <!-- 1. Thanh Tiến Độ Thăng Cấp Cảnh Giới -->
+        <div class="realm-exp-container">
+          <div class="realm-exp-header">
+            <span id="realmExpLabel" class="exp-title">Phàm Nhân ➔ Luyện Khí Sơ Kỳ</span>
+            <span id="realmExpText" class="exp-numbers">0 / 20 LK (0%)</span>
+          </div>
+          <div class="realm-exp-bar-wrap">
+            <div id="realmExpFill" class="realm-exp-fill"></div>
+          </div>
+        </div>
+
+        <!-- 2. Nút Thổ Nạp Khí / Đột Phá -->
+        <div class="idle-actions">
+          <button id="btnCultivate" class="btn-main-idle" onclick="toggleCultivation()">Vận Khí</button>
+        </div>
+
+        <!-- 3. Thanh Chu Thiên (Chu kỳ thở từng vòng) -->
+        <div class="chu-thien-bar-wrap">
+          <div id="chuThienFill" class="chu-thien-fill"></div>
+        </div>
+
+        <!-- 4. Chữ Trạng Thái -->
+        <div id="idleStatusText" class="idle-status-text">Đang chờ lệnh...</div>
+      </div>
+    </div>
+
+    <!-- CỘT TÍNH NĂNG PHẢI (GIỮ NGUYÊN ĐOẠN NÀY) -->
+    <div class="side-nav right-nav">
+      <button class="nav-icon-btn" onclick="startBattle()">
+        <div class="icon-circle" style="color: #ef4444;">⚔️</div>
+        <span>Bí Cảnh</span>
+      </button>
+      <button class="nav-icon-btn" onclick="showProfile()">
+        <div class="icon-circle">👤</div>
+        <span>Nhân Vật</span>
+      </button>
+      <button class="nav-icon-btn" onclick="showLeaderboard()">
+        <div class="icon-circle">🏆</div>
+        <span>Bảng Xếp Hạng</span>
+      </button>
+    </div>
+  </div> <!-- Đã sửa: Đóng #start-screen đúng cú pháp -->
+
+  <!-- ========================================== -->
+  <!-- 3. MÀN HÌNH BẾ QUAN KHAI PHÁ (CÂU HỎI CSV) -->
+  <!-- ========================================== -->
+  <div id="game-screen" class="screen">
+    <!-- HUD NHÂN VẬT TRONG BẾ QUAN -->
+    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 460px; margin-bottom: 8px;">
+      <div class="hud-player-card" style="flex: 1; margin-right: 10px;">
+        <img id="quizAvatar" class="hud-avatar" src="assets/pham-nhan-ngoi-thien.png" alt="Avatar">
+        <div class="hud-info-box">
+          <div class="hud-name-row">
+            <span id="quizName" class="hud-player-name">Đạo Hữu</span>
+            <span id="quizRealmBadge" class="hud-realm-badge">Phàm Nhân</span>
+          </div>
+          <!-- Thanh Máu (HP) -->
+          <div class="hud-bar-wrapper">
+            <div id="quizHpFill" class="hud-bar-fill-hp"></div>
+            <div id="quizHpText" class="hud-bar-text">❤️ 100/100</div>
+          </div>
+          <!-- Thanh Mana (Linh Lực) -->
+          <div class="hud-bar-wrapper">
+            <div id="quizManaFill" class="hud-bar-fill-mana"></div>
+            <div id="quizManaText" class="hud-bar-text">🌀 0/0</div>
+          </div>
+        </div>
+      </div>
+      <button onclick="stopCultivationEarly()" style="padding: 10px 14px; background: #991b1b; color: #fff; border: 1px solid #ef4444; border-radius: 8px; font-weight: bold; cursor: pointer;">🚪 Xuất Quan</button>
+    </div>
+
+    <div class="quiz-box">
+      <div id="counter" class="quiz-counter">Câu hỏi: 1 / 10</div>
+      <div id="question" class="quiz-question">Đang mở Tàng Kinh Các...</div>
+      <div id="options" class="options-container"></div>
+      <div id="message" class="quiz-msg"></div>
+      <button id="nextBtn" class="btn-main mt-10" style="display:none;" onclick="nextQuestion()">Tiếp Tục ➔</button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 4. MÀN HÌNH HỒ SƠ TU TIÊN GIẢ              -->
+  <!-- ========================================== -->
+  <div id="profile-screen" class="screen">
+    <div class="profile-card">
+      <h2 class="profile-header">📜 Hồ Sơ Tu Tiên Giả</h2>
+
+      <div class="avatar-container">
+        <img id="profileAvatar" class="avatar-circle" src="assets/pham-nhan-ngoi-thien.png" alt="Avatar">
+        <div id="profileRealmBadge" class="avatar-badge">Phàm Nhân</div>
+      </div>
+
+      <div class="profile-meta-list">
+        <p>Đạo Hiệu: <b id="profileName">Nam</b></p>
+        <p>Cảnh Giới: <span id="profileRealm" class="realm-pill">Phàm Nhân</span></p>
+        <p>Tổng Tu Vi (Linh Khí): <b id="profileMana" class="gold-txt">0</b></p>
+      </div>
+
+      <!-- KHỐI THUỘC TÍNH & CỘNG ĐIỂM TIỀM NĂNG -->
+      <div class="profile-attributes-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h3 class="attr-title" style="margin: 0;">☯️ Thuộc Tính Bản Nguyên</h3>
+          <span style="color: #ffd700; font-size: 0.95rem;">Điểm tiềm năng: <b id="profileFreePoints" style="font-size: 1.2rem; color: #4ade80;">0</b></span>
+        </div>
+
+        <div class="stat-alloc-row">
+          <span>⚔️ Sức Mạnh: <b id="profileStr" class="text-gold">1</b> <small id="profileStrEffect" style="color: #94a3b8;">(10 Sát thương)</small></span>
+          <button class="btn-stat-add" onclick="allocateStat('str')">+</button>
+        </div>
+
+        <div class="stat-alloc-row">
+          <span>❤️ Khí Huyết: <b id="profileVit" class="text-green">1</b> <small id="profileVitEffect" style="color: #94a3b8;">(10 HP)</small></span>
+          <button class="btn-stat-add" onclick="allocateStat('vit')">+</button>
+        </div>
+
+        <div class="stat-alloc-row">
+          <span>⚡ Nhanh Nhẹn: <b id="profileAgi" class="text-blue">1</b> <small id="profileAgiEffect" style="color: #94a3b8;">(10 Thân pháp)</small></span>
+          <button class="btn-stat-add" onclick="allocateStat('agi')">+</button>
+        </div>
+
+        <div class="stat-alloc-row">
+          <span>🌀 Tinh Thần: <b id="profileSpi" class="text-purple">1</b> <small id="profileSpiEffect" style="color: #94a3b8;">(10 Thần thức)</small></span>
+          <button class="btn-stat-add" onclick="allocateStat('spi')">+</button>
+        </div>
+
+        <div style="height: 1px; background: rgba(255, 215, 0, 0.2); margin: 12px 0;"></div>
+
+        <p class="attr-row">⚔️ Phi Kiếm Ngự Trận: <b id="profileSwords" style="color: #ffd700;">0 Thanh</b></p>
+        <p class="attr-row">📜 Lĩnh Ngộ Hạ Quyển (A1): <b id="profileMasteryA1" style="color: #4ade80;">0 / 900 từ</b></p>
+        <p class="attr-row">📘 Lĩnh Ngộ Trung Quyển (B1): <b id="profileMasteryB1" style="color: #60a5fa;">0 / 4000 từ</b></p>
+      </div>
+
+      <button class="btn-back-lobby btn-blue" onclick="goHome()">Về động phủ 🏯</button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 5. MÀN HÌNH TIÊN ĐẠO BẢNG                  -->
+  <!-- ========================================== -->
+  <div id="leaderboard-screen" class="screen">
+    <div class="leaderboard-card">
+      <h2 class="lb-header">🏆 TIÊN ĐẠO BẢNG 🏆</h2>
+      <p id="lb-desc-text" class="lb-desc">Bảng xếp hạng Linh lực trọn đời</p>
+
+      <div class="lb-tabs-container">
+        <button id="lb-tab-mana" class="lb-big-tab active" onclick="switchLeaderboardTab('mana')">
+          ⚡ Tu Vi Bảng
+        </button>
+        <button id="lb-tab-battle" class="lb-big-tab" onclick="switchLeaderboardTab('battle')">
+          ⚔️ Bí Cảnh Bảng
+        </button>
+      </div>
+
+      <div class="lb-content-box">
+        <ul id="lb-list" class="lb-container"></ul>
+      </div>
+
+      <button class="btn-back-lobby btn-red mt-15" onclick="goHome()">Trở về Động phủ 🏯</button>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 6. MÀN HÌNH BÍ CẢNH TRẢM YÊU (CANVAS 2D)   -->
+  <!-- ========================================== -->
+  <div id="battle-screen" class="screen">
+    <canvas id="gameCanvas"></canvas>
+
+    <div style="position: absolute; top: 12px; left: 12px; display: flex; flex-direction: column; gap: 8px; z-index: 10;">
+      <div class="hud-player-card" style="min-width: 240px;">
+        <img id="battleAvatar" class="hud-avatar" src="assets/pham-nhan-ngoi-thien.png" alt="Avatar">
+        <div class="hud-info-box">
+          <div class="hud-name-row">
+            <span id="battleName" class="hud-player-name">Đạo Hữu</span>
+            <span id="battleRealmBadge" class="hud-realm-badge">Phàm Nhân</span>
+          </div>
+          <div class="hud-bar-wrapper">
+            <div id="battleHpFill" class="hud-bar-fill-hp"></div>
+            <div id="battleHpText" class="hud-bar-text">❤️ 100/100</div>
+          </div>
+          <div class="hud-bar-wrapper">
+            <div id="battleManaFill" class="hud-bar-fill-mana"></div>
+            <div id="battleManaText" class="hud-bar-text">🌀 0/0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="battle-hud-box" style="position: static;">
+    <div id="battleTimeText" style="color: #ffd700;">⏱️ Sinh Tồn: 00:00</div>
+    <div id="battleSwordText">⚔️ Kiếm Khí: 0/0</div>
+    <div id="battleKillsText">👾 Ma Vật Trảm: 0</div>
+  </div>
+</div>
+
+<!-- NÚT DÙNG ĐAN DƯỢC NHANH (BÊN PHẢI, PHÍA TRÊN CỤM SKILL) -->
+    <div id="battleQuickItems" class="battle-quick-items-right">
+      <button type="button" class="quick-item-btn" onclick="useItemInBattle('hoi_huyet_dan')" title="Dùng Hồi Huyết Đan">
+        <span class="quick-item-icon">💊</span>
+        <span id="quickHpCount" class="quick-item-count">0</span>
+      </button>
+      <button type="button" class="quick-item-btn" onclick="useItemInBattle('hoi_khi_dan')" title="Dùng Hồi Khí Đan">
+        <span class="quick-item-icon">🧪</span>
+        <span id="quickManaCount" class="quick-item-count">0</span>
+      </button>
+    </div>
+
+<button class="btn-battle-escape" onclick="exitBattle()">🚪 Rút lui</button>
+    <!-- CẦN GẠT DI CHUYỂN BÊN TRÁI -->
+    <div id="joystickZone" class="joystick-zone">
+      <div id="joystickBase" class="joystick-base">
+        <div id="joystickStick" class="joystick-stick"></div>
+      </div>
+    </div>
+
+    <!-- CẦN GẠT KỸ NĂNG BÊN PHẢI -->
+    <div id="skillControlWrapper" class="skill-control-wrapper" style="display: none;">
+      <div id="activeSkillName" class="skill-name-tag">Ngự Kiếm Thuật</div>
+      <div id="skillAimBase" class="skill-aim-base">
+        <div id="skillAimStick" class="skill-aim-stick">
+          <span id="activeSkillIcon">⚔️</span>
+        </div>
+        <div id="skillCooldownOverlay" class="skill-cd-overlay"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: TÚI TRỮ VẬT -->
+  <div id="inventoryModal" class="modal-overlay" style="display: none;">
+    <div class="inventory-card">
+      <h3 class="inv-header">🎒 TÚI TRỮ VẬT</h3>
+      <div id="inventoryList" class="inv-items-box"></div>
+      <button class="btn-close-inv" onclick="closeInventory()">Đóng Túi</button>
+    </div>
+  </div>
+
+  <!-- MODAL: TÀNG KINH CÁC -->
+  <div id="libraryModal" class="modal-overlay" style="display: none;">
+    <div class="library-card">
+      <h3 class="library-header">📖 TÀNG KINH CÁC 📖</h3>
+      <p class="library-desc">Chọn công pháp điển tịch để nhập định tu luyện:</p>
+      
+      <div class="library-options">
+        <div class="library-item" onclick="openHanNguModal()">
+          <div class="lib-icon">📜</div>
+          <div class="lib-info">
+            <h4>Hán Ngữ Chân Giải</h4>
+            <p>Khẩu quyết Hán tự, tích lũy Ngộ Tính thăng hoa cảnh giới</p>
+          </div>
+          <button class="btn-lib-action">Lĩnh Ngộ</button>
+        </div>
+
+        <div class="library-item locked" onclick="alert('🔒 Cấm chế phong ấn!\n\nĐiển tịch Anh Ngữ Công hiện chưa khai mở.')">
+          <div class="lib-icon">🔒</div>
+          <div class="lib-info">
+            <h4>Anh Ngữ Công <span class="lock-tag">Chưa Mở Khóa</span></h4>
+            <p>Bí điển dị giới, tạm thời bị phong ấn bởi cấm chế cổ xưa</p>
+          </div>
+          <button class="btn-lib-action disabled">Phong Ấn</button>
+        </div>
+      </div>
+
+      <button class="btn-close-inv mt-15" onclick="closeLibraryModal()">Rời Khỏi Tàng Kinh Các</button>
+    </div>
+  </div>
+
+  <!-- MODAL: HÁN NGỮ CHÂN GIẢI -->
+  <div id="hanNguModal" class="modal-overlay" style="display: none;">
+    <div class="library-card">
+      <h3 class="library-header">📜 HÁN NGỮ CHÂN GIẢI</h3>
+      <p class="library-desc">Cảnh giới càng cao, thiên đạo càng vô tình. Hãy chọn quyển tịch phù hợp:</p>
+      
+      <div class="library-options">
+        <div class="library-item" onclick="startVolume('ha_quyen')">
+          <div class="lib-icon">📗</div>
+          <div class="lib-info">
+            <h4>Hạ Quyển (A1-A2)</h4>
+            <p>Dành cho: Phàm Nhân ➔ Trúc Cơ</p>
+          </div>
+          <button class="btn-lib-action">Tu Luyện</button>
+        </div>
+
+        <div class="library-item" onclick="startVolume('trung_quyen')">
+          <div class="lib-icon">📘</div>
+          <div class="lib-info">
+            <h4>Trung Quyển (B1-B2)</h4>
+            <p>Yêu cầu: Kim Đan ➔ Nguyên Anh<br><small style="color:#f59e0b; font-weight:bold;">(Độ khó Siêu Cấp)</small></p>
+          </div>
+          <button class="btn-lib-action">Tu Luyện</button>
+        </div>
+
+        <div class="library-item locked" onclick="alert('Thượng Quyển (C1-C2) chứa đựng thiên cơ của Hóa Thần trở lên. Tạm thời chưa xuất thế!')">
+          <div class="lib-icon">📕</div>
+          <div class="lib-info">
+            <h4>Thượng Quyển (C1-C2) <span class="lock-tag">Bản sau</span></h4>
+            <p>Yêu cầu: Hóa Thần ➔ Độ Kiếp</p>
+          </div>
+          <button class="btn-lib-action disabled">Phong Ấn</button>
+        </div>
+      </div>
+
+      <button class="btn-close-inv mt-15" onclick="closeHanNguModal()">Trở Lại</button>
+    </div>
+  </div>
+
+  <!-- MODAL: THIÊN ĐẠO CHÚC PHÚC -->
+  <div id="breakthroughModal" class="modal-overlay" style="display: none; z-index: 9999;">
+    <div class="library-card breakthrough-card">
+      <div class="breakthrough-badge">⚡ THIÊN ĐẠO CHÚC PHÚC ⚡</div>
+      <h2 id="breakthroughTitle" class="breakthrough-title">Chúc mừng đạo hữu đột phá!</h2>
+      <div id="breakthroughRealm" class="breakthrough-realm">Luyện Khí Kỳ</div>
+      <div class="breakthrough-divider"></div>
+      <p id="breakthroughDesc" class="breakthrough-desc"></p>
+      <div id="breakthroughBonus" class="breakthrough-bonus"></div>
+      <button class="btn-lib-action btn-breakthrough-close" onclick="closeBreakthroughModal()">Củng Cố Tu Vi 🧘‍♂️</button>
+    </div>
+  </div>
+
+  <!-- MODAL KÊNH CHAT THẾ GIỚI -->
+  <div id="chatModal" class="modal-overlay" style="display:none;">
+    <div class="chat-card">
+      <div class="chat-header">
+        <h3>💬 TRUYỀN ÂM THẾ GIỚI</h3>
+        <button class="btn-close-modal" onclick="closeWorldChat()">✖</button>
+      </div>
+      
+      <div id="chatMessages" class="chat-messages-box">
+        <p style="color:#64748b; font-size:13px; text-align:center;">Đang kết nối thần thức thiên địa...</p>
+      </div>
+
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" maxlength="100" placeholder="Nhập truyền âm (tối đa 100 chữ)..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+        <button class="btn-send-chat" onclick="sendChatMessage()">Gửi</button>
+      </div>
+      <div class="chat-counter-box">
+        <span id="chatCharCount" style="color:#64748b; font-size:11px;">0/100 ký tự</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL BẢNG THÔNG BÁO THIÊN ĐẠO -->
+  <div id="announcementModal" class="modal-overlay" style="display: none; z-index: 10000;">
+    <div class="announcement-card">
+      <div class="announcement-header">
+        <div class="announcement-badge">📜 THIÊN ĐẠO THÔNG CÁO</div>
+        <h3 id="announceTitle" class="announcement-title">ĐANG KẾT NỐI...</h3>
+        <button class="btn-close-modal" onclick="closeAnnouncementModal()">✖</button>
+      </div>
+      
+      <div class="announcement-body">
+        <div class="announce-section">
+          <h4 class="section-title">✨ Thay Đổi Phiên Bản</h4>
+          <div id="announcePatchNotes" class="announce-text">Đang tải dữ liệu từ thiên địa...</div>
+        </div>
+
+        <div class="announce-section guide-box">
+          <h4 class="section-title" style="color: #4ade80;">💡 Hướng Dẫn & Mẹo Tu Luyện</h4>
+          <div id="announceGuide" class="announce-text">Đang tải hướng dẫn...</div>
+        </div>
+
+        <div class="announce-section fanpage-box">
+          <h4 class="section-title" style="color: #38bdf8;">🏯 Hội Đạo Hữu Tu Tiên Lộ</h4>
+          <p id="announceFanpageText" class="fanpage-desc">Gia nhập cộng đồng tu tiên để nhận quà và trao đổi cùng các đạo hữu!</p>
+          <button id="announceFanpageBtn" class="btn-fanpage" onclick="goToFanpage()">
+            🌐 Mở Fanpage "Tu Tiên Lộ" ➔
+          </button>
+        </div>
+      </div>
+
+      <button class="btn-main mt-10" onclick="closeAnnouncementModal()">Đã Lĩnh Ngộ 🧘‍♂️</button>
+    </div>
+  </div>
+
+  <!-- MODAL: TRÂN BẢO CÁC (SHOP) -->
+  <div id="shopModal" class="modal-overlay" style="display: none; z-index: 10000;">
+    <div class="shop-card">
+      <div class="shop-header">
+        <h3>🏪 TRÂN BẢO CÁC</h3>
+        <div class="currency-badge">
+          <span class="icon-linh-thach">💎</span>
+          <span id="ui-linh-thach-shop">0</span>
+        </div>
+        <button class="btn-close-modal" onclick="closeShopModal()">✖</button>
+      </div>
+      
+      <div class="shop-tabs">
+        <button id="shop-tab-duoc" class="shop-tab-btn active" onclick="renderShop('dieu_duoc')">💊 Diệu Dược</button>
+        <button id="shop-tab-ky" class="shop-tab-btn" onclick="renderShop('than_ky')">📜 Thần Kỹ</button>
+      </div>
+
+      <div id="shopContent" class="shop-content-box"></div>
+    </div>
+  </div>
+
+  <script>
+    function openLibraryModal() {
+      if (window.playClickSound) window.playClickSound();
+      const modal = document.getElementById('libraryModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeLibraryModal() {
+      if (window.playClickSound) window.playClickSound();
+      const modal = document.getElementById('libraryModal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function openHanNguModal() {
+      if (window.playClickSound) window.playClickSound();
+      document.getElementById('libraryModal').style.display = 'none';
+      const modal = document.getElementById('hanNguModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeHanNguModal() {
+      if (window.playClickSound) window.playClickSound();
+      document.getElementById('hanNguModal').style.display = 'none';
+      document.getElementById('libraryModal').style.display = 'flex';
+    }
+
+    function startVolume(vol) {
+      if (window.playClickSound) window.playClickSound();
+      if (typeof window.checkAndStartVolume === 'function') {
+        window.checkAndStartVolume(vol);
+      } else {
+        alert("Đang tải dữ liệu Tàng Kinh Các, vui lòng thử lại sau vài giây...");
+      }
+    }
+  </script>
+
+  <script type="module" src="app.js"></script>
+  <script type="module" src="idle.js"></script>
+  <script src="ads.js"></script>
+</body>
+</html>
