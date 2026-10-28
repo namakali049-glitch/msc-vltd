@@ -72,7 +72,8 @@ battleAssets.swordCyan.src = "assets/kiem-khi-truc-co.png";
 battleAssets.swordKimDan.src = "assets/kim-dan-kiem-khi.png";       
 battleAssets.swordNguyenAnh.src = "assets/nguyen-anh-kiem-khi.png"; 
 battleAssets.enemyGhost.src = "assets/quy-hon.png";
-
+battleAssets.enemyCoDauMa.src = "assets/co-dau-ma.png"; // Ảnh quái mới
+battleAssets.enemyBoss.src = "assets/boss.png";         // Ảnh Boss mới
 function getBattleCharacterSkin() {
     const mana = window.lifetimeMana || 0;
     if (mana >= 50000) return battleAssets.playerNguyenAnh;
