@@ -496,42 +496,6 @@
     </div>
   </div>
 
-  <script>
-    function openLibraryModal() {
-      if (window.playClickSound) window.playClickSound();
-      const modal = document.getElementById('libraryModal');
-      if (modal) modal.style.display = 'flex';
-    }
-
-    function closeLibraryModal() {
-      if (window.playClickSound) window.playClickSound();
-      const modal = document.getElementById('libraryModal');
-      if (modal) modal.style.display = 'none';
-    }
-
-    function openHanNguModal() {
-      if (window.playClickSound) window.playClickSound();
-      document.getElementById('libraryModal').style.display = 'none';
-      const modal = document.getElementById('hanNguModal');
-      if (modal) modal.style.display = 'flex';
-    }
-
-    function closeHanNguModal() {
-      if (window.playClickSound) window.playClickSound();
-      document.getElementById('hanNguModal').style.display = 'none';
-      document.getElementById('libraryModal').style.display = 'flex';
-    }
-
-    function startVolume(vol) {
-      if (window.playClickSound) window.playClickSound();
-      if (typeof window.checkAndStartVolume === 'function') {
-        window.checkAndStartVolume(vol);
-      } else {
-        alert("Đang tải dữ liệu Tàng Kinh Các, vui lòng thử lại sau vài giây...");
-      }
-    }
-  </script>
-
   <!-- Nạp Trình Quản lý Giao diện Modals -->
   <script type="module" src="ui/ui_modals.js"></script>
   <!-- Nạp Lõi Game (Kiến trúc Data-Driven) -->
