@@ -59,7 +59,6 @@ window.masteredWordsB1 = masteredWordsB1;
 window.lifetimeMana = lifetimeMana;
 window.playerLinhThach = playerLinhThach;
 
-// --- CỜ KHÓA DỮ LIỆU ĐỂ CHỐNG RESET TÀI KHOẢN ---
 let isDataLoaded = false;
 window.isDataLoaded = false;
 
@@ -164,15 +163,11 @@ window.getSwordCount = function() {
     const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0, countA1, countB1) : { major: "Phàm Nhân" };
     const major = realmData.major;
 
-    // Phàm nhân không có linh lực để ngự kiếm
     if (major === "Phàm Nhân") return 0;
 
     const spi = window.playerStats ? window.playerStats.spi : 1;
-    
-    // CÔNG THỨC MỚI: Mặc định có 1 thanh, cứ đạt mốc 10 điểm Tinh Thần sẽ được +1 thanh
     let calculatedSwords = Math.floor(spi / 10) + 1; 
 
-    // Giới hạn trần phi kiếm theo từng đại cảnh giới
     let maxSwords = 1;
     if (major === "Luyện Khí Kỳ") maxSwords = 3;
     else if (major === "Trúc Cơ Kỳ") maxSwords = 5;
@@ -199,15 +194,12 @@ window.addLifetimeMana = function(amount, isBreakthrough = false) {
     let targetMana = oldMana + amount;
     
     if (!window.isAdmin) {
-        // Chặn không cho vượt mốc 12.000 nếu không phải hành động Đột Phá hợp lệ
         if (oldMana < 12000 && targetMana >= 12000) targetMana = 12000;
         else if (oldMana === 12000 && !isBreakthrough) targetMana = 12000;
 
-        // Chặn không cho vượt mốc 50.000 nếu không phải hành động Đột Phá hợp lệ
         if (oldMana < 50000 && targetMana >= 50000) targetMana = 50000;
         else if (oldMana === 50000 && !isBreakthrough) targetMana = 50000;
 
-        // Chặn tuyệt đối nếu cố tình đột phá (hack/lag) mà chưa đủ từ vựng
         if (countA1 < 600 && targetMana > 12000) targetMana = 12000;
         if (countB1 < 2667 && targetMana > 50000) targetMana = 50000;
     }
@@ -417,16 +409,27 @@ function generateRandomBaseStats() {
 }
 
 // ==========================================
-// HỆ THỐNG LƯU VÀ TẢI DỮ LIỆU ĐÃ VÁ LỖI (CHUYỂN SANG MÙA 2)
+// HỆ THỐNG LƯU VÀ TẢI DỮ LIỆU ĐÃ VÁ LỖI GHI ĐÈ
 // ==========================================
 async function syncManaToDatabase() {
     if (!currentUser || !isDataLoaded) return; 
     
     try {
-        // ĐỔI ĐƯỜNG DẪN TỪ 'users/' THÀNH 'users_v2/'
         const userRef = ref(database, 'users_v2/' + currentUser.uid);
-        
         const currentTotalMana = window.lifetimeMana !== undefined ? window.lifetimeMana : lifetimeMana;
+        
+        // --- CHỐT CHẶN BẢO VỆ CHỐNG GHI ĐÈ THIẾT BỊ CŨ ---
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+            const serverMana = Number(snapshot.val().mana) || 0;
+            // Nếu Tu vi ở Local thấp hơn Server quá 500 điểm -> Chặn đồng bộ để bảo vệ Tu vi server
+            if (currentTotalMana < serverMana && (serverMana - currentTotalMana > 500)) {
+                console.warn("Phát hiện thiết bị cũ, chặn ghi đè tu vi!");
+                return; 
+            }
+        }
+        // -------------------------------------------------
+
         const currentStats = window.playerStats || playerStats;
         const currentA1 = window.masteredWordsA1 || masteredWordsA1;
         const currentB1 = window.masteredWordsB1 || masteredWordsB1;
@@ -436,11 +439,9 @@ async function syncManaToDatabase() {
             mana: currentTotalMana,
             linhThach: window.playerLinhThach || 0,
             currentHp: window.currentHp !== undefined ? window.currentHp : 100,
-            
             currentLinhLuc: window.currentLinhLuc !== undefined ? window.currentLinhLuc : 100,
             tuLinhBuff: window.tuLinhBuff || 0,
             itemUsageHistory: window.itemUsageHistory || {},
-            
             inventory: window.inventory || {},
             learnedSkills: window.learnedSkills || [], 
             stats: currentStats,
@@ -455,7 +456,6 @@ window.syncManaToDatabase = syncManaToDatabase;
 
 async function loadUserLifetimeMana(uid) {
     try {
-        // ĐỔI ĐƯỜNG DẪN TỪ 'users/' THÀNH 'users_v2/'
         const userRef = ref(database, 'users_v2/' + uid);
         const snapshot = await get(userRef);
         if (snapshot.exists()) {
@@ -487,7 +487,7 @@ async function loadUserLifetimeMana(uid) {
 
             if (isIllegitimate) {
                 alert("⚠️ THIÊN ĐẠO CẢNH BÁO!\n\nPhát hiện đạo hữu chưa lĩnh ngộ đủ từ vựng nhưng đã đột phá. Đạo thể lập tức bị áp chế quay về Bình Cảnh!");
-                await update(userRef, { mana: lifetimeMana }); // Ghi đè mốc phạt lên Server
+                await update(userRef, { mana: lifetimeMana });
             }
             // =======================================================
 
@@ -498,7 +498,6 @@ async function loadUserLifetimeMana(uid) {
             if (ltEl) ltEl.innerText = window.playerLinhThach;
 
             window.currentHp = val.currentHp !== undefined ? Math.max(val.currentHp, 1) : 100;
-            
             window.currentLinhLuc = val.currentLinhLuc !== undefined ? val.currentLinhLuc : 100;
             window.tuLinhBuff = val.tuLinhBuff || 0;
             window.itemUsageHistory = val.itemUsageHistory || {};
@@ -542,6 +541,7 @@ async function loadUserLifetimeMana(uid) {
     updateCharacterUI();
     if (typeof window.initIdleParams === 'function') window.initIdleParams();
 }
+
 // ==========================================
 // CÁC HÀM XÁC THỰC
 // ==========================================
@@ -588,7 +588,6 @@ window.handleSignup = async function() {
         window.playerStats = playerStats;
         window.stats = playerStats;
         
-        // ĐỔI ĐƯỜNG DẪN TỪ 'users/' THÀNH 'users_v2/'
         await set(ref(database, 'users_v2/' + userCred.user.uid), { 
             name: displayName, 
             mana: 0, 
@@ -622,7 +621,6 @@ window.handleGoogleLogin = async function() {
     try { 
         const result = await signInWithPopup(auth, googleProvider);
         
-        // ĐỔI ĐƯỜNG DẪN TỪ 'users/' THÀNH 'users_v2/'
         const userRef = ref(database, 'users_v2/' + result.user.uid);
         const snapshot = await get(userRef);
         if (!snapshot.exists()) {
@@ -739,7 +737,6 @@ window.showLeaderboard = async function() {
     const listEl = document.getElementById('lb-list');
     if (listEl) listEl.innerHTML = "<p style='color:#94a3b8; text-align:center; padding-top: 20px;'>⏳ Đang kết nối Tiên Đạo Bảng...</p>";
     try {
-        // ĐỔI ĐƯỜNG DẪN TỪ 'users' THÀNH 'users_v2' ĐỂ BẢNG XẾP HẠNG CHỈ LẤY DATA MỚI
         const lbRef = ref(window.firebaseDB || database, 'users_v2');
         const snapshot = await get(lbRef);
         if (snapshot.exists()) {
