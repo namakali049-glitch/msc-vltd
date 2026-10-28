@@ -1,15 +1,18 @@
-const CACHE_NAME = 'tutien-v1.0.3';
+const CACHE_NAME = 'tutien-v1.0.4';
 const STATIC_ASSETS = [
   './',
-  './chat.js',
   './index.html',
   './style.css',
   './app.js',
+  './idle.js',
+  './chat.js',
   './audio.js',
   './realm.js',
   './inventory.js',
+  './shop.js',
   './battle.js',
   './quiz.js',
+  './ads.js',
   './manifest.json',
   './a1_vocab.csv',
   './b1_vocab.csv',
