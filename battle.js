@@ -55,6 +55,8 @@ const battleAssets = {
     swordKimDan: new Image(),         
     swordNguyenAnh: new Image(),      
     enemyGhost: new Image()
+    enemyCoDauMa: new Image(),
+    enemyBoss: new Image()
 };
 
 battleAssets.bg.src = "assets/hac-am-son-dong.png";
