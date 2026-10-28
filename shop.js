@@ -13,6 +13,7 @@ window.SHOP_CATALOG = {
     ],
     than_ky: [
         { id: 'skill_ngu_kiem', name: 'Ngự Kiếm Thuật', desc: 'Tuyệt kỹ điều khiển phi kiếm bay công kích ma vật.', price: 1200, currency: 'linh_thach', color: '#ffd700', icon: '⚔️' }
+        { id: 'skill_loi_chu', name: 'Thiên Lôi Chú', desc: 'Kỹ năng bị động. Mỗi 3 giây giáng sét ngẫu nhiên tiêu diệt ma vật.', price: 300, currency: 'linh_thach', color: '#a855f7', icon: '⚡' }
     ]
 };
 
