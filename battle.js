@@ -145,6 +145,8 @@ window.startBattle = function() {
     battleData.drops = [];
     battleData.projectiles = [];
     battleData.enemyProjectiles = [];
+    battleData.shockwaves = []; 
+    battleData.batQuaiReady = true;
     battleData.aimState = { active: false, startX: 0, startY: 0, curX: 0, curY: 0, dirX: 0, dirY: 0 };
 
     const skillWrap = document.getElementById('skillControlWrapper');
@@ -152,7 +154,11 @@ window.startBattle = function() {
     if (skillWrap) {
         skillWrap.style.display = hasSkill ? 'flex' : 'none';
     }
-    
+    const activeSkillWrap = document.getElementById('battleActiveSkills');
+    const hasBatQuai = window.learnedSkills && window.learnedSkills.includes('skill_bat_quai');
+    if (activeSkillWrap) {
+        activeSkillWrap.style.display = hasBatQuai ? 'block' : 'none';
+    }
     initControls();
 
     battleData.kills = 0;
