@@ -1,0 +1,2776 @@
+id,hanzi,pinyin,meaning,type,LEVEL
+1,挨,āi,Vst,ai,"bị, chịu (chịu đựng)"
+2,欸,ăi,Ptc,ai,"thán từ thể hiện sự ngạc nhiên, chú ý"
+3,愛戴,àidài,Vst,ái đái,"kính trọng, yêu mến"
+4,愛國,àiguó,Vs,ái quốc,yêu nước
+5,愛滋病,àizībìng,N,ái tỵ bệnh,bệnh HIV/AIDS
+6,安頓,āndùn,V,an đôn,"sắp xếp, ổn định"
+7,安撫,ānfŭ,V,an phú,"an ủi, vỗ về"
+8,安寧,ānníng,Vs,an ninh,"bình yên, thanh thản"
+9,安詳,ānxiáng,Vs,an tường,"bình thản, yên tĩnh"
+10,安置,ānzhì,V,an trí,"sắp xếp, bố trí"
+11,暗暗,ànàn,Adv,ám ám,"lén lút, một cách thầm lặng"
+12,案件,ànjiàn,N,án kiện,"vụ án, trường hợp"
+13,案情,ànqíng,N,án tình,tình tiết vụ án
+14,按摩,ànmó,V,ấn ma,mát xa
+15,昂貴,ángguì,Vs,ngàng quý,"đắt giá, cao cấp"
+16,奧妙,àomiào,Vs,áo diệu,"huyền bí, tinh tế"
+17,懊惱,àonăo,Vs,ngạo nảo,"buồn phiền, thất vọng"
+18,八卦,bāguà,N,bát quái,"tin đồn, chuyện phiếm"
+19,八字,bāzì,N,bát tự,"số mệnh, chữ ký (theo Tứ Trụ)"
+20,把持,băchí,V,bá trì,"nắm giữ, kiểm soát"
+21,把手,băshŏu,N,bả thủ,"tay cầm, tay nắm"
+22,白皮書,báipíshū,N,bạch bì thư,"sách trắng (tài liệu chính thức, báo cáo)"
+23,拜會,bàihuì,V,bái hội,"thăm, gặp mặt (thể hiện sự kính trọng)"
+24,頒發/頒,bānfā/bān,V,ban phát,"trao tặng, phát tặng"
+25,頒獎,bānjiăng,V-sep,ban thưởng,trao giải thưởng
+26,辦案,bànàn,V-sep,bàn án,giải quyết vụ án
+27,半島,bàndăo,N,bán đảo,bán đảo
+28,半導體,bàndăotĭ,N,bán đạo thể,chất bán dẫn
+29,幫,bāng,M,Bang,Giúp
+30,綁,băng,V,bàng,"buộc, trói"
+31,包袱,bāofú,N,bao phục,"gánh nặng, gánh vác"
+32,包圍,bāowéi,V,bao vi,bao vây
+33,寶貝,băobèi,Vst,bảo bối,"bảo bối, người yêu quý"
+34,寶石,băoshí,N,bảo thạch,đá quý
+35,飽和,băohé,Vs,bão hòa,"bão hòa (trong hóa học, vật lý)"
+36,飽滿,băomăn,Vs,bão mãn,"đầy đủ, no nê"
+37,保安,băoān,N,bảo an,bảo vệ an ninh
+38,保管,băoguăn,V,bảo quản,"bảo trì, giữ gìn"
+39,保齡球,băolíngqiú,N,bảo linh cầu,bowling (môn thể thao)
+40,保姆,băomŭ,N,bảo mẫu,"giúp việc, người chăm sóc"
+41,保全,băoquán,Vs-attr,bảo toàn,"bảo vệ, giữ gìn an toàn"
+42,保險,băoxiăn,Vs,Bảo hiểm,Bảo hiểm
+43,保佑,băoyòu,V,bảo ước,"phù hộ, che chở"
+44,保重,băozhòng,Vi,bảo trọng,"giữ gìn, bảo vệ sức khỏe"
+45,報案,bàoàn,V-sep,báo án,khai báo vụ án
+46,報表,bàobiăo,N,báo biểu,"báo cáo, tờ báo cáo"
+47,報酬,bàochóu,N,báo thù,"tiền công, thù lao"
+48,報復,bàofù,V,báo phục,"trả thù, trả đũa"
+49,報關,bàoguān,V-sep,báo quan,khai báo hải quan
+50,報價,bàojià,N,báo giá,báo giá sản phẩm
+51,報刊,bàokān,N,báo san,báo chí
+52,報應,bàoyìng,N,báo ứng,"sự báo đáp, hậu quả"
+53,報章,bàozhāng,N,báo chương,"báo chí, tờ báo"
+54,暴雨,bàoyŭ,N,bạo vũ,"mưa lớn, mưa bão"
+55,爆發,bàofā,Vpt,bạo phát,"bùng nổ, phát nổ"
+56,抱負,bàofù,N,bảo phó,"khát vọng, hoài bão"
+57,碑,bēi,N,bi,bia đá
+58,悲哀,bēiāi,Vs,bi ai,"buồn bã, sầu muộn"
+59,悲觀,bēiguān,Vs,bi quan,"bi quan, tiêu cực"
+60,貝殼,bèiké,N,bối giác,"vỏ sò, vỏ ốc"
+61,倍數,bèishù,N,bội số,"số lần, bội số"
+62,背誦,bèisòng,V,bối tụng,đọc thuộc lòng
+63,奔騰,bēnténg,Vi,bôn đăng,"vọt lên, dâng trào"
+64,本,běn,Adv,Bản,Quyển (sách)
+65,本事,běnshì,N,bản sự,"năng lực, khả năng"
+66,本位,běnwèi,N,bản vị,"vị trí gốc, căn bản"
+67,本性,běnxìng,N,bản tính,"bản chất, tính cách"
+68,本質,běnzhí,N,bản chất,"bản chất, cốt lõi"
+69,崩潰,bēngkuì,Vp,bùng hoại,"sụp đổ, tan vỡ"
+70,甭,béng,Adv,"đừng, không cần",không cần
+71,敝,bì,Det,bỉ,"hư hỏng, yếu kém"
+72,必,bì,Adv,tất,"cần thiết, phải"
+73,編輯,biānjí,N / V,biên tập,"chỉnh sửa, biên soạn"
+74,編寫,biānxiě,V,biên tả,"viết, biên soạn"
+75,編織,biānzhī,V,biên chiết,đan lát
+76,編制,biānzhì,N,biên chế,"tổ chức, cấu trúc"
+77,編製,biānzhì,V,biên tạo,"sản xuất, tạo ra"
+78,邊界,biānjiè,N,biên giới,ranh giới
+79,邊緣,biānyuán,N,biên duyên,"rìa, mép, bờ"
+80,貶,biăn,Vp,biếm,"hạ thấp, chỉ trích"
+81,貶值,biănzhí,Vp,biếm trị,giảm giá trị
+82,匾額,biăné,N,biển mục,"biển hiệu, bảng tên"
+83,辨認,biànrèn,V,biện nhận,"nhận diện, nhận ra"
+84,辨識,biànshì,V,biện thức,"nhận diện, phân biệt"
+85,辯,biàn,V,biện,"biện luận, tranh luận"
+86,辯護,biànhù,Vi,biện hộ,"bảo vệ, biện hộ"
+87,辯論,biànlùn,Vi,biện luận,"tranh luận, bàn luận"
+88,變革,biàngé,N,biến cách,"cải cách, thay đổi lớn"
+89,變遷,biànqiān,Vs,biến thiên,"sự thay đổi, biến động"
+90,變通,biàntōng,Vi,biến thông,"linh hoạt, thích ứng"
+91,變形,biànxíng,Vp,biến hình,"biến dạng, thay đổi hình dạng"
+92,標籤,biāoqiān,N,tiêu phiến,"nhãn, mác, thẻ"
+93,標語,biāoyŭ,N,tiêu ngữ,"khẩu hiệu, slogan"
+94,表白,biăobái,Vi,biểu bạch,"thổ lộ, tỏ bày tình cảm"
+95,表明,biăomíng,Vi,biểu minh,"chỉ rõ, làm rõ"
+96,鼻孔,bíkŏng,N,tỵ khổng,lỗ mũi
+97,筆錄,bĭlù,N,bút lục,"ghi chép, biên bản"
+98,筆友,bĭyŏu,N,bút hữu,"bạn viết thư, bạn qua thư tín"
+99,比率,bĭlǜ,N,tỉ suất,"tỷ lệ, tỉ lệ phần trăm"
+100,比擬,bĭnĭ,V,tỉ nghị,"so sánh, đối chiếu"
+101,比喻,bĭyù,N,tỉ dụ,"phép ẩn dụ, sự so sánh"
+102,比重,bĭzhòng,N,tỉ trọng,"trọng số, tỷ trọng"
+103,必備,bìbèi,Vs-attr,tất bị,"cần thiết, phải có"
+104,必定,bìdìng,Adv,tất định,"nhất định, chắc chắn"
+105,必然,bìrán,Adv,tất nhiên,"tất yếu, đương nhiên"
+106,閉幕,bìmù,Vp,bế mạc,"kết thúc, bế mạc (hội nghị, sự kiện)"
+107,閉塞,bìsè,Vs,bế tắc,"tắc nghẽn, không thông"
+108,避難,bìnàn,Vi,tị nạn,"chạy trốn, lánh nạn"
+109,避孕,bìyùn,V-sep,tị dục,tránh thai
+110,畢生,bìshēng,N,bạt sinh,"suốt đời, cả đời"
+111,幣值,bìzhí,N,tệ giá,giá trị đồng tiền
+112,憋,biē,V,bí,"nhịn, kìm nén"
+113,別,bié,V,Biệt,Đừng
+114,別墅,biéshù,N,biệt thự,"villa, nhà riêng biệt"
+115,兵,bīng,N,binh,"quân lính, chiến binh"
+116,賓館,bīnguăn,N,tân quán,khách sạn
+117,柄,bĭng,N,bính,"cán, tay cầm"
+118,並列,bìngliè,Vst,tịnh liệt,"liệt kê, đặt cạnh nhau"
+119,並重,bìngzhòng,Vs,tịnh trọng,"trọng yếu, quan trọng"
+120,併發,bìngfā,Vpt,biến phát,"phát sinh, bùng phát"
+121,病床,bìngchuáng,N,bệnh sàng,giường bệnh
+122,病菌,bìngjùn,N,bệnh khuẩn,vi khuẩn gây bệnh
+123,病患,bìnghuàn,N,bệnh hoạn,người bệnh
+124,波,bō,M,ba,sóng
+125,波及,bōjí,Vst,ba cập,"ảnh hưởng, lan rộng"
+126,波浪,bōlàng,N,ba lãng,sóng biển
+127,剝,bō,V,bào,"bóc, lột"
+128,剝削,bōxuè,V,bào hiếp,"khai thác, bóc lột"
+129,搏鬥,bódòu,Vi,bác đấu,"đấu tranh, chiến đấu"
+130,播出,bòchū,V,phát sóng,phát sóng (truyền hình)
+131,補給,bǔjĭ,V,bổ cấp,"cung cấp, tiếp tế"
+132,補救,bŭjiù,V,bổ cứu,"cứu chữa, sửa chữa"
+133,哺乳動物,bŭrŭdòngwù,N,bộ nhũ động vật,động vật có vú
+134,不便,bùbiàn,Vs,bất tiện,không tiện lợi
+135,不得,bùdé,Adv,bất đắc,"không thể, không có khả năng"
+136,不等,bùděng,N,bất đẳng,"không tương xứng, không đồng đều"
+137,不動產,bùdòngchăn,N,bất động sản,tài sản bất động
+138,不法,bùfă,Vs-attr,bất pháp,"phạm pháp, trái luật"
+139,不凡,bùfán,Vs,bất phàm,"không tầm thường, xuất sắc"
+140,不妨,bùfáng,Adv,bất phương,"không có vấn đề gì, không sao"
+141,不公,bùgōng,Vs,bất công,bất công bằng
+142,不及,bùjí,Vs-pred,bất cập,"không bằng, không đạt được"
+143,不禁,bùjīn,Vaux,bất tân,"không thể không, không thể cầm lòng"
+144,不堪,bùkān,Vs,bất kham,"không chịu nổi, không thể chịu đựng được"
+145,不力,bùlì,Vs-pred,bất lực,"bất lực, không có khả năng"
+146,不料,bùliào,Adv,bất liệu,"không ngờ, không tưởng tượng được"
+147,不免,bùmiăn,Adv,bất miễn,"không tránh khỏi, không thể không"
+148,不容,bùróng,Adv,bất dung,"không chấp nhận, không thể chịu đựng"
+149,不時,bùshí,Adv,bất thời,"không kịp thời, không đúng lúc"
+150,不惜,bùxí,Vs,bất tích,"không tiếc, không ngần ngại"
+151,不下,bùxià,Adv,bất hạ,"không thể giảm, không thể hạ thấp"
+152,不肖,bùxiào,Vs-attr,bất hiếu,không hiếu thảo
+153,不懈,bùxiè,Vs,bất hạ,"không ngừng nghỉ, không lười biếng"
+154,不再,bùzài,Vs-pred,bất tái,"không còn nữa, không tái diễn"
+155,不致,bùzhì,Adv,bất trí,"không đến mức, không xảy ra"
+156,不知不覺,bùzhībùjué,Adv,bất tri bất giác,"vô tình, không biết, không nhận ra"
+157,不至於/不致於,bùzhìyú,Adv,bất chí ư,"không đến mức, không quá mức"
+158,部落,bùluò,N,bộ lạc,"bộ tộc, nhóm người cùng nguồn gốc"
+159,部署,bùshù,V,bộ thụ,"sắp xếp, tổ chức, bố trí"
+160,步調,bùdiào,N,bước đi,"nhịp điệu, tốc độ đi"
+161,步驟,bùzòu,N,bước tắc,"bước đi, cách làm"
+162,猜測,cāicè,V,suy đoán,"đoán, phỏng đoán"
+163,猜忌,cāijì,Vst,suy tị,"nghi ngờ, không tin tưởng"
+164,猜想,cāixiăng,V,suy tưởng,"tưởng tượng, phỏng đoán"
+165,裁縫,cáiféng,N,tài phong,thợ may
+166,裁減,cáijiăn,V,tài giảm,"cắt giảm, giảm bớt"
+167,財團,cáituán,N,tài đoàn,tập đoàn tài chính
+168,財政,cáizhèng,N,tài chính,chính sách tài chính
+169,才智,cáizhì,N,tài trí,"trí tuệ, khả năng"
+170,採訪,căifăng,V,thải phỏng,"phỏng vấn, tiếp xúc"
+171,採光,căiguāng,N,thải quang,ánh sáng tự nhiên
+172,採納,căinà,V,thải nạp,"nhận vào, tiếp nhận"
+173,採取,căiqŭ,V,thải thủ,"lấy, thu thập"
+174,彩繪,căihuì,V,thái hội,vẽ tranh màu
+175,餐具,cānjù,N,can cụ,dụng cụ ăn uống
+176,參謀,cānmóu,N,tham mưu,"cố vấn, người giúp đỡ"
+177,殘暴,cánbào,Vs,tàn bạo,"độc ác, tàn nhẫn"
+178,殘酷,cánkù,Vs,tàn khốc,"tàn bạo, không thương xót"
+179,殘殺,cánshā,V,tàn sát,"giết hại, tàn sát"
+180,慘重,cănzhòng,Vs,thảm trọng,"nghiêm trọng, trầm trọng"
+181,燦爛,cànlàn,Vs,tán lạn,"rực rỡ, lấp lánh"
+182,蒼白,cāngbái,Vs,thương bạch,"tái nhợt, nhợt nhạt"
+183,蒼蠅,cāngyíng,N,thương ruồi,ruồi
+184,操縱,cāozòng,V,thao túng,"điều khiển, chi phối"
+185,草案,căoàn,N,thảo án,"dự thảo, bản dự thảo"
+186,草叢,căocóng,N,thảo tùng,"đám cỏ, bụi cỏ"
+187,草率,căoshuài,Vs,thảo suất,"qua loa, cẩu thả"
+188,草藥,căoyào,N,thảo dược,"thuốc nam, thuốc từ cây cỏ"
+189,測,cè,V,trắc,"đo lường, kiểm tra"
+190,策畫/策劃,cèhuà,V,sách họa,"kế hoạch, vạch ra phương án"
+191,差額,chāé,N,sai ngạch,"khoản chênh lệch, sự khác biệt"
+192,插曲,chāqŭ,N,sáp khúc,"phần nhạc phụ, một đoạn nhạc xen vào"
+193,插嘴,chāzuĭ,V-sep,sáp thuỷ,"cắt lời, ngắt lời"
+194,茶具,chájù,N,trà cụ,"dụng cụ pha trà, bộ đồ trà"
+195,察覺,chájué,Vpt,sát giác,"nhận thấy, phát hiện"
+196,查明,chámíng,V,tra minh,"làm rõ, điều tra rõ ràng"
+197,蟬,chán,N,sên,"con ve, con châu chấu"
+198,饞,chán,Vs,tham,"thèm ăn, đói khát"
+199,潺潺,chánchán,Vs,tràn tràn,tiếng nước chảy róc rách
+200,猖獗,chāngjué,Vs,sàng tuyệt,"tàn bạo, hung hãn"
+201,腸(子),cháng(zi),N,tràng,"ruột, cơ quan tiêu hóa"
+202,長遠,chángyuăn,Vs,trường viễn,"lâu dài, xa xôi"
+203,場次,chăngcì,N,trường thứ,"buổi diễn, số lần tổ chức"
+204,場面,chăngmiàn,N,trường diện,"cảnh tượng, cảnh quay"
+205,倡導,chàngdăo,V,xướng đạo,"khởi xướng, đề xướng"
+206,唱腔,chàngqiāng,N,xướng khang,"âm điệu, giọng hát trong opera"
+207,暢銷,chàngxiāo,Vs,sáng tảo,"bán chạy, bán được nhiều"
+208,產物,chănwù,N,sản vật,"sản phẩm, thành quả"
+209,產值,chănzhí,N,sản trị,giá trị sản xuất
+210,超速,chāosù,Vp,siêu tốc,vượt tốc độ
+211,超脫,chāotuō,Vst,siêu thoát,"thoát khỏi, vượt lên"
+212,抄襲,chāoxí,V,sao tịch,"sao chép, đạo văn"
+213,吵嘴,chăozuĭ,Vi,xảo chẩm,"cãi nhau, tranh cãi"
+214,車輛,chēliàng,N,xa lương,"phương tiện, xe cộ"
+215,車廂,chēxiāng,N,xa khoang,toa xe
+216,撤回,chèhuí,V,triệt hồi,"rút lại, thu hồi"
+217,撤銷,chèxiāo,V,triệt tẩy,"hủy bỏ, bãi bỏ"
+218,沉默/沈默,chénmò,Vs,trầm mặc,"im lặng, không nói gì"
+219,沉思,chénsī,Vi,trầm tư,"suy nghĩ sâu sắc, ngẫm nghĩ"
+220,沉重/沈重,chénzhòng,Vs,trầm trọng,"nặng nề, nghiêm trọng"
+221,塵土,chéntŭ,N,trần thổ,"bụi đất, bụi bẩn"
+222,呈,chéng,Vst,trình,"trình bày, thể hiện"
+223,乘,chéng,Vst,Thừa,Nhân
+224,承包,chéngbāo,V,thừa bao,"nhận thầu, nhận hợp đồng"
+225,承擔,chéngdān,V,thừa đảm,"gánh vác, chịu trách nhiệm"
+226,承諾,chéngnuò,N,thừa nạp,"cam kết, hứa hẹn"
+227,成敗,chéngbài,N,thành bại,thành công hay thất bại
+228,成見,chéngjiàn,N,thành kiến,"định kiến, quan điểm cố định"
+229,成就,chéngjiù,V,thành tựu,"thành tựu, đạt được"
+230,成品,chéngpĭn,N,thành phẩm,sản phẩm hoàn thành
+231,成全,chéngquán,V,thành toàn,giúp ai đạt được mục tiêu
+232,成效,chéngxiào,N,thành hiệu,"kết quả đạt được, hiệu quả"
+233,成衣,chéngyī,N,thành y,áo quần may sẵn
+234,成員,chéngyuán,N,thành viên,thành viên trong một tổ chức
+235,成長,chéngzhăng,N,thành trưởng,"phát triển, lớn lên"
+236,稱號,chēnghào,N,xưng hiệu,danh hiệu
+237,稱呼,chēnghū,V,xưng hô,"gọi tên, cách xưng hô"
+238,撐腰,chēngyāo,Vi,trướng yên,"ủng hộ, giúp đỡ"
+239,程式,chéngshì,N,trình tự,"chương trình, mã lệnh"
+240,呈獻,chéngxiàn,V,trình hiến,"dâng hiến, trình bày"
+241,誠心,chéngxīn,N,thành tâm,"lòng thành, chân thành"
+242,誠心誠意,chéngxīnchéngyì,Vs,thành tâm thành ý,"chân thành, tận tâm"
+243,誠摯,chéngzhì,Vs,thành chí,"chân thành, nghiêm túc"
+244,稱,chèng,V,xưng,"gọi, gọi là"
+245,吃驚,chījīng,Vs,ăn kinh,"ngạc nhiên, bất ngờ"
+246,吃苦,chīkŭ,Vs,ăn khổ,"chịu khó khăn, chịu đựng"
+247,吃力,chīlì,Vs,ăn lực,"tốn sức, vất vả"
+248,持,chí,V,trì,"giữ, cầm, duy trì"
+249,持久,chíjiŭ,Vs,trì cữu,"lâu dài, bền bỉ"
+250,持平,chípíng,Vs,trì bình,"giữ ổn định, duy trì trạng thái bình thường"
+251,池(子),chí(zi),N,trì (tử),"ao, hồ, bể chứa nước"
+252,遲鈍,chídùn,Vs,trì độn,"chậm chạp, lề mề"
+253,充斥,chōngchì,Vst,sung xích,"tràn ngập, lấp đầy"
+254,充裕,chōngyù,Vs,sung túc,"phong phú, đầy đủ"
+255,沖淡,chōngdàn,V,sung đạm,"làm loãng, giảm bớt"
+256,沖天,chōngtiān,Vs,sung thiên,"bay lên trời, vút lên"
+257,衝動,chōngdòng,Vs,sung động,"cơn bốc đồng, cảm xúc mạnh mẽ"
+258,衝擊,chōngjí,V,sung kích,"tác động mạnh, ảnh hưởng mạnh"
+259,憧憬,chōngjĭng,Vst,sung cảnh,"ước ao, mơ ước"
+260,重疊,chóngdié,Vs,trọng điệp,"trùng lặp, chồng lên nhau"
+261,崇尚,chóngshàng,Vst,sùng thượng,"tôn trọng, kính trọng"
+262,寵愛,chŏngài,Vst,sủng ái,"yêu thương, cưng chiều"
+263,寵物,chŏngwù,N,sủng vật,"vật nuôi, thú cưng"
+264,抽查,chōuchá,V,xâu tra,kiểm tra ngẫu nhiên
+265,抽空,chōukòng,Vi,xâu không,"dành thời gian, tìm thời gian"
+266,抽象,chōuxiàng,Vs,xâu tượng,trừu tượng
+267,抽樣,chōuyàng,V-sep,xâu mẫu,"lấy mẫu, thí nghiệm mẫu"
+268,仇,chóu,N,thù,"kẻ thù, sự thù hận"
+269,仇恨,chóuhèn,N,thù hận,"sự oán hận, hận thù"
+270,稠密,chóumì,Vs,sàu mật,"dày đặc, chen chúc"
+271,出超,chūchāo,Vs,xuất siêu,xuất khẩu vượt quá
+272,出錯,chūcuò,Vp-sep,xuất sai,"gặp lỗi, sai sót"
+273,出發點,chūfādiăn,N,xuất phát điểm,"điểm bắt đầu, khởi đầu"
+274,出局,chūjú,Vp,xuất cục,"bị loại, ra ngoài cuộc chơi"
+275,出力,chūlì,V-sep,xuất lực,"làm việc, cống hiến"
+276,出路,chūlù,N,xuất lộ,"con đường thoát, cơ hội"
+277,出馬,chūmă,Vi,xuất mã,"tham gia, bước vào"
+278,出賣,chūmài,V,xuất mãi,"bán, rao bán"
+279,出面,chūmiàn,Vi,xuất diện,"xuất hiện, đứng ra"
+280,出名,chūmíng,Vs,xuất danh,nổi tiếng
+281,出品,chūpĭn,N,xuất phẩm,"sản phẩm, đồ đạc xuất xưởng"
+282,出示,chūshì,V,xuất thị,"trình bày, đưa ra"
+283,出手,chūshŏu,Vi,xuất thủ,"ra tay, tấn công"
+284,出頭,chūtóu,Vp,xuất đầu,"nổi bật, đứng ra"
+285,出土,chūtŭ,Vp,xuất thổ,"khai quật, xuất hiện từ đất"
+286,出息(˙ㄒㄧ),chūxi,N,xuất hý,"hy vọng, cơ hội phát triển"
+287,出血,chūxiě,Vp,xuất huyết,"chảy máu, mất máu"
+288,初期,chūqí,N,sơ kỳ,"giai đoạn đầu, giai đoạn ban đầu"
+289,儲備,chúbèi,V,trữ bồi,"dự trữ, tích lũy"
+290,除此之外,chúcĭzhīwài,Conj,trừ thử tác,"ngoài ra, bên cạnh đó"
+291,鋤頭,chútou,N,xừ đầu,"cái cuốc, công cụ cày đất"
+292,處,chŭ,Vi,xử,"nơi chốn, xử lý"
+293,處方,chŭfāng,N,xử phương,toa thuốc
+294,處分,chŭfèn,N / V,xử phân,"xử phạt, trừng phạt"
+295,處境,chŭjìng,N,xử cảnh,"tình huống, hoàn cảnh"
+296,處事,chŭshì,Vi,xử sự,"giải quyết công việc, đối xử"
+297,處於,chŭyú,Vst,xử ở,ở trong tình huống
+298,處女,chŭnǚ,N,xử nữ,"cô gái chưa kết hôn, trinh nữ"
+299,穿梭,chuānsuō,Vi,xuyên sa,"đi qua lại, xuyên qua"
+300,傳,chuán,V,Truyền,"Truyền, chuyển giao"
+301,傳遞,chuándì,V,truyền đạt,"chuyển tiếp, truyền tải"
+302,傳奇,chuánqí,N / Vs,truyền kỳ,"huyền thoại, sử thi"
+303,傳神,chuánshén,Vs,truyền thần,"sống động, sinh động"
+304,傳授,chuánshòu,V,truyền thụ,"giảng dạy, truyền đạt kiến thức"
+305,船隻,chuánzhī,N,thuyền chiết,"tàu thuyền, phương tiện thủy"
+306,喘,chuăn,V,suốt,"thở hổn hển, thở gấp"
+307,創傷,chuāngshāng,N,sáng thương,"vết thương, chấn thương"
+308,創,chuàng,V,sáng,"tạo ra, sáng tạo"
+309,創辦,chuàngbàn,V,sáng biện,"sáng lập, thành lập"
+310,創立,chuànglì,V,sáng lập,"lập ra, tạo dựng"
+311,創業,chuàngyè,V-sep,sáng nghiệp,"khởi nghiệp, bắt đầu sự nghiệp"
+312,吹牛,chuīniú,V-sep,xuy bâu,"khoác lác, nói phét"
+313,垂,chuí,V,thùy,"treo, rủ xuống"
+314,垂直,chuízhí,Vs,thùy trực,"thẳng đứng, dọc theo chiều thẳng"
+315,辭,cí,V,từ,"từ chức, từ chối, lời từ biệt"
+316,辭行,cíxíng,Vi,từ hành,"từ biệt, chia tay"
+317,慈善,císhàn,Vs,từ thiện,"thiện nguyện, từ tâm"
+318,此刻,cĭkè,N,thử khắc,"ngay lúc này, khoảnh khắc này"
+319,次,cì,Det,Thứ,Lần
+320,次要,cìyào,Vs-attr,thứ yếu,"không quan trọng, ít quan trọng"
+321,伺候,cìhòu,V,tạ hầu,"phục vụ, chăm sóc"
+322,刺殺,cìshā,V,kích sát,"ám sát, giết người"
+323,匆忙,cōngmáng,Vs,xung mang,"vội vã, hối hả"
+324,從容,cōngróng,Vs,từ dung,"bình tĩnh, thảnh thơi"
+325,從而,cóngér,Conj,từ nhi,"do đó, vì thế"
+326,湊巧,còuqiăo,Vs,tấu xảo,"tình cờ, ngẫu nhiên"
+327,粗糙,cūcāo,Vs,thô sảo,"thô kệch, không mịn màng"
+328,粗魯,cūlŭ,Vs,thô lỗ,"thô bạo, không tinh tế"
+329,促,cù,V,xúc,"thúc đẩy, làm tăng tốc"
+330,促成,cùchéng,Vpt,xúc thành,"tạo điều kiện, thúc đẩy thành công"
+331,促使,cùshĭ,Vst,xúc sử,"thúc đẩy, tạo ra sự thay đổi"
+332,促銷,cùxiāo,V,xúc tiêu,"quảng cáo, khuyến mãi"
+333,簇擁,cùyŏng,V,tú ôm,"bao vây, vây quanh"
+334,摧殘,cuīcán,V,thôi tàn,"tàn phá, phá hủy"
+335,摧毀,cuīhuĭ,V,thôi hủy,"phá hủy, tàn phá"
+336,催眠,cuīmián,V,thôi miên,"gây mê, thôi miên"
+337,脆弱,cuìruò,Vs,thối nhược,"yếu đuối, mong manh"
+338,存貨,cúnhuò,N,tồn hoá,"hàng tồn kho, vật liệu dự trữ"
+339,磋商,cuōshāng,Vi,toái thương,"thảo luận, thương thảo"
+340,撮合,cuòhé,V,toát hợp,"kết nối, hòa giải"
+341,搭配,dāpèi,V,đạp phối,"phối hợp, kết hợp"
+342,達,dá,Vst,đạt,"đạt được, thành công"
+343,答覆,dáfù,V,đáp phúc,"trả lời, phản hồi"
+344,打,dă,Prep,Đả,"Đánh, chơi"
+345,打鬥,dădòu,Vi,đả đấu,"đánh nhau, chiến đấu"
+346,打賭,dădŭ,V-sep,đả đổ,"đánh cược, cá cược"
+347,打發,dăfā,V,đả phát,"giải quyết, làm xong"
+348,打擊,dăjí,V,đả kích,"tấn công, làm tổn thương"
+349,打量,dăliàng,V,đả lượng,"đánh giá, xem xét"
+350,打獵,dăliè,V-sep,đả liệp,"săn bắn, đi săn"
+351,打牌,dăpái,V-sep,đả bài,"chơi bài, đánh bài"
+352,打手,dăshŏu,N,đả thủ,"người đánh, người thực hiện công việc"
+353,打烊,dăyáng,Vp,đả ương,"đóng cửa, hết giờ làm việc"
+354,大道,dàdào,N,đại đạo,"đại lộ, đường lớn"
+355,大隊,dàduì,N,đại đội,"đội quân lớn, nhóm lớn"
+356,大使,dàshĭ,N,đại sứ,"đại sứ, người đại diện chính thức"
+357,大選,dàxuăn,N,đại tuyển,"bầu cử lớn, cuộc bầu cử"
+358,大洋洲,dàyángzhōu,N,đại dương châu,châu Đại Dương
+359,呆,dāi,Vs,đái,"ngớ ngẩn, lờ đờ, mù quáng"
+360,歹徒,dăitú,N,đái đồ,"tội phạm, kẻ cướp, kẻ xấu"
+361,逮捕,dăibŭ,V,đái bắt,"bắt giữ, bắt khẩn cấp"
+362,代課,dàikè,V-sep,đại khóa,"dạy thay, dạy thay thế"
+363,怠慢,dàimàn,Vst,đãi mạn,"lơ là, không chú ý, phớt lờ"
+364,擔,dān,V,đảm,"gánh vác, chịu trách nhiệm"
+365,擔當,dāndāng,V,đảm đương,"đảm nhận, gánh vác trách nhiệm"
+366,擔負,dānfù,V,đảm phụ,"gánh vác, chịu trách nhiệm"
+367,單獨,dāndú,Adv,đơn độc,"một mình, riêng biệt"
+368,單價,dānjià,N,đơn giá,"giá mỗi đơn vị, giá bán lẻ"
+369,單據,dānjù,N,đơn cước,"hóa đơn, biên lai"
+370,單親,dānqīn,Vs-attr,đơn thân,"cha mẹ đơn thân, gia đình đơn thân"
+371,單行道,dānxíngdào,N,đơn hành đạo,đường một chiều
+372,膽,dăn,N,đảm,"can đảm, dũng cảm"
+373,膽固醇,dăngùchún,N,đảm cố trùng,cholesterol
+374,但,dàn,Adv,nhưng,"nhưng, tuy nhiên"
+375,淡季,dànjì,N,đạm quý,"mùa thấp điểm, mùa ít khách"
+376,淡水,dànshuĭ,N,đạm thủy,nước ngọt
+377,刀,dāo,M,đao,"dao, kiếm"
+378,導師,dăoshī,N,đạo sư,"thầy giáo, người hướng dẫn"
+379,導致,dăozhì,Vst,đạo chí,"gây ra, dẫn đến"
+380,島嶼,dăoyŭ,N,đảo tự,"hòn đảo, vùng đảo"
+381,道,dào,Vi,Đạo,Món (ăn)
+382,道別,dàobié,Vi,đạo biệt,"chia tay, tạm biệt"
+383,道地,dàodì,Vs,đạo địa,"chính thống, đúng đắn"
+384,道士,dàoshì,N,đạo sỹ,"thầy tu, người học đạo, thầy pháp"
+385,道義,dàoyì,N,đạo nghĩa,"đạo đức, lý lẽ"
+386,到頭來,dàotóulái,Adv,đến đầu lai,"rốt cuộc, cuối cùng"
+387,倒數,dàoshŭ,Vi,đảo số,đếm ngược
+388,當,dāng,Det,Đương,"Khi, đang"
+389,當兵,dāngbīng,V-sep,đương binh,"làm lính, phục vụ trong quân đội"
+390,當代,dāngdài,N,đương đại,"hiện đại, thời đại hiện nay"
+391,當局,dāngjú,N,đương cục,"chính quyền, nhà cầm quyền"
+392,當前,dāngqián,N,đương tiền,"hiện tại, trước mắt"
+393,當心,dāngxīn,Vs,đương tâm,"cẩn thận, chú ý"
+394,黨派,dăngpài,N,đảng phái,"các nhóm, đảng phái chính trị"
+395,黨員,dăngyuán,N,đảng viên,thành viên đảng
+396,得以,déyĭ,Adv,đắc dĩ,"có thể, có khả năng"
+397,登場,dēngchăng,Vi,đăng trường,"xuất hiện, ra sân khấu"
+398,登陸,dēnglù,Vi,đăng lục,"đổ bộ, lên bờ"
+399,燈火,dēnghuŏ,N,đăng hỏa,"ánh sáng đèn, đèn chiếu sáng"
+400,燈籠,dēnglóng,N,đăng lồng,đèn lồng
+401,等候,děnghòu,Vst,đẳng hậu,"chờ đợi, chờ đón"
+402,等價,děngjià,Vs,đẳng giá,giá trị ngang nhau
+403,瞪,dèng,V,đẳng,"trừng mắt, nhìn chằm chằm"
+404,嘀咕,dígū,Vi,đế câu,"lầm bầm, nói thì thầm"
+405,底片,dĭpiàn,N,đế phiến,"phim nền, phim chưa rửa"
+406,抵押,dĭyā,V,đế áp,"thế chấp, cầm cố"
+407,抵制,dĭzhì,V,đế chế,"chống lại, phản đối"
+408,地表,dìbiăo,N,địa bề,bề mặt trái đất
+409,地步,dìbù,N,địa bước,"tình huống, hoàn cảnh"
+410,地勢,dìshì,N,địa thế,"địa hình, địa hình đất đai"
+411,地域,dìyù,N,địa vực,"khu vực, phạm vi địa lý"
+412,地獄,dìyù,N,địa ngục,"địa ngục, thế giới sau khi chết"
+413,地質,dìzhí,N,địa chất,"khoa học đất, địa chất học"
+414,地主,dìzhŭ,N,địa chủ,"chủ đất, chủ sở hữu đất đai"
+415,締結,dìjié,V,đế kết,"ký kết, thành lập"
+416,締造,dìzào,V,đế tạo,"tạo dựng, thành lập"
+417,弟兄,dìxiōng,N,đệ huynh,"anh em trai, huynh đệ"
+418,顛覆,diānfù,V,điên phục,"lật đổ, đảo ngược"
+419,典雅,diănyă,Vs,điển nhã,"thanh lịch, tao nhã"
+420,點子,diănzi,N,điểm tử,"ý tưởng, sáng kiến"
+421,奠定,diàndìng,Vpt,điện định,"đặt nền móng, xác định"
+422,惦記,diànjì,Vst,điện ký,"nhớ, nghĩ tới"
+423,電工,diàngōng,N,điện công,thợ điện
+424,電力,diànlì,N,điện lực,năng lượng điện
+425,電流,diànliú,N,điện lưu,dòng điện
+426,電壓,diànyā,N,điện áp,điện áp
+427,凋零,diāolíng,Vs,điêu linh,"héo úa, tàn lụi"
+428,調,diào,V,điều,"điều chỉnh, điều tra"
+429,調查,diàochá,N,điều tra,"điều tra, khảo sát"
+430,調度,diàodù,Vi,điều độ,"điều phối, sắp xếp"
+431,吊橋,diàoqiáo,N,điểu kiều,cầu treo
+432,疊,dié,V,điệp,"xếp chồng, chồng lên nhau"
+433,頂,dĭng,Adv / V,đỉnh,"đỉnh, đầu"
+434,定額,dìngé,N,định ngạch,mức cố định
+435,定義,dìngyì,N,định nghĩa,"xác định, giải thích nghĩa"
+436,釘,dìng,V,đinh,"đinh tán, đóng đinh"
+437,丟棄,diūqì,V,tiêu khí,"bỏ đi, vứt bỏ"
+438,凍結,dòngjié,V,đông kết,"đông lạnh, đóng băng"
+439,洞穴,dòngxuè,N,động huyệt,hang động
+440,動產,dòngchăn,N,động sản,tài sản di động
+441,動機,dòngjī,N,động cơ,"lý do, động lực"
+442,動靜,dòngjìng,N,động tĩnh,"sự thay đổi, động thái"
+443,動力,dònglì,N,động lực,"sức mạnh, động lực"
+444,動亂,dòngluàn,Vs,động loạn,"loạn lạc, xáo trộn"
+445,動脈,dòngmài,N,động mạch,"động mạch, mạch máu lớn"
+446,動態,dòngtài,N,động thái,trạng thái thay đổi
+447,動向,dòngxiàng,N,động hướng,xu hướng phát triển
+448,動員,dòngyuán,V,động viên,"huy động, tập hợp lực lượng"
+449,抖,dŏu,V,đẩu,"run, giật, làm rung"
+450,陡,dŏu,Vs,đẩu,"dốc, nghiêng, dốc đứng"
+451,逗留,dòuliú,Vi,đậu lưu,"tạm trú, lưu lại một thời gian"
+452,鬥志,dòuzhì,N,đấu chí,"tinh thần chiến đấu, quyết tâm"
+453,督促,dūcù,V,đốc thúc,"thúc giục, giám sát"
+454,獨創,dúchuàng,V,độc sáng,sáng tạo độc đáo
+455,獨到,dúdào,Vs,độc đáo,"có phương pháp đặc biệt, có tầm nhìn riêng biệt"
+456,獨占/獨佔,dúzhàn,V,độc chiếm,chiếm độc quyền
+457,讀物,dúwù,N,đọc vật,"sách báo, tài liệu để đọc"
+458,堵,dŭ,V,堵,"chặn, tắc nghẽn"
+459,堵塞,dŭsè,Vst,堵塞,"tắc nghẽn, bế tắc"
+460,賭博,dŭbó,Vi,đổ bạc,"đánh bạc, cờ bạc"
+461,賭場,dŭchăng,N,đổ trường,"sòng bạc, casino"
+462,渡,dù,V,độ,"vượt qua, qua sông, biển"
+463,度量衡,dùliànghéng,N,độ lượng,"hệ thống đo lường, các đơn vị đo lường"
+464,端正,duānzhèng,Vs,đoan chính,"ngay ngắn, nghiêm chỉnh"
+465,短缺,duănquē,Vs,đoản thiếu,"thiếu hụt, khan hiếm"
+466,短暫,duănzhàn,Vs,đoản tạm,"ngắn ngủi, tạm thời"
+467,斷絕,duànjué,V,đoạn tuyệt,"cắt đứt, chấm dứt"
+468,堆積,duījī,V,đùi tích,"chất đống, tích tụ lại"
+469,隊伍,duìwŭ,N,đội ngũ,"đội nhóm, nhóm người"
+470,兌現,duìxiàn,V,huệ hiện,"thực hiện, đổi thành tiền mặt"
+471,對比,duìbĭ,N,đối tỷ,"so sánh, đối chiếu"
+472,對照,duìzhào,Vst,đối chiếu,"so sánh, đối chiếu"
+473,對峙,duìzhì,Vs,đối chướng,"đối đầu, đối kháng"
+474,頓,dùn,Adv / Vi,đốn,"bữa ăn, ngừng lại"
+475,頓時,dùnshí,Adv,đốn thời,"ngay lập tức, trong chớp mắt"
+476,多寡,duōguă,N,đa qua,"nhiều hay ít, số lượng"
+477,多虧,duōkuī,Adv,đa suy,"may mắn nhờ vào, nhờ vào sự giúp đỡ"
+478,多媒體,duōméitĭ,N,đa truyền thông,"đa phương tiện, truyền thông đa dạng"
+479,多元,duōyuán,Vs,đa nguyên,"đa dạng, đa chiều"
+480,奪魁,duókuí,Vp,đoạt quầy,"chiến thắng, giành vị trí đầu tiên"
+481,躲避,duŏbì,V,đới tị,"trốn tránh, né tránh"
+482,墮胎,duòtāi,V-sep,đọa thai,"phá thai, nạo thai"
+483,額外,éwài,Vs-attr,ngạch ngoại,"thêm vào, ngoài ra"
+484,惡,è,Vs-attr,ác,"xấu, ác ý, độc ác"
+485,惡化,èhuà,Vp,ác hóa,"trở nên tồi tệ hơn, xấu đi"
+486,惡性,èxìng,Vs-attr,ác tính,"tính ác, tính xấu"
+487,惡意,èyì,N,ác ý,"ý đồ xấu, ý đồ ác"
+488,恩愛,ēnài,Vs,ân ái,"tình yêu, tình cảm vợ chồng"
+489,恩情,ēnqíng,N,ân tình,"lòng tốt, sự giúp đỡ"
+490,恩人,ēnrén,N,ân nhân,người đã giúp đỡ mình
+491,恩怨,ēnyuàn,N,ân oán,ân tình và thù oán
+492,而是,érshì,Conj,nhi sỹ,"mà là, chính là"
+493,而言,éryán,,nhi ngôn,"nói về, xét về"
+494,兒女,érnǚ,N,nhi nữ,"con cái, con trai con gái"
+495,耳光,ěrguāng,N,nhĩ quang,cái tát vào mặt
+496,發,fā,M,phát,"phát ra, xuất ra"
+497,發電,fādiàn,Vi,phát điện,phát ra điện năng
+498,發瘋,fāfēng,Vp,phát cuồng,"trở nên điên loạn, mất trí"
+499,發掘,fājué,V,phát quật,"khai quật, khám phá"
+500,發誓,fāshì,V-sep,phát thệ,"thề, tuyên thệ"
+501,發育,fāyù,Vs,phát dục,"phát triển, trưởng thành"
+502,發作,fāzuò,Vp,phát tác,"bộc phát, lên cơn (bệnh)"
+503,法定,fădìng,Vs-attr,pháp định,"hợp pháp, theo luật định"
+504,法官,făguān,N,pháp quan,"thẩm phán, quan tòa"
+505,法令,fălìng,N,pháp lệnh,"điều lệ, nghị định pháp lý"
+506,法人,fărén,N,pháp nhân,"tổ chức, cá nhân theo luật pháp"
+507,法則,făzé,N,pháp tắc,"nguyên tắc, quy luật"
+508,法制,făzhì,N,pháp chế,hệ thống pháp lý
+509,法治,făzhì,N,pháp trị,"pháp trị, chế độ pháp trị"
+510,翻臉,fānliăn,Vp,phiên diện,"thay đổi thái độ, nổi giận"
+511,翻身,fānshēn,V-sep,phiên thân,"thay đổi, thoát khỏi tình trạng xấu"
+512,翻新,fānxīn,V,phiên tân,"đổi mới, cải cách"
+513,繁多,fánduō,Vs,phồn đa,"rất nhiều, đa dạng"
+514,繁體,fántĭ,N,phồn thể,chữ viết phồn thể
+515,藩籬,fánlí,N,phường li,"hàng rào, vật cản"
+516,凡/凡是,fán/fánshì,Conj,phàm/phàm thị,"tất cả, mọi thứ"
+517,返,făn,V,phản,"quay lại, trở về"
+518,反擊,fănjí,V,phản kích,"phản công, đánh trả"
+519,反射,fănshè,Vi,phản xạ,"sự phản chiếu, phản hồi"
+520,反省,fănxĭng,Vi,phản tỉnh,"tự suy ngẫm, kiểm điểm"
+521,反之,fănzhī,Conj,phản chiếu,"trái lại, ngược lại"
+522,犯規,fànguī,V-sep,phạm quy,vi phạm quy định
+523,販毒,fàndú,Vi,phạm độc,buôn bán ma túy
+524,販賣,fànmài,V,phạm mãi,"bán, giao dịch"
+525,方位,fāngwèi,N,phương vị,"hướng, phương hướng"
+526,方向盤,fāngxiàngpán,N,phương hướng bàn,"vô lăng, tay lái"
+527,方針,fāngzhēn,N,phương châm,"phương hướng, chiến lược"
+528,方正,fāngzhèng,Vs,phương chính,"ngay thẳng, chỉnh tề"
+529,妨礙,fángài,V,phương hại,"gây trở ngại, cản trở"
+530,防備,fángbèi,V,phòng bị,"bảo vệ, phòng thủ"
+531,防範,fángfàn,V,phòng phạm,"phòng ngừa, bảo vệ"
+532,防水,fángshuĭ,Vs,phòng thủy,chống nước
+533,防衛,fángwèi,V,phòng vệ,"tự vệ, bảo vệ"
+534,防禦,fángyù,V,phòng ngự,"bảo vệ, phòng thủ"
+535,防治,fángzhì,V,phòng trị,phòng ngừa và điều trị
+536,仿冒,făngmào,V,phỏng mạo,"làm giả, bắt chước"
+537,仿造,făngzào,V,phỏng tạo,"làm giả, sao chép"
+538,紡織,făngzhī,Vi,phóng trí,"dệt vải, công nghiệp dệt"
+539,放蕩,fàngdàng,Vs,phóng đãng,"phóng túng, buông thả"
+540,放寬,fàngkuān,V,phóng khoan,"nới lỏng, thư giãn"
+541,放款,fàngkuăn,Vi,phóng khoán,cho vay tiền
+542,放任,fàngrèn,Vst,phóng nhiệm,"để mặc, bỏ qua"
+543,放映,fàngyìng,V,phóng ánh,chiếu phim
+544,放逐,fàngzhú,Vi,phóng trục,"đuổi đi, xua đuổi"
+545,非凡,fēifán,Vs,phi phàm,"xuất sắc, phi thường"
+546,飛彈,fēidàn,N,phi đạn,"tên lửa, đạn bay"
+547,飛快,fēikuài,Adv,phi khoái,"cực nhanh, bay vọt"
+548,飛翔,fēixiáng,Vi,phi tường,"bay lượn, vỗ cánh bay"
+549,飛行,fēixíng,Vi,phi hành,"bay, sự bay"
+550,肥料,féiliào,N,phì liệu,phân bón
+551,廢,fèi,V,phế,"bỏ đi, loại bỏ"
+552,廢除,fèichú,V,phế trừ,"bãi bỏ, hủy bỏ"
+553,廢棄,fèiqì,V,phế khí,"bỏ đi, vứt bỏ"
+554,廢墟,fèixū,N,phế huy,"đống đổ nát, phế tích"
+555,廢止,fèizhĭ,V,phế chỉ,"dừng lại, bãi bỏ"
+556,費力,fèilì,Vs,phí lực,"tốn công sức, mất sức"
+557,沸騰,fèiténg,Vp,phí đằng,"sôi sục, bùng lên"
+558,肺炎,fèiyán,N,phổi yên,viêm phổi
+559,分貝,fēnbèi,M,phân bội,"đơn vị đo âm thanh, decibel"
+560,分辨,fēnbiàn,V,phân biệt,"phân biệt, phân loại"
+561,分寸,fēncùn,N,phân xuân,"chừng mực, khuôn khổ"
+562,分擔,fēndān,V,phân đảm,"chia sẻ, gánh vác"
+563,分發,fēnfā,Vi,phân phát,"phát tán, phân phối"
+564,分割,fēngē,V,phân cắt,"chia cắt, phân chia"
+565,分化,fēnhuà,Vpt,phân hóa,"phân chia, sự phân hóa"
+566,分級,fēnjí,V-sep,phân cấp,"phân loại, phân cấp"
+567,分家,fēnjiā,V-sep,phân gia,chia gia tài
+568,分解,fēnjiě,V,phân giải,"phân tích, giải quyết"
+569,分離,fēnlí,Vs,phân ly,"chia ra, phân tách"
+570,分裂,fēnliè,Vp,phân liệt,"phân rã, tách rời"
+571,分泌,fēnmì,V,phân bí,"tiết ra (mồ hôi, nước mắt, etc.)"
+572,分子,fēnzĭ,N,phân tử,"phân tử, thành phần cơ bản"
+573,墳墓/墳/墓,fénmù/fén/mù,N,phần mộ,"mộ, nơi chôn cất"
+574,粉刷,fěnshuā,V,phân sáp,"quét vôi, tô sơn"
+575,分量,fènliàng,N,phân lượng,"số lượng, trọng lượng"
+576,糞,fèn,N,phân,"phân, phân bón"
+577,封閉,fēngbì,Vs,phong bế,"đóng lại, phong tỏa"
+578,封鎖,fēngsuŏ,V,phong tỏa,"chặn, cấm, bao vây"
+579,封條,fēngtiáo,N,phong điều,dấu niêm phong
+580,風暴,fēngbào,N,phong bão,"bão, cơn bão lớn"
+581,風潮,fēngcháo,N,phong trào,"làn sóng, xu hướng"
+582,風光,fēngguāng,N / Vs,phong quang,"cảnh quan, phong cảnh"
+583,風化,fēnghuà,Vp,phong hóa,"phong hóa, mài mòn do thời gian"
+584,風力,fēnglì,N,phong lực,"lực gió, sức gió"
+585,風尚,fēngshàng,N,phong thượng,"xu hướng, tập quán"
+586,風水,fēngshuĭ,N,phong thủy,"phong thủy, tác động của môi trường"
+587,風行,fēngxíng,Vs,phong hành,"lan truyền, lưu hành"
+588,鋒面,fēngmiàn,N,phong diện,"mặt sắc, mặt cạnh sắc nhọn"
+589,豐盛,fēngshèng,Vs,phong thịnh,"phong phú, thịnh soạn"
+590,豐收,fēngshōu,Vs,phong thu hoạch,mùa màng bội thu
+591,縫,fèng,N,phùng,"đường chỉ, khe hở"
+592,奉獻,fèngxiàn,V,phụng hiến,"cống hiến, đóng góp"
+593,奉養,fèngyàng,V,phụng dưỡng,"nuôi dưỡng, chăm sóc"
+594,佛經,fójīng,N,phật kinh,kinh sách của Phật giáo
+595,佛像,fóxiàng,N,phật tượng,tượng Phật
+596,否決,fŏujué,V,phủ quyết,"bác bỏ, từ chối (đề nghị, luật)"
+597,膚淺,fūqiăn,Vs,phu thiển,"nông cạn, thiếu chiều sâu"
+598,敷衍,fūyăn,V,phu diễn,"hời hợt, không chuyên tâm"
+599,俘虜,fúlŭ,N / V,phù lưu,"tù binh, người bị bắt"
+600,浮動,fúdòng,Vi,phù động,"dao động, thay đổi"
+601,服從,fúcóng,V,phục tòng,"tuân theo, nghe theo"
+602,服飾,fúshì,N,phục sức,trang phục
+603,服務,fúwù,N,Phục vụ,"Phục vụ, dịch vụ"
+604,服刑,fúxíng,V-sep,phục hình,"thi hành án, chịu án"
+605,幅度,fúdù,N,phúc độ,"độ rộng, phạm vi"
+606,福氣,fúqì,N,phúc khí,"phúc, may mắn"
+607,輻射,fúshè,N,phúc xạ,"bức xạ, tia phóng xạ"
+608,斧頭/斧,fŭtou/fŭ,N,phủ đầu,cái rìu
+609,撫養,fŭyăng,V,phụ dưỡng,"nuôi dưỡng, chăm sóc (con cái)"
+610,撫育,fŭyù,V,phụ dục,"nuôi nấng, dạy dỗ"
+611,腐爛,fŭlàn,Vp,hủ lạn,"thối rữa, phân hủy"
+612,腐蝕,fŭshí,Vst,hủ thiêu,"ăn mòn, xói mòn"
+613,腐朽,fŭxiŭ,Vp,hủ hủ,"mục nát, hư hỏng"
+614,付款,fùkuăn,V-sep,phó khoán,"thanh toán, trả tiền"
+615,負,fù,Vst,phủ,"gánh vác, mang, chịu trách nhiệm"
+616,負面,fùmiàn,N,phủ diện,"tiêu cực, mặt trái"
+617,富貴,fùguì,N,phú quý,"giàu có, phú vinh"
+618,富有,fùyŏu,Vst,phú hữu,"giàu có, sở hữu"
+619,婦人,fùrén,N,phụ nhân,"phụ nữ, vợ"
+620,附上,fùshàng,Vpt,phụ thượng,"đính kèm, gắn thêm"
+621,復甦,fùsū,Vp,phục sinh,"phục hồi, sống lại"
+622,復原,fùyuán,Vp,phục nguyên,"phục hồi, hồi phục"
+623,賦予,fùyŭ,V,phụ dự,"ban tặng, trao cho"
+624,該死,gāisĭ,Vs,cai tử,"đáng chết, đáng bị trừng phạt"
+625,改編,găibiān,V,cải biên,"chỉnh sửa, thay đổi (kịch bản, tác phẩm)"
+626,改觀,găiguān,Vp,cải quan,"thay đổi diện mạo, hình thức"
+627,改良,găiliáng,V,cải lương,"cải tiến, cải thiện"
+628,改選,găixuăn,V,cải tuyển,"bầu lại, chọn lại"
+629,鈣,gài,N,canxi,"canxi, một nguyên tố hóa học"
+630,概,gài,Adv,khái,"khái quát, tóm tắt"
+631,概括,gàiguā,Vst,khái quát,"tổng hợp, tóm lược"
+632,概況,gàikuàng,N,khái huống,"tình hình, trạng thái chung"
+633,蓋章,gàizhāng,V-sep,cái chương,"đóng dấu, niêm phong"
+634,尷尬,gāngà,Vs,gian ngáo,"lúng túng, xấu hổ"
+635,干擾,gānrăo,V,can nhiễu,"làm gián đoạn, quấy rối"
+636,干涉,gānshè,V,can thiệp,"can thiệp, sự tham gia vào vấn đề của người khác"
+637,乾燥,gānzào,Vs,can táo,"khô, khô ráo, không có độ ẩm"
+638,感觸,gănchù,N,cảm xúc,"cảm nhận, xúc động"
+639,感性,gănxìng,Vs,cảm tính,"nhạy cảm, có khả năng cảm nhận được những điều tinh tế"
+640,趕忙,gănmáng,Adv,khẩn vội,"vội vã, hối hả"
+641,綱領,gānglĭng,N,cương lĩnh,"phương châm, định hướng chính"
+642,剛強,gāngqiáng,Vs,cương cường,"mạnh mẽ, kiên cường"
+643,鋼鐵,gāngtiě,N,gang thiết,"thép, kim loại"
+644,崗位,găngwèi,N,cương vị,"vị trí công tác, công việc"
+645,高見,gāojiàn,N,cao kiến,"sự sáng suốt, tầm nhìn xa"
+646,高壓,gāoyā,N,cao áp,áp lực cao
+647,告別,gàobié,V,cáo biệt,"từ biệt, chia tay"
+648,告狀,gàozhuàng,V-sep,cáo trạng,"tố cáo, báo cáo sai phạm"
+649,胳膊,gēbó,N,cái cánh tay,tay
+650,歌頌,gēsòng,V,ca tán,"ca ngợi, tán thưởng"
+651,疙瘩,gēda,N,cái u,"cục u, khối u"
+652,鴿(子),gē(zi),N,cáp tử,chim bồ câu
+653,隔閡,géhé,N,cách hách,"sự cách biệt, khoảng cách"
+654,隔天,gétiān,N,cách thiên,"ngày hôm sau, ngày kế tiếp"
+655,格局,géjú,N,cách cục,"khuôn khổ, cấu trúc"
+656,格式,géshì,N,cách thức,"hình thức, định dạng"
+657,格外,géwài,Adv,cách ngoại,"đặc biệt, ngoài dự tính"
+658,革新,géxīn,V,cách tân,"cải cách, đổi mới"
+659,各界,gèjiè,N,các giới,"các lĩnh vực, các ngành"
+660,個數,gèshù,N,cá số,"số lượng, số đơn vị"
+661,個體,gètĭ,N,cá thể,"cá nhân, đơn vị riêng lẻ"
+662,給予,gěiyŭ,V,cấp dự,"trao cho, cấp cho"
+663,跟進,gēnjìn,Vi,cam tiến,"theo dõi, tiếp tục thực hiện"
+664,跟前,gēnqián,N,cam tiền,"phía trước, ngay trước"
+665,根源,gēnyuán,N,căn nguyên,"nguồn gốc, nguồn cội"
+666,耕地,gēngdì,N,canh đất,"đất trồng trọt, canh tác"
+667,更動,gēngdòng,V,canh động,"thay đổi, điều chỉnh"
+668,弓,gōng,N,cung,cung tên
+669,工地,gōngdì,N,công địa,công trường
+670,工讀,gōngdú,Vi,công đọc,"công việc học, công việc làm thêm"
+671,工藝品,gōngyìpĭn,N,công nghệ phẩm,sản phẩm thủ công
+672,公安,gōngān,N,công an,lực lượng cảnh sát
+673,公費,gōngfèi,N,công phí,"chi phí công cộng, công quỹ"
+674,公會,gōnghuì,N,công hội,"hiệp hội, tổ chức công"
+675,公民,gōngmín,N,công dân,"người dân, công dân"
+676,公認,gōngrèn,V,công nhận,"công nhận, thừa nhận"
+677,公事,gōngshì,N,công sự,"công việc của chính phủ, công vụ"
+678,公文,gōngwén,N,công văn,tài liệu hành chính
+679,公務,gōngwù,N,công vụ,công việc hành chính
+680,公務員,gōngwùyuán,N,công vụ viên,nhân viên công chức
+681,公益,gōngyì,N,công ích,lợi ích công cộng
+682,公債,gōngzhài,N,công trái,trái phiếu của chính phủ
+683,功勞,gōngláo,N,công lao,"công lao, thành tích"
+684,功利,gōnglì,Vs,công lợi,"tính lợi ích, ích lợi"
+685,攻,gōng,V,công,tấn công
+686,攻讀,gōngdú,V,công đọc,"học tập, nghiên cứu"
+687,攻擊,gōngjí,V,công kích,"tấn công, chỉ trích"
+688,供給,gōnjĭ,V,cung cấp,"cung cấp, tiếp tế"
+689,宮殿,gōngdiàn,N,cung điện,"cung điện, lâu đài"
+690,恭敬,gōngjìng,Vs,cung kính,"tôn kính, cung kính"
+691,恭維,gōngwéi,V,cung vĩ,"khen ngợi, tán dương"
+692,鞏固,gŏnggù,Vs,củng cố,"làm vững chắc, củng cố"
+693,共產,gòngchăn,Vs-attr,cộng sản,chủ nghĩa cộng sản
+694,共和國,gònghéguó,N,cộng hòa quốc,quốc gia cộng hòa
+695,共鳴,gòngmíng,N,cộng minh,"sự đồng cảm, sự cộng hưởng"
+696,供養,gòngyàng,V,cung dưỡng,"nuôi dưỡng, chăm sóc"
+697,勾結,gōujié,V,câu kết,"thông đồng, hợp tác phi pháp"
+698,溝,gōu,N,câu,"kênh, mương, rãnh"
+699,購,gòu,V,câu,"mua sắm, mua vào"
+700,構想,gòuxiăng,N,cấu tưởng,"ý tưởng, kế hoạch"
+701,孤獨,gūdú,Vs,cô độc,"cô đơn, biệt lập"
+702,孤兒,gūér,N,cô nhi,trẻ mồ côi
+703,孤立,gūlì,Vs,cô lập,"cô lập, tách biệt"
+704,辜負,gūfù,Vst,cu phụ,"làm thất vọng, phụ lòng"
+705,估價,gūjià,V-sep,ước giá,"đánh giá, định giá"
+706,古怪,gŭguài,Vs,cổ quái,"kỳ quặc, lạ lùng"
+707,古籍,gŭjí,N,cổ tịch,"sách cổ, tài liệu cổ"
+708,古物,gŭwù,N,cổ vật,"vật phẩm cổ, di tích"
+709,股,gŭ,M,cổ,cổ phiếu
+710,股市,gŭshì,N,cổ thị,thị trường chứng khoán
+711,鼓吹,gŭchuī,V,cổ xúy,"tuyên truyền, khích lệ"
+712,鼓動,gŭdòng,V,cổ động,"khích động, kích động"
+713,故,gù,Conj,cố,"cũ, trước đây"
+714,雇/僱,gù,V,cống,"thuê mướn, thuê lao động"
+715,雇用/僱用,gùyòng,V,cống dụng,"thuê mướn, tuyển dụng"
+716,固然,gùrán,Conj,cố nhiên,"đương nhiên, hiển nhiên"
+717,固體,gùtĭ,N,cố thể,"thể rắn, vật chất rắn"
+718,固有,gùyŏu,Vs-attr,cố hữu,"vốn có, sẵn có"
+719,固執,gùzhí,Vs,cố chấp,"cứng đầu, kiên quyết"
+720,顧全,gùquán,V,cố toàn,"lo lắng cho tất cả, chu đáo"
+721,蝸牛,guāniú,N,qua lâu,con ốc sên
+722,寡婦,guăfù,N,quả phụ,góa phụ
+723,拐,guăi,V,quải,"bắt cóc, lừa đảo"
+724,官,guān,N,quan,quan chức
+725,官司,guānsī,N,quan sự,"vụ kiện tụng, tranh chấp pháp lý"
+726,棺材/棺,guāncái/guān,N,quan tài,"quan tài, hòm đựng xác"
+727,觀,guàn,V,quan,"quan sát, nhìn"
+728,觀測,guāncè,V,quan trắc,"đo đạc, quan sát kỹ lưỡng"
+729,觀感,guāngăn,N,quan cảm,"cảm nhận, ấn tượng"
+730,觀看,guānkàn,V,quan khán,"xem, quan sát"
+731,觀摩,guānmó,V,quan ma,quan sát và học hỏi
+732,觀望,guānwàng,Vi,quan vọng,"theo dõi, đợi chờ"
+733,關稅,guānshuì,N,quan thuế,thuế quan
+734,關切,guānqiè,Vst,quan thiết,"quan tâm, chăm sóc"
+735,關懷,guānhuái,Vst,quan hoài,"quan tâm, chăm sóc"
+736,關頭,guāntóu,N,quan đầu,"lúc quan trọng, giai đoạn quyết định"
+737,關係,guānxì,Vst,Quan hệ,Quan hệ
+738,關照,guānzhào,Vst,quan chiếu,"chăm sóc, quan tâm"
+739,管教,guănjiào,V,quản giáo,"giáo dục, huấn luyện"
+740,管理,guănlĭ,N,Quản lý,Quản lý
+741,管線,guănxiàn,N,quản tuyến,"tuyến đường, đường ống"
+742,管(子),guăn(zi),N,quản,"ống, cái quản"
+743,貫徹,guànchè,Vst,quán triệt,"thực hiện, thi hành nghiêm túc"
+744,灌,guàn,V,quán,"tưới, làm đầy"
+745,灌溉,guàngài,V,quán cái,"tưới tiêu, cấp nước"
+746,灌輸,guànshū,V,quán thâu,"truyền đạt, truyền vào"
+747,光顧,guānggù,V,quang cố,"thăm hỏi, thăm viếng"
+748,光滑,guānghuá,Vs,quang hoạt,"mịn màng, trơn bóng"
+749,光輝,guānghuī,N,quang huy,"ánh sáng, sự rực rỡ"
+750,光芒,guāngmáng,N,quang mang,"ánh sáng mạnh, tia sáng"
+751,規範,guīfàn,N,quy phạm,"quy tắc, tiêu chuẩn"
+752,規格,guīgé,N,quy cách,"tiêu chuẩn, quy định"
+753,規矩,guījŭ,Vs,quy củ,"quy tắc, nề nếp"
+754,歸,guī,V / Vst,quy,"về, trở lại"
+755,歸還,guīhuán,V,quy hoàn,"trả lại, hoàn trả"
+756,歸納,guīnà,V,quy nạp,"tổng hợp, kết luận"
+757,軌道,guĭdào,N,quỹ đạo,"đường ray, quỹ đạo"
+758,鬼怪,guĭguài,N,quỷ quái,"ma quái, yêu quái"
+759,貴,guì,Det,Quý,Đắt
+760,貴賓,guìbīn,N,quý nhân,"khách quý, khách mời"
+761,棍(子),gùn(zi),N,quật tử,"cây gậy, que gậy"
+762,國產,guóchăn,Vs-attr,quốc sản,sản xuất trong nước
+763,國防,guófáng,N,quốc phòng,phòng thủ quốc gia
+764,國境,guójìng,N,quốc cảnh,biên giới quốc gia
+765,國君,guójūn,N,quốc quân,"vua, lãnh đạo đất nước"
+766,國民,guómín,N,quốc dân,"công dân, người dân của quốc gia"
+767,國營,guóyíng,Vs-attr,quốc doanh,doanh nghiệp nhà nước
+768,果斷,guŏduàn,Vs,quả quyết,"quyết đoán, dứt khoát"
+769,果實,guŏshí,N,quả thực,"kết quả, thành quả"
+770,果樹,guŏshù,N,quả thụ,cây ăn quả
+771,果真,guŏzhēn,Adv,quả thật,"thật sự, quả thật"
+772,過關,guòguān,V-sep,quá quan,vượt qua thử thách
+773,過量,guòliàng,Vs,quá lượng,vượt quá số lượng
+774,過目,guòmù,Vi,quá mục,"xem qua, duyệt qua"
+775,過人,guòrén,Vs,quá người,"xuất sắc, vượt trội"
+776,過失,guòshī,N,quá thất,"sai sót, lỗi lầm"
+777,過癮,guòyĭn,Vs,quá hứng,"thỏa mãn, tận hưởng"
+778,過重,guòzhòng,Vs,quá trọng,quá nặng
+779,海拔,hăibá,N,hải bá,độ cao so với mực nước biển
+780,海面,hăimiàn,N,hải diện,mặt biển
+781,海嘯,hăixiào,N,hải triều,sóng thần
+782,海運,hăiyùn,N,hải vận,vận chuyển biển
+783,害蟲,hàichóng,N,hại trùng,côn trùng gây hại
+784,行號,hánghào,N,hành hiệu,"công ty, doanh nghiệp"
+785,行列,hángliè,N,hành liệt,"hàng ngũ, đội ngũ"
+786,航空信,hángkōngxìn,N,hàng không tín,thư hàng không
+787,航行,hángxíng,Vi,hàng hành,di chuyển bằng đường hàng không
+788,毫不,háobù,Adv,hào bất,"không chút nào, không hề"
+789,好比,hăobĭ,Vst,hảo tỷ,"ví như, giống như"
+790,好手,hăoshŏu,N,hảo thủ,"tay giỏi, người tài giỏi"
+791,好受,hăoshòu,Vs,hảo thụ,"dễ chịu, thoải mái"
+792,號,hào,Vst,Hiệu,Số
+793,號子/證券行,hàozi /zhèngquànháng,N,hiệu tử/chứng khoán,sàn giao dịch chứng khoán
+794,合併,hébìng,V,hợp nhất,"kết hợp, sáp nhập"
+795,合同,hétóng,N,hợp đồng,hợp đồng
+796,合意,héyì,Vs,hợp ý,"đồng ý, thỏa thuận"
+797,何,hé,Det,hà,"gì, nào"
+798,何在,hézài,Vs,hà tại,"ở đâu, ở chỗ nào"
+799,和解,héjiě,Vi,hòa giải,giải quyết mâu thuẫn
+800,和睦,hémù,Vs,hòa mục,"hòa thuận, hòa hợp"
+801,和諧,héxié,Vs,hòa hài,"hài hòa, hòa thuận"
+802,核定,hédìng,V,hạt định,"phê duyệt, xác định"
+803,核對,héduì,V,hạt đối,"đối chiếu, kiểm tra"
+804,核算,hésuàn,V,hạt toán,"tính toán, kiểm tra lại"
+805,核准,hézhŭn,V,hạt chuẩn,"phê chuẩn, duyệt qua"
+806,核子,hézĭ,N,hạt tử,hạt nhân
+807,黑名單,hēimíngdān,N,hắc danh đơn,danh sách đen
+808,黑社會,hēishèhuì,N,hắc xã hội,xã hội đen
+809,狠,hěn,Vs,hám,"tàn nhẫn, quyết liệt"
+810,狠心,hěnxīn,Vs,hám tâm,"lòng ác, tàn nhẫn"
+811,哼,hēng,Ptc / Vi,hưng,"kêu, thở dài"
+812,橫,héng,Vi,hoành,"ngang, ngang dọc"
+813,衡量,héngliáng,V,hành lượng,"đo lường, đánh giá"
+814,轟動,hōngdòng,Vs,hùng động,"gây sự chú ý lớn, làm xôn xao"
+815,轟轟烈烈,hōnghōnglièliè,Vs,hùng hùng liệt liệt,"dữ dội, mạnh mẽ"
+816,紅利,hónglì,N,hồng lợi,"tiền thưởng, lợi nhuận"
+817,紅燒,hóngshāo,V,hồng thiêu,món ăn nấu với nước sốt đậm đặc
+818,洪水,hóngshuĭ,N,hồng thủy,lũ lụt
+819,宏偉,hóngwěi,Vs,hồng vĩ,"vĩ đại, hoành tráng"
+820,哄,hŏng,V,hồng,"dỗ, vỗ về"
+821,後輩,hòubèi,N,hậu bối,"thế hệ sau, đàn em"
+822,候選人,hòuxuănrén,N,hậu tuyển nhân,ứng viên
+823,呼籲,hūyù,Vi,hô ứng,"kêu gọi, yêu cầu"
+824,壺,hú,M,hồ,"bình, lọ (dụng cụ chứa)"
+825,胡亂,húluàn,Adv,hồ loạn,"một cách vô lý, một cách lộn xộn"
+826,狐疑,húyí,Vs,hồ nghi,nghi ngờ
+827,戶口,hùkŏu,N,hộ khẩu,sổ hộ khẩu
+828,互補,hùbŭ,Vs,hỗ bổ,bổ sung cho nhau
+829,互惠,hùhuì,Vs,hỗ huệ,trao đổi có lợi cho nhau
+830,護,hù,V,hộ,bảo vệ
+831,花瓣,huābàn,N,hoa phiến,cánh hoa
+832,花朵,huāduŏ,N,hoa đoá,bông hoa
+833,花卉,huāhuì,N,hoa hòe,"loài hoa, cây hoa"
+834,花紋,huāwén,N,hoa văn,họa tiết hoa văn
+835,花樣,huāyàng,N,hoa dạng,"kiểu dáng, mẫu mã"
+836,划不來,huábùlái,Vs,hoạc bất lai,"không đáng làm, không có giá trị"
+837,划得來,huádelái,Vs,hoạc đắc lai,"có lợi, có giá trị"
+838,華裔,huáyì,N,Hoa diễu,người Hoa (người gốc Hoa sống ở nước ngoài)
+839,化工,huàgōng,N,hóa công,công nghiệp hóa học
+840,化石,huàshí,N,hóa thạch,"hóa thạch, hóa đá"
+841,話劇,huàjù,N,thoại kịch,kịch nói
+842,畫展,huàzhăn,N,họa triển,triển lãm tranh
+843,劃時代,huàshídài,Vs-attr,hoạch thời đại,có ảnh hưởng lớn đến cả thời đại
+844,懷,huái,Vst,hoài,"nhớ, tưởng nhớ"
+845,歡送,huānsòng,V,hoan tống,"tiễn biệt, chào tạm biệt"
+846,幻象,huànxiàng,N,hoang tưởng,"ảo giác, hoang tưởng"
+847,換取,huànqŭ,V,hoán thủ,"đổi lấy, trao đổi"
+848,患,huàn,Vst,hoạn,"gặp phải, mắc phải"
+849,患者,huànzhě,N,hoạn giả,bệnh nhân
+850,荒唐,huāngtáng,Vs,hoang đường,"hoang tưởng, vô lý"
+851,慌張,huāngzhāng,Vs,hoảng tràng,"hoang mang, vội vã"
+852,惶恐,huángkŏng,Vs,hoang khủng,"lo sợ, sợ hãi"
+853,恍惚,huănghū,Vs,hoảng hốt,"lơ mơ, mơ hồ"
+854,灰塵,huīchén,N,huyền trần,bụi bặm
+855,輝煌,huīhuáng,Vs,huy hoàng,"rực rỡ, lộng lẫy"
+856,回合,huíhé,N,hồi hợp,"vòng, hiệp (trong đấu tranh, thể thao)"
+857,回絕,huíjué,V,hồi tuyệt,"từ chối, bác bỏ"
+858,回升,huíshēng,Vp,hồi thăng,"hồi phục, tăng lại"
+859,迴響/回響,huíxiăng,N,hồi hưởng,"tiếng vọng, hồi âm"
+860,毀,huĭ,V,hủy,"phá hủy, làm hỏng"
+861,毀損,huĭsŭn,V,hủy tổn,"phá hủy, làm hỏng"
+862,悔恨,huĭhèn,Vs,hối hận,"ân hận, hối lỗi"
+863,匯,huì,V,hội,"giao dịch, trao đổi"
+864,匯票,huìpiào,N,hội phiếu,phiếu chuyển tiền quốc tế
+865,會見,huìjiàn,V,hội kiến,"gặp gỡ, tiếp kiến"
+866,會談,huìtán,Vi,hội đàm,"cuộc họp, đàm phán"
+867,會意,huìyì,Vp,hội ý,"hiểu ý, thông cảm ý"
+868,繪畫,huìhuà,N,hội họa,"vẽ tranh, hội họa"
+869,賄賂,huìlù,V,hối lộ,"sự hối lộ, đút lót"
+870,彗星,huìxīng,N,huệ tinh,sao chổi
+871,昏,hūn,Vs,hôn,"mờ mịt, mơ hồ, u tối"
+872,渾身,húnshēn,N,hồn thân,toàn thân
+873,混,hùn,Vs,hỗn,"trộn, lẫn lộn"
+874,混淆,hùnyáo,Vs,hỗn tạp,"pha trộn, lẫn lộn"
+875,混濁,hùnzhuó,Vs,hỗn trọc,"đục, không rõ"
+876,活/活兒,huó/huór,N,hoạt/hoạt nhi,"sống, hoạt động"
+877,活期,huóqí,Vs-attr,hoạt kỳ,"tài khoản thanh toán, kỳ hạn không cố định"
+878,火箭,huŏjiàn,N,hỏa tiễn,tên lửa
+879,火力,huŏlì,N,hỏa lực,"lực lượng vũ trang, sức mạnh vũ khí"
+880,火焰,huŏyàn,N,hỏa diễm,ngọn lửa
+881,火藥,huŏyào,N,hỏa dược,thuốc nổ
+882,伙伴/夥伴,huŏbàn,N,bạn hợp,"bạn đồng hành, đối tác"
+883,貨幣,huòbì,N,hóa tệ,"tiền tệ, tiền mặt"
+884,貨品,huòpĭn,N,hóa phẩm,hàng hóa
+885,豁達,huòdá,Vs,hoát đạt,"rộng lượng, khoan dung"
+886,積,jī,Vst,tích,"tích lũy, tích cóp"
+887,基層,jīcéng,N,cơ tầng,"tầng cơ bản, cơ sở"
+888,基地,jīdì,N,cơ sở,"căn cứ, cơ sở"
+889,基督,Jīdū,N,Cơ Đốc,Chúa Kitô
+890,基因,jīyīn,N,cơ nhân,"gen, yếu tố di truyền"
+891,機動,jīdòng,Vs-attr,cơ động,"động cơ, linh hoạt"
+892,機警,jījĭng,Vs,cơ cảnh,"cảnh giác, cảnh tỉnh"
+893,機率,jīlǜ,N,cơ suất,"xác suất, tỷ lệ"
+894,機密,jīmì,N,cơ mật,bí mật
+895,機器人,jīqìrén,N,cơ khí nhân,robot
+896,機制,jīzhì,N,cơ chế,"cơ cấu, hệ thống"
+897,肌膚,jīfū,N,cơ phu,làn da
+898,飢餓/饑餓,jīè,Vs,cơ đói,"đói, thiếu ăn"
+899,畸形,jīxíng,Vs,kỳ hình,"dị dạng, không bình thường"
+900,激增,jīzēng,Vs,kích tăng,"tăng nhanh, tăng đột biến"
+901,及早,jízăo,Adv,cập tảo,"kịp thời, sớm"
+902,吉利,jílì,Vs,cát lợi,"may mắn, thuận lợi"
+903,吉祥,jíxiáng,Vs,cát tường,"may mắn, tốt lành"
+904,汲取,jíqŭ,V,cáp thủy,"rút ra, lấy (nước, kiến thức)"
+905,即,jí,Vst,tức,"ngay, liền"
+906,即日,jírì,N,tức nhật,ngay trong ngày
+907,即時,jíshí,Adv,tức thời,ngay lập tức
+908,極端,jíduān,N / Vs,cực đoan,"cực kỳ, cực đoan"
+909,極力,jílì,Adv,cực lực,"hết sức, nỗ lực hết mình"
+910,極為,jíwéi,Adv,cực vi,"rất, vô cùng"
+911,集合,jíhé,N,tập hợp,"họp lại, tụ họp"
+912,集結,jíjié,V,tập kết,"tập hợp lại, dồn lại"
+913,集權,jíquán,Vs,tập quyền,quyền lực tập trung
+914,集體,jítĭ,Adv,tập thể,"nhóm, đoàn thể"
+915,集團,jítuán,N,tập đoàn,"công ty, nhóm lớn"
+916,急救,jíjiù,Vi,cấp cứu,"cứu hộ, sơ cứu"
+917,急躁,jízào,Vs,cấp tảo,"nóng vội, thiếu kiên nhẫn"
+918,籍貫,jíguàn,N,tịch quán,quê quán
+919,擊,jí,V,kích,"đánh, đấm"
+920,擊落,jíluò,V,kích lạc,đánh rơi
+921,計,jì,Vst,kế,"kế hoạch, tính toán"
+922,暨,jì,Conj,ký,"và, cùng với"
+923,繼承,jìchéng,Vpt,kế thừa,"thừa kế, tiếp nối"
+924,季風,jìfēng,N,quý phong,gió mùa
+925,劑量,jìliàng,N,chế lượng,liều lượng
+926,紀律,jìlǜ,N,kỷ luật,"quy định, kỷ luật"
+927,技能,jìnéng,N,kỹ năng,kỹ năng
+928,技藝,jìyì,N,kỹ nghệ,"tài năng, nghệ thuật"
+929,祭祀,jìsì,V,tế tự,cúng tế
+930,傢伙,jiāhuŏ,N,gia hòa,"thằng, gã, người"
+931,家家戶戶,jiājiāhùhù,N,gia gia hộ hộ,mọi gia đình
+932,家屬,jiāshŭ,N,gia thuộc,thành viên gia đình
+933,佳節,jiājié,N,giai tiết,lễ hội
+934,佳人,jiārén,N,giai nhân,người đẹp
+935,加緊,jiājĭn,V,gia cường,tăng cường
+936,加快,jiākuài,V,gia tốc,tăng tốc
+937,加薪,jiāxīn,V-sep,gia tân,tăng lương
+938,加重,jiāzhòng,V,gia trọng,làm nặng thêm
+939,枷鎖,jiāsuŏ,N,gia sở,xiềng xích
+940,夾雜,jiázá,Vpt,giáp tạp,"pha trộn, lẫn lộn"
+941,假,jiă,Prep,Giả,"Kỳ nghỉ, giả dối"
+942,假若,jiăruò,Conj,giả nếu,"giả dụ, nếu"
+943,假使,jiăshĭ,Conj,giả sử,"giả sử, nếu"
+944,假象,jiăxiàng,N,giả tượng,ảo tưởng
+945,架/架(子),jià/jià(zi),V / N,giá/giá tử,"kệ, giá (dụng cụ)"
+946,架構,jiàgòu,N,giá cấu,cấu trúc
+947,監督,jiāndū,V,giám sát,"giám sát, quản lý"
+948,尖端,jiānduān,Vs-attr,尖端,"đỉnh cao, cực kỳ"
+949,堅固,jiāngù,Vs,kiên cố,chắc chắn
+950,堅忍,jiānrěn,Vs,kiên nhẫn,kiên trì
+951,堅信,jiānxìn,Vst,kiên tín,tin tưởng vững chắc
+952,堅硬,jiānyìng,Vs,kiên cứng,cứng cáp
+953,兼職,jiānzhí,Vi,kiêm chức,"làm thêm, công việc thứ hai"
+954,艱鉅,jiānjù,Vs,gian truân,"khó khăn, gian khổ"
+955,艱苦,jiānkŭ,Vs,gian khổ,khó khăn
+956,艱難,jiānnán,Vs,gian nan,"khó khăn, khổ sở"
+957,簡便,jiănbiàn,Vs,giản tiện,đơn giản và tiện lợi
+958,簡稱,jiănchēng,Vst,giản xưng,viết tắt
+959,簡化,jiănhuà,Vpt,giản hóa,đơn giản hóa
+960,簡體,jiăntĭ,N,giản thể,chữ giản thể
+961,檢討,jiăntăo,V,kiểm thảo,"kiểm điểm, thảo luận"
+962,賤,jiàn,Vs,ti tiện,"rẻ mạt, đê tiện"
+963,濺,jiàn,V,tiễn,"văng, bắn"
+964,見解,jiànjiě,N,kiến giải,"quan điểm, ý kiến"
+965,見識,jiànshì,V,kiến thức,"kinh nghiệm, sự hiểu biết"
+966,見證,jiànzhèng,V,kiến chứng,chứng kiến
+967,建造,jiànzào,V,kiến tạo,xây dựng
+968,健身,jiànshēn,Vi,kiện thân,rèn luyện sức khỏe
+969,健身房,jiànshēnfáng,N,kiện thân phòng,phòng tập thể dục
+970,健壯,jiànzhuàng,Vs,kiện tráng,khỏe mạnh
+971,將,jiāng,Prep,tương,"sẽ, dự định"
+972,將軍,jiāngjūn,N,tướng quân,tướng quân
+973,獎勵,jiănglì,V,thưởng,"phần thưởng, khen thưởng"
+974,獎賞,jiăngshăng,N,thưởng,"thưởng, khen thưởng"
+975,獎狀,jiăngzhuàng,N,chứng nhận,"giấy chứng nhận, bằng khen"
+976,講理,jiănglĭ,Vs,giảng lý,"giảng giải, giải thích hợp lý"
+977,講習,jiăngxí,N,giảng tập,"lớp học, khóa học"
+978,講義,jiăngyì,N,giảng nghĩa,"bài giảng, bài học"
+979,講座,jiăngzuò,N,giảng tòa,"khóa học, lớp học"
+980,交錯,jiāocuò,Vs,giao thác,"lẫn lộn, xen kẽ"
+981,交貨,jiāohuò,V-sep,giao hàng,giao hàng hóa
+982,交集,jiāojí,N,giao hợp,"giao thoa, giao điểm"
+983,交情,jiāoqíng,N,giao tình,"mối quan hệ, tình cảm"
+984,交涉,jiāoshè,Vi,giao thiệp,"thương thảo, đàm phán"
+985,交談,jiāotán,Vi,giao đàm,"trò chuyện, nói chuyện"
+986,焦急,jiāojí,Vs,lo lắng,"nóng ruột, lo âu"
+987,腳本,jiăoběn,N,kịch bản,"kịch bản, kịch bản phim"
+988,攪和(ㄏㄨㄛˋ),jiăohuò,Vi,Giảo Hòa,"Lộn xộn, làm rối lên, gây xáo trộn"
+989,轎車,jiàochē,N,kiệu xe,"xe ô tô, xe hơi"
+990,叫好,jiàohăo,Vi,kêu hay,"vỗ tay khen ngợi, hoan hô"
+991,教官,jiàoguān,N,giáo quan,"giảng viên, huấn luyện viên"
+992,教化,jiàohuà,V,giáo hóa,"giáo dục, cải hóa"
+993,教誨,jiàohuĭ,N,giáo huấn,"dạy bảo, chỉ bảo"
+994,教徒,jiàotú,N,giáo đồ,"tín đồ, người theo tôn giáo"
+995,教學,jiàoxué,N,giáo học,dạy học
+996,教員,jiàoyuán,N,giáo viên,giáo viên
+997,較量,jiàoliàng,Vi,so tài,"thi đấu, so sánh"
+998,皆,jiē,Adv,giai,"tất cả, mọi người"
+999,階層,jiēcéng,N,giai tầng,"tầng lớp, cấp bậc"
+1000,階級,jiējí,N,giai cấp,"giai cấp, tầng lớp xã hội"
+1001,街坊,jiēfāng,N,phố phường,"khu phố, hàng xóm"
+1002,接管,jiēguăn,V,tiếp quản,"quản lý, nhận lãnh"
+1003,接連,jiēlián,Adv,tiếp liền,"liên tiếp, nối tiếp"
+1004,接納,jiēnà,V,tiếp nhận,"chấp nhận, nhận vào"
+1005,接洽,jiēqià,V,tiếp xúc,"giao tiếp, làm việc"
+1006,揭幕,jiēmù,Vp,khai mạc,"khai trương, mở màn"
+1007,揭曉,jiēxiăo,V,khai hiển,"công bố, thông báo"
+1008,截,jié,M / V,triệt,"chặn, cắt đứt"
+1009,潔白,jiébái,Vs,khiết bạch,"trong sáng, sạch sẽ"
+1010,節儉,jiéjiăn,Vs,tiết kiệm,"tiết kiệm, không lãng phí"
+1011,竭力,jiélì,Adv,kiệt lực,"hết sức, nỗ lực hết mình"
+1012,結實(˙ㄕ),jiéshi,Vs,Kết Thực,"Chắc chắn, bền bỉ, vững chãi"
+1013,結業,jiéyè,Vp,kết nghiệp,"kết thúc công việc, tan ca"
+1014,結緣,jiéyuán,Vi,kết duyên,"kết nối, tạo mối quan hệ"
+1015,解答,jiědá,N,giải đáp,trả lời
+1016,解放,jiěfàng,V,giải phóng,"giải thoát, tự do"
+1017,解渴,jiěkě,Vs,giải khát,giải quyết cơn khát
+1018,解剖,jiěpŏu,V,giải phẫu,"mổ xẻ, giải phẫu"
+1019,解說,jiěshuō,V,giải thuyết,"giải thích, thuyết minh"
+1020,解體,jiětĭ,Vp,giải thể,"tan rã, phá vỡ"
+1021,解脫,jiětuō,V,giải thoát,"giải cứu, thoát khỏi"
+1022,解約,jiěyuē,Vp-sep,giải hợp đồng,hủy hợp đồng
+1023,屆,jiè,Vst,giới,"kỳ, giai đoạn"
+1024,屆時,jièshí,Adv,giới thời,khi đến thời điểm
+1025,戒,jiè,V,giới,"kiêng, tránh"
+1026,戒備,jièbèi,Vi,giới bị,"phòng bị, cảnh giác"
+1027,借貸,jièdài,V,tạm thải,"cho vay, vay mượn"
+1028,藉口,jièkŏu,N,tịch khẩu,"lý do, viện cớ"
+1029,介入,jièrù,V,giới nhập,"can thiệp, tham gia vào"
+1030,金魚,jīnyú,N,kim ngư,cá vàng
+1031,津貼,jīntiē,N,tân tiếp,"trợ cấp, phụ cấp"
+1032,緊湊,jĭncòu,Vs,khẩn trương,"gấp gáp, vội vã"
+1033,緊密,jĭnmì,Vs,khẩn mật,"chặt chẽ, khít khao"
+1034,緊縮,jĭnsuō,Vi,khẩn súc,"thu hẹp, co lại"
+1035,謹慎,jĭnshèn,Vs,cẩn thận,"thận trọng, chú ý"
+1036,近,jìn,Det,Cận,Gần
+1037,勁/勁兒,jìn/jìnr,N,lực,"sức lực, năng lực"
+1038,進場,jìnchăng,Vi,tiến trường,"vào sân, vào cuộc"
+1039,進度,jìndù,N,tiến độ,"tiến trình, tiến độ"
+1040,進而,jìnér,Conj,tiến nhiễu,tiến xa hơn
+1041,進攻,jìngōng,V,tiến công,tấn công
+1042,進化,jìnhuà,Vp,tiến hóa,"tiến triển, phát triển"
+1043,進軍,jìnjūn,V,tiến quân,"hành quân, tiến quân"
+1044,進修,jìnxiū,V,tiến tu,"học thêm, tiếp tục học"
+1045,進展,jìnzhăn,Vi,tiến triển,"phát triển, tiến triển"
+1046,晉級,jìnjí,Vp,tiến cấp,"thăng cấp, thăng tiến"
+1047,禁令,jìnlìng,N,cấm lệnh,lệnh cấm
+1048,精,jīng,Vs,tinh,"tinh thần, tinh tế"
+1049,精光,jīngguāng,Vs,tinh quang,"hoàn toàn, không còn gì"
+1050,精華,jīnghuá,N,tinh hoa,"tinh túy, phần tinh chất"
+1051,精明,jīngmíng,Vs,tinh minh,"thông minh, sáng suốt"
+1052,精髓,jīngsuĭ,N,tinh tuý,"tinh hoa, cốt lõi"
+1053,精緻,jīngzhì,Vs,tinh xảo,"tinh tế, chi tiết"
+1054,經典,jīngdiăn,N,kinh điển,"cổ điển, tiêu biểu"
+1055,經濟,jīngjì,Vs,kinh tế,kinh tế
+1056,經書,jīngshū,N,kinh thư,"sách kinh, kinh điển"
+1057,驚惶,jīnghuáng,Vs,kinh hoàng,"hoảng sợ, sợ hãi"
+1058,驚奇,jīngqí,Vs,kinh kỳ,"kinh ngạc, bất ngờ"
+1059,驚喜,jīngxĭ,Vs,kinh hỷ,"ngạc nhiên, vui mừng"
+1060,驚險,jīngxiăn,Vs,kinh hiểm,"nguy hiểm, đáng sợ"
+1061,鯨魚,jīngyú,N,kinh ngư,cá voi
+1062,井,jĭng,N,tỉnh,giếng
+1063,警報,jĭngbào,N,cảnh báo,báo động
+1064,警覺,jĭngjué,Vs,cảnh giác,"tỉnh táo, cảnh giác"
+1065,警惕,jĭngtì,V,cảnh tiễng,"cảnh báo, đề phòng"
+1066,警衛,jĭngwèi,N,cảnh vệ,"vệ sĩ, lính gác"
+1067,景觀,jĭngguān,N,cảnh quan,"cảnh vật, cảnh đẹp"
+1068,景氣,jĭngqì,N,cảnh khí,tình hình kinh tế
+1069,景物,jĭngwù,N,cảnh vật,"cảnh vật, đồ vật"
+1070,景象,jĭngxiàng,N,cảnh tượng,"hình ảnh, quang cảnh"
+1071,淨,jìng,Adv,tịnh,"sạch sẽ, trong sáng"
+1072,敬,jìng,V,kính,"tôn kính, kính trọng"
+1073,敬佩,jìngpèi,Vst,kính bái,kính trọng
+1074,境地,jìngdì,N,cảnh đất,"tình cảnh, hoàn cảnh"
+1075,靜脈,jìngmài,N,tĩnh mạch,mạch máu
+1076,靜態,jìngtài,N,tĩnh thái,trạng thái tĩnh
+1077,競賽,jìngsài,Vi,cạnh tài,"cuộc thi, thi đấu"
+1078,競選,jìngxuăn,V,cạnh tuyển,"tranh cử, thi đấu"
+1079,競爭,jìngzhēng,N,cạnh tranh,"cạnh tranh, thi đấu"
+1080,揪,jiū,V,jiū,"nắm, kéo (vật)"
+1081,糾紛,jiūfēn,N,cứu phẫn,"tranh chấp, xung đột"
+1082,酒店,jiŭdiàn,N,Tửu Điếm,Khách sạn
+1083,酒館,jiŭguăn,N,Tửu Quán,"Quán rượu, quán bia"
+1084,酒精,jiŭjīng,N,Tửu Tinh,"Cồn, rượu"
+1085,就,jiù,Vst,Tựu,"Liền, ngay"
+1086,就緒,jiùxù,Vs,Tựu Hựu,"Sẵn sàng, chuẩn bị xong"
+1087,救濟,jiùjì,V,Cứu Tế,"Cứu giúp, cứu trợ"
+1088,救援,jiùyuán,V,Cứu Viện,"Cứu hộ, cứu trợ"
+1089,居,jū,Vst,Cư,"Sống, cư trú"
+1090,局部,júbù,Det,Cục Bộ,"Phần, bộ phận"
+1091,局面,júmiàn,N,Cục Diện,"Tình hình, hoàn cảnh"
+1092,沮喪,jŭsàng,Vs,Tự Tảng,"Buồn bã, chán nản"
+1093,舉止,jŭzhĭ,N,Cử Chỉ,"Cử chỉ, thái độ"
+1094,舉重,jŭzhòng,N,Cử Trọng,"Cử tạ, nâng tạ"
+1095,巨人,jùrén,N,Cự Nhân,Người khổng lồ
+1096,拒,jù,V,Cự,Từ chối
+1097,據悉,jùxī,Conj,Cứ Tức,Theo báo cáo
+1098,俱全,jùquán,Vs-pred,Cụ Toàn,"Hoàn chỉnh, đầy đủ"
+1099,捐獻,juānxiàn,V,Quyên Hiến,"Đóng góp, quyên góp"
+1100,捐贈,juānzèng,V,Quyên Tặng,"Tặng, biếu, quyên góp"
+1101,決賽,juésài,N,Quyết Tế,Chung kết
+1102,決議,juéyì,N,Quyết Nghị,"Quyết định, nghị quyết"
+1103,抉擇,juézé,N,Quyết Tắc,"Lựa chọn, quyết định"
+1104,絕大多數,juédàduōshù,Det,Tuyệt Đại Đa Số,Đại đa số
+1105,絕跡,juéjī,Vp,Tuyệt Tích,"Biến mất, tuyệt chủng"
+1106,均,jūn,Adv,Quân,"Đều, đều đặn"
+1107,均衡,jūnhéng,Vs,Quân Hành,Cân bằng
+1108,均勻,jūnyún,Vs,Quân Vân,Đồng đều
+1109,軍備,jūnbèi,N,Quân Bị,"Quân trang, quân sự"
+1110,軍閥,jūnfá,N,Quân Phái,"Quân phiệt, quân đội chia rẽ"
+1111,軍官,jūnguān,N,Quân Quan,"Quan quân, sĩ quan"
+1112,軍艦,jūnjiàn,N,Quân Hạm,"Tàu chiến, tàu quân sự"
+1113,開辦,kāibàn,V,Khai Bàn,"Mở, sáng lập"
+1114,開導,kāidăo,V,Khai Đạo,"Hướng dẫn, khai sáng"
+1115,開發,kāifā,N,khai phát,"phát triển, khai thác"
+1116,開飯,kāifàn,Vp,Khai Phạn,"Ăn cơm, dùng bữa"
+1117,開放,kāifàng,Vs,khai phóng,"mở cửa, khai thông"
+1118,開口,kāikŏu,V-sep,Khai Khẩu,"Mở miệng, nói ra"
+1119,開闊,kāikuò,Vs,Khai Khoát,"Rộng lớn, rộng rãi"
+1120,開路,kāilù,V-sep,Khai Lộ,"Mở đường, mở lối"
+1121,開幕,kāimù,Vp,Khai Mạc,"Lễ khai mạc, mở màn"
+1122,開盤,kāipán,Vp,Khai Phiên,Mở sàn (chứng khoán)
+1123,開闢,kāipì,V,Khai Phát,"Khai phá, mở rộng"
+1124,開啟,kāiqĭ,Vpt,Khai Khởi,"Mở ra, khởi động"
+1125,開頭/開頭兒,kāitóu/kāitóur,N,Khai Đầu,"Khởi đầu, bắt đầu"
+1126,開銷,kāixiāo,N,Khai Tiêu,"Chi tiêu, chi phí"
+1127,開業,kāiyè,Vp,Khai Nghiệp,"Mở cửa hàng, mở doanh nghiệp"
+1128,開展,kāizhăn,V,Khai Trí,"Triển khai, phát triển"
+1129,開張,kāizhāng,Vp,Khai Trương,Khai trương (doanh nghiệp)
+1130,刊物,kānwù,N,San Vật,"Ấn phẩm, tạp chí"
+1131,刊登,kāndēng,V,San Đăng,"Đăng tải, xuất bản"
+1132,看守,kānshŏu,V,Khán Thủ,"Giám sát, canh giữ"
+1133,康復,kāngfù,Vp,Khang Phục,"Hồi phục, phục hồi"
+1134,慷慨,kāngkăi,Vs,Khang Khái,"Hào phóng, rộng lượng"
+1135,扛,káng,V,Khang,"Chống đỡ, gánh vác"
+1136,抗爭,kàngzhēng,Vi,Kháng Tranh,"Kháng cự, đấu tranh"
+1137,考場,kăochăng,N,Khảo Trường,Phòng thi
+1138,考古,kăogŭ,Vi,Khảo Cổ,"Khảo cổ, nghiên cứu cổ vật"
+1139,考量,kăoliáng,N,Khảo Lượng,"Xem xét, cân nhắc"
+1140,考生,kăoshēng,N,Khảo Sinh,Thí sinh
+1141,考驗,kăoyàn,V,Khảo Nghiệm,"Kiểm tra, thử thách"
+1142,烤肉,kăoròu,N,Khảo Nhục,Nướng thịt
+1143,靠,kào,Vst,khào,"dựa vào, phụ thuộc"
+1144,刻畫/刻劃,kèhuà,Vi,Khắc Họa,"Khắc họa, miêu tả"
+1145,科幻,kēhuàn,Vs,Khoa Hoang,Khoa học viễn tưởng
+1146,苛責,kēzé,V,Kha Trách,"Mắng mỏ, chỉ trích"
+1147,殼,ké,N,Xác,"Vỏ, lớp vỏ"
+1148,可觀,kěguān,Vs,Khả Quan,"Có thể nhìn thấy, đáng chú ý"
+1149,可見,kějiàn,Conj,Khả Kiến,"Có thể thấy được, hiển nhiên"
+1150,可望,kěwàng,Vaux,Khả Vọng,"Có thể hy vọng, có thể mong đợi"
+1151,可行,kěxíng,Vs,Khả Hành,"Có thể thực hiện, khả thi"
+1152,刻薄,kèbó,Vs,Khắc Bạc,"Tàn nhẫn, khắc nghiệt"
+1153,刻苦,kèkŭ,Vs,Khắc Khổ,"Chịu đựng, gian khổ"
+1154,刻意,kèyì,Adv,Khắc Ý,"Cố ý, có chủ đích"
+1155,客機,kèjī,N,Khách Cơ,Máy bay thương mại
+1156,課業,kèyè,N,Khóa Nghiệp,"Công việc học tập, môn học"
+1157,克制,kèzhì,V,Khắc Chế,"Kiềm chế, kiểm soát"
+1158,吭聲,kēngshēng,Vi,Hành Thinh,"Phát ra tiếng, lên tiếng"
+1159,空曠,kōngkuàng,Vs,Không Khoáng,"Rộng rãi, trống trải"
+1160,空難,kōngnàn,N,Không Nan,Tai nạn hàng không
+1161,空談,kōngtán,Vi,Không Đàm,"Nói suông, vô ích"
+1162,空運,kōngyùn,V,Không Vận,Vận chuyển bằng đường hàng không
+1163,孔,kŏng,N,Khổng,"Lỗ, khe hở, lỗ hổng"
+1164,恐嚇,kŏnghè,V,Khủng Hách,"Đe dọa, khủng bố"
+1165,恐懼,kŏngjù,Vs,Khủng Cự,"Sợ hãi, lo sợ"
+1166,口頭,kŏutóu,N,Khẩu Đầu,"Bằng miệng, lời nói"
+1167,口吻,kŏuwěn,N,Khẩu Vận,"Giọng điệu, sắc thái trong lời nói"
+1168,扣除,kòuchú,V,Khấu Trừ,"Khấu trừ, giảm bớt"
+1169,苦工,kŭgōng,N,Khổ Công,"Công việc vất vả, nặng nhọc"
+1170,苦難,kŭnàn,N,Khổ Nạn,"Nỗi khổ, khó khăn"
+1171,苦惱,kŭnăo,Vs,Khổ Nảo,"Lo lắng, phiền muộn"
+1172,苦衷,kŭzhōng,N,Khổ Trung,"Nỗi lòng, nỗi khổ"
+1173,庫存,kùcún,N,Khố Tồn,"Tồn kho, hàng tồn kho"
+1174,誇耀,kuāyào,V,Khoa Yêu,"Khoe khoang, phô trương"
+1175,跨越,kuàyuè,V,Quá Việt,"Vượt qua, vượt lên"
+1176,快活,kuàihuó,Vs,Khoái Hoạt,"Vui vẻ, hạnh phúc"
+1177,寬廣,kuānguăng,Vs,Khuôn Quảng,"Rộng lớn, rộng rãi"
+1178,寬闊,kuānkuò,Vs,Khuôn Khoát,"Rộng lớn, bao la"
+1179,款,kuăn,M,Khoản,"Khoản, hạng mục"
+1180,款待,kuăndài,V,Khoản Đãi,"Tiếp đãi, chiêu đãi"
+1181,狂風,kuángfēng,N,Cuồng Phong,"Gió cuồng, gió mạnh"
+1182,狂妄,kuángwàng,Vs,Cuồng Vọng,"Liều lĩnh, điên cuồng"
+1183,礦產,kuàngchăn,N,Khoáng Sản,Tài nguyên khoáng sản
+1184,礦工,kuànggōng,N,Khoáng Công,Thợ mỏ
+1185,虧,kuī,Vp,Khuy,"Thua lỗ, thiếu hụt"
+1186,昆蟲,kūnchóng,N,Côn Trùng,Côn trùng
+1187,捆,kŭn,V,Khuân,"Buộc lại, trói lại"
+1188,困,kùn,Vi,Khốn,"Khó khăn, bế tắc"
+1189,困境,kùnjìng,N,Khốn Cảnh,Tình huống khó khăn
+1190,困擾,kùnrăo,N / Vs,Khốn Nhiễu,"Quấy rầy, phiền toái"
+1191,擴建,kuòjiàn,V,Khoát Kiến,"Mở rộng, xây dựng thêm"
+1192,擴散,kuòsàn,Vs,Khoát Tán,"Phát tán, lan rộng"
+1193,擴張,kuòzhāng,Vst,Khoát Trương,"Mở rộng, phát triển"
+1194,拉票,lāpiào,V-sep,La Phiếu,"Vận động bầu cử, thu hút phiếu bầu"
+1195,臘月,làyuè,N,Lạp Nguyệt,Tháng chạp (theo âm lịch)
+1196,來賓,láibīn,N,Lai Khách,"Khách mời, người đến thăm"
+1197,來得,láide,Adv,Lai Đắc,"Đến được, đạt được"
+1198,來客,láikè,N,Lai Khách,"Khách hàng, người đến chơi"
+1199,欄,lán,M,Lan,"Cột, bảng, khu vực"
+1200,攔,lán,V,Lan,"Chặn, ngăn cản"
+1201,懶惰,lănduò,Vs,Lười Đọng,"Lười biếng, trì trệ"
+1202,懶散,lănsăn,Vs,Lười Tán,"Lười biếng, không chăm chỉ"
+1203,朗讀,lăngdú,V,Lãng Độc,"Đọc to, đọc rõ"
+1204,朗誦,lăngsòng,V,Lãng Tụng,"Đọc thơ, tụng kinh"
+1205,牢,láo,N,lao,"chắc chắn, bền vững"
+1206,勞改,láogăi,Vi,Lao Cải,"Cải tạo lao động, cải tạo tù nhân"
+1207,勞累,láolèi,Vs,Lao Lệ,"Mệt mỏi, làm việc vất vả"
+1208,老人家,lăorénjia,N,Lão Nhân Gia,"Người già, ông bà"
+1209,老天爺,lăotiānyé,N,Lão Thiên Gia,"Ông trời, trời ơi"
+1210,老頭兒/老頭(子),lăotóur/lăotóu(zi),N,Lão Đầu Tử,"Người lớn tuổi, ông già"
+1211,老鄉,lăoxiāng,N,Lão Hương,"Người đồng hương, bạn đồng hương"
+1212,老子,lăozi,N,Lão Tử,"Ông già, cha (cách gọi thân mật)"
+1213,雷,léi,N,Lôi,"Sấm sét, sấm"
+1214,雷達,léidá,N,Lôi Đạo,"Radar, sóng vô tuyến"
+1215,雷同,léitóng,Vs,Lôi Đồng,"Giống nhau, tương tự"
+1216,累積,lěijī,V,Lũy Tích,"Tích lũy, dồn lại"
+1217,類似,lèisì,Vst,loại tự,"tương tự, giống nhau"
+1218,冷凍,lěngdòng,V,Lãnh Đông,"Đông lạnh, làm lạnh"
+1219,冷汗,lěnghàn,N,Lãnh Hãn,"Mồ hôi lạnh, lo sợ"
+1220,冷清,lěngqīng,Vs,Lãnh Thanh,"Tĩnh mịch, vắng vẻ"
+1221,勒索,lèsuŏ,V,Lặc Sách,"Tống tiền, cưỡng ép tiền bạc"
+1222,哩,lī,Ptc,Lý,Đơn vị đo chiều dài (mile)
+1223,黎明,límíng,N,Ly Minh,"Bình minh, sáng sớm"
+1224,罹難,línàn,Vp,Ly Nan,"Gặp tai nạn, bị nạn"
+1225,里程,lĭchéng,N,Lý Trình,"Quảng đường, lộ trình"
+1226,理財,lĭcái,Vi,Lý Tài,Quản lý tài chính
+1227,理論,lĭlùn,Vi,lý luận,lý luận
+1228,理所當然,lĭsuŏdāngrán,Vs,Lý Sở Đương Nhiên,"Lẽ đương nhiên, hợp lý"
+1229,理性,lĭxìng,Vs,Lý Tính,"Lý trí, lý luận"
+1230,理學,lĭxué,N,Lý Học,Môn lý học
+1231,理智,lĭzhì,Vs,Lý Trí,"Lý trí, lý luận, sự sáng suốt"
+1232,禮服,lĭfú,N,Lễ Phục,"Áo lễ, trang phục trong các dịp lễ hội, trang trọng"
+1233,禮節,lĭjié,N,Lễ Tiết,"Lễ nghi, phép tắc"
+1234,禮貌,lĭmào,Vs,Lễ mạo,Lịch sự
+1235,力求,lìqiú,V,Lực Cầu,"Cố gắng hết sức, nỗ lực đạt được"
+1236,力行,lìxíng,V,Lực Hành,"Thực hiện, hành động kiên trì"
+1237,力學,lìxué,N,Lực Học,"Môn học về lực, cơ học"
+1238,立國,lìguó,Vi,Lập Quốc,"Thành lập đất nước, dựng nước"
+1239,立即,lìjí,Vs-attr,lập tức,"ngay lập tức, tức thời"
+1240,立體,lìtĭ,Vs,Lập Thể,"3D, thể ba chiều"
+1241,利率,lìlǜ,N,Lợi Suất,Tỷ lệ lãi suất
+1242,利弊,lìbì,N,Lợi Bĩ,Lợi ích và bất lợi
+1243,例,lì,Prep,Lệ,"Ví dụ, trường hợp, mẫu"
+1244,歷屆,lìjiè,N,Lịch Kiệt,"Các thế hệ trước, các kỳ trước"
+1245,歷來,lìlái,N,Lịch Lai,"Từ trước đến nay, xuyên suốt"
+1246,歷年,lìnián,N,Lịch Niên,"Các năm qua, các năm trước"
+1247,聯,lián,N / V,Liên,"Liên kết, kết nối"
+1248,聯盟,liánméng,N,Liên Minh,"Liên minh, hợp tác"
+1249,聯繫/連繫,liánxì,V,Liên Hệ,"Kết nối, liên lạc"
+1250,聯想,liánxiăng,V,Liên Tưởng,"Liên tưởng, suy nghĩ liên quan"
+1251,連帶,liándài,Vs-attr,Liên Đới,"Mối liên kết, liên quan chặt chẽ"
+1252,連結/聯結,liánjié,V,Liên Kết,"Kết nối, liên kết"
+1253,連任,liánrèn,Vst,Liên Nhiệm,"Đảm nhiệm lại, tái đắc cử"
+1254,連線,liánxiàn,V-sep,Liên Tuyến,"Kết nối, tạo đường truyền"
+1255,廉價,liánjià,Vs,Liêm Giá,"Giá rẻ, tiết kiệm"
+1256,廉潔,liánjié,Vs,Liêm Tiết,"Thanh liêm, trong sạch"
+1257,臉龐,liănpáng,N,Liên Phường,"Khuôn mặt, diện mạo"
+1258,臉譜,liănpŭ,N,Liên Phổ,"Biểu đồ khuôn mặt, nét mặt"
+1259,良機,liángjī,N,Lương Cơ,"Cơ hội tốt, cơ hội thuận lợi"
+1260,兩極,liăngjí,N,Lưỡng Cực,"Hai cực, đối lập hoàn toàn"
+1261,兩口子,liăngkŏuzi,N,Lưỡng Khẩu,"Vợ chồng, hai vợ chồng"
+1262,遼闊,liáokuò,Vs,Lưu Quát,"Rộng lớn, bao la"
+1263,列,liè,V,liệt,"xếp thành hàng, loại"
+1264,列車,lièchē,N,Liệt Xa,"Tàu hỏa, chuyến tàu"
+1265,列國,lièguó,N,Liệt Quốc,"Các quốc gia, các nước"
+1266,列入,lièrù,Vst,Liệt Nhập,"Đưa vào danh sách, liệt kê"
+1267,獵人,lièrén,N,Liệp Nhân,Thợ săn
+1268,烈士,lièshì,N,Liệt Sĩ,"Anh hùng, người hy sinh"
+1269,臨,lín,Adv / Prep,lâm,"sắp, đến gần, đối diện"
+1270,臨床,línchuáng,Vs-attr,Lâm Sàng,Liên quan đến khám chữa bệnh
+1271,鄰里,línlĭ,N,Lân Lý,"Hàng xóm, khu vực lân cận"
+1272,鈴,líng,N,Linh,"Chuông, kêu gọi"
+1273,靈,líng,Vs,Linh,"Linh hồn, thần thánh"
+1274,靈感,línggăn,N,Linh Cảm,"Cảm hứng, sự nhận thức đặc biệt"
+1275,靈驗,língyàn,Vs,Linh Nghiệm,"Linh nghiệm, thần thánh"
+1276,領隊,lĭngduì,N,Lĩnh Đội,"Trưởng đoàn, người dẫn đầu"
+1277,領會,lĭnghuì,Vst,Lĩnh Hội,"Hiểu rõ, nắm vững"
+1278,領悟,lĭngwù,Vpt,Lĩnh Ngộ,"Thấu hiểu, giác ngộ"
+1279,令,lìng,V,lệnh,"lệnh, làm"
+1280,另,lìng,Adv,Lệnh,Khác
+1281,流程,liúchéng,N,Lưu Trình,"Quá trình, chuỗi hoạt động"
+1282,流傳,liúchuán,V,Lưu Truyền,"Truyền bá, lan truyền"
+1283,流落,liúluò,Vi,Lưu Lạc,"Lưu lạc, bơ vơ, lang thang"
+1284,流氓,liúmáng,N,Lưu Mang,"Kẻ du côn, người hư hỏng"
+1285,流失,liúshī,Vst,Lưu Thất,"Mất đi, thất thoát"
+1286,流水,liúshuĭ,N,Lưu Thủy,"Nước chảy, dòng nước"
+1287,流通,liútōng,Vi,Lưu Thông,"Lưu thông, lưu hành"
+1288,流星,liúxīng,N,Lưu Tinh,"Sao băng, sao chổi"
+1289,流域,liúyù,N,Lưu Vực,"Lưu vực, khu vực xung quanh sông ngòi"
+1290,柳樹,liŭshù,N,Liễu Thụ,Cây liễu
+1291,籠(子),lóng(zi),N,Lồng,"Cái lồng, lồng chim"
+1292,籠罩,lóngzhào,Vs,Lồng Chao,"Bao phủ, che phủ"
+1293,壟斷,lŏngduàn,V,Lũng Đoạt,"Độc chiếm, độc quyền"
+1294,樓房,lóufáng,N,Lâu Phòng,"Nhà, tòa nhà"
+1295,漏,lòu,Vpt,Lậu,"Rỉ ra, chảy ra ngoài"
+1296,爐(子),lú(zi),N,Lô,"Lò, lò nung"
+1297,陸地,lùdì,N,Lục Địa,"Đất liền, đất khô"
+1298,路過,lùguò,V,Lộ Quá,"Đi qua, đi ngang qua"
+1299,露天,lùtiān,N,Lộ Thiên,"Ngoài trời, không có mái che"
+1300,錄影,lùyĭng,V-sep,Lục Ảnh,"Quay video, ghi hình"
+1301,錄影機,lùyĭngjī,N,Lục Ảnh Cơ,Máy quay video
+1302,輪廓,lúnkuò,N,Luân Khắc,"Đường nét, hình dáng tổng thể"
+1303,倫理,lúnlĭ,N,Luân Lý,"Đạo lý, quy tắc đạo đức"
+1304,淪陷,lúnxiàn,Vp,Lân Hám,"Rơi vào tình trạng khó khăn, sụp đổ"
+1305,論點,lùndiăn,N,Luận Điểm,"Quan điểm, luận đề"
+1306,卵,luăn,N,Oán,Trứng
+1307,囉嗦/囉唆,luōsuō,Vs,Loa So,"Nói nhiều, nói dài dòng"
+1308,鑼,luó,N,La,Cái trống (thường dùng trong âm nhạc truyền thống)
+1309,邏輯,luójí,N,Logic,"Lý luận, logic"
+1310,落得,luòdé,Vst,Lạc Đắc,"Rơi vào, kết quả là"
+1311,落魄,luòtuò,Vs,Lạc Phách,"Hành động nghèo khó, khốn cùng"
+1312,落選,luòxuăn,Vp,Lạc Tuyển,"Không được chọn, bị loại trong cuộc thi"
+1313,駱駝,luòtuó,N,Lạc Đà,Con lạc đà
+1314,驢,lǘ,N,Lừa,Con lừa
+1315,鋁,lǚ,N,Lỗ,Nhôm (kim loại)
+1316,旅費,lǚfèi,N,Lữ Phí,Chi phí đi lại
+1317,旅途,lǚtú,N,Lữ Đồ,"Chuyến đi, hành trình"
+1318,履歷,lǚlì,N,Lý Lịch,"Hồ sơ công việc, lý lịch"
+1319,履行,lǚxíng,V,Lý Hành,"Thực hiện, hành động theo kế hoạch"
+1320,略,lüè,Adv,lược,"lược qua, sơ qua"
+1321,麻醉,mázuì,V,Ma Tuy,"Gây mê, thuốc mê"
+1322,馬鈴薯,mălíngshŭ,N,Mã Linh Thổ,Khoai tây
+1323,埋伏,máifú,Vi,Mai Phục,"Mai phục, phục kích"
+1324,買賣,măimài,N,mãi mại,"mua bán, giao dịch"
+1325,買主,măizhŭ,N,Mãi Chủ,Người mua
+1326,邁,mài,V,Mái,"Tiến lên, bước tới"
+1327,邁進,màijìn,Vi,Mái Tiến,"Tiến bước, tiến về phía trước"
+1328,麥(子),mài(zi),N,Mạch (Tử),Lúa mì
+1329,瞞,mán,V,Mạn,"Lừa dối, giấu giếm"
+1330,蠻橫,mánhèng,Vs,Man Hành,"Hung hãn, thô lỗ"
+1331,滿懷,mănhuái,Vst,Mãn Hoài,Tràn đầy (cảm xúc)
+1332,漫長,màncháng,Vs,Man Trường,"Dài đằng đẵng, dài lâu"
+1333,蔓延,mànyán,Vs,Mạn Diên,"Lan rộng, kéo dài"
+1334,盲從,mángcóng,Vs,Mang Tòng,"Mù quáng theo, không suy nghĩ"
+1335,盲人,mángrén,N,Mang Nhân,Người mù
+1336,茫然,mángrán,Vs,Mang Nhiên,"Hoang mang, lạc lối"
+1337,毛毯,máotăn,N,Mao Đ blanket,Chăn lông
+1338,茂密,màomì,Vs,Mậu Mật,"Rậm rạp, dày đặc"
+1339,冒險,màoxiăn,Vi,Mạo Hiểm,"Mạo hiểm, thách thức"
+1340,枚,méi,M,Mai,"(Lượng từ dùng cho đồ vật nhỏ, thường là đồng xu)"
+1341,眉毛/眉,méimáo/méi,N,Mi Mao,Lông mày
+1342,眉頭,méitóu,N,Mi Đầu,Đầu lông mày
+1343,每每,měiměi,Adv,Mỗi Mỗi,"Mỗi khi, luôn luôn"
+1344,美滿,měimăn,Vs,Mỹ Mãn,"Hạnh phúc trọn vẹn, viên mãn"
+1345,悶,mēn,Vs,Mân,"Chán nản, bực bội"
+1346,門戶,ménhù,N,Môn Hộ,"Cửa nhà, cửa ra vào"
+1347,蒙,méng,Vst,Mông,"Lừa dối, ngớ ngẩn"
+1348,猛,měng,Adv,mãnh,"mạnh mẽ, dữ dội"
+1349,猛烈,měngliè,Vs,Mạnh Liệt,"Mãnh liệt, mãnh mẽ"
+1350,夢見,mèngjiàn,Vpt,Mộng Kiến,Mơ thấy
+1351,謎,mí,N,Mê,"Câu đố, bí ẩn"
+1352,謎語,míyŭ,N,Mê Ngữ,"Câu đố, câu hỏi khó hiểu"
+1353,迷宮,mígōng,N,Mê Cung,Mê cung
+1354,迷惑,míhuò,Vs,Mê Hoặc,"Làm cho bối rối, gây hoang mang"
+1355,迷戀,míliàn,Vst,Mê Luyến,"Mê đắm, say mê"
+1356,彌補,míbŭ,V,Mi Bổ,"Bù đắp, sửa chữa"
+1357,密集,mìjí,Vs,Mật Tập,"Dày đặc, tập trung"
+1358,蜜,mì,N,Mật,Mật ong
+1359,鳴,míng,Vi,Minh,"Kêu, hót, gáy"
+1360,明白,míngbái,Adv,minh bạch,"hiểu, rõ ràng"
+1361,明理,mínglĭ,Vs,Minh Lý,"Sáng suốt, hiểu lý lẽ"
+1362,明日,míngrì,N,Minh Nhật,Ngày mai
+1363,明智,míngzhì,Vs,Minh Triết,"Sáng suốt, thông minh"
+1364,名額,míngé,N,Danh Ngạch,"Số lượng danh sách, chỉ tiêu"
+1365,名號,mínghào,N,Danh Hiệu,"Danh xưng, tên gọi"
+1366,名氣,míngqì,N,Danh Khí,"Danh tiếng, uy tín"
+1367,名勝,míngshèng,N,Danh Thắng,Danh lam thắng cảnh
+1368,名聲,míngshēng,N,Danh Thính,Danh tiếng
+1369,名堂,míngtáng,N,Danh Đường,"Công việc, công trình nổi bật"
+1370,名下,míngxià,N,Danh Hạ,"Dưới tên, quyền sở hữu"
+1371,冥想,míngxiăng,Vi,Minh Tưởng,"Thiền, suy nghĩ sâu sắc"
+1372,命名,mìngmíng,V-sep,Mệnh Danh,"Đặt tên, gọi tên"
+1373,命中,mìngzhòng,Vpt,Mệnh Trung,"Trúng số, đúng mục tiêu"
+1374,綿延,miányán,Vst,Miên Duệ,"Kéo dài, tiếp nối"
+1375,勉強,miănqiăng,V,miễn cưỡng,"gượng ép, miễn cưỡng"
+1376,免稅,miănshuì,Vs,Miễn Thuế,Miễn thuế
+1377,免疫,miănyì,Vs,Miễn Dịch,Miễn dịch
+1378,面孔,miànkŏng,N,Diện Khẩu,Khuôn mặt
+1379,描繪,miáohuì,V,Miêu Họa,"Vẽ, mô tả"
+1380,描述,miáoshù,V,Miêu Thự,"Mô tả, diễn đạt"
+1381,民俗,mínsú,N,Dân Tục,Phong tục dân gian
+1382,民營,mínyíng,Vs-attr,Dân Doanh,Doanh nghiệp tư nhân
+1383,敏感,mĭngăn,Vs,Mẫn Cảm,Nhạy cảm
+1384,敏捷,mĭnjié,Vs,Mẫn Tiết,"Nhanh nhẹn, linh hoạt"
+1385,滅,miè,V,Diệt,"Tiêu diệt, hủy diệt"
+1386,模範,mófàn,N,Mô Phạm,"Mẫu mực, gương mẫu"
+1387,模具,mójù,N,Mô Cụ,Khuôn mẫu
+1388,模式,móshì,N,Mô Thức,"Mô hình, kiểu mẫu"
+1389,魔術,móshù,N,Ma Thuật,Phép thuật
+1390,末期,mòqí,N,Mạt Kỳ,"Thời kỳ cuối, giai đoạn cuối"
+1391,墨,mò,N,Mặc,"Mực (viết), mực vẽ"
+1392,沒落,mòluò,Vs,Mất Lạc,"Suy tàn, xuống cấp"
+1393,沒收,mòshōu,V,Mất Thu,"Tịch thu, thu hồi"
+1394,默默/默,mòmò,Adv,Mặc Mặc,"Im lặng, yên tĩnh"
+1395,默契,mòqì,N,Mặc Hợp,"Hiệp ước im lặng, sự ăn ý"
+1396,漠視,mòshì,V,Mạc Thị,"Lờ đi, không quan tâm"
+1397,謀生,móushēng,Vi,Mưu Sinh,Kiếm sống
+1398,某些,mŏuxiē,Det,Mỗ Một,"Một số, một vài"
+1399,畝,mŭ,M,Mẫu,Mẫu (đơn vị đo diện tích)
+1400,木材,mùcái,N,Mộc Tài,"Gỗ, vật liệu gỗ"
+1401,木刻,mùkē,N,Mộc Khắc,Khắc gỗ
+1402,木料,mùliào,N,Mộc Liệu,Nguyên liệu gỗ
+1403,木偶,mùŏu,N,Mộc Ấu,Múa rối gỗ
+1404,沐浴,mùyù,Vi,Mục Dục,"Tắm rửa, tắm gội"
+1405,目睹,mùdŭ,Vpt,Mục Đỗ,"Chứng kiến, nhìn thấy"
+1406,目光,mùguāng,N,Mục Quang,"Ánh mắt, tầm nhìn"
+1407,目擊,mùjí,Vpt,Mục Kích,"Chứng kiến, thấy trực tiếp"
+1408,牧場,mùchăng,N,Mục Trường,"Đồng cỏ, trang trại"
+1409,幕,mù,N,Mạc,"Màn, bức màn, cảnh (trong kịch, phim)"
+1410,募集,mùjí,V,Mộ Tập,"Tuyển dụng, thu thập"
+1411,拿,ná,Prep,Nã,"Cầm, lấy"
+1412,納悶,nàmèn,Vs,Nạp Mẫn,"Bối rối, khó hiểu"
+1413,納入,nàrù,V,Nạp Nhập,"Chấp nhận, đưa vào"
+1414,納稅,nàshuì,V-sep,Nạp Thuế,Nộp thuế
+1415,乃/乃是,năi/năishì,Adv,Nãi/ Nãi Thị,"Chính là, tức là"
+1416,耐,nài,Vs-pred,Nại,"Chịu đựng, kiên trì"
+1417,耐力,nàilì,N,Nại Lực,"Sức bền, sức chịu đựng"
+1418,男方,nánfāng,N,Nam Phương,"Phía nam, bên nam"
+1419,南極洲,nánjízhōu,N,Nam Cực Châu,Lục địa Nam Cực
+1420,難度,nándù,N,Nan Độ,Độ khó
+1421,難關,nánguān,N,Nan Quan,"Khó khăn, thử thách"
+1422,難免,nánmiăn,Vs,Nan Miễn,"Khó tránh, không tránh khỏi"
+1423,難題,nántí,N,Nan Đề,Vấn đề khó khăn
+1424,難民,nànmín,N,Nan Dân,Người tị nạn
+1425,囊括,nángguā,V,Ngang Quát,"Bao quát, bao gồm"
+1426,腦海,năohăi,N,Não Hải,"Trong đầu, tâm trí"
+1427,腦力,năolì,N,Não Lực,Năng lực trí tuệ
+1428,內閣,nèigé,N,Nội Các,Nội các (chính phủ)
+1429,內涵,nèihán,N,Nội Hàm,"Nội dung, hàm ý, ý nghĩa ẩn chứa"
+1430,內銷,nèixiāo,Vs-attr,Nội Tiêu,"Bán trong nước, tiêu thụ nội địa"
+1431,內在,nèizài,N,Nội Tại,"Bên trong, thuộc về bản chất"
+1432,內戰,nèizhàn,N,Nội Chiến,Chiến tranh nội bộ
+1433,內政,nèizhèng,N,Nội Chính,Chính trị nội bộ
+1434,能量,néngliàng,N,Năng Lượng,Năng lượng
+1435,擬,nĭ,V,Nghĩ,"Dự tính, mô phỏng, giả định"
+1436,擬定,nĭdìng,V,Nghĩ Định,"Lập kế hoạch, dự thảo"
+1437,念頭,niàntou,N,Niệm Đầu,"Ý tưởng, suy nghĩ"
+1438,娘,niáng,N,Nương,"Mẹ, mẹ ruột"
+1439,娘家,niángjiā,N,Nương Gia,Nhà mẹ (nhà vợ)
+1440,凝固,nínggù,Vp,Ngưng Cố,"Đóng băng, đông cứng lại"
+1441,凝結,níngjié,V,Ngưng Kết,"Kết tụ lại, đông kết"
+1442,凝聚,níngjù,V,Ngưng Tụ,"Tụ hợp lại, gắn kết"
+1443,凝視,níngshì,V,Ngưng Thị,Nhìn chằm chằm
+1444,扭轉,niŭzhuăn,V,Nhuýnh Chuyển,"Lật ngược tình thế, xoay chuyển"
+1445,農具,nóngjù,N,Nông Cụ,Dụng cụ nông nghiệp
+1446,農田,nóngtián,N,Nông Điền,Ruộng đồng
+1447,農作物,nóngzuòwù,N,Nông Tác Vật,"Nông sản, cây trồng"
+1448,奴隸,núlì,N,Nô Lệ,Nô lệ
+1449,努力,nŭlì,N,Nỗ lực,Cố gắng
+1450,怒氣,nùqì,N,Nộ Khí,"Cơn giận, phẫn nộ"
+1451,挪,nuó,V,Noa,"Di chuyển, đổi chỗ"
+1452,懦弱,nuòruò,Vs,Nhuệ Nhược,"Yếu đuối, nhu nhược"
+1453,諾言,nuòyán,N,Nặc Ngôn,"Lời hứa, cam kết"
+1454,女方,nǚfāng,N,Nữ Phương,"Phía nữ, bên nữ"
+1455,虐待,nüèdài,V,Nhục Hại,"Lạm dụng, ngược đãi"
+1456,趴,pā,Vi,Pa,"Nằm sấp, bò"
+1457,拍馬屁,pāimăpì,Vi,Phách Mã Bì,"Nịnh hót, tán tụng thái quá"
+1458,拍攝,pāishè,V,Phách Xạ,"Chụp ảnh, quay phim"
+1459,拍子,pāizi,N,Phách Tử,"Nhịp, phách (nhạc học)"
+1460,排除,páichú,V,Bài Trừ,"Loại trừ, loại bỏ"
+1461,排擠,páijĭ,V,Bài Tị,"Đẩy ra, đuổi đi"
+1462,排名,páimíng,Vi,Bài Danh,"Xếp hạng, xếp thứ tự"
+1463,派出所,pàichūsuŏ,N,Phái Xuất Sở,"Đồn công an, trạm cảnh sát"
+1464,派遣,pàiqiăn,V,Phái Khiển,"Cử đi, phái đi"
+1465,派頭,pàitóu,N,Phái Đầu,"Phong thái, dáng vẻ"
+1466,判,pàn,V,Phán,"Phán quyết, xét xử"
+1467,盼,pàn,Vst,Phán,"Hy vọng, mong chờ"
+1468,旁人,pángrén,N,Bàng Nhân,"Người khác, người ngoài"
+1469,旁聽,pángtīng,V,Bàng Thính,"Nghe lén, nghe lén cuộc hội thoại"
+1470,拋,pāo,V,Phao,"Ném, vứt"
+1471,拋棄,pāoqì,V,Phao Khí,"Vứt bỏ, từ bỏ"
+1472,跑道,păodào,N,Bảo Đạo,"Đường chạy, sân chạy"
+1473,泡,pào,M,Phao,"Ngâm, pha (trà)"
+1474,泡沫,pàomò,N,Phao Mạt,"Bọt biển, bong bóng"
+1475,陪伴,péibàn,V,Bồi Bạn,"Đi cùng, đồng hành"
+1476,培訓,péixùn,V,Bồi Huấn,"Đào tạo, huấn luyện"
+1477,培育,péiyù,V,Bồi Dục,"Nuôi dưỡng, chăm sóc"
+1478,配,pèi,V / Vs,phối,phối hợp
+1479,配給,pèijĭ,V,Phối Cấp,"Cung cấp, phân phát"
+1480,配音,pèiyīn,V-sep,Phối Âm,"Lồng tiếng, thuyết minh"
+1481,噴漆,pēnqī,V-sep,Phun Kỳ,Phun sơn
+1482,盆地,péndì,N,Bồn Địa,"Chậu, bồn (địa lý), thung lũng"
+1483,蓬勃,péngbó,Vs,Phong Bác,"Phát triển mạnh mẽ, sôi nổi"
+1484,捧場,pěngchăng,Vi,Bổng Tràng,"Ủng hộ, giúp đỡ"
+1485,批發,pīfā,V,Phê Phát,Bán sỉ
+1486,批准,pīzhŭn,Vpt,Phê Chuẩn,"Phê duyệt, chấp nhận"
+1487,疲憊,píbèi,Vs,Bì Bạc,"Mệt mỏi, kiệt sức"
+1488,匹,pĭ,M,thất,"con (dùng cho con ngựa, con lừa)"
+1489,譬如/譬如說,pìrú/pìrúshuō,Prep,Tỉ Như,"Ví dụ như, chẳng hạn như"
+1490,偏差,piānchā,N,Thiên Sai,Sai lệch
+1491,便宜,piányí,N / Vst,Tiện nghi,Rẻ
+1492,片刻,piànkè,N,Phiến Khắc,"Một lát, một chút thời gian"
+1493,票,piào,M,Phiếu,Vé
+1494,拼,pīn,V,Tinh,"Ghép lại, kết hợp"
+1495,貧苦,pínkŭ,Vs,Bần Khổ,Nghèo khổ
+1496,貧民,pínmín,N,Bần Dân,Người nghèo
+1497,品味,pĭnwèi,N,Phẩm Vị,"Sở thích, khẩu vị"
+1498,品種,pĭnzhŏng,N,Phẩm Chủng,"Giống, loại"
+1499,平凡,píngfán,Vs,Bình Phàm,"Bình thường, tầm thường"
+1500,平面,píngmiàn,N,Bình Diện,Bề mặt phẳng
+1501,平穩,píngwěn,Vs,Bình Ổn,Ổn định
+1502,平行,píngxíng,Vs,Bình Hành,Song song
+1503,評估,pínggū,V,Bình Cứu,Đánh giá
+1504,評價,píngjià,N,Bình Giá,"Đánh giá, xếp loại"
+1505,評論,pínglùn,V,Bình Luận,"Bình luận, nhận xét"
+1506,潑,pō,V,Phát,"Tạt, vẩy"
+1507,婆家,pójiā,N,Bà Gia,Nhà chồng
+1508,破案,pòàn,V-sep,Phá Án,"Giải quyết án, phá án"
+1509,破產,pòchăn,Vp,Phá Sản,"Phá sản, vỡ nợ"
+1510,破除,pòchú,V,Phá Trừ,"Loại bỏ, tiêu diệt"
+1511,破獲,pòhuò,V,Phá Hoạch,"Phá vỡ, phá hủy"
+1512,破例,pòlì,Vp-sep,Phá Lệ,"Phá lệ, làm ngoại lệ"
+1513,破碎,pòsuì,Vs,Phá Toái,"Vỡ, hỏng"
+1514,迫害,pòhài,V,Bức Hại,"Hành hạ, bức hiếp"
+1515,魄力,pòlì,N,Bạt Lực,"Nghị lực, sức mạnh tâm hồn"
+1516,樸素,púsù,Vs,Phác Tố,"Đơn giản, mộc mạc"
+1517,曝光,pùguāng,Vp,Phóng Quang,"Phơi bày, lộ ra"
+1518,暴露,pùlù,Vs,Bạo Lộ,"Phơi bày, lộ ra"
+1519,漆,qī,N,Tất,"Sơn, mực sơn"
+1520,淒涼,qīliáng,Vs,Thê Lương,"Buồn bã, u ám"
+1521,欺侮,qīwŭ,V,Kỳ Vũ,"Ức hiếp, lạm dụng"
+1522,奇觀,qíguān,N,Kỳ Quan,"Kỳ quan, cảnh tượng đặc biệt"
+1523,奇蹟,qíjī,N,Kỳ Tích,"Phép màu, kỳ tích"
+1524,奇妙,qímiào,Vs,Kỳ Diệu,"Kỳ lạ, kỳ diệu"
+1525,奇異,qíyì,Vs,Kỳ Dị,"Lạ, khác thường"
+1526,期貨,qíhuò,N,Kỳ Hóa,Hàng hóa tương lai (chứng khoán)
+1527,旗幟,qízhì,N,Kỳ Chỉ,"Cờ, biểu tượng"
+1528,乞丐,qĭgài,N,Kì Khách,Kẻ ăn xin
+1529,啟,qĭ,Vi,Khởi,"Mở, bắt đầu, khởi xướng"
+1530,啟發,qĭfā,V,Khởi Phát,"Khơi dậy, phát triển, gợi mở"
+1531,啟示,qĭshì,N,Khởi Thị,"Chỉ dẫn, gợi ý"
+1532,啟事,qĭshì,N,Khởi Sự,"Thông báo, tin tức"
+1533,起步,qĭbù,Vi,Khởi Bộ,"Bắt đầu, khởi động"
+1534,起伏,qĭfú,Vi,Khởi Phục,"Lên xuống, dao động"
+1535,起碼,qĭmă,Adv,Khởi Mã,"Tối thiểu, ít nhất"
+1536,起源,qĭyuán,N,Khởi Nguyên,"Nguồn gốc, bắt nguồn"
+1537,氣概,qìgài,N,Khí Đại,"Tinh thần, thái độ, khí phách"
+1538,氣管,qìguăn,N,Khí Quản,"Cuống họng, đường thở"
+1539,氣派,qìpài,Vs,Khí Phái,"Phong cách, khí thế"
+1540,氣勢,qìshì,N,Khí Thế,"Thế lực, khí thế"
+1541,氣體,qìtĭ,N,Khí Thể,Thể khí
+1542,氣壓,qìyā,N,Khí Áp,Áp suất khí
+1543,契機,qìjī,N,Khế Cơ,"Cơ hội, thời cơ"
+1544,棄權,qìquán,Vi,Khước Quyền,Từ bỏ quyền lợi
+1545,恰當,qiàdàng,Vs,Thích Đáng,"Phù hợp, thích hợp"
+1546,恰好,qiàhăo,Adv,Thích Hảo,"Vừa đúng, vừa vặn"
+1547,恰恰,qiàqià,Adv,Thích Thích,"Đúng lúc, vừa vặn"
+1548,洽商,qiàshāng,Vi,Hợp Thương,"Thương lượng, đàm phán"
+1549,洽談,qiàtán,Vi,Hợp Đàm,"Thương thảo, đàm phán"
+1550,鉛,qiān,N,Diêm,Chì (kim loại)
+1551,牽連,qiānlián,Vst,Khiên Liên,"Dính líu, liên quan"
+1552,簽署,qiānshù,V,Hiên Thư,"Ký tên, ký kết"
+1553,千萬,qiānwàn,Det,thiên vạn,"rất nhiều, hàng triệu"
+1554,謙遜,qiānxùn,Vs,Khiêm Tốn,"Khiêm nhường, tôn trọng"
+1555,前輩,qiánbèi,N,Tiền Bối,"Người đi trước, tiền bối"
+1556,前程,qiánchéng,N,Tiền Trình,"Tương lai, tiền đồ"
+1557,前後,qiánhòu,N,Tiền Hậu,"Trước sau, toàn bộ"
+1558,前景,qiánjĭng,N,Tiền Cảnh,"Triển vọng, tương lai"
+1559,前科,qiánkē,N,Tiền Khoa,Tiền án
+1560,前提,qiántí,N,Tiền Đề,Điều kiện tiên quyết
+1561,潛藏,qiáncáng,Vi,Tiềm Tàng,"Tiềm ẩn, che giấu"
+1562,潛力,qiánlì,N,Tiềm Lực,Tiềm năng
+1563,虔誠,qiánchéng,Vs,Khiêm Thành,"Sùng kính, thành kính"
+1564,淺薄,qiănbó,Vs,Thiển Bạc,"Nông cạn, hời hợt"
+1565,淺顯,qiănxiăn,Vs,Thiển Hiển,"Dễ hiểu, rõ ràng"
+1566,腔調,qiāngdiào,N,Xang Điều,"Giọng điệu, âm điệu"
+1567,牆角,qiángjiăo,N,Tường Giác,Góc tường
+1568,強勁,qiángjìng,Vs,Cường Kình,"Mạnh mẽ, vững vàng"
+1569,強求,qiăngqiú,V,Cường Cầu,"Cưỡng ép, ép buộc"
+1570,強權,qiángquán,N,Cường Quyền,Quyền lực mạnh mẽ
+1571,強壯,qiángzhuàng,Vs,Cường Tráng,"Mạnh mẽ, vạm vỡ"
+1572,瞧不起,qiáobùqĭ,Vst,Khiêu Bất Khí,"Khinh thường, coi thường"
+1573,橋樑/橋梁,qiáoliáng,N,Kiều Lương,"Cầu, cầu nối"
+1574,巧合,qiăohé,Vs,Xảo Hợp,"Ngẫu nhiên, trùng hợp"
+1575,俏,qiào,Vs,Xảo,"Xinh đẹp, dễ thương"
+1576,翹,qiào,Vs,Khiêu,"Nghiêng, vểnh, vươn lên"
+1577,峭壁,qiàobì,N,Tiêu Bích,Vách đá dốc đứng
+1578,翹課,qiàokè,V-sep,Khiêu Khóa,"Bỏ học, trốn học"
+1579,切磋,qiēcuō,V,Thiết Thoa,"Trao đổi, luyện tập"
+1580,且,qiě,Adv,Thả,"Và, hơn nữa"
+1581,切實,qièshí,Vs,Thiết Thực,"Cụ thể, thực tế"
+1582,竊賊,qièzéi,N,Thiết Tặc,"Kẻ trộm, cắp"
+1583,親,qīn,Vs,thân,thân thiết
+1584,親熱,qīnrè,Vs,Thân Nhiệt,"Nồng nhiệt, thân mật"
+1585,親身,qīnshēn,Adv,Thân Thân,"Tự mình, bản thân"
+1586,親生,qīnshēng,Vs-attr,Thân Sinh,"Sinh ra, do mẹ sinh"
+1587,侵犯,qīnfàn,V,Xâm Phạm,"Xâm lấn, vi phạm"
+1588,侵略,qīnlüè,V,Xâm Lược,"Xâm chiếm, xâm lược"
+1589,侵蝕,qīnshí,V,Xâm Thực,"Xâm hại, ăn mòn"
+1590,侵襲,qīnxí,V,Xâm Tập,"Tấn công, xâm nhập"
+1591,欽佩,qīnpèi,Vst,Khâm Bái,"Kính trọng, ngưỡng mộ"
+1592,琴,qín,N,Cầm,"Đàn, đàn tỳ bà"
+1593,勤奮,qínfèn,Vs,Cần Phấn,"Chăm chỉ, cần cù"
+1594,青春,qīngchūn,N,Thanh Xuân,"Tuổi trẻ, thời thanh xuân"
+1595,青翠,qīngcuì,Vs,Thanh Thúy,"Xanh tươi, tươi sáng"
+1596,青蛙,qīngwā,N,Thanh Wa,Con ếch
+1597,清澈,qīngchè,Vs,Thanh Triệt,"Trong suốt, rõ ràng"
+1598,清潔,qīngjié,Vs,Thanh Khiết,"Sạch sẽ, vệ sinh"
+1599,清靜,qīngjìng,Vs,Thanh Tịnh,"Yên tĩnh, thanh bình"
+1600,清廉,qīnglián,Vs,Thanh Liêm,"Liêm khiết, trong sạch"
+1601,清幽,qīngyōu,Vs,Thanh U,"Yên tĩnh, thanh thoát"
+1602,清掃,qīngsăo,V,Thanh Tảo,"Quét dọn, vệ sinh"
+1603,傾向,qīngxiàng,N,khuynh hướng,"xu hướng, chiều hướng"
+1604,輕薄,qīngbó,Vs,Khinh Bạc,"Hời hợt, thiếu trách nhiệm"
+1605,輕蔑,qīngmiè,Vs,Khinh Miệt,"Khinh thường, coi thường"
+1606,輕易,qīngyì,Adv,Khinh Dịch,"Dễ dàng, nhẹ nhàng"
+1607,情報,qíngbào,N,Tình Báo,"Thông tin, tình báo"
+1608,情操,qíngcāo,N,Tình Thao,"Tình cảm, cảm xúc"
+1609,情婦,qíngfù,N,Tình Phụ,Người tình (nữ)
+1610,情節,qíngjié,N,Tình Tiết,"Câu chuyện, cốt truyện"
+1611,情景,qíngjĭng,N,Tình Cảnh,"Cảnh tượng, tình huống"
+1612,情侶,qínglǚ,N,Tình Lữ,"Cặp đôi, người yêu"
+1613,情趣,qíngqù,N,Tình Thú,"Sở thích, niềm vui"
+1614,慶幸,qìngxìng,Vs,Khánh Hạnh,"May mắn, hạnh phúc"
+1615,丘陵,qiūlíng,N,Khâu Lĩnh,"Đồi, gò, vùng đồi núi"
+1616,求學,qiúxué,Vi,Cầu Học,"Học hành, tìm kiếm tri thức"
+1617,求助,qiúzhù,Vi,Cầu Trợ,"Cầu cứu, tìm sự giúp đỡ"
+1618,屈服,qūfú,Vs,Khuất Phục,"Khuất phục, chịu thua"
+1619,趨勢,qūshì,N,Xuy Trí,"Xu hướng, trào lưu"
+1620,渠道,qúdào,N,Kênh Đạo,"Kênh, đường ống, phương tiện"
+1621,取材,qŭcái,Vs,Thủ Tài,"Lấy tài liệu, lấy nguồn thông tin"
+1622,取締,qŭdì,V,Thủ Đế,"Cấm, ngừng, kiểm soát (hoạt động trái phép)"
+1623,取樣,qŭyàng,N,Thủ Dạng,"Lấy mẫu, mẫu thử"
+1624,取悅,qŭyuè,V,Thủ Duệ,"Làm vui lòng, làm vừa lòng"
+1625,趣味,qùwèi,N,Thú Vị,"Sở thích, niềm vui"
+1626,圈,quān,V,quyển,"vòng tròn, chu vi"
+1627,圈子,quānzi,N,Quyển Tử,"Nhóm, cộng đồng, giới"
+1628,拳,quán,M,Quyền,"Quyền (quyền lực), đấm, quyền cước"
+1629,全力,quánlì,Adv,Toàn Lực,"Toàn bộ sức lực, hết sức"
+1630,全盤,quánpán,Det,Toàn Bàn,"Toàn bộ, toàn diện"
+1631,權力,quánlì,N,Quyền Lực,Quyền lực
+1632,權威,quánwēi,N,Quyền Uy,"Quyền uy, quyền lực tối cao"
+1633,權益,quányì,N,Quyền Ích,"Quyền lợi, quyền lợi chính đáng"
+1634,泉源,quányuán,N,Tuyền Nguyên,"Nguồn suối, nguồn gốc"
+1635,勸導,quàndăo,V,Khuyên Đạo,"Khuyên bảo, hướng dẫn"
+1636,勸告,quàngào,N,Khuyên Cáo,"Khuyên bảo, lời khuyên"
+1637,缺陷,quēxiàn,N,Khiếm Hãm,"Khiếm khuyết, khuyết điểm"
+1638,確保,quèbăo,V,Xác Bảo,"Đảm bảo, chắc chắn"
+1639,確切,quèqiè,Vs,Xác Thiết,"Chính xác, rõ ràng"
+1640,確實,quèshí,Adv,xác thực,"chính xác, thật sự"
+1641,群島,qúndăo,N,Quần Đảo,Quần đảo
+1642,群居,qúnjū,Vs,Quần Cư,"Sống chung, sống tập thể"
+1643,染料,rănliào,N,Nhiễm Liệu,Thuốc nhuộm
+1644,嚷,răng,Vi,Nhảng,"Kêu la, la hét"
+1645,饒,ráo,V,Nao,"Khoan dung, tha thứ"
+1646,熱潮,rècháo,N,Nhiệt Triều,"Trào lưu, phong trào nóng"
+1647,熱帶,rèdài,N,Nhiệt Đới,Vùng nhiệt đới
+1648,熱水瓶,rèshuĭpíng,N,Nhiệt Thủy Bình,Bình nước nóng
+1649,仁愛,rénài,N,Nhân Ái,"Lòng nhân ái, lòng thương người"
+1650,人次,réncì,N,Nhân Thứ,Số lượt người
+1651,人道,réndào,N,Nhân Đạo,Đạo đức nhân loại
+1652,人禍,rénhuò,N,Nhân Họa,Tai họa do con người gây ra
+1653,人際,rénjì,N,Nhân Tế,"Quan hệ xã hội, giao tiếp"
+1654,人情,rénqíng,N,Nhân Tình,"Quan hệ xã hội, tình người"
+1655,人群,rénqún,N,Nhân Quần,"Đám đông, quần chúng"
+1656,人士,rénshì,N,Nhân Sĩ,"Người (có học, có tiếng), nhân vật"
+1657,人手,rénshŏu,N,Nhân Thủ,"Nhân lực, lực lượng lao động"
+1658,人選,rénxuăn,N,Nhân Tuyển,"Người chọn lựa, ứng viên"
+1659,人造,rénzào,Vs-attr,Nhân Tạo,"Nhân tạo, do con người tạo ra"
+1660,忍痛,rěntòng,Vs,Nhẫn Thống,"Chịu đựng đau đớn, kiên cường chịu đựng"
+1661,任,rèn,M,nhậm,"đảm nhiệm, giao phó"
+1662,任期,rènqí,N,Nhậm Kỳ,"Thời gian tại nhiệm, nhiệm kỳ"
+1663,任意,rènyì,Adv,Nhậm Ý,"Tùy ý, tự do lựa chọn"
+1664,認錯,rèncuò,Vp,Nhận Thác,"Nhận lỗi, thừa nhận sai"
+1665,認定,rèndìng,V,Nhận Định,"Xác nhận, định rõ"
+1666,日程,rìchéng,N,Nhật Trình,"Lịch trình, thời gian biểu"
+1667,日光燈,rìguāngdēng,N,Nhật Quang Đăng,Đèn huỳnh quang
+1668,日益,rìyì,Adv,Nhật Ích,"Ngày càng, ngày càng nhiều"
+1669,容量,róngliàng,N,Dung Lượng,"Dung tích, sức chứa"
+1670,容納,róngnà,Vst,Dung Nạp,"Tiếp nhận, chứa đựng"
+1671,容器,róngqì,N,Dung Khí,"Đồ chứa, vật chứa"
+1672,容許,róngxŭ,V,Dung Hứa,"Cho phép, chấp nhận"
+1673,溶,róng,Vs,Dung,"Tan chảy, hòa tan"
+1674,溶化,rónghuà,Vp,Dung Hóa,"Tan chảy, tan ra"
+1675,融合,rónghé,V,Dung Hợp,"Hòa hợp, dung hòa"
+1676,融洽,róngqià,Vs,Dung Thỏa,"Hòa hợp, hài hòa"
+1677,榮譽,róngyù,N,Vinh Dự,"Vinh dự, danh dự"
+1678,揉,róu,V,Nhâu,"Xoa, vỗ về"
+1679,柔軟,róuruăn,Vs,Nhu Nhuyễn,"Mềm mại, linh hoạt"
+1680,肉麻,ròumá,Vs,Nhục Ma,"Lố bịch, quá mức, ngượng ngùng"
+1681,肉體,ròutĭ,N,Nhục Thể,"Thể xác, thân thể"
+1682,如此,rúcĭ,Adv,như thử,như vậy
+1683,儒家,rújiā,N,Nho Gia,Trường phái Nho giáo
+1684,入超,rùchāo,Vs,Nhập Siêu,Nhập khẩu vượt quá xuất khẩu
+1685,入口,rùkŏu,Vi,Nhập khẩu,Lối vào
+1686,入世,rùshì,Vs,Nhập Thế,"Gia nhập thế giới, bước vào xã hội"
+1687,軟弱,ruănruò,Vs,Nhu Nhược,"Mềm yếu, yếu đuối"
+1688,軟體,ruăntĭ,N,Nhu Thể,Phần mềm (máy tính)
+1689,若,ruò,Conj,Nhược,"Nếu, nếu như"
+1690,若干,ruògān,Det,Nhược Can,"Một vài, một số lượng nhất định"
+1691,撒謊,sāhuăng,V-sep,Tả Hàng,Nói dối
+1692,撒,să,V,Tả,"Rải, vãi, tung"
+1693,灑,să,V,Tả,"Rưới, tưới"
+1694,賽,sài,V,Tái,"Cuộc thi, cuộc đấu"
+1695,散文,sănwén,N,Tán Văn,Văn xuôi
+1696,散布/散佈,sànbù,V,Tán Phổ,"Phát tán, phân tán"
+1697,喪事,sāngshì,N,Tang Sự,Tang lễ
+1698,嗓子,săngzi,N,Tạng Tử,"Họng, cổ họng"
+1699,喪生,sàngshēng,Vp,Tang Sinh,"Chết, tử vong"
+1700,騷動,sāodòng,Vi,Tao Động,"Náo động, hỗn loạn"
+1701,嫂子,săozi,N,Thảo Tử,Chị dâu
+1702,色澤,sèzé,N,Sắc Tắc,"Màu sắc, vẻ ngoài"
+1703,剎(ㄕㄚ)車/煞車,shāchē,V-sep,Sát Xa/ Sát Xa,"Phanh xe, dừng lại đột ngột"
+1704,沙啞,shāyă,Vs,Sa Họa,"Cổ họng khàn, giọng khàn"
+1705,傻瓜,shăguā,N,Sỏ Qua,"Kẻ ngốc, đần độn"
+1706,山峰,shānfēng,N,Sơn Phong,Đỉnh núi
+1707,山谷,shāngŭ,N,Sơn Cốc,Thung lũng
+1708,山脈,shānmài,N,Sơn Mạch,Dãy núi
+1709,閃電,shăndiàn,N,Thiểm Điện,Sét
+1710,閃爍,shănshuò,Vi,Thiểm Sóc,"Lấp lánh, chớp sáng"
+1711,閃耀,shănyào,Vs,Thiểm Diệu,"Tỏa sáng, lấp lánh"
+1712,擅長,shàncháng,Vst,Tham Sở,"Thành thạo, giỏi về"
+1713,傷害,shānghài,N,thương hại,"tổn thương, làm hại"
+1714,傷口,shāngkŏu,N,Thương Khẩu,Vết thương
+1715,傷亡,shāngwáng,Vp,Thương Vong,"Thương vong, thương tích và tử vong"
+1716,商榷,shāngquè,Vi,Thương Thảo,"Thảo luận, thương lượng"
+1717,商討,shāngtăo,V,Thương Thảo,"Bàn bạc, thảo luận"
+1718,賞,shăng,V,Thưởng,"Thưởng, khen thưởng"
+1719,尚,shàng,Adv,Thượng,"Còn, vẫn, quan trọng"
+1720,上吊,shàngdiào,Vi,Thượng Điếu,Treo cổ tự tử
+1721,上好,shànghăo,Vs-attr,Thượng Hảo,"Tốt, chất lượng cao"
+1722,上進,shàngjìn,Vs,Thượng Tiến,"Tiến bộ, phát triển"
+1723,上空,shàngkōng,N,Thượng Không,"Không trung, bầu trời"
+1724,上路,shànglù,Vp,Thượng Lộ,"Lên đường, bắt đầu hành trình"
+1725,上門,shàngmén,Vi,Thượng Môn,"Đến nhà, đến cửa (thăm viếng)"
+1726,上司,shàngsī,N,Thượng Tư,"Cấp trên, sếp, người quản lý"
+1727,上下,shàngxià,N,thượng hạ,"lên xuống, trên dưới"
+1728,上旬,shàngxún,N,Thượng Tuần,Mười ngày đầu tháng
+1729,上演,shàngyăn,V,Thượng Diễn,"Biểu diễn, trình diễn (kịch, phim)"
+1730,上癮,shàngyĭn,Vp,Thượng Nghiện,"Nghiện, say mê quá mức"
+1731,上漲,shàngzhăng,Vp,Thượng Trướng,"Tăng lên, tăng giá"
+1732,燒香,shāoxiāng,V-sep,Thiêu Hương,"Đốt hương, thắp hương"
+1733,奢侈,shēchĭ,Vs,Xa Sỉ,"Xa hoa, phung phí"
+1734,奢望,shēwàng,Vst,Xa Vọng,"Ước mơ xa vời, hy vọng không thực tế"
+1735,設,shè,V,Thiết,"Thiết lập, đặt ra"
+1736,設施,shèshī,N,Thiết Thí,"Cơ sở vật chất, trang thiết bị"
+1737,設想,shèxiăng,Vi,Thiết Tưởng,"Dự định, tưởng tượng"
+1738,射擊,shèjí,V,Xạ Kích,"Bắn súng, nổ súng"
+1739,射手,shèshŏu,N,Xạ Thủ,"Người bắn, xạ thủ"
+1740,涉及,shèjí,Vpt,Thiệp Nhập,"Liên quan đến, có liên quan"
+1741,涉嫌,shèxián,Vst,Thiệp Hiềm,"Bị nghi ngờ, có liên quan đến tội phạm"
+1742,社論,shèlùn,N,Xã Luận,"Bài xã luận, bình luận của báo chí"
+1743,攝取,shèqŭ,V,Nhiếp Thủ,"Hấp thụ, thu nhận (thức ăn, dưỡng chất)"
+1744,攝氏,shèshì,N,Nhiếp Thị,Đơn vị đo nhiệt độ (Celsius)
+1745,攝影機,shèyĭngjī,N,Nhiếp Ảnh Cơ,"Máy ảnh, máy quay phim"
+1746,深奧,shēnào,Vs,Thâm Áo,"Sâu sắc, phức tạp"
+1747,深沉,shēnchén,Vs,Thâm Trầm,"Sâu lắng, nghiêm túc, trầm lắng"
+1748,深度,shēndù,N,Thâm Độ,"Độ sâu, chiều sâu"
+1749,深厚,shēnhòu,Vs,Thâm Hậu,"Sâu sắc, thâm hậu"
+1750,深切,shēnqiè,Vs,Thâm Thiết,"Sâu sắc, thiết tha"
+1751,深入,shēnrù,V,thâm nhập,đi sâu vào
+1752,深造,shēnzào,Vi,Thâm Tạo,"Học thêm, học lên cao"
+1753,身段,shēnduàn,N,Thân Đoạn,"Dáng người, hình thể"
+1754,身教,shēnjiào,N,Thân Giáo,"Giáo dục bằng hành động, giáo dục qua việc làm"
+1755,身為,shēnwéi,Vst,Thân Vi,"Là (chức vụ, vai trò)"
+1756,身子,shēnzi,N,Thân Tử,"Cơ thể, thân thể"
+1757,伸張,shēnzhāng,V,Thân Trương,"Mở rộng, kéo dài"
+1758,神,shén,Vs,thần,"thần thánh, siêu nhiên"
+1759,神情,shénqíng,N,Thần Tình,"Biểu cảm khuôn mặt, thần thái"
+1760,審核,shěnhé,V,Thẩm Hạch,"Kiểm tra, xét duyệt"
+1761,審判,shěnpàn,V,Thẩm Phán,"Phán xét, xét xử"
+1762,審慎,shěnshèn,Vs,Thẩm Thận,"Cẩn trọng, thận trọng"
+1763,審議,shěnyì,V,Thẩm Nghị,"Xem xét, thảo luận"
+1764,甚,shèn,Adv,Thậm,"Rất, cực kỳ"
+1765,滲入,shènrù,V,Sẩm Nhập,"Thấm vào, thấm dần"
+1766,生火,shēnghuŏ,V-sep,Sinh Hỏa,"Đốt lửa, nhóm lửa"
+1767,生理,shēnglĭ,N,Sinh Lý,Sinh lý (về cơ thể con người)
+1768,生平,shēngpíng,N,Sinh Bình,"Cuộc đời, tiểu sử"
+1769,生氣,shēngqì,N,Sinh khí,Tức giận
+1770,生前,shēngqián,N,Sinh Tiền,"Trước khi qua đời, trong lúc còn sống"
+1771,生人,shēngrén,N,Sinh Nhân,Người còn sống
+1772,生死,shēngsĭ,N,Sinh Tử,Sự sống và cái chết
+1773,生態,shēngtài,N,Sinh Thái,Hệ sinh thái
+1774,生物,shēngwù,N,Sinh Vật,"Sinh vật, động thực vật"
+1775,生效,shēngxiào,Vp,Sinh Hiệu,Có hiệu lực
+1776,生硬,shēngyìng,Vs,Sinh Nghiêng,"Cứng nhắc, thiếu linh hoạt"
+1777,生育,shēngyù,N / V,Sinh Dục,"Sinh đẻ, sinh con"
+1778,生殖,shēngzhí,Vi,Sinh Chức,"Sinh sản, sinh dục"
+1779,升遷,shēngqiān,Vi,Thăng Thiên,Thăng chức
+1780,升值,shēngzhí,Vp,Thăng Giá,Tăng giá trị
+1781,聲稱,shēngchēng,V,Thanh Xưng,"Tuyên bố, khẳng định"
+1782,聲明,shēngmíng,N,Thanh Minh,"Tuyên bố, thông báo chính thức"
+1783,聲勢,shēngshì,N,Thanh Thế,"Thế lực, khí thế"
+1784,省,shěng,N,tỉnh,"tiết kiệm, tỉnh (địa lý)"
+1785,省事,shěngshì,Vs,Tỉnh Sự,"Tiết kiệm công sức, dễ dàng"
+1786,盛,shèng,Vs,Thịnh,"Hưng thịnh, phát đạt"
+1787,盛情,shèngqíng,N,Thịnh Tình,"Lòng hiếu khách, sự đối đãi nồng hậu"
+1788,盛行,shèngxíng,Vs,Thịnh Hành,"Thịnh hành, phổ biến"
+1789,盛裝,shèngzhuāng,Vs,Thịnh Trang,"Mặc đẹp, ăn diện"
+1790,勝地,shèngdì,N,Thắng Địa,"Địa điểm thắng lợi, địa điểm lý tưởng"
+1791,聖賢,shèngxián,N,Thánh Hiền,"Thánh nhân, bậc hiền triết"
+1792,失,shī,Vpt,Thất,"Mất, thất bại"
+1793,失靈,shīlíng,Vp,Thất Linh,Mất khả năng hoạt động
+1794,失落,shīluò,Vs,Thất Lạc,"Mất mát, thất lạc"
+1795,失明,shīmíng,Vp,Thất Minh,"Mù, mất thị lực"
+1796,失事,shīshì,Vp,Thất Sự,"Gặp sự cố, tai nạn"
+1797,失手,shīshŏu,Vs,Thất Thủ,"Lỡ tay, làm mất"
+1798,失蹤,shīzōng,Vp,Thất Tung,Mất tích
+1799,師範,shīfàn,Vs-attr,Sư Phạm,"Trường sư phạm, giáo viên"
+1800,施肥,shīféi,V-sep,Thi Phì,Bón phân
+1801,施行,shīxíng,V,Thi Hành,"Thi hành, thực hiện"
+1802,屍體,shītĭ,N,Thi Thể,Xác chết
+1803,石膏,shígāo,N,Thạch Cao,Thạch cao (vật liệu xây dựng)
+1804,十足,shízú,Vs,Thập Túc,"Hoàn toàn, đầy đủ"
+1805,拾,shí,V,Thập,"Nhặt, thu gom"
+1806,時光,shíguāng,N,Thời Quang,Thời gian
+1807,時節,shíjié,N,Thời Tiết,"Mùa vụ, mùa"
+1808,時髦,shímáo,Vs,Thời Mao,"Mốt, hợp thời"
+1809,時效,shíxiào,N,Thời Hiệu,Thời gian có hiệu lực
+1810,實地,shídì,Adv,Thực Địa,"Thực tế, thực hành"
+1811,實踐,shíjiàn,V,Thực Tiễn,"Thực hiện, hành động"
+1812,實況,shíkuàng,N,Thực Huống,Tình hình thực tế
+1813,實例,shílì,N,Thực Lệ,Ví dụ thực tế
+1814,實習,shíxí,Vi,Thực Tập,"Thực hành, thực tập"
+1815,實證,shízhèng,N,Thực Chứng,Chứng minh thực tế
+1816,實質,shízhí,N,Thực Chất,"Bản chất, thực tế"
+1817,屎,shĭ,N,Sĩ,"Phân, chất thải"
+1818,史料,shĭliào,N,Sử Liệu,Tài liệu lịch sử
+1819,使喚,shĭhuàn,V,Sử Hán,"Ra lệnh, sai bảo"
+1820,使節,shĭjié,N,Sử Tiết,"Sứ giả, phái đoàn ngoại giao"
+1821,使勁,shĭjìng,Vi,Sử Tỉnh,"Dùng sức, nỗ lực hết mình"
+1822,使命,shĭmìng,N,Sứ Mệnh,"Nhiệm vụ, sứ mệnh"
+1823,士兵,shìbīng,N,Sĩ Binh,"Lính, chiến sĩ"
+1824,仕女,shìnǚ,N,Sĩ Nữ,"Phụ nữ, quý tộc nữ"
+1825,示範,shìfàn,Vi,Thị Phạm,"Mẫu, làm mẫu"
+1826,市面,shìmiàn,N,Thị Diện,"Thị trường, mặt hàng"
+1827,市容,shìróng,N,Thị Dung,Diện mạo của thành phố
+1828,世代,shìdài,N,Thế Đại,"Thế hệ, đời sau"
+1829,世間,shìjiān,N,Thế Gian,"Thế giới, nhân gian"
+1830,世事,shìshì,N,Thế Sự,"Công việc đời sống, sự việc thế gian"
+1831,試卷,shìjuàn,N,Thí Quyển,"Đề thi, bài thi"
+1832,試圖,shìtú,Vaux,Thí Đồ,"Cố gắng, thử làm"
+1833,逝世,shìshì,Vp,Thệ Thế,"Qua đời, mất"
+1834,勢必,shìbì,Adv,Thế Bất,"Nhất định, chắc chắn"
+1835,事故,shìgù,N,Sự Cố,"Tai nạn, sự việc ngoài dự đoán"
+1836,事變,shìbiàn,N,Sự Biến,"Biến cố, thay đổi lớn"
+1837,事態,shìtài,N,Sự Thái,"Tình hình, tình trạng"
+1838,事務,shìwù,N,Sự Vụ,"Công việc, sự vụ"
+1839,事宜,shìyí,N,Sự Nghi,"Công việc, vấn đề"
+1840,釋放,shìfàng,V,Thích Phóng,"Thả, giải phóng"
+1841,嗜好,shìhào,N,Thị Hảo,"Sở thích, đam mê"
+1842,視為,shìwéi,V,Thị Vi,"Xem như, coi là"
+1843,適宜,shìyí,Vs,Thích Nghi,"Phù hợp, thích hợp"
+1844,適中,shìzhōng,Vs,Thích Trung,"Vừa phải, hợp lý"
+1845,收藏,shōucáng,V,Thâu Tàng,"Sưu tầm, thu thập"
+1846,收買,shōumăi,V,Thu Mại,"Mua chuộc, mua bán"
+1847,收縮,shōusuō,Vi,Thu Súc,"Thu hẹp, co lại"
+1848,收聽,shōutīng,V,Thu Thính,"Nghe, tiếp nhận thông tin"
+1849,收益,shōuyì,N,Thu Ích,"Lợi nhuận, thu nhập"
+1850,手冊,shŏucè,N,Thủ Sách,"Sổ tay, sách hướng dẫn"
+1851,手槍,shŏuqiāng,N,Thủ Khang,"Súng ngắn, súng lục"
+1852,手勢,shŏushì,N,Thủ Thế,"Dấu hiệu, động tác tay"
+1853,守,shŏu,V,Thủ,"Giữ, bảo vệ"
+1854,守護,shŏuhù,V,Thủ Hộ,"Bảo vệ, gìn giữ"
+1855,首府,shŏufŭ,N,Thủ Phủ,"Thủ đô, thành phố chính"
+1856,首領,shŏulĭng,N,Thủ Lãnh,"Lãnh đạo, thủ lĩnh"
+1857,首席,shŏuxí,N,Thủ Tịch,"Chủ tịch, người đứng đầu"
+1858,首飾,shŏushì,N,Thủ Sức,"Đồ trang sức, trang sức"
+1859,首先,shŏuxiān,Conj,thủ tiên,đầu tiên
+1860,首長,shŏuzhăng,N,Thủ Trưởng,"Người đứng đầu, lãnh đạo"
+1861,受害,shòuhài,Vp,Thụ Hại,"Bị thiệt hại, bị hại"
+1862,受訓,shòuxùn,V-sep,Thụ Huấn,"Nhận huấn luyện, đào tạo"
+1863,售貨員,shòuhuòyuán,N,Thụ Hóa Viên,Nhân viên bán hàng
+1864,授課,shòukè,V-sep,Thụ Khóa,"Giảng dạy, truyền đạt bài học"
+1865,狩獵,shòuliè,V,Thú Liệp,Săn bắn
+1866,壽星,shòuxīng,N,Thọ Tinh,Người có sinh nhật (ngày sinh)
+1867,疏導,shūdăo,V,Sơ Đạo,"Hướng dẫn, dẫn dắt"
+1868,疏散,shūsàn,V,Sơ Tán,"Tản ra, giải tán"
+1869,梳,shū,V,Sơ,"Chải, gỡ (tóc)"
+1870,書本,shūběn,N,Thư Bản,Sách
+1871,書面,shūmiàn,N,Thư Diện,"Dạng văn bản, viết tay"
+1872,書寫,shūxiě,V,Thư Tả,"Viết, ghi chép"
+1873,舒暢,shūchàng,Vs,Thư Sướng,"Thoải mái, dễ chịu"
+1874,舒展,shūzhăn,V,Thư Triển,"Giãn ra, mở rộng"
+1875,輸血,shūxiě,V-sep,Thua Huyết,Truyền máu
+1876,束縛,shùfú,V,Thúc Phược,"Ràng buộc, kiềm chế"
+1877,樹苗,shùmiáo,N,Thụ Miêu,"Cây giống, cây con"
+1878,數據,shùjù,N,Sổ Cứu,"Dữ liệu, con số"
+1879,率,shuài,V,Suất,"Tỉ lệ, tỷ suất"
+1880,霜,shuāng,N,Sương,Sương giá
+1881,雙重,shuāngchóng,Vs-attr,Song Trùng,"Đôi, kép"
+1882,雙打,shuāngdă,N,Song Đả,Đánh đôi (tennis)
+1883,爽快,shuăngkuài,Vs,Sảng Khoái,"Thoải mái, vui vẻ"
+1884,水道,shuĭdào,N,Thủy Đạo,"Kênh nước, con đường nước"
+1885,水稻,shuĭdào,N,Thủy Đạo,Lúa nước
+1886,水晶,shuĭjīng,N,Thủy Tinh,"Pha lê, thủy tinh"
+1887,水庫,shuĭkù,N,Thủy Khố,Hồ chứa nước
+1888,水力,shuĭlì,N,Thủy Lực,Lực lượng thủy động
+1889,水泥,shuĭní,N,Thủy Nhuệ,Xi măng
+1890,水源,shuĭyuán,N,Thủy Nguyên,Nguồn nước
+1891,水蒸氣,shuĭzhēngqì,N,Thủy Chưng Khí,Hơi nước
+1892,順從,shùncóng,Vs,Thuận Tùng,"Tuân theo, vâng lời"
+1893,順應,shùnyìng,Vst,Thuận Ứng,"Phù hợp, thích ứng"
+1894,瞬間,shùnjiān,N,Thuấn Gian,"Khoảnh khắc, tức thì"
+1895,說謊,shuōhuăng,V-sep,Thuyết Hướng,Nói dối
+1896,說笑,shuōxiào,Vi,Thuyết Tiếu,"Nói đùa, nói chuyện vui"
+1897,思潮,sīcháo,N,Tư Triều,Xu hướng tư tưởng
+1898,思念,sīniàn,Vst,Tư Niệm,"Nhớ, tưởng nhớ"
+1899,思維,sīwéi,N,Tư Vị,Tư duy
+1900,絲毫,sīháo,Det,Ti丝 hao,"Một chút, chút xíu, một tí"
+1901,司令,sīlìng,N,Ty Lệnh,"Tướng lĩnh, người chỉ huy"
+1902,斯文,sīwén,Vs,Ti Văn,"Nho nhã, lịch sự, có văn hóa"
+1903,私心,sīxīn,N,Tư Tâm,"Lòng ích kỷ, tư lợi"
+1904,賜,sì,V,Tứ,"Ban cho, ban tặng"
+1905,似的/似地,sìde,,Tự đích/Tự địa,"Giống như, kiểu như"
+1906,松樹/松,sōngshù/sōng,N,Tùng Thụ/Tùng,Cây thông
+1907,慫恿,sŏngyŏng,V,Tùng Dũng,"Khuyến khích, dụ dỗ"
+1908,搜集,sōují,V,Sưu Tập,"Thu thập, sưu tầm"
+1909,俗稱,súchēng,Vst,Tục Xưng,"Tên gọi phổ biến, tên thường gọi"
+1910,俗語,súyŭ,N,Tục Ngữ,"Lời nói dân gian, tục ngữ"
+1911,訴苦,sùkŭ,Vi,Tố Khổ,"Than phiền, kể lể khó khăn"
+1912,素質,sùzhí,N,Tố Chất,"Tính cách, phẩm chất"
+1913,算命,suànmìng,V-sep,Toán Mệnh,"Xem bói, đoán mệnh"
+1914,算術,suànshù,N,Toán Thuật,"Phép toán, toán học"
+1915,雖說,suīshuō,Conj,Tuy Thuyết,"Mặc dù nói, dù nói rằng"
+1916,隨,suí,Adv / Prep,tuỳ,"theo, tùy thuộc"
+1917,隨後,suíhòu,N,Tùy Hậu,"Sau đó, tiếp theo"
+1918,隨即,suíjí,Adv,Tùy Ký,"Ngay lập tức, lập tức"
+1919,隨身,suíshēn,Adv,Tùy Thân,"Mang theo người, mang theo bên mình"
+1920,隨同,suítóng,Prep,Tùy Đồng,"Cùng với, đi cùng"
+1921,隧道,suìdào,N,Tuyến Đạo,Đường hầm
+1922,歲月,suìyuè,N,Tuế Nguyệt,"Thời gian, năm tháng"
+1923,損,sŭn,V,Tổn,"Tổn hại, thiệt hại"
+1924,損害,sŭnhài,V,Tổn Hại,"Thiệt hại, hư hỏng"
+1925,損壞,sŭnhuài,V,Tổn Hoại,"Hỏng, tổn thất"
+1926,損傷,sŭnshāng,Vst,Tổn Thương,"Vết thương, tổn thương"
+1927,縮小,suōxiăo,Vp,Súc Tiểu,"Thu nhỏ, giảm bớt"
+1928,所得,suŏdé,N,Sở Đắc,"Thu nhập, những gì đạt được"
+1929,所在,suŏzài,N,Sở Tại,"Nơi ở, nơi có mặt"
+1930,索賠,suŏpéi,Vi,Tác Bồi,Yêu cầu bồi thường
+1931,瑣碎,suŏsuì,Vs,Tỏa Toái,"Lặt vặt, nhỏ nhặt"
+1932,他人,tārén,N,Tha Nhân,Người khác
+1933,塔,tă,N,Tháp,"Tháp, tòa tháp"
+1934,踏實,tàshí,Vs,Đạp Thực,"Chắc chắn, vững vàng, thực tế"
+1935,台階,táijiē,N,Đài Giai,"Bậc thang, cầu thang"
+1936,太平,tàipíng,Vs,Thái Bình,"Bình an, yên ổn"
+1937,態勢,tàishì,N,Thái Thế,"Tình hình, thế thái"
+1938,貪,tān,Vs,Tham,Tham lam
+1939,貪心,tānxīn,Vs,Tham Tâm,"Lòng tham, tham vọng"
+1940,痰,tán,N,Đàm,"Đờm, dịch trong cổ họng"
+1941,談論,tánlùn,V,Đàm Luận,"Thảo luận, nói về"
+1942,彈性,tánxìng,N,Đàn Tính,"Linh hoạt, có tính đàn hồi"
+1943,坦克,tănkè,N,Thản Khắc,Xe tăng
+1944,坦然,tănrán,Vs,Thản Nhiên,"Bình tĩnh, điềm tĩnh"
+1945,探病,tànbìng,V-sep,Thám Bệnh,Thăm bệnh
+1946,探究,tànjiù,V,Thám Cứu,"Nghiên cứu, khám phá"
+1947,探索,tànsuŏ,V,Thám Sở,"Tìm kiếm, thám hiểm"
+1948,探望,tànwàng,V,Thám Vọng,"Thăm viếng, thăm dò"
+1949,探險,tànxiăn,Vi,Thám Hiểm,"Thám hiểm, mạo hiểm"
+1950,堂堂,tángtáng,Vs,Đường Đường,"To lớn, vĩ đại"
+1951,倘若,tăngruò,Conj,Đẳng Nhược,"Nếu, giả sử"
+1952,陶器,táoqì,N,Đào Khí,Đồ gốm
+1953,逃生,táoshēng,Vi,Đào Sinh,"Thoát hiểm, cứu sống"
+1954,逃稅,táoshuì,V-sep,Đào Thuế,Trốn thuế
+1955,淘汰,táotài,V,Đào Thải,"Loại bỏ, thải loại"
+1956,套房,tàofáng,N,Thoát Phòng,"Phòng suite, phòng khách sạn"
+1957,套裝,tàozhuāng,N,Thoát Trang,"Bộ đồ, trang phục"
+1958,特此,tècĭ,Adv,Đặc Thử,"Nhân dịp này, vì lý do này"
+1959,特區,tèqū,N,Đặc Khu,"Khu vực đặc biệt, khu kinh tế đặc biệt"
+1960,特權,tèquán,N,Đặc Quyền,Quyền lợi đặc biệt
+1961,特約,tèyuē,Vs-attr,Đặc Ước,Hợp đồng đặc biệt
+1962,特徵,tèzhēng,N,Đặc Trưng,"Đặc điểm, dấu hiệu đặc trưng"
+1963,疼愛,téngài,Vst,Đằng Ái,"Yêu thương, chăm sóc"
+1964,剔除,tīchú,V,Thích Trừ,"Loại bỏ, loại ra"
+1965,啼,tí,Vi,Đề,"Kêu, khóc (dùng cho trẻ con hoặc động vật)"
+1966,提拔,tíbá,V,Đề Bạt,"Đề bạt, thăng chức"
+1967,提倡,tíchàng,V,Đề Xướng,"Khuyến khích, thúc đẩy"
+1968,提出,tíchū,Vpt,Đề Xuất,"Đề xuất, đưa ra"
+1969,提及,tíjí,V,Đề Cập,"Đề cập đến, nhắc đến"
+1970,提名,tímíng,V,Đề Danh,"Đề cử, bầu chọn"
+1971,提升/提昇,tíshēng,V,Đề Thăng,"Nâng cao, cải thiện"
+1972,提議,tíyì,V,Đề Nghị,"Đề nghị, đưa ra ý kiến"
+1973,體操,tĭcāo,N,Thể Thao,"Thể dục, thể thao"
+1974,體格,tĭgé,N,Thể Cách,"Thể chất, thân hình"
+1975,體積,tĭjī,N,Thể Tích,"Thể tích, khối lượng"
+1976,體諒,tĭliàng,Vst,Thể Lượng,"Thông cảm, hiểu"
+1977,體面,tĭmiàn,Vs,Thể Diện,"Thể diện, danh dự"
+1978,體系,tĭxì,N,Thể Hệ,"Hệ thống, cấu trúc"
+1979,體質,tĭzhí,N,Thể Chất,"Chất lượng cơ thể, thể lực"
+1980,替代,tìdài,Vst,Thế Đổi,"Thay thế, thế chỗ"
+1981,添,tiān,V,Thiêm,"Thêm vào, bổ sung"
+1982,天敵,tiāndí,N,Thiên Địch,"Kẻ thù tự nhiên, thiên địch"
+1983,天然氣,tiānránqì,N,Thiên Nhiên Khí,"Khí tự nhiên, khí đốt"
+1984,天性,tiānxìng,N,Thiên Tính,"Bản chất tự nhiên, bản năng"
+1985,天災,tiānzāi,N,Thiên Tai,"Thiên tai, thảm họa tự nhiên"
+1986,田地,tiándì,N,Điền Địa,"Cánh đồng, đất đai"
+1987,田徑,tiánjìng,N,Điền Kinh,"Môn điền kinh, thể thao chạy"
+1988,甜美,tiánměi,Vs,Tiêm Mị,"Ngọt ngào, dễ thương"
+1989,挑剔,tiāotī,V,Thiêu Tí,"Chê bai, kén chọn"
+1990,調和,tiáohé,V / Vs,Điều Hòa,"Hài hòa, điều tiết"
+1991,調節,tiáojié,V,Điều Tiết,"Điều chỉnh, điều tiết"
+1992,調皮,tiáopí,Vs,Điều Pí,Nghịch ngợm
+1993,條例,tiáolì,N,Điều Lệ,"Điều lệ, quy định"
+1994,挑戰,tiăozhàn,N,khiêu chiến,"thách thức, khiêu chiến"
+1995,聽寫,tīngxiě,V,Thính Tả,Viết chính tả
+1996,停頓,tíngdùn,Vi,Đình Đốn,"Dừng lại, gián đoạn"
+1997,停留,tíngliú,Vi,Đình Lưu,"Dừng lại, tạm dừng"
+1998,停滯,tíngzhì,Vi,Đình Trệ,"Ngừng lại, đình trệ"
+1999,通,tōng,M,thông,"thông suốt, qua"
+2000,通報,tōngbào,V,Thông Báo,"Thông báo, thông tin về sự kiện nào đó"
+2001,通車,tōngchē,Vp,Thông Xa,"Khai thông tuyến xe, thông xe"
+2002,通稱,tōngchēng,Vst,Thông Xưng,"Tên gọi chung, tên phổ biến"
+2003,通貨膨脹,tōnghuòpéngzhàng,Vs,Thông Hóa Bành Trướng,Lạm phát
+2004,通緝,tōngqì,V,Thông Cấp,Lệnh truy nã
+2005,通行,tōngxíng,Vi,Thông Hành,"Lưu thông, đi lại được"
+2006,通用,tōngyòng,Vs-attr,Thông Dụng,"Dùng chung, phổ biến"
+2007,同伴,tóngbàn,N,Đồng Bạn,Bạn đồng hành
+2008,同化,tónghuà,V,Đồng Hóa,"Đồng hóa, trở nên giống nhau"
+2009,同鄉,tóngxiāng,N,Đồng Hương,Người cùng quê
+2010,同心,tóngxīn,Vs,Đồng Tâm,"Tập trung, đoàn kết"
+2011,同性戀,tóngxìngliàn,N,Đồng Tính Luyến Ái,"Đồng tính, tình yêu giữa người cùng giới"
+2012,同業,tóngyè,N,Đồng Nghiệp,"Cùng ngành nghề, cùng lĩnh vực"
+2013,統計,tŏngjì,N,thống kê,"thống kê, đo đạc"
+2014,統統,tŏngtŏng,Adv,Thống Thống,"Tất cả, toàn bộ"
+2015,統制,tŏngzhì,V,Thống Chế,"Kiểm soát, điều tiết"
+2016,痛恨,tònghèn,Vst,Thống Hận,"Rất ghét, căm phẫn"
+2017,偷渡,tōudù,Vi,Đầu Độ,Vượt biên trái phép
+2018,偷懶,tōulăn,Vs,Đầu Lười,"Lười biếng, trốn việc"
+2019,投保,tóubăo,V,Đầu Bảo,Mua bảo hiểm
+2020,投機,tóujī,Vs,Đầu Kỳ,"Đầu cơ, đầu tư mạo hiểm"
+2021,投入,tóurù,Vs,đầu nhập,"đầu tư, bỏ vào"
+2022,透明,tòumíng,Vs,Thấu Minh,"Minh bạch, trong suốt"
+2023,徒弟,túdì,N,Đồ Đệ,"Đệ tử, học trò"
+2024,突擊,tújí,V,Đột Kích,"Tấn công bất ngờ, đột kích"
+2025,突兀,túwù,Vs,Đột Ức,"Đột ngột, bất ngờ, lạ lùng"
+2026,塗,tú,V,Đồ,"Sơn, phủ lên, vẽ"
+2027,圖,tú,V,Đồ,Hình ảnh
+2028,圖表,túbiăo,N,Đồ Biểu,"Biểu đồ, sơ đồ"
+2029,圖騰,túténg,N,Đồ Đằng,Hình vẽ mang ý nghĩa biểu tượng
+2030,土壤,tŭrăng,N,Thổ Nhưỡng,"Đất đai, đất canh tác"
+2031,團,tuán,M,đoàn,"nhóm, đoàn thể"
+2032,團聚,tuánjù,Vs,Đoàn Tụ,"Sum vầy, tụ họp"
+2033,團員,tuányuán,N,Đoàn Viên,Thành viên của một đoàn thể
+2034,推測,tuīcè,V,Thôi Trắc,"Suy đoán, phỏng đoán"
+2035,推崇,tuīchóng,Vst,Thôi Sùng,"Tôn trọng, tôn sùng"
+2036,推出,tuīchū,Vpt,Thôi Xuất,"Đưa ra, phát hành, ra mắt"
+2037,推選,tuīxuăn,V,Thôi Tuyển,"Lựa chọn, bầu cử"
+2038,退化,tuìhuà,Vp,Thoái Hóa,"Thoái hóa, suy thoái"
+2039,吞吞吐吐,tūntūntŭtŭ,Vi,Thôn Thôn Thổ Thổ,"Nói ấp úng, lưỡng lự"
+2040,托,tuō,V,Thác,"Nhờ vả, giao phó"
+2041,拖累,tuōlèi,V,Đoái Lệ,"Kéo theo, làm phiền"
+2042,拖延,tuōyán,Vst,Đoái Diên,"Kéo dài, trì hoãn"
+2043,脫身,tuōshēn,Vp,Thoát Thân,"Thoát khỏi, ra khỏi tình thế khó khăn"
+2044,脫手,tuōshŏu,Vp,Thoát Thủ,"Để tuột tay, bỏ rơi"
+2045,外號,wàihào,N,Ngoại Hào,Biệt danh
+2046,外力,wàilì,N,Ngoại Lực,Lực lượng bên ngoài
+2047,外貿,wàimào,N,Ngoại Mậu,Thương mại quốc tế
+2048,外線,wàixiàn,N,Ngoại Tuyến,"Đường dây bên ngoài, liên lạc ngoài mạng"
+2049,外銷,wàixiāo,V,Ngoại Tiêu,Xuất khẩu
+2050,外遇,wàiyù,N,Ngoại Duyên,"Quan hệ ngoài luồng, ngoại tình"
+2051,外在,wàizài,N,Ngoại Tại,"Vật thể bên ngoài, tính bên ngoài"
+2052,外資,wàizī,N,Ngoại Tư,Vốn đầu tư nước ngoài
+2053,彎曲,wānqū,Vs,Loan Khúc,"Uốn cong, vặn vẹo"
+2054,完備,wánbèi,Vs,Hoàn Bị,"Hoàn thiện, đầy đủ"
+2055,玩弄,wánnòng,V,Oán Lộng,"Lợi dụng, đùa giỡn"
+2056,頑強,wánqiáng,Vs,Ngoan Cường,"Kiên cường, bền bỉ"
+2057,挽,wăn,V,Vãn,"Cứu vãn, gỡ lại"
+2058,挽救,wănjiù,V,Vãn Cứu,"Cứu vãn, cứu chữa"
+2059,萬分,wànfēn,Adv,Vạn Phân,"Vô cùng, cực kỳ"
+2060,萬事,wànshì,N,Vạn Sự,"Mọi việc, tất cả sự việc"
+2061,萬歲,wànsuì,Vs,Vạn Tuế,"Sống lâu, trường thọ"
+2062,萬萬,wànwàn,Adv,Vạn Vạn,"Rất, cực kỳ"
+2063,萬物,wànwù,N,Vạn Vật,"Tất cả mọi thứ, vạn vật"
+2064,惋惜,wànxí,Vs,Wan Tích,"Tiếc nuối, xót xa"
+2065,亡國,wángguó,Vp,Vong Quốc,"Mất nước, quốc gia bị tiêu diệt"
+2066,往來,wănglái,Vi,Vãng Lai,"Qua lại, giao dịch, liên lạc"
+2067,旺季,wàngjì,N,Vượng Quý,"Mùa cao điểm, mùa bận rộn"
+2068,旺盛,wàngshèng,Vs,Vượng Thịnh,"Mạnh mẽ, hưng thịnh"
+2069,威風,wēifēng,Vs,Uy Phong,"Uy nghi, khí thế"
+2070,威力,wēilì,N,Uy Lực,"Quyền lực, sức mạnh"
+2071,萎縮,wēisuō,Vs,Uy Tụy,"Héo úa, co lại, suy yếu"
+2072,為,wéi,Vst,vị,"vì, để"
+2073,為人,wéirén,N,Vì Nhân,Cách đối xử với người khác
+2074,為生,wéishēng,Vs,Vì Sinh,"Vì cuộc sống, kiếm sống"
+2075,為首,wéishŏu,Vs,Vì Thủ,"Làm đầu, đứng đầu"
+2076,為止,wéizhĭ,N,Vì Chỉ,"Cho đến khi, cho đến khi kết thúc"
+2077,違背,wéibèi,Vpt,Vi Bội,"Vi phạm, trái với"
+2078,違約,wéiyuē,V-sep,Vi Ước,Vi phạm hợp đồng
+2079,危害,wéihài,V,Nguy Hại,"Gây hại, đe dọa"
+2080,圍巾,wéijīn,N,Viêm Cân,Khăn quàng
+2081,圍牆,wéiqiáng,N,Viên Tường,"Tường bao, tường xung quanh"
+2082,圍繞,wéirào,V,Viên Rao,"Quay quanh, bao quanh"
+2083,微弱,wéiruò,Vs,Vi Nhược,"Yếu ớt, yếu đuối"
+2084,微小,wéixiăo,Vs,Vi Tiểu,"Nhỏ bé, rất nhỏ"
+2085,胃,wèi,N,Vị,Dạ dày
+2086,胃口,wèikŏu,N,Vị Khẩu,Cảm giác thèm ăn
+2087,未必,wèibì,Adv,Vị Tất,"Chưa chắc, không nhất thiết"
+2088,未婚夫,wèihūnfū,N,Vị Hôn Phu,Chồng chưa cưới
+2089,未婚妻,wèihūnqī,N,Vị Hôn Thê,Vợ chưa cưới
+2090,未免,wèimiăn,Adv,Vị Miễn,"Có phần, không tránh khỏi"
+2091,衛生,wèishēng,N,vệ sinh,vệ sinh
+2092,溫帶,wēndài,N,Ôn Đới,Vùng ôn đới
+2093,溫習,wēnxí,V,Ôn Tập,"Ôn lại, ôn bài"
+2094,溫馴,wēnxún,Vs,Ôn Tuần,"Dễ bảo, hiền lành"
+2095,瘟疫,wēnyì,N,Ôn Dịch,"Dịch bệnh, bệnh dịch"
+2096,文明,wénmíng,N,Văn Minh,"Văn minh, tiến bộ"
+2097,文壇,wéntán,N,Văn Đàn,Giới văn học
+2098,文獻,wénxiàn,N,Văn Hiến,"Tài liệu, sách vở"
+2099,聞名,wénmíng,Vst,Văn Danh,Nổi tiếng
+2100,穩健,wěnjiàn,Vs,Ổn Kiện,"Vững vàng, ổn định"
+2101,紊亂,wènluàn,Vs,Vấn Loạn,"Hỗn loạn, rối loạn"
+2102,問世,wènshì,Vp,Vấn Thế,"Ra đời, được xuất bản"
+2103,臥,wò,Vi,Ngọa,"Nằm, nằm nghỉ"
+2104,烏龜/龜,wūguī/guī,N,Ô Quái/Quái,Con rùa
+2105,烏鴉,wūyā,N,Ô Quái,Con quạ
+2106,汙染,wūrăn,N,Ô nhiễm,Ô nhiễm
+2107,無比,wúbĭ,Vs,Vô Tỷ,"Không gì sánh bằng, vô song"
+2108,無線電,wúxiàndiàn,N,Vô Tuyến Điện,"Đài phát thanh không dây, radio"
+2109,無形,wúxíng,Vs,Vô Hình,"Không có hình dạng, vô hình"
+2110,無疑,wúyí,Adv,Vô Nghi,"Không nghi ngờ, chắc chắn"
+2111,五金,wŭjīn,N,Ngũ Kim,"Kim loại, hàng hóa kim khí"
+2112,武力,wŭlì,N,Vũ Lực,Sức mạnh quân sự
+2113,武士,wŭshì,N,Vũ Sĩ,"Kị sĩ, chiến sĩ"
+2114,武裝,wŭzhuāng,N,Vũ Trang,"Trang bị vũ khí, trang bị quân sự"
+2115,侮辱,wŭrù,V,Vũ Nhục,"Lăng mạ, sỉ nhục"
+2116,物產,wùchăn,N,Vật Sản,"Sản phẩm, tài nguyên"
+2117,物品,wùpĭn,N,Vật Phẩm,"Đồ vật, vật phẩm"
+2118,物體,wùtĭ,N,Vật Thể,"Đối tượng, vật thể"
+2119,物資,wùzī,N,Vật Tư,"Vật liệu, nguyên liệu"
+2120,誤差,wùchā,N,Ngộ Sai,"Sai số, sự sai lệch"
+2121,誤解,wùjiě,Vst,Ngộ Giải,"Hiểu nhầm, hiểu sai"
+2122,務實,wùshí,Vs,Vụ Thực,"Thực tế, thiết thực"
+2123,西服,xīfú,N,Tây Phục,"Áo vest, đồ vest"
+2124,西洋,xīyáng,N,Tây Dương,"Phương Tây, các nước phương Tây"
+2125,西醫,xīyī,N,Tây Y,Y học phương Tây
+2126,溪流,xīliú,N,Khê Lưu,"Suối, dòng suối"
+2127,席,xí,M,Tịch,"Ghế, chỗ ngồi"
+2128,席位,xíwèi,N,Tịch Vị,Chỗ ngồi
+2129,錫,xí,N,Thiếc,Kim loại thiếc
+2130,襲擊,xíjí,V,Tập Kích,Tấn công bất ngờ
+2131,昔日,xírì,N,Tích Nhật,"Ngày xưa, ngày trước"
+2132,習題,xítí,N,Tập Đề,"Bài tập, câu hỏi luyện tập"
+2133,洗禮,xĭlĭ,N,Tẩy Lễ,Lễ rửa tội
+2134,喜氣,xĭqì,N,Hỉ Khí,Không khí vui mừng
+2135,喜悅,xĭyuè,Vs,Hỉ Duyệt,"Vui mừng, hạnh phúc"
+2136,戲曲,xìqŭ,N,Hí Khúc,"Kịch, hát bội"
+2137,瑕疵,xiácī,N,Hà Tì,"Khuyết điểm, sai sót"
+2138,峽谷,xiágŭ,N,Hà Cốc,"Hẻm núi, khe núi"
+2139,狹小,xiáxiăo,Vs,Hiệp Tiểu,Chật hẹp
+2140,狹窄,xiázhăi,Vs,Hiệp Triệt,"Hẹp, chật chội"
+2141,下筆,xiàbĭ,Vi,Hạ Bút,Bắt đầu viết
+2142,下跌,xiàdié,Vp,Hạ Điệp,"Giảm xuống, suy giảm"
+2143,下滑,xiàhuá,Vp,Hạ Hoạt,"Trượt xuống, giảm dần"
+2144,下列,xiàliè,Vs-attr,Hạ Liệt,"Dưới đây, liệt kê dưới đây"
+2145,下水,xiàshuĭ,V-sep,Hạ Thủy,"Xuống nước, bắt đầu làm việc"
+2146,下水道,xiàshuĭdào,N,Hạ Thủy Đạo,"Cống, hệ thống cống thoát nước"
+2147,下旬,xiàxún,N,Hạ Tuần,"Phần cuối tháng, nửa sau tháng"
+2148,掀,xiān,V,Hiên,"Dở lên, lật lên"
+2149,仙丹,xiāndān,N,Tiên Đan,"Thuốc tiên, thuốc có tác dụng kỳ diệu"
+2150,先後,xiānhòu,N,Tiên Hậu,"Trước và sau, thứ tự"
+2151,先進,xiānjìn,N,tiên tiến,tiên tiến
+2152,先驅,xiānqū,N,Tiên Khu,Người tiên phong
+2153,先天,xiāntiān,Vs-attr,Tiên Thiên,"Bẩm sinh, thiên phú"
+2154,鮮明,xiānmíng,Vs,Tiên Minh,"Rõ ràng, nổi bật"
+2155,鮮艶/鮮豔,xiānyàn,Vs,Tiên Diễm,"Tươi đẹp, rực rỡ"
+2156,纖維,xiānwéi,N,Tiên Vi,"Sợi, chất xơ"
+2157,嫌疑,xiányí,N,Hiềm Nghi,Nghi ngờ
+2158,顯現,xiănxiàn,Vst,Hiển Hiện,"Hiện ra, xuất hiện rõ ràng"
+2159,限度,xiàndù,N,Hạn Độ,"Giới hạn, mức độ"
+2160,憲法,xiànfă,N,Hiến Pháp,"Hiến pháp, bộ luật cơ bản"
+2161,線路,xiànlù,N,Tuyến Lộ,"Đường dây, tuyến đường"
+2162,陷入,xiànrù,V,Hãm Nhập,"Rơi vào, lún vào"
+2163,獻身,xiànshēn,V-sep,Hiến Thân,"Cống hiến, hy sinh"
+2164,現今,xiànjīn,N,Hiện Kim,"Ngày nay, hiện nay"
+2165,現行,xiànxíng,Vs-attr,Hiện Hành,"Đang thi hành, hiện hành"
+2166,現狀,xiànzhuàng,N,Hiện Trạng,Tình trạng hiện tại
+2167,相傳,xiāngchuán,Vi,Tương Truyền,"Truyền lại, lưu truyền"
+2168,相仿,xiāngfăng,Vs,Tương Phỏng,"Tương tự, giống nhau"
+2169,相符,xiāngfú,Vs,Tương Hợp,"Phù hợp, giống nhau"
+2170,相繼,xiāngjì,Adv,Tương Kế,"Lần lượt, tiếp theo"
+2171,相配,xiāngpèi,Vs,Tương Phối,"Phù hợp, tương thích"
+2172,鄉土,xiāngtŭ,Vs,Hương Thổ,"Quê hương, vùng đất quê"
+2173,香皂,xiāngzào,N,Hương Tảo,Xà phòng
+2174,鑲,xiāng,V,Tương,"Khảm, đính vào"
+2175,想開,xiăngkāi,Vp,Tưởng Khai,"Mở lòng, suy nghĩ thoáng"
+2176,響亮,xiăngliàng,Vs,Hưởng Lượng,"Âm thanh lớn, vang dội"
+2177,向,xiàng,Adv,Hướng,Hướng
+2178,嚮導,xiàngdăo,N,Hướng Đạo,Người dẫn đường
+2179,嚮往,xiàngwăng,Vst,Hướng Vọng,"Mong muốn, khao khát"
+2180,象徵,xiàngzhēng,N / Vst,Tượng Trưng,"Biểu tượng, đại diện"
+2181,消毒,xiāodú,V-sep,Tiêu Độc,"Khử trùng, sát khuẩn"
+2182,消防,xiāofáng,Vs-attr,Tiêu Phòng,Phòng cháy chữa cháy
+2183,消耗,xiāohào,V,Tiêu Hao,"Tiêu hao, tiêu thụ"
+2184,消遣,xiāoqiăn,N / V,Tiêu Khiển,"Giải trí, tiêu khiển"
+2185,瀟灑,xiāosă,Vs,Tiêu Tả,"Thanh thoát, duyên dáng"
+2186,逍遙,xiāoyáo,Vs,Tiêu Dao,"Thảnh thơi, tự do"
+2187,小伙子/小夥子,xiăohuŏzi,N,Tiểu Hỏa Tử,"Chàng trai trẻ, thanh niên"
+2188,效法,xiàofă,V,Hiệu Pháp,"Bắt chước, làm theo"
+2189,效勞,xiàoláo,Vi,Hiệu Lao,"Cống hiến, phục vụ"
+2190,效力,xiàolì,N,Hiệu Lực,"Hiệu quả, sức mạnh"
+2191,效忠,xiàozhōng,V,Hiệu Trung,"Trung thành, trung thành với"
+2192,笑嘻嘻,xiàoxīxī,Vi,Tiếu Hi Hi,Cười hớn hở
+2193,孝子,xiàozĭ,N,Hiếu Tử,Con hiếu thảo
+2194,協辦,xiébàn,V,Hiệp Biện,Phối hợp tổ chức
+2195,協定,xiédìng,N,Hiệp Định,"Thỏa thuận, hiệp định"
+2196,協會,xiéhuì,N,Hiệp Hội,"Hội, tổ chức"
+2197,協商,xiéshāng,V,Hiệp Thương,"Thảo luận, thương thảo"
+2198,協調,xiétiáo,V / Vs,Hiệp Điều,"Điều chỉnh, phối hợp"
+2199,協議,xiéyì,N / V,Hiệp Nghị,"Hiệp định, thỏa thuận"
+2200,血汗,xiěhàn,N,Huyết Hãn,"Mồ hôi và máu, nỗ lực không ngừng, công sức bỏ ra"
+2201,血跡,xiějī,N,Huyết Tích,Vết máu
+2202,血壓,xiěyā,N,Huyết Áp,Áp suất máu
+2203,寫實,xiěshí,Vs,Tả Thực,"Mô tả chân thực, miêu tả đúng thực tế"
+2204,洩氣,xièqì,Vs,Tiết Khí,"Thất vọng, chán nản"
+2205,心愛,xīnài,Vs-attr,Tâm Ái,"Yêu thương, yêu quý"
+2206,心軟,xīnruăn,Vs,Tâm Nguỵ,"Mềm lòng, dễ bị cảm động"
+2207,心事,xīnshì,N,Tâm Sự,"Lo lắng, băn khoăn"
+2208,心思,xīnsī,N,Tâm Tư,"Suy nghĩ, tâm trạng"
+2209,心酸,xīnsuān,Vs,Tâm Toan,"Cảm thấy đau buồn, xót xa"
+2210,心態,xīntài,N,Tâm Thái,"Thái độ, tâm trạng"
+2211,心疼,xīnténg,Vst,Tâm Đăng,"Xót xa, đau lòng"
+2212,心胸,xīnxiōng,N,Tâm Hung,"Tấm lòng, lòng dạ"
+2213,辛勤,xīnqín,Vs,Tân Cần,"Chăm chỉ, siêng năng"
+2214,辛酸,xīnsuān,Vs,Tân Toan,"Đau khổ, vất vả"
+2215,新潮,xīncháo,Vs,Tân Triều,"Mới mẻ, hợp thời, hiện đại"
+2216,新手,xīnshŏu,N,Tân Thủ,"Người mới, người chưa có kinh nghiệm"
+2217,新穎,xīnyĭng,Vs,Tân Dĩnh,"Mới mẻ, độc đáo"
+2218,信賴,xìnlài,Vst,Tín Lại,"Tin tưởng, dựa vào"
+2219,信念,xìnniàn,N,Tín Niệm,"Niềm tin, lòng tin"
+2220,信徒,xìntú,N,Tín Đồ,"Người tín đồ, người theo đạo"
+2221,信息,xìnxí,N,Tin Tức,"Thông tin, tin tức"
+2222,星辰,xīngchén,N,Tinh Trần,"Các vì sao, thiên thể"
+2223,星座,xīngzuò,N,Tinh Tọa,"Cung hoàng đạo, chòm sao"
+2224,興建,xīngjiàn,V,Hưng Kiến,"Xây dựng, xây dựng mới"
+2225,興隆,xīnglóng,Vs,Hưng Long,"Phồn vinh, phát đạt"
+2226,興起,xīngqĭ,Vpt,Hưng Khởi,"Nổi lên, phát triển"
+2227,行善,xíngshàn,Vi,Hành Thiện,"Làm việc thiện, hành động tốt"
+2228,行使,xíngshĭ,V,Hành Thực,"Thực thi, sử dụng"
+2229,行星,xíngxīng,N,Hành Tinh,Hành tinh
+2230,行政,xíngzhèng,N,Hành Chính,Quản lý hành chính
+2231,刑事,xíngshì,N,Hình Sự,"Liên quan đến pháp luật, hình sự"
+2232,形勢,xíngshì,N,Hình Thế,"Tình hình, hoàn cảnh"
+2233,形態,xíngtài,N,Hình Thái,"Hình thức, dạng thức"
+2234,形體,xíngtĭ,N,Hình Thể,"Hình thể, hình dạng"
+2235,形形色色,xíngxíngsèsè,Vs,Hình Hình Sắc Sắc,"Đủ loại, đa dạng"
+2236,型態,xíngtài,N,Hình Thái,"Kiểu dáng, hình thức"
+2237,性,xìng,N,Tính,"Tính chất, giới tính"
+2238,性能,xìngnéng,N,Tính Năng,"Tính năng, khả năng"
+2239,性情,xìngqíng,N,Tính Tình,"Tính cách, tính tình"
+2240,興致,xìngzhì,N,Hưng Trí,"Hứng thú, sự quan tâm"
+2241,胸,xiōng,N,Hung,"Ngực, trái tim"
+2242,胸口,xiōngkŏu,N,Hung Khẩu,Vùng ngực
+2243,修補,xiūbŭ,V,Tu Bổ,"Sửa chữa, vá lại"
+2244,修訂,xiūdìng,V,Tu Đính,"Sửa đổi, chỉnh sửa"
+2245,修建,xiūjiàn,V,Tu Kiến,"Xây dựng, tu sửa"
+2246,修女,xiūnǚ,N,Tu Nữ,"Nữ tu, nữ tu sĩ"
+2247,修養,xiūyăng,N,Tu Dưỡng,"Rèn luyện, dưỡng dục"
+2248,修築,xiūzhú,V,Tu Trúc,"Xây dựng lại, tu sửa"
+2249,繡,xiù,V,Tú,"Thêu, thêu dệt"
+2250,虛擬,xūnĭ,V,Hư Nghị,"Ảo, giả lập"
+2251,虛心,xūxīn,Vs,Hư Tâm,"Khiêm tốn, khiêm nhường"
+2252,許,xŭ,N,hứa,cho phép
+2253,許多,xŭduō,Adv,Hứa đa,Nhiều
+2254,許久,xŭjiŭ,N,Hứa Cửu,"Lâu, một thời gian dài"
+2255,許可,xŭkě,V,Hứa Khả,"Cho phép, sự cho phép"
+2256,酗酒,xùjiŭ,Vi,Hữu Tửu,"Uống rượu say, nghiện rượu"
+2257,序幕,xùmù,N,Tự Mộc,"Mở đầu, khởi đầu"
+2258,敘述,xùshù,V,Tự Thuật,"Miêu tả, kể lại"
+2259,宣稱,xuānchēng,V,Tuyên Xưng,"Tuyên bố, công nhận"
+2260,宣告,xuāngào,V,Tuyên Cáo,"Tuyên bố, thông báo"
+2261,宣示,xuānshì,V,Tuyên Thị,"Tuyên bố, công bố"
+2262,宣誓,xuānshì,Vi,Tuyên Thệ,"Thề, tuyên thệ"
+2263,宣言,xuānyán,N,Tuyên Ngôn,"Tuyên ngôn, phát biểu"
+2264,宣揚,xuānyáng,V,Tuyên Dương,"Quảng bá, tuyên dương"
+2265,旋律,xuánlǜ,N,Xuân Lý,"Giai điệu, âm điệu"
+2266,旋轉,xuánzhuăn,Vi,Xuân Chuyển,"Xoay, quay"
+2267,懸殊,xuánshū,Vs,Huyền Sù,Chênh lệch lớn
+2268,懸崖/崖,xuányái/yái,N,Huyền Nhai,"Vách đá, vực thẳm"
+2269,選拔,xuănbá,V,Tuyển Bạt,"Tuyển chọn, chọn lọc"
+2270,選購,xuăngòu,V,Tuyển Cấu,"Mua sắm, chọn mua"
+2271,選民,xuănmín,N,Tuyển Dân,"Cử tri, người bỏ phiếu"
+2272,選票,xuănpiào,N,Tuyển Phiếu,"Lá phiếu, thẻ bầu cử"
+2273,選修,xuănxiū,V,Tuyển Tu,Môn học tự chọn
+2274,學分,xuéfēn,N,Học Phân,Tín chỉ học tập
+2275,學科,xuékē,N,Học Khoa,"Môn học, chuyên ngành"
+2276,學年,xuénián,N,Học Niên,Năm học
+2277,學識,xuéshì,N,Học Thức,"Kiến thức, học vấn"
+2278,學說,xuéshuō,N,Học Thuyết,"Học thuyết, lý thuyết"
+2279,學徒,xuétú,N,Học Đồ,"Học viên, người học việc"
+2280,學員,xuéyuán,N,Học Viên,"Học viên, học sinh"
+2281,學制,xuézhì,N,Học Chế,Hệ thống giáo dục
+2282,雪人,xuěrén,N,Tuyết Nhân,Người tuyết
+2283,削弱,xuèruò,V,Tước Nhược,"Làm yếu đi, giảm sức mạnh"
+2284,循環,xúnhuán,N,tuần hoàn,tuần hoàn
+2285,巡邏,xúnluó,Vi,Tuần Lô,"Tuần tra, kiểm tra định kỳ"
+2286,巡視,xúnshì,V,Tuần Thị,"Kiểm tra, thanh tra"
+2287,詢問,xúnwèn,V,Hỏi Vấn,"Hỏi thăm, yêu cầu thông tin"
+2288,訓,xùn,V,Huấn,"Huấn luyện, dạy bảo"
+2289,押,yā,V,Áp,"Giữ, giam giữ, đè nén"
+2290,鴉片,yāpiàn,N,A Tiêm,Thuốc phiện
+2291,壓歲錢,yāsuìqián,N,Áp Tuế Tiền,Tiền lì xì trong dịp Tết
+2292,壓縮,yāsuō,V,Áp Súc,"Nén lại, co lại"
+2293,壓制,yāzhì,V,Áp Chế,"Kìm nén, đàn áp"
+2294,牙科,yákē,N,Nha Khoa,Ngành nha khoa
+2295,芽,yá,N,Nha,"Mầm, chồi"
+2296,啞,yă,Vp,Ám,"Câm, không nói được"
+2297,亞軍,yàjūn,N,Á Quân,"Hạng nhì, người về nhì"
+2298,淹,yān,V,Yên,"Ngập nước, chìm trong nước"
+2299,言論,yánlùn,N,Ngôn Luận,"Lời nói, phát ngôn"
+2300,岩石,yánshí,N,Nham Thạch,"Đá, đá núi"
+2301,延遲,yánchí,Vpt,Diên Trì,"Hoãn lại, trì hoãn"
+2302,延伸,yánshēn,Vs,Diên Thân,"Mở rộng, kéo dài"
+2303,延誤,yánwù,Vpt,Diên Ngộ,"Trễ, muộn, chậm trễ"
+2304,延續,yánxù,Vst,Diên Tục,"Kéo dài, tiếp tục"
+2305,沿海,yánhăi,N,Duyên Hải,Dọc theo bờ biển
+2306,沿途,yántú,N,Duyên Đồ,"Dọc đường, trên đường đi"
+2307,沿襲,yánxí,Vst,Duyên Tập,"Kế thừa, tiếp nối"
+2308,沿用,yányòng,V,Duyên Dụng,"Tiếp tục sử dụng, áp dụng tiếp"
+2309,嚴禁,yánjìn,V,Nghiêm Cấm,Cấm nghiêm ngặt
+2310,嚴厲,yánlì,Vs,Nghiêm Lệ,"Nghiêm khắc, chặt chẽ"
+2311,嚴密,yánmì,Vs,Nghiêm Mật,"Chặt chẽ, cẩn mật"
+2312,演變,yănbiàn,Vs,Diễn Biến,"Biến chuyển, thay đổi"
+2313,演講,yănjiăng,N,diễn giảng,diễn thuyết
+2314,演說,yănshuō,N,Diễn Thuyết,"Diễn thuyết, bài phát biểu"
+2315,演習,yănxí,Vi,Diễn Tập,"Tập luyện, thực hành"
+2316,眼界,yănjiè,N,Nhãn Giới,"Tầm nhìn, quan điểm"
+2317,眼看,yănkàn,V,Nhãn Khán,"Nhìn thấy, thấy rõ"
+2318,衍生,yănshēng,V,Diễn Sinh,"Phát sinh, sinh ra từ"
+2319,燕窩,yànwō,N,Yến Oa,Tổ yến
+2320,燕(子),yàn(zi),N,Yến (Tử),Chim yến
+2321,央求,yāngqiú,V,Ứng Cầu,"Cầu xin, nài nỉ"
+2322,仰,yăng,V,Ngưỡng,"Nhìn lên, ngưỡng mộ"
+2323,仰慕,yăngmù,Vst,Ngưỡng Mộ,"Kính trọng, ngưỡng mộ"
+2324,養分/養份,yăngfèn,N,Dưỡng Phân,"Dinh dưỡng, chất dinh dưỡng"
+2325,養老,yănglăo,Vs,Dưỡng Lão,Nuôi dưỡng tuổi già
+2326,養育,yăngyù,V,Dưỡng Dục,"Nuôi nấng, chăm sóc"
+2327,邀,yāo,V,Yêu,"Mời gọi, mời"
+2328,窯,yáo,N,Diêu,Lò gốm
+2329,搖晃,yáohuàng,Vi,Dao Hoảng,"Lắc lư, rung rinh"
+2330,謠言,yáoyán,N,Dao Ngôn,"Tin đồn, lời đồn đại"
+2331,遙遠,yáoyuăn,Vs,Dao Viễn,"Xa xôi, rất xa"
+2332,要點,yàodiăn,N,Yêu Điểm,"Điểm quan trọng, điểm chính"
+2333,要犯,yàofàn,N,Yêu Phạm,"Tội phạm chính, thủ phạm"
+2334,藥品,yàopĭn,N,Dược Phẩm,"Thuốc, dược phẩm"
+2335,業績,yèjī,N,Nghiệp Tích,"Thành tựu công việc, thành tích"
+2336,依,yī,Prep,Y,"Dựa vào, theo"
+2337,依舊,yījiù,Adv,Y Cựu,"Vẫn như cũ, như trước"
+2338,依據,yījù,Prep,y cứ,căn cứ
+2339,依賴,yīlài,Vst,Y Lại,"Dựa dẫm, lệ thuộc vào"
+2340,依照,yīzhào,Prep,Y Chiếu,"Theo, dựa vào"
+2341,醫療,yīliáo,N,Y Liệu,"Chữa trị, điều trị"
+2342,醫術,yīshù,N,Y Thuật,Nghệ thuật chữa bệnh
+2343,醫藥,yīyào,N,Y Dược,Y học và dược phẩm
+2344,一定,yīdìng,Vs-attr,Nhất định,Nhất định
+2345,一道,yīdào,Adv,Nhất Đạo,"Một lúc, cùng một lúc"
+2346,一度,yīdù,Adv,Nhất Độ,"Một lần, một thời gian"
+2347,一概,yīgài,Adv,Nhất Khái,"Tất cả, chung chung"
+2348,一貫,yīguàn,Vs-attr,Nhất Quán,"Kiên định, thống nhất"
+2349,一律,yīlǜ,Adv,Nhất Lệ,"Theo kiểu, giống nhau"
+2350,一味,yīwèi,Adv,Nhất Vị,"Đơn giản, chỉ có một cách"
+2351,咦,yí,Ptc,Nhi,Biểu thị sự ngạc nhiên
+2352,儀表,yíbiăo,N,Nghi Biểu,"Bề ngoài, diện mạo"
+2353,遺產,yíchăn,N,Di Sản,"Di sản, tài sản thừa kế"
+2354,遺傳,yíchuán,Vst,Di Truyền,Di truyền
+2355,遺憾,yíhàn,Vs,Di Hám,"Tiếc nuối, sự tiếc nuối"
+2356,遺留,yíliú,V,Di Lưu,"Để lại, lưu lại"
+2357,遺棄,yíqì,V,Di Khí,"Bỏ rơi, bỏ đi"
+2358,遺體,yítĭ,N,Di Thể,Xác chết
+2359,遺忘,yíwàng,Vpt,Di Vong,"Quên, lãng quên"
+2360,遺志,yízhì,N,Di Chí,"Di nguyện, ý chí trước khi mất"
+2361,遺址,yízhĭ,N,Di Chỉ,"Di chỉ, di tích"
+2362,疑慮,yílǜ,N,Nghi Lự,"Lo lắng, hoài nghi"
+2363,移植,yízhí,V,Di Trồng,"Cấy ghép, cấy"
+2364,倚,yĭ,V,Ý,"Dựa vào, ngả vào"
+2365,以至/以致/以至於/以致於,yĭzhì/yĭzhìyú,Conj,Dĩ Chí,"Đến mức, dẫn đến"
+2366,亦,yì,Adv / Conj,Diệc,"Cũng, cũng là"
+2367,一連串,yīliánchuàn,Vs-attr,Nhất Liên Xuyến,"Một loạt, một chuỗi"
+2368,一流,yīliú,Vs,Nhất Lưu,"Hàng đầu, xuất sắc"
+2369,一如,yīrú,Prep,Nhất Như,"Giống như, giống y hệt"
+2370,一心,yīxīn,Adv,Nhất Tâm,"Tập trung vào một mục tiêu, lòng dạ chung thủy"
+2371,液體,yètĭ,N,Dịch Thể,"Dung dịch, thể lỏng"
+2372,抑制,yìzhì,V,Ức Chế,"Kiềm chế, ngăn chặn"
+2373,意識到,yìshìdào,Vpt,Ý Thức Được,"Nhận thức được, nhận ra"
+2374,意圖,yìtú,N,Ý Đồ,"Dự định, ý định"
+2375,意味,yìwèi,Vst,Ý Vị,"Ý nghĩa, biểu hiện của sự việc"
+2376,毅力,yìlì,N,Dũng Lực,Sức mạnh ý chí
+2377,翌日,yìrì,N,Dịch Nhật,"Ngày hôm sau, ngày kế tiếp"
+2378,異常,yìcháng,Vs,Dị Thường,"Bất thường, lạ thường"
+2379,異鄉,yìxiāng,N,Dị Hương,"Nơi khác, đất khách"
+2380,議定,yìdìng,V,Nghị Định,"Thảo luận và quyết định, thỏa thuận"
+2381,議論,yìlùn,V,Nghị Luận,"Bình luận, tranh luận"
+2382,議題,yìtí,N,Nghị Đề,Đề tài thảo luận
+2383,議員,yìyuán,N,Nghị Viên,"Thành viên hội đồng, nghị sĩ"
+2384,音,yīn,N,Âm,"Âm thanh, tiếng"
+2385,因果,yīnguŏ,N,Nhân Quả,Nguyên nhân và hậu quả
+2386,陰謀,yīnmóu,N,Âm Mưu,"Kế hoạch xấu, âm mưu"
+2387,陰影,yīnyĭng,N,Âm Ảnh,"Bóng tối, bóng ma"
+2388,銀幕,yínmù,N,Ngân Mạc,"Màn bạc, màn hình chiếu phim"
+2389,銀色,yínsè,N,Ngân Sắc,"Màu bạc, màu bạc ánh kim"
+2390,銀子,yínzi,N,Ngân Tử,"Tiền bạc, tiền xu"
+2391,引,yĭn,V,Dẫn,"Dẫn dắt, kéo theo"
+2392,引導,yĭndăo,V,Dẫn Đạo,"Hướng dẫn, chỉ đạo"
+2393,引進,yĭnjìn,V,Dẫn Nhập,"Đưa vào, giới thiệu"
+2394,引擎,yĭnqíng,N,Dẫn Cơ,"Động cơ, máy móc"
+2395,隱藏,yĭncáng,V,Ẩn Tàng,"Ẩn giấu, che giấu"
+2396,隱士,yĭnshì,N,Ẩn Sĩ,"Người ẩn dật, ẩn sĩ"
+2397,隱約,yĭnyuē,Adv,Ẩn Ước,"Mơ hồ, không rõ ràng"
+2398,印證,yìnzhèng,V,Ấn Chứng,"Chứng minh, xác nhận"
+2399,櫻桃,yīngtáo,N,Anh Đào,Quả anh đào
+2400,英勇,yīngyŏng,Vs,Anh Dũng,"Dũng cảm, anh dũng"
+2401,應,yìng,Prep / V,Ứng,"Đáp ứng, nên làm"
+2402,鷹/老鷹,yīng/lăoyīng,N,ưng/lão ưng,"Chim ưng, đại bàng"
+2403,營地,yíngdì,N,Doanh Địa,"Trại, khu vực làm việc quân sự"
+2404,營造,yíngzào,V,Doanh Tạo,"Xây dựng, xây cất"
+2405,迎,yíng,V,Nghiêng,"Chào đón, tiếp đón"
+2406,迎合,yínghé,Vst,Nghiêng Hợp,"Đáp ứng, làm vừa lòng"
+2407,影射,yĭngshè,Vst,Ảnh Xạ,"Ám chỉ, bóng gió"
+2408,硬,yìng,Adv,ngạnh,"cứng, rắn"
+2409,硬體,yìngtĭ,N,Cứng Thể,Phần cứng (máy tính)
+2410,應變,yìngbiàn,Vi,Ứng Biến,"Ứng phó, thích ứng"
+2411,應酬,yìngchóu,Vi,Ứng Châu,"Tiếp đãi, đối phó"
+2412,應急,yìngjí,Vs,Ứng Cấp,Ứng phó khẩn cấp
+2413,應驗,yìngyàn,Vpt,Ứng Nghiệm,"Kiểm tra, chứng minh đúng"
+2414,應徵,yìngzhēng,V,Ứng Tình,"Tham gia tuyển dụng, ứng tuyển"
+2415,唷,yō,Ptc,Nhi,Biểu thị sự ngạc nhiên hoặc hỏi lại
+2416,湧,yŏng,V,Dũng,"Dâng trào, nổi lên"
+2417,踴躍,yŏngyuè,Vs,Dũng Dược,"Hăng hái, nhiệt tình"
+2418,用戶,yònghù,N,Dụng Hộ,"Người sử dụng, khách hàng"
+2419,用途,yòngtú,N,Dụng Đồ,"Công dụng, mục đích sử dụng"
+2420,悠久,yōujiŭ,Vs,Du Cửu,"Lâu dài, vĩnh viễn"
+2421,悠閒,yōuxián,Vs,Du Hiền,"Thoải mái, thư giãn"
+2422,優待,yōudài,V,Ưu Đãi,"Ưu đãi, đặc ân"
+2423,優勢,yōushì,N,Ưu Thế,"Lợi thế, ưu điểm"
+2424,優先,yōuxiān,Adv,Ưu Tiên,"Ưu tiên, ưu đãi"
+2425,優異,yōuyì,Vs,Ưu Dị,"Xuất sắc, nổi bật"
+2426,鈾,yòu,N,Du,Uranium
+2427,由來,yóulái,N,Do Lai,"Nguồn gốc, xuất xứ"
+2428,遊覽,yóulăn,V,Du Lãm,"Tham quan, du lịch"
+2429,油田,yóutián,N,Dầu Điền,Mỏ dầu
+2430,油條,yóutiáo,N,Dầu Điều,"Quẩy, bánh quẩy"
+2431,友愛,yŏuài,Vst,Hữu Ái,"Tình bạn, tình hữu nghị"
+2432,有機,yŏujī,Vs-attr,Hữu Cơ,Hữu cơ (có liên quan đến sinh học)
+2433,有理,yŏulĭ,Vs,Hữu Lý,"Có lý, hợp lý"
+2434,有所,yŏusuŏ,Vst,Hữu Sở,"Có một chút, có phần"
+2435,有為,yŏuwéi,Vs,Hữu Vi,"Có tài, có thành tích"
+2436,有限,yŏuxiàn,Vs,Hữu Hạn,"Hữu hạn, giới hạn"
+2437,有形,yŏuxíng,Vs,Hữu Hình,"Hữu hình, có thể nhìn thấy"
+2438,有心人,yŏuxīnrén,N,Hữu Tâm Nhân,"Người có tâm, có ý"
+2439,有益,yŏuyì,Vst,Hữu Ích,"Có ích, có lợi"
+2440,有意,yŏuyì,Vaux,Hữu Ý,"Có ý định, cố ý"
+2441,有緣,yŏuyuán,Vs,Hữu Duyên,Có duyên
+2442,誘惑,yòuhuò,V,Dụ Hoặc,"Cám dỗ, quyến rũ"
+2443,幼稚,yòuzhì,Vs,Ấu Trĩ,"Trẻ con, ngây thơ"
+2444,于,yú,Prep,Ứu,"Ở, tại, với (trong trường hợp này, mang nghĩa ""tại"")"
+2445,於,yú,Prep,Ủ,"Tại, ở"
+2446,逾,yú,Vst,Dữ,"Vượt quá, vượt quá mức"
+2447,餘,yú,N / Vst,Dư,"Dư thừa, còn lại"
+2448,語法,yǔfă,N,Ngữ Pháp,Ngữ pháp
+2449,愚蠢,yúchŭn,Vs,Ngô Trẩn,"Ngu ngốc, dại dột"
+2450,輿論,yúlùn,N,Du Luận,"Dư luận, ý kiến công chúng"
+2451,漁民,yúmín,N,Ngư Dân,"Ngư dân, người đánh bắt cá"
+2452,予,yŭ,V,Dự,"Cấp cho, ban cho"
+2453,予以,yŭyĭ,V,Dự Dĩ,"Cấp cho, ban cho (thường dùng trong văn viết)"
+2454,與會,yùhuì,Vi,Dữ Hội,"Tham dự, có mặt"
+2455,雨季,yŭjì,N,Vũ Kỳ,Mùa mưa
+2456,語文,yŭwén,N,Ngữ Văn,Ngôn ngữ và văn học
+2457,宇宙,yŭzhòu,N,Vũ Trụ,"Vũ trụ, không gian"
+2458,愈,yù,Adv,Dữ,"Hơn nữa, càng thêm"
+2459,玉器,yùqì,N,Ngọc Khí,Đồ trang sức bằng ngọc
+2460,預測,yùcè,V,Dự Xác,"Dự báo, tiên đoán"
+2461,預防,yùfáng,V,Dự Phòng,"Phòng ngừa, dự phòng"
+2462,預告,yùgào,V,Dự Cáo,"Dự báo, thông báo trước"
+2463,預估,yùgū,V,Dự Cứ,"Ước tính, dự đoán"
+2464,預賽,yùsài,N,Dự Tế,"Vòng loại, cuộc thi sơ khảo"
+2465,預約,yùyuē,V,Dự Ước,"Đặt trước, hẹn trước"
+2466,寓言,yùyán,N,Vu Ngôn,Truyện ngụ ngôn
+2467,園林,yuánlín,N,Viên Lâm,"Vườn cây, khu vườn"
+2468,元氣,yuánqì,N,Nguyên Khí,"Sinh lực, năng lượng sống"
+2469,元首,yuánshŏu,N,Nguyên Thủ,"Người lãnh đạo, nguyên thủ quốc gia"
+2470,元素,yuánsù,N,Nguyên Tố,"Nguyên tố, thành phần cơ bản"
+2471,原,yuán,Adv,Nguyên,"Nguyên bản, cơ sở"
+2472,原形,yuánxíng,N,Nguyên Hình,Hình dáng ban đầu
+2473,原野,yuányě,N,Nguyên Dã,"Cánh đồng, đồng cỏ"
+2474,原狀,yuánzhuàng,N,Nguyên Trạng,Tình trạng ban đầu
+2475,原住民,yuánzhùmín,N,Nguyên Trú Dân,Người bản địa
+2476,原子,yuánzĭ,N,Nguyên Tử,Nguyên tử
+2477,原子彈,yuánzĭdàn,N,Nguyên Tử Đạn,Bom nguyên tử
+2478,援助,yuánzhù,V,Viện Trợ,"Giúp đỡ, viện trợ"
+2479,遠景,yuănjĭng,N,Viễn Cảnh,"Viễn cảnh, tầm nhìn tương lai"
+2480,怨,yuàn,Vst,Oán,"Oán giận, hận thù"
+2481,約束,yuēshù,V,Ước Thúc,"Cam kết, điều kiện"
+2482,躍,yuè,Vi,Dược,"Nhảy lên, vọt lên"
+2483,樂隊,yuèduì,N,Lạc Đoàn,Ban nhạc
+2484,運,yùn,V,Vận,"Vận mệnh, vận may"
+2485,運行,yùnxíng,Vi,Vận Hành,"Hoạt động, chạy (máy móc)"
+2486,孕婦,yùnfù,N,Dự Phụ,Phụ nữ mang thai
+2487,醞釀,yùnniàng,V,Duyệt Nướng,"Lên men (rượu), lên kế hoạch"
+2488,栽,zāi,V,Tài,"Trồng, cấy ghép"
+2489,災禍,zāihuò,N,Tai Họa,"Tai họa, thiên tai"
+2490,災情,zāiqíng,N,Tai Tình,Tình hình thảm họa
+2491,在場,zàichăng,Vi,Tại Trường,"Có mặt, có mặt tại"
+2492,在世,zàishì,Vs,Tại Thế,"Còn sống, sống"
+2493,在座,zàizuò,Vi,Tại Tọa,"Có mặt, ngồi ở đó"
+2494,再生,zàishēng,Vs-attr,Tái Sinh,"Tái sinh, hồi phục"
+2495,咱,zán,N,Tán,"Chúng ta, chúng mình"
+2496,贊助,zànzhù,V,Tán Trợ,"Tài trợ, đóng góp"
+2497,讚嘆/讚歎,zàntàn,Vi,Tán Thán,"Khen ngợi, tán dương"
+2498,贓物,zāngwù,N,Tằng Vật,"Tài sản cướp được, đồ gian"
+2499,遭,zāo,M / Prep / Vst,Tao,"Gặp phải, chịu đựng (thường là điều không tốt)"
+2500,遭遇,zāoyù,Vst,tao ngộ,"gặp phải, trải qua"
+2501,造反,zàofăn,Vi,Tạo Phản,"Nổi loạn, khởi nghĩa, làm phản"
+2502,造化,zàohuà,N,Tạo Hóa,"Vận mệnh, số phận, sự sáng tạo của tự nhiên"
+2503,造物主,zàowùzhŭ,N,Tạo Vật Chủ,"Thượng đế, đấng sáng tạo"
+2504,造型,zàoxíng,N,Tạo Hình,"Hình thức, kiểu dáng, mẫu mã"
+2505,責備,zébèi,V,Trách Bị,"Trách móc, chỉ trích"
+2506,增進,zēngjìn,V,Tăng Tiến,"Tăng cường, thúc đẩy, làm cho tốt hơn"
+2507,增強,zēngqiáng,Vp,Tăng Cường,"Củng cố, làm mạnh mẽ hơn"
+2508,增值,zēngzhí,Vp,Tăng Giá,"Tăng giá trị, làm giá trị gia tăng"
+2509,扎,zhā,V,Chích,"Cắm, chọc vào (thường là vật nhọn)"
+2510,炸藥,zhàyào,N,Chát Dược,"Thuốc nổ, chất nổ"
+2511,沾,zhān,V,Triêm,"Dính, bị vấy bẩn"
+2512,盞,zhăn,M,Chẩm,"Cái chén, cái ly (đơn vị đếm)"
+2513,展望,zhănwàng,Vst,Triển Vọng,"Nhìn xa, triển vọng, hy vọng về tương lai"
+2514,展現,zhănxiàn,V,Triển Hiện,"Thể hiện, trình bày, biểu thị"
+2515,嶄新,zhănxīn,Vs-attr,Chấn Tân,"Mới mẻ, hoàn toàn mới"
+2516,占據/佔據,zhànjù,V,Chiếm Cứ,"Chiếm đóng, chiếm lấy"
+2517,占領/佔領,zhànlĭng,V,Chiếm Lĩnh,"Chiếm giữ, chiếm lãnh thổ"
+2518,顫抖,zhàndŏu,Vi,Chấn Đẩu,"Run rẩy, rùng mình (do sợ hãi hoặc lạnh)"
+2519,戰火,zhànhuŏ,N,Chiến Hỏa,"Lửa chiến tranh, chiến tranh"
+2520,戰機,zhànjī,N,Chiến Cơ,Máy bay chiến đấu
+2521,戰亂,zhànluàn,N,Chiến Loạn,"Nội chiến, loạn lạc, chiến tranh hỗn loạn"
+2522,戰略,zhànlüè,N,Chiến Lược,"Chiến lược, kế hoạch chiến đấu"
+2523,戰勝,zhànshèng,V,Chiến Thắng,"Chiến thắng, thắng lợi"
+2524,戰士,zhànshì,N,Chiến Sĩ,"Người lính, chiến binh"
+2525,戰術,zhànshù,N,Chiến Thuật,"Kỹ thuật chiến đấu, chiến thuật"
+2526,戰線,zhànxiàn,N,Chiến Tuyến,"Mặt trận, chiến tuyến"
+2527,戰友,zhànyŏu,N,Chiến Hữu,"Đồng đội, bạn chiến đấu"
+2528,戰戰兢兢,zhànzhànjīngjīng,Vs,Chiến Chiến Kinh Kinh,"Cẩn trọng, lo lắng, e dè"
+2529,張貼,zhāngtiē,V,Trương Thiết,"Dán, treo (thông báo, poster)"
+2530,長子,zhăngzĭ,N,Trưởng Tử,Con trai cả
+2531,帳篷,zhàngpéng,N,Trướng Phòng,Lều (dùng trong cắm trại)
+2532,丈,zhàng,M,Trượng,Đơn vị đo chiều dài (1 trượng = 10 thước)
+2533,朝氣,zhāoqì,N,Triều Khí,"Sinh lực, năng lượng, nhiệt huyết"
+2534,著想,zháoxiăng,Vs,Trứ Tưởng,"Quan tâm, lo lắng cho"
+2535,找尋,zhăoxún,V,Chiếu Tầm,"Tìm kiếm, tìm tòi"
+2536,沼澤,zhăozé,N,Triều Trạch,"Đầm lầy, vùng đất ẩm ướt"
+2537,召集,zhàojí,V,Triệu Tập,"Triệu tập, tập hợp lại"
+2538,照例,zhàolì,Adv,Chiếu Lệ,"Theo lệ, theo thông lệ"
+2539,照耀,zhàoyào,V,Chiếu Chiếu,"Chiếu sáng, chiếu rọi"
+2540,遮,zhē,V,Chi,"Che, che phủ, che đậy"
+2541,遮蔽,zhēbì,V,Chi Tế,"Che khuất, che chắn"
+2542,折騰,zhēténg,V,Chiết Teng,"Giày vò, làm khổ, quay cuồng"
+2543,針灸,zhēnjiŭ,Vi,Châm Cứu,Châm cứu
+2544,真情,zhēnqíng,N,Chân Tình,Tình cảm chân thật
+2545,診斷,zhěnduàn,V,Chẩn Đoán,"Chẩn đoán, đánh giá bệnh tình"
+2546,診所,zhěnsuŏ,N,Chẩn Sở,"Phòng khám, bệnh viện nhỏ"
+2547,鎮定,zhèndìng,Vs,Chấn Định,"Bình tĩnh, ổn định, làm dịu lại"
+2548,鎮壓,zhènyā,V,Chấn Áp,"Đàn áp, áp bức"
+2549,振動,zhèndòng,Vi,Chấn Động,"Rung động, dao động"
+2550,震驚,zhènjīng,Vs,Chấn Kinh,"Kinh hoàng, sửng sốt, ngạc nhiên"
+2551,陣營,zhènyíng,N,Trận Doanh,"Trại, doanh trại, phe nhóm"
+2552,蒸,zhēng,V,Chưng,"Hấp, làm nóng, bốc hơi"
+2553,蒸發,zhēngfā,Vi,Chưng Phát,"Bay hơi, bốc hơi"
+2554,蒸氣,zhēngqì,N,Chưng Khí,Hơi nước
+2555,爭辯,zhēngbiàn,Vi,Tranh Biện,"Cãi vã, tranh luận"
+2556,爭奪,zhēngduó,V,Tranh Đoạt,"Tranh giành, chiếm đoạt"
+2557,爭論,zhēnglùn,N,tranh luận,tranh cãi
+2558,爭氣,zhēngqì,Vs,Tranh Khí,"Cố gắng để khẳng định mình, phấn đấu"
+2559,爭議,zhēngyì,N,Tranh Nghị,"Tranh cãi, bất đồng ý kiến"
+2560,徵收,zhēngshōu,V,Trưng Thu,"Thu thuế, thu tiền"
+2561,掙扎,zhēngzhá,Vi,Tranh Trắc,"Vật lộn, đấu tranh"
+2562,整,zhěng,V,Chỉnh,"Toàn bộ, đầy đủ"
+2563,整頓,zhěngdùn,V,Chỉnh Đốn,"Chỉnh đốn, sắp xếp lại"
+2564,整整,zhěngzhěng,Adv,Chỉnh Chỉnh,"Hoàn toàn, đầy đủ, trọn vẹn"
+2565,正當,zhèngdāng,Vs,Chính Đương,"Chính đáng, hợp lý, đúng đắn"
+2566,正面,zhèngmiàn,Adv,chính diện,"mặt chính, mặt trước"
+2567,正統,zhèngtŏng,N,Chính Thống,"Chính thống, truyền thống"
+2568,正義,zhèngyì,N,Chính Nghĩa,"Công lý, chính nghĩa"
+2569,政績,zhèngjī,N,Chính Thành,Thành tích chính trị
+2570,政見,zhèngjiàn,N,Chính Kiến,Quan điểm chính trị
+2571,政權,zhèngquán,N,Chính Quyền,Chính quyền
+2572,證券,zhèngquàn,N,Chứng Khoán,Chứng khoán
+2573,證人,zhèngrén,N,Chứng Nhân,Nhân chứng
+2574,掙,zhèng,V,Tranh,"Vật lộn, đấu tranh"
+2575,之內,zhīnèi,N,Chi Nội,"Trong, bên trong"
+2576,之所以,zhīsuŏyĭ,Conj,Chi Sở Dĩ,"Lý do tại sao, lý do"
+2577,支撐,zhīchēng,V,Chi Tranh,"Chống đỡ, hỗ trợ"
+2578,支付,zhīfù,V,Chi Phất,"Thanh toán, chi trả"
+2579,支配,zhīpèi,V,Chi Phối,"Quản lý, điều phối"
+2580,支應,zhīyìng,V,Chi Ứng,"Cung cấp, đáp ứng"
+2581,知足,zhīzú,Vs,Tri Túc,"Biết đủ, hài lòng với những gì mình có"
+2582,脂肪,zhīfáng,N,Chí Phương,"Mỡ, chất béo"
+2583,織,zhī,V,Chức,"Dệt, làm ra, tạo ra"
+2584,直徑,zhíjìng,N,Trực Kính,Đường kính
+2585,值班,zhíbān,V-sep,Trị Ban,Ca làm việc
+2586,值錢,zhíqián,Vs,Trị Tiền,"Có giá trị, quý giá"
+2587,殖民,zhímín,Vi,Chích Mân,"Thực dân hóa, chiếm đóng đất đai"
+2588,質量,zhíliàng,N,Chất Lượng,Chất lượng
+2589,質疑,zhíyí,V,Chất Nghi,"Hoài nghi, nghi ngờ"
+2590,職務,zhíwù,N,Chức Vụ,Chức vụ
+2591,職責,zhízé,N,Chức Trách,Trách nhiệm công việc
+2592,執照,zhízhào,N,Chấp Chiếu,"Giấy phép, chứng chỉ"
+2593,執政,zhízhèng,Vi,Chấp Chính,"Cầm quyền, lãnh đạo"
+2594,執著,zhízhuó,Vs,Chấp Trứ,"Kiên trì, bền bỉ"
+2595,止,zhĭ,N,chỉ,dừng lại
+2596,只得,zhĭdé,Adv,Chỉ Đắc,"Chỉ có thể, chỉ đành"
+2597,指標,zhĭbiāo,N,Chỉ Tiêu,"Chỉ tiêu, tiêu chuẩn"
+2598,指點,zhĭdiăn,V,Chỉ Điểm,"Chỉ ra, hướng dẫn"
+2599,指揮,zhĭhuī,N / V,Chỉ Huy,"Chỉ huy, lãnh đạo"
+2600,指控,zhĭkòng,V,Chỉ Công,"Buộc tội, tố cáo"
+2601,指南針,zhĭnánzhēn,N,Chỉ Nam Châm,"La bàn, dụng cụ chỉ hướng"
+2602,指數,zhĭshù,N,Chỉ Số,"Chỉ số, tỉ lệ"
+2603,指望,zhĭwàng,Vst,Chỉ Vọng,"Hi vọng, mong đợi"
+2604,指紋,zhĭwén,N,Chỉ Văn,Dấu vân tay
+2605,指引,zhĭyĭn,V,Chỉ Dẫn,"Chỉ dẫn, hướng dẫn"
+2606,指正,zhĭzhèng,V,Chỉ Chính,"Chỉ ra lỗi sai, sửa chữa"
+2607,至,zhì,Conj / Prep,chí,"đến, tới"
+2608,至今,zhìjīn,Adv,Chi Kim,"Đến nay, cho đến bây giờ"
+2609,治安,zhìān,N,Trị An,An ninh trật tự
+2610,治本,zhìběn,Vi,Trị Bổn,"Giải quyết tận gốc, vấn đề căn bản"
+2611,治標,zhìbiāo,Vi,Trị Tiêu,"Giải quyết tạm thời, biện pháp ngắn hạn"
+2612,治理,zhìlĭ,V,Trị Lý,"Quản lý, cai trị"
+2613,治療,zhìliáo,V,Trị Liệu,"Điều trị, chữa bệnh"
+2614,志趣,zhìqù,N,Chí Thuý,"Sở thích, chí hướng"
+2615,志向,zhìxiàng,N,Chí Hướng,"Mục tiêu, hoài bão"
+2616,致詞,zhìcí,Vi,Chí Từ,"Phát biểu, phát ngôn"
+2617,致富,zhìfù,Vs,Chí Phú,"Làm giàu, đạt được sự giàu có"
+2618,致力,zhìlì,Vst,Chí Lực,"Tập trung vào, cống hiến hết mình"
+2619,致命,zhìmìng,Vs,Chí Mệnh,"Chí mạng, gây chết người"
+2620,致意,zhìyì,Vi,Chí Ý,"Gửi lời chào, bày tỏ lòng cảm ơn"
+2621,智力,zhìlì,N,Trí Lực,"Trí tuệ, năng lực trí óc"
+2622,制裁,zhìcái,V,Chế Tài,"Trừng phạt, xử lý, chế tài"
+2623,製品,zhìpĭn,N,Chế Phẩm,"Sản phẩm, hàng hóa sản xuất"
+2624,滯留,zhìliú,Vi,Trệ Lưu,"Kẹt lại, tạm dừng lại (do tắc nghẽn, trì hoãn)"
+2625,中斷,zhōngduàn,V,Trung Đoạn,"Ngừng lại, gián đoạn"
+2626,中和,zhōnghé,V,Trung Hòa,"Trung hòa, điều hòa"
+2627,中立,zhōnglì,Vs,Trung Lập,"Trung lập, không nghiêng về phe nào"
+2628,中旬,zhōngxún,N,Trung Tuần,Giữa tháng (khoảng từ ngày 11 đến 20)
+2629,中葉,zhōngyè,N,Trung Diệp,Giữa mùa (mùa hè)
+2630,中醫,zhōngyī,N,Trung Y,Y học cổ truyền Trung Quốc
+2631,中庸,zhōngyōng,Vs,Trung Dung,"Trung dung, con đường vừa phải, không cực đoan"
+2632,忠實,zhōngshí,Vs,Trung Thực,"Trung thành, chân thực"
+2633,衷心,zhōngxīn,Adv,Trung Tâm,"Lòng thành, hết lòng"
+2634,終場,zhōngchăng,N,Chung Trường,"Kết thúc, phần cuối (thường dùng trong thể thao)"
+2635,終結,zhōngjié,V,Chung Kết,"Kết thúc, chấm dứt"
+2636,終究,zhōngjiù,Adv,Chung Cứu,"Cuối cùng, sau tất cả"
+2637,終身,zhōngshēn,N,Chung Thân,"Cả đời, suốt đời"
+2638,種種,zhŏngzhŏng,Det,Chủng Chủng,"Mọi loại, đủ loại"
+2639,種植,zhòngzhí,V,Chủng Trồng,"Trồng trọt, trồng cây"
+2640,中風,zhòngfēng,Vp,Trung Phong,Đột quỵ
+2641,中獎,zhòngjiăng,Vp,Trung Giải,Trúng thưởng
+2642,中肯,zhòngkěn,Vs,Trung Khẩn,"Thích hợp, hợp lý, chính xác"
+2643,中暑,zhòngshŭ,Vp,Trung Thử,Bị say nắng
+2644,重用,zhòngyòng,V,Trọng Dụng,"Sử dụng, giao trọng trách"
+2645,重鎮,zhòngzhèn,N,Trọng Trấn,"Vị trí quan trọng, chỗ đứng vững chắc"
+2646,周邊,zhōubiān,N,Chu Biên,"Xung quanh, khu vực lân cận"
+2647,周密,zhōumì,Vs,Chu Mật,"Tỉ mỉ, cẩn thận, chi tiết"
+2648,周詳,zhōuxiáng,Vs,Chu Tường,"Tỉ mỉ, đầy đủ, toàn diện"
+2649,周遊,zhōuyóu,V,Chu Du,Du lịch vòng quanh
+2650,周轉,zhōuzhuăn,V,Chu Chuyển,"Quay vòng, luân chuyển (vốn, hàng hóa)"
+2651,皺,zhòu,Vs,Chấu,"Nếp nhăn, gấp nếp"
+2652,皺紋,zhòuwén,N,Chấu Vân,Nếp nhăn (trên da)
+2653,株,zhū,M,Châu,"Cây giống, cây trồng"
+2654,諸多,zhūduō,Det,Chư Đa,"Rất nhiều, vô số"
+2655,逐,zhú,Prep / V,Trục,"Đuổi, đẩy ra"
+2656,逐步,zhúbù,Adv,Trục Bước,"Dần dần, từng bước một"
+2657,主導,zhŭdăo,V,Chủ Đạo,"Dẫn dắt, chủ động dẫn đầu"
+2658,主管,zhŭguăn,V,chủ quản,người quản lý
+2659,主見,zhŭjiàn,N,Chủ Kiến,Quan điểm cá nhân
+2660,主力,zhŭlì,N,Chủ Lực,Lực lượng chủ chốt
+2661,主流,zhŭliú,N,Chủ Lưu,"Chính thống, dòng chính"
+2662,主權,zhŭquán,N,Chủ Quyền,Quyền lực tối cao của quốc gia
+2663,主人翁,zhŭrénwēng,N,Chủ Nhân Ông,"Người chủ, người đứng đầu"
+2664,主義,zhŭyì,N,Chủ Nghĩa,"Nguyên tắc, lý tưởng"
+2665,主宰,zhŭzăi,V,Chủ Tể,"Người làm chủ, thống trị"
+2666,主旨,zhŭzhĭ,N,Chủ Chỉ,"Mục đích chính, ý chính"
+2667,主軸,zhŭzhóu,N,Chủ Trục,"Trục chính, trụ cột"
+2668,囑咐,zhŭfù,V,Chúc Phó,"Dặn dò, chỉ dẫn"
+2669,矚目,zhŭmù,Vi,Chú Mục,"Chú ý, theo dõi một cách chăm chú"
+2670,注定/註定,zhùdìng,Vaux,Chú Định,"Định mệnh, đã được sắp đặt"
+2671,注目,zhùmù,Vi,Chú Mục,"Dành sự chú ý, quan tâm"
+2672,注視,zhùshì,V,Chú Thị,"Nhìn chằm chằm, chú ý nhìn"
+2673,注重,zhùzhòng,Vst,Chú Trọng,"Chú trọng, quan tâm đến"
+2674,住宿,zhùsù,Vi,Túc Sự,"Lưu trú, chỗ ở"
+2675,柱(子),zhù(zi),N,Trụ,"Cột, trụ (dùng để nâng đỡ)"
+2676,助教,zhùjiào,N,Trợ Giảng,Trợ giảng viên
+2677,助手,zhùshŏu,N,Trợ Thủ,"Người giúp việc, trợ lý"
+2678,佇立,zhùlì,Vi,Trú Lập,"Đứng yên, đứng im"
+2679,著作,zhùzuò,N,Trứ Tác,"Tác phẩm, sách vở"
+2680,駐,zhù,V,Trú,"Đóng quân, đóng tại một nơi"
+2681,抓緊,zhuājĭn,V,Chụp Cẩn,"Nắm bắt, không để mất cơ hội"
+2682,專櫃,zhuānguì,N,Chuyên Quầy,"Quầy chuyên dụng, quầy bán hàng"
+2683,專員,zhuānyuán,N,Chuyên Viên,"Chuyên gia, nhân viên chuyên môn"
+2684,專制,zhuānzhì,Vs,Chuyên Chế,"Chuyên chế, độc tài"
+2685,磚,zhuān,N,Chuyên,"Gạch, viên gạch"
+2686,轉動,zhuăndòng,V,Chuyển Động,"Quay, chuyển động"
+2687,轉化,zhuănhuà,Vp,Chuyển Hóa,"Biến đổi, chuyển hóa"
+2688,轉機,zhuănjī,N,chuyển cơ hội,cơ hội mới
+2689,轉手,zhuănshŏu,V,Chuyển Thủ,"Bán lại, chuyển nhượng"
+2690,轉眼,zhuănyăn,Adv,Chuyển Nhãn,"Chớp mắt, trong chớp mắt"
+2691,轉移,zhuănyí,V,Chuyển Di,"Di chuyển, chuyển hướng"
+2692,轉帳,zhuănzhàng,V-sep,Chuyển Trương,Chuyển khoản (tiền)
+2693,撰寫,zhuànxiě,V,Toạn Tả,"Viết, soạn thảo"
+2694,莊嚴,zhuāngyán,Vs,Trang Nghiêm,"Uy nghiêm, trang trọng"
+2695,裝備,zhuāngbèi,N,Trang Bị,"Trang bị, thiết bị"
+2696,裝潢,zhuānghuáng,V,Trang Hoàng,"Trang trí, nội thất"
+2697,裝配,zhuāngpèi,V,Trang Phối,"Lắp ráp, lắp đặt"
+2698,裝運,zhuāngyùn,V,Trang Vận,"Vận chuyển, chuyển hàng"
+2699,裝置,zhuāngzhì,V,Trang Chỉ,"Thiết bị, dụng cụ"
+2700,壯觀,zhuàngguān,Vs,Tráng Quan,"Hùng vĩ, tráng lệ"
+2701,壯麗,zhuànglì,Vs,Tráng Lệ,"Hùng vĩ, lộng lẫy"
+2702,狀元,zhuàngyuán,N,Trạng Nguyên,Người đứng đầu trong kỳ thi
+2703,追捕,zhuībŭ,V,Truy Bắt,"Săn lùng, truy nã"
+2704,追查,zhuīchá,V,Truy Tra,"Điều tra, truy tìm"
+2705,追究,zhuījiù,V,Truy Cứu,"Điều tra, truy cứu"
+2706,準,zhŭn,Adv,chuẩn,đúng chuẩn
+2707,準備,zhŭnbèi,N,Chuẩn bị,Chuẩn bị
+2708,準則,zhŭnzé,N,Chuẩn Tắc,"Tiêu chuẩn, quy định"
+2709,准許,zhŭnxŭ,V,Chuẩn Hứa,"Cho phép, đồng ý"
+2710,卓越,zhuóyuè,Vs,Trác Việt,"Xuất sắc, vượt trội"
+2711,著手,zhuóshŏu,Vi,Trứ Thủ,"Bắt tay vào làm, bắt đầu công việc"
+2712,著眼,zhuóyăn,Vi,Trứ Nhãn,"Chú ý, tập trung vào"
+2713,著重,zhuózhòng,Vst,Trứ Trọng,"Nhấn mạnh, chú trọng"
+2714,酌量,zhuóliáng,Adv,Trác Lượng,"Cân nhắc, xem xét kỹ"
+2715,資深,zīshēn,Vs,Tư Thâm,"Có kinh nghiệm, lâu năm trong nghề"
+2716,資助,zīzhù,V,Tư Trợ,"Hỗ trợ, tài trợ"
+2717,姿勢,zīshì,N,Tư Thế,"Tư thế, dáng điệu"
+2718,姿態,zītài,N,Tư Thái,"Thái độ, cách cư xử"
+2719,滋味,zīwèi,N,Tư Vị,"Hương vị, cảm giác"
+2720,子彈,zĭdàn,N,Tử Đạn,"Đạn dược, viên đạn"
+2721,子弟,zĭdì,N,Tử Đệ,"Con cháu, con trai"
+2722,子孫,zĭsūn,N,Tử Tôn,"Con cháu, thế hệ sau"
+2723,紫外線,zĭwàixiàn,N,Tử Ngoại Tuyến,"Tia cực tím, tia UV"
+2724,自,zì,Prep,Tự,"Bản thân, tự mình"
+2725,自稱,zìchēng,Vst,Tự Xưng,"Tự gọi mình là, tự nhận mình là"
+2726,自費,zìfèi,Vi,Tự Phí,"Chi trả tự túc, tự mình trả tiền"
+2727,自豪,zìháo,Vs,Tự Hào,"Tự hào, kiêu hãnh về bản thân"
+2728,自覺,zìjué,Vst,Tự Giác,"Tự nhận thức, tự giác"
+2729,自立,zìlì,Vs,Tự Lập,"Tự lập, tự mình đứng vững"
+2730,自滿,zìmăn,Vs,Tự Mãn,"Tự mãn, thỏa mãn với bản thân"
+2731,自然,zìrán,Adv,Tự nhiên,Tự nhiên
+2732,自身,zìshēn,N,Tự Thân,"Bản thân, chính mình"
+2733,自行,zìxíng,Adv,Tự Hành,"Tự làm, tự mình thực hiện"
+2734,自制,zìzhì,Vi,Tự Chế,"Tự chế tạo, tự kiểm soát"
+2735,自治,zìzhì,Vi,Tự Trị,"Tự quản lý, tự trị"
+2736,自傳,zìzhuàn,N,Tự Truyện,"Tự truyện, sách viết về bản thân"
+2737,字體,zìtĭ,N,Tự Thể,"Kiểu chữ, font chữ"
+2738,字眼/字眼兒,zìyăn/zìyănr,N,Tự Nhãn/Tự Nhãn Nhi,"Từ ngữ, từ vựng, cách nói"
+2739,字樣,zìyàng,N,Tự Dạng,"Hình thức chữ viết, kiểu chữ"
+2740,宗旨,zōngzhĭ,N,Tông Chỉ,"Mục đích, mục tiêu"
+2741,總裁,zŏngcái,N,Tổng Tài,Giám đốc điều hành (CEO)
+2742,總得,zŏngděi,Adv,Tổng Đắc,"Tổng cộng, tổng kết"
+2743,總額,zŏngé,N,Tổng Ngạch,Tổng số tiền
+2744,總和,zŏnghé,N,Tổng Hòa,"Tổng hợp, tổng số"
+2745,總結,zŏngjié,N,Tổng Kết,"Kết luận, tóm tắt"
+2746,總經理,zŏngjīnglĭ,N,Tổng Kinh Lý,"Giám đốc điều hành, tổng giám đốc"
+2747,總數,zŏngshù,N,Tổng Số,"Tổng số, tổng cộng"
+2748,縱火,zònghuŏ,V-sep,Tùng Hỏa,"Phóng hỏa, đốt phá"
+2749,縱容,zòngróng,Vst,Tùng Dung,"Tha thứ, dung túng"
+2750,縱使,zòngshĭ,Conj,Tùng Thực,"Dù cho, mặc dù"
+2751,走廊,zŏuláng,N,Tẩu Lang,Hành lang
+2752,揍,zòu,V,Tẩu,"Đánh, đấm"
+2753,租賃,zūlìn,V,Tô Lâm,"Thuê, cho thuê"
+2754,祖宗,zŭzōng,N,Tổ Tông,"Tổ tiên, ông bà tổ tiên"
+2755,阻擋,zŭdăng,V,Tổ Đoạn,"Ngăn cản, cản trở"
+2756,阻力,zŭlì,N,Tổ Lực,"Sức cản, lực cản"
+2757,阻撓,zŭnáo,V,Tổ Nạo,"Cản trở, ngăn chặn"
+2758,阻塞,zŭsè,Vs,Tổ Tắc,"Tắc nghẽn, chặn lại"
+2759,組裝,zŭzhuāng,V,Tổ Trang,"Lắp ráp, hợp thành"
+2760,鑽研,zuānyán,V,Toán Nghiên,Nghiên cứu chuyên sâu
+2761,嘴唇/嘴脣/唇/脣,zuĭchún/chún,N,Chủy Xuân/Chủy Lân,"Môi, môi miệng"
+2762,罪惡,zuìè,N,Tội Ác,"Tội ác, điều xấu"
+2763,罪名,zuìmíng,N,Tội Danh,"Tên tội, cáo buộc"
+2764,罪行,zuìxìng,N,Tội Hành,Hành vi phạm tội
+2765,尊,zūn,M / Vst,Tôn,"Tôn trọng, kính trọng"
+2766,尊嚴,zūnyán,N,Tôn Nghiêm,"Dignity, sự nghiêm trang"
+2767,遵循,zūnxún,Vst,Tuân Tuân,"Tuân theo, tuân thủ"
+2768,作風,zuòfēng,N,Tác Phong,Phong cách làm việc
+2769,作怪,zuòguài,Vi,Tác Quái,"Quậy phá, gây rối"
+2770,作物,zuòwù,N,Tác Vật,"Cây trồng, sản phẩm nông nghiệp"
+2771,作戰,zuòzhàn,Vi,Tác Chiến,"Chiến đấu, chiến tranh"
+2772,作證/做證,zuòzhèng,V-sep,Tác Chứng,"Làm chứng, chứng thực"
+2773,坐牢,zuòláo,V-sep,Tọa Lao,"Ngồi tù, bị giam giữ"
+2774,坐鎮,zuòzhèn,Vi,Tọa Trấn,"Ngồi giữ chức vụ, chủ trì"
+2775,座談,zuòtán,Vi,Tọa Đàm,"Hội thảo, trao đổi"
