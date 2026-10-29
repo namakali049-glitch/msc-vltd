@@ -420,20 +420,21 @@ function generateRandomBaseStats() {
 // HỆ THỐNG LƯU VÀ TẢI DỮ LIỆU ĐÃ VÁ LỖI (CHUYỂN SANG MÙA 2)
 // ==========================================
 async function syncManaToDatabase() {
-    if (!currentUser || !isDataLoaded) return; 
+    if (!currentUser || !window.isDataLoaded) return; 
     
     try {
         // ĐỔI ĐƯỜNG DẪN TỪ 'users/' THÀNH 'users_v2/'
         const userRef = ref(database, 'users_v2/' + currentUser.uid);
         
-        const currentTotalMana = window.lifetimeMana !== undefined ? window.lifetimeMana : lifetimeMana;
-        const currentStats = window.playerStats || playerStats;
-        const currentA1 = window.masteredWordsA1 || masteredWordsA1;
-        const currentB1 = window.masteredWordsB1 || masteredWordsB1;
+        // 🚨 CHỐT CHẶN BẢO VỆ: Ưu tiên dữ liệu mới nhất từ window
+        const manaToSave = window.lifetimeMana !== undefined ? window.lifetimeMana : lifetimeMana;
+        const currentStats = window.playerStats !== undefined ? window.playerStats : playerStats;
+        const currentA1 = window.masteredWordsA1 !== undefined ? window.masteredWordsA1 : masteredWordsA1;
+        const currentB1 = window.masteredWordsB1 !== undefined ? window.masteredWordsB1 : masteredWordsB1;
         
         await update(userRef, {
             name: currentUser.displayName || currentUser.email.split('@')[0],
-            mana: currentTotalMana,
+            mana: manaToSave,
             linhThach: window.playerLinhThach || 0,
             currentHp: window.currentHp !== undefined ? window.currentHp : 100,
             
@@ -446,9 +447,17 @@ async function syncManaToDatabase() {
             stats: currentStats,
             masteredA1: currentA1,
             masteredB1: currentB1,
+            masteredC1: window.masteredWordsC1 || [],
             battleRecord: window.battleRecord || battleRecord,
             lastUpdated: Date.now()
         });
+
+        // ĐỒNG BỘ NGƯỢC LẠI: Ép các biến nội bộ nhận giá trị mới để không bao giờ lệch pha
+        lifetimeMana = manaToSave;
+        masteredWordsA1 = currentA1;
+        masteredWordsB1 = currentB1;
+        playerStats = currentStats;
+
     } catch(e) { console.error("Lỗi đồng bộ Firebase:", e); }
 }
 window.syncManaToDatabase = syncManaToDatabase;
@@ -467,6 +476,7 @@ async function loadUserLifetimeMana(uid) {
             masteredWordsB1 = parseFirebaseArray(val.masteredB1);
             window.masteredWordsA1 = masteredWordsA1;
             window.masteredWordsB1 = masteredWordsB1;
+            window.masteredWordsC1 = parseFirebaseArray(val.masteredC1);
 
             // =======================================================
             // CHỐT CHẶN B2: GIÁNG CẤP NGƯỜI CHƠI CŨ VƯỢT RÀO TRÁI PHÉP
@@ -569,7 +579,6 @@ onAuthStateChanged(auth, async (user) => {
         masteredWordsB1 = [];
         inventory = {};
         window.inventory = inventory;
-        
         
         switchScreen('auth-screen');
     }
