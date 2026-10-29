@@ -10,9 +10,9 @@ const STATIC_ASSETS = [
   './inventory.js',
   './battle.js',
   './quiz.js',
-  './idle.js',        // Bổ sung
-  './shop.js',        // Bổ sung
-  './ads.js',         // Bổ sung
+  './idle.js',
+  './shop.js',
+  './ads.js',
   './manifest.json',
   './a1_vocab.csv',
   './b1_vocab.csv',
@@ -22,7 +22,6 @@ const STATIC_ASSETS = [
   './assets/luyen-khi.png',
   './assets/truc-co.png',
   './assets/hac-am-son-dong.png',
-  './assets/truc-co.png',
   './assets/truc-co-trung-ky.png',
   './assets/truc-co-vien-man.png',
   './assets/quy-hon.png',
