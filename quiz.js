@@ -74,7 +74,30 @@ window.checkAndStartVolume = function(vol) {
     
     const hanNguModal = document.getElementById('hanNguModal');
     if (hanNguModal) hanNguModal.style.display = 'none';
-    window.startGame();
+    
+    // --- TÍCH HỢP BẢNG HỎI XEM QUẢNG CÁO TRƯỚC KHI BẾ QUAN ---
+    if (window.AdsManager) {
+        window.AdsManager.showRewarded(
+            () => {
+                // Xem thành công: Thêm buff x2 cho 20 câu
+                window.tuLinhBuff = (window.tuLinhBuff || 0) + 20;
+                alert("✨ Thiên Đạo Ban Phước!\n\nĐạo hữu nhận được trạng thái [Tụ Linh]: x2 Linh Thạch thu được trong 20 câu tiếp theo.");
+                window.startGame();
+            },
+            () => {
+                // Nhấn nút Bỏ qua không xem
+                window.startGame();
+            }
+        );
+        
+        // Đổi nội dung của bảng thông báo ads.js cho đúng ngữ cảnh
+        setTimeout(() => {
+            const adDesc = document.getElementById('ad-desc');
+            if (adDesc) adDesc.innerText = "Trước khi bế quan, đạo hữu có muốn quan sát thiên cơ để nhận [Tụ Linh Phù] (x2 Linh Thạch trong 20 câu) không?";
+        }, 50);
+    } else {
+        window.startGame(); // Chạy thẳng nếu không có hệ thống quảng cáo
+    }
 };
 
 // 2. KHỞI CHẠY BẾ QUAN (ENDLESS MODE)
