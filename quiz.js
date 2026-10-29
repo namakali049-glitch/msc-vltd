@@ -116,7 +116,7 @@ window.startGame = function() {
     });
 };
 
-// 3. THUẬT TOÁN RÚT THẺ THÔNG MINH (8 TỪ MỚI - 2 TỪ CŨ)
+// 3. THUẬT TOÁN RÚT THẺ THÔNG MINH ĐÃ FIX LỖI TRÙNG LẶP VÀ SAI ĐÁP ÁN
 function processVocabData() {
     const isA1 = window.currentCsvFile.includes("a1");
     let masteredList = isA1 ? (window.masteredWordsA1 || []) : (window.masteredWordsB1 || []);
@@ -129,31 +129,45 @@ function processVocabData() {
     shuffleArray(unlearned);
 
     let drawPool = [];
-    // Ưu tiên bốc tối đa 8 từ chưa thuộc
     const unlearnedToDraw = Math.min(8, unlearned.length);
     drawPool = drawPool.concat(unlearned.slice(0, unlearnedToDraw));
     
-    // Bổ sung từ đã thuộc cho đủ 10 câu
     const needed = 10 - drawPool.length;
     drawPool = drawPool.concat(learned.slice(0, needed));
 
     shuffleArray(drawPool);
     activeQuestions = [];
 
-    // Tạo đề bài với 1 đáp án đúng và 3 đáp án nhiễu
+    // Tạo đề bài với 1 đáp án đúng và 3 đáp án nhiễu KHÔNG TRÙNG LẶP
     drawPool.forEach(word => {
-        let distractors = vocabPool.filter(w => w.hanzi !== word.hanzi);
-        shuffleArray(distractors);
-        let options = [word, distractors[0], distractors[1], distractors[2]];
+        // Lọc ra tập hợp các từ nhiễu tiềm năng (Loại trừ từ hiện tại)
+        let potentialDistractors = vocabPool.filter(w => w.hanzi !== word.hanzi);
+        shuffleArray(potentialDistractors);
+        
+        let options = [word];
+        let usedMeanings = new Set();
+        usedMeanings.add(word.meaning);
+
+        // Bốc chính xác 3 từ nhiễu không trùng nghĩa với nhau và không trùng nghĩa với đáp án
+        for (let distractor of potentialDistractors) {
+            if (options.length >= 4) break;
+            if (!usedMeanings.has(distractor.meaning)) {
+                options.push(distractor);
+                usedMeanings.add(distractor.meaning);
+            }
+        }
+
+        // Xáo trộn 4 đáp án (Fisher-Yates)
         shuffleArray(options);
 
+        // Cố định vị trí của đáp án đúng SAU KHI ĐÃ XÁO TRỘN
         let ansIdx = options.findIndex(opt => opt.hanzi === word.hanzi);
         
         activeQuestions.push({
             q: word.hanzi,
             pinyin: word.pinyin,
             fullWord: word,
-            options: options.map(opt => opt.meaning), // Chỉ hiển thị nghĩa tiếng Việt
+            options: options.map(opt => opt.meaning), // Đảm bảo index mảng options khớp với ansIdx
             ans: ansIdx
         });
     });
