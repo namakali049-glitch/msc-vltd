@@ -959,8 +959,16 @@ body {
 
 .hud-info-box { display: flex; flex-direction: column; gap: 3px; flex: 1; }
 .hud-name-row { display: flex; align-items: center; gap: 8px; }
-.hud-player-name { font-size: 0.95rem; font-weight: bold; color: #ffd700; }
-
+.hud-player-name {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: #ffd700;
+  /* 🚨 Thêm 4 dòng này */
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .hud-realm-badge {
   font-size: 0.7rem;
   background: rgba(255, 215, 0, 0.15);
