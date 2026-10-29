@@ -571,7 +571,7 @@ onAuthStateChanged(auth, async (user) => {
         window.inventory = inventory;
         
         
-        checkAutoShowAnnouncement();
+        switchScreen('auth-screen');
     }
 });
 
