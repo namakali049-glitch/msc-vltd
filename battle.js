@@ -803,13 +803,15 @@ function battleLoop() {
         }
     }
 
-    // XỬ LÝ SÓNG XUNG KÍCH (THÁI CỰC TRẬN)
+    // XỬ LÝ SÓNG XUNG KÍCH & THÁI CỰC TRẬN (CÓ ÂM DƯƠNG NGƯ)
     for (let i = battleData.shockwaves.length - 1; i >= 0; i--) {
         let wave = battleData.shockwaves[i];
         wave.radius += wave.speed;
         let alpha = Math.max(0, 1 - (wave.radius / wave.maxRadius));
 
         battleCtx.save();
+        
+        // 1. VẼ SÓNG XUNG KÍCH LAN RỘNG
         battleCtx.beginPath();
         battleCtx.arc(wave.x, wave.y, wave.radius, 0, Math.PI * 2);
         battleCtx.lineWidth = 15 * alpha;
@@ -821,8 +823,72 @@ function battleLoop() {
         battleCtx.lineWidth = 4 * alpha;
         battleCtx.strokeStyle = `rgba(255, 215, 0, ${alpha})`;
         battleCtx.stroke();
-        battleCtx.restore();
 
+        // 2. VẼ ÂM DƯƠNG NGƯ & BÁT QUÁI Ở TÂM (Xoay tròn & Nở dần)
+        let taijiRadius = Math.min(wave.radius * 0.6, 140); // Khóa kích thước tối đa ở mốc 140
+        let rotation = wave.radius * 0.04; // Vừa nở vừa xoay
+
+        battleCtx.translate(wave.x, wave.y);
+        battleCtx.rotate(rotation);
+        battleCtx.globalAlpha = alpha; 
+
+        // Nửa Trái (Âm - Đen)
+        battleCtx.beginPath();
+        battleCtx.arc(0, 0, taijiRadius, Math.PI/2, 3*Math.PI/2);
+        battleCtx.fillStyle = 'rgba(15, 23, 42, 0.9)'; 
+        battleCtx.fill();
+
+        // Nửa Phải (Dương - Xanh Cyan)
+        battleCtx.beginPath();
+        battleCtx.arc(0, 0, taijiRadius, 3*Math.PI/2, Math.PI/2);
+        battleCtx.fillStyle = 'rgba(34, 211, 238, 0.9)';
+        battleCtx.fill();
+
+        // Hình tròn Dương (Nửa trên) lấn sang phần Âm
+        battleCtx.beginPath();
+        battleCtx.arc(0, -taijiRadius/2, taijiRadius/2, 0, Math.PI*2);
+        battleCtx.fillStyle = 'rgba(34, 211, 238, 0.9)';
+        battleCtx.fill();
+
+        // Hình tròn Âm (Nửa dưới) lấn sang phần Dương
+        battleCtx.beginPath();
+        battleCtx.arc(0, taijiRadius/2, taijiRadius/2, 0, Math.PI*2);
+        battleCtx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+        battleCtx.fill();
+
+        // Mắt Âm (Trong Dương)
+        battleCtx.beginPath();
+        battleCtx.arc(0, -taijiRadius/2, taijiRadius/6, 0, Math.PI*2);
+        battleCtx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+        battleCtx.fill();
+
+        // Mắt Dương (Trong Âm)
+        battleCtx.beginPath();
+        battleCtx.arc(0, taijiRadius/2, taijiRadius/6, 0, Math.PI*2);
+        battleCtx.fillStyle = 'rgba(34, 211, 238, 0.9)';
+        battleCtx.fill();
+
+        // Viền vòng tròn Thái Cực
+        battleCtx.beginPath();
+        battleCtx.arc(0, 0, taijiRadius, 0, Math.PI*2);
+        battleCtx.lineWidth = 3;
+        battleCtx.strokeStyle = `rgba(34, 211, 238, ${alpha})`;
+        battleCtx.stroke();
+        
+        // Vòng Bát Quái Bao Ngoài (Mô phỏng 8 quẻ bằng nét đứt mạ vàng)
+        let circum = 2 * Math.PI * (taijiRadius + 18);
+        battleCtx.beginPath();
+        battleCtx.arc(0, 0, taijiRadius + 18, 0, Math.PI*2);
+        // Tỷ lệ phân chia 8 đoạn để tạo 8 quẻ
+        battleCtx.setLineDash([circum / 8 * 0.7, circum / 8 * 0.3]); 
+        battleCtx.lineWidth = 6;
+        battleCtx.strokeStyle = `rgba(255, 215, 0, ${alpha})`;
+        battleCtx.stroke();
+        battleCtx.setLineDash([]); // Reset lại nét liền cho hệ thống
+
+        battleCtx.restore(); // Đóng gói hệ tọa độ xoay
+
+        // 3. XỬ LÝ VA CHẠM HẤT VĂNG QUÁI VẬT
         for (let j = battleData.enemies.length - 1; j >= 0; j--) {
             let en = battleData.enemies[j];
             if (!wave.hitList.has(en)) {
@@ -853,7 +919,6 @@ function battleLoop() {
         }
         if (wave.radius >= wave.maxRadius) battleData.shockwaves.splice(i, 1);
     }
-
     // XỬ LÝ CHỚP MÀN HÌNH CHUNG
     if (battleData.damageFlash > 0) {
         battleCtx.fillStyle = `rgba(239, 68, 68, ${battleData.damageFlash * 0.06})`;
