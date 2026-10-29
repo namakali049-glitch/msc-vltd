@@ -77,6 +77,14 @@ window.renderShop = function(tab) {
 };
 
 window.buyShopItem = function(tab, itemId, price) {
+    // CHỐT CHẶN: Kiểm tra cảnh giới khi mua Thái Cực Trận
+    if (itemId === 'skill_bat_quai') {
+        const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0) : { major: "Phàm Nhân" };
+        if (realmData.major !== "Kim Đan Kỳ" && realmData.major !== "Nguyên Anh Kỳ") {
+            alert("⚠️ Đạo tâm chưa đủ! Bí kíp này đòi hỏi tu vi tối thiểu Kim Đan Kỳ mới có thể lĩnh ngộ.");
+            return;
+        }
+    }
     let quantity = 1;
 
     // Tính năng mua số lượng lớn cho Đan Dược
