@@ -75,31 +75,105 @@ window.checkAndStartVolume = function(vol) {
     const hanNguModal = document.getElementById('hanNguModal');
     if (hanNguModal) hanNguModal.style.display = 'none';
     
-    // --- TÍCH HỢP BẢNG HỎI XEM QUẢNG CÁO TRƯỚC KHI BẾ QUAN ---
-    if (window.AdsManager) {
-        window.AdsManager.showRewarded(
-            () => {
-                // Xem thành công: Thêm buff x2 cho 20 câu
+// HỆ THỐNG POPUP CƠ DUYÊN (CHỐNG CHẶN QUẢNG CÁO)
+window.showCoDuyenPopup = function(title, desc, onAccept, onSkip) {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:999999;display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box;";
+    overlay.innerHTML = `
+        <div style="background:#0f172a;border:2px solid #eab308;border-radius:12px;padding:24px;max-width:320px;width:100%;text-align:center;box-shadow:0 0 25px rgba(234,179,8,0.4);color:#fff;">
+            <h3 style="color:#facc15;margin:0 0 10px 0;font-size:18px;">🎬 ${title}</h3>
+            <p style="font-size:13px;color:#cbd5e1;line-height:1.5;margin-bottom:16px;white-space:pre-line;">${desc}</p>
+            <div id="coduyen-timer-box" style="display:none;font-size:32px;font-weight:bold;margin:12px 0;color:#38bdf8;">6s</div>
+            <div id="coduyen-actions" style="display:flex;flex-direction:column;gap:10px;">
+                <button id="btn-trigger-coduyen" style="background:linear-gradient(135deg, #f59e0b, #d97706);color:#fff;border:none;padding:12px 20px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:14px;">🚀 Khám Phá Cơ Duyên</button>
+                <button id="btn-dismiss-coduyen" style="background:#334155;color:#94a3b8;border:none;padding:10px 16px;border-radius:8px;cursor:pointer;font-size:13px;">Bỏ Qua (Không xem)</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+
+    document.getElementById('btn-dismiss-coduyen').onclick = () => {
+        overlay.remove();
+        if (onSkip) onSkip();
+    };
+
+    document.getElementById('btn-trigger-coduyen').onclick = () => {
+        window.open("https://uplcm.com/4/12128333", '_blank');
+        document.getElementById('btn-trigger-coduyen').style.display = 'none';
+        document.getElementById('btn-dismiss-coduyen').style.display = 'none';
+        
+        const timerBox = document.getElementById('coduyen-timer-box');
+        timerBox.style.display = 'block';
+        let timeLeft = 6;
+        
+        const timer = setInterval(() => {
+            timeLeft--;
+            timerBox.innerText = timeLeft + "s";
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                document.getElementById('coduyen-actions').innerHTML = `<button id="btn-finish-coduyen" style="background:#22c55e;color:#fff;border:none;padding:12px 20px;border-radius:8px;font-weight:bold;cursor:pointer;font-size:14px;width:100%;">✨ Lĩnh Thưởng & Tiếp Tục</button>`;
+                document.getElementById('btn-finish-coduyen').onclick = () => {
+                    overlay.remove();
+                    if (onAccept) onAccept();
+                };
+            }
+        }, 1000);
+    };
+};
+
+// 1. CHỌN QUYỂN & CẢNH BÁO THIÊN ĐẠO
+window.checkAndStartVolume = function(vol) {
+    if (window.playClickSound) window.playClickSound();
+
+    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
+    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
+    const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0, countA1, countB1) : { major: "Phàm Nhân" };
+    const major = realmData.major;
+    
+    let isEligible = true; // Biến kiểm tra đủ điều kiện nhận Linh Thạch
+
+    if (vol === 'thuong_quyen') {
+        if (["Phàm Nhân", "Luyện Khí Kỳ", "Trúc Cơ Kỳ", "Kim Đan Kỳ", "Nguyên Anh Kỳ"].includes(major)) {
+            alert("⚠️ CẢNH BÁO THIÊN ĐẠO:\nCảnh giới hiện tại quá thấp để lĩnh ngộ Thượng Quyển. Đạo hữu vẫn có thể xem để mở mang kiến thức, nhưng sẽ KHÔNG thu được Linh Thạch!");
+            isEligible = false;
+        }
+        window.currentCsvFile = "c1_vocab.csv";
+    } 
+    else if (vol === 'trung_quyen') {
+        if (["Phàm Nhân", "Luyện Khí Kỳ", "Trúc Cơ Kỳ", "Hóa Thần Kỳ", "Độ Kiếp Kỳ"].includes(major)) {
+            isEligible = false; // Phàm nhân/Trúc Cơ quá yếu hoặc Hóa thần quá mạnh -> Không nhận thưởng
+        }
+        window.currentCsvFile = "b1_vocab.csv";
+    } 
+    else {
+        if (["Kim Đan Kỳ", "Nguyên Anh Kỳ", "Hóa Thần Kỳ", "Độ Kiếp Kỳ"].includes(major)) {
+            alert("⚠️ CẢNH BÁO THIÊN ĐẠO:\nĐạo hữu đã đạt cảnh giới cao. Tiếp tục tu luyện Hạ Quyển sẽ không thu được Linh Thạch!");
+            isEligible = false;
+        }
+        window.currentCsvFile = "a1_vocab.csv";
+    }
+    
+    const hanNguModal = document.getElementById('hanNguModal');
+    if (hanNguModal) hanNguModal.style.display = 'none';
+
+    // NẾU ĐỦ ĐIỀU KIỆN NHẬN THƯỞNG -> HIỆN BẢNG HỎI
+    if (isEligible && window.showCoDuyenPopup) {
+        window.showCoDuyenPopup(
+            "THIÊN ĐẠO CHIẾU CƠ",
+            "Đạo hữu đủ điều kiện nhận Linh Thạch trong Tàng Kinh Các.\nCó muốn quan sát thiên cơ để nhận [Tụ Linh Phù] (x2 Linh Thạch trong 20 câu) không?",
+            () => { // Bấm Chấp nhận
                 window.tuLinhBuff = (window.tuLinhBuff || 0) + 20;
                 alert("✨ Thiên Đạo Ban Phước!\n\nĐạo hữu nhận được trạng thái [Tụ Linh]: x2 Linh Thạch thu được trong 20 câu tiếp theo.");
                 window.startGame();
             },
-            () => {
-                // Nhấn nút Bỏ qua không xem
+            () => { // Bấm Bỏ qua
                 window.startGame();
             }
         );
-        
-        // Đổi nội dung của bảng thông báo ads.js cho đúng ngữ cảnh
-        setTimeout(() => {
-            const adDesc = document.getElementById('ad-desc');
-            if (adDesc) adDesc.innerText = "Trước khi bế quan, đạo hữu có muốn quan sát thiên cơ để nhận [Tụ Linh Phù] (x2 Linh Thạch trong 20 câu) không?";
-        }, 50);
     } else {
-        window.startGame(); // Chạy thẳng nếu không có hệ thống quảng cáo
+        window.startGame(); // Chơi luôn không hỏi
     }
 };
-
 // 2. KHỞI CHẠY BẾ QUAN (ENDLESS MODE)
 window.startGame = function() {
     window.switchScreen('game-screen');
