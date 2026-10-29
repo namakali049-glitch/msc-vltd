@@ -236,7 +236,29 @@ window.exitBattle = function(isDeath = false, isVictory = false) {
     if (window.syncManaToDatabase) window.syncManaToDatabase();
     if (window.goHome) window.goHome();
 };
-
+// Chỉ hiển thị bảng hỏi quảng cáo nếu nhặt được ít nhất 1 Linh Thạch
+    if (window.AdsManager && collectedLinhThach > 0) {
+        window.AdsManager.showRewarded(
+            () => {
+                // Xem thành công: Thưởng thêm ĐÚNG BẰNG số Linh Thạch vừa nhặt (thành x2)
+                finalizeExit(collectedLinhThach);
+            },
+            () => {
+                // Bỏ qua
+                finalizeExit(0);
+            }
+        );
+        
+        // Đổi nội dung của bảng thông báo ads.js 
+        setTimeout(() => {
+            const adDesc = document.getElementById('ad-desc');
+            if (adDesc) adDesc.innerText = `Bí Cảnh khép lại! Đạo hữu đã thu thập được ${collectedLinhThach} 💎.\nMuốn quan sát thiên cơ để nhân đôi (x2) phần thưởng thành ${collectedLinhThach * 2} 💎 không?`;
+        }, 50);
+    } else {
+        // Nếu trắng tay (chưa nhặt được gì), thoát luôn
+        finalizeExit(0);
+    }
+};
 function spawnBattleEnemy(survivalSec = 0, isBoss = false) {
     if (!battleCanvas) return;
     
