@@ -117,11 +117,13 @@ window.buyShopItem = function(tab, itemId, price) {
         const itemName = window.ITEM_DATABASE && window.ITEM_DATABASE[itemId] ? window.ITEM_DATABASE[itemId].name : itemId;
         alert(`✨ Giao dịch thành công! Nhận được ${quantity}x ${itemName}.`);
     } else if (tab === 'than_ky') {
-        if (window.learnSkill) {
-            window.learnSkill(itemId);
-            alert("✨ Lĩnh ngộ thành công bí kíp Ngự Kiếm Thuật!");
-        }
+    if (window.learnSkill) {
+        window.learnSkill(itemId);
+        // Tìm tên kỹ năng từ CATALOG thay vì fix cứng chữ
+        const skillName = window.SHOP_CATALOG['than_ky'].find(s => s.id === itemId)?.name || "Kỹ năng";
+        alert(`✨ Lĩnh ngộ thành công bí kíp ${skillName}!`);
     }
+}
     
     if (window.syncManaToDatabase) window.syncManaToDatabase();
     updateShopCurrencies();
