@@ -308,7 +308,14 @@
         <span id="quickManaCount" class="quick-item-count">0</span>
       </button>
     </div>
-
+<!-- NÚT KỸ NĂNG CHỦ ĐỘNG: THÁI CỰC TRẬN (ĐẶT Ở GÓC DƯỚI BÊN TRÁI) -->
+    <div id="battleActiveSkills" style="position: absolute; bottom: max(30px, env(safe-area-inset-bottom)); left: max(25px, env(safe-area-inset-left)); z-index: 105; display: none;">
+      <button type="button" class="quick-item-btn" style="width: 56px; height: 56px; border-color: #22d3ee; background: rgba(15, 23, 42, 0.9);" onclick="launchBatQuai()">
+        <span class="quick-item-icon">☯️</span>
+        <div id="batQuaiCooldownOverlay" class="skill-cd-overlay"></div>
+      </button>
+      <div style="text-align: center; color: #22d3ee; font-size: 11px; font-weight: bold; margin-top: 6px; text-shadow: 0 1px 3px #000;">THÁI CỰC</div>
+    </div>
 <button class="btn-battle-escape" onclick="exitBattle()">🚪 Rút lui</button>
     <!-- CẦN GẠT DI CHUYỂN BÊN TRÁI -->
     <div id="joystickZone" class="joystick-zone">
