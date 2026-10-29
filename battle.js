@@ -803,12 +803,68 @@ function battleLoop() {
         }
     }
 
-    if (battleData.damageFlash > 0) {
-        battleCtx.fillStyle = `rgba(255, 0, 0, ${battleData.damageFlash * 0.06})`;
-        battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
-        battleData.damageFlash--;
+    // XỬ LÝ SÓNG XUNG KÍCH (THÁI CỰC TRẬN)
+    for (let i = battleData.shockwaves.length - 1; i >= 0; i--) {
+        let wave = battleData.shockwaves[i];
+        wave.radius += wave.speed;
+        let alpha = Math.max(0, 1 - (wave.radius / wave.maxRadius));
+
+        battleCtx.save();
+        battleCtx.beginPath();
+        battleCtx.arc(wave.x, wave.y, wave.radius, 0, Math.PI * 2);
+        battleCtx.lineWidth = 15 * alpha;
+        battleCtx.strokeStyle = `rgba(34, 211, 238, ${alpha})`;
+        battleCtx.stroke();
+        
+        battleCtx.beginPath();
+        battleCtx.arc(wave.x, wave.y, wave.radius * 0.8, 0, Math.PI * 2);
+        battleCtx.lineWidth = 4 * alpha;
+        battleCtx.strokeStyle = `rgba(255, 215, 0, ${alpha})`;
+        battleCtx.stroke();
+        battleCtx.restore();
+
+        for (let j = battleData.enemies.length - 1; j >= 0; j--) {
+            let en = battleData.enemies[j];
+            if (!wave.hitList.has(en)) {
+                let dist = Math.hypot(wave.x - en.x, wave.y - en.y);
+                if (dist < wave.radius + en.radius && dist > wave.radius - 30) {
+                    wave.hitList.add(en);
+                    en.hp -= wave.dmg;
+                    
+                    let pushAngle = Math.atan2(en.y - wave.y, en.x - wave.x);
+                    en.x += Math.cos(pushAngle) * (en.type === 'boss' ? 20 : 100);
+                    en.y += Math.sin(pushAngle) * (en.type === 'boss' ? 20 : 100);
+                    
+                    battleData.textPopups.push({ x: en.x, y: en.y - 20, text: `💥 -${wave.dmg}`, color: "#22d3ee", life: 40 });
+
+                    if (en.hp <= 0) {
+                        spawnDeathParticles(en.x, en.y, "#22d3ee");
+                        battleData.enemies.splice(j, 1);
+                        battleData.kills++;
+                        if (en.type === 'boss') {
+                            if (window.updateLinhThach) window.updateLinhThach(300);
+                            battleData.textPopups.push({ x: en.x, y: en.y, text: "+300 💎 ĐẠI YÊU ĐAN", color: "#facc15", life: 90 });
+                        } else if (Math.random() * 100 < 10.0) {
+                            battleData.drops.push({ x: en.x, y: en.y, radius: 12, type: 'linh_thach', life: 600, bob: Math.random() * Math.PI * 2 });
+                        }
+                    }
+                }
+            }
+        }
+        if (wave.radius >= wave.maxRadius) battleData.shockwaves.splice(i, 1);
     }
 
+    // XỬ LÝ CHỚP MÀN HÌNH CHUNG
+    if (battleData.damageFlash > 0) {
+        battleCtx.fillStyle = `rgba(239, 68, 68, ${battleData.damageFlash * 0.06})`;
+        battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
+        battleData.damageFlash--;
+    } else if (battleData.damageFlash < 0) {
+        let intensity = Math.abs(battleData.damageFlash);
+        battleCtx.fillStyle = `rgba(34, 211, 238, ${intensity * 0.05})`;
+        battleCtx.fillRect(0, 0, battleCanvas.width, battleCanvas.height);
+        battleData.damageFlash++; 
+    }
     // THIÊN LÔI CHÚ (Kỹ năng bị động)
     if (window.learnedSkills && window.learnedSkills.includes('skill_loi_chu')) {
         battleData.loiChuTimer++;
