@@ -220,7 +220,8 @@ function attemptBreakthrough() {
             initIdleParams();
             if (window.updateCharacterUI) window.updateCharacterUI();
         } else {
-            
+            const penalty = Math.floor(currentMana * 0.25);
+            const remainingMana = Math.max(0, currentMana - penalty);
             if (window.setLifetimeMana) window.setLifetimeMana(remainingMana);
             else window.lifetimeMana = remainingMana;
             
