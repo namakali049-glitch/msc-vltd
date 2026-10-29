@@ -169,7 +169,8 @@ window.startBattle = function() {
     battleData.loiChuTimer = 0;
     battleData.bossSpawned = false;
     battleData.clearedPopup = false; 
-    battleData.isExiting = false;    
+    battleData.isExiting = false;
+    battleData.startLinhThach = window.playerLinhThach || 0;
     moveDir.up = moveDir.down = moveDir.left = moveDir.right = false;
     window.analogMove = { x: 0, y: 0 };
     
