@@ -1158,7 +1158,57 @@ function launchNguKiem(targetDirX, targetDirY) {
     battleData.screenShake = 6;
     if (window.playClickSound) window.playClickSound();
 }
+window.launchBatQuai = function() {
+    if (!battleData.batQuaiReady) {
+        battleData.textPopups.push({ x: battleData.player.x, y: battleData.player.y - 40, text: "Chưa hồi chiêu!", color: "#94a3b8", life: 40 });
+        return;
+    }
 
+    const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0) : { major: "Phàm Nhân" };
+    if (realmData.major !== "Kim Đan Kỳ" && realmData.major !== "Nguyên Anh Kỳ") {
+        battleData.textPopups.push({ x: battleData.player.x, y: battleData.player.y - 40, text: "Chưa đạt Kim Đan!", color: "#f59e0b", life: 40 });
+        if (window.playWrongSound) window.playWrongSound();
+        return;
+    }
+
+    const maxMana = window.maxLinhLuc || 100;
+    const manaCost = Math.floor(maxMana * (2 / 3)); 
+
+    if ((window.currentLinhLuc || 0) < manaCost) {
+        battleData.textPopups.push({ x: battleData.player.x, y: battleData.player.y - 40, text: `Cần ${manaCost} MP!`, color: "#38bdf8", life: 40 });
+        if (window.playWrongSound) window.playWrongSound();
+        return;
+    }
+
+    window.currentLinhLuc -= manaCost;
+    battleData.batQuaiReady = false;
+    
+    const cdOverlay = document.getElementById('batQuaiCooldownOverlay');
+    if (cdOverlay) {
+        cdOverlay.style.transition = 'none';
+        cdOverlay.style.height = '100%';
+        setTimeout(() => {
+            cdOverlay.style.transition = `height 15s linear`;
+            cdOverlay.style.height = '0%';
+        }, 50);
+    }
+    
+    setTimeout(() => { battleData.batQuaiReady = true; }, 15000);
+
+    battleData.screenShake = 25; 
+    battleData.damageFlash = -10; 
+    if (window.playLootSound) window.playLootSound(); 
+
+    battleData.shockwaves.push({
+        x: battleData.player.x,
+        y: battleData.player.y,
+        radius: 10,
+        maxRadius: 350, 
+        speed: 12,      
+        dmg: (window.swordDamage || 10) * 5, 
+        hitList: new Set()
+    });
+};
 window.useItemInBattle = function(itemId) {
     if (window.playClickSound) window.playClickSound();
 
