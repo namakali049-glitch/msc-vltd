@@ -1,5 +1,6 @@
 // ==========================================
-// ĐỘNG CƠ BẾ QUAN KHAI PHÁ (MÔ-ĐUN ĐỘC LẬP) - ENDLESS MODE
+// ĐỘNG CƠ BẾ QUAN KHAI PHÁ (MÔ-ĐUN ĐỘC LẬP) - BẢN HOÀN THIỆN
+// Tích hợp: Endless Mode, Smart Shuffle, Thượng Quyển
 // ==========================================
 
 let activeQuestions = [];
@@ -46,19 +47,27 @@ window.updateQuizHUD = function() {
     if (manaText) manaText.innerText = `🌀 ${curMana}/${maxMana}`;
 };
 
-// 1. CHỌN QUYỂN & CẢNH BÁO
+// 1. CHỌN QUYỂN & CẢNH BÁO THIÊN ĐẠO
 window.checkAndStartVolume = function(vol) {
     if (window.playClickSound) window.playClickSound();
 
     const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
     const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
     const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0, countA1, countB1) : { major: "Phàm Nhân" };
+    const major = realmData.major;
     
-    if (vol === 'trung_quyen') {
+    if (vol === 'thuong_quyen') {
+        if (["Phàm Nhân", "Luyện Khí Kỳ", "Trúc Cơ Kỳ", "Kim Đan Kỳ", "Nguyên Anh Kỳ"].includes(major)) {
+            alert("⚠️ CẢNH BÁO THIÊN ĐẠO:\nCảnh giới hiện tại quá thấp để lĩnh ngộ Thượng Quyển. Đạo hữu vẫn có thể xem để mở mang kiến thức, nhưng sẽ KHÔNG thu được Linh Thạch!");
+        }
+        window.currentCsvFile = "c1_vocab.csv";
+    } 
+    else if (vol === 'trung_quyen') {
         window.currentCsvFile = "b1_vocab.csv";
-    } else {
-        if (realmData.major === "Kim Đan Kỳ" || realmData.major === "Nguyên Anh Kỳ") {
-            alert("⚠️ CẢNH BÁO THIÊN ĐẠO:\nĐạo hữu đã đạt cảnh giới cao. Tiếp tục tu luyện Hạ Quyển sẽ bị giáng phạt giảm 90% Linh Lực nhận được!");
+    } 
+    else {
+        if (["Kim Đan Kỳ", "Nguyên Anh Kỳ", "Hóa Thần Kỳ", "Độ Kiếp Kỳ"].includes(major)) {
+            alert("⚠️ CẢNH BÁO THIÊN ĐẠO:\nĐạo hữu đã đạt cảnh giới cao. Tiếp tục tu luyện Hạ Quyển sẽ không thu được Linh Thạch!");
         }
         window.currentCsvFile = "a1_vocab.csv";
     }
@@ -68,7 +77,7 @@ window.checkAndStartVolume = function(vol) {
     window.startGame();
 };
 
-// 2. KHỞI CHẠY BẾ QUAN (VÔ TẬN)
+// 2. KHỞI CHẠY BẾ QUAN (ENDLESS MODE)
 window.startGame = function() {
     window.switchScreen('game-screen');
     currentQuestionIndex = 0;
@@ -81,7 +90,6 @@ window.startGame = function() {
     document.getElementById('options').innerHTML = "";
     document.getElementById('nextBtn').style.display = "none";
 
-    // Cập nhật Tên, Cảnh giới, Avatar vào HUD Bế Quan
     const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
     const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
     const realmName = window.calculateRealm ? window.calculateRealm(window.lifetimeMana || 0, countA1, countB1) : "Phàm Nhân";
@@ -98,7 +106,6 @@ window.startGame = function() {
 
     window.updateQuizHUD();
 
-    // Dùng PapaParse đọc file CSV
     Papa.parse(window.currentCsvFile, {
         download: true,
         header: true,
@@ -115,8 +122,15 @@ window.startGame = function() {
 
 // 3. THUẬT TOÁN RÚT THẺ THÔNG MINH (CHỐNG TRÙNG LẶP & SAI VỊ TRÍ)
 function processVocabData() {
-    const isA1 = window.currentCsvFile.includes("a1");
-    let masteredList = isA1 ? (window.masteredWordsA1 || []) : (window.masteredWordsB1 || []);
+    let masteredList = [];
+    if (window.currentCsvFile.includes("a1")) {
+        masteredList = window.masteredWordsA1 || [];
+    } else if (window.currentCsvFile.includes("b1")) {
+        masteredList = window.masteredWordsB1 || [];
+    } else {
+        masteredList = window.masteredWordsC1 || []; // Thượng quyển
+    }
+
     if (!Array.isArray(masteredList)) masteredList = Object.keys(masteredList);
 
     const learned = vocabPool.filter(w => masteredList.includes(w.hanzi));
@@ -213,11 +227,14 @@ window.checkAnswer = function(selectedIdx, btnElement) {
         btnElement.classList.add('correct');
         if (window.playCorrectSound) window.playCorrectSound();
         
-        const isA1 = window.currentCsvFile.includes("a1");
-        if (isA1) {
+        // Ghi nhận từ vựng vĩnh viễn
+        if (window.currentCsvFile.includes("a1")) {
             if (!window.masteredWordsA1.includes(qData.q)) window.masteredWordsA1.push(qData.q);
-        } else {
+        } else if (window.currentCsvFile.includes("b1")) {
             if (!window.masteredWordsB1.includes(qData.q)) window.masteredWordsB1.push(qData.q);
+        } else {
+            if (!window.masteredWordsC1) window.masteredWordsC1 = [];
+            if (!window.masteredWordsC1.includes(qData.q)) window.masteredWordsC1.push(qData.q);
         }
 
         const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0) : { major: "Phàm Nhân" };
@@ -226,22 +243,36 @@ window.checkAnswer = function(selectedIdx, btnElement) {
         let bonusLT = 0;
         let warningMsg = "";
 
-        if (isA1) {
-            if (major === "Kim Đan Kỳ" || major === "Nguyên Anh Kỳ") {
+        // ----- QUY LUẬT THIÊN ĐẠO THƯỞNG PHẠT -----
+        if (window.currentCsvFile.includes("a1")) { 
+            if (["Kim Đan Kỳ", "Nguyên Anh Kỳ", "Hóa Thần Kỳ", "Độ Kiếp Kỳ"].includes(major)) {
                 bonusLT = 0;
                 warningMsg = "<br><span style='color:#f59e0b;'>⚠️ Đạo tâm quá cao! Đọc sách vỡ lòng không thu được Linh Thạch.</span>";
             } else {
                 bonusLT = 1;
             }
-        } else {
-            if (major === "Phàm Nhân" || major === "Luyện Khí Kỳ" || major === "Trúc Cơ Kỳ") {
+        } 
+        else if (window.currentCsvFile.includes("b1")) { 
+            if (["Phàm Nhân", "Luyện Khí Kỳ", "Trúc Cơ Kỳ"].includes(major)) {
                 bonusLT = 0;
                 warningMsg = "<br><span style='color:#ef4444;'>⚠️ Cảnh giới chưa đủ! Ép học Trung Quyển không thu được Linh Thạch.</span>";
+            } else if (["Hóa Thần Kỳ", "Độ Kiếp Kỳ"].includes(major)) {
+                bonusLT = 0;
+                warningMsg = "<br><span style='color:#f59e0b;'>⚠️ Đạo tâm quá cao! Học Trung Quyển không còn thu được Linh Thạch.</span>";
             } else {
-                bonusLT = 2; 
+                bonusLT = 2;
+            }
+        } 
+        else { 
+            if (["Hóa Thần Kỳ", "Độ Kiếp Kỳ"].includes(major)) {
+                bonusLT = 3; 
+            } else {
+                bonusLT = 0;
+                warningMsg = "<br><span style='color:#ef4444;'>⚠️ Tu vi chưa tới Hóa Thần! Xem Thượng Quyển không ngộ ra được Linh Thạch.</span>";
             }
         }
         
+        // Hiệu ứng Tụ Linh Đan
         let buffMsg = "";
         if (bonusLT > 0 && window.tuLinhBuff && window.tuLinhBuff > 0) {
             bonusLT *= 2;
@@ -255,6 +286,7 @@ window.checkAnswer = function(selectedIdx, btnElement) {
             if (window.updateLinhThach) window.updateLinhThach(bonusLT);
         }
 
+        // Hồi lượng nhỏ HP khi trả lời đúng
         window.currentHp = Math.min(window.maxHp || 100, (window.currentHp || 100) + 2);
 
         let rewardText = bonusLT > 0 ? `Nhận được ${bonusLT} 💎.` : `Không nhận được Linh Thạch.`;
@@ -262,6 +294,7 @@ window.checkAnswer = function(selectedIdx, btnElement) {
         window.updateQuizHUD();
         if (window.syncManaToDatabase) window.syncManaToDatabase();
     } else {
+        // Trả lời sai - Phạt Tâm Ma Phản Phệ
         btnElement.classList.add('wrong');
         btns[qData.ans].classList.add('correct');
         wrongCount++;
@@ -316,7 +349,7 @@ window.nextQuestion = function() {
     if (currentQuestionIndex < activeQuestions.length) {
         showQuestion();
     } else {
-        // Tự động load 10 câu tiếp theo thay vì thoát
+        // Tự động load đợt tiếp theo thay vì thoát
         document.getElementById('message').innerHTML = "🌟 <span style='color:#ffd700;'>Đang ngưng tụ thêm bích họa...</span>";
         document.getElementById('options').innerHTML = "";
         document.getElementById('nextBtn').style.display = "none";
