@@ -10,9 +10,13 @@ const STATIC_ASSETS = [
   './inventory.js',
   './battle.js',
   './quiz.js',
+  './idle.js',        // Bổ sung
+  './shop.js',        // Bổ sung
+  './ads.js',         // Bổ sung
   './manifest.json',
   './a1_vocab.csv',
   './b1_vocab.csv',
+  './c1_vocab.csv',
   './assets/bgm.mp3',
   './assets/pham-nhan-1.png',
   './assets/luyen-khi.png',
