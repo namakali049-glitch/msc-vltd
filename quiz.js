@@ -1,5 +1,5 @@
 // ==========================================
-// ĐỘNG CƠ BẾ QUAN KHAI PHÁ (MÔ-ĐUN ĐỘC LẬP)
+// ĐỘNG CƠ BẾ QUAN KHAI PHÁ (MÔ-ĐUN ĐỘC LẬP) - ENDLESS MODE
 // ==========================================
 
 let activeQuestions = [];
@@ -68,15 +68,15 @@ window.checkAndStartVolume = function(vol) {
     window.startGame();
 };
 
-// 2. KHỞI CHẠY BẾ QUAN
+// 2. KHỞI CHẠY BẾ QUAN (VÔ TẬN)
 window.startGame = function() {
     window.switchScreen('game-screen');
     currentQuestionIndex = 0;
     wrongCount = 0;
     window.sessionMana = 0;
     sessionSeconds = 0;
+    window.totalQuizAnswered = 0; // Bộ đếm tổng số câu vô tận
 
-    
     document.getElementById('message').innerHTML = "Đang kết nối thần thức vào Tàng Kinh Các...";
     document.getElementById('options').innerHTML = "";
     document.getElementById('nextBtn').style.display = "none";
@@ -96,10 +96,7 @@ window.startGame = function() {
     const avatarFunc = window.getAvatarByMana || (() => "assets/pham-nhan.png");
     if (qAvatar) qAvatar.src = avatarFunc(window.lifetimeMana || 0);
 
-    // Cập nhật 2 thanh Máu và Mana
     window.updateQuizHUD();
-
-    
 
     // Dùng PapaParse đọc file CSV
     Papa.parse(window.currentCsvFile, {
@@ -116,7 +113,7 @@ window.startGame = function() {
     });
 };
 
-// 3. THUẬT TOÁN RÚT THẺ THÔNG MINH ĐÃ FIX LỖI TRÙNG LẶP VÀ SAI ĐÁP ÁN
+// 3. THUẬT TOÁN RÚT THẺ THÔNG MINH (CHỐNG TRÙNG LẶP & SAI VỊ TRÍ)
 function processVocabData() {
     const isA1 = window.currentCsvFile.includes("a1");
     let masteredList = isA1 ? (window.masteredWordsA1 || []) : (window.masteredWordsB1 || []);
@@ -140,7 +137,6 @@ function processVocabData() {
 
     // Tạo đề bài với 1 đáp án đúng và 3 đáp án nhiễu KHÔNG TRÙNG LẶP
     drawPool.forEach(word => {
-        // Lọc ra tập hợp các từ nhiễu tiềm năng (Loại trừ từ hiện tại)
         let potentialDistractors = vocabPool.filter(w => w.hanzi !== word.hanzi);
         shuffleArray(potentialDistractors);
         
@@ -148,7 +144,6 @@ function processVocabData() {
         let usedMeanings = new Set();
         usedMeanings.add(word.meaning);
 
-        // Bốc chính xác 3 từ nhiễu không trùng nghĩa với nhau và không trùng nghĩa với đáp án
         for (let distractor of potentialDistractors) {
             if (options.length >= 4) break;
             if (!usedMeanings.has(distractor.meaning)) {
@@ -157,7 +152,6 @@ function processVocabData() {
             }
         }
 
-        // Xáo trộn 4 đáp án (Fisher-Yates)
         shuffleArray(options);
 
         // Cố định vị trí của đáp án đúng SAU KHI ĐÃ XÁO TRỘN
@@ -167,12 +161,13 @@ function processVocabData() {
             q: word.hanzi,
             pinyin: word.pinyin,
             fullWord: word,
-            options: options.map(opt => opt.meaning), // Đảm bảo index mảng options khớp với ansIdx
+            options: options.map(opt => opt.meaning),
             ans: ansIdx
         });
     });
 
     if (activeQuestions.length > 0) {
+        currentQuestionIndex = 0; // Đặt lại index mỗi đợt 10 câu
         showQuestion();
     } else {
         document.getElementById('message').innerHTML = "Đã tu luyện trọn vẹn bổn kinh thư này!";
@@ -183,9 +178,9 @@ function processVocabData() {
 // 4. HIỂN THỊ CÂU HỎI
 function showQuestion() {
     const qData = activeQuestions[currentQuestionIndex];
-    document.getElementById('counter').innerText = `Câu hỏi: ${currentQuestionIndex + 1} / ${activeQuestions.length}`;
+    // Hiển thị vô tận
+    document.getElementById('counter').innerText = `Tu luyện: Câu thứ ${window.totalQuizAnswered + 1}`;
     
-    // Hiển thị chữ Hán lớn kèm Pinyin đặt ngay phía dưới
     document.getElementById('question').innerHTML = `
         <div class="quiz-hanzi">${qData.q}</div>
         <div class="quiz-pinyin">[ ${qData.pinyin || ''} ]</div>
@@ -218,7 +213,6 @@ window.checkAnswer = function(selectedIdx, btnElement) {
         btnElement.classList.add('correct');
         if (window.playCorrectSound) window.playCorrectSound();
         
-        // 1. Ghi nhận từ vựng vĩnh viễn (Chỉ khai báo isA1 duy nhất 1 lần ở đây)
         const isA1 = window.currentCsvFile.includes("a1");
         if (isA1) {
             if (!window.masteredWordsA1.includes(qData.q)) window.masteredWordsA1.push(qData.q);
@@ -226,7 +220,6 @@ window.checkAnswer = function(selectedIdx, btnElement) {
             if (!window.masteredWordsB1.includes(qData.q)) window.masteredWordsB1.push(qData.q);
         }
 
-        // 2. Thưởng Linh Thạch theo Quyển & Cảnh Giới
         const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0) : { major: "Phàm Nhân" };
         const major = realmData.major;
         
@@ -234,7 +227,6 @@ window.checkAnswer = function(selectedIdx, btnElement) {
         let warningMsg = "";
 
         if (isA1) {
-            // Học Hạ Quyển
             if (major === "Kim Đan Kỳ" || major === "Nguyên Anh Kỳ") {
                 bonusLT = 0;
                 warningMsg = "<br><span style='color:#f59e0b;'>⚠️ Đạo tâm quá cao! Đọc sách vỡ lòng không thu được Linh Thạch.</span>";
@@ -242,30 +234,27 @@ window.checkAnswer = function(selectedIdx, btnElement) {
                 bonusLT = 1;
             }
         } else {
-            // Học Trung Quyển
             if (major === "Phàm Nhân" || major === "Luyện Khí Kỳ" || major === "Trúc Cơ Kỳ") {
                 bonusLT = 0;
                 warningMsg = "<br><span style='color:#ef4444;'>⚠️ Cảnh giới chưa đủ! Ép học Trung Quyển không thu được Linh Thạch.</span>";
             } else {
-                bonusLT = 2; // Nhận 2 viên cho Trung Quyển
+                bonusLT = 2; 
             }
         }
         
-        // Hiệu ứng Tụ Linh Đan (X2 Linh Thạch)
         let buffMsg = "";
         if (bonusLT > 0 && window.tuLinhBuff && window.tuLinhBuff > 0) {
             bonusLT *= 2;
             window.tuLinhBuff--;
             buffMsg = `<br><span style='color:#c084fc;'>✨ Tụ Linh Đan kích hoạt! x2 Linh Thạch (Còn ${window.tuLinhBuff} câu)</span>`;
         } else if (window.tuLinhBuff && window.tuLinhBuff > 0) {
-            window.tuLinhBuff--; // Vẫn trừ số lần buff dù không nhận được tiền
+            window.tuLinhBuff--; 
         }
 
         if (bonusLT > 0) {
             if (window.updateLinhThach) window.updateLinhThach(bonusLT);
         }
 
-        // 3. Hồi lượng nhỏ HP khi trả lời đúng
         window.currentHp = Math.min(window.maxHp || 100, (window.currentHp || 100) + 2);
 
         let rewardText = bonusLT > 0 ? `Nhận được ${bonusLT} 💎.` : `Không nhận được Linh Thạch.`;
@@ -273,7 +262,6 @@ window.checkAnswer = function(selectedIdx, btnElement) {
         window.updateQuizHUD();
         if (window.syncManaToDatabase) window.syncManaToDatabase();
     } else {
-        // 5.5. Trả lời sai - Phạt Tâm Ma Phản Phệ
         btnElement.classList.add('wrong');
         btns[qData.ans].classList.add('correct');
         wrongCount++;
@@ -294,7 +282,6 @@ window.checkAnswer = function(selectedIdx, btnElement) {
                 window.currentHp = Math.max(0, (window.currentHp || 10) - dmg);
                 statName = "Sinh Mệnh";
             } else {
-                // Tu sĩ: Trừ trực tiếp vào Linh Lực (Thanh Mana)
                 dmg = Math.ceil((window.maxLinhLuc || 10) / 3);
                 window.currentLinhLuc = Math.max(0, (window.currentLinhLuc || 0) - dmg);
                 statName = "Linh Lực";
@@ -303,7 +290,6 @@ window.checkAnswer = function(selectedIdx, btnElement) {
             msgDiv.innerHTML = `💥 <span style='color:#ef4444;'>Tâm Ma Xâm Nhập! Tổn thất ${dmg} ${statName}.</span>`;
             window.updateQuizHUD();
 
-            // Hết máu hoặc hết Linh Lực hoặc sai 3 lần => Tẩu Hỏa Nhập Ma
             const isOutOfEnergy = (realmData.major === "Phàm Nhân" && window.currentHp <= 0) || 
                                   (realmData.major !== "Phàm Nhân" && window.currentLinhLuc <= 0);
 
@@ -320,20 +306,24 @@ window.checkAnswer = function(selectedIdx, btnElement) {
     document.getElementById('nextBtn').style.display = "inline-block";
 };
 
-// 6. CHUYỂN CÂU HỎI
+// 6. CHUYỂN CÂU HỎI (CHUỖI VÔ TẬN)
 window.nextQuestion = function() {
     if (window.playClickSound) window.playClickSound();
+    
     currentQuestionIndex++;
+    window.totalQuizAnswered++; 
+
     if (currentQuestionIndex < activeQuestions.length) {
         showQuestion();
     } else {
-        document.getElementById('message').innerHTML = "🌟 <span style='color:#ffd700;'>Hoàn thành chu kỳ chu thiên! Củng cố tu vi thành công.</span>";
+        // Tự động load 10 câu tiếp theo thay vì thoát
+        document.getElementById('message').innerHTML = "🌟 <span style='color:#ffd700;'>Đang ngưng tụ thêm bích họa...</span>";
         document.getElementById('options').innerHTML = "";
         document.getElementById('nextBtn').style.display = "none";
         
         setTimeout(() => {
-            stopCultivationEarly();
-        }, 2000);
+            processVocabData(); 
+        }, 500);
     }
 };
 
