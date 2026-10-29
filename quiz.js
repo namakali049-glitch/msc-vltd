@@ -47,34 +47,6 @@ window.updateQuizHUD = function() {
     if (manaText) manaText.innerText = `🌀 ${curMana}/${maxMana}`;
 };
 
-// 1. CHỌN QUYỂN & CẢNH BÁO THIÊN ĐẠO
-window.checkAndStartVolume = function(vol) {
-    if (window.playClickSound) window.playClickSound();
-
-    const countA1 = (window.masteredWordsA1 && Array.isArray(window.masteredWordsA1)) ? window.masteredWordsA1.length : 0;
-    const countB1 = (window.masteredWordsB1 && Array.isArray(window.masteredWordsB1)) ? window.masteredWordsB1.length : 0;
-    const realmData = window.getRealmData ? window.getRealmData(window.lifetimeMana || 0, countA1, countB1) : { major: "Phàm Nhân" };
-    const major = realmData.major;
-    
-    if (vol === 'thuong_quyen') {
-        if (["Phàm Nhân", "Luyện Khí Kỳ", "Trúc Cơ Kỳ", "Kim Đan Kỳ", "Nguyên Anh Kỳ"].includes(major)) {
-            alert("⚠️ CẢNH BÁO THIÊN ĐẠO:\nCảnh giới hiện tại quá thấp để lĩnh ngộ Thượng Quyển. Đạo hữu vẫn có thể xem để mở mang kiến thức, nhưng sẽ KHÔNG thu được Linh Thạch!");
-        }
-        window.currentCsvFile = "c1_vocab.csv";
-    } 
-    else if (vol === 'trung_quyen') {
-        window.currentCsvFile = "b1_vocab.csv";
-    } 
-    else {
-        if (["Kim Đan Kỳ", "Nguyên Anh Kỳ", "Hóa Thần Kỳ", "Độ Kiếp Kỳ"].includes(major)) {
-            alert("⚠️ CẢNH BÁO THIÊN ĐẠO:\nĐạo hữu đã đạt cảnh giới cao. Tiếp tục tu luyện Hạ Quyển sẽ không thu được Linh Thạch!");
-        }
-        window.currentCsvFile = "a1_vocab.csv";
-    }
-    
-    const hanNguModal = document.getElementById('hanNguModal');
-    if (hanNguModal) hanNguModal.style.display = 'none';
-    
 // HỆ THỐNG POPUP CƠ DUYÊN (CHỐNG CHẶN QUẢNG CÁO)
 window.showCoDuyenPopup = function(title, desc, onAccept, onSkip) {
     const overlay = document.createElement('div');
