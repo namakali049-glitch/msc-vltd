@@ -217,45 +217,45 @@ window.exitBattle = function(isDeath = false, isVictory = false) {
     window.analogMove = { x: 0, y: 0 };
 
     const survivalSec = Math.floor(battleData.frameCount / 60);
-    const formatTimeFunc = window.formatTime || ((s) => `${Math.floor(s/60)}:${s%60}`);
+    
+    // Tính toán số Linh Thạch thu được trong ván này
+    const currentLT = window.playerLinhThach || 0;
+    const collectedLinhThach = Math.max(0, currentLT - (battleData.startLinhThach || currentLT));
 
-    let recordNotice = "";
-    if (window.recordBattleResult) {
-        const isNewRecord = window.recordBattleResult(survivalSec, battleData.kills);
-        if (isNewRecord) {
-            recordNotice = "\n🔥 LẬP KỶ LỤC MỚI TRÊN TIÊN ĐẠO BẢNG!";
+    const finalizeExit = (bonusLinhThach = 0) => {
+        if (bonusLinhThach > 0 && window.updateLinhThach) {
+            window.updateLinhThach(bonusLinhThach);
         }
-    }
 
-    let titleMsg = "🚪 Đạo hữu đã an toàn rút khỏi Bí Cảnh!";
-    if (isDeath) titleMsg = "💥 Đạo thể tổn hao nặng nề! Buộc phải rút lui.";
-    if (isVictory) titleMsg = "🏆 TUYỆT VỜI! ĐẠO HỮU ĐÃ QUÉT SẠCH BÍ CẢNH!";
-
-    alert(`${titleMsg}\n\n📊 KẾT QUẢ VÁN ĐẤU:\n⏱️ Thời gian sống sót: ${formatTimeFunc(survivalSec)}\n👾 Ma vật đã trảm: ${battleData.kills} con${recordNotice}`);
-
-    if (window.syncManaToDatabase) window.syncManaToDatabase();
-    if (window.goHome) window.goHome();
-};
-// Chỉ hiển thị bảng hỏi quảng cáo nếu nhặt được ít nhất 1 Linh Thạch
-    if (window.AdsManager && collectedLinhThach > 0) {
-        window.AdsManager.showRewarded(
-            () => {
-                // Xem thành công: Thưởng thêm ĐÚNG BẰNG số Linh Thạch vừa nhặt (thành x2)
-                finalizeExit(collectedLinhThach);
-            },
-            () => {
-                // Bỏ qua
-                finalizeExit(0);
-            }
-        );
+        const formatTimeFunc = window.formatTime || ((s) => `${Math.floor(s/60)}:${s%60}`);
+        let recordNotice = "";
         
-        // Đổi nội dung của bảng thông báo ads.js 
-        setTimeout(() => {
-            const adDesc = document.getElementById('ad-desc');
-            if (adDesc) adDesc.innerText = `Bí Cảnh khép lại! Đạo hữu đã thu thập được ${collectedLinhThach} 💎.\nMuốn quan sát thiên cơ để nhân đôi (x2) phần thưởng thành ${collectedLinhThach * 2} 💎 không?`;
-        }, 50);
+        if (window.recordBattleResult) {
+            const isNewRecord = window.recordBattleResult(survivalSec, battleData.kills);
+            if (isNewRecord) recordNotice = "\n🔥 LẬP KỶ LỤC MỚI TRÊN TIÊN ĐẠO BẢNG!";
+        }
+
+        let titleMsg = "🚪 Đạo hữu đã an toàn rút khỏi Bí Cảnh!";
+        if (isDeath) titleMsg = "💥 Đạo thể tổn hao nặng nề! Buộc phải rút lui.";
+        if (isVictory) titleMsg = "🏆 TUYỆT VỜI! ĐẠO HỮU ĐÃ QUÉT SẠCH BÍ CẢNH!";
+        
+        let bonusStr = bonusLinhThach > 0 ? `\n🎁 Thưởng Cơ Duyên (x2): +${bonusLinhThach} 💎` : "";
+
+        alert(`${titleMsg}\n\n📊 KẾT QUẢ VÁN ĐẤU:\n⏱️ Thời gian sống sót: ${formatTimeFunc(survivalSec)}\n👾 Ma vật đã trảm: ${battleData.kills} con\n💎 Linh thạch nhặt được: ${collectedLinhThach}${recordNotice}${bonusStr}`);
+
+        if (window.syncManaToDatabase) window.syncManaToDatabase();
+        if (window.goHome) window.goHome();
+    };
+
+    // Nếu nhặt được > 0 Linh Thạch -> Hỏi x2
+    if (window.showCoDuyenPopup && collectedLinhThach > 0) {
+        window.showCoDuyenPopup(
+            "BÍ CẢNH KHÉP LẠI",
+            `Đạo hữu đã nhặt được ${collectedLinhThach} 💎 trong Bí Cảnh.\nMuốn quan sát thiên cơ để nhân đôi (x2) thành ${collectedLinhThach * 2} 💎 không?`,
+            () => { finalizeExit(collectedLinhThach); }, // Bấm Nhận x2
+            () => { finalizeExit(0); } // Bấm Bỏ qua
+        );
     } else {
-        // Nếu trắng tay (chưa nhặt được gì), thoát luôn
         finalizeExit(0);
     }
 };
