@@ -18,7 +18,6 @@ body {
 /* ========================================== */
 /* NỀN CẢNH BẤT CHU SƠN & ĐỘNG PHỦ            */
 /* ========================================== */
-/* Nền chung cho toàn game (Màn hình đăng nhập, hồ sơ...) */
 .screen {
   display: none;
   width: 100vw;
@@ -37,7 +36,6 @@ body {
   background: #0c1017;
 }
 
-/* ĐẶC QUYỀN SẢNH CHÍNH: Toàn bộ màn hình là Động Phủ Tu Luyện */
 #start-screen.active {
   display: flex;
   background: radial-gradient(circle at center, rgba(10, 15, 30, 0.1) 0%, rgba(5, 8, 17, 0.5) 100%),
@@ -45,7 +43,7 @@ body {
 }
 
 /* ========================================== */
-/* TIỆN ÍCH CHUNG & NÚT GÓC MÀN HÌNH          */
+/* TIỆN ÍCH CHUNG & NÚT GÓC MÀN HÌNH         */
 /* ========================================== */
 .fixed-top-right-bar {
   position: fixed;
@@ -242,7 +240,7 @@ body {
 .nav-icon-btn span { font-size: 0.75rem; font-weight: bold; text-shadow: 0 1px 2px #000; }
 
 /* ========================================== */
-/* KHU VỰC ĐỘNG PHỦ TOÀN MÀN HÌNH (KHÔNG KHUNG) */
+/* KHU VỰC ĐỘNG PHỦ TOÀN MÀN HÌNH             */
 /* ========================================== */
 .idle-center-zone {
   position: absolute;
@@ -256,7 +254,6 @@ body {
   z-index: 5;
 }
 
-/* Tiêu đề Động Phủ trên đỉnh */
 .dong-phu-title {
   color: #ffd700;
   font-size: 1.8rem;
@@ -266,7 +263,6 @@ body {
   margin-top: 10px;
 }
 
-/* Khung cũ biến thành vùng chứa trong suốt */
 .cultivation-stage-box {
   position: relative;
   background: transparent !important;
@@ -283,7 +279,6 @@ body {
   pointer-events: none;
 }
 
-/* Thông tin nhân vật nổi tự nhiên ở góc trái trên */
 .stage-player-info {
   position: fixed;
   top: max(65px, calc(env(safe-area-inset-top) + 55px));
@@ -313,11 +308,11 @@ body {
   flex-direction: column;
 }
 
+/* Fix tràn viền tên dài */
 .stage-name {
   font-size: 0.9rem;
   font-weight: bold;
   color: #fff;
-  /* 🚨 Thêm 4 dòng này */
   max-width: 120px;
   white-space: nowrap;
   overflow: hidden;
@@ -329,7 +324,6 @@ body {
   color: #facc15;
 }
 
-/* Vị trí Nhân vật ngồi thiền: Đặt cố định ngay trên mặt bệ đá */
 .cultivation-avatar-box {
   position: absolute;
   top: 48%;
@@ -341,7 +335,6 @@ body {
   pointer-events: none;
 }
 
-/* Vòng Chu Thiên sau lưng */
 .chu-thien-aura {
   position: absolute;
   top: 50%;
@@ -368,7 +361,6 @@ body {
   100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); }
 }
 
-/* Ảnh nhân vật */
 .idle-avatar {
   position: absolute;
   bottom: 0;
@@ -428,7 +420,6 @@ body {
   pointer-events: auto;
 }
 
-/* 1. Thanh Tiến Độ Thăng Cấp Cảnh Giới */
 .realm-exp-container {
   width: 100%;
   background: rgba(10, 15, 29, 0.75);
@@ -476,7 +467,6 @@ body {
   box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
 }
 
-/* 2. Nút bấm Vận Khí */
 .idle-actions {
   margin: 2px 0;
 }
@@ -513,7 +503,6 @@ body {
   box-shadow: 0 0 25px rgba(239, 68, 68, 0.8);
 }
 
-/* 3. Thanh Chu Thiên (chu kỳ từng vòng thở) */
 .chu-thien-bar-wrap {
   width: 260px;
   height: 6px;
@@ -532,7 +521,6 @@ body {
   will-change: transform;
 }
 
-/* 4. Dòng trạng thái */
 .idle-status-text {
   font-size: 0.82rem;
   color: #cbd5e1;
@@ -591,6 +579,11 @@ body {
 .profile-meta-list { display: flex; flex-direction: column; gap: 5px; font-size: 0.92rem; margin-bottom: 14px; }
 .realm-pill { background: rgba(255, 215, 0, 0.2); color: #ffd700; padding: 2px 8px; border-radius: 4px; font-weight: bold; }
 .gold-txt { color: #facc15; }
+
+/* Fix tràn viền tên cho phần Hồ Sơ Nhân Vật */
+.profile-meta-list b {
+  word-break: break-word;
+}
 
 .profile-attributes-box {
   background: rgba(0, 0, 0, 0.45);
@@ -959,16 +952,18 @@ body {
 
 .hud-info-box { display: flex; flex-direction: column; gap: 3px; flex: 1; }
 .hud-name-row { display: flex; align-items: center; gap: 8px; }
+
+/* Fix tràn viền tên Tàng Kinh Các */
 .hud-player-name {
   font-size: 0.95rem;
   font-weight: bold;
   color: #ffd700;
-  /* 🚨 Thêm 4 dòng này */
   max-width: 100px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .hud-realm-badge {
   font-size: 0.7rem;
   background: rgba(255, 215, 0, 0.15);
@@ -1388,7 +1383,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  z-index: 105; /* Cao hơn Joystick và Skill stick để luôn nhận chạm */
+  z-index: 105;
   touch-action: manipulation;
 }
 
